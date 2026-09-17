@@ -93,6 +93,31 @@ pattern is what `projects/ch10_inventory.py` and `projects/ch12_student_records.
 iterative binary search is revisited recursively in ch12 with the same variable names. None of this
 is explained anywhere in the code — it has to be written.
 
+## ⚠ CORRECTION (2026-09-17, after this report was written)
+
+**The prose EXISTS.** The author pointed to it after this report was generated:
+
+    https://claude.ai/code/artifact/4b2e9f72-d2d8-4d0d-94ea-9f944eae603e
+    "Python Foundations: A First Course in Programming"
+
+So the section below — written when the bundle was all that could be seen — is WRONG about the
+most important thing in it. The project is NOT "author ~100 passages from scratch." It is
+"bring existing book text together with a verified code spine." Open question 1 changes from a
+sourcing decision into a mechanical one, and its copyright dimension largely dissolves, since
+the artifact is the author's own.
+
+What is still TRUE in the section below, and still matters:
+  - the prose is not in THIS REPO, so it has to be brought in
+  - the 76 section headers are the join key between text and code
+  - the exercise set really is thin (6 Try-Its, chapters 1-6 only) — that is a content gap the
+    book text may or may not close, and it should be checked against the artifact
+
+RETRIEVAL IS AN OPEN PROBLEM. The artifact renders its content from a live data store: its
+HTML shell carries no static text and its asset store is empty, so the text could not be
+extracted programmatically from this session. Settle with the author how the text gets into
+the repo — export from the artifact, paste, or some other route — BEFORE planning content work.
+Treat everything below with that correction in mind.
+
 ## The central gap: there is no instructional prose in this repo
 
 Every file was read in full, along with README.md and main.py. The only text present anywhere is:
