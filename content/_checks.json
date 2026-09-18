@@ -1,0 +1,718 @@
+{
+ "ch06-functions#1": {
+  "kind": "function",
+  "name": "is_even",
+  "cases": [
+   [
+    [
+     4
+    ],
+    true
+   ],
+   [
+    [
+     7
+    ],
+    false
+   ],
+   [
+    [
+     0
+    ],
+    true
+   ],
+   [
+    [
+     -2
+    ],
+    true
+   ]
+  ]
+ },
+ "ch06-functions#2": {
+  "kind": "function",
+  "name": "bmi",
+  "cases": [
+   [
+    [
+     70,
+     1.75
+    ],
+    22.9
+   ],
+   [
+    [
+     90,
+     1.8
+    ],
+    27.8
+   ],
+   [
+    [
+     50,
+     1.6
+    ],
+    19.5
+   ]
+  ]
+ },
+ "ch06-functions#3": {
+  "kind": "function",
+  "name": "largest_of_three",
+  "cases": [
+   [
+    [
+     3,
+     9,
+     5
+    ],
+    9
+   ],
+   [
+    [
+     7,
+     7,
+     2
+    ],
+    7
+   ],
+   [
+    [
+     -1,
+     -5,
+     -3
+    ],
+    -1
+   ],
+   [
+    [
+     1,
+     2,
+     3
+    ],
+    3
+   ]
+  ]
+ },
+ "ch06-functions#4": {
+  "kind": "function",
+  "name": "count_vowels",
+  "cases": [
+   [
+    [
+     "banana"
+    ],
+    3
+   ],
+   [
+    [
+     "sky"
+    ],
+    0
+   ],
+   [
+    [
+     "programming"
+    ],
+    3
+   ],
+   [
+    [
+     "queue"
+    ],
+    4
+   ],
+   [
+    [
+     ""
+    ],
+    0
+   ]
+  ]
+ },
+ "ch06-functions#5": {
+  "kind": "function",
+  "name": "is_prime",
+  "cases": [
+   [
+    [
+     2
+    ],
+    true
+   ],
+   [
+    [
+     1
+    ],
+    false
+   ],
+   [
+    [
+     9
+    ],
+    false
+   ],
+   [
+    [
+     13
+    ],
+    true
+   ],
+   [
+    [
+     17
+    ],
+    true
+   ]
+  ]
+ },
+ "ch07-lists#3": {
+  "kind": "function",
+  "name": "count_above",
+  "cases": [
+   [
+    [
+     [
+      1,
+      5,
+      9
+     ],
+     4
+    ],
+    2
+   ],
+   [
+    [
+     [],
+     0
+    ],
+    0
+   ],
+   [
+    [
+     [
+      3,
+      3,
+      3
+     ],
+     3
+    ],
+    0
+   ],
+   [
+    [
+     [
+      -5,
+      0,
+      5
+     ],
+     -1
+    ],
+    2
+   ]
+  ]
+ },
+ "ch07-lists#6": {
+  "kind": "function",
+  "name": "second_largest",
+  "cases": [
+   [
+    [
+     [
+      3,
+      1,
+      4,
+      1,
+      5
+     ]
+    ],
+    4
+   ],
+   [
+    [
+     [
+      10,
+      20
+     ]
+    ],
+    10
+   ],
+   [
+    [
+     [
+      7,
+      2,
+      9,
+      4
+     ]
+    ],
+    7
+   ]
+  ]
+ },
+ "ch08-strings-as-data#2": {
+  "kind": "function",
+  "name": "count_letter",
+  "cases": [
+   [
+    [
+     "Hello World",
+     "l"
+    ],
+    3
+   ],
+   [
+    [
+     "Banana",
+     "A"
+    ],
+    3
+   ],
+   [
+    [
+     "xyz",
+     "q"
+    ],
+    0
+   ]
+  ]
+ },
+ "ch08-strings-as-data#4": {
+  "kind": "function",
+  "name": "title_case",
+  "cases": [
+   [
+    [
+     "hello world"
+    ],
+    "Hello World"
+   ],
+   [
+    [
+     "python"
+    ],
+    "Python"
+   ],
+   [
+    [
+     "the quick brown fox"
+    ],
+    "The Quick Brown Fox"
+   ]
+  ]
+ },
+ "ch08-strings-as-data#6": {
+  "kind": "function",
+  "name": "caesar_shift",
+  "cases": [
+   [
+    [
+     "abc",
+     1
+    ],
+    "bcd"
+   ],
+   [
+    [
+     "xyz",
+     3
+    ],
+    "abc"
+   ],
+   [
+    [
+     "hello",
+     0
+    ],
+    "hello"
+   ]
+  ]
+ },
+ "ch09-dictionaries-and-sets#4": {
+  "kind": "function",
+  "name": "invert",
+  "cases": [
+   [
+    [
+     {
+      "one": "uno",
+      "two": "dos"
+     }
+    ],
+    {
+     "uno": "one",
+     "dos": "two"
+    }
+   ],
+   [
+    [
+     {
+      "a": "z"
+     }
+    ],
+    {
+     "z": "a"
+    }
+   ],
+   [
+    [
+     {}
+    ],
+    {}
+   ]
+  ]
+ },
+ "ch10-tuples-and-structured-records#2": {
+  "kind": "function",
+  "name": "distance",
+  "cases": [
+   [
+    [
+     [
+      0,
+      0
+     ],
+     [
+      3,
+      4
+     ]
+    ],
+    5.0
+   ],
+   [
+    [
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    0.0
+   ],
+   [
+    [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      5
+     ]
+    ],
+    5.0
+   ]
+  ]
+ },
+ "ch11-searching-and-sorting#1": {
+  "kind": "function",
+  "name": "linear_search",
+  "cases": [
+   [
+    [
+     [
+      1,
+      2,
+      1,
+      3
+     ],
+     1
+    ],
+    [
+     0,
+     2
+    ]
+   ],
+   [
+    [
+     [
+      1,
+      2
+     ],
+     5
+    ],
+    []
+   ],
+   [
+    [
+     [
+      4,
+      4,
+      4
+     ],
+     4
+    ],
+    [
+     0,
+     1,
+     2
+    ]
+   ]
+  ]
+ },
+ "ch11-searching-and-sorting#3": {
+  "kind": "function",
+  "name": "binary_search",
+  "cases": [
+   [
+    [
+     [
+      1,
+      3,
+      5,
+      7
+     ],
+     5
+    ],
+    2
+   ],
+   [
+    [
+     [
+      1,
+      3,
+      5,
+      7
+     ],
+     4
+    ],
+    2
+   ],
+   [
+    [
+     [
+      1,
+      3,
+      5,
+      7
+     ],
+     0
+    ],
+    0
+   ],
+   [
+    [
+     [
+      1,
+      3,
+      5,
+      7
+     ],
+     9
+    ],
+    4
+   ]
+  ]
+ },
+ "ch11-searching-and-sorting#6": {
+  "kind": "function",
+  "name": "is_sorted",
+  "cases": [
+   [
+    [
+     [
+      1,
+      2,
+      3
+     ]
+    ],
+    true
+   ],
+   [
+    [
+     [
+      3,
+      1
+     ]
+    ],
+    false
+   ],
+   [
+    [
+     []
+    ],
+    true
+   ],
+   [
+    [
+     [
+      5
+     ]
+    ],
+    true
+   ]
+  ]
+ },
+ "ch12-recursion-and-problem-solving#1": {
+  "kind": "function",
+  "name": "power",
+  "cases": [
+   [
+    [
+     2,
+     10
+    ],
+    1024
+   ],
+   [
+    [
+     5,
+     0
+    ],
+    1
+   ],
+   [
+    [
+     3,
+     3
+    ],
+    27
+   ]
+  ]
+ },
+ "ch12-recursion-and-problem-solving#3": {
+  "kind": "function",
+  "name": "digit_sum",
+  "cases": [
+   [
+    [
+     1234
+    ],
+    10
+   ],
+   [
+    [
+     0
+    ],
+    0
+   ],
+   [
+    [
+     9
+    ],
+    9
+   ]
+  ]
+ },
+ "ch12-recursion-and-problem-solving#4": {
+  "kind": "function",
+  "name": "is_palindrome",
+  "cases": [
+   [
+    [
+     "racecar"
+    ],
+    true
+   ],
+   [
+    [
+     "hello"
+    ],
+    false
+   ],
+   [
+    [
+     "a"
+    ],
+    true
+   ],
+   [
+    [
+     ""
+    ],
+    true
+   ]
+  ]
+ },
+ "ch12-recursion-and-problem-solving#5": {
+  "kind": "function",
+  "name": "count_item",
+  "cases": [
+   [
+    [
+     [
+      1,
+      2,
+      1,
+      1
+     ],
+     1
+    ],
+    3
+   ],
+   [
+    [
+     [],
+     5
+    ],
+    0
+   ],
+   [
+    [
+     [
+      1,
+      2
+     ],
+     3
+    ],
+    0
+   ]
+  ]
+ },
+ "ch12-recursion-and-problem-solving#6": {
+  "kind": "function",
+  "name": "gcd",
+  "cases": [
+   [
+    [
+     12,
+     8
+    ],
+    4
+   ],
+   [
+    [
+     7,
+     13
+    ],
+    1
+   ],
+   [
+    [
+     10,
+     0
+    ],
+    10
+   ]
+  ]
+ },
+ "ch01-your-first-programs#4": {
+  "kind": "predict"
+ },
+ "ch02-variables-and-types#4": {
+  "kind": "predict"
+ },
+ "ch03-expressions-and-operators#4": {
+  "kind": "predict"
+ },
+ "ch04-making-decisions#5": {
+  "kind": "predict"
+ },
+ "ch05-repetition#7": {
+  "kind": "predict"
+ },
+ "ch06-functions#6": {
+  "kind": "predict"
+ },
+ "ch03-expressions-and-operators#3": {
+  "kind": "output",
+  "expected": "####################\n####################\n####################\n####################\n####################"
+ },
+ "ch05-repetition#1": {
+  "kind": "output",
+  "expected": "1\n4\n9\n16\n25\n36\n49\n64\n81\n100\n121\n144\n169\n196\n225\n256\n289\n324\n361\n400"
+ }
+}

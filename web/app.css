@@ -332,3 +332,72 @@ pre.output-only {
 @keyframes pulse { 50% { opacity: 0.25; } }
 
 [hidden] { display: none !important; }
+
+/* ---------------------------------------------------------------- exercises */
+
+.exercise { background: var(--paper); }
+
+.exercise .prompt {
+  margin: 0;
+  padding: 0.85rem 0.9rem 0.6rem;
+  font-size: 0.97rem;
+  line-height: 1.55;
+}
+
+.exercise .num {
+  display: inline-block;
+  min-width: 1.5rem;
+  margin-right: 0.15rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.exercise .ask {
+  display: block;
+  padding: 0 0.9rem 0.4rem;
+  font-size: 0.82rem;
+  color: var(--soft);
+}
+
+.exercise .prediction {
+  display: block;
+  width: calc(100% - 1.8rem);
+  margin: 0 0.9rem 0.6rem;
+  padding: 0.55rem 0.7rem;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--code-bg);
+  border: 1px dashed var(--rule);
+  border-radius: 0.4rem;
+  resize: vertical;
+}
+.exercise .prediction:focus { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+.exercise textarea:not(.prediction) { background: var(--code-bg); }
+
+.bar .check {
+  background: transparent;
+  color: var(--accent);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+.bar .check:disabled { opacity: 0.55; cursor: progress; }
+
+.result.passed {
+  color: var(--accent);
+  border-left: 3px solid var(--accent);
+}
+.result.failed {
+  color: var(--warn);
+  background: var(--warn-bg);
+  border-left: 3px solid var(--warn);
+}
+
+.exercise .unchecked {
+  margin: 0;
+  padding: 0.5rem 0.9rem 0.7rem;
+  font-size: 0.78rem;
+  color: var(--soft);
+  border-top: 1px solid var(--rule);
+}

@@ -26,6 +26,11 @@ SITE = ROOT / "site"
 # build.py --check fails if any box raises without a declaration here.
 BOXES = json.loads((CONTENT / "_boxes.json").read_text())
 
+# How to check a Try It answer, keyed "<slug>#<exercise number>". Only the
+# exercises that can be checked without ever failing a correct answer appear
+# here; the rest render with a Run button and no verdict.
+CHECKS = json.loads((CONTENT / "_checks.json").read_text())
+
 
 # ---------------------------------------------------------------- markdown
 
@@ -134,6 +139,15 @@ def render(blocks, slug):
     while i < len(blocks):
         kind, payload = blocks[i]
 
+        if kind == "h3" and payload == "Try It":
+            parts.append(f"<h3>{inline(payload)}</h3>")
+            j = i + 1
+            while j < len(blocks) and blocks[j][0] != "h3":
+                j += 1
+            parts.append(render_exercises(slug, blocks[i + 1:j]))
+            i = j
+            continue
+
         if kind == "code":
             expected, label, skip = "", "", 0
             # The book almost always writes a short label between a code fence
@@ -163,6 +177,66 @@ def render(blocks, slug):
 
         i += 1
     return "\n".join(parts)
+
+
+SIGNATURE = re.compile(r"`([a-z_][a-z_0-9]*\([^)]*\))`")
+
+
+def render_exercises(slug, blocks):
+    """Render a Try It section as numbered exercises, each with its own box.
+
+    Exercises are numbered across the whole section, not per list, because the
+    book's numbering runs straight through even where a code fence splits it.
+    """
+    exercises = []
+    for kind, payload in blocks:
+        if kind in ("ol", "ul"):
+            for item in payload:
+                exercises.append({"text": item, "code": ""})
+        elif kind == "code" and exercises:
+            exercises[-1]["code"] = payload      # a fence belongs to the item above it
+
+    out = []
+    for number, exercise in enumerate(exercises, 1):
+        out.append(exercise_html(slug, number, exercise))
+    return "\n".join(out)
+
+
+def exercise_html(slug, number, exercise):
+    check = CHECKS.get(f"{slug}#{number}")
+    key = f"{slug}#{number}"
+    body = [f'<p class="prompt"><span class="num">{number}</span>{inline(exercise["text"])}</p>']
+
+    starter = exercise["code"]
+    if check and check["kind"] == "function" and not starter:
+        # The exercise states the signature; use it as the starting line.
+        stub = check.get("stub") or next(iter(SIGNATURE.findall(exercise["text"])), "")
+        starter = f"def {stub}:\n    " if stub else ""
+
+    if check and check["kind"] == "predict":
+        body.append('<label class="ask">Write down what you think it prints, '
+                    'then press Check.</label>'
+                    '<textarea class="prediction" spellcheck="false" rows="3" '
+                    'aria-label="Your prediction"></textarea>')
+
+    body.append(f'<textarea spellcheck="false" aria-label="Python code, editable">'
+                f'{html.escape(starter)}</textarea>')
+
+    buttons = '<button class="run">Run</button>'
+    if check:
+        buttons += '<button class="check">Check</button>'
+    buttons += ('<button class="reset" title="Undo your edits">Reset</button>'
+                '<span class="status"></span>')
+    body.append(f'<div class="bar">{buttons}</div><pre class="result" hidden></pre>')
+
+    if not check:
+        body.append('<p class="unchecked">No single correct answer to check '
+                    'against \u2014 run it and see.</p>')
+
+    attrs = f'<div class="box exercise" data-box="{html.escape(key, quote=True)}"'
+    if check:
+        attrs += f' data-check="{html.escape(json.dumps(check), quote=True)}"'
+    return attrs + ">" + "".join(body) + "</div>"
 
 
 def code_box(slug, index, code, expected, label=""):
