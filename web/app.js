@@ -9,11 +9,17 @@
 
 const PYODIDE = "https://cdn.jsdelivr.net/npm/pyodide@314.0.7/";
 
+/* web/box_runner.py, inlined by build.py */
+const BOX_RUNNER = {{harness}};
+
 const pill = document.querySelector(".runtime");
 const slug = document.body.dataset.slug;
 
+const TIMEOUT_SECONDS = 5;
+
 let pyodide = null;
 let loading = null;
+let runBox = null;        // the Python entry point from box_runner.py
 let sink = null;          // where the currently running program's output goes
 
 function say(message, ready = false) {
@@ -46,6 +52,10 @@ async function boot() {
       },
     });
 
+    // box_runner.py is inlined here at build time by build.py.
+    pyodide.runPython(BOX_RUNNER);
+    runBox = pyodide.globals.get("run_box");
+
     say("Python ready", true);
     setTimeout(() => (pill.hidden = true), 1600);
     return pyodide;
@@ -66,7 +76,7 @@ async function runPython(source, onOutput) {
   let error = null;
   const namespace = py.runPython("dict()");
   try {
-    py.runPython(source, { globals: namespace });
+    runBox(source, TIMEOUT_SECONDS, namespace);
   } catch (e) {
     error = String(e.message || e);
   } finally {
@@ -77,23 +87,6 @@ async function runPython(source, onOutput) {
 }
 
 /* ------------------------------------------------------------------ boxes */
-
-/** The one accident that hangs the tab, caught before Python ever sees it. */
-function looksLikeRunawayLoop(source) {
-  const lines = source.split("\n");
-  for (let i = 0; i < lines.length; i++) {
-    if (!/^\s*while\s+(True|1)\s*:/.test(lines[i])) continue;
-    const indent = lines[i].match(/^\s*/)[0].length;
-    for (let j = i + 1; j < lines.length; j++) {
-      const line = lines[j];
-      if (!line.trim()) continue;
-      if (line.match(/^\s*/)[0].length <= indent) break;   // loop body ended
-      if (/\b(break|return|sys\.exit|input)\b/.test(line)) return false;
-    }
-    return true;
-  }
-  return false;
-}
 
 function autosize(area) {
   area.style.height = "auto";
@@ -146,15 +139,6 @@ document.querySelectorAll(".box").forEach((box) => {
   });
 
   runButton.addEventListener("click", async () => {
-    if (looksLikeRunawayLoop(area.value)) {
-      const go = confirm(
-        "This looks like a loop that never stops: a `while True:` with no " +
-        "`break` inside it.\n\nIf you run it, the page will freeze and you " +
-        "will have to reload. Your code is saved.\n\nRun it anyway?"
-      );
-      if (!go) return;
-    }
-
     const setup = box.dataset.setup ? box.dataset.setup + "\n" : "";
     runButton.disabled = true;
     status.textContent = pyodide ? "running…" : "starting Python…";
@@ -172,7 +156,9 @@ document.querySelectorAll(".box").forEach((box) => {
     if (error) {
       result.classList.add("error");
       result.textContent = (output ? output + "\n" : "") + error;
-      status.textContent = "raised an error";
+      status.textContent = error.includes("KeyboardInterrupt")
+        ? `stopped after ${TIMEOUT_SECONDS}s`
+        : "raised an error";
     } else {
       result.textContent = output || "(no output)";
       status.textContent = "done";

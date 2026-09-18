@@ -261,10 +261,27 @@ def build(check=False):
                .replace("{{slug}}", page["slug"]))
         (SITE / f"{page['slug']}.html").write_text(out)
 
+    runner = json.dumps((ROOT / "web" / "box_runner.py").read_text())
     for name in ("app.js", "app.css"):
-        (SITE / name).write_text((ROOT / "web" / name).read_text())
+        text = (ROOT / "web" / name).read_text().replace("{{harness}}", runner)
+        (SITE / name).write_text(text)
 
     (SITE / "index.html").write_text((SITE / f"{pages[0]['slug']}.html").read_text())
+
+    # Machine-readable box list, so the boxes can be run outside this script.
+    dump = []
+    for page in pages:
+        index = 0
+        for kind, code in page["blocks"]:
+            if kind != "code":
+                continue
+            declared = BOXES.get(f"{page['slug']}#{index}", {})
+            dump.append({"id": f"{page['slug']}#{index}", "slug": page["slug"],
+                         "code": code, "setup": declared.get("setup", ""),
+                         "raises": declared.get("raises", ""),
+                         "needs_input": "input(" in code})
+            index += 1
+    (SITE / "boxes.json").write_text(json.dumps(dump, indent=1))
 
     total = sum(p["boxes"] for p in pages)
     print(f"built {len(pages)} pages, {total} code boxes -> {SITE.relative_to(ROOT)}/")
