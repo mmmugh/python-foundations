@@ -949,5 +949,123 @@
     ]
    }
   ]
+ },
+ "ch02-variables-and-types#11": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "Ada"
+    ],
+    "words": [
+     "corner store",
+     "ada"
+    ],
+    "numbers": [
+     3.5,
+     2.25,
+     1.75,
+     7.5
+    ]
+   }
+  ]
+ },
+ "ch03-expressions-and-operators#13": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "68"
+    ],
+    "words": [
+     "quarters",
+     "dimes",
+     "nickels",
+     "pennies"
+    ],
+    "numbers": [
+     2,
+     1,
+     1,
+     3
+    ]
+   },
+   {
+    "typed": [
+     "41"
+    ],
+    "numbers": [
+     1,
+     1,
+     1,
+     1
+    ]
+   }
+  ]
+ },
+ "ch04-making-decisions#12": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "70",
+     "Tuesday"
+    ],
+    "words": [
+     "senior"
+    ],
+    "numbers": [
+     7
+    ]
+   },
+   {
+    "typed": [
+     "10",
+     "Monday"
+    ],
+    "numbers": [
+     8
+    ]
+   },
+   {
+    "typed": [
+     "30",
+     "Tuesday"
+    ],
+    "numbers": [
+     11
+    ]
+   },
+   {
+    "typed": [
+     "30",
+     "Friday"
+    ],
+    "numbers": [
+     14
+    ]
+   }
+  ]
+ },
+ "ch06-functions#13": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "Ada",
+     "88",
+     "105",
+     "92",
+     "79",
+     "95"
+    ],
+    "words": [
+     "ada"
+    ],
+    "numbers": [
+     88.5
+    ]
+   }
+  ]
  }
 }

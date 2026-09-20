@@ -287,13 +287,17 @@ def project_box(slug, index, code, expected, label=""):
         spec = (f'<div class="spec"><p class="spec-head">{heading}</p>'
                 f'<pre>{html.escape(expected)}</pre></div>')
 
-    # The output is checkable exactly when nothing has to be typed in: the
-    # build already proves the stated output is what this code really produces.
+    # A project that asks the reader to type something needs a declared check,
+    # because the sample run shows the typed values and the checker supplies
+    # them silently. Everything else is checkable against the stated output for
+    # free: the build already proves that is what this code really produces.
+    spec_check = CHECKS.get(f"{slug}#{index}")
+    if spec_check is None and expected and "input(" not in code:
+        spec_check = {"kind": "output", "expected": expected}
     check = ""
-    if expected and "input(" not in code:
+    if spec_check:
         check = (' data-check="' +
-                 html.escape(json.dumps({"kind": "output", "expected": expected}),
-                             quote=True) + '"')
+                 html.escape(json.dumps(spec_check), quote=True) + '"')
 
     buttons = '<button class="run">Run</button>'
     if check:
