@@ -571,3 +571,28 @@ pre.reference {
   overflow-x: auto;
   color: var(--soft);
 }
+
+/* The test cases, shown as the specification for a function exercise. */
+.exercise .cases {
+  margin: 0 0.9rem 0.7rem;
+  background: var(--code-bg);
+  border: 1px solid var(--rule);
+  border-radius: 0.4rem;
+}
+.exercise .cases summary {
+  padding: 0.4rem 0.7rem;
+  cursor: pointer;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+.exercise .cases pre {
+  margin: 0;
+  padding: 0 0.7rem 0.7rem;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  white-space: pre;
+  overflow-x: auto;
+  color: var(--ink);
+}

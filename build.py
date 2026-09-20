@@ -232,6 +232,17 @@ def render_exercises(slug, blocks):
     return "\n".join(out)
 
 
+def worked_cases(check):
+    """The test cases, written out as calls. For an exercise that names a
+    function, these are the specification: "count_above([3, 3, 3], 3) -> 0"
+    settles whether the comparison is > or >= without giving any code away."""
+    lines = []
+    for args, expected in check["cases"]:
+        shown = ", ".join(repr(a) for a in args)
+        lines.append(f"{check['name']}({shown})  ->  {expected!r}")
+    return "\n".join(lines)
+
+
 def exercise_html(slug, number, exercise):
     check = CHECKS.get(f"{slug}#{number}")
     key = f"{slug}#{number}"
@@ -242,6 +253,10 @@ def exercise_html(slug, number, exercise):
         # The exercise states the signature; use it as the starting line.
         stub = check.get("stub") or next(iter(SIGNATURE.findall(exercise["text"])), "")
         starter = f"def {stub}:\n    " if stub else ""
+
+    if check and check["kind"] == "function":
+        body.append('<details class="cases" open><summary>What it should do</summary>'
+                    f'<pre>{html.escape(worked_cases(check))}</pre></details>')
 
     if check and check["kind"] == "predict":
         body.append('<label class="ask">Write down what you think it prints, '
