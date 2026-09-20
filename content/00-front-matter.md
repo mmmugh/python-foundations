@@ -2,7 +2,7 @@
 
 *A workable textbook for beginners — every example runs as written.*
 
-2026-09-17 · @Someone
+2026-09-17 · Justin Stewart—built with Claude Opus 5
 
 ## How to Use This Book
 
