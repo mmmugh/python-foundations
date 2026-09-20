@@ -596,3 +596,12 @@ pre.reference {
   overflow-x: auto;
   color: var(--ink);
 }
+
+.exercise .solution .why {
+  margin: 0;
+  padding: 0 0.9rem 0.8rem;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--soft);
+  font-family: inherit;
+}

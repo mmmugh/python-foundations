@@ -32,6 +32,39 @@ BOXES = json.loads((CONTENT / "_boxes.json").read_text())
 CHECKS = json.loads((CONTENT / "_checks.json").read_text())
 
 
+def load_solutions():
+    """Worked solutions for the exercises that have no check, keyed "<slug>#<n>".
+
+    Kept as Markdown rather than JSON so they can be edited as writing.
+    """
+    path = CONTENT / "_solutions.md"
+    if not path.exists():
+        return {}
+    found, ident, code, note, fence = {}, None, [], [], False
+    for line in path.read_text().split("\n"):
+        if line.startswith("## ") and not fence:
+            if ident:
+                found[ident] = {"code": "\n".join(code).strip(),
+                                "note": " ".join(note).strip()}
+            ident, code, note = line[3:].strip(), [], []
+            continue
+        if ident is None:
+            continue
+        if line.startswith("```"):
+            fence = not fence
+            continue
+        if fence:
+            code.append(line)
+        elif line.strip() and not line.startswith("<!--"):
+            note.append(line.strip())
+    if ident:
+        found[ident] = {"code": "\n".join(code).strip(), "note": " ".join(note).strip()}
+    return found
+
+
+SOLUTIONS = load_solutions()
+
+
 # ---------------------------------------------------------------- markdown
 
 def inline(text):
@@ -274,7 +307,12 @@ def exercise_html(slug, number, exercise):
                 '<span class="status"></span>')
     body.append(f'<div class="bar">{buttons}</div><pre class="result" hidden></pre>')
 
-    if not check:
+    solution = SOLUTIONS.get(key)
+    if solution:
+        note = f'<p class="why">{inline(solution["note"])}</p>' if solution["note"] else ""
+        body.append('<details class="solution"><summary>Show a solution</summary>'
+                    f'<pre>{html.escape(solution["code"])}</pre>{note}</details>')
+    elif not check:
         body.append('<p class="unchecked">No single correct answer to check '
                     'against \u2014 run it and see.</p>')
 
