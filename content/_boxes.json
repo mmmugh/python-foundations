@@ -1,44 +1,48 @@
 {
-  "ch01-your-first-programs#7": {
-    "raises": "SyntaxError",
-    "why": "A missing closing quote. The error message is the lesson."
-  },
-  "ch04-making-decisions#7": {
-    "setup": "has_ticket = True\nage = 15"
-  },
-  "ch06-functions#8": {
-    "raises": "NameError",
-    "why": "result lived only inside the function. That is what scope means."
-  },
-  "ch07-lists#2": {
-    "raises": "IndexError",
-    "why": "The list has two items, so index 5 does not exist."
-  },
-  "ch08-strings-as-data#1": {
-    "raises": "TypeError",
-    "why": "Strings are immutable — you cannot assign to one character."
-  },
-  "ch09-dictionaries-and-sets#2": {
-    "raises": "KeyError",
-    "why": "Grace is not a key in the dictionary."
-  },
-  "ch10-tuples-and-structured-records#1": {
-    "raises": "TypeError",
-    "why": "Tuples are immutable — that is the whole point of them."
-  },
-  "ch10-tuples-and-structured-records#6": {
-    "setup": "students = [\n    {\"name\": \"Ada\", \"grade\": 9, \"score\": 88},\n    {\"name\": \"Grace\", \"grade\": 10, \"score\": 92},\n    {\"name\": \"Alan\", \"grade\": 9, \"score\": 45},\n    {\"name\": \"Katherine\", \"grade\": 11, \"score\": 95},\n]"
-  },
-  "ch10-tuples-and-structured-records#7": {
-    "setup": "students = [\n    {\"name\": \"Ada\", \"grade\": 9, \"score\": 88},\n    {\"name\": \"Grace\", \"grade\": 10, \"score\": 92},\n    {\"name\": \"Alan\", \"grade\": 9, \"score\": 45},\n    {\"name\": \"Katherine\", \"grade\": 11, \"score\": 95},\n]"
-  },
-  "ch10-tuples-and-structured-records#8": {
-    "setup": "students = [\n    {\"name\": \"Ada\", \"grade\": 9, \"score\": 88},\n    {\"name\": \"Grace\", \"grade\": 10, \"score\": 92},\n    {\"name\": \"Alan\", \"grade\": 9, \"score\": 45},\n    {\"name\": \"Katherine\", \"grade\": 11, \"score\": 95},\n]"
-  },
-  "ch10-tuples-and-structured-records#9": {
-    "setup": "students = [\n    {\"name\": \"Ada\", \"grade\": 9, \"score\": 88},\n    {\"name\": \"Grace\", \"grade\": 10, \"score\": 92},\n    {\"name\": \"Alan\", \"grade\": 9, \"score\": 45},\n    {\"name\": \"Katherine\", \"grade\": 11, \"score\": 95},\n]"
-  },
-  "ch10-tuples-and-structured-records#10": {
-    "setup": "students = [\n    {\"name\": \"Ada\", \"grade\": 9, \"score\": 88},\n    {\"name\": \"Grace\", \"grade\": 10, \"score\": 92},\n    {\"name\": \"Alan\", \"grade\": 9, \"score\": 45},\n    {\"name\": \"Katherine\", \"grade\": 11, \"score\": 95},\n]"
-  }
+ "ch01-your-first-programs#7": {
+  "raises": "SyntaxError",
+  "why": "A missing closing quote. The error message is the lesson."
+ },
+ "ch04-making-decisions#7": {
+  "setup": "has_ticket = True\nage = 15"
+ },
+ "ch06-functions#8": {
+  "raises": "NameError",
+  "why": "result lived only inside the function. That is what scope means."
+ },
+ "ch07-lists#2": {
+  "raises": "IndexError",
+  "why": "The list has two items, so index 5 does not exist."
+ },
+ "ch08-strings-as-data#1": {
+  "raises": "TypeError",
+  "why": "Strings are immutable \u2014 you cannot assign to one character."
+ },
+ "ch09-dictionaries-and-sets#2": {
+  "raises": "KeyError",
+  "why": "Grace is not a key in the dictionary."
+ },
+ "ch10-tuples-and-structured-records#1": {
+  "raises": "TypeError",
+  "why": "Tuples are immutable \u2014 that is the whole point of them."
+ },
+ "ch10-tuples-and-structured-records#6": {
+  "setup": "students = [\n    {\"name\": \"Ada\", \"grade\": 9, \"score\": 88},\n    {\"name\": \"Grace\", \"grade\": 10, \"score\": 92},\n    {\"name\": \"Alan\", \"grade\": 9, \"score\": 45},\n    {\"name\": \"Katherine\", \"grade\": 11, \"score\": 95},\n]"
+ },
+ "ch10-tuples-and-structured-records#7": {
+  "setup": "students = [\n    {\"name\": \"Ada\", \"grade\": 9, \"score\": 88},\n    {\"name\": \"Grace\", \"grade\": 10, \"score\": 92},\n    {\"name\": \"Alan\", \"grade\": 9, \"score\": 45},\n    {\"name\": \"Katherine\", \"grade\": 11, \"score\": 95},\n]"
+ },
+ "ch10-tuples-and-structured-records#8": {
+  "setup": "students = [\n    {\"name\": \"Ada\", \"grade\": 9, \"score\": 88},\n    {\"name\": \"Grace\", \"grade\": 10, \"score\": 92},\n    {\"name\": \"Alan\", \"grade\": 9, \"score\": 45},\n    {\"name\": \"Katherine\", \"grade\": 11, \"score\": 95},\n]"
+ },
+ "ch10-tuples-and-structured-records#9": {
+  "setup": "students = [\n    {\"name\": \"Ada\", \"grade\": 9, \"score\": 88},\n    {\"name\": \"Grace\", \"grade\": 10, \"score\": 92},\n    {\"name\": \"Alan\", \"grade\": 9, \"score\": 45},\n    {\"name\": \"Katherine\", \"grade\": 11, \"score\": 95},\n]"
+ },
+ "ch10-tuples-and-structured-records#10": {
+  "setup": "students = [\n    {\"name\": \"Ada\", \"grade\": 9, \"score\": 88},\n    {\"name\": \"Grace\", \"grade\": 10, \"score\": 92},\n    {\"name\": \"Alan\", \"grade\": 9, \"score\": 45},\n    {\"name\": \"Katherine\", \"grade\": 11, \"score\": 95},\n]"
+ },
+ "ch09-dictionaries-and-sets#11": {
+  "varies": true,
+  "why": "Python randomizes string hashing per process, so a set prints in a different order each run."
+ }
 }

@@ -81,7 +81,7 @@ print(scores)
 Output:
 
 ```
-[88, 92, 79, 85]
+[88, 92, 85, 95]
 ```
 
 This property is called **mutability**, and it is the main practical difference between a list and the other containers in this book.

@@ -158,6 +158,16 @@ def render(blocks, slug):
                   and blocks[i + 2][0] == "output" and is_output_label(blocks[i + 1][1])):
                 label, expected, skip = blocks[i + 1][1], blocks[i + 2][1], 2
             i += skip
+            # Pressing Run reproduces the book's output on most boxes, so the
+            # panel only earns its place where Run cannot: a transcript that
+            # includes typed input, or output that legitimately varies.
+            varies = BOXES.get(f"{slug}#{box}", {}).get("varies")
+            if "input(" in payload:
+                label = "A sample run"
+            elif varies:
+                label = "The book showed"
+            else:
+                expected, label = "", ""
             parts.append(code_box(slug, box, payload, expected, label))
             box += 1
 
@@ -254,8 +264,7 @@ def code_box(slug, index, code, expected, label=""):
 
     answer = ""
     if expected:
-        generic = label.lower().rstrip(":") in ("", "output")
-        summary = "What the book prints" if generic else inline(label.rstrip(":"))
+        summary = inline(label.rstrip(":")) or "What the book prints"
         answer = (f'<details class="expected"><summary>{summary}</summary>'
                   f'<pre>{html.escape(expected)}</pre></details>')
 
@@ -350,16 +359,25 @@ def build(check=False):
     dump = []
     for page in pages:
         index = 0
-        for kind, code in page["blocks"]:
+        blocks = page["blocks"]
+        for n, (kind, code) in enumerate(blocks):
             if kind != "code":
                 continue
             declared = BOXES.get(f"{page['slug']}#{index}", {})
+            expected, label = "", ""
+            if n + 1 < len(blocks) and blocks[n + 1][0] == "output":
+                expected = blocks[n + 1][1]
+            elif (n + 2 < len(blocks) and blocks[n + 1][0] == "p"
+                  and blocks[n + 2][0] == "output" and is_output_label(blocks[n + 1][1])):
+                label, expected = blocks[n + 1][1], blocks[n + 2][1]
             dump.append({"id": f"{page['slug']}#{index}", "slug": page["slug"],
                          "code": code, "setup": declared.get("setup", ""),
                          "raises": declared.get("raises", ""),
+                         "expected": expected, "label": label,
                          "needs_input": "input(" in code})
             index += 1
     (SITE / "boxes.json").write_text(json.dumps(dump, indent=1))
+    page_boxes = dump
 
     total = sum(p["boxes"] for p in pages)
     print(f"built {len(pages)} pages, {total} code boxes -> {SITE.relative_to(ROOT)}/")
@@ -367,10 +385,10 @@ def build(check=False):
         print(f"  {p['slug']:<42} {p['boxes']:>3} boxes")
 
     if check:
-        verify(pages)
+        verify(pages, page_boxes)
 
 
-def verify(pages):
+def verify(pages, dump):
     """Run every code box on this machine's python3 and report what happens."""
     print("\nchecking every code box against python3:")
     tally = {"clean": 0, "needs input": 0, "raises on purpose": 0, "UNEXPECTED": 0}
@@ -416,6 +434,46 @@ def verify(pages):
     if problems:
         sys.exit(f"\n{len(problems)} box(es) fail unexpectedly")
     print("  all boxes behave as expected")
+    audit_book_output(dump)
+
+
+def audit_book_output(dump):
+    """Check every printed output in the book against what the code really does.
+
+    The book states its own output beside each example. Where the example is
+    deterministic and needs no typing, that statement is checkable -- and a
+    wrong one teaches the wrong lesson, so it fails the build rather than
+    shipping.
+    """
+    print("\nchecking the book's own printed output against reality:")
+    checked = mismatched = 0
+    for box in dump:
+        if not box["expected"] or box["needs_input"] or box["raises"]:
+            continue
+        if BOXES.get(box["id"], {}).get("varies"):
+            continue
+
+        source = (box["setup"] + "\n" if box["setup"] else "") + box["code"]
+        with tempfile.NamedTemporaryFile("w", suffix=".py", delete=False) as f:
+            f.write(source + "\n")
+            temp = f.name
+        run = subprocess.run([sys.executable, temp], capture_output=True, text=True,
+                             stdin=subprocess.DEVNULL, timeout=30)
+        if run.returncode != 0:
+            continue
+        checked += 1
+
+        tidy = lambda t: "\n".join(l.rstrip() for l in t.strip("\n").split("\n")).strip()
+        if tidy(run.stdout) != tidy(box["expected"]):
+            mismatched += 1
+            print(f"  !! {box['id']}")
+            print(f"       book says : {tidy(box['expected'])!r}")
+            print(f"       really is : {tidy(run.stdout)!r}")
+
+    print(f"  {checked} checked, {mismatched} mismatched")
+    if mismatched:
+        sys.exit(f"\n{mismatched} place(s) where the book states an output the code "
+                 f"does not produce")
 
 
 if __name__ == "__main__":
