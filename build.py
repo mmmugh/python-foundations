@@ -137,8 +137,18 @@ def render(blocks, slug):
     parts = []
     box = 0
     i = 0
+    section = ""
     while i < len(blocks):
         kind, payload = blocks[i]
+        if kind == "h3":
+            section = payload
+
+        # "A solution:" introduces the listing, which is now behind a
+        # disclosure, so the sentence goes with it rather than above the box.
+        if (kind == "p" and re.match(r"^A solution", payload)
+                and i + 1 < len(blocks) and blocks[i + 1][0] == "code"):
+            i += 1
+            continue
 
         if kind == "h3" and payload == "Try It":
             parts.append(f"<h3>{inline(payload)}</h3>")
@@ -165,6 +175,12 @@ def render(blocks, slug):
             # Pressing Run reproduces the book's output on most boxes, so the
             # panel only earns its place where Run cannot: a transcript that
             # includes typed input, or output that legitimately varies.
+            if section.startswith(("Chapter project", "Capstone project")):
+                parts.append(project_box(slug, box, payload, expected, label))
+                box += 1
+                i += 1
+                continue
+
             varies = BOXES.get(f"{slug}#{box}", {}).get("varies")
             if "input(" in payload:
                 label = "A sample run"
@@ -251,6 +267,51 @@ def exercise_html(slug, number, exercise):
     if check:
         attrs += f' data-check="{html.escape(json.dumps(check), quote=True)}"'
     return attrs + ">" + "".join(body) + "</div>"
+
+
+def project_box(slug, index, code, expected, label=""):
+    """A chapter project: something to write, not something to read.
+
+    The prompt says what to build and the printed output says exactly what it
+    should produce, which between them is a complete specification. Handing the
+    finished listing over as well leaves nothing to do, so it goes behind a
+    disclosure and the editor starts with the one line of description the
+    listing opens with.
+    """
+    first = code.split("\n")[0]
+    starter = first + "\n\n" if first.startswith("#") else ""
+
+    spec = ""
+    if expected:
+        heading = "A sample run" if "input(" in code else "What it should print"
+        spec = (f'<div class="spec"><p class="spec-head">{heading}</p>'
+                f'<pre>{html.escape(expected)}</pre></div>')
+
+    # The output is checkable exactly when nothing has to be typed in: the
+    # build already proves the stated output is what this code really produces.
+    check = ""
+    if expected and "input(" not in code:
+        check = (' data-check="' +
+                 html.escape(json.dumps({"kind": "output", "expected": expected}),
+                             quote=True) + '"')
+
+    buttons = '<button class="run">Run</button>'
+    if check:
+        buttons += '<button class="check">Check</button>'
+    buttons += ('<button class="reset" title="Start over">Reset</button>'
+                '<span class="status"></span>')
+
+    return (
+        f'{spec}'
+        f'<div class="box project" data-box="{index}"{check}>'
+        f'<textarea spellcheck="false" aria-label="Your program">'
+        f'{html.escape(starter)}</textarea>'
+        f'<div class="bar">{buttons}</div>'
+        f'<pre class="result" hidden></pre>'
+        f'<details class="solution"><summary>Show a solution</summary>'
+        f'<pre>{html.escape(code)}</pre></details>'
+        f'</div>'
+    )
 
 
 def code_box(slug, index, code, expected, label=""):

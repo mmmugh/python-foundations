@@ -510,3 +510,64 @@ pre.reference {
   border: 1px solid var(--rule);
   border-radius: 0.6rem;
 }
+
+/* ----------------------------------------------------------------- projects */
+
+/* The specification: what the program must produce. Open by default, because
+   this is the half of the brief that prose cannot give precisely. */
+.spec {
+  margin: 1.5rem 0 0;
+  border: 1px solid var(--rule);
+  border-bottom: 0;
+  border-radius: 0.6rem 0.6rem 0 0;
+  background: var(--panel);
+  overflow: hidden;
+}
+
+.spec-head {
+  margin: 0;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--soft);
+  border-bottom: 1px solid var(--rule);
+}
+
+.spec pre {
+  margin: 0;
+  padding: 0.9rem;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  white-space: pre;
+  overflow-x: auto;
+  color: var(--ink);
+}
+
+.spec + .box.project {
+  margin-top: 0;
+  border-radius: 0 0 0.6rem 0.6rem;
+}
+
+.box.project textarea { min-height: 7rem; }
+
+.box.project .solution {
+  border-top: 1px solid var(--rule);
+  background: var(--paper);
+}
+.box.project .solution summary {
+  padding: 0.55rem 0.9rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: var(--soft);
+}
+.box.project .solution summary:hover { color: var(--accent); }
+.box.project .solution pre {
+  margin: 0;
+  padding: 0 0.9rem 0.9rem;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  white-space: pre;
+  overflow-x: auto;
+  color: var(--soft);
+}
