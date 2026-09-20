@@ -33,7 +33,7 @@ Python works out the right side first (`5 + 1`, which is `6`), then points the n
 
 ### The four basic types
 
-Every value in Python has a **type**, which determines what you can do with it. Four types cover almost everything in this book.
+Every value in Python has a **type**, which determines what you can do with it. Four types cover almost everything in this course.
 
 | Type | Name | Examples | Holds |
 | --- | --- | --- | --- |

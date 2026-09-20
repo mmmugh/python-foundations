@@ -169,7 +169,7 @@ def render(blocks, slug):
             if "input(" in payload:
                 label = "A sample run"
             elif varies:
-                label = "The book showed"
+                label = "The course showed"
             else:
                 expected, label = "", ""
             parts.append(code_box(slug, box, payload, expected, label))
@@ -275,7 +275,7 @@ def code_box(slug, index, code, expected, label=""):
 
     answer = ""
     if expected:
-        summary = inline(label.rstrip(":")) or "What the book prints"
+        summary = inline(label.rstrip(":")) or "What the course prints"
         answer = (f'<details class="expected"><summary>{summary}</summary>'
                   f'<pre>{html.escape(expected)}</pre></details>')
 
@@ -314,6 +314,8 @@ def title_of(path, blocks):
 
 def build(check=False):
     SITE.mkdir(exist_ok=True)
+    for stale in SITE.glob("*.standalone.html"):
+        stale.unlink()          # previews are built on demand; do not leave old ones
     pages = []
 
     for path in chapter_files():
@@ -456,7 +458,7 @@ def write_bundle(pages):
                     body.append(f"# --- {re.sub(r'`', '', heading)} {rule}\n")
                 if raises:
                     muted += 1
-                    body.append(f"# Commented out: the book runs this to show {raises}.\n"
+                    body.append(f"# Commented out: the course runs this to show {raises}.\n"
                                 f"# Uncomment it to see the error for yourself.\n")
                     body.append("".join(f"# {l}\n" if l.strip() else "#\n"
                                         for l in code.split("\n")))
@@ -473,12 +475,12 @@ def write_bundle(pages):
                 one = muted == 1
                 notes += ["",
                           f"{muted} example{'' if one else 's'} below "
-                          f"{'runs' if one else 'run'} on purpose in the book, to show the",
+                          f"{'runs' if one else 'run'} on purpose in the course, to show the",
                           f"error {'it raises' if one else 'they raise'}. Left live here "
                           f"{'it' if one else 'they'} would stop this file before the",
                           "rest of the chapter ran, so "
                           f"{'it is' if one else 'they are'} commented out below.",
-                          f"Uncomment {'it' if one else 'one'} to see what the book describes."]
+                          f"Uncomment {'it' if one else 'one'} to see what the course describes."]
             if asks:
                 notes += ["", "This file stops and waits wherever the chapter asks you to",
                           "type something."]
@@ -486,6 +488,20 @@ def write_bundle(pages):
 
             (out / name).write_text("\n".join(notes) + "".join(body).rstrip() + "\n")
             written.append((name, title, muted, asks))
+
+    # The Word export needs python-docx, which nothing else here does. If it is
+    # not installed, the course still builds; only the download row disappears.
+    document_row = ""
+    docx = SITE / "python-foundations.docx"
+    if docx.exists():
+        size = docx.stat().st_size / 1024
+        document_row = (
+            "<h3>The whole course as a document</h3>"
+            "<p>The same text you are reading, as a Word file, for reading away "
+            "from a browser or for printing. Generated from the chapters, so it "
+            "matches what is on these pages.</p>"
+            f'<p><a href="python-foundations.docx">python-foundations.docx</a> '
+            f"({size:,.0f} KB)</p><h3>The code</h3>")
 
     index_rows = "".join(
         f'<tr><td><a href="bundle/{n}">{n}</a></td><td>{html.escape(t)}</td>'
@@ -499,8 +515,9 @@ def write_bundle(pages):
         .replace("{{slug}}", "bundle").replace("{{nav}}", '<a href="index.html">Contents</a>')
         .replace("{{prevnext}}", '<a class="prev" href="99-appendices.html">&larr; Appendices</a>')
         .replace("{{body}}",
-                 "<h2>The code as files</h2>"
-                 "<p>Every example and project from the book, generated from the "
+                 "<h2>Downloads</h2>"
+                 + document_row +
+                 "<p>Every example and project from the course, generated from the "
                  "chapters themselves so the two cannot disagree. You need Python "
                  "3.6 or newer and nothing else.</p>"
                  f"<table><thead><tr><th>File</th><th>Chapter</th><th>Notes</th>"
@@ -567,7 +584,7 @@ def audit_book_output(dump):
     wrong one teaches the wrong lesson, so it fails the build rather than
     shipping.
     """
-    print("\nchecking the book's own printed output against reality:")
+    print("\nchecking the course's own printed output against reality:")
     checked = mismatched = 0
     for box in dump:
         if not box["expected"] or box["needs_input"] or box["raises"] or box["reference"]:
@@ -589,12 +606,12 @@ def audit_book_output(dump):
         if tidy(run.stdout) != tidy(box["expected"]):
             mismatched += 1
             print(f"  !! {box['id']}")
-            print(f"       book says : {tidy(box['expected'])!r}")
+            print(f"     course says : {tidy(box['expected'])!r}")
             print(f"       really is : {tidy(run.stdout)!r}")
 
     print(f"  {checked} checked, {mismatched} mismatched")
     if mismatched:
-        sys.exit(f"\n{mismatched} place(s) where the book states an output the code "
+        sys.exit(f"\n{mismatched} place(s) where the course states an output the code "
                  f"does not produce")
 
 

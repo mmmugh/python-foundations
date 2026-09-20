@@ -1,7 +1,7 @@
 # Python Foundations
 
 *Python Foundations: A First Course in Programming* as a web app: the whole
-book, with every example in an editable box that runs in the browser.
+course, with every example in an editable box that runs in the browser.
 
 Twelve chapters, 157 runnable code boxes, 75 exercises (41 of which check your
 answer), an interactive scratchpad, and four appendices. No accounts, no
@@ -27,16 +27,20 @@ content/       the manuscript, one Markdown file per chapter — the master copy
 build.py       content/ -> site/. ~600 lines, no dependencies
 web/           page template, stylesheet, browser runtime
   box_runner.py  runs a box, stops a runaway loop, checks an answer
-scripts/       a one-file preview builder
+scripts/       a one-file preview builder, and the Word export
 archive/       how the project got here; nothing depends on it
 ```
 
-`site/` is generated and not tracked. `site/bundle/` holds the book's code as
+`site/` is generated and not tracked. `site/bundle/` holds the course's code as
 `.py` files, generated from the chapters so the two cannot disagree.
+
+`python3 scripts/make_docx.py` writes `site/python-foundations.docx` from the
+same chapters. It is the only thing here that needs a package (`python-docx`);
+the course builds fine without it, and the download link simply does not appear.
 
 ## `build.py --check`
 
-The build refuses to ship a book that is wrong about itself:
+The build refuses to ship a course that is wrong about itself:
 
 - every code box is executed; one that fails without being declared as a
   deliberate teaching error fails the build

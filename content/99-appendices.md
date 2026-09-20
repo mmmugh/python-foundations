@@ -126,7 +126,7 @@ Assembling that list solves the problem outright surprisingly often.
 
 ## Appendix B — Quick Reference
 
-Everything in this book, on one page.
+Everything in this course, on one page.
 
 ### Output and input
 
@@ -348,11 +348,11 @@ main()              # called on the last line
 
 ## Appendix C — Where to Go Next
 
-This book covered the core of programming: values, decisions, repetition, decomposition, data structures, and algorithms. Those ideas transfer to every language you will ever use. What follows are the things deliberately left out, roughly in the order they become useful.
+This course covered the core of programming: values, decisions, repetition, decomposition, data structures, and algorithms. Those ideas transfer to every language you will ever use. What follows are the things deliberately left out, roughly in the order they become useful.
 
 ### Left out on purpose
 
-**Objects and classes.** Python lets you define your own types, bundling data and the functions that work on it. A `Student` class would replace this book's student dictionaries with something that carries its own `average()` method. This is the single biggest idea still ahead, and it is normally the start of a second course. Everything in this book works without it.
+**Objects and classes.** Python lets you define your own types, bundling data and the functions that work on it. A `Student` class would replace this course's student dictionaries with something that carries its own `average()` method. This is the single biggest idea still ahead, and it is normally the start of a second course. Everything in this course works without it.
 
 **Reading and writing files.** Programs here kept data in variables, so it vanished when the program ended. `open()`, and the `csv` and `json` modules, let a program save its work and read data it did not create.
 
@@ -385,7 +385,7 @@ A first algorithms course covers roughly that list, and it is where computer sci
 
 Programming is learned by writing programs. Some ways to keep going:
 
-- **Finish the exercises.** Every Try It in this book, including the ones you skipped.
+- **Finish the exercises.** Every Try It in this course, including the ones you skipped.
 - **Extend the projects.** Add letter-grade curves to the gradebook. Make the inventory system accept new items. Give the guessing game a high-score table.
 - **Solve puzzles.** Project Euler, Advent of Code, and similar sites offer graded problems that are good practice and genuinely fun.
 - **Automate something tedious.** The best beginner projects solve a problem you actually have — renaming a folder of files, tracking a habit, calculating something you currently do by hand.
@@ -424,7 +424,7 @@ with `python3 myfile.py` does exactly the same. To see a value, print it.
 print(2 + 3)
 ```
 
-This is the behaviour the whole book is written around, which is why the
+This is the behaviour the whole course is written around, which is why the
 chapter boxes work this way.
 
 ### The scratchpad is an interpreter
@@ -467,19 +467,19 @@ from the top every time, for anyone, without you typing at it, and the boxes
 hold you to that.
 
 The scratchpad forgets everything when you leave the page. Your edits to the
-chapter boxes are kept, and the Reset button puts a box back to how the book
-had it.
+chapter boxes are kept, and the Reset button puts a box back to how it started.
 
-### The code as files
+### Taking it with you
 
-Everything in this book is also available as ordinary `.py` files, one per
-chapter, if you would rather work in an editor on your own machine.
-[The code as files](bundle.html) lists them. You need Python 3.6 or newer and
-nothing else.
+Everything here is also available to download. The whole course comes as a Word
+document, for reading away from a browser or for printing, and every example
+and project comes as ordinary `.py` files, one per chapter, if you would rather
+work in an editor on your own machine. [Downloads](bundle.html) has both. For
+the code you need Python 3.6 or newer and nothing else.
 
 Those files are generated from these chapters, so they cannot disagree with
 what you have been reading. Two things about them do differ from the page, and
-each file says which in its own opening lines. An example that the book runs on
+each file says which in its own opening lines. An example that the course runs on
 purpose to show an error is commented out, because left live it would stop the
 file before the rest of the chapter ran. And a file simply stops and waits
 wherever the chapter asks you to type something, since there is nobody to

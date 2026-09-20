@@ -157,7 +157,7 @@ Output:
 A 7 by 4 rectangle has area 28.
 ```
 
-Use f-strings for anything more complicated than printing a single value. The rest of this book does.
+Use f-strings for anything more complicated than printing a single value. The rest of this course does.
 
 ### String operators
 

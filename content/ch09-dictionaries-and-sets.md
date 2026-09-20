@@ -197,7 +197,7 @@ quick   1
 brown   1
 ```
 
-That `key=lambda pair: pair[1]` says "compare these by their second element." A `lambda` is a small unnamed function; here it takes a `(word, count)` pair and returns the count. You do not need to write lambdas to work through this book, but they appear constantly in real code and this is by far their most common use.
+That `key=lambda pair: pair[1]` says "compare these by their second element." A `lambda` is a small unnamed function; here it takes a `(word, count)` pair and returns the count. You do not need to write lambdas to work through this course, but they appear constantly in real code and this is by far their most common use.
 
 ### Nested dictionaries
 

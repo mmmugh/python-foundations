@@ -134,7 +134,7 @@ def check_output(source, expected, seconds=5):
 
 def check_prediction(book_code, prediction, seconds=5):
     """For 'predict the output' items: compare what the learner wrote down
-    against what the book's own code actually prints."""
+    against what the course's own code actually prints."""
     try:
         actual = _capture(book_code, seconds, {})
     except Exception as e:

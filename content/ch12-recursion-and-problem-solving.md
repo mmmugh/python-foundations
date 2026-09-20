@@ -302,7 +302,7 @@ The base cases are "the range is empty" and "found it." Each recursive call sear
 
 ### Capstone project: a student records system
 
-This brings together everything in the book: functions, loops, conditionals, lists, dictionaries, records, searching, and sorting.
+This brings together everything in the course: functions, loops, conditionals, lists, dictionaries, records, searching, and sorting.
 
 ```python
 # A student records system: add, search, sort, and report.
@@ -447,7 +447,7 @@ Names with 'a': 5
 
 Read through that program and count what it uses. Functions with docstrings and single responsibilities. Loops and conditionals. Lists, dictionaries, records, list comprehensions. `sorted()` with `key=lambda`. Binary search on a sorted list, and linear search where the data is not sorted by the field being searched. f-string alignment throughout.
 
-That is the whole book.
+That is the whole course.
 
 A few points of craft worth extracting.
 

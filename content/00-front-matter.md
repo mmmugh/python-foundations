@@ -4,11 +4,11 @@
 
 2026-09-20 · Justin Stewart—built with Claude Opus 5
 
-## How to Use This Book
+## How to Use This Course
 
-This book teaches you to write programs in Python. It assumes you have never written a line of code and know roughly the algebra taught in a first high-school course. By the end you will be able to read a problem, break it into steps, choose a way to store the data, and write a program that solves it.
+This course teaches you to write programs in Python. It assumes you have never written a line of code and know roughly the algebra taught in a first high-school course. By the end you will be able to read a problem, break it into steps, choose a way to store the data, and write a program that solves it.
 
-Every code example in this book runs exactly as printed. Nothing needs to be installed, no files need to be downloaded, and no example depends on one printed in an earlier chapter unless it says so. If you type it in and it does not run, the problem is a typo, and Appendix A will help you find it.
+Every example here runs exactly as shown. Nothing needs to be installed, no files need to be downloaded, and no example depends on one printed in an earlier chapter unless it says so. If you type it in and it does not run, the problem is a typo, and Appendix A will help you find it.
 
 ### The three parts
 
@@ -34,7 +34,7 @@ Do the Try It exercises as you go rather than saving them for the end. Programmi
 
 There is nothing to install and nothing to download. Every example sits in a box you can type in, with a **Run** button underneath. Press Run, and the output appears below the box.
 
-Then change something and press Run again. Change a number, swap a `<` for a `>`, delete a line and see which part of the output disappears. This is the whole reason the code is in a box rather than on a page, and there is no way to break anything: the **Reset** button puts a box back to exactly how the book had it, and your own edits are kept if you close the page and come back.
+Then change something and press Run again. Change a number, swap a `<` for a `>`, delete a line and see which part of the output disappears. This is the whole reason the code is in a box rather than on a page, and there is no way to break anything: the **Reset** button puts a box back to exactly how it started, and your own edits are kept if you close the page and come back.
 
 Each box starts from nothing and runs top to bottom, the way a saved file does. A variable you create in one box does not exist in the next one. Where an example needs something set up first, the box shows you that setup above the code, marked *already defined for you*.
 
@@ -64,4 +64,4 @@ Every example is already typed in for you, which is convenient and is also a tra
 
 Nothing here requires it, but every example and project is also supplied as a folder of `.py` files, one per chapter, if you would rather work on your own machine. You need Python 3.6 or newer and nothing else — no installs, no libraries beyond `random`.
 
-Every deterministic example in this book is run, and its output compared against what the book prints, every single time the book is rebuilt. If the two ever disagree, the book does not get published. So if an example behaves differently for you, something really is different, and Appendix A is about tracking that down.
+Every deterministic example here is run, and its output compared against what the course says it prints, every time the site is rebuilt. If the two ever disagree, the build fails. So if an example behaves differently for you, something really is different, and Appendix A is about tracking that down.
