@@ -2,7 +2,7 @@
 
 *A workable textbook for beginners — every example runs as written.*
 
-2026-09-17 · Justin Stewart—built with Claude Opus 5
+2026-09-20 · Justin Stewart—built with Claude Opus 5
 
 ## How to Use This Book
 
@@ -23,32 +23,45 @@ Every code example in this book runs exactly as printed. Nothing needs to be ins
 | Section | What it is |
 | --- | --- |
 | Concept | The idea explained in plain language, with a worked example |
-| Worked examples | Complete programs, printed with their exact output |
-| Try It | Short exercises that practice one thing each |
+| Worked examples | Complete programs, ready to run and to change |
+| Try It | Short exercises that practice one thing each, many with a Check button |
 | Common mistakes | Errors that catch nearly everyone, and what they look like |
 | Chapter project | A longer program combining everything in the chapter |
 
 Do the Try It exercises as you go rather than saving them for the end. Programming is a skill like playing an instrument: reading about it and doing it are different activities, and only one of them works.
 
-### Setting up in Replit
+### Running the code
 
-You need somewhere to run code. Replit works in a browser, requires no installation, and saves your work automatically.
+There is nothing to install and nothing to download. Every example sits in a box you can type in, with a **Run** button underneath. Press Run, and the output appears below the box.
 
-1. Go to **replit.com** and make a free account.
-2. Click **Create Repl**, choose **Python** as the template, and give it a name such as `python-foundations`.
-3. You will see three panes: a file list on the left, an editor in the middle, and a black **Console** on the right.
-4. Type your code in the editor pane, then press the **Run** button. Output appears in the Console.
+Then change something and press Run again. Change a number, swap a `<` for a `>`, delete a line and see which part of the output disappears. This is the whole reason the code is in a box rather than on a page, and there is no way to break anything: the **Reset** button puts a box back to exactly how the book had it, and your own edits are kept if you close the page and come back.
 
-That is the whole setup. One habit worth forming immediately: make a new file for each chapter (`ch01.py`, `ch02.py`, and so on) using the **+** button in the file list, rather than overwriting one file all term. You will want to look back at old work.
+Each box starts from nothing and runs top to bottom, the way a saved file does. A variable you create in one box does not exist in the next one. Where an example needs something set up first, the box shows you that setup above the code, marked *already defined for you*.
 
-> **A note on `input()`.** Several programs in this book ask the user to type something. In Replit, you type your answer into the Console pane and press Enter. If a program seems frozen, check whether it is waiting for you to type.
+A few boxes fail on purpose. Those carry a note saying so before you run them, because the error message is the thing being taught.
+
+> **A note on `input()`.** Several programs ask you to type something. A box appears asking for it; type your answer and press OK. If a program seems to be doing nothing, check whether it is waiting for you.
+
+> **If a program never stops.** A loop with no way out is an easy mistake to make, and here it stops itself after five seconds and reports `KeyboardInterrupt`. Nothing is lost when it does.
+
+### The scratchpad
+
+The boxes behave like files, because a program is a file. But a lot of learning happens by simply asking Python a question — what does `"5" * 3` do? is `round(2.5)` 2 or 3? — and for that there is a **Scratchpad** button in the corner.
+
+It works the way a Python interpreter does. It remembers what you typed, so you can build something up a line at a time, and it shows you the value of anything you type without your having to print it. Appendix D explains the difference between the two, and when each is the right one to reach for.
+
+### Checking your answers
+
+Every chapter ends with a handful of Try It exercises. About half have a **Check** button: it runs your answer against several test cases and, if something is wrong, tells you which case failed and what it expected. It does not care how you wrote it — a `for` loop and a comprehension that both work will both pass.
+
+Some exercises have no Check button. Those are the ones where you choose the words the program prints, or the data it works on, so there is no single right answer to check against. The box says as much rather than pretending otherwise. Appendix A is how you check those yourself, and it is worth reading before you need it.
 
 ### On typing the examples out
 
-Copy and paste will get the examples running, but typing them by hand is how the syntax gets into your fingers. It is slower, and it is worth it. Type the short examples; paste the long ones.
+Every example is already typed in for you, which is convenient and is also a trap. Reading code you did not write feels like understanding; writing it is what turns into being able to write it. Type the short examples out yourself — over the top of the box, or into the scratchpad — and run the long ones as printed, then change them until you can predict what the change will do.
 
-### The code bundle
+### If you would rather use your own editor
 
-Every example and project in this book is also supplied as a folder of `.py` files, one per chapter, ready to drop into Replit. Running `main.py` gives a menu of all of them. Use it to check your own work against, or to start from when a project asks you to extend something.
+Nothing here requires it, but every example and project is also supplied as a folder of `.py` files, one per chapter, if you would rather work on your own machine. You need Python 3.6 or newer and nothing else — no installs, no libraries beyond `random`.
 
-Every file in that bundle was run and its output compared against what this book prints. Where the two disagreed, the book was corrected — so if an example behaves differently for you, something is genuinely different, and Appendix A is about tracking that down.
+Every deterministic example in this book is run, and its output compared against what the book prints, every single time the book is rebuilt. If the two ever disagree, the book does not get published. So if an example behaves differently for you, something really is different, and Appendix A is about tracking that down.
