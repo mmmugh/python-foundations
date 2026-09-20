@@ -24,6 +24,20 @@
 
 <div class="runtime" hidden><span class="dot"></span><span class="msg"></span></div>
 
+<button class="scratch-tab" aria-expanded="false">Scratchpad</button>
+<section class="scratchpad" hidden aria-label="Python scratchpad">
+  <header>
+    <span>Scratchpad — what you type here is remembered while you stay on this page</span>
+    <button class="scratch-clear" title="Forget everything typed so far">Clear</button>
+    <button class="scratch-close" aria-label="Close scratchpad">&times;</button>
+  </header>
+  <pre class="transcript"></pre>
+  <div class="entry">
+    <span class="caret">&gt;&gt;&gt;</span>
+    <textarea rows="1" spellcheck="false" aria-label="Scratchpad input"></textarea>
+  </div>
+</section>
+
 <script type="module" src="app.js"></script>
 </body>
 </html>

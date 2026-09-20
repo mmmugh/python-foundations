@@ -52,7 +52,7 @@ async function boot() {
 
     pyodide.runPython(BOX_RUNNER);
     for (const name of ["run_box", "check_function", "check_output",
-                        "check_prediction", "check_stdin"]) {
+                        "check_prediction", "check_stdin", "repl_run"]) {
       python[name] = pyodide.globals.get(name);
     }
 
@@ -238,3 +238,129 @@ document.querySelectorAll(".box").forEach((box) => {
     });
   }
 });
+
+
+/* -------------------------------------------------------------- scratchpad */
+
+/* A place to poke at Python and see what comes back, which is how a lot of
+ * people learn types and syntax. Its namespace persists while the page is
+ * open, and a bare expression shows its value — the two things that make a
+ * REPL a REPL, and the two things the code boxes deliberately do not do. */
+
+const scratch = document.querySelector(".scratchpad");
+const scratchTab = document.querySelector(".scratch-tab");
+
+if (scratch) {
+  const transcript = scratch.querySelector(".transcript");
+  const input = scratch.querySelector(".entry textarea");
+  const caret = scratch.querySelector(".caret");
+  let namespace = null;
+  let pending = [];
+  const history = [];
+  let cursor = 0;
+
+  function write(text, className) {
+    const line = document.createElement("span");
+    if (className) line.className = className;
+    line.textContent = text.endsWith("\n") ? text : text + "\n";
+    transcript.appendChild(line);
+    transcript.scrollTop = transcript.scrollHeight;
+  }
+
+  function grow() {
+    input.style.height = "auto";
+    input.style.height = input.scrollHeight + "px";
+  }
+
+  async function submit() {
+    const line = input.value;
+    write((pending.length ? "... " : ">>> ") + line, "typed");
+    pending.push(line);
+    input.value = "";
+    grow();
+
+    if (line.trim() !== "" || pending.length === 1) {
+      const source = pending.join("\n");
+      await boot();
+      if (!namespace) namespace = pyodide.runPython("dict()");
+
+      const chunks = [];
+      sink = (text) => chunks.push(text);
+      let value = "", incomplete = false, failed = null;
+      try {
+        const out = python.repl_run(source, TIMEOUT_SECONDS, namespace);
+        value = out.get(0);
+        incomplete = out.get(1);
+        out.destroy();
+      } catch (e) {
+        failed = String(e.message || e).trim().split("\n").filter(Boolean).pop();
+      } finally {
+        sink = null;
+      }
+
+      if (incomplete) {
+        caret.textContent = "...";
+        return;
+      }
+      if (chunks.length) write(chunks.join("\n"));
+      if (failed) write(failed, "oops");
+      else if (value) write(value);
+    }
+
+    pending = [];
+    caret.textContent = ">>>";
+  }
+
+  input.addEventListener("input", grow);
+
+  input.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      if (input.value.trim() && history[history.length - 1] !== input.value) {
+        history.push(input.value);
+      }
+      cursor = history.length;
+      submit();
+      return;
+    }
+    if (event.key === "Tab") {
+      event.preventDefault();
+      const { selectionStart: a, selectionEnd: b, value } = input;
+      input.value = value.slice(0, a) + "    " + value.slice(b);
+      input.selectionStart = input.selectionEnd = a + 4;
+      grow();
+      return;
+    }
+    // Arrow through what you typed before, the way a terminal does.
+    if ((event.key === "ArrowUp" || event.key === "ArrowDown") && !input.value.includes("\n")) {
+      if (event.key === "ArrowUp" && cursor > 0) cursor -= 1;
+      else if (event.key === "ArrowDown" && cursor < history.length) cursor += 1;
+      else return;
+      event.preventDefault();
+      input.value = history[cursor] || "";
+      grow();
+    }
+  });
+
+  function open(yes) {
+    scratch.hidden = !yes;
+    scratchTab.hidden = yes;
+    scratchTab.setAttribute("aria-expanded", String(yes));
+    if (yes) input.focus();
+    try { localStorage.setItem("pf:scratchpad", yes ? "open" : "shut"); } catch (e) { /* ignore */ }
+  }
+
+  scratchTab.addEventListener("click", () => open(true));
+  scratch.querySelector(".scratch-close").addEventListener("click", () => open(false));
+  scratch.querySelector(".scratch-clear").addEventListener("click", () => {
+    transcript.textContent = "";
+    pending = [];
+    caret.textContent = ">>>";
+    if (namespace) { namespace.destroy(); namespace = null; }
+    write("Cleared. Anything you defined is forgotten.", "typed");
+  });
+
+  try {
+    if (localStorage.getItem("pf:scratchpad") === "open") open(true);
+  } catch (e) { /* ignore */ }
+}

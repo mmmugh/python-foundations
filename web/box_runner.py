@@ -17,46 +17,57 @@ import sys
 import time
 
 
-def run_box(source, seconds, namespace, check_every=2000, stdin=None):
-    """exec source in namespace, raising KeyboardInterrupt if it runs too long.
+class _Deadline:
+    """Stops code that will not stop itself.
 
-    Time spent waiting at an input() prompt does not count against the limit.
-    A learner thinking about what to type has not written a runaway loop.
+    A trace function is the one mechanism that lives inside the running program,
+    so it is the only way to interrupt a loop on a thread that cannot be
+    preempted. Time spent waiting at an input() prompt does not count: a learner
+    thinking about what to type has not written a runaway loop.
     """
-    deadline = time.monotonic() + seconds
-    counter = 0
 
-    queued = list(stdin) if stdin is not None else None
+    def __init__(self, seconds, namespace, stdin=None, check_every=2000):
+        self.seconds = seconds
+        self.deadline = time.monotonic() + seconds
+        self.namespace = namespace
+        self.queued = list(stdin) if stdin is not None else None
+        self.check_every = check_every
+        self.counter = 0
 
-    def timed_input(prompt=""):
-        nonlocal deadline
-        if queued is not None:                      # checking: answer from a script
-            return queued.pop(0) if queued else ""
+    def _input(self, prompt=""):
+        if self.queued is not None:                 # checking: answer from a script
+            return self.queued.pop(0) if self.queued else ""
         started = time.monotonic()
         try:
             return builtins.input(prompt)
         finally:
-            deadline += time.monotonic() - started  # thinking time is not a runaway loop
+            self.deadline += time.monotonic() - started
 
-    def guard(frame, event, arg):
-        nonlocal counter
-        counter += 1
-        if counter % check_every == 0 and time.monotonic() > deadline:
+    def _guard(self, frame, event, arg):
+        self.counter += 1
+        if self.counter % self.check_every == 0 and time.monotonic() > self.deadline:
             raise KeyboardInterrupt(
-                f"stopped after {seconds:g} seconds "
+                f"stopped after {self.seconds:g} seconds "
                 f"- this looks like a loop that never ends"
             )
-        return guard
+        return self._guard
 
-    namespace["__name__"] = "__main__"
-    namespace["input"] = timed_input
+    def __enter__(self):
+        self.namespace.setdefault("__name__", "__main__")
+        self.namespace["input"] = self._input
+        sys.settrace(self._guard)
+        return self
 
-    sys.settrace(guard)
-    try:
-        exec(compile(source, "<box>", "exec"), namespace)
-    finally:
+    def __exit__(self, *exc):
         sys.settrace(None)
-        namespace.pop("input", None)
+        self.namespace.pop("input", None)
+        return False
+
+
+def run_box(source, seconds, namespace, check_every=2000, stdin=None):
+    """exec source in namespace, raising KeyboardInterrupt if it runs too long."""
+    with _Deadline(seconds, namespace, stdin, check_every):
+        exec(compile(source, "<box>", "exec"), namespace)
 
 
 def _capture(source, seconds, namespace, stdin=None):
@@ -209,3 +220,38 @@ def check_stdin(source, runs, seconds=5):
             return False, [f"with {shown} typed in, expected this line: {exact!r}"]
 
     return True, []
+
+
+def repl_run(source, seconds, namespace):
+    """Run one scratchpad entry, the way an interactive interpreter would.
+
+    Returns (text, incomplete). `incomplete` means the entry opened a block or
+    a bracket and the console should keep taking lines instead of running it.
+
+    A bare expression shows its value here, because that is what a REPL is --
+    and deliberately NOT in the code boxes, where a file is being modelled and
+    `2 + 3` on its own line correctly prints nothing.
+    """
+    import ast
+    import codeop
+
+    try:
+        if codeop.compile_command(source, "<scratchpad>", "exec") is None:
+            return "", True
+    except (SyntaxError, ValueError, OverflowError):
+        pass                       # a real error: let the compile below report it
+
+    with _Deadline(seconds, namespace):
+        tree = ast.parse(source, "<scratchpad>", "exec")
+        last = tree.body[-1] if tree.body else None
+
+        if isinstance(last, ast.Expr):
+            head = ast.Module(body=tree.body[:-1], type_ignores=[])
+            exec(compile(head, "<scratchpad>", "exec"), namespace)
+            value = eval(compile(ast.Expression(last.value), "<scratchpad>", "eval"),
+                         namespace)
+            namespace["_"] = value
+            return ("" if value is None else repr(value)), False
+
+        exec(compile(tree, "<scratchpad>", "exec"), namespace)
+        return "", False

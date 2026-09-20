@@ -396,3 +396,76 @@ Programming is learned by writing programs. Some ways to keep going:
 The difficulty in programming is rarely syntax. Syntax is memorization and it comes with practice. The difficulty is **decomposition** — looking at a problem and seeing the pieces it breaks into, and working out how to represent its data.
 
 That skill is what Chapter 6 and Part II were really teaching, and it is the one that makes a good programmer. It is also the one that does not become obsolete: the languages change every decade, and knowing how to break a problem apart does not.
+
+## Appendix D — The Two Kinds of Box
+
+There are two places to type Python on these pages, and they do not behave the
+same way. The difference trips people up once, and then never again.
+
+### A code box is a file
+
+Every code box in a chapter behaves like a file you have saved and run. It
+starts from nothing, runs top to bottom, and finishes. Nothing it makes is
+kept: a variable you create in one box does not exist in the next box, and
+neither does a function you define.
+
+Because a box is a file, it shows you only what you ask it to show you. Press
+Run on this one and watch what happens.
+
+```python
+2 + 3
+```
+
+Nothing appears. Python worked the answer out and threw it away, because
+nothing asked for it. That is not the page being unhelpful — a file you run
+with `python3 myfile.py` does exactly the same. To see a value, print it.
+
+```python
+print(2 + 3)
+```
+
+This is the behaviour the whole book is written around, which is why the
+chapter boxes work this way.
+
+### The scratchpad is an interpreter
+
+The button in the bottom corner opens a scratchpad, and it is a different
+thing. Two differences matter.
+
+It remembers. What you type on one line is still there on the next, so you can
+build something up a piece at a time.
+
+It answers. Type an expression and it shows you the value, with no `print()`
+needed. Here is a short session, with `>>>` marking what was typed.
+
+```
+>>> word = "Python"
+>>> word.upper()
+'PYTHON'
+>>> len(word)
+6
+>>> word[0]
+'P'
+>>> type(word)
+<class 'str'>
+```
+
+Note the quotation marks around `'PYTHON'` and `'P'`. The scratchpad shows you
+what a value *is*, so you can see at a glance that those are strings. `print()`
+shows you what a value *looks like*, and prints `PYTHON` with no quotes. Both
+are true, and the difference is a useful thing to be able to see.
+
+### Which one to use
+
+Use the scratchpad when you have a question. What does `"5" * 3` do? Is
+`round(2.5)` 2 or 3? What methods does a string have? Questions like these are
+answered faster by typing them than by reasoning about them, and getting an
+answer wrong costs you nothing there.
+
+Use a code box when you are writing a program. A program is a thing that runs
+from the top every time, for anyone, without you typing at it, and the boxes
+hold you to that.
+
+The scratchpad forgets everything when you leave the page. Your edits to the
+chapter boxes are kept, and the Reset button puts a box back to how the book
+had it.
