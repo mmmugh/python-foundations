@@ -250,8 +250,15 @@ def exercise_html(slug, number, exercise):
 
 
 def code_box(slug, index, code, expected, label=""):
-    """One editable, runnable code box."""
+    """One editable, runnable code box -- or, for a fragment, plain code.
+
+    A syntax reminder like `if condition:` is not a program. Giving it a Run
+    button promises something it cannot do, so it renders as code and nothing
+    more.
+    """
     declared = BOXES.get(f"{slug}#{index}", {})
+    if declared.get("reference"):
+        return f'<pre class="reference">{html.escape(code)}</pre>' 
     setup = declared.get("setup")
     crash = declared.get("raises")
 
@@ -374,6 +381,7 @@ def build(check=False):
                          "code": code, "setup": declared.get("setup", ""),
                          "raises": declared.get("raises", ""),
                          "expected": expected, "label": label,
+                         "reference": bool(declared.get("reference")),
                          "needs_input": "input(" in code})
             index += 1
     (SITE / "boxes.json").write_text(json.dumps(dump, indent=1))
@@ -391,7 +399,8 @@ def build(check=False):
 def verify(pages, dump):
     """Run every code box on this machine's python3 and report what happens."""
     print("\nchecking every code box against python3:")
-    tally = {"clean": 0, "needs input": 0, "raises on purpose": 0, "UNEXPECTED": 0}
+    tally = {"clean": 0, "needs input": 0, "raises on purpose": 0,
+             "reference, not run": 0, "UNEXPECTED": 0}
     problems = []
 
     for page in pages:
@@ -401,6 +410,9 @@ def verify(pages, dump):
                 continue
             declared = BOXES.get(f"{page['slug']}#{index}", {})
             index += 1
+            if declared.get("reference"):
+                tally["reference, not run"] += 1
+                continue
             if "input(" in code:
                 tally["needs input"] += 1
                 continue
@@ -419,8 +431,6 @@ def verify(pages, dump):
                 tally["clean"] += 1
             elif declared.get("raises"):
                 tally["raises on purpose"] += 1
-            elif page["slug"] == "99-appendices":
-                tally["raises on purpose"] += 1      # syntax skeletons, not programs
             else:
                 tally["UNEXPECTED"] += 1
                 problems.append((f"{page['slug']}#{index - 1}",
@@ -448,7 +458,7 @@ def audit_book_output(dump):
     print("\nchecking the book's own printed output against reality:")
     checked = mismatched = 0
     for box in dump:
-        if not box["expected"] or box["needs_input"] or box["raises"]:
+        if not box["expected"] or box["needs_input"] or box["raises"] or box["reference"]:
             continue
         if BOXES.get(box["id"], {}).get("varies"):
             continue

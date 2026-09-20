@@ -44,5 +44,70 @@
  "ch09-dictionaries-and-sets#11": {
   "varies": true,
   "why": "Python randomizes string hashing per process, so a set prints in a different order each run."
+ },
+ "99-appendices#0": {
+  "raises": "SyntaxError",
+  "why": "The quote is never closed on line 1, but Python reports line 2. That is the point of this section."
+ },
+ "99-appendices#2": {
+  "setup": "total = 10\ncount = 4"
+ },
+ "99-appendices#3": {
+  "setup": "score = \"85\""
+ },
+ "99-appendices#4": {
+  "setup": "def letter_grade(score):\n    if score >= 90:\n        return \"A\"\n    elif score >= 80:\n        return \"B\"\n    elif score >= 70:\n        return \"C\"\n    elif score >= 60:\n        return \"D\"\n    return \"F\""
+ },
+ "99-appendices#5": {
+  "reference": true,
+  "why": "A syntax reminder, not a program. There is nothing here to run."
+ },
+ "99-appendices#6": {
+  "reference": true,
+  "why": "A syntax reminder, not a program. There is nothing here to run."
+ },
+ "99-appendices#7": {
+  "reference": true,
+  "why": "A syntax reminder, not a program. There is nothing here to run."
+ },
+ "99-appendices#8": {
+  "reference": true,
+  "why": "A syntax reminder, not a program. There is nothing here to run."
+ },
+ "99-appendices#9": {
+  "reference": true,
+  "why": "A syntax reminder, not a program. There is nothing here to run."
+ },
+ "99-appendices#10": {
+  "reference": true,
+  "why": "A syntax reminder, not a program. There is nothing here to run."
+ },
+ "99-appendices#11": {
+  "reference": true,
+  "why": "A syntax reminder, not a program. There is nothing here to run."
+ },
+ "99-appendices#12": {
+  "reference": true,
+  "why": "A syntax reminder, not a program. There is nothing here to run."
+ },
+ "99-appendices#13": {
+  "reference": true,
+  "why": "A syntax reminder, not a program. There is nothing here to run."
+ },
+ "99-appendices#14": {
+  "reference": true,
+  "why": "A syntax reminder, not a program. There is nothing here to run."
+ },
+ "99-appendices#15": {
+  "reference": true,
+  "why": "A syntax reminder, not a program. There is nothing here to run."
+ },
+ "99-appendices#16": {
+  "reference": true,
+  "why": "A syntax reminder, not a program. There is nothing here to run."
+ },
+ "99-appendices#17": {
+  "reference": true,
+  "why": "A syntax reminder, not a program. There is nothing here to run."
  }
 }

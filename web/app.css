@@ -496,3 +496,17 @@ pre.output-only {
   tab-size: 4;
 }
 .scratchpad .entry textarea:focus { outline: none; }
+
+/* A syntax reminder, not a program: code with nothing to run. */
+pre.reference {
+  margin: 0 0 1.5rem;
+  padding: 0.9rem;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  white-space: pre;
+  overflow-x: auto;
+  color: var(--ink);
+  background: var(--code-bg);
+  border: 1px solid var(--rule);
+  border-radius: 0.6rem;
+}
