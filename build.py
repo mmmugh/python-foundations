@@ -326,8 +326,12 @@ def build(check=False):
             f'<a class="next" href="{pages[n+1]["slug"]}.html">'
             f'{html.escape(pages[n+1]["title"])} &rarr;</a>' if n + 1 < len(pages) else "",
         ])
+        # The front matter's heading is already the book's name.
+        heading = page["title"]
+        tab = heading if heading.startswith("Python Foundations") else f"{heading} — Python Foundations"
         out = (template
-               .replace("{{title}}", html.escape(page["title"]))
+               .replace("{{tab}}", html.escape(tab))
+               .replace("{{title}}", html.escape(heading))
                .replace("{{part}}", html.escape(page["part"] or ""))
                .replace("{{nav}}", nav)
                .replace("{{body}}", render(page["blocks"], page["slug"]))
