@@ -17,7 +17,7 @@ import sys
 import time
 
 
-def run_box(source, seconds, namespace, check_every=2000):
+def run_box(source, seconds, namespace, check_every=2000, stdin=None):
     """exec source in namespace, raising KeyboardInterrupt if it runs too long.
 
     Time spent waiting at an input() prompt does not count against the limit.
@@ -26,13 +26,17 @@ def run_box(source, seconds, namespace, check_every=2000):
     deadline = time.monotonic() + seconds
     counter = 0
 
+    queued = list(stdin) if stdin is not None else None
+
     def timed_input(prompt=""):
         nonlocal deadline
+        if queued is not None:                      # checking: answer from a script
+            return queued.pop(0) if queued else ""
         started = time.monotonic()
         try:
             return builtins.input(prompt)
         finally:
-            deadline += time.monotonic() - started
+            deadline += time.monotonic() - started  # thinking time is not a runaway loop
 
     def guard(frame, event, arg):
         nonlocal counter
@@ -55,14 +59,14 @@ def run_box(source, seconds, namespace, check_every=2000):
         namespace.pop("input", None)
 
 
-def _capture(source, seconds, namespace):
+def _capture(source, seconds, namespace, stdin=None):
     """Run source under the same guard, collecting whatever it printed."""
     import io
 
     buffer = io.StringIO()
     stdout, sys.stdout = sys.stdout, buffer
     try:
-        run_box(source, seconds, namespace)
+        run_box(source, seconds, namespace, stdin=stdin)
     finally:
         sys.stdout = stdout
     return buffer.getvalue()
@@ -135,3 +139,73 @@ def check_prediction(book_code, prediction, seconds=5):
         if a != b:
             return False, [f"line {n}: you said {a!r}, it prints {b!r}"], actual
     return False, [f"you wrote {len(got)} lines, it prints {len(want)}"], actual
+
+
+def _readable(n):
+    """Show 555555.0 as 555555, not 5.55556e+06. A learner is looking at their
+    own output here, so it has to read back the way they wrote it."""
+    return str(int(n)) if n == int(n) and abs(n) < 1e15 else f"{n:g}"
+
+
+def _numbers_in(text):
+    import re
+
+    return [float(n) for n in re.findall(r"-?\d+(?:\.\d+)?", text)]
+
+
+def _in_order(found, wanted, match):
+    """Is `wanted` a subsequence of `found`? Returns the first miss, or None."""
+    i = 0
+    for want in wanted:
+        while i < len(found) and not match(found[i], want):
+            i += 1
+        if i == len(found):
+            return want
+        i += 1
+    return None
+
+
+def check_stdin(source, runs, seconds=5):
+    """Check an answer that asks the user for input.
+
+    The exercise says what to compute but not how to word it, so the wording is
+    not tested. Fixed input goes in; the numbers or keywords the exercise does
+    pin must come out, in order. "5 x 1 = 5" and a bare "5" both pass.
+
+    Input is supplied without echoing it back, so a value that was typed in
+    cannot be mistaken for a value the program worked out.
+    """
+    for attempt in runs:
+        typed = list(attempt.get("typed", []))
+        shown = ", ".join(repr(t) for t in typed) or "nothing"
+        try:
+            printed = _capture(source, seconds, {}, stdin=typed)
+        except Exception as e:
+            return False, [f"with {shown} typed in, your code stopped: "
+                           f"{type(e).__name__}: {e}"]
+
+        wanted = attempt.get("numbers")
+        if wanted:
+            found = _numbers_in(printed)
+            miss = _in_order(found, wanted, lambda a, b: abs(a - b) < 0.005)
+            if miss is not None:
+                seen = ", ".join(_readable(n) for n in found[:10]) or "nothing"
+                more = ", ..." if len(found) > 10 else ""
+                return False, [f"with {shown} typed in, expected {_readable(miss)} among "
+                               f"the numbers printed, in order. Got: {seen}{more}"]
+
+        words = attempt.get("words")
+        if words:
+            lowered, at = printed.lower(), 0
+            for word in words:
+                found_at = lowered.find(word.lower(), at)
+                if found_at < 0:
+                    return False, [f"with {shown} typed in, expected to see "
+                                   f"{word!r} in what you printed"]
+                at = found_at + len(word)
+
+        exact = attempt.get("contains")
+        if exact and exact not in printed:
+            return False, [f"with {shown} typed in, expected this line: {exact!r}"]
+
+    return True, []

@@ -51,7 +51,8 @@ async function boot() {
     });
 
     pyodide.runPython(BOX_RUNNER);
-    for (const name of ["run_box", "check_function", "check_output", "check_prediction"]) {
+    for (const name of ["run_box", "check_function", "check_output",
+                        "check_prediction", "check_stdin"]) {
       python[name] = pyodide.globals.get(name);
     }
 
@@ -96,13 +97,17 @@ async function checkAnswer(spec, source, prediction) {
     cases.destroy();
   } else if (spec.kind === "output") {
     result = python.check_output(source, spec.expected);
+  } else if (spec.kind === "stdin") {
+    const runs = pyodide.toPy(spec.runs);
+    result = python.check_stdin(source, runs);
+    runs.destroy();
   } else {
     result = python.check_prediction(source, prediction || "");
   }
   const passed = result.get(0);
   const notes = result.get(1).toJs();
   result.destroy();
-  return { passed, notes, total: spec.cases ? spec.cases.length : 1 };
+  return { passed, notes, total: (spec.cases || spec.runs || [1]).length };
 }
 
 /* ------------------------------------------------------------------ boxes */
@@ -214,9 +219,15 @@ document.querySelectorAll(".box").forEach((box) => {
 
       if (passed) {
         result.className = "result passed";
-        result.textContent = spec.kind === "function"
-          ? `Passed all ${total} test cases.`
-          : "Correct.";
+        if (spec.kind === "function") {
+          result.textContent = `Passed all ${total} test cases.`;
+        } else if (spec.kind === "stdin") {
+          result.textContent = total > 1
+            ? `Correct — checked with ${total} different inputs.`
+            : "Correct.";
+        } else {
+          result.textContent = "Correct.";
+        }
         status.textContent = "";
       } else {
         result.className = "result failed";

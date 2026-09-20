@@ -714,5 +714,240 @@
  "ch05-repetition#1": {
   "kind": "output",
   "expected": "1\n4\n9\n16\n25\n36\n49\n64\n81\n100\n121\n144\n169\n196\n225\n256\n289\n324\n361\n400"
+ },
+ "ch02-variables-and-types#2": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "6",
+     "4"
+    ],
+    "numbers": [
+     10,
+     24
+    ]
+   }
+  ],
+  "note": "sum then product; the difference is skipped because 6-4 and 4-6 are both defensible"
+ },
+ "ch02-variables-and-types#5": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "72"
+    ],
+    "numbers": [
+     6
+    ]
+   }
+  ]
+ },
+ "ch03-expressions-and-operators#1": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "150"
+    ],
+    "numbers": [
+     2,
+     30
+    ]
+   }
+  ]
+ },
+ "ch03-expressions-and-operators#2": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "250",
+     "8"
+    ],
+    "numbers": [
+     20,
+     270
+    ]
+   }
+  ]
+ },
+ "ch03-expressions-and-operators#5": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "70",
+     "85",
+     "96"
+    ],
+    "numbers": [
+     83.7
+    ]
+   }
+  ]
+ },
+ "ch04-making-decisions#1": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "5"
+    ],
+    "words": [
+     "positive"
+    ]
+   },
+   {
+    "typed": [
+     "-5"
+    ],
+    "words": [
+     "negative"
+    ]
+   },
+   {
+    "typed": [
+     "0"
+    ],
+    "words": [
+     "zero"
+    ]
+   }
+  ]
+ },
+ "ch04-making-decisions#4": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "2"
+    ],
+    "numbers": [
+     28
+    ]
+   },
+   {
+    "typed": [
+     "4"
+    ],
+    "numbers": [
+     30
+    ]
+   },
+   {
+    "typed": [
+     "1"
+    ],
+    "numbers": [
+     31
+    ]
+   }
+  ]
+ },
+ "ch05-repetition#2": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "5"
+    ],
+    "numbers": [
+     5,
+     10,
+     15,
+     20,
+     25,
+     30,
+     35,
+     40,
+     45,
+     50,
+     55,
+     60
+    ]
+   }
+  ]
+ },
+ "ch05-repetition#3": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "5",
+     "10",
+     "0"
+    ],
+    "numbers": [
+     15
+    ]
+   }
+  ]
+ },
+ "ch05-repetition#5": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "education"
+    ],
+    "numbers": [
+     5
+    ]
+   }
+  ]
+ },
+ "ch07-lists#2": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "pear",
+     "apple",
+     "fig",
+     "date",
+     "cherry"
+    ],
+    "words": [
+     "apple",
+     "cherry",
+     "date",
+     "fig",
+     "pear"
+    ]
+   }
+  ]
+ },
+ "ch08-strings-as-data#1": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "python"
+    ],
+    "words": [
+     "python",
+     "nohtyp"
+    ],
+    "contains": "PYTHON",
+    "numbers": [
+     6
+    ]
+   }
+  ]
+ },
+ "ch08-strings-as-data#5": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "the quick brown fox"
+    ],
+    "numbers": [
+     4
+    ]
+   }
+  ]
  }
 }
