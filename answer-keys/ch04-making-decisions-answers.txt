@@ -1,0 +1,152 @@
+PYTHON FOUNDATIONS
+Chapter 4 — Making Decisions
+
+ANSWER KEY
+
+
+VOCABULARY
+──────────
+
+ 1. A ____ is an expression that follows the `if` keyword and produces
+    `True` or `False`.
+
+      ANSWER: condition
+
+ 2. The indented lines that run only when a condition is true are called a
+    ____.
+
+      ANSWER: block
+
+ 3. ____ (short for "else if") lets you chain more than two possibilities
+    together in one decision.
+
+      ANSWER: elif
+
+ 4. The idea that non-boolean values such as `0`, the empty string, and
+    `None` can act like `True` or `False` in a condition is called ____.
+
+      ANSWER: truthiness
+
+
+READING CODE
+────────────
+
+ 5. What does this print?
+
+        score = 85
+        
+        if score >= 90:
+            grade = "A"
+        elif score >= 80:
+            grade = "B"
+        elif score >= 70:
+            grade = "C"
+        elif score >= 60:
+            grade = "D"
+        else:
+            grade = "F"
+        
+        print(f"Score {score} earns a {grade}.")
+
+      ANSWER: Score 85 earns a B.
+
+ 6. What does this print?
+
+        score = 95
+        
+        if score >= 60:
+            grade = "D"
+        elif score >= 70:
+            grade = "C"
+        elif score >= 90:
+            grade = "A"
+        
+        print(grade)
+
+      ANSWER: D
+
+ 7. What does this print?
+
+        name = ""
+        
+        if name:
+            print(f"Hello, {name}.")
+        else:
+            print("Hello, stranger.")
+
+      ANSWER: Hello, stranger.
+
+ 8. What does this print?
+
+        has_ticket = False
+        age = 20
+        
+        if has_ticket:
+            if age >= 13:
+                print("Enjoy the show.")
+            else:
+                print("You need an adult with you.")
+        else:
+            print("Please buy a ticket first.")
+
+      ANSWER: Please buy a ticket first.
+
+ 9. What does this print?
+
+        score = 45
+        
+        if score >= 60:
+            print("You passed.")
+        print("Congratulations.")
+
+      ANSWER: Congratulations.
+
+
+WRITING CODE
+────────────
+
+10. age = ____(input("Your age: ")) if age >= 18: print("You are eligible
+    to vote.") else: print(f"You can vote in {18 - age} years.")
+
+      ANSWER: int
+
+11. answer = input("How many tickets? ") if answer.____(): tickets =
+    int(answer) print(f"That will be ${tickets * 12}.") else:
+    print("Please enter a whole number.")
+
+      ANSWER: isdigit
+
+12. answer = input("Enter a price: ") ____: price = float(answer)
+    print(f"With tax: ${price * 1.08:.2f}") except ValueError: print("That
+    is not a number.")
+
+      ANSWER: try
+
+13. discount = 0 # Only apply the discount when price is greater than 0
+    (skip the free infant ticket) if day == "tuesday" and price ____ 0:
+    discount = 3 price -= discount
+
+      ANSWER: >
+
+
+WHY IT WORKS
+────────────
+
+14. Python checks `elif` conditions in the order they are written and
+    stops at the first one that is ____, which is why a score of 95 in the
+    reordered chain gets the grade "____" instead of "A".
+
+      ANSWER: true
+      ANSWER: D
+
+15. The ticket program checks `.isdigit()` before calling `int()` because
+    converting text that contains letters with `int()` would ____, so
+    testing first avoids ever attempting an unsafe conversion.
+
+      ANSWER: crash the program
+
+16. An empty string counts as ____ in a condition, which is why `if name:`
+    prints "Hello, stranger." when the user presses Enter without typing
+    anything.
+
+      ANSWER: False

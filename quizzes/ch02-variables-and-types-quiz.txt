@@ -1,0 +1,102 @@
+PYTHON FOUNDATIONS
+Chapter 2 — Variables and Types
+
+Name: ________________________________     Date: ______________
+
+Fill in every blank. Where a term is asked for, write the word the course
+uses. Where code is asked for, write exact Python. Where output is asked
+for, write what the program prints, one line per line.
+
+
+VOCABULARY
+──────────
+
+ 1. A __________________ is a name that refers to a value.
+
+ 2. Every value in Python has a __________________, which determines what
+    you can do with it.
+
+ 3. Adding two strings together glues them end to end, an operation called
+    __________________.
+
+ 4. The text inside input() that asks the user a question, such as "What
+    is your name? ", is called the __________________.
+
+ 5. Python's naming convention of lowercase words joined by underscores,
+    as in final_score, is called __________________.
+
+
+READING CODE
+────────────
+
+ 6. What does this print?
+
+        count = 5
+        count = count + 1
+        print(count)
+
+    ____________________________________
+
+ 7. What does this print?
+
+        print(type(7))
+        print(type(7.0))
+        print(type("7"))
+        print(type(True))
+
+    ____________________________________
+
+ 8. What does this print?
+
+        print(7 + 7)
+        print("7" + "7")
+
+    ____________________________________
+
+ 9. What does this print?
+
+        a = 10
+        b = a
+        a = 99
+        print(a, b)
+
+    ____________________________________
+
+10. What does this print?
+
+        print(int(3.9))
+        print(int("14"))
+
+    ____________________________________
+
+
+WRITING CODE
+────────────
+
+11. Complete this line so the text typed by the user is converted to a
+    whole number before arithmetic is done: age =
+    __________________(input('How old are you? '))
+
+12. Complete this program so the variable used on the last line exists:
+    score = 42 __________________ = "Ada" print(player, "scored", score)
+
+13. Complete this line so a temperature with a decimal point can be read
+    without crashing: fahrenheit = __________________(input("Temperature
+    in degrees F: "))
+
+
+WHY IT WORKS
+────────────
+
+14. In a = 10; b = a; a = 99, the line b = a copies the value 10 into b at
+    that moment; b does not stay linked to the name a. So after a = 99
+    runs, printing b still shows __________________.
+
+15. Python fully evaluates the right side of = before doing anything else,
+    so count = count + 1 first works out count's __________________ value,
+    adds 1, and only then points the name count at the __________________
+    value.
+
+16. print(age + 1) crashes with a TypeError when age comes from input(),
+    because input() always returns a __________________, even when the
+    user types a number made only of digits.

@@ -1,0 +1,111 @@
+PYTHON FOUNDATIONS
+Chapter 8 — Strings as Data
+
+Name: ________________________________     Date: ______________
+
+Fill in every blank. Where a term is asked for, write the word the course
+uses. Where code is asked for, write exact Python. Where output is asked
+for, write what the program prints, one line per line.
+
+
+VOCABULARY
+──────────
+
+ 1. A string is a __________________ of characters, so indexing and
+    slicing work on it much like they do on a list.
+
+ 2. Unlike a list, a string is __________________—it cannot be changed
+    after it is created, so every string method returns a new string
+    instead of modifying it.
+
+ 3. The __________________ operator tests whether one string appears
+    inside another, as in "quick" in sentence.
+
+ 4. Sequences like \n and \t, which represent characters that can't be
+    typed directly into a string, are called __________________ sequences.
+
+
+READING CODE
+────────────
+
+ 5. What does this print?
+
+        word = "Python"
+        print(word[0:3])
+        print(word[::-1])
+
+    ____________________________________
+
+ 6. What does this print?
+
+        messy = "   Ada LOVELACE  "
+        clean = messy.strip().title()
+        print(f"[{clean}]")
+
+    ____________________________________
+
+ 7. What does this print?
+
+        answer = " Yes "
+        print(answer == "yes")
+        print(answer.strip().lower() == "yes")
+
+    ____________________________________
+
+ 8. What does this print?
+
+        row = "Ada,88,A"
+        name, score, grade = row.split(",")
+        print(f"{name} scored {score} for a {grade}")
+
+    ____________________________________
+
+ 9. What does this print?
+
+        word = "python"
+        word.upper()
+        print(word)
+
+    ____________________________________
+
+10. What does this print?
+
+        def count_vowels(text):
+            count = 0
+            for letter in text.lower():
+                if letter in "aeiou":
+                    count += 1
+            return count
+        
+        
+        print(count_vowels("Hello World"))
+
+    ____________________________________
+
+
+WRITING CODE
+────────────
+
+11. word = "hello" print(word.__________________()) # prints HELLO
+
+12. sentence = "the quick brown fox" words = sentence.__________________()
+    # splits the sentence into a list of words print(words)
+
+13. words = ["the", "quick", "brown"] print(" ".__________________(words))
+    # glues the words together with a space between each one
+
+
+WHY IT WORKS
+────────────
+
+14. word.upper() by itself does not change word, because strings are
+    __________________; every string method returns a __________________
+    string rather than modifying the original.
+
+        word = "python"
+        word.upper()
+        print(word)
+
+15. .find(x) returns __________________ when x does not appear in the
+    string at all; a return value of __________________ means the match
+    starts at the very first character.

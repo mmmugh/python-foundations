@@ -469,7 +469,17 @@ def build(check=False):
         # The front matter's heading is already the book's name.
         heading = page["title"]
         tab = heading if heading.startswith("Python Foundations") else f"{heading} — Python Foundations"
+        # A chapter with a quiz gets a quiet link to it. The answer key is not
+        # linked, and more to the point is not in site/ at all.
+        quiz = ROOT / "quizzes" / f"{page['slug']}-quiz.txt"
+        quiz_link = ""
+        if quiz.exists():
+            quiz_link = (f'<p class="quiz"><a href="quizzes/{quiz.name}">'
+                         f'Chapter {page["title"].split()[1].rstrip("—").strip()} quiz</a>'
+                         f' — fill it in, then show or print it</p>')
+
         out = (template
+               .replace("{{quiz}}", quiz_link)
                .replace("{{tab}}", html.escape(tab))
                .replace("{{title}}", html.escape(heading))
                .replace("{{part}}", html.escape(page["part"] or ""))
@@ -512,6 +522,7 @@ def build(check=False):
     page_boxes = dump
 
     write_bundle(pages)
+    copy_quizzes()
 
     total = sum(p["boxes"] for p in pages)
     print(f"built {len(pages)} pages, {total} code boxes -> {SITE.relative_to(ROOT)}/")
@@ -520,6 +531,38 @@ def build(check=False):
 
     if check:
         verify(pages, page_boxes)
+
+
+ANSWER_MARKER = "ANSWER KEY"
+
+
+def copy_quizzes():
+    """Copy the student quizzes into the site, and nothing else.
+
+    An explicit whitelist, not an exclusion: a rule that copies everything
+    except the files it recognises as keys fails open the moment a key is named
+    something unexpected. This fails closed.
+    """
+    source = ROOT / "quizzes"
+    if not source.exists():
+        return
+    target = SITE / "quizzes"
+    target.mkdir(exist_ok=True)
+    for stale in target.glob("*"):
+        stale.unlink()
+    copied = 0
+    for quiz in sorted(source.glob("*-quiz.txt")):
+        (target / quiz.name).write_text(quiz.read_text())
+        copied += 1
+
+    # Prove it, rather than trusting the glob. Everything under site/ is public.
+    leaked = [p.relative_to(SITE) for p in SITE.rglob("*")
+              if p.is_file() and p.suffix in (".txt", ".md", ".html")
+              and ANSWER_MARKER in p.read_text(errors="ignore")]
+    if leaked:
+        sys.exit(f"answer key reachable from the site: {leaked}")
+    if copied:
+        print(f"copied {copied} quizzes -> site/quizzes/ (no answer keys)")
 
 
 def bundle_name(text):

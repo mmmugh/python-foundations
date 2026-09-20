@@ -27,7 +27,9 @@ content/       the manuscript, one Markdown file per chapter — the master copy
 build.py       content/ -> site/. ~600 lines, no dependencies
 web/           page template, stylesheet, browser runtime
   box_runner.py  runs a box, stops a runaway loop, checks an answer
-scripts/       a one-file preview builder, and the Word export
+scripts/       preview builder, Word export, quiz renderer
+quizzes/       one fill-in-the-blank quiz per chapter, linked from the site
+answer-keys/   the matching keys — NEVER copied into site/ (see below)
 archive/       how the project got here; nothing depends on it
 ```
 
@@ -50,6 +52,16 @@ The build refuses to ship a course that is wrong about itself:
 It has caught two real errors so far: a stated output in Chapter 7 that the
 code did not produce, and sixteen appendix fragments that were offering a Run
 button they could not honour.
+
+## The answer keys
+
+`quizzes/*-quiz.txt` is copied into `site/` and linked from the foot of each
+chapter. `answer-keys/*-answers.txt` is not, and must not be: everything under
+`site/` is fetchable by anyone who guesses a filename, with no traversal bug
+required. `build.py` copies by an explicit whitelist of `*-quiz.txt` rather than
+excluding what it recognises as a key — an exclusion rule fails open the first
+time a key is named something unexpected — and then greps everything it wrote
+for the answer-key marker and fails the build if one is found.
 
 ## Editing
 

@@ -1,0 +1,110 @@
+PYTHON FOUNDATIONS
+Chapter 9 — Dictionaries and Sets
+
+Name: ________________________________     Date: ______________
+
+Fill in every blank. Where a term is asked for, write the word the course
+uses. Where code is asked for, write exact Python. Where output is asked
+for, write what the program prints, one line per line.
+
+
+VOCABULARY
+──────────
+
+ 1. A __________________ stores a connection between a key and a value
+    directly, so a lookup doesn't depend on two lists staying in the same
+    order.
+
+ 2. In a dictionary entry, the part before the colon is the
+    __________________ and the part after the colon is the
+    __________________.
+
+ 3. A __________________ is an unordered collection with no duplicates,
+    best suited to answering one question: is this thing in here?
+
+ 4. A __________________ is a small unnamed function, often passed as the
+    key= argument to sorted() or max().
+
+
+READING CODE
+────────────
+
+ 5. What does this print?
+
+        scores = {"Ada": 88, "Grace": 92}
+        scores["Alan"] = 45
+        scores["Ada"] = 91
+        print(scores)
+
+    ____________________________________
+
+ 6. What does this print?
+
+        scores = {"Ada": 88}
+        print(scores.get("Grace"))
+        print(scores.get("Grace", 0))
+
+    ____________________________________
+
+ 7. What does this print?
+
+        text = "a b a c b a"
+        counts = {}
+        for word in text.split():
+            counts[word] = counts.get(word, 0) + 1
+        print(counts)
+
+    ____________________________________
+
+ 8. What does this print?
+
+        scores = {"Ada": 88, "Grace": 92, "Alan": 45}
+        top = max(scores, key=scores.get)
+        print(top)
+
+    ____________________________________
+
+ 9. What does this print?
+
+        band = {"Ada", "Grace", "Alan"}
+        chorus = {"Grace", "Alan", "Katherine"}
+        print(len(band & chorus))
+        print("Ada" in (band - chorus))
+
+    ____________________________________
+
+10. What does this print?
+
+        students = {
+            "Ada": {"score": 88, "grade": "B"},
+            "Grace": {"score": 92, "grade": "A"},
+        }
+        for name, record in students.items():
+            print(f"{name}: {record['score']} ({record['grade']})")
+
+    ____________________________________
+
+
+WRITING CODE
+────────────
+
+11. scores = {"Ada": 88} print(scores.__________________("Grace", 0)) #
+    returns 0 instead of raising a KeyError
+
+12. scores = {"Ada": 88, "Grace": 92, "Alan": 45} __________________
+    scores["Alan"] # removes the "Alan" entry entirely print(scores)
+
+13. numbers = [1, 2, 2, 3, 3, 3] unique = __________________(numbers) #
+    removes the duplicates print(unique)
+
+
+WHY IT WORKS
+────────────
+
+14. counts.get(word, 0) returns the current count, or __________________
+    the very first time a word is seen, so counts[word] = counts.get(word,
+    0) + 1 works whether or not the key already __________________.
+
+15. Looping directly over a dictionary, as in for name in scores:, hands
+    you the __________________ only; to get the key and value together in
+    one loop you need .__________________().

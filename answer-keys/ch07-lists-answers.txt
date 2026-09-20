@@ -1,0 +1,134 @@
+PYTHON FOUNDATIONS
+Chapter 7 — Lists
+
+ANSWER KEY
+
+
+VOCABULARY
+──────────
+
+ 1. A ____ holds many values in one variable, in order, and is created
+    with square brackets.
+
+      ANSWER: list
+
+ 2. Each item in a list has a position called its ____. Python counts
+    these starting from zero.
+
+      ANSWER: index
+
+ 3. The property that lets a list be changed after it is created—unlike a
+    string or a number—is called ____.
+
+      ANSWER: mutability
+
+ 4. A ____ takes a section of a list using list[start:stop], and always
+    produces a new list rather than changing the original.
+
+      ANSWER: slice
+
+
+READING CODE
+────────────
+
+ 5. What does this print?
+
+        names = ["Ada", "Grace", "Alan", "Katherine"]
+        print(names[1])
+        print(names[-1])
+
+      ANSWER: Grace
+          Katherine
+
+ 6. What does this print?
+
+        letters = ["a", "b", "c", "d", "e", "f"]
+        print(letters[2:5])
+        print(letters[:2])
+
+      ANSWER: ['c', 'd', 'e']
+          ['a', 'b']
+
+ 7. What does this print?
+
+        scores = [88, 92, 79]
+        result = scores.sort()
+        print(result)
+        print(scores)
+
+      ANSWER: None
+          [79, 88, 92]
+
+ 8. What does this print?
+
+        a = [1, 2, 3]
+        b = a
+        b.append(4)
+        print(a)
+
+      ANSWER: [1, 2, 3, 4]
+
+ 9. What does this print?
+
+        names = ["Ada", "Grace", "Alan"]
+        for position, name in enumerate(names):
+            print(f"{position + 1}. {name}")
+
+      ANSWER: 1. Ada
+          2. Grace
+          3. Alan
+
+10. What does this print?
+
+        scores = [55, 82, 91, 40, 76]
+        passing = []
+        for score in scores:
+            if score >= 60:
+                passing.append(score)
+        print(passing)
+        print(len(passing))
+
+      ANSWER: [82, 91, 76]
+          3
+
+
+WRITING CODE
+────────────
+
+11. names = ["Ada", "Grace"] names.____("Alan") # adds "Alan" to the end
+    of the list print(names)
+
+      ANSWER: append
+
+12. scores = [88, 92, 79] ordered = ____(scores) # returns a new sorted
+    list; scores itself is left unchanged print(ordered, scores)
+
+      ANSWER: sorted
+
+13. evens = [] for n in numbers: if n % 2 == 0: evens.____(n) # adds n to
+    the end of evens
+
+      ANSWER: append
+
+
+WHY IT WORKS
+────────────
+
+14. Printing a shows [1, 2, 3, 4] even though only b was changed, because
+    b = a does not create a second list—it creates a second ____ that
+    refers to the ____ list as a.
+
+        a = [1, 2, 3]
+        b = a
+        b.append(4)
+        print(a)
+
+      ANSWER: name
+      ANSWER: same
+
+15. .sort() changes a list ____ and returns ____, which is why writing
+    scores = scores.sort() destroys the list by replacing it with the
+    return value.
+
+      ANSWER: in place
+      ANSWER: None

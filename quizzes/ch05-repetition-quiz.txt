@@ -1,0 +1,109 @@
+PYTHON FOUNDATIONS
+Chapter 5 — Repetition
+
+Name: ________________________________     Date: ______________
+
+Fill in every blank. Where a term is asked for, write the word the course
+uses. Where code is asked for, write exact Python. Where output is asked
+for, write what the program prints, one line per line.
+
+
+VOCABULARY
+──────────
+
+ 1. A loop that repeats as long as its condition stays true is called a
+    __________________ loop.
+
+ 2. A loop whose condition never becomes false, so it repeats forever, is
+    called an __________________ loop.
+
+ 3. The pattern of setting up a variable before a loop and updating it on
+    every pass — to build a sum, a count, or a string — is called the
+    __________________ pattern.
+
+ 4. A boolean variable used to record how a loop ended, such as whether
+    the player won or ran out of tries, is called a __________________.
+
+
+READING CODE
+────────────
+
+ 5. What does this print?
+
+        count = 1
+        
+        while count <= 5:
+            print(f"Count is {count}")
+            count += 1
+        
+        print("Done.")
+
+    ____________________________________
+
+ 6. What does this print?
+
+        for i in range(2, 6):
+            print(i)
+
+    ____________________________________
+
+ 7. What does this print?
+
+        for table in range(1, 3):
+            for multiplier in range(1, 3):
+                print(f"{table} x {multiplier} = {table * multiplier}")
+
+    ____________________________________
+
+ 8. What does this print?
+
+        for number in range(1, 11):
+            if number % 3 != 0:
+                continue
+            print(number)
+
+    ____________________________________
+
+ 9. What does this print?
+
+        total = 0
+        for i in range(1, 6):
+            if i == 3:
+                continue
+            total += i
+        print(total)
+
+    ____________________________________
+
+
+WRITING CODE
+────────────
+
+10. answer = input("Enter a number: ") while not
+    answer.__________________(): print("That is not a whole number.")
+    answer = input("Enter a number: ") print(f"Thank you. You entered
+    {int(answer)}.")
+
+11. for i in __________________(5, 0, -1): print(i)
+
+12. count = 1 while count <= 5: print(f"Count is {count}") count
+    __________________ 1 print("Done.")
+
+13. while True: command = input("Enter a command (or 'quit'): ") if
+    command == "quit": __________________ print(f"You said: {command}")
+
+
+WHY IT WORKS
+────────────
+
+14. A `while` loop needs a variable set up before the loop, a condition
+    that can become false, and something inside the loop that moves toward
+    that. Deleting `count += 1` means `count` never changes, so `count <=
+    5` stays __________________ forever and the loop never ends.
+
+15. `range(n)` always produces exactly __________________ values, which is
+    why `range(5)` produces `0` through `4` rather than `0` through `5`.
+
+16. Starting `largest` at `0` before the loop gives the wrong answer when
+    every number entered is __________________, because none of them would
+    ever be greater than `0`.

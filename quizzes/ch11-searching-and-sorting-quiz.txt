@@ -1,0 +1,159 @@
+PYTHON FOUNDATIONS
+Chapter 11 — Searching and Sorting
+
+Name: ________________________________     Date: ______________
+
+Fill in every blank. Where a term is asked for, write the word the course
+uses. Where code is asked for, write exact Python. Where output is asked
+for, write what the program prints, one line per line.
+
+
+VOCABULARY
+──────────
+
+ 1. A __________________ is a procedure for solving a problem: a finite
+    sequence of unambiguous steps that turns an input into the right
+    output.
+
+ 2. Looking at each item in a list, one after another, until you find the
+    target, is called __________________.
+
+ 3. Searching a sorted list by repeatedly checking the middle of the
+    remaining range and throwing away half is called __________________.
+
+ 4. The standard notation for describing how an algorithm's work scales as
+    the input grows, deliberately ignoring constant factors and machine
+    speed, is called __________________.
+
+ 5. Selection sort and bubble sort both make roughly n squared comparisons
+    in the worst case, which puts them in the __________________ class,
+    notated O(n squared).
+
+
+READING CODE
+────────────
+
+ 6. What does this print?
+
+        def linear_search(items, target):
+            for i in range(len(items)):
+                if items[i] == target:
+                    return i
+            return -1
+        
+        
+        numbers = [17, 4, 23, 8, 42, 15, 9]
+        
+        print(linear_search(numbers, 42))
+        print(linear_search(numbers, 99))
+
+    ____________________________________
+
+ 7. What does this print?
+
+        def binary_search(items, target):
+            low = 0
+            high = len(items) - 1
+        
+            while low <= high:
+                middle = (low + high) // 2
+        
+                if items[middle] == target:
+                    return middle
+                elif items[middle] < target:
+                    low = middle + 1
+                else:
+                    high = middle - 1
+        
+            return -1
+        
+        
+        numbers = [4, 8, 9, 15, 17, 23, 42]
+        
+        print(binary_search(numbers, 42))
+        print(binary_search(numbers, 4))
+        print(binary_search(numbers, 99))
+
+    ____________________________________
+
+ 8. What does this print?
+
+        def selection_sort(items):
+            result = items.copy()
+        
+            for i in range(len(result)):
+                smallest = i
+                for j in range(i + 1, len(result)):
+                    if result[j] < result[smallest]:
+                        smallest = j
+                result[i], result[smallest] = result[smallest], result[i]
+        
+            return result
+        
+        
+        print(selection_sort([64, 25, 12, 22, 11]))
+
+    ____________________________________
+
+ 9. What does this print?
+
+        words = ["Banana", "apple", "Cherry"]
+        print(sorted(words))
+        print(sorted(words, key=str.lower))
+
+    ____________________________________
+
+10. What does this print?
+
+        def linear_search_counted(items, target):
+            comparisons = 0
+            for i in range(len(items)):
+                comparisons += 1
+                if items[i] == target:
+                    return i, comparisons
+            return -1, comparisons
+        
+        
+        index, comparisons = linear_search_counted([5, 3, 8, 1, 9], 1)
+        print(index, comparisons)
+
+    ____________________________________
+
+
+WRITING CODE
+────────────
+
+11. Complete the loop bound so every index in items gets checked: for i in
+    range(__________________):
+
+        def linear_search(items, target):
+
+12. Compute the middle index using integer division: middle = (low + high)
+    __________________ 2
+
+        low = 0
+        high = len(items) - 1
+
+13. Complete the swap that places the smallest value found so far into
+    position i: result[i], result[smallest] =
+
+        result = items.copy()
+
+    ____________________________________
+
+
+WHY IT WORKS
+────────────
+
+14. Binary search only works correctly when the list is already
+    __________________, because each step assumes everything below the
+    middle is smaller and everything above is larger.
+
+15. Linear search is described as O(n) because doubling the size of the
+    list __________________ the number of comparisons needed in the worst
+    case.
+
+16. A dictionary lookup stays fast no matter how large the dictionary
+    grows, because it does not check keys one at a time the way linear
+    search does — that is why dictionary lookup is O(__________________),
+    constant time regardless of size.

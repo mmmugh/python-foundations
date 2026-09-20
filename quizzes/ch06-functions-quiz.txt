@@ -1,0 +1,127 @@
+PYTHON FOUNDATIONS
+Chapter 6 — Functions
+
+Name: ________________________________     Date: ______________
+
+Fill in every blank. Where a term is asked for, write the word the course
+uses. Where code is asked for, write exact Python. Where output is asked
+for, write what the program prints, one line per line.
+
+
+VOCABULARY
+──────────
+
+ 1. Names listed in the parentheses of a `def` line are called
+    __________________, while the values you pass in when calling the
+    function are called __________________.
+
+ 2. A variable created inside a function exists only inside it; this is
+    called __________________ scope.
+
+ 3. A string on the first line of a function that describes what it does
+    is called a __________________.
+
+ 4. Breaking a problem into small functions that each do one job, and
+    giving each a name, is called __________________.
+
+
+READING CODE
+────────────
+
+ 5. What does this print?
+
+        def double_print(n):
+            print(n * 2)
+        
+        def double_return(n):
+            return n * 2
+        
+        a = double_print(5)
+        b = double_return(5)
+        
+        print("a is", a)
+        print("b is", b)
+
+    ____________________________________
+
+ 6. What does this print?
+
+        def greet(name, greeting="Hello"):
+            print(f"{greeting}, {name}!")
+        
+        greet("Ada")
+        greet("Ada", "Good morning")
+
+    ____________________________________
+
+ 7. What does this print?
+
+        def safe_divide(a, b):
+            if b == 0:
+                return None
+            return a / b
+        
+        print(safe_divide(10, 2))
+        print(safe_divide(10, 0))
+
+    ____________________________________
+
+ 8. What does this print?
+
+        def split_time(total_seconds):
+            return total_seconds // 60, total_seconds % 60
+        
+        minutes, seconds = split_time(500)
+        print(f"{minutes} minutes and {seconds} seconds")
+
+    ____________________________________
+
+ 9. What does this print?
+
+        def add_ten(n):
+            n = n + 10
+        
+        x = 5
+        add_ten(x)
+        print(x)
+
+    ____________________________________
+
+
+WRITING CODE
+────────────
+
+10. __________________ greet(name): print(f"Hello, {name}!")
+
+11. def area(width, height): __________________ width * height room =
+    area(12, 10) print(room) # should print 120
+
+12. def celsius_to_fahrenheit(celsius): __________________ return celsius
+    * 9 / 5 + 32
+
+13. def main(): print("Running the program.") __________________()
+
+
+WHY IT WORKS
+────────────
+
+14. `double_print` calls `print()` but has no `return` statement, so
+    Python automatically returns __________________, which is why `a` ends
+    up holding that value instead of `10`.
+
+15. `result` is created inside `calculate` and stops existing once the
+    function returns, because variables created inside a function have
+    __________________ scope; the only way to get a value out of a
+    function is to __________________ it.
+
+        def calculate():
+            result = 42
+            return result
+        
+        print(calculate())
+        print(result)
+
+16. Inside `add_ten`, the line `n = n + 10` creates a new value for the
+    parameter `n` inside the function; it does not reach back and change
+    `x`, because assigning to a parameter only affects that function's own
+    __________________ copy of the value.

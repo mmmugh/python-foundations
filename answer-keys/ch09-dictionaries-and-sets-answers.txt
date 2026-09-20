@@ -1,0 +1,128 @@
+PYTHON FOUNDATIONS
+Chapter 9 — Dictionaries and Sets
+
+ANSWER KEY
+
+
+VOCABULARY
+──────────
+
+ 1. A ____ stores a connection between a key and a value directly, so a
+    lookup doesn't depend on two lists staying in the same order.
+
+      ANSWER: dictionary
+
+ 2. In a dictionary entry, the part before the colon is the ____ and the
+    part after the colon is the ____.
+
+      ANSWER: key
+      ANSWER: value
+
+ 3. A ____ is an unordered collection with no duplicates, best suited to
+    answering one question: is this thing in here?
+
+      ANSWER: set
+
+ 4. A ____ is a small unnamed function, often passed as the key= argument
+    to sorted() or max().
+
+      ANSWER: lambda
+
+
+READING CODE
+────────────
+
+ 5. What does this print?
+
+        scores = {"Ada": 88, "Grace": 92}
+        scores["Alan"] = 45
+        scores["Ada"] = 91
+        print(scores)
+
+      ANSWER: {'Ada': 91, 'Grace': 92, 'Alan': 45}
+
+ 6. What does this print?
+
+        scores = {"Ada": 88}
+        print(scores.get("Grace"))
+        print(scores.get("Grace", 0))
+
+      ANSWER: None
+          0
+
+ 7. What does this print?
+
+        text = "a b a c b a"
+        counts = {}
+        for word in text.split():
+            counts[word] = counts.get(word, 0) + 1
+        print(counts)
+
+      ANSWER: {'a': 3, 'b': 2, 'c': 1}
+
+ 8. What does this print?
+
+        scores = {"Ada": 88, "Grace": 92, "Alan": 45}
+        top = max(scores, key=scores.get)
+        print(top)
+
+      ANSWER: Grace
+
+ 9. What does this print?
+
+        band = {"Ada", "Grace", "Alan"}
+        chorus = {"Grace", "Alan", "Katherine"}
+        print(len(band & chorus))
+        print("Ada" in (band - chorus))
+
+      ANSWER: 2
+          True
+
+10. What does this print?
+
+        students = {
+            "Ada": {"score": 88, "grade": "B"},
+            "Grace": {"score": 92, "grade": "A"},
+        }
+        for name, record in students.items():
+            print(f"{name}: {record['score']} ({record['grade']})")
+
+      ANSWER: Ada: 88 (B)
+          Grace: 92 (A)
+
+
+WRITING CODE
+────────────
+
+11. scores = {"Ada": 88} print(scores.____("Grace", 0)) # returns 0
+    instead of raising a KeyError
+
+      ANSWER: get
+
+12. scores = {"Ada": 88, "Grace": 92, "Alan": 45} ____ scores["Alan"] #
+    removes the "Alan" entry entirely print(scores)
+
+      ANSWER: del
+
+13. numbers = [1, 2, 2, 3, 3, 3] unique = ____(numbers) # removes the
+    duplicates print(unique)
+
+      ANSWER: set
+
+
+WHY IT WORKS
+────────────
+
+14. counts.get(word, 0) returns the current count, or ____ the very first
+    time a word is seen, so counts[word] = counts.get(word, 0) + 1 works
+    whether or not the key already ____.
+
+      ANSWER: 0
+      ANSWER: exists
+
+15. Looping directly over a dictionary, as in for name in scores:, hands
+    you the ____ only; to get the key and value together in one loop you
+    need .____().
+
+      ANSWER: keys
+      ANSWER: items
