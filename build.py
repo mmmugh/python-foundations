@@ -46,6 +46,7 @@ def inline(text):
     text = html.escape(text)
     text = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", text)
     text = re.sub(r"(?<!\*)\*([^*]+)\*(?!\*)", r"<em>\1</em>", text)
+    text = re.sub(r"\[([^\]]+)\]\(([^)\s]+)\)", r'<a href="\2">\1</a>', text)
 
     def restore(match):
         return f"<code>{html.escape(spans[int(match.group(1))])}</code>"
@@ -145,6 +146,9 @@ def render(blocks, slug):
             while j < len(blocks) and blocks[j][0] != "h3":
                 j += 1
             parts.append(render_exercises(slug, blocks[i + 1:j]))
+            # Exercise fences still consume a box number, so that "<slug>#<n>"
+            # means the same fence here as it does in verify() and the bundle.
+            box += sum(1 for kind, _ in blocks[i + 1:j] if kind == "code")
             i = j
             continue
 
@@ -387,6 +391,8 @@ def build(check=False):
     (SITE / "boxes.json").write_text(json.dumps(dump, indent=1))
     page_boxes = dump
 
+    write_bundle(pages)
+
     total = sum(p["boxes"] for p in pages)
     print(f"built {len(pages)} pages, {total} code boxes -> {SITE.relative_to(ROOT)}/")
     for p in pages:
@@ -394,6 +400,112 @@ def build(check=False):
 
     if check:
         verify(pages, page_boxes)
+
+
+def bundle_name(text):
+    """A filename stem from a heading: "Chapter project: a receipt" -> receipt."""
+    text = re.sub(r"^.*?:\s*", "", text)
+    text = re.sub(r"^(a|an|the)\s+", "", text.strip(), flags=re.I)
+    return re.sub(r"[^a-z0-9]+", "_", text.lower()).strip("_")
+
+
+def write_bundle(pages):
+    """Write the book's code out as .py files, generated from the manuscript.
+
+    These used to be maintained by hand, and drifted from the book in fourteen
+    places -- every one of them forced by the promise that a file runs start to
+    finish without stopping. Generating them means the promise is kept by a
+    rule that states itself in each file's header, instead of by edits nobody
+    can see from the chapter.
+    """
+    out = SITE / "bundle"
+    out.mkdir(exist_ok=True)
+    written = []
+
+    for page in pages:
+        if not re.match(r"^ch\d\d-", page["slug"]):
+            continue
+        number = int(page["slug"][2:4])
+        stem = page["slug"][5:].replace("-", "_")
+
+        section, index = None, 0
+        examples, project, project_title = [], None, ""
+        for kind, payload in page["blocks"]:
+            if kind == "h3":
+                section = payload
+                continue
+            if kind != "code":
+                continue
+            declared = BOXES.get(f"{page['slug']}#{index}", {})
+            index += 1
+            if (section or "").startswith(("Chapter project", "Capstone project")):
+                project, project_title = payload, section
+            elif section != "Try It":
+                examples.append((section, payload, declared.get("raises")))
+
+        files = [(f"ch{number:02d}_{stem}.py", page["title"], examples, True)]
+        if project:
+            files.append((f"ch{number:02d}_{bundle_name(project_title)}.py",
+                          project_title, [(None, project, None)], False))
+
+        for name, title, items, with_headers in files:
+            body, muted, asks = [], 0, False
+            for heading, code, raises in items:
+                if with_headers and heading:
+                    rule = "-" * max(3, 74 - len(heading))
+                    body.append(f"# --- {re.sub(r'`', '', heading)} {rule}\n")
+                if raises:
+                    muted += 1
+                    body.append(f"# Commented out: the book runs this to show {raises}.\n"
+                                f"# Uncomment it to see the error for yourself.\n")
+                    body.append("".join(f"# {l}\n" if l.strip() else "#\n"
+                                        for l in code.split("\n")))
+                else:
+                    body.append(code + "\n")
+                if "input(" in code:
+                    asks = True
+                body.append("\n")
+
+            notes = [f'"""{title}', "",
+                     f"Generated from content/{page['slug']}.md by build.py.",
+                     "Edit the chapter, not this file."]
+            if muted:
+                one = muted == 1
+                notes += ["",
+                          f"{muted} example{'' if one else 's'} below "
+                          f"{'runs' if one else 'run'} on purpose in the book, to show the",
+                          f"error {'it raises' if one else 'they raise'}. Left live here "
+                          f"{'it' if one else 'they'} would stop this file before the",
+                          "rest of the chapter ran, so "
+                          f"{'it is' if one else 'they are'} commented out below.",
+                          f"Uncomment {'it' if one else 'one'} to see what the book describes."]
+            if asks:
+                notes += ["", "This file stops and waits wherever the chapter asks you to",
+                          "type something."]
+            notes += ['"""', "", ""]
+
+            (out / name).write_text("\n".join(notes) + "".join(body).rstrip() + "\n")
+            written.append((name, title, muted, asks))
+
+    index_rows = "".join(
+        f'<tr><td><a href="bundle/{n}">{n}</a></td><td>{html.escape(t)}</td>'
+        f'<td>{"error demos commented out" if m else ""}'
+        f'{" · asks you to type" if a else ""}</td></tr>'
+        for n, t, m, a in written)
+    template = (ROOT / "web" / "page.html").read_text()
+    (SITE / "bundle.html").write_text(
+        template.replace("{{tab}}", "The code as files — Python Foundations")
+        .replace("{{title}}", "The code as files").replace("{{part}}", "")
+        .replace("{{slug}}", "bundle").replace("{{nav}}", '<a href="index.html">Contents</a>')
+        .replace("{{prevnext}}", '<a class="prev" href="99-appendices.html">&larr; Appendices</a>')
+        .replace("{{body}}",
+                 "<h2>The code as files</h2>"
+                 "<p>Every example and project from the book, generated from the "
+                 "chapters themselves so the two cannot disagree. You need Python "
+                 "3.6 or newer and nothing else.</p>"
+                 f"<table><thead><tr><th>File</th><th>Chapter</th><th>Notes</th>"
+                 f"</tr></thead><tbody>{index_rows}</tbody></table>"))
+    print(f"generated {len(written)} bundle files -> {(out).relative_to(ROOT)}/")
 
 
 def verify(pages, dump):

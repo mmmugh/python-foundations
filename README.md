@@ -1,73 +1,53 @@
-# Python Foundations — Code Bundle
+# Python Foundations
 
-Every code example and project from *Python Foundations: A First Course in
-Programming*. All of it runs on plain Python 3 with nothing installed.
+*Python Foundations: A First Course in Programming* as a web app: the whole
+book, with every example in an editable box that runs in the browser.
 
-## Getting this into Replit
+Twelve chapters, 157 runnable code boxes, 75 exercises (41 of which check your
+answer), an interactive scratchpad, and four appendices. No accounts, no
+backend, no build toolchain — it is a static site, and Python runs in the
+browser via Pyodide.
 
-1. Go to **replit.com** and create a free account.
-2. Click **Create Repl** and choose the **Python** template.
-3. Drag this whole folder (or the `.zip`) into the file list on the left.
-4. Press **Run**. `main.py` gives you a menu of every file in the book.
-
-You can also run any file on its own from the Replit Shell:
+## Running it
 
 ```
-python3 examples/ch07_lists.py
-python3 projects/ch05_guessing_game.py
+python3 build.py --check          # build site/ and verify every example
+python3 -m http.server 8731 --directory site
 ```
+
+Then open <http://localhost:8731/>. Nothing to install: `build.py` uses only
+the standard library, and the page loads Pyodide from a CDN on first visit.
 
 ## What is here
 
 ```
-main.py       A menu that runs any chapter's code
-examples/     Every worked example, one file per chapter
-projects/     The end-of-chapter projects
+content/       the manuscript, one Markdown file per chapter — the master copy
+  _boxes.json    boxes needing a setup line, an expected error, or no Run button
+  _checks.json   how each checkable exercise is checked
+build.py       content/ -> site/. ~600 lines, no dependencies
+web/           page template, stylesheet, browser runtime
+  box_runner.py  runs a box, stops a runaway loop, checks an answer
+scripts/       a one-file preview builder
+archive/       how the project got here; nothing depends on it
 ```
 
-### examples/
+`site/` is generated and not tracked. `site/bundle/` holds the book's code as
+`.py` files, generated from the chapters so the two cannot disagree.
 
-One file per chapter, containing the worked examples in the order the book
-presents them. Run a file and follow along with that chapter.
+## `build.py --check`
 
-Examples that ask for typed input are wrapped in functions at the bottom of
-their file, so the file runs start to finish without stopping. Uncomment the
-call at the end to try one interactively.
+The build refuses to ship a book that is wrong about itself:
 
-A few lines are commented out with a note saying they raise an error on
-purpose — `names[5]` on a four-item list, assigning to a character of a
-string. Uncomment them when you want to see the error message the book
-describes.
+- every code box is executed; one that fails without being declared as a
+  deliberate teaching error fails the build
+- every deterministic example's printed output is compared against what the
+  chapter claims it prints, and a mismatch fails the build
 
-| File | Chapter |
-| --- | --- |
-| `ch01_first_programs.py` | Your First Programs |
-| `ch02_variables_and_types.py` | Variables and Types |
-| `ch03_expressions_and_operators.py` | Expressions and Operators |
-| `ch04_making_decisions.py` | Making Decisions |
-| `ch05_repetition.py` | Repetition |
-| `ch06_functions.py` | Functions |
-| `ch07_lists.py` | Lists |
-| `ch08_strings_as_data.py` | Strings as Data |
-| `ch09_dictionaries_and_sets.py` | Dictionaries and Sets |
-| `ch10_tuples_and_records.py` | Tuples and Structured Records |
-| `ch11_searching_and_sorting.py` | Searching and Sorting |
-| `ch12_recursion.py` | Recursion and Problem Solving |
+It has caught two real errors so far: a stated output in Chapter 7 that the
+code did not produce, and sixteen appendix fragments that were offering a Run
+button they could not honour.
 
-### projects/
+## Editing
 
-The larger program at the end of each chapter, ready to run and to modify.
-Projects 2 through 6 ask you to type something; the rest print a report and
-finish on their own.
-
-## Requirements
-
-Python 3.6 or newer, because of f-strings. Nothing else — no `pip install`,
-no libraries beyond `random` from the standard library.
-
-## A note on the output
-
-Every example in this bundle was run and its output checked against what the
-book prints. If something behaves differently on your machine, that is worth
-investigating rather than ignoring — and Appendix A of the book is about
-exactly that.
+Edit `content/*.md` and rebuild. The chapters are the only source of truth —
+the code files, the site and the exercise stubs are all generated from them.

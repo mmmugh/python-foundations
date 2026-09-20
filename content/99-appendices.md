@@ -469,3 +469,18 @@ hold you to that.
 The scratchpad forgets everything when you leave the page. Your edits to the
 chapter boxes are kept, and the Reset button puts a box back to how the book
 had it.
+
+### The code as files
+
+Everything in this book is also available as ordinary `.py` files, one per
+chapter, if you would rather work in an editor on your own machine.
+[The code as files](bundle.html) lists them. You need Python 3.6 or newer and
+nothing else.
+
+Those files are generated from these chapters, so they cannot disagree with
+what you have been reading. Two things about them do differ from the page, and
+each file says which in its own opening lines. An example that the book runs on
+purpose to show an error is commented out, because left live it would stop the
+file before the rest of the chapter ran. And a file simply stops and waits
+wherever the chapter asks you to type something, since there is nobody to
+answer for you.
