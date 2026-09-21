@@ -535,6 +535,7 @@ def build(check=False):
     copy_runtime()
 
     built = [build_volume(vol) for vol in VOLS]
+    prune_removed_volumes()
 
     # One machine-readable list of every box in every volume, so the boxes can
     # be run outside this script. Ids carry the volume, so they stay unique.
@@ -552,6 +553,21 @@ def build(check=False):
 
     if check:
         verify(built)
+
+
+def prune_removed_volumes():
+    """Delete output for volumes that no longer exist.
+
+    site/ is not rebuilt from empty, so a volume that is deleted or renamed
+    otherwise leaves its pages behind: unlinked from the contents, still
+    fetchable by anyone who has the URL. Withdrawn writing that stays published
+    is the kind of thing nobody notices until someone else does.
+    """
+    keep = {vol["slug"] for vol in VOLS} | {"pyodide"}
+    for path in SITE.iterdir():
+        if path.is_dir() and path.name not in keep:
+            shutil.rmtree(path)
+            print(f"removed site/{path.name}/ -- no volume by that name any more")
 
 
 def build_volume(vol):

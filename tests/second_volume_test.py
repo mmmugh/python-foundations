@@ -60,6 +60,7 @@ def main():
         sys.exit(f"{TRIAL} already exists -- remove it and run again")
 
     problems = []
+
     def check(ok, what):
         print(f"  {'ok  ' if ok else 'FAIL'}  {what}")
         if not ok:
@@ -102,10 +103,17 @@ def main():
         check("111 checked" in run.stdout or "checked, 0 mismatched" in run.stdout,
               "its stated output is checked like any other")
     finally:
+        # Deliberately NOT deleting site/_trial-volume by hand: the build is
+        # supposed to notice the volume is gone and take its pages down. Doing
+        # it here would hide a volume that stays published after being removed.
         shutil.rmtree(TRIAL, ignore_errors=True)
-        shutil.rmtree(SITE / "_trial-volume", ignore_errors=True)
-        subprocess.run([sys.executable, "build.py"], cwd=ROOT,
-                       capture_output=True, text=True, timeout=900)
+        again = subprocess.run([sys.executable, "build.py"], cwd=ROOT,
+                               capture_output=True, text=True, timeout=900)
+        left = (SITE / "_trial-volume").exists()
+        check(not left and again.returncode == 0,
+              "removing a volume takes its pages down again")
+        if left:
+            shutil.rmtree(SITE / "_trial-volume", ignore_errors=True)
 
     print("\n" + ("a second volume is just a directory"
                   if not problems else f"{len(problems)} problem(s)"))
