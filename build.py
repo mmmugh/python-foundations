@@ -544,6 +544,7 @@ def build(check=False):
 
     write_bundle(pages)
     copy_quizzes()
+    assert_nothing_private_published()
 
     total = sum(p["boxes"] for p in pages)
     print(f"built {len(pages)} pages, {total} code boxes -> {SITE.relative_to(ROOT)}/")
@@ -580,16 +581,31 @@ def copy_quizzes():
         (target / quiz.name).write_text(quiz.read_text())
         copied += 1
 
-    # Prove it, rather than trusting the glob. Everything under site/ is public.
-    leaked = [p.relative_to(SITE) for p in SITE.rglob("*")
-              if p.is_file() and p.suffix in (".txt", ".md", ".html")
-              and ANSWER_MARKER in p.read_text(errors="ignore")]
-    leaked += [p.relative_to(SITE) for p in SITE.rglob("*")
-               if p.is_file() and any(p.stem.startswith(n) for n in PRIVATE_CONTENT)]
-    if leaked:
-        sys.exit(f"content that must not be published is reachable: {leaked}")
     if copied:
         print(f"copied {copied} quizzes -> site/quizzes/ (no answer keys)")
+
+
+def assert_nothing_private_published():
+    """Everything under site/ is public. Prove nothing private got there.
+
+    This is deliberately NOT inside copy_quizzes(): it used to be, and an early
+    `if not source.exists(): return` meant the whole scan was skipped whenever
+    quizzes/ was absent. Moving or renaming that directory disarmed the guard
+    instead of failing the build.
+    """
+    leaked = sorted({p.relative_to(SITE) for p in SITE.rglob("*") if p.is_file()
+                     and (any(p.stem.startswith(n) for n in PRIVATE_CONTENT)
+                          or (p.suffix in (".txt", ".md", ".html")
+                              and ANSWER_MARKER in p.read_text(errors="ignore")))})
+    # Word documents are a zip of XML, so a plain read finds nothing in them.
+    for doc in SITE.rglob("*.docx"):
+        import zipfile
+        with zipfile.ZipFile(doc) as archive:
+            body = archive.read("word/document.xml").decode("utf-8", "ignore")
+        if ANSWER_MARKER in body or "Worked solutions" in body:
+            leaked.append(doc.relative_to(SITE))
+    if leaked:
+        sys.exit(f"content that must not be published is reachable: {leaked}")
 
 
 def bundle_name(text):

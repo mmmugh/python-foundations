@@ -11,7 +11,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from build import split_blocks                                  # noqa: E402
+from build import chapter_files, split_blocks                   # noqa: E402
 
 from docx import Document                                       # noqa: E402
 from docx.enum.text import WD_ALIGN_PARAGRAPH                   # noqa: E402
@@ -66,7 +66,10 @@ def main():
     style.font.size = Pt(11)
 
     seen_parts = set()
-    for path in sorted(CONTENT.glob("*.md")):
+    # chapter_files() rather than a raw glob: it drops the underscore-prefixed
+    # build inputs -- _solutions.md holds every worked answer -- and orders the
+    # appendices after the chapters instead of after the front matter.
+    for path in chapter_files():
         text = path.read_text()
         part = None
         if text.startswith("<!--"):
@@ -119,7 +122,11 @@ def main():
 
     out.parent.mkdir(exist_ok=True)
     document.save(out)
-    print(f"{out.relative_to(ROOT)}  {out.stat().st_size:,} bytes")
+    try:
+        shown = out.relative_to(ROOT)
+    except ValueError:
+        shown = out
+    print(f"{shown}  {out.stat().st_size:,} bytes")
 
 
 if __name__ == "__main__":

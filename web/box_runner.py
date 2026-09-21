@@ -93,6 +93,8 @@ def check_function(source, name, cases, seconds=5):
     namespace = {}
     try:
         _capture(source, seconds, namespace)
+    except KeyboardInterrupt as e:
+        return False, [f"your code never finished -- {e}"]
     except Exception as e:
         return False, [f"your code did not run -- {type(e).__name__}: {e}"]
 
@@ -100,16 +102,25 @@ def check_function(source, name, cases, seconds=5):
     if not callable(function):
         return False, [f"no function called {name}() was defined yet"]
 
+    # Calling the function is the part that can loop forever -- `while True` in
+    # a body is the canonical beginner mistake in is_prime and binary_search --
+    # so the call goes INSIDE the deadline. Running the source under the guard
+    # and then calling outside it only protects the definition, which cannot
+    # loop.
     failures = []
-    for args, expected in cases:
-        shown = ", ".join(repr(a) for a in args)
-        try:
-            got = function(*args)
-        except Exception as e:
-            failures.append(f"{name}({shown}) raised {type(e).__name__}: {e}")
-            continue
-        if got != expected:
-            failures.append(f"{name}({shown}) gave {got!r}, expected {expected!r}")
+    try:
+        with _Deadline(seconds, namespace):
+            for args, expected in cases:
+                shown = ", ".join(repr(a) for a in args)
+                try:
+                    got = function(*args)
+                except Exception as e:
+                    failures.append(f"{name}({shown}) raised {type(e).__name__}: {e}")
+                    continue
+                if got != expected:
+                    failures.append(f"{name}({shown}) gave {got!r}, expected {expected!r}")
+    except KeyboardInterrupt as e:
+        return False, [f"{name}() never finished -- {e}"]
     return not failures, failures
 
 
@@ -118,6 +129,8 @@ def check_output(source, expected, seconds=5):
     the output completely -- otherwise it fails correct answers."""
     try:
         printed = _capture(source, seconds, {})
+    except KeyboardInterrupt as e:
+        return False, [f"your code never finished -- {e}"]
     except Exception as e:
         return False, [f"your code did not run -- {type(e).__name__}: {e}"]
 
@@ -137,7 +150,7 @@ def check_prediction(book_code, prediction, seconds=5):
     against what the course's own code actually prints."""
     try:
         actual = _capture(book_code, seconds, {})
-    except Exception as e:
+    except BaseException as e:
         return False, [f"the example itself failed: {e}"], ""
 
     def tidy(text):
@@ -191,6 +204,8 @@ def check_stdin(source, runs, seconds=5):
         shown = ", ".join(repr(t) for t in typed) or "nothing"
         try:
             printed = _capture(source, seconds, {}, stdin=typed)
+        except KeyboardInterrupt as e:
+            return False, [f"with {shown} typed in, your code never finished -- {e}"]
         except Exception as e:
             return False, [f"with {shown} typed in, your code stopped: "
                            f"{type(e).__name__}: {e}"]
