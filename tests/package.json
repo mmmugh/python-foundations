@@ -1,0 +1,7 @@
+{
+ "name": "python-foundations-tests",
+ "private": true,
+ "type": "module",
+ "description": "Verification harness: runs the course under real Pyodide, not local CPython.",
+ "dependencies": { "pyodide": "314.0.6" }
+}

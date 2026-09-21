@@ -6,3 +6,5 @@ node_modules/
 site/
 
 # answer-keys/ is tracked on purpose: it belongs in the repo but never in site/.
+tests/node_modules/
+tests/package-lock.json
