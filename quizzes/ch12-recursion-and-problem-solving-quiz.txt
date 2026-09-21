@@ -1,5 +1,5 @@
 PYTHON FOUNDATIONS
-Chapter 12 — Recursion and Problem Solving
+Chapter 12 - Recursion and Problem Solving
 
 Name: ________________________________     Date: ______________
 
@@ -9,7 +9,7 @@ for, write what the program prints, one line per line.
 
 
 VOCABULARY
-──────────
+----------
 
  1. A __________________ function is one that calls itself, as long as it
     always calls itself on a smaller version of the problem and knows when
@@ -29,7 +29,7 @@ VOCABULARY
 
 
 READING CODE
-────────────
+------------
 
  6. What does this print?
 
@@ -103,7 +103,7 @@ READING CODE
 
 
 WRITING CODE
-────────────
+------------
 
 11. Complete the base case, which stops the recursion: if n <= 1: return
 
@@ -130,7 +130,7 @@ WRITING CODE
 
 
 WHY IT WORKS
-────────────
+------------
 
 14. factorial(n) crashes with a RecursionError when the recursive case
     never moves toward the __________________, so n never becomes small

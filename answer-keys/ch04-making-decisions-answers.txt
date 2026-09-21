@@ -1,11 +1,11 @@
 PYTHON FOUNDATIONS
-Chapter 4 — Making Decisions
+Chapter 4 - Making Decisions
 
 ANSWER KEY
 
 
 VOCABULARY
-──────────
+----------
 
  1. A ____ is an expression that follows the `if` keyword and produces
     `True` or `False`.
@@ -29,7 +29,7 @@ VOCABULARY
 
 
 READING CODE
-────────────
+------------
 
  5. What does this print?
 
@@ -103,7 +103,7 @@ READING CODE
 
 
 WRITING CODE
-────────────
+------------
 
 10. age = ____(input("Your age: ")) if age >= 18: print("You are eligible
     to vote.") else: print(f"You can vote in {18 - age} years.")
@@ -130,7 +130,7 @@ WRITING CODE
 
 
 WHY IT WORKS
-────────────
+------------
 
 14. Python checks `elif` conditions in the order they are written and
     stops at the first one that is ____, which is why a score of 95 in the

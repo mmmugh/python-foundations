@@ -1,5 +1,5 @@
 PYTHON FOUNDATIONS
-Chapter 2 — Variables and Types
+Chapter 2 - Variables and Types
 
 Name: ________________________________     Date: ______________
 
@@ -9,7 +9,7 @@ for, write what the program prints, one line per line.
 
 
 VOCABULARY
-──────────
+----------
 
  1. A __________________ is a name that refers to a value.
 
@@ -27,7 +27,7 @@ VOCABULARY
 
 
 READING CODE
-────────────
+------------
 
  6. What does this print?
 
@@ -71,7 +71,7 @@ READING CODE
 
 
 WRITING CODE
-────────────
+------------
 
 11. Complete this line so the text typed by the user is converted to a
     whole number before arithmetic is done: age =
@@ -86,7 +86,7 @@ WRITING CODE
 
 
 WHY IT WORKS
-────────────
+------------
 
 14. In a = 10; b = a; a = 99, the line b = a copies the value 10 into b at
     that moment; b does not stay linked to the name a. So after a = 99

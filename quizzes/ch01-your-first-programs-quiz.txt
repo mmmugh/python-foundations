@@ -1,5 +1,5 @@
 PYTHON FOUNDATIONS
-Chapter 1 — Your First Programs
+Chapter 1 - Your First Programs
 
 Name: ________________________________     Date: ______________
 
@@ -9,7 +9,7 @@ for, write what the program prints, one line per line.
 
 
 VOCABULARY
-──────────
+----------
 
  1. A __________________ is a list of instructions written in an order a
     computer can follow.
@@ -24,7 +24,7 @@ VOCABULARY
 
 
 READING CODE
-────────────
+------------
 
  5. What does this print?
 
@@ -67,7 +67,7 @@ READING CODE
 
 
 WRITING CODE
-────────────
+------------
 
 10. Complete this line so it prints the text 3 + 4 exactly, with no
     arithmetic performed: print(__________________)
@@ -80,7 +80,7 @@ WRITING CODE
 
 
 WHY IT WORKS
-────────────
+------------
 
 13. Python runs your instructions one line at a time, from
     __________________ to __________________, which is why swapping the

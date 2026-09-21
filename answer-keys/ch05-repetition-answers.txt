@@ -1,11 +1,11 @@
 PYTHON FOUNDATIONS
-Chapter 5 — Repetition
+Chapter 5 - Repetition
 
 ANSWER KEY
 
 
 VOCABULARY
-──────────
+----------
 
  1. A loop that repeats as long as its condition stays true is called a
     ____ loop.
@@ -18,7 +18,7 @@ VOCABULARY
       ANSWER: infinite
 
  3. The pattern of setting up a variable before a loop and updating it on
-    every pass — to build a sum, a count, or a string — is called the ____
+    every pass - to build a sum, a count, or a string - is called the ____
     pattern.
 
       ANSWER: accumulator
@@ -30,7 +30,7 @@ VOCABULARY
 
 
 READING CODE
-────────────
+------------
 
  5. What does this print?
 
@@ -94,7 +94,7 @@ READING CODE
 
 
 WRITING CODE
-────────────
+------------
 
 10. answer = input("Enter a number: ") while not answer.____():
     print("That is not a whole number.") answer = input("Enter a number:
@@ -118,7 +118,7 @@ WRITING CODE
 
 
 WHY IT WORKS
-────────────
+------------
 
 14. A `while` loop needs a variable set up before the loop, a condition
     that can become false, and something inside the loop that moves toward

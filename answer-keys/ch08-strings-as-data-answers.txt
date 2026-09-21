@@ -1,18 +1,18 @@
 PYTHON FOUNDATIONS
-Chapter 8 — Strings as Data
+Chapter 8 - Strings as Data
 
 ANSWER KEY
 
 
 VOCABULARY
-──────────
+----------
 
  1. A string is a ____ of characters, so indexing and slicing work on it
     much like they do on a list.
 
       ANSWER: sequence
 
- 2. Unlike a list, a string is ____—it cannot be changed after it is
+ 2. Unlike a list, a string is ____-it cannot be changed after it is
     created, so every string method returns a new string instead of
     modifying it.
 
@@ -30,7 +30,7 @@ VOCABULARY
 
 
 READING CODE
-────────────
+------------
 
  5. What does this print?
 
@@ -90,7 +90,7 @@ READING CODE
 
 
 WRITING CODE
-────────────
+------------
 
 11. word = "hello" print(word.____()) # prints HELLO
 
@@ -108,7 +108,7 @@ WRITING CODE
 
 
 WHY IT WORKS
-────────────
+------------
 
 14. word.upper() by itself does not change word, because strings are ____;
     every string method returns a ____ string rather than modifying the

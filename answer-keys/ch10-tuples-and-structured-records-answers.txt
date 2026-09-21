@@ -1,11 +1,11 @@
 PYTHON FOUNDATIONS
-Chapter 10 — Tuples and Structured Records
+Chapter 10 - Tuples and Structured Records
 
 ANSWER KEY
 
 
 VOCABULARY
-──────────
+----------
 
  1. A ____ is an ordered collection, like a list, that cannot be changed
     after it is made.
@@ -23,19 +23,19 @@ VOCABULARY
       ANSWER: list of dictionaries
 
  4. LOW_STOCK = 10 is written in capitals, the Python convention for a
-    ____ — a value fixed for the whole program.
+    ____ - a value fixed for the whole program.
 
       ANSWER: constant
 
  5. The line state = "OUT OF STOCK" if item["quantity"] == 0 else
-    f"{item['quantity']} left" is a ____ — an if/else that produces a
+    f"{item['quantity']} left" is a ____ - an if/else that produces a
     value rather than choosing statements.
 
       ANSWER: conditional expression
 
 
 READING CODE
-────────────
+------------
 
  6. What does this print?
 
@@ -103,7 +103,7 @@ READING CODE
 
 
 WRITING CODE
-────────────
+------------
 
 11. Unpack the tuple point into its two coordinates: x, y =
 
@@ -125,7 +125,7 @@ WRITING CODE
 
 
 WHY IT WORKS
-────────────
+------------
 
 14. Passing a tuple to a function carries no risk that the function will
     alter your data, because a tuple is ____ and cannot be changed no
@@ -134,7 +134,7 @@ WHY IT WORKS
       ANSWER: immutable
 
 15. A dictionary key must never change while it is in use, or the
-    dictionary could no longer find it — that is why a list cannot be a
+    dictionary could no longer find it - that is why a list cannot be a
     key but a ____ can.
 
       ANSWER: tuple

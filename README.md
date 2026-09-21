@@ -12,8 +12,13 @@ browser via Pyodide.
 
 ```
 python3 build.py --check          # build site/ and verify every example
-python3 -m http.server 8731 --directory site
+python3 scripts/serve.py          # serve it on :8731
 ```
+
+`scripts/serve.py` exists rather than `python3 -m http.server` because that
+sends plain text with no charset, and a browser left to guess turns a UTF-8 em
+dash into `a-EUR-`. The quizzes are pure ASCII so it cannot bite them; the
+server says the charset anyway.
 
 Then open <http://localhost:8731/>. Nothing to install: `build.py` uses only
 the standard library, and the page loads Pyodide from a CDN on first visit.
@@ -27,7 +32,7 @@ content/       the manuscript, one Markdown file per chapter — the master copy
 build.py       content/ -> site/. ~600 lines, no dependencies
 web/           page template, stylesheet, browser runtime
   box_runner.py  runs a box, stops a runaway loop, checks an answer
-scripts/       preview builder, Word export, quiz renderer
+scripts/       preview builder, Word export, quiz renderer, local server
 quizzes/       one fill-in-the-blank quiz per chapter, linked from the site
 answer-keys/   the matching keys — NEVER copied into site/ (see below)
 archive/       how the project got here; nothing depends on it

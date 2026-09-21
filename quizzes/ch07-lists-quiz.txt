@@ -1,5 +1,5 @@
 PYTHON FOUNDATIONS
-Chapter 7 — Lists
+Chapter 7 - Lists
 
 Name: ________________________________     Date: ______________
 
@@ -9,7 +9,7 @@ for, write what the program prints, one line per line.
 
 
 VOCABULARY
-──────────
+----------
 
  1. A __________________ holds many values in one variable, in order, and
     is created with square brackets.
@@ -17,15 +17,15 @@ VOCABULARY
  2. Each item in a list has a position called its __________________.
     Python counts these starting from zero.
 
- 3. The property that lets a list be changed after it is created—unlike a
-    string or a number—is called __________________.
+ 3. The property that lets a list be changed after it is created-unlike a
+    string or a number-is called __________________.
 
  4. A __________________ takes a section of a list using list[start:stop],
     and always produces a new list rather than changing the original.
 
 
 READING CODE
-────────────
+------------
 
  5. What does this print?
 
@@ -83,7 +83,7 @@ READING CODE
 
 
 WRITING CODE
-────────────
+------------
 
 11. names = ["Ada", "Grace"] names.__________________("Alan") # adds
     "Alan" to the end of the list print(names)
@@ -97,10 +97,10 @@ WRITING CODE
 
 
 WHY IT WORKS
-────────────
+------------
 
 14. Printing a shows [1, 2, 3, 4] even though only b was changed, because
-    b = a does not create a second list—it creates a second
+    b = a does not create a second list-it creates a second
     __________________ that refers to the __________________ list as a.
 
         a = [1, 2, 3]

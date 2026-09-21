@@ -1,5 +1,5 @@
 PYTHON FOUNDATIONS
-Chapter 11 — Searching and Sorting
+Chapter 11 - Searching and Sorting
 
 Name: ________________________________     Date: ______________
 
@@ -9,7 +9,7 @@ for, write what the program prints, one line per line.
 
 
 VOCABULARY
-──────────
+----------
 
  1. A __________________ is a procedure for solving a problem: a finite
     sequence of unambiguous steps that turns an input into the right
@@ -31,7 +31,7 @@ VOCABULARY
 
 
 READING CODE
-────────────
+------------
 
  6. What does this print?
 
@@ -121,7 +121,7 @@ READING CODE
 
 
 WRITING CODE
-────────────
+------------
 
 11. Complete the loop bound so every index in items gets checked: for i in
     range(__________________):
@@ -143,7 +143,7 @@ WRITING CODE
 
 
 WHY IT WORKS
-────────────
+------------
 
 14. Binary search only works correctly when the list is already
     __________________, because each step assumes everything below the
@@ -155,5 +155,5 @@ WHY IT WORKS
 
 16. A dictionary lookup stays fast no matter how large the dictionary
     grows, because it does not check keys one at a time the way linear
-    search does — that is why dictionary lookup is O(__________________),
+    search does - that is why dictionary lookup is O(__________________),
     constant time regardless of size.

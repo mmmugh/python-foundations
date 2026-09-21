@@ -1,11 +1,11 @@
 PYTHON FOUNDATIONS
-Chapter 7 — Lists
+Chapter 7 - Lists
 
 ANSWER KEY
 
 
 VOCABULARY
-──────────
+----------
 
  1. A ____ holds many values in one variable, in order, and is created
     with square brackets.
@@ -17,8 +17,8 @@ VOCABULARY
 
       ANSWER: index
 
- 3. The property that lets a list be changed after it is created—unlike a
-    string or a number—is called ____.
+ 3. The property that lets a list be changed after it is created-unlike a
+    string or a number-is called ____.
 
       ANSWER: mutability
 
@@ -29,7 +29,7 @@ VOCABULARY
 
 
 READING CODE
-────────────
+------------
 
  5. What does this print?
 
@@ -93,7 +93,7 @@ READING CODE
 
 
 WRITING CODE
-────────────
+------------
 
 11. names = ["Ada", "Grace"] names.____("Alan") # adds "Alan" to the end
     of the list print(names)
@@ -112,10 +112,10 @@ WRITING CODE
 
 
 WHY IT WORKS
-────────────
+------------
 
 14. Printing a shows [1, 2, 3, 4] even though only b was changed, because
-    b = a does not create a second list—it creates a second ____ that
+    b = a does not create a second list-it creates a second ____ that
     refers to the ____ list as a.
 
         a = [1, 2, 3]

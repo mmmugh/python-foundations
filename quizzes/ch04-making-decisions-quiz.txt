@@ -1,5 +1,5 @@
 PYTHON FOUNDATIONS
-Chapter 4 — Making Decisions
+Chapter 4 - Making Decisions
 
 Name: ________________________________     Date: ______________
 
@@ -9,7 +9,7 @@ for, write what the program prints, one line per line.
 
 
 VOCABULARY
-──────────
+----------
 
  1. A __________________ is an expression that follows the `if` keyword
     and produces `True` or `False`.
@@ -26,7 +26,7 @@ VOCABULARY
 
 
 READING CODE
-────────────
+------------
 
  5. What does this print?
 
@@ -100,7 +100,7 @@ READING CODE
 
 
 WRITING CODE
-────────────
+------------
 
 10. age = __________________(input("Your age: ")) if age >= 18: print("You
     are eligible to vote.") else: print(f"You can vote in {18 - age}
@@ -120,7 +120,7 @@ WRITING CODE
 
 
 WHY IT WORKS
-────────────
+------------
 
 14. Python checks `elif` conditions in the order they are written and
     stops at the first one that is __________________, which is why a

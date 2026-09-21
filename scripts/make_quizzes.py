@@ -8,6 +8,11 @@ without ceremony.
 
 Blanks are a fixed width whatever the answer is. A blank sized to its answer
 tells the student how long the word is, which is a hint nobody asked for.
+
+The output is pure ASCII, deliberately. A .txt file carries no way to declare
+its encoding, and a server sending "text/plain" with no charset leaves the
+reader's browser to guess -- which on a phone turned an em dash into "a-EUR-".
+An .html page can say <meta charset>; plain text cannot, so it must not need to.
 """
 
 import json
@@ -25,8 +30,17 @@ QUIZZES = ROOT / "quizzes"
 # an unguessable filename would not be one.
 KEYS = ROOT / "answer-keys"
 BLANK = "_" * 18
+ASCII_ONLY = {"\u2014": "-", "\u2013": "-", "\u2018": "'", "\u2019": "'",
+              "\u201c": '"', "\u201d": '"', "\u2026": "...", "\u00a0": " "}
 SECTIONS = ["Vocabulary", "Reading code", "Writing code", "Why it works"]
 WIDTH = 74
+
+
+def plain(text):
+    """Fold the typographic characters down to ASCII."""
+    for fancy, flat in ASCII_ONLY.items():
+        text = text.replace(fancy, flat)
+    return text
 
 
 def wrap(text, indent, first_indent=None):
@@ -46,7 +60,7 @@ def wrap(text, indent, first_indent=None):
 def render(quiz, title, number, answers=False):
     lines = [
         "PYTHON FOUNDATIONS",
-        f"Chapter {number} — {title}",
+        plain(f"Chapter {number} - {title}"),
         "",
         "ANSWER KEY" if answers else
         "Name: ________________________________     Date: ______________",
@@ -65,7 +79,7 @@ def render(quiz, title, number, answers=False):
         items = [q for q in quiz["questions"] if q["section"] == section]
         if not items:
             continue
-        lines += ["", section.upper(), "─" * len(section), ""]
+        lines += ["", section.upper(), "-" * len(section), ""]
         for q in items:
             n += 1
             text, trailing = q["text"], False
@@ -87,7 +101,13 @@ def render(quiz, title, number, answers=False):
                     shown = a if "\n" not in a else "\n          ".join(a.split("\n"))
                     lines.append(f"      ANSWER: {shown}")
             lines.append("")
-    return "\n".join(lines).rstrip() + "\n"
+    out = plain("\n".join(lines).rstrip() + "\n")
+    stray = sorted({c for c in out if ord(c) > 127})
+    if stray:
+        raise SystemExit(
+            "quiz text must be ASCII, because a .txt cannot declare its encoding. "
+            f"Found: {[f'U+{ord(c):04X} {c!r}' for c in stray]}")
+    return out
 
 
 def main():

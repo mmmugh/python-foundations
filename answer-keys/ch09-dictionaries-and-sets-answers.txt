@@ -1,11 +1,11 @@
 PYTHON FOUNDATIONS
-Chapter 9 — Dictionaries and Sets
+Chapter 9 - Dictionaries and Sets
 
 ANSWER KEY
 
 
 VOCABULARY
-──────────
+----------
 
  1. A ____ stores a connection between a key and a value directly, so a
     lookup doesn't depend on two lists staying in the same order.
@@ -30,7 +30,7 @@ VOCABULARY
 
 
 READING CODE
-────────────
+------------
 
  5. What does this print?
 
@@ -92,7 +92,7 @@ READING CODE
 
 
 WRITING CODE
-────────────
+------------
 
 11. scores = {"Ada": 88} print(scores.____("Grace", 0)) # returns 0
     instead of raising a KeyError
@@ -111,7 +111,7 @@ WRITING CODE
 
 
 WHY IT WORKS
-────────────
+------------
 
 14. counts.get(word, 0) returns the current count, or ____ the very first
     time a word is seen, so counts[word] = counts.get(word, 0) + 1 works

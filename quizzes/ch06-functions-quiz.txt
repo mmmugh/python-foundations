@@ -1,5 +1,5 @@
 PYTHON FOUNDATIONS
-Chapter 6 — Functions
+Chapter 6 - Functions
 
 Name: ________________________________     Date: ______________
 
@@ -9,7 +9,7 @@ for, write what the program prints, one line per line.
 
 
 VOCABULARY
-──────────
+----------
 
  1. Names listed in the parentheses of a `def` line are called
     __________________, while the values you pass in when calling the
@@ -26,7 +26,7 @@ VOCABULARY
 
 
 READING CODE
-────────────
+------------
 
  5. What does this print?
 
@@ -89,7 +89,7 @@ READING CODE
 
 
 WRITING CODE
-────────────
+------------
 
 10. __________________ greet(name): print(f"Hello, {name}!")
 
@@ -103,7 +103,7 @@ WRITING CODE
 
 
 WHY IT WORKS
-────────────
+------------
 
 14. `double_print` calls `print()` but has no `return` statement, so
     Python automatically returns __________________, which is why `a` ends

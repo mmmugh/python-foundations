@@ -1,5 +1,5 @@
 PYTHON FOUNDATIONS
-Chapter 8 — Strings as Data
+Chapter 8 - Strings as Data
 
 Name: ________________________________     Date: ______________
 
@@ -9,12 +9,12 @@ for, write what the program prints, one line per line.
 
 
 VOCABULARY
-──────────
+----------
 
  1. A string is a __________________ of characters, so indexing and
     slicing work on it much like they do on a list.
 
- 2. Unlike a list, a string is __________________—it cannot be changed
+ 2. Unlike a list, a string is __________________-it cannot be changed
     after it is created, so every string method returns a new string
     instead of modifying it.
 
@@ -26,7 +26,7 @@ VOCABULARY
 
 
 READING CODE
-────────────
+------------
 
  5. What does this print?
 
@@ -84,7 +84,7 @@ READING CODE
 
 
 WRITING CODE
-────────────
+------------
 
 11. word = "hello" print(word.__________________()) # prints HELLO
 
@@ -96,7 +96,7 @@ WRITING CODE
 
 
 WHY IT WORKS
-────────────
+------------
 
 14. word.upper() by itself does not change word, because strings are
     __________________; every string method returns a __________________
