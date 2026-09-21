@@ -39,3 +39,12 @@ for (const [id, spec] of Object.entries(checks)) {
 }
 console.log("-".repeat(80));
 console.log(`${n} stdin checks — ${bad === 0 ? "all sound" : bad + " rejected"}`);
+
+/* Exit status, not just a printed table. Without this the harness prints
+ * "3 broken" and still exits 0, so anything that gates on it -- npm test, a CI
+ * step, `node x.mjs && node y.mjs` -- reports green while the checks are
+ * broken. A test that cannot fail its caller is a report, not a test.
+ */
+if (n === 0) { console.log("no stdin checks were exercised -- do the fixture ids still\nmatch _checks.json?"); process.exit(1); }
+process.exit(bad ? 1 : 0);
+

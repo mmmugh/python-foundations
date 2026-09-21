@@ -32,7 +32,14 @@ const PAGE = `${first.volume}/${first.slug}.html`;
 let chromium;
 try {
   ({ chromium } = await import("playwright-core"));
-} catch {
+} catch (e) {
+  // Only "it is not installed" is a skip. A corrupted install or a broken
+  // import is a failure: swallowing it would turn a real breakage into a
+  // green run that says "skipped".
+  if (e.code !== "ERR_MODULE_NOT_FOUND") {
+    console.log(`FAIL  playwright-core is installed but will not load: ${e.message}`);
+    process.exit(1);
+  }
   console.log("skipped: playwright-core is not installed.");
   console.log("  npm install playwright-core && npx playwright-core install chromium");
   process.exit(0);
@@ -50,6 +57,13 @@ try {
   browser = await chromium.launch();
 } catch (e) {
   stop();
+  // Same rule: a missing executable is a skip, any other launch failure is a
+  // failure. A sandbox problem or a bad launch argument must not read as
+  // "no browser installed".
+  if (!/Executable doesn't exist|please run.*install/i.test(e.message)) {
+    console.log(`FAIL  the browser is installed but would not start: ${e.message.split("\n")[0]}`);
+    process.exit(1);
+  }
   console.log("skipped: no browser binary installed.");
   console.log("  npx playwright-core install chromium");
   process.exit(0);

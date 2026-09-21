@@ -14,9 +14,10 @@ const call = (src, runs) => { const r = checkStdin(src, runs); const v=[r.get(0)
 
 console.log("project                              course's own   another style   a real bug");
 console.log("-".repeat(88));
-let bad = 0;
+let bad = 0, ran = 0;
 for (const [id, spec] of Object.entries(checks)) {
   if (!ALT.get(id)) continue;
+  ran++;
   const book = boxes.find((b) => b.id === qualify(id)).code;
   const runs = py.toPy(spec.runs);
   const [a, an] = call(book, runs);
@@ -31,4 +32,14 @@ for (const [id, spec] of Object.entries(checks)) {
   if (ok) console.log(`      bug is caught with: ${cn[0]}`);
 }
 console.log("-".repeat(88));
-console.log(bad === 0 ? "all 4 project checks sound" : `${bad} rejected`);
+/* Counted, not asserted as a literal. "all 4 project checks sound" was a
+ * hardcoded string: if the fixture ids in project_answers.py ever drifted from
+ * _checks.json, every case would be skipped by the filter above, `bad` would
+ * stay 0, and this would still have claimed all four were sound.
+ */
+console.log(`${ran} project checks — ${bad === 0 ? "all sound" : bad + " rejected"}`);
+if (ran === 0) {
+  console.log("none were exercised -- project_answers.py's ids no longer match _checks.json");
+  process.exit(1);
+}
+process.exit(bad ? 1 : 0);

@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
 sys.path.insert(0, str(ROOT))
-from build import find_volume                                   # noqa: E402
+from build import assert_nothing_private_published, find_volume  # noqa: E402
 
 
 def main():
@@ -36,6 +36,7 @@ def main():
     # the file has to be a sibling of the runtime directory.
     out = SITE / f"{slug}.standalone.html"
     out.write_text(page)
+    assert_nothing_private_published()   # this lands in site/, which is published
     print(f"{out.relative_to(ROOT)}  {len(page):,} bytes")
 
 

@@ -55,6 +55,14 @@ def write_trial():
         (TRIAL / "content" / name).write_text("{}")
 
 
+def counted(stdout):
+    """The number of stated outputs the build actually checked."""
+    found = re.search(r"(\d+) checked, (\d+) mismatched", stdout)
+    if not found:
+        sys.exit(f"could not find the audit line in the build output:\n{stdout[-800:]}")
+    return int(found.group(1))
+
+
 def main():
     if TRIAL.exists():
         sys.exit(f"{TRIAL} already exists -- remove it and run again")
@@ -66,8 +74,18 @@ def main():
         if not ok:
             problems.append(what)
 
-    write_trial()
+    # What one volume checks, so the two-volume run can be compared against it.
+    # Without this the count assertion below passes on any successful build.
+    base = subprocess.run([sys.executable, "build.py", "--check"],
+                          cwd=ROOT, capture_output=True, text=True, timeout=900)
+    if base.returncode != 0:
+        sys.exit("the repo does not build cleanly before the test even starts")
+    before = counted(base.stdout)
+
     try:
+        write_trial()            # inside the try, so a half-written volume is
+                                 # still cleaned up rather than blocking the
+                                 # next run
         run = subprocess.run([sys.executable, "build.py", "--check"],
                              cwd=ROOT, capture_output=True, text=True, timeout=900)
         check(run.returncode == 0,
@@ -100,8 +118,14 @@ def main():
         check(len(mine) == 1 and mine[0]["id"] == "_trial-volume/ch01-a-trial-chapter#0",
               "its boxes are listed under ids that carry the volume")
 
-        check("111 checked" in run.stdout or "checked, 0 mismatched" in run.stdout,
-              "its stated output is checked like any other")
+        # The trial chapter states that `print(6 * 7)` prints 42. If the output
+        # audit only ever looked where volume one lives, the count would not
+        # move -- and "checked, 0 mismatched" would still be in the output,
+        # which is why matching on that string proved nothing.
+        after = counted(run.stdout)
+        check(after == before + 1,
+              f"its stated output is checked like any other "
+              f"({before} boxes checked before, {after} after)")
     finally:
         # Deliberately NOT deleting site/_trial-volume by hand: the build is
         # supposed to notice the volume is gone and take its pages down. Doing

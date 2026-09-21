@@ -42,6 +42,8 @@ def load_volumes():
         vol["quizzes"] = meta.parent / "quizzes"
         if not vol["content"].is_dir():
             sys.exit(f"{meta.parent.name} has a volume.json but no content/")
+        if not vol.get("title"):
+            sys.exit(f"{meta.parent.name}/volume.json needs a \"title\"")
         found.append(vol)
     if not found:
         sys.exit(f"no volumes found: expected volumes/<name>/volume.json")
@@ -555,6 +557,11 @@ def build(check=False):
         verify(built)
 
 
+# Dropped into every volume directory this script writes, so it can recognise
+# its own output later. Nothing reads it; its existence is the whole point.
+BUILT_MARKER = ".built-volume"
+
+
 def prune_removed_volumes():
     """Delete output for volumes that no longer exist.
 
@@ -562,10 +569,16 @@ def prune_removed_volumes():
     otherwise leaves its pages behind: unlinked from the contents, still
     fetchable by anyone who has the URL. Withdrawn writing that stays published
     is the kind of thing nobody notices until someone else does.
+
+    Only directories carrying BUILT_MARKER are removed -- a whitelist of what
+    this script made, not a blacklist of what it does not recognise. Deleting
+    by non-recognition would take a .well-known/ put there for a certificate,
+    or a .git/ used to publish site/ to a hosting branch, with one printed line
+    as the only warning.
     """
-    keep = {vol["slug"] for vol in VOLS} | {"pyodide"}
-    for path in SITE.iterdir():
-        if path.is_dir() and path.name not in keep:
+    keep = {vol["slug"] for vol in VOLS}
+    for path in sorted(SITE.iterdir()):
+        if path.is_dir() and path.name not in keep and (path / BUILT_MARKER).exists():
             shutil.rmtree(path)
             print(f"removed site/{path.name}/ -- no volume by that name any more")
 
@@ -574,6 +587,7 @@ def build_volume(vol):
     """Render one volume into site/<volume>/. Returns (vol, pages, boxes)."""
     out_dir = SITE / vol["slug"]
     out_dir.mkdir(exist_ok=True)
+    (out_dir / BUILT_MARKER).write_text(vol["slug"] + "\n")
     pages = []
 
     for path in chapter_files(vol):
@@ -708,8 +722,10 @@ def write_library(built):
     # name; with two it is a shelf and must not claim to be either of them.
     only = built[0][0] if len(built) == 1 else None
     name = only["title"] if only else "All volumes"
+    # No volume of its own: the page is the shelf, and data-volume must not
+    # claim it is volume one, in case it ever grows a code box.
     (SITE / "index.html").write_text(
-        fill(template, built[0][0], root="", home=name,
+        fill(template, {"slug": "", "title": name}, root="", home=name,
              tab=name, title=name, part="",
              nav="".join(nav), body="".join(sections),
              quiz="", prevnext="", slug="index"))

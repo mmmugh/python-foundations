@@ -66,3 +66,10 @@ console.log("\nthe case it cannot catch:");
 const t2 = Date.now();
 const c = run("sum(range(10**8))", 2);
 console.log(`  sum(range(10**8))      ${(c.error || "completed").slice(0, 52).padEnd(54)} ${((Date.now() - t2) / 1000).toFixed(2)}s`);
+
+/* Exit status, not just a printed table. Without this the harness prints
+ * "3 broken" and still exits 0, so anything that gates on it -- npm test, a CI
+ * step, `node x.mjs && node y.mjs` -- reports green while the checks are
+ * broken. A test that cannot fail its caller is a report, not a test.
+ */
+process.exit(problems.length || tally.UNEXPECTED ? 1 : 0);

@@ -1,6 +1,6 @@
 """Export a volume as a Word document, generated from its chapters.
 
-    python3 scripts/make_docx.py [volume-slug] [out.docx]
+    python3 scripts/make_docx.py [volume-slug] [--out PATH]
 
 Built from the chapters, not from the original draft, so it says what the
 course currently says rather than what it used to.
@@ -11,7 +11,8 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from build import chapter_files, find_volume, split_blocks      # noqa: E402
+from build import (assert_nothing_private_published,            # noqa: E402
+                   chapter_files, find_volume, split_blocks)
 
 from docx import Document                                       # noqa: E402
 from docx.enum.text import WD_ALIGN_PARAGRAPH                   # noqa: E402
@@ -19,10 +20,21 @@ from docx.shared import Pt, RGBColor, Inches                    # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 
-# Which volume, and where its Word file goes. A volume slug may be given first;
-# without one there had better be only a single volume to mean.
-_args = [a for a in sys.argv[1:] if not a.endswith(".docx")]
-VOLUME = find_volume(_args[0] if _args else None)
+# Which volume, and where its Word file goes. Guessing which argument is which
+# by looking for a ".docx" suffix meant `make_docx.py my_output` quietly read
+# the output path as a volume name and refused; Document.save() never required
+# that extension.
+_argv = sys.argv[1:]
+_out = None
+if "--out" in _argv:
+    _at = _argv.index("--out")
+    if _at + 1 >= len(_argv):
+        sys.exit("--out needs a path after it")
+    _out = Path(_argv[_at + 1])
+    _argv = _argv[:_at] + _argv[_at + 2:]
+if len(_argv) > 1:
+    sys.exit(f"expected at most one volume name, got: {' '.join(_argv)}")
+VOLUME = find_volume(_argv[0] if _argv else None)
 TITLE = ": ".join(x for x in (VOLUME["title"], VOLUME.get("subtitle")) if x)
 
 
@@ -58,9 +70,8 @@ def add_code(document, code, muted=False):
 
 
 def main():
-    named = [a for a in sys.argv[1:] if a.endswith(".docx")]
-    out = (Path(named[0]) if named else
-           ROOT / "site" / VOLUME["slug"] / VOLUME.get("docx", f"{VOLUME['slug']}.docx"))
+    out = _out or (ROOT / "site" / VOLUME["slug"]
+                   / VOLUME.get("docx", f"{VOLUME['slug']}.docx"))
     document = Document()
 
     document.core_properties.title = TITLE
@@ -128,6 +139,13 @@ def main():
 
     out.parent.mkdir(parents=True, exist_ok=True)
     document.save(out)
+
+    # This writes into site/, which is published, and it can run after build.py
+    # has already checked site/ and exited. A guard that only runs inside
+    # build() guards the build, not the directory -- and this script is exactly
+    # where a worked-solutions leak got out once before.
+    if out.is_relative_to(ROOT / "site"):
+        assert_nothing_private_published()
     try:
         shown = out.relative_to(ROOT)
     except ValueError:

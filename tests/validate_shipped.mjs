@@ -46,3 +46,12 @@ for (const [label, guess] of [
   console.log(`  ${ok ? "PASS" : "FAIL"}  ${label.padEnd(28)} ${notes[0] || ""}`);
 }
 console.log(`\n${n} checks exercised through the shipped box_runner.py — ${bad === 0 ? "all sound" : bad + " broken"}`);
+
+/* Exit status, not just a printed table. Without this the harness prints
+ * "3 broken" and still exits 0, so anything that gates on it -- npm test, a CI
+ * step, `node x.mjs && node y.mjs` -- reports green while the checks are
+ * broken. A test that cannot fail its caller is a report, not a test.
+ */
+if (n === 0) { console.log("no checks were exercised at all"); process.exit(1); }
+process.exit(bad ? 1 : 0);
+
