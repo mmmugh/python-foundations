@@ -10,7 +10,14 @@ browser via Pyodide.
 
 ## Running it
 
+Nothing to install—no package manager, no build toolchain, no accounts. A
+Python 3 is the only requirement, and `build.py` uses only the standard
+library. Verified on 3.9 and 3.14, including `--check`, which runs every
+example under whichever interpreter you used.
+
 ```
+git clone https://github.com/mmmugh/python-foundations.git
+cd python-foundations
 python3 build.py --check          # build site/ and verify every example
 python3 scripts/serve.py          # serve it on :8731
 ```
@@ -20,8 +27,8 @@ sends plain text with no charset, and a browser left to guess turns a UTF-8 em
 dash into `a-EUR-`. The quizzes are pure ASCII so it cannot bite them; the
 server says the charset anyway.
 
-Then open <http://localhost:8731/>. Nothing to install: `build.py` uses only
-the standard library, and the page loads Pyodide from a CDN on first visit.
+Then open <http://localhost:8731/>. The first build downloads the Python
+runtime once (13 MB, see below); after that nothing here touches the network.
 
 ## What is here
 
@@ -33,6 +40,7 @@ build.py       content/ -> site/. ~600 lines, no dependencies
 web/           page template, stylesheet, browser runtime
   box_runner.py  runs a box, stops a runaway loop, checks an answer
 scripts/       preview builder, Word export, quiz renderer, local server
+vendor/        Pyodide—CPython 3.14 as WebAssembly; fetched, not committed
 quizzes/       one fill-in-the-blank quiz per chapter, linked from the site
 answer-keys/   the matching keys — NEVER copied into site/ (see below)
 archive/       how the project got here; nothing depends on it
@@ -57,6 +65,38 @@ The build refuses to ship a course that is wrong about itself:
 It has caught two real errors so far: a stated output in Chapter 7 that the
 code did not produce, and sixteen appendix fragments that were offering a Run
 button they could not honour.
+
+## The Python runtime
+
+The code boxes run real CPython 3.14, compiled to WebAssembly by
+[Pyodide](https://github.com/pyodide/pyodide) (MPL-2.0). The site serves it
+from its own origin rather than loading it from a CDN at page load: nothing
+about reading this course depends on someone else's uptime, and a classroom of
+thirty is not pulling 13 MB across the internet thirty times.
+
+Those 13 MB are *not* in this repository. Serving the runtime locally is the
+point; carrying a copy of someone else's binaries in this history is not. The
+first `build.py` fetches them into `vendor/pyodide/` (gitignored) and says so;
+every build after that finds them already there.
+
+What is tracked is enough to get exactly those bytes back and prove they are
+the right ones. `vendor/pyodide/CHECKSUMS` pins the SHA-256 of each file,
+`build.py` re-checks all five on every build and refuses to ship a mismatch,
+and the fetch is a script you can run yourself:
+
+```
+python3 scripts/fetch_pyodide.py             # verify against CHECKSUMS
+python3 scripts/fetch_pyodide.py --download  # re-fetch anything missing or wrong
+python3 scripts/fetch_pyodide.py --update 314.0.9   # move to a new Pyodide
+```
+
+The pinned hashes were taken from bytes that arrived identically over two
+independent channels—the npm registry tarball and the jsdelivr CDN—so a later
+compromise of either one fails the build instead of reaching a browser.
+
+If you need a build machine with no network, run the fetch once somewhere that
+has one and copy `vendor/pyodide/` across; the checksums will confirm it
+arrived intact.
 
 ## The answer keys
 

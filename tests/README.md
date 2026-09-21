@@ -11,6 +11,15 @@ browser executes.
     node validate_stdin.mjs    the input()-driven checks
     node validate_projects.mjs the four interactive chapter projects
     node repl_test.mjs         the scratchpad REPL
+    node browser_test.mjs      a real browser: the page, a click, the network
+
+`browser_test.mjs` is the only one that starts where a student starts. The
+others drive `box_runner.py` under Pyodide in node, which skips the whole
+interface: the module graph, the served content types, and whether Python comes
+from this site or from someone else's CDN. It needs a headless browser and
+skips cleanly without one:
+
+    npm install playwright-core && npx playwright-core install chromium
 
 Each check is exercised three ways: it must pass a correct answer, pass a
 second correct answer written in a different style, and fail a realistic
@@ -24,5 +33,6 @@ those correct-and-incorrect variants. They are test fixtures, not course
 content, and are deliberately not the worked solutions in
 `content/_solutions.md`.
 
-The pinned Pyodide is 314.0.6 rather than the 314.0.7 the site loads, because
-npm here is restricted to packages published before 2026-09-11. Same CPython.
+The pinned Pyodide is 314.0.7: the same version the site serves from
+`vendor/pyodide/`. It was 314.0.6 for a while, which meant these harnesses were
+verifying a runtime nobody would ever run.

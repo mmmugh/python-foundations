@@ -3,10 +3,17 @@
  * Everything that knows about Pyodide lives behind runPython() and the check
  * helpers below, so the day a Web Worker + JSPI setup is worth it, only those
  * change. Pinned to Pyodide 314.0.7 (CPython 3.14). The loader is
- * pyodide.asm.mjs as of 314.0.0 — pyodide.asm.js no longer exists on the CDN.
+ * pyodide.asm.mjs as of 314.0.0—pyodide.asm.js no longer exists.
  */
 
-const PYODIDE = "https://cdn.jsdelivr.net/npm/pyodide@314.0.7/";
+/* Served from this site, not from a CDN: the course works with no network
+ * after a clone, and nobody else decides what Python a student runs. The bytes
+ * live in vendor/pyodide/ and build.py copies them here.
+ *
+ * Resolved against this module's own URL rather than the page's, so it stays
+ * correct if the pages ever move into subdirectories.
+ */
+const PYODIDE = new URL("pyodide/", import.meta.url).href;
 
 /* web/box_runner.py, inlined by build.py */
 const BOX_RUNNER = {{harness}};
@@ -32,9 +39,14 @@ async function boot() {
   if (loading) return loading;
 
   loading = (async () => {
-    say("Starting Python… (about 6 MB, once)");
+    say("Starting Python… (13 MB, once)");
     const { loadPyodide } = await import(PYODIDE + "pyodide.mjs");
-    pyodide = await loadPyodide({ indexURL: PYODIDE });
+    // packageBaseUrl as well as indexURL: left unset, Pyodide keeps a built-in
+    // https://cdn.jsdelivr.net/pyodide/... fallback for loadPackage and micropip.
+    // The course never calls either, so it never fires -- but pointing it at our
+    // own origin makes "no external CDN" a property of the code rather than a
+    // consequence of what we happen not to call.
+    pyodide = await loadPyodide({ indexURL: PYODIDE, packageBaseUrl: PYODIDE });
 
     pyodide.setStdout({ batched: (text) => sink && sink(text) });
     pyodide.setStderr({ batched: (text) => sink && sink(text) });

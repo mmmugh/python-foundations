@@ -8,3 +8,11 @@ site/
 # answer-keys/ is tracked on purpose: it belongs in the repo but never in site/.
 tests/node_modules/
 tests/package-lock.json
+
+# The Pyodide runtime is fetched at install time, not committed: 13 MB of
+# someone else's binaries do not belong in this history. What IS tracked is
+# enough to get exactly those bytes back and prove they are the right ones.
+vendor/pyodide/*
+!vendor/pyodide/CHECKSUMS
+!vendor/pyodide/LICENSE
+!vendor/pyodide/README.md

@@ -11,6 +11,7 @@ chapter into site/.
 import html
 import json
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -544,6 +545,7 @@ def build(check=False):
 
     write_bundle(pages)
     copy_quizzes()
+    copy_runtime()
     assert_nothing_private_published()
 
     total = sum(p["boxes"] for p in pages)
@@ -560,6 +562,63 @@ ANSWER_MARKER = "ANSWER KEY"
 # Content that must never be published whole. Per-exercise reveals are fine;
 # a single page carrying the lot is not.
 PRIVATE_CONTENT = ("_solutions", "_boxes", "_checks")
+
+
+def copy_runtime():
+    """Put Python into the site, after proving it is the Python we meant.
+
+    The page loads the interpreter from this site rather than a CDN, so these
+    bytes are what a student actually runs. They are not committed -- 13 MB of
+    someone else's binaries do not belong in this history -- so the first build
+    fetches them, and every build re-checks them against the pinned hashes.
+
+    Fetching here rather than telling the reader to run another script keeps
+    the install to one command. It is not silent: it says what it is doing, it
+    only happens when something is missing or wrong, and after that the build
+    touches the network never again.
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import fetch_pyodide
+
+    if not fetch_pyodide.CHECKSUMS.exists():
+        sys.exit("vendor/pyodide/CHECKSUMS is missing -- this is not a complete "
+                 "checkout of the repository")
+
+    version, hashes = fetch_pyodide.pinned()
+    bad = fetch_pyodide.verify(hashes)
+
+    # Missing and wrong are different. Missing is the first build, and fetching
+    # it is the whole reason this is one command instead of two. Wrong means a
+    # file is there and is not the file CHECKSUMS names -- a truncated download,
+    # a damaged disk, or someone editing the interpreter a student runs. Quietly
+    # re-downloading over that would repair the site and hide the event, so it
+    # stops the build and asks to be told to refetch.
+    if bad and all(line.endswith("missing") for line in bad):
+        absent = [line.split(":")[0] for line in bad]
+        print(f"pyodide {version}: {len(absent)} of {len(hashes)} runtime files "
+              f"are not here yet, fetching them (once)")
+        try:
+            fetch_pyodide.download(version, absent)
+        except OSError as e:
+            sys.exit(f"could not fetch pyodide {version}: {e}\n"
+                     "this build needs the network once; after that it does not")
+        bad = fetch_pyodide.verify(hashes)
+
+    if bad:
+        sys.exit("the pyodide runtime does not match vendor/pyodide/CHECKSUMS:\n  "
+                 + "\n  ".join(bad)
+                 + "\nthese are the bytes a student would run, so this build stops.\n"
+                 "run: python3 scripts/fetch_pyodide.py --download")
+
+    target = SITE / "pyodide"
+    target.mkdir(exist_ok=True)
+    for name in hashes:
+        shutil.copyfile(fetch_pyodide.VENDOR / name, target / name)
+
+    # Pyodide is MPL-2.0, which asks that the licence travel with the binary.
+    # site/ is what gets hosted, so the copy has to be there and not only here.
+    shutil.copyfile(fetch_pyodide.VENDOR / "LICENSE", target / "LICENSE")
+    print(f"copied pyodide {version} -> site/pyodide/ ({len(hashes)} files, verified)")
 
 
 def copy_quizzes():
