@@ -1,6 +1,6 @@
 """Render the chapter quizzes from structured data.
 
-    python3 scripts/make_quizzes.py drafts.json
+    python3 scripts/make_quizzes.py drafts.json [volume-slug]
 
 Writes two files per chapter into quizzes/: the student's copy, and the answer
 key. Markdown-ish, but named .txt so it opens in any text editor and prints
@@ -21,14 +21,18 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-QUIZZES = ROOT / "quizzes"
+sys.path.insert(0, str(ROOT))
+from build import find_volume                                   # noqa: E402
+
+VOLUME = find_volume(sys.argv[2] if len(sys.argv) > 2 else None)
+QUIZZES = VOLUME["quizzes"]
 
 # Answer keys live OUTSIDE the directory the site is built from, and outside
 # the directory the build copies into it. Nothing under site/ is private: a
 # file there is fetchable by anyone who guesses its name, without needing any
 # traversal bug at all. Keeping the keys out of the copy path is the control;
 # an unguessable filename would not be one.
-KEYS = ROOT / "answer-keys"
+KEYS = VOLUME["dir"] / "answer-keys"
 BLANK = "_" * 18
 ASCII_ONLY = {"\u2014": "-", "\u2013": "-", "\u2018": "'", "\u2019": "'",
               "\u201c": '"', "\u201d": '"', "\u2026": "...", "\u00a0": " "}
@@ -117,7 +121,7 @@ def main():
     KEYS.mkdir(exist_ok=True)
 
     titles = {}
-    for md in ROOT.joinpath("content").glob("ch*.md"):
+    for md in VOLUME["content"].glob("ch*.md"):
         head = re.search(r"^## Chapter (\d+) — (.+)$", md.read_text(), re.M)
         titles[md.stem] = (int(head.group(1)), head.group(2))
 

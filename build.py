@@ -1,11 +1,14 @@
-"""Build the Python Foundations web app from content/ and the code bundle.
+"""Build the course web app from volumes/ and the code bundle.
 
     python3 build.py            # write site/
     python3 build.py --check    # also run every code box and report failures
 
-No dependencies. Reads content/*.md, turns every ```python fence into an
-editable code box that runs in the browser, and writes one HTML page per
-chapter into site/.
+No dependencies. Reads volumes/<volume>/content/*.md, turns every ```python
+fence into an editable code box that runs in the browser, and writes one HTML
+page per chapter into site/<volume>/.
+
+A volume is a course. There is one today; adding another means adding a
+directory with a volume.json in it, and changing nothing here.
 """
 
 import html
@@ -18,27 +21,91 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-CONTENT = ROOT / "content"
+VOLUMES = ROOT / "volumes"
 SITE = ROOT / "site"
 
+
+def load_volumes():
+    """Every course under volumes/, in the order a reader should meet them.
+
+    A volume is self-contained: its own chapters, quizzes, answer keys and
+    worked solutions, built into its own directory under site/. Adding volume
+    two means adding a directory with a volume.json in it. Nothing in this file
+    names a particular volume, and nothing outside volumes/ has to change.
+    """
+    found = []
+    for meta in sorted(VOLUMES.glob("*/volume.json")):
+        vol = json.loads(meta.read_text())
+        vol["slug"] = meta.parent.name
+        vol["dir"] = meta.parent
+        vol["content"] = meta.parent / "content"
+        vol["quizzes"] = meta.parent / "quizzes"
+        if not vol["content"].is_dir():
+            sys.exit(f"{meta.parent.name} has a volume.json but no content/")
+        found.append(vol)
+    if not found:
+        sys.exit(f"no volumes found: expected volumes/<name>/volume.json")
+    return sorted(found, key=lambda v: (v.get("number", 0), v["slug"]))
+
+
+VOLS = load_volumes()
+
+
+def find_volume(name=None):
+    """The volume a script should work on.
+
+    With one volume there is nothing to choose. With two, saying which is
+    required rather than guessed: quietly exporting the wrong course is worse
+    than being asked.
+    """
+    if name:
+        for vol in VOLS:
+            if vol["slug"] == name:
+                return vol
+        sys.exit(f"no volume called {name!r}. There is: "
+                 + ", ".join(v["slug"] for v in VOLS))
+    if len(VOLS) == 1:
+        return VOLS[0]
+    sys.exit("there is more than one volume, so say which: "
+             + ", ".join(v["slug"] for v in VOLS))
+
+
+def across_volumes(load):
+    """Merge a per-volume mapping into one dict keyed "<volume>/<page>#<n>".
+
+    Every lookup below is by that key, so two volumes can each have a ch01
+    without colliding and none of the rendering code has to know volumes exist.
+    """
+    merged = {}
+    for vol in VOLS:
+        for key, value in load(vol).items():
+            merged[f"{vol['slug']}/{key}"] = value
+    return merged
+
+
+def load_json(vol, name):
+    path = vol["content"] / name
+    return json.loads(path.read_text()) if path.exists() else {}
+
+
 # Boxes that need something declared: a setup prelude (the fence uses a name
-# defined in an earlier fence) or an expected exception (the book crashes on
-# purpose and the traceback is the lesson). Keyed "<slug>#<box index>".
+# defined in an earlier fence) or an expected exception (the course crashes on
+# purpose and the traceback is the lesson).
 # build.py --check fails if any box raises without a declaration here.
-BOXES = json.loads((CONTENT / "_boxes.json").read_text())
+BOXES = across_volumes(lambda vol: load_json(vol, "_boxes.json"))
 
-# How to check a Try It answer, keyed "<slug>#<exercise number>". Only the
-# exercises that can be checked without ever failing a correct answer appear
-# here; the rest render with a Run button and no verdict.
-CHECKS = json.loads((CONTENT / "_checks.json").read_text())
+# How to check a Try It answer. Only the exercises that can be checked without
+# ever failing a correct answer appear here; the rest render with a Run button
+# and no verdict.
+CHECKS = across_volumes(lambda vol: load_json(vol, "_checks.json"))
 
 
-def load_solutions():
-    """Worked solutions for the exercises that have no check, keyed "<slug>#<n>".
+def load_solutions(vol):
+    """Worked solutions for the exercises that have no check, keyed "<page>#<n>".
 
     Kept as Markdown rather than JSON so they can be edited as writing.
     """
-    path = CONTENT / "_solutions.md"
+    path = vol["content"] / "_solutions.md"
     if not path.exists():
         return {}
     found, ident, code, note, fence = {}, None, [], [], False
@@ -63,7 +130,7 @@ def load_solutions():
     return found
 
 
-SOLUTIONS = load_solutions()
+SOLUTIONS = across_volumes(load_solutions)
 
 
 # ---------------------------------------------------------------- markdown
@@ -431,16 +498,16 @@ def page_order(path):
     return (1, int(path.stem[2:4]))
 
 
-def chapter_files():
-    """The pages of the course.
+def chapter_files(vol):
+    """The pages of one volume.
 
     A leading underscore means a file that feeds the build rather than one the
     reader sees -- _solutions.md holds the worked answers. Publishing it would
     hand over every solution on one page, so the rule is a whitelist of what a
     page looks like, not a blacklist of what it must not be.
     """
-    return sorted((p for p in CONTENT.glob("*.md") if not p.stem.startswith("_")),
-                  key=page_order)
+    return sorted((p for p in vol["content"].glob("*.md")
+                   if not p.stem.startswith("_")), key=page_order)
 
 
 def title_of(path, blocks):
@@ -456,9 +523,44 @@ def build(check=False):
     SITE.mkdir(exist_ok=True)
     for stale in SITE.glob("*.standalone.html"):
         stale.unlink()          # previews are built on demand; do not leave old ones
+
+    # Shared by every volume, and the reason the volumes live in one site: the
+    # runtime is fetched and served once rather than once per course, and a
+    # reader who moves from volume one to volume two does not download Python
+    # again or lose the scratchpad.
+    runner = json.dumps((ROOT / "web" / "box_runner.py").read_text())
+    for name in ("app.js", "app.css"):
+        text = (ROOT / "web" / name).read_text().replace("{{harness}}", runner)
+        (SITE / name).write_text(text)
+    copy_runtime()
+
+    built = [build_volume(vol) for vol in VOLS]
+
+    # One machine-readable list of every box in every volume, so the boxes can
+    # be run outside this script. Ids carry the volume, so they stay unique.
+    (SITE / "boxes.json").write_text(
+        json.dumps([box for _, _, boxes in built for box in boxes], indent=1))
+
+    write_library(built)
+    assert_nothing_private_published()
+
+    for vol, pages, boxes in built:
+        print(f"built {len(pages)} pages, {len(boxes)} code boxes "
+              f"-> site/{vol['slug']}/")
+        for page in pages:
+            print(f"  {page['slug']:<42} {page['boxes']:>3} boxes")
+
+    if check:
+        verify(built)
+
+
+def build_volume(vol):
+    """Render one volume into site/<volume>/. Returns (vol, pages, boxes)."""
+    out_dir = SITE / vol["slug"]
+    out_dir.mkdir(exist_ok=True)
     pages = []
 
-    for path in chapter_files():
+    for path in chapter_files(vol):
         text = path.read_text()
         part = None
         part_match = re.match(r"<!-- part: (.+) -->", text)
@@ -469,6 +571,9 @@ def build(check=False):
         blocks = split_blocks(text.split("\n"))
         pages.append({
             "slug": path.stem,
+            # Lookups into BOXES, CHECKS and SOLUTIONS are by this, not by
+            # slug: two volumes can each have a ch01.
+            "key": f"{vol['slug']}/{path.stem}",
             "title": title_of(path, blocks),
             "part": part,
             "blocks": blocks,
@@ -488,37 +593,53 @@ def build(check=False):
             f'<a class="next" href="{pages[n+1]["slug"]}.html">'
             f'{html.escape(pages[n+1]["title"])} &rarr;</a>' if n + 1 < len(pages) else "",
         ])
-        # The front matter's heading is already the book's name.
+        # The front matter's heading is already the volume's name.
         heading = page["title"]
-        tab = heading if heading.startswith("Python Foundations") else f"{heading} — Python Foundations"
+        tab = heading if heading.startswith(vol["title"]) else f"{heading} — {vol['title']}"
         # A chapter with a quiz gets a quiet link to it. The answer key is not
         # linked, and more to the point is not in site/ at all.
-        quiz = ROOT / "quizzes" / f"{page['slug']}-quiz.txt"
+        quiz = vol["quizzes"] / f"{page['slug']}-quiz.txt"
         quiz_link = ""
         if quiz.exists():
             quiz_link = (f'<p class="quiz"><a href="quizzes/{quiz.name}">'
                          f'Chapter {page["title"].split()[1].rstrip("—").strip()} quiz</a>'
                          f' — fill it in, then show or print it</p>')
 
-        out = (template
-               .replace("{{quiz}}", quiz_link)
-               .replace("{{tab}}", html.escape(tab))
-               .replace("{{title}}", html.escape(heading))
-               .replace("{{part}}", html.escape(page["part"] or ""))
-               .replace("{{nav}}", nav)
-               .replace("{{body}}", render(page["blocks"], page["slug"]))
-               .replace("{{prevnext}}", prev_next)
-               .replace("{{slug}}", page["slug"]))
-        (SITE / f"{page['slug']}.html").write_text(out)
+        (out_dir / f"{page['slug']}.html").write_text(
+            fill(template, vol, tab=tab, title=heading, part=page["part"] or "",
+                 nav=nav, body=render(page["blocks"], page["key"]),
+                 quiz=quiz_link, prevnext=prev_next, slug=page["slug"]))
 
-    runner = json.dumps((ROOT / "web" / "box_runner.py").read_text())
-    for name in ("app.js", "app.css"):
-        text = (ROOT / "web" / name).read_text().replace("{{harness}}", runner)
-        (SITE / name).write_text(text)
+    boxes = box_list(vol, pages)
+    write_bundle(vol, pages)
+    copy_quizzes(vol)
+    return vol, pages, boxes
 
-    (SITE / "index.html").write_text((SITE / f"{pages[0]['slug']}.html").read_text())
 
-    # Machine-readable box list, so the boxes can be run outside this script.
+def fill(template, vol, *, tab, title, part, nav, body, quiz, prevnext, slug,
+         root="../", home=None):
+    """Put one page together.
+
+    `root` is how a page reaches the shared files: volume pages sit one level
+    down from app.css, app.js and the runtime, the library page sits beside
+    them.
+    """
+    return (template
+            .replace("{{root}}", root)
+            .replace("{{home}}", html.escape(home or vol["title"]))
+            .replace("{{quiz}}", quiz)
+            .replace("{{tab}}", html.escape(tab))
+            .replace("{{title}}", html.escape(title))
+            .replace("{{part}}", html.escape(part))
+            .replace("{{nav}}", nav)
+            .replace("{{body}}", body)
+            .replace("{{prevnext}}", prevnext)
+            .replace("{{volume}}", html.escape(vol["slug"], quote=True))
+            .replace("{{slug}}", slug))
+
+
+def box_list(vol, pages):
+    """Every code box in one volume, as data, with its stated output."""
     dump = []
     for page in pages:
         index = 0
@@ -526,35 +647,56 @@ def build(check=False):
         for n, (kind, code) in enumerate(blocks):
             if kind != "code":
                 continue
-            declared = BOXES.get(f"{page['slug']}#{index}", {})
+            declared = BOXES.get(f"{page['key']}#{index}", {})
             expected, label = "", ""
             if n + 1 < len(blocks) and blocks[n + 1][0] == "output":
                 expected = blocks[n + 1][1]
             elif (n + 2 < len(blocks) and blocks[n + 1][0] == "p"
                   and blocks[n + 2][0] == "output" and is_output_label(blocks[n + 1][1])):
                 label, expected = blocks[n + 1][1], blocks[n + 2][1]
-            dump.append({"id": f"{page['slug']}#{index}", "slug": page["slug"],
+            dump.append({"id": f"{page['key']}#{index}", "volume": vol["slug"],
+                         "slug": page["slug"],
                          "code": code, "setup": declared.get("setup", ""),
                          "raises": declared.get("raises", ""),
                          "expected": expected, "label": label,
                          "reference": bool(declared.get("reference")),
                          "needs_input": "input(" in code})
             index += 1
-    (SITE / "boxes.json").write_text(json.dumps(dump, indent=1))
-    page_boxes = dump
+    return dump
 
-    write_bundle(pages)
-    copy_quizzes()
-    copy_runtime()
-    assert_nothing_private_published()
 
-    total = sum(p["boxes"] for p in pages)
-    print(f"built {len(pages)} pages, {total} code boxes -> {SITE.relative_to(ROOT)}/")
-    for p in pages:
-        print(f"  {p['slug']:<42} {p['boxes']:>3} boxes")
+def write_library(built):
+    """site/index.html: the way in, whatever number of volumes there are.
 
-    if check:
-        verify(pages, page_boxes)
+    With one volume this reads as its table of contents; with two it reads as a
+    shelf. Not a redirect and not a picker that wastes a click either way.
+    """
+    template = (ROOT / "web" / "page.html").read_text()
+    sections, nav = [], []
+    for vol, pages, _ in built:
+        first = pages[0]["slug"] if pages else ""
+        heading = html.escape(vol["title"])
+        sections.append(f'<h2><a href="{vol["slug"]}/{first}.html">{heading}</a></h2>')
+        if vol.get("subtitle"):
+            sections.append(f'<p class="part">{html.escape(vol["subtitle"])}</p>')
+        if vol.get("blurb"):
+            sections.append(f'<p>{html.escape(vol["blurb"])}</p>')
+        sections.append("<ul class=\"contents\">" + "".join(
+            f'<li><a href="{vol["slug"]}/{p["slug"]}.html">{html.escape(p["title"])}</a></li>'
+            for p in pages) + "</ul>")
+        sections.append(f'<p><a href="{vol["slug"]}/bundle.html">'
+                        f'The code from {heading} as files</a></p>')
+        nav.append(f'<a href="{vol["slug"]}/{first}.html">{heading}</a>')
+
+    # With one volume this page is that volume's contents and should carry its
+    # name; with two it is a shelf and must not claim to be either of them.
+    only = built[0][0] if len(built) == 1 else None
+    name = only["title"] if only else "All volumes"
+    (SITE / "index.html").write_text(
+        fill(template, built[0][0], root="", home=name,
+             tab=name, title=name, part="",
+             nav="".join(nav), body="".join(sections),
+             quiz="", prevnext="", slug="index"))
 
 
 ANSWER_MARKER = "ANSWER KEY"
@@ -621,17 +763,18 @@ def copy_runtime():
     print(f"copied pyodide {version} -> site/pyodide/ ({len(hashes)} files, verified)")
 
 
-def copy_quizzes():
-    """Copy the student quizzes into the site, and nothing else.
+def copy_quizzes(vol):
+    """Copy one volume's student quizzes into the site, and nothing else.
 
     An explicit whitelist, not an exclusion: a rule that copies everything
     except the files it recognises as keys fails open the moment a key is named
-    something unexpected. This fails closed.
+    something unexpected. This fails closed. The answer keys sit in the same
+    volume directory, one level up from here, and are never copied.
     """
-    source = ROOT / "quizzes"
+    source = vol["quizzes"]
     if not source.exists():
         return
-    target = SITE / "quizzes"
+    target = SITE / vol["slug"] / "quizzes"
     target.mkdir(exist_ok=True)
     for stale in target.glob("*"):
         stale.unlink()
@@ -641,7 +784,8 @@ def copy_quizzes():
         copied += 1
 
     if copied:
-        print(f"copied {copied} quizzes -> site/quizzes/ (no answer keys)")
+        print(f"copied {copied} quizzes -> site/{vol['slug']}/quizzes/ "
+              f"(no answer keys)")
 
 
 def assert_nothing_private_published():
@@ -674,7 +818,7 @@ def bundle_name(text):
     return re.sub(r"[^a-z0-9]+", "_", text.lower()).strip("_")
 
 
-def write_bundle(pages):
+def write_bundle(vol, pages):
     """Write the book's code out as .py files, generated from the manuscript.
 
     These used to be maintained by hand, and drifted from the book in fourteen
@@ -683,8 +827,8 @@ def write_bundle(pages):
     rule that states itself in each file's header, instead of by edits nobody
     can see from the chapter.
     """
-    out = SITE / "bundle"
-    out.mkdir(exist_ok=True)
+    out = SITE / vol["slug"] / "bundle"
+    out.mkdir(parents=True, exist_ok=True)
     written = []
 
     for page in pages:
@@ -701,7 +845,7 @@ def write_bundle(pages):
                 continue
             if kind != "code":
                 continue
-            declared = BOXES.get(f"{page['slug']}#{index}", {})
+            declared = BOXES.get(f"{page['key']}#{index}", {})
             index += 1
             if (section or "").startswith(("Chapter project", "Capstone project")):
                 project, project_title = payload, section
@@ -732,7 +876,8 @@ def write_bundle(pages):
                 body.append("\n")
 
             notes = [f'"""{title}', "",
-                     f"Generated from content/{page['slug']}.md by build.py.",
+                     f"Generated from {vol['slug']}/content/{page['slug']}.md "
+                     f"by build.py.",
                      "Edit the chapter, not this file."]
             if muted:
                 one = muted == 1
@@ -755,7 +900,7 @@ def write_bundle(pages):
     # The Word export needs python-docx, which nothing else here does. If it is
     # not installed, the course still builds; only the download row disappears.
     document_row = ""
-    docx = SITE / "python-foundations.docx"
+    docx = SITE / vol["slug"] / vol.get("docx", f"{vol['slug']}.docx")
     if docx.exists():
         size = docx.stat().st_size / 1024
         document_row = (
@@ -763,7 +908,7 @@ def write_bundle(pages):
             "<p>The same text you are reading, as a Word file, for reading away "
             "from a browser or for printing. Generated from the chapters, so it "
             "matches what is on these pages.</p>"
-            f'<p><a href="python-foundations.docx">python-foundations.docx</a> '
+            f'<p><a href="{docx.name}">{docx.name}</a> '
             f"({size:,.0f} KB)</p><h3>The code</h3>")
 
     index_rows = "".join(
@@ -772,35 +917,38 @@ def write_bundle(pages):
         f'{" · asks you to type" if a else ""}</td></tr>'
         for n, t, m, a in written)
     template = (ROOT / "web" / "page.html").read_text()
-    (SITE / "bundle.html").write_text(
-        template.replace("{{tab}}", "The code as files — Python Foundations")
-        .replace("{{title}}", "The code as files").replace("{{part}}", "")
-        .replace("{{slug}}", "bundle").replace("{{nav}}", '<a href="index.html">Contents</a>')
-        .replace("{{prevnext}}", '<a class="prev" href="99-appendices.html">&larr; Appendices</a>')
-        .replace("{{body}}",
-                 "<h2>Downloads</h2>"
-                 + document_row +
-                 "<p>Every example and project from the course, generated from the "
-                 "chapters themselves so the two cannot disagree. You need Python "
-                 "3.6 or newer and nothing else.</p>"
-                 f"<table><thead><tr><th>File</th><th>Chapter</th><th>Notes</th>"
-                 f"</tr></thead><tbody>{index_rows}</tbody></table>"))
-    print(f"generated {len(written)} bundle files -> {(out).relative_to(ROOT)}/")
+    last = pages[-1]["slug"] if pages else ""
+    (SITE / vol["slug"] / "bundle.html").write_text(
+        fill(template, vol,
+             tab=f"The code as files — {vol['title']}",
+             title="The code as files", part="", quiz="", slug="bundle",
+             nav="".join(f'<a href="{p["slug"]}.html">{html.escape(p["title"])}</a>'
+                         for p in pages),
+             prevnext=f'<a class="prev" href="{last}.html">&larr; '
+                      f'{html.escape(pages[-1]["title"])}</a>' if pages else "",
+             body="<h2>Downloads</h2>"
+                  + document_row +
+                  "<p>Every example and project from the course, generated from the "
+                  "chapters themselves so the two cannot disagree. You need Python "
+                  "3.6 or newer and nothing else.</p>"
+                  f"<table><thead><tr><th>File</th><th>Chapter</th><th>Notes</th>"
+                  f"</tr></thead><tbody>{index_rows}</tbody></table>"))
+    print(f"generated {len(written)} bundle files -> site/{vol['slug']}/bundle/")
 
 
-def verify(pages, dump):
-    """Run every code box on this machine's python3 and report what happens."""
+def verify(built):
+    """Run every code box in every volume on this machine's python3."""
     print("\nchecking every code box against python3:")
     tally = {"clean": 0, "needs input": 0, "raises on purpose": 0,
              "reference, not run": 0, "UNEXPECTED": 0}
     problems = []
 
-    for page in pages:
+    for page in (page for _, pages, _ in built for page in pages):
         index = 0
         for kind, code in page["blocks"]:
             if kind != "code":
                 continue
-            declared = BOXES.get(f"{page['slug']}#{index}", {})
+            declared = BOXES.get(f"{page['key']}#{index}", {})
             index += 1
             if declared.get("reference"):
                 tally["reference, not run"] += 1
@@ -825,7 +973,7 @@ def verify(pages, dump):
                 tally["raises on purpose"] += 1
             else:
                 tally["UNEXPECTED"] += 1
-                problems.append((f"{page['slug']}#{index - 1}",
+                problems.append((f"{page['key']}#{index - 1}",
                                  code.strip().split("\n")[0],
                                  run.stderr.strip().split("\n")[-1]))
 
@@ -836,13 +984,13 @@ def verify(pages, dump):
     if problems:
         sys.exit(f"\n{len(problems)} box(es) fail unexpectedly")
     print("  all boxes behave as expected")
-    audit_book_output(dump)
+    audit_book_output([box for _, _, boxes in built for box in boxes])
 
 
 def audit_book_output(dump):
-    """Check every printed output in the book against what the code really does.
+    """Check every printed output against what the code really does.
 
-    The book states its own output beside each example. Where the example is
+    Each chapter states its own output beside each example. Where the example is
     deterministic and needs no typing, that statement is checkable -- and a
     wrong one teaches the wrong lesson, so it fails the build rather than
     shipping.

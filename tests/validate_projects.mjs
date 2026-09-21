@@ -1,10 +1,9 @@
 import { loadPyodide } from "pyodide";
 import { readFileSync } from "node:fs";
+import { checks, boxes, qualify } from "./volume.mjs";
 const REPO = new URL("..", import.meta.url).pathname;
 const SP = new URL(".", import.meta.url).pathname;
 
-const checks = JSON.parse(readFileSync(`${REPO}/content/_checks.json`, "utf8"));
-const boxes = JSON.parse(readFileSync(`${REPO}/site/boxes.json`, "utf8"));
 const py = await loadPyodide();
 py.runPython(readFileSync(`${REPO}/web/box_runner.py`, "utf8"));
 py.runPython(readFileSync(`${SP}/project_answers.py`, "utf8"));
@@ -18,7 +17,7 @@ console.log("-".repeat(88));
 let bad = 0;
 for (const [id, spec] of Object.entries(checks)) {
   if (!ALT.get(id)) continue;
-  const book = boxes.find((b) => b.id === id).code;
+  const book = boxes.find((b) => b.id === qualify(id)).code;
   const runs = py.toPy(spec.runs);
   const [a, an] = call(book, runs);
   const [b] = call(ALT.get(id), runs);

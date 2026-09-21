@@ -1,8 +1,7 @@
 import { loadPyodide } from "pyodide";
 import { readFileSync } from "node:fs";
 
-const REPO = new URL("..", import.meta.url).pathname;
-const boxes = JSON.parse(readFileSync(`${REPO}/site/boxes.json`, "utf8"));
+import { REPO, boxes } from "./volume.mjs";
 const py = await loadPyodide();
 py.runPython(readFileSync(`${REPO}/web/box_runner.py`, "utf8"));
 const runBox = py.globals.get("run_box");

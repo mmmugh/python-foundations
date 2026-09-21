@@ -15,11 +15,19 @@
  */
 
 import { spawn } from "node:child_process";
+import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const PORT = 8741;
+
+// Read the first chapter out of the built site rather than naming one, so this
+// keeps working when a volume is added, renamed or reordered.
+const boxes = JSON.parse(readFileSync(join(ROOT, "site", "boxes.json"), "utf8"));
+const first = boxes.find(b => /\/ch\d\d-/.test(b.id));
+if (!first) { console.log("skipped: no chapter pages in site/ -- build first."); process.exit(0); }
+const PAGE = `${first.volume}/${first.slug}.html`;
 
 let chromium;
 try {
@@ -62,8 +70,7 @@ const check = (ok, what) => { console.log(`  ${ok ? "ok  " : "FAIL"}  ${what}`);
                               if (!ok) problems.push(what); };
 
 try {
-  await page.goto(`http://localhost:${PORT}/ch01-your-first-programs.html`,
-                  { waitUntil: "load" });
+  await page.goto(`http://localhost:${PORT}/${PAGE}`, { waitUntil: "load" });
 
   // Pyodide boots on the first Run, not on load: a reader who only reads must
   // not be made to download 13 MB.

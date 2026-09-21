@@ -12,6 +12,7 @@ browser executes.
     node validate_projects.mjs the four interactive chapter projects
     node repl_test.mjs         the scratchpad REPL
     node browser_test.mjs      a real browser: the page, a click, the network
+    python3 second_volume_test.py   that adding a volume needs no code change
 
 `browser_test.mjs` is the only one that starts where a student starts. The
 others drive `box_runner.py` under Pyodide in node, which skips the whole
@@ -27,6 +28,11 @@ mistake. A check that cannot tell those apart is worse than no check, and this
 is how that is caught — it found two such checks when they were written
 (`count_vowels` had no test word containing a "u"; `invert`'s expected value
 could not survive JSON, which turns integer dict keys into strings).
+
+The `.mjs` harnesses check one volume, named in `volume.mjs` and overridable
+with `VOLUME=<slug> node validate_shipped.mjs`. The fixtures below are written
+against that volume's exercises and key themselves the way its `_checks.json`
+does, without a volume in the id.
 
 `reference_solutions.py`, `stdin_answers.py` and `project_answers.py` hold
 those correct-and-incorrect variants. They are test fixtures, not course

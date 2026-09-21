@@ -1,6 +1,6 @@
-"""Export the course as a Word document, generated from content/.
+"""Export a volume as a Word document, generated from its chapters.
 
-    python3 scripts/make_docx.py [out.docx]
+    python3 scripts/make_docx.py [volume-slug] [out.docx]
 
 Built from the chapters, not from the original draft, so it says what the
 course currently says rather than what it used to.
@@ -11,15 +11,19 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from build import chapter_files, split_blocks                   # noqa: E402
+from build import chapter_files, find_volume, split_blocks      # noqa: E402
 
 from docx import Document                                       # noqa: E402
 from docx.enum.text import WD_ALIGN_PARAGRAPH                   # noqa: E402
 from docx.shared import Pt, RGBColor, Inches                    # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-CONTENT = ROOT / "content"
-TITLE = "Python Foundations: A First Course in Programming"
+
+# Which volume, and where its Word file goes. A volume slug may be given first;
+# without one there had better be only a single volume to mean.
+_args = [a for a in sys.argv[1:] if not a.endswith(".docx")]
+VOLUME = find_volume(_args[0] if _args else None)
+TITLE = ": ".join(x for x in (VOLUME["title"], VOLUME.get("subtitle")) if x)
 
 
 def add_runs(paragraph, text):
@@ -54,7 +58,9 @@ def add_code(document, code, muted=False):
 
 
 def main():
-    out = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "site" / "python-foundations.docx"
+    named = [a for a in sys.argv[1:] if a.endswith(".docx")]
+    out = (Path(named[0]) if named else
+           ROOT / "site" / VOLUME["slug"] / VOLUME.get("docx", f"{VOLUME['slug']}.docx"))
     document = Document()
 
     document.core_properties.title = TITLE
@@ -69,7 +75,7 @@ def main():
     # chapter_files() rather than a raw glob: it drops the underscore-prefixed
     # build inputs -- _solutions.md holds every worked answer -- and orders the
     # appendices after the chapters instead of after the front matter.
-    for path in chapter_files():
+    for path in chapter_files(VOLUME):
         text = path.read_text()
         part = None
         if text.startswith("<!--"):
@@ -120,7 +126,7 @@ def main():
                             for run in cell.paragraphs[0].runs:
                                 run.bold = True
 
-    out.parent.mkdir(exist_ok=True)
+    out.parent.mkdir(parents=True, exist_ok=True)
     document.save(out)
     try:
         shown = out.relative_to(ROOT)

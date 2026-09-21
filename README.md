@@ -33,25 +33,61 @@ runtime once (13 MB, see below); after that nothing here touches the network.
 ## What is here
 
 ```
-content/       the manuscript, one Markdown file per chapter — the master copy
-  _boxes.json    boxes needing a setup line, an expected error, or no Run button
-  _checks.json   how each checkable exercise is checked
-build.py       content/ -> site/. ~600 lines, no dependencies
-web/           page template, stylesheet, browser runtime
-  box_runner.py  runs a box, stops a runaway loop, checks an answer
-scripts/       preview builder, Word export, quiz renderer, local server
-vendor/        Pyodide—CPython 3.14 as WebAssembly; fetched, not committed
-quizzes/       one fill-in-the-blank quiz per chapter, linked from the site
-answer-keys/   the matching keys — NEVER copied into site/ (see below)
-archive/       how the project got here; nothing depends on it
+volumes/                one directory per course
+  vol1-foundations/
+    volume.json           its title, subtitle and place in the order
+    content/              the manuscript, one Markdown file per chapter
+      _boxes.json           boxes needing a setup line, an error, or no Run button
+      _checks.json          how each checkable exercise is checked
+      _solutions.md         worked answers—never published whole
+    quizzes/              one fill-in-the-blank quiz per chapter
+    answer-keys/          the matching keys—NEVER copied into site/ (see below)
+build.py                volumes/ -> site/. No dependencies
+web/                    page template, stylesheet, browser runtime
+  box_runner.py           runs a box, stops a runaway loop, checks an answer
+scripts/                preview builder, Word export, quiz renderer, local server
+vendor/pyodide/         CPython 3.14 as WebAssembly; fetched, not committed
+tests/                  harnesses that run the course under real Pyodide
+archive/                how the project got here; nothing depends on it
 ```
 
-`site/` is generated and not tracked. `site/bundle/` holds the course's code as
-`.py` files, generated from the chapters so the two cannot disagree.
+`site/` is generated and not tracked. It looks like this:
 
-`python3 scripts/make_docx.py` writes `site/python-foundations.docx` from the
-same chapters. It is the only thing here that needs a package (`python-docx`);
-the course builds fine without it, and the download link simply does not appear.
+```
+site/
+  index.html            the way in: every volume and its chapters
+  app.js  app.css       shared by every volume
+  pyodide/              shared too—fetched once, not once per volume
+  vol1-foundations/
+    ch01-....html  ...  the chapters
+    quizzes/            the student copies only
+    bundle/             the course's code as .py files
+```
+
+## Adding a volume
+
+Make a directory under `volumes/` with a `volume.json` in it and a `content/`
+beside it, then build. Nothing in `build.py` names a volume, and nothing
+outside `volumes/` has to change:
+
+```json
+{ "number": 2, "title": "Python Further", "subtitle": "A Second Course",
+  "blurb": "One sentence for the contents page." }
+```
+
+Chapters are `chNN-slug.md`, with `00-` for front matter and `99-` for
+appendices; that is the whole naming convention. Quizzes and answer keys go in
+`quizzes/` and `answer-keys/` inside the volume.
+
+`python3 tests/second_volume_test.py` proves this still holds: it creates a
+throwaway volume, builds it, checks that it got its own directory, that its
+pages reach the shared runtime rather than copying it, and that the library
+page stops calling itself volume one—then deletes it again.
+
+`python3 scripts/make_docx.py` writes a volume's chapters out as a Word file,
+into that volume's directory in `site/`. It is the only thing here that needs a
+package (`python-docx`); the course builds fine without it, and the download
+link simply does not appear.
 
 ## `build.py --check`
 
@@ -100,8 +136,9 @@ arrived intact.
 
 ## The answer keys
 
-`quizzes/*-quiz.txt` is copied into `site/` and linked from the foot of each
-chapter. `answer-keys/*-answers.txt` is not, and must not be: everything under
+A volume's `quizzes/*-quiz.txt` is copied into `site/` and linked from the foot
+of each chapter. Its `answer-keys/*-answers.txt` is not, and must not be:
+everything under
 `site/` is fetchable by anyone who guesses a filename, with no traversal bug
 required. `build.py` copies by an explicit whitelist of `*-quiz.txt` rather than
 excluding what it recognises as a key — an exclusion rule fails open the first
@@ -110,5 +147,6 @@ for the answer-key marker and fails the build if one is found.
 
 ## Editing
 
-Edit `content/*.md` and rebuild. The chapters are the only source of truth —
-the code files, the site and the exercise stubs are all generated from them.
+Edit `volumes/<volume>/content/*.md` and rebuild. The chapters are the only
+source of truth: the code files, the site and the exercise stubs are all
+generated from them.

@@ -27,6 +27,7 @@ let sink = null;          // where the currently running program's output goes
 
 const pill = document.querySelector(".runtime");
 const slug = document.body.dataset.slug;
+const volume = document.body.dataset.volume || "";
 
 function say(message, ready = false) {
   pill.hidden = false;
@@ -152,7 +153,9 @@ document.querySelectorAll(".box").forEach((box) => {
   const result = box.querySelector(".result");
 
   const original = area.value;
-  const key = `pf:${slug}:${box.dataset.box}`;
+  // The volume belongs in the key: two volumes may each have a ch02, and
+  // a reader must not find volume one's edits waiting in volume two.
+  const key = `pf:${volume}/${slug}:${box.dataset.box}`;
   const spec = box.dataset.check ? JSON.parse(box.dataset.check) : null;
 
   // Autosave is the safety net for a runaway loop: on the main thread nothing

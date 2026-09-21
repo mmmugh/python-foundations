@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{{tab}}</title>
-<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="{{root}}app.css">
 </head>
-<body data-slug="{{slug}}">
+<body data-slug="{{slug}}" data-volume="{{volume}}">
 
 <header class="top">
-  <a class="home" href="index.html">Python Foundations</a>
+  <a class="home" href="{{root}}index.html">{{home}}</a>
   <details class="toc">
     <summary>Contents</summary>
     <nav>{{nav}}</nav>
@@ -39,6 +39,6 @@
   </div>
 </section>
 
-<script type="module" src="app.js"></script>
+<script type="module" src="{{root}}app.js"></script>
 </body>
 </html>
