@@ -417,8 +417,29 @@ def code_box(slug, index, code, expected, label=""):
 
 # ---------------------------------------------------------------- pages
 
+def page_order(path):
+    """Front matter, then the chapters in order, then the appendices.
+
+    Sorting the filenames puts 99-appendices second, because "9" sorts before
+    "c" — which read as a missing chapter rather than an ordering accident.
+    """
+    if path.stem.startswith("00"):
+        return (0, 0)
+    if path.stem.startswith("99"):
+        return (2, 0)
+    return (1, int(path.stem[2:4]))
+
+
 def chapter_files():
-    return sorted(CONTENT.glob("*.md"))
+    """The pages of the course.
+
+    A leading underscore means a file that feeds the build rather than one the
+    reader sees -- _solutions.md holds the worked answers. Publishing it would
+    hand over every solution on one page, so the rule is a whitelist of what a
+    page looks like, not a blacklist of what it must not be.
+    """
+    return sorted((p for p in CONTENT.glob("*.md") if not p.stem.startswith("_")),
+                  key=page_order)
 
 
 def title_of(path, blocks):
@@ -535,6 +556,10 @@ def build(check=False):
 
 ANSWER_MARKER = "ANSWER KEY"
 
+# Content that must never be published whole. Per-exercise reveals are fine;
+# a single page carrying the lot is not.
+PRIVATE_CONTENT = ("_solutions", "_boxes", "_checks")
+
 
 def copy_quizzes():
     """Copy the student quizzes into the site, and nothing else.
@@ -559,8 +584,10 @@ def copy_quizzes():
     leaked = [p.relative_to(SITE) for p in SITE.rglob("*")
               if p.is_file() and p.suffix in (".txt", ".md", ".html")
               and ANSWER_MARKER in p.read_text(errors="ignore")]
+    leaked += [p.relative_to(SITE) for p in SITE.rglob("*")
+               if p.is_file() and any(p.stem.startswith(n) for n in PRIVATE_CONTENT)]
     if leaked:
-        sys.exit(f"answer key reachable from the site: {leaked}")
+        sys.exit(f"content that must not be published is reachable: {leaked}")
     if copied:
         print(f"copied {copied} quizzes -> site/quizzes/ (no answer keys)")
 
