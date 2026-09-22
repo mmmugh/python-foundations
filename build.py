@@ -19,6 +19,7 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
+from xml.etree import ElementTree
 
 ROOT = Path(__file__).resolve().parent
 VOLUMES = ROOT / "volumes"
@@ -534,7 +535,15 @@ def build(check=False):
     for name in ("app.js", "app.css"):
         text = (ROOT / "web" / name).read_text().replace("{{harness}}", runner)
         (SITE / name).write_text(text)
-    shutil.copyfile(ROOT / "web" / "favicon.svg", SITE / "favicon.svg")
+    # An SVG is XML, and a browser parses it strictly: one stray "--" inside a
+    # comment and the icon silently draws nothing. Nobody notices a favicon
+    # that is merely absent, so the build checks it rather than trusting it.
+    icon = ROOT / "web" / "favicon.svg"
+    try:
+        ElementTree.parse(icon)
+    except ElementTree.ParseError as e:
+        sys.exit(f"web/favicon.svg is not well-formed XML and would not render: {e}")
+    shutil.copyfile(icon, SITE / "favicon.svg")
     copy_runtime()
 
     built = [build_volume(vol) for vol in VOLS]
