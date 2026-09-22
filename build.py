@@ -534,6 +534,7 @@ def build(check=False):
     for name in ("app.js", "app.css"):
         text = (ROOT / "web" / name).read_text().replace("{{harness}}", runner)
         (SITE / name).write_text(text)
+    shutil.copyfile(ROOT / "web" / "favicon.svg", SITE / "favicon.svg")
     copy_runtime()
 
     built = [build_volume(vol) for vol in VOLS]
