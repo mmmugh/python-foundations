@@ -11,10 +11,12 @@ A volume is a course. There is one today; adding another means adding a
 directory with a volume.json in it, and changing nothing here.
 """
 
+import hashlib
 import html
 import json
 import re
 import shutil
+import struct
 import subprocess
 import sys
 import tempfile
@@ -535,15 +537,7 @@ def build(check=False):
     for name in ("app.js", "app.css"):
         text = (ROOT / "web" / name).read_text().replace("{{harness}}", runner)
         (SITE / name).write_text(text)
-    # An SVG is XML, and a browser parses it strictly: one stray "--" inside a
-    # comment and the icon silently draws nothing. Nobody notices a favicon
-    # that is merely absent, so the build checks it rather than trusting it.
-    icon = ROOT / "web" / "favicon.svg"
-    try:
-        ElementTree.parse(icon)
-    except ElementTree.ParseError as e:
-        sys.exit(f"web/favicon.svg is not well-formed XML and would not render: {e}")
-    shutil.copyfile(icon, SITE / "favicon.svg")
+    copy_icons()
     copy_runtime()
 
     built = [build_volume(vol) for vol in VOLS]
@@ -746,6 +740,50 @@ ANSWER_MARKER = "ANSWER KEY"
 # Content that must never be published whole. Per-exercise reveals are fine;
 # a single page carrying the lot is not.
 PRIVATE_CONTENT = ("_solutions", "_boxes", "_checks")
+
+
+def copy_icons():
+    """Publish the icons, having checked they are what they claim to be.
+
+    Nobody ever notices an icon that is merely absent, so none of this is
+    taken on trust. An SVG is XML and a browser parses it strictly: one stray
+    pair of hyphens inside a comment and it draws nothing at all, which has
+    happened here. A PNG is checked for its header and its size.
+
+    apple-touch-icon.svg is a source file, not a published one: it exists only
+    to render the PNG, and iOS cannot use an SVG for a home screen icon anyway.
+    """
+    web = ROOT / "web"
+    for name in ("favicon.svg", "apple-touch-icon.svg"):
+        try:
+            ElementTree.parse(web / name)
+        except ElementTree.ParseError as e:
+            sys.exit(f"web/{name} is not well-formed XML and would not render: {e}")
+
+    for name, expected in (("favicon.png", 32), ("apple-touch-icon.png", 180)):
+        head = (web / name).read_bytes()[:24]
+        if head[:8] != b"\x89PNG\r\n\x1a\n":
+            sys.exit(f"web/{name} is not a PNG")
+        width, height = struct.unpack(">II", head[16:24])
+        if (width, height) != (expected, expected):
+            sys.exit(f"web/{name} is {width}x{height}, expected "
+                     f"{expected}x{expected} -- run scripts/make_icons.py")
+
+    # The PNGs are rendered from the SVGs by hand, so they can fall behind
+    # them. Stale is a warning rather than a failure: it is only cosmetic, and
+    # breaking a build in the middle of editing an icon would be unkind.
+    stamp = web / "icons.sha256"
+    if stamp.exists():
+        recorded = dict(line.split("  ", 1)[::-1]
+                        for line in stamp.read_text().splitlines() if line)
+        stale = [n for n, want in recorded.items()
+                 if hashlib.sha256((web / n).read_bytes()).hexdigest() != want]
+        if stale:
+            print(f"  NOTE: {', '.join(stale)} changed since the PNGs were "
+                  f"rendered -- run: python3 scripts/make_icons.py")
+
+    for name in ("favicon.svg", "favicon.png", "apple-touch-icon.png"):
+        shutil.copyfile(web / name, SITE / name)
 
 
 def copy_runtime():
