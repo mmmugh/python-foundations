@@ -707,3 +707,225 @@ hanoi(3, "A", "C", "B")
 
 Unchanged from the draft. Ran it: prints exactly 7 moves (2^3 - 1), all legal, ending with everything moved from A to C.
 
+## ch01-your-first-programs-practice#1
+
+```python
+print("======================================")
+print("         RIVERSIDE FILM CLUB")
+print("======================================")
+```
+
+The rule is typed out in full. String repetition would be shorter, but that is Chapter 3.
+
+## ch01-your-first-programs-practice#2
+
+```python
+print("Feature:  The Quiet Harbour  (1998)")
+```
+
+One string, spaces and all, exactly as it should appear.
+
+## ch01-your-first-programs-practice#3
+
+```python
+print("Feature:", "The Quiet Harbour  (1998)")
+```
+
+print() puts exactly one space between arguments, so the two spaces after Feature: become one. When the spacing matters, put it inside the string.
+
+## ch01-your-first-programs-practice#4
+
+```python
+print("When:     Friday, 7:30 pm")
+print("Where:    Room 14")
+```
+
+Two calls, and the values line up because the spaces are inside the strings.
+
+## ch01-your-first-programs-practice#5
+
+```python
+print("Seats available:", 8 * 12)
+```
+
+8 * 12 rather than 96: change the row count and the flyer stays right.
+
+## ch01-your-first-programs-practice#6
+
+```python
+print("Snack bar total:", 3 * 3.75 + 2 * 3.00)
+```
+
+The arithmetic happens before print() sees it. Note that print() adds the space after the colon.
+
+## ch01-your-first-programs-practice#7
+
+```python
+# Prints the flyer for Friday's Riverside Film Club showing.
+
+print("======================================")
+print("         RIVERSIDE FILM CLUB")
+print("======================================")
+print()
+print("Feature:  The Quiet Harbour  (1998)")
+print("When:     Friday, 7:30 pm")
+print("Where:    Room 14")
+print()
+print("Seats available:", 8 * 12)
+print("Snack bar total:", 3 * 3.75 + 2 * 3.00)
+print()
+print("======================================")
+```
+
+The comment says what the program is for, not what each line does. Blank lines come from print() with nothing in it.
+
+## ch04-making-decisions-practice#1
+
+```python
+wind = float(input("Wind speed in mph? "))
+print(f"Wind: {wind:.1f} mph")
+```
+
+float() rather than int(), because a wind speed has a decimal point. The .1f keeps the display steady even when the reading is a whole number.
+
+## ch04-making-decisions-practice#2
+
+```python
+wind = float(input("Wind speed in mph? "))
+if wind < 30:
+    print("Wind: OK")
+else:
+    print("Wind: TOO STRONG")
+```
+
+Under 30 means <, not <=. At exactly 30 the club stays on the ground.
+
+## ch04-making-decisions-practice#3
+
+```python
+temperature = float(input("Temperature in C? "))
+if temperature >= 2 and temperature <= 35:
+    print("Temperature: OK")
+else:
+    print("Temperature: OUT OF RANGE")
+```
+
+Two comparisons joined with and. Both ends count as safe, so both are >= and <=.
+
+## ch04-making-decisions-practice#4
+
+```python
+ceiling = float(input("Cloud ceiling in feet? "))
+if ceiling >= 5000:
+    print("Ceiling: CLEAR")
+elif ceiling >= 2000:
+    print("Ceiling: MARGINAL")
+else:
+    print("Ceiling: TOO LOW")
+```
+
+The narrow band goes first. With 2000 tested before 5000, a clear sky reads as marginal and the CLEAR branch never runs.
+
+## ch04-making-decisions-practice#5
+
+```python
+typed = input("Fuel percentage? ")
+if typed.isdigit():
+    fuel = int(typed)
+    print(f"Fuel: {fuel}%")
+else:
+    print("Fuel: NOT A NUMBER")
+```
+
+Check first, convert second: int() on 'full' would stop the program before it could print anything.
+
+## ch04-making-decisions-practice#6
+
+```python
+wind = float(input("Wind speed in mph? "))
+temperature = float(input("Temperature in C? "))
+ceiling = float(input("Cloud ceiling in feet? "))
+typed = input("Fuel percentage? ")
+wind_ok = wind < 30
+temperature_ok = temperature >= 2 and temperature <= 35
+ceiling_ok = ceiling >= 2000
+fuel_ok = typed.isdigit() and int(typed) >= 95
+if wind_ok and temperature_ok and ceiling_ok and fuel_ok:
+    print("LAUNCH: GO")
+else:
+    print("LAUNCH: NO GO")
+```
+
+Naming each condition keeps the verdict line readable, and the names are reused in the next step.
+
+## ch04-making-decisions-practice#7
+
+```python
+wind = float(input("Wind speed in mph? "))
+temperature = float(input("Temperature in C? "))
+ceiling = float(input("Cloud ceiling in feet? "))
+typed = input("Fuel percentage? ")
+wind_ok = wind < 30
+temperature_ok = temperature >= 2 and temperature <= 35
+ceiling_ok = ceiling >= 2000
+fuel_ok = typed.isdigit() and int(typed) >= 95
+if wind_ok and temperature_ok and ceiling_ok and fuel_ok:
+    print("LAUNCH: GO")
+else:
+    print("LAUNCH: NO GO")
+    if not wind_ok:
+        print("HOLD: wind")
+    elif not temperature_ok:
+        print("HOLD: temperature")
+    elif not ceiling_ok:
+        print("HOLD: ceiling")
+    else:
+        print("HOLD: fuel")
+```
+
+elif rather than four ifs, so only the first failure is reported. Fuel is the else because it is the only one left.
+
+## ch04-making-decisions-practice#8
+
+```python
+wind = float(input("Wind speed in mph? "))
+temperature = float(input("Temperature in C? "))
+ceiling = float(input("Cloud ceiling in feet? "))
+typed = input("Fuel percentage? ")
+wind_ok = wind < 30
+temperature_ok = temperature >= 2 and temperature <= 35
+ceiling_ok = ceiling >= 2000
+fuel_ok = typed.isdigit() and int(typed) >= 95
+if wind_ok:
+    print("Wind: OK")
+else:
+    print("Wind: TOO STRONG")
+if temperature_ok:
+    print("Temperature: OK")
+else:
+    print("Temperature: OUT OF RANGE")
+if ceiling >= 5000:
+    print("Ceiling: CLEAR")
+elif ceiling >= 2000:
+    print("Ceiling: MARGINAL")
+else:
+    print("Ceiling: TOO LOW")
+if typed.isdigit():
+    print(f"Fuel: {int(typed)}%")
+else:
+    print("Fuel: NOT A NUMBER")
+if wind_ok and temperature_ok and ceiling_ok and fuel_ok:
+    print("LAUNCH: GO")
+else:
+    print("LAUNCH: NO GO")
+    if not wind_ok:
+        print("HOLD: wind")
+    elif not temperature_ok:
+        print("HOLD: temperature")
+    elif not ceiling_ok:
+        print("HOLD: ceiling")
+    else:
+        print("HOLD: fuel")
+```
+
+Nothing new, only assembly: the status lines from steps 2 to 5, then the verdict, then the reason.

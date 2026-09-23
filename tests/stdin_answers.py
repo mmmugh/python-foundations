@@ -55,3 +55,38 @@ A = {
  "sentence = input('Sentence: ')\nprint(f'{len(sentence.split(\" \"))} words')",
  "s = input()\nprint(len(s))"),                                          # counted characters
 }
+
+# Practice page: the launch console, one reading at a time.
+A.update({
+"ch04-making-decisions-practice#1": (
+ 'wind = float(input("Wind speed in mph? "))\nprint(f"Wind: {wind:.1f} mph")',
+ 'w = float(input())\nprint("Wind:", f"{w:.1f}", "mph")',
+ 'wind = int(input("Wind? "))\nprint(f"Wind: {wind} mph")'),
+"ch04-making-decisions-practice#2": (
+ 'wind = float(input())\nif wind < 30:\n    print("Wind: OK")\nelse:\n    print("Wind: TOO STRONG")',
+ 'w = float(input())\nprint("Wind: OK" if w < 30 else "Wind: TOO STRONG")',
+ 'w = float(input())\nif w <= 30:\n    print("Wind: OK")\nelse:\n    print("Wind: TOO STRONG")'),
+"ch04-making-decisions-practice#3": (
+ 't = float(input())\nif t >= 2 and t <= 35:\n    print("Temperature: OK")\nelse:\n    print("Temperature: OUT OF RANGE")',
+ 't = float(input())\nprint("Temperature: OK" if 2 <= t <= 35 else "Temperature: OUT OF RANGE")',
+ 't = float(input())\nif t > 2 and t <= 35:\n    print("Temperature: OK")\nelse:\n    print("Temperature: OUT OF RANGE")'),
+"ch04-making-decisions-practice#4": (
+ 'c = float(input())\nif c >= 5000:\n    print("Ceiling: CLEAR")\nelif c >= 2000:\n    print("Ceiling: MARGINAL")\nelse:\n    print("Ceiling: TOO LOW")',
+ 'c = float(input())\nif c < 2000:\n    print("Ceiling: TOO LOW")\nelif c < 5000:\n    print("Ceiling: MARGINAL")\nelse:\n    print("Ceiling: CLEAR")',
+ 'c = float(input())\nif c >= 2000:\n    print("Ceiling: MARGINAL")\nelif c >= 5000:\n    print("Ceiling: CLEAR")\nelse:\n    print("Ceiling: TOO LOW")'),
+"ch04-making-decisions-practice#5": (
+ 'typed = input()\nif typed.isdigit():\n    print(f"Fuel: {int(typed)}%")\nelse:\n    print("Fuel: NOT A NUMBER")',
+ 'typed = input()\ntry:\n    print("Fuel: " + str(int(typed)) + "%")\nexcept ValueError:\n    print("Fuel: NOT A NUMBER")',
+ 'typed = input()\nprint(f"Fuel: {int(typed)}%")'),
+"ch04-making-decisions-practice#6": (
+ 'w = float(input())\nt = float(input())\nc = float(input())\nf = input()\nok_w = w < 30\nok_t = 2 <= t <= 35\nok_c = c >= 2000\nok_f = f.isdigit() and int(f) >= 95\nif ok_w and ok_t and ok_c and ok_f:\n    print("LAUNCH: GO")\nelse:\n    print("LAUNCH: NO GO")',
+ 'w = float(input())\nt = float(input())\nc = float(input())\nf = input()\ngo = w < 30 and 2 <= t <= 35 and c >= 2000 and f.isdigit() and int(f) >= 95\nprint("LAUNCH: GO" if go else "LAUNCH: NO GO")',
+ 'w = float(input())\nt = float(input())\nc = float(input())\nf = input()\nok_w = w < 30\nok_t = 2 <= t <= 35\nok_c = c >= 2000\nok_f = f.isdigit() and int(f) >= 95\nif ok_w and ok_t and ok_c:\n    print("LAUNCH: GO")\nelse:\n    print("LAUNCH: NO GO")'),
+"ch04-making-decisions-practice#7": (
+ 'w = float(input())\nt = float(input())\nc = float(input())\nf = input()\nok_w = w < 30\nok_t = 2 <= t <= 35\nok_c = c >= 2000\nok_f = f.isdigit() and int(f) >= 95\nif ok_w and ok_t and ok_c and ok_f:\n    print("LAUNCH: GO")\nelse:\n    print("LAUNCH: NO GO")\n    if not ok_w:\n        print("HOLD: wind")\n    elif not ok_t:\n        print("HOLD: temperature")\n    elif not ok_c:\n        print("HOLD: ceiling")\n    else:\n        print("HOLD: fuel")',
+ 'w = float(input())\nt = float(input())\nc = float(input())\nf = input()\nok_w = w < 30\nok_t = 2 <= t <= 35\nok_c = c >= 2000\nok_f = f.isdigit() and int(f) >= 95\nreason = ""\nif not ok_w:\n    reason = "wind"\nelif not ok_t:\n    reason = "temperature"\nelif not ok_c:\n    reason = "ceiling"\nelif not ok_f:\n    reason = "fuel"\nif reason == "":\n    print("LAUNCH: GO")\nelse:\n    print("LAUNCH: NO GO")\n    print("HOLD: " + reason)',
+ 'w = float(input())\nt = float(input())\nc = float(input())\nf = input()\nok_w = w < 30\nok_t = 2 <= t <= 35\nok_c = c >= 2000\nok_f = f.isdigit() and int(f) >= 95\nif ok_w and ok_t and ok_c and ok_f:\n    print("LAUNCH: GO")\nelse:\n    print("LAUNCH: NO GO")\n    if not ok_c:\n        print("HOLD: ceiling")\n    elif not ok_w:\n        print("HOLD: wind")\n    elif not ok_t:\n        print("HOLD: temperature")\n    else:\n        print("HOLD: fuel")'),
+"ch04-making-decisions-practice#8": (
+ 'w = float(input())\nt = float(input())\nc = float(input())\nf = input()\nok_w = w < 30\nok_t = 2 <= t <= 35\nok_c = c >= 2000\nok_f = f.isdigit() and int(f) >= 95\nprint("Wind: OK" if ok_w else "Wind: TOO STRONG")\nprint("Temperature: OK" if ok_t else "Temperature: OUT OF RANGE")\nif c >= 5000:\n    print("Ceiling: CLEAR")\nelif c >= 2000:\n    print("Ceiling: MARGINAL")\nelse:\n    print("Ceiling: TOO LOW")\nif f.isdigit():\n    print(f"Fuel: {int(f)}%")\nelse:\n    print("Fuel: NOT A NUMBER")\nif ok_w and ok_t and ok_c and ok_f:\n    print("LAUNCH: GO")\nelse:\n    print("LAUNCH: NO GO")\n    if not ok_w:\n        print("HOLD: wind")\n    elif not ok_t:\n        print("HOLD: temperature")\n    elif not ok_c:\n        print("HOLD: ceiling")\n    else:\n        print("HOLD: fuel")',
+ 'w = float(input())\nt = float(input())\nc = float(input())\nf = input()\nok_w = w < 30\nok_t = 2 <= t <= 35\nok_c = c >= 2000\nok_f = f.isdigit() and int(f) >= 95\nif ok_w:\n    print("Wind: OK")\nelse:\n    print("Wind: TOO STRONG")\nprint("Temperature: OK" if ok_t else "Temperature: OUT OF RANGE")\nif c >= 5000:\n    print("Ceiling: CLEAR")\nelif c >= 2000:\n    print("Ceiling: MARGINAL")\nelse:\n    print("Ceiling: TOO LOW")\nif f.isdigit():\n    print(f"Fuel: {int(f)}%")\nelse:\n    print("Fuel: NOT A NUMBER")\nif ok_w and ok_t and ok_c and ok_f:\n    print("LAUNCH: GO")\nelse:\n    print("LAUNCH: NO GO")\n    if not ok_w:\n        print("HOLD: wind")\n    elif not ok_t:\n        print("HOLD: temperature")\n    elif not ok_c:\n        print("HOLD: ceiling")\n    else:\n        print("HOLD: fuel")',
+ 'w = float(input())\nt = float(input())\nc = float(input())\nf = input()\nok_w = w < 30\nok_t = 2 <= t <= 35\nok_c = c >= 2000\nok_f = f.isdigit() and int(f) >= 95\nprint("Wind: OK" if ok_w else "Wind: TOO STRONG")\nif c >= 5000:\n    print("Ceiling: CLEAR")\nelif c >= 2000:\n    print("Ceiling: MARGINAL")\nelse:\n    print("Ceiling: TOO LOW")\nif f.isdigit():\n    print(f"Fuel: {int(f)}%")\nelse:\n    print("Fuel: NOT A NUMBER")\nif ok_w and ok_t and ok_c and ok_f:\n    print("LAUNCH: GO")\nelse:\n    print("LAUNCH: NO GO")\n    if not ok_w:\n        print("HOLD: wind")\n    elif not ok_t:\n        print("HOLD: temperature")\n    elif not ok_c:\n        print("HOLD: ceiling")\n    else:\n        print("HOLD: fuel")')})

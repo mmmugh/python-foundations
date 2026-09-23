@@ -256,7 +256,9 @@ def render(blocks, slug):
             i += 1
             continue
 
-        if kind == "h3" and payload == "Try It":
+        # "Steps" is what a practice page calls its exercises; it renders the
+        # same way, as numbered items each with a box of their own.
+        if kind == "h3" and payload in ("Try It", "Steps"):
             parts.append(f"<h3>{inline(payload)}</h3>")
             j = i + 1
             while j < len(blocks) and blocks[j][0] != "h3":
@@ -503,6 +505,18 @@ def page_order(path):
     return (1, int(path.stem[2:4]))
 
 
+def practice_files(vol):
+    """One optional practice page per chapter, in volumes/<vol>/practice/.
+
+    Named after the chapter it belongs to, so the pairing is the filename and
+    not a table that can fall out of step. Kept out of content/ because these
+    are not chapters: they carry no new teaching, they sit outside the reading
+    order, and they must never reach the code bundle.
+    """
+    folder = vol["dir"] / "practice"
+    return sorted(folder.glob("*.md"), key=page_order) if folder.is_dir() else []
+
+
 def chapter_files(vol):
     """The pages of one volume.
 
@@ -614,30 +628,71 @@ def build_volume(vol):
             "boxes": sum(1 for k, _ in blocks if k == "code"),
         })
 
+    for path in practice_files(vol):
+        text = path.read_text()
+        blocks = split_blocks(text.split("\n"))
+        owner = next((p for p in pages if p["slug"] == path.stem), None)
+        if owner is None:
+            sys.exit(f"{vol['slug']}/practice/{path.name} has no chapter of that "
+                     f"name in content/")
+        pages.append({
+            "slug": f"{path.stem}-practice",
+            "key": f"{vol['slug']}/{path.stem}-practice",
+            "title": title_of(path, blocks),
+            "part": owner["title"],
+            "blocks": blocks,
+            "boxes": sum(1 for k, _ in blocks if k == "code"),
+            # Not a chapter: kept out of the reading order, the contents list
+            # and the code bundle, but built, boxed and verified like one.
+            "practice": True,
+            "owner": owner["slug"],
+        })
+
     template = (ROOT / "web" / "page.html").read_text()
+    chapters = [p for p in pages if not p.get("practice")]
     for n, page in enumerate(pages):
         nav = "".join(
             f'<a href="{p["slug"]}.html"{" class=here" if p is page else ""}>'
             f'{html.escape(p["title"])}</a>'
-            for p in pages
+            for p in chapters
         )
-        prev_next = "".join([
-            f'<a class="prev" href="{pages[n-1]["slug"]}.html">&larr; '
-            f'{html.escape(pages[n-1]["title"])}</a>' if n else "",
-            f'<a class="next" href="{pages[n+1]["slug"]}.html">'
-            f'{html.escape(pages[n+1]["title"])} &rarr;</a>' if n + 1 < len(pages) else "",
-        ])
+        if page.get("practice"):
+            # A practice page is a side road: the only way on is back to its
+            # chapter, so that is the whole of its prev/next.
+            prev_next = (f'<a class="prev" href="{page["owner"]}.html">&larr; '
+                         f'{html.escape(chapters[[c["slug"] for c in chapters].index(page["owner"])]["title"])}</a>')
+        else:
+            at = chapters.index(page)
+            prev_next = "".join([
+                f'<a class="prev" href="{chapters[at-1]["slug"]}.html">&larr; '
+                f'{html.escape(chapters[at-1]["title"])}</a>' if at else "",
+                f'<a class="next" href="{chapters[at+1]["slug"]}.html">'
+                f'{html.escape(chapters[at+1]["title"])} &rarr;</a>'
+                if at + 1 < len(chapters) else "",
+            ])
         # The front matter's heading is already the volume's name.
         heading = page["title"]
         tab = heading if heading.startswith(vol["title"]) else f"{heading} — {vol['title']}"
-        # A chapter with a quiz gets a quiet link to it. The answer key is not
+        # The foot of a chapter: somewhere to go when the reading is done.
+        # A practice page if one exists, and the quiz. The answer key is not
         # linked, and more to the point is not in site/ at all.
-        quiz = vol["quizzes"] / f"{page['slug']}-quiz.txt"
-        quiz_link = ""
-        if quiz.exists():
-            quiz_link = (f'<p class="quiz"><a href="quizzes/{quiz.name}">'
-                         f'Chapter {page["title"].split()[1].rstrip("—").strip()} quiz</a>'
-                         f' — fill it in, then show or print it</p>')
+        extras = []
+        if not page.get("practice"):
+            practice = next((x for x in pages
+                             if x.get("owner") == page["slug"]), None)
+            if practice:
+                extras.append(f'<p class="practice">'
+                              f'<a href="{practice["slug"]}.html">'
+                              f'{html.escape(practice["title"])}</a>'
+                              f' — one project, built step by step, using only '
+                              f'what you have met so far</p>')
+            quiz = vol["quizzes"] / f"{page['slug']}-quiz.txt"
+            if quiz.exists():
+                extras.append(
+                    f'<p class="quiz"><a href="quizzes/{quiz.name}">'
+                    f'Chapter {page["title"].split()[1].rstrip("—").strip()} quiz</a>'
+                    f' — fill it in, then show or print it</p>')
+        quiz_link = "".join(extras)
 
         (out_dir / f"{page['slug']}.html").write_text(
             fill(template, vol, tab=tab, title=heading, part=page["part"] or "",
@@ -708,7 +763,8 @@ def write_library(built):
     template = (ROOT / "web" / "page.html").read_text()
     sections, nav = [], []
     for vol, pages, _ in built:
-        first = pages[0]["slug"] if pages else ""
+        listed = [p for p in pages if not p.get("practice")]
+        first = listed[0]["slug"] if listed else ""
         heading = html.escape(vol["title"])
         sections.append(f'<h2><a href="{vol["slug"]}/{first}.html">{heading}</a></h2>')
         if vol.get("subtitle"):
@@ -717,7 +773,7 @@ def write_library(built):
             sections.append(f'<p>{html.escape(vol["blurb"])}</p>')
         sections.append("<ul class=\"contents\">" + "".join(
             f'<li><a href="{vol["slug"]}/{p["slug"]}.html">{html.escape(p["title"])}</a></li>'
-            for p in pages) + "</ul>")
+            for p in pages if not p.get("practice")) + "</ul>")
         sections.append(f'<p><a href="{vol["slug"]}/bundle.html">'
                         f'The code from {heading} as files</a></p>')
         nav.append(f'<a href="{vol["slug"]}/{first}.html">{heading}</a>')
@@ -912,7 +968,10 @@ def write_bundle(vol, pages):
     written = []
 
     for page in pages:
-        if not re.match(r"^ch\d\d-", page["slug"]):
+        # Practice pages are exercises, not teaching, and their fences are
+        # mostly empty starters. Their slugs match ^ch\d\d- too, so they have
+        # to be excluded by what they are rather than what they are called.
+        if page.get("practice") or not re.match(r"^ch\d\d-", page["slug"]):
             continue
         number = int(page["slug"][2:4])
         stem = page["slug"][5:].replace("-", "_")

@@ -1067,5 +1067,230 @@
     ]
    }
   ]
+ },
+ "ch01-your-first-programs-practice#1": {
+  "kind": "output",
+  "expected": "======================================\n         RIVERSIDE FILM CLUB\n======================================"
+ },
+ "ch01-your-first-programs-practice#2": {
+  "kind": "output",
+  "expected": "Feature:  The Quiet Harbour  (1998)"
+ },
+ "ch01-your-first-programs-practice#3": {
+  "kind": "output",
+  "expected": "Feature: The Quiet Harbour  (1998)"
+ },
+ "ch01-your-first-programs-practice#4": {
+  "kind": "output",
+  "expected": "When:     Friday, 7:30 pm\nWhere:    Room 14"
+ },
+ "ch01-your-first-programs-practice#5": {
+  "kind": "output",
+  "expected": "Seats available: 96"
+ },
+ "ch01-your-first-programs-practice#6": {
+  "kind": "output",
+  "expected": "Snack bar total: 17.25"
+ },
+ "ch01-your-first-programs-practice#7": {
+  "kind": "output",
+  "expected": "======================================\n         RIVERSIDE FILM CLUB\n======================================\n\nFeature:  The Quiet Harbour  (1998)\nWhen:     Friday, 7:30 pm\nWhere:    Room 14\n\nSeats available: 96\nSnack bar total: 17.25\n\n======================================"
+ },
+ "ch04-making-decisions-practice#1": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "12.5"
+    ],
+    "contains": "Wind: 12.5 mph"
+   }
+  ]
+ },
+ "ch04-making-decisions-practice#2": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "12.5"
+    ],
+    "contains": "Wind: OK"
+   },
+   {
+    "typed": [
+     "30"
+    ],
+    "contains": "Wind: TOO STRONG"
+   }
+  ]
+ },
+ "ch04-making-decisions-practice#3": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "20"
+    ],
+    "contains": "Temperature: OK"
+   },
+   {
+    "typed": [
+     "2"
+    ],
+    "contains": "Temperature: OK"
+   },
+   {
+    "typed": [
+     "36"
+    ],
+    "contains": "Temperature: OUT OF RANGE"
+   }
+  ]
+ },
+ "ch04-making-decisions-practice#4": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "6000"
+    ],
+    "contains": "Ceiling: CLEAR"
+   },
+   {
+    "typed": [
+     "2000"
+    ],
+    "contains": "Ceiling: MARGINAL"
+   },
+   {
+    "typed": [
+     "1999"
+    ],
+    "contains": "Ceiling: TOO LOW"
+   }
+  ]
+ },
+ "ch04-making-decisions-practice#5": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "97"
+    ],
+    "contains": "Fuel: 97%"
+   },
+   {
+    "typed": [
+     "full"
+    ],
+    "contains": "Fuel: NOT A NUMBER"
+   }
+  ]
+ },
+ "ch04-making-decisions-practice#6": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "10",
+     "20",
+     "6000",
+     "98"
+    ],
+    "contains": "LAUNCH: GO"
+   },
+   {
+    "typed": [
+     "35",
+     "20",
+     "6000",
+     "98"
+    ],
+    "contains": "LAUNCH: NO GO"
+   },
+   {
+    "typed": [
+     "10",
+     "20",
+     "6000",
+     "full"
+    ],
+    "contains": "LAUNCH: NO GO"
+   }
+  ]
+ },
+ "ch04-making-decisions-practice#7": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "10",
+     "20",
+     "1500",
+     "98"
+    ],
+    "contains": "HOLD: ceiling"
+   },
+   {
+    "typed": [
+     "31",
+     "20",
+     "1500",
+     "90"
+    ],
+    "contains": "HOLD: wind"
+   },
+   {
+    "typed": [
+     "10",
+     "40",
+     "6000",
+     "98"
+    ],
+    "contains": "HOLD: temperature"
+   },
+   {
+    "typed": [
+     "10",
+     "20",
+     "6000",
+     "90"
+    ],
+    "contains": "HOLD: fuel"
+   }
+  ]
+ },
+ "ch04-making-decisions-practice#8": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "12.5",
+     "20",
+     "6000",
+     "98"
+    ],
+    "words": [
+     "Wind: OK",
+     "Temperature: OK",
+     "Ceiling: CLEAR",
+     "Fuel: 98%"
+    ],
+    "contains": "LAUNCH: GO"
+   },
+   {
+    "typed": [
+     "12.5",
+     "20",
+     "1500",
+     "98"
+    ],
+    "words": [
+     "Ceiling: TOO LOW",
+     "LAUNCH: NO GO",
+     "HOLD: ceiling"
+    ]
+   }
+  ]
  }
 }

@@ -56,3 +56,25 @@ OUTPUT_MUTANT = {
 "ch03-expressions-and-operators#3": "for row in range(4):\n    print('#' * 20)",
 "ch05-repetition#1": "for n in range(1, 21):\n    print(n)",
 }
+
+# Practice pages. The flyer is pinned line for line, so these are
+# checked by exact output rather than by calling anything.
+OUTPUT_GOOD.update({
+ "ch01-your-first-programs-practice#1": "print(\"======================================\")\nprint(\"         RIVERSIDE FILM CLUB\")\nprint(\"======================================\")",
+ "ch01-your-first-programs-practice#2": "print(\"Feature:  The Quiet Harbour  (1998)\")",
+ "ch01-your-first-programs-practice#3": "print(\"Feature:\", \"The Quiet Harbour  (1998)\")",
+ "ch01-your-first-programs-practice#4": "print(\"When:     Friday, 7:30 pm\")\nprint(\"Where:    Room 14\")",
+ "ch01-your-first-programs-practice#5": "print(\"Seats available:\", 8 * 12)",
+ "ch01-your-first-programs-practice#6": "print(\"Snack bar total:\", 3 * 3.75 + 2 * 3.00)",
+ "ch01-your-first-programs-practice#7": "# Prints the flyer for Friday's Riverside Film Club showing.\n\nprint(\"======================================\")\nprint(\"         RIVERSIDE FILM CLUB\")\nprint(\"======================================\")\nprint()\nprint(\"Feature:  The Quiet Harbour  (1998)\")\nprint(\"When:     Friday, 7:30 pm\")\nprint(\"Where:    Room 14\")\nprint()\nprint(\"Seats available:\", 8 * 12)\nprint(\"Snack bar total:\", 3 * 3.75 + 2 * 3.00)\nprint()\nprint(\"======================================\")"
+})
+
+OUTPUT_MUTANT.update({
+ "ch01-your-first-programs-practice#1": "print(\"======================================\")\nprint(\"RIVERSIDE FILM CLUB\")\nprint(\"======================================\")",
+ "ch01-your-first-programs-practice#2": "print(\"Feature: The Quiet Harbour  (1998)\")",
+ "ch01-your-first-programs-practice#3": "print(\"Feature:  The Quiet Harbour  (1998)\")",
+ "ch01-your-first-programs-practice#4": "print(\"When: Friday, 7:30 pm\")\nprint(\"Where: Room 14\")",
+ "ch01-your-first-programs-practice#5": "print(\"Seats available:\", 8 * 11)",
+ "ch01-your-first-programs-practice#6": "print(\"Snack bar total:\", 3 * 3.75 + 2 * 3.50)",
+ "ch01-your-first-programs-practice#7": "# Prints the flyer for Friday's Riverside Film Club showing.\n\nprint(\"======================================\")\nprint(\"         RIVERSIDE FILM CLUB\")\nprint(\"======================================\")\nprint()\nprint(\"Feature:  The Quiet Harbour  (1998)\")\nprint(\"When:     Friday, 7:30 pm\")\nprint(\"Where:    Room 14\")\nprint(\"Seats available:\", 8 * 12)\nprint(\"Snack bar total:\", 3 * 3.75 + 2 * 3.00)\nprint()\nprint(\"======================================\")"
+})
