@@ -145,6 +145,37 @@ excluding what it recognises as a key — an exclusion rule fails open the first
 time a key is named something unexpected — and then greps everything it wrote
 for the answer-key marker and fails the build if one is found.
 
+## The leak guard
+
+This repo is meant to be public, so `.githooks/leak-scan` reads a diff and
+refuses anything whose **added** lines or added file paths match a deny
+pattern: absolute home directories, private LAN addresses, and the shapes of
+AWS keys, GitHub tokens, API keys and PEM private keys. It runs from
+`pre-commit` and again from `pre-push`, which is the net for anything committed
+with `--no-verify` or pushed from another clone.
+
+Git does not carry hooks in a clone, so after cloning:
+
+    git config core.hooksPath .githooks
+
+Only added lines are scanned, so a leak already committed can still be removed
+— a scan that also matched removals would make the fix un-committable. Added
+paths are scanned because a leak can hide in a filename. Generic patterns match
+case-sensitively, so a lowercase `/users/` route is not mistaken for a home
+directory.
+
+Anything personal — an employer, a codename, a private hostname — goes in
+`.githooks/leak-patterns.local`, which is gitignored and matched
+case-insensitively. Copy `leak-patterns.local.example` to start one. The
+tracked pattern file holds shapes only and is safe to publish, which is the
+point: a deny list that itself leaks is no use.
+
+Known blind spot, documented rather than hidden: a binary file produces no
+added lines, so a secret inside one is not seen.
+
+`python3 tests/leak_scan_test.py` checks the guard blocks what it claims to and
+allows what it should, including the scrub-out case.
+
 ## Editing
 
 Edit `volumes/<volume>/content/*.md` and rebuild. The chapters are the only

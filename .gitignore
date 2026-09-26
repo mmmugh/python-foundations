@@ -16,3 +16,7 @@ vendor/pyodide/*
 !vendor/pyodide/CHECKSUMS
 !vendor/pyodide/LICENSE
 !vendor/pyodide/README.md
+
+# Personal deny patterns for .githooks/leak-scan: literals that must never
+# reach a public repo. Never committed, by definition.
+.githooks/leak-patterns.local
