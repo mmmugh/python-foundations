@@ -929,3 +929,968 @@ else:
 ```
 
 Nothing new, only assembly: the status lines from steps 2 to 5, then the verdict, then the reason.
+
+## ch02-variables-and-types-practice#1
+
+```python
+trail = "Kettle Ridge"
+distance_km = 12.4
+print(trail, "is", distance_km, "km")
+```
+
+print() puts a space between each piece, so the commas do the spacing and no spaces are typed inside the strings.
+
+## ch02-variables-and-types-practice#2
+
+```python
+distance_km = 12.4
+pace = float(input("Pace in minutes per km? "))
+minutes = distance_km * pace
+print("That takes", minutes, "minutes")
+```
+
+float() and not int(), because a pace can be 10.5. Without the conversion Python is asked to multiply a number by a piece of text, and says so.
+
+## ch02-variables-and-types-practice#3
+
+```python
+distance_km = 12.4
+pace = float(input("Pace in minutes per km? "))
+minutes = distance_km * pace
+hours = minutes / 60
+print("That takes", minutes, "minutes, which is", hours, "hours")
+```
+
+Sixty minutes in an hour. The answer is a long decimal for now; Chapter 3 has round().
+
+## ch02-variables-and-types-practice#4
+
+```python
+distance_km = 12.4
+pace = float(input("Pace in minutes per km? "))
+minutes = distance_km * pace
+hours = minutes / 60
+water = hours * 0.75
+print("Water per person:", water, "litres")
+```
+
+Per hour, so it multiplies the hours. Multiplying the minutes asks for 102 litres, which is a clue that the units were wrong.
+
+## ch02-variables-and-types-practice#5
+
+```python
+distance_km = 12.4
+pace = float(input("Pace in minutes per km? "))
+minutes = distance_km * pace
+hours = minutes / 60
+water = hours * 0.75
+people = int(input("How many people? "))
+print("Water for the group:", water * people, "litres")
+```
+
+int() for a head count, since half a walker does not turn up.
+
+## ch02-variables-and-types-practice#6
+
+```python
+people = int(input("How many people? "))
+print("Permits:", 4.50 * people)
+```
+
+Without int(), 4.50 * '4' is not a price. Python refuses to multiply a decimal by text.
+
+## ch02-variables-and-types-practice#7
+
+```python
+distance_km = float(input("Trail length in km? "))
+pace = float(input("Pace in minutes per km? "))
+people = int(input("How many people? "))
+
+minutes = distance_km * pace
+hours = minutes / 60
+water = hours * 0.75
+
+print("Length:", distance_km, "km")
+print("Time:", minutes, "minutes")
+print("Time:", hours, "hours")
+print("Water each:", water, "litres")
+print("Water total:", water * people, "litres")
+print("Permits:", 4.50 * people)
+```
+
+Every printed number comes from the three that were typed in. Change the trail length and the whole plan follows.
+
+## ch03-expressions-and-operators-practice#1
+
+```python
+people = int(input("How many people? "))
+each = int(input("Slices each? "))
+slices = people * each
+print(f"You need {slices} slices")
+```
+
+Both inputs need int(). Without it, '5' * 3 is the text 555, which is a lot of pizza.
+
+## ch03-expressions-and-operators-practice#2
+
+```python
+people = int(input("How many people? "))
+each = int(input("Slices each? "))
+slices = people * each
+pizzas = (slices + 7) // 8
+print(f"Order {pizzas} pizzas")
+```
+
+Plain // rounds down, which orders one pizza for fifteen slices and leaves someone hungry. The +7 rounds up without needing an if.
+
+## ch03-expressions-and-operators-practice#3
+
+```python
+people = int(input("How many people? "))
+each = int(input("Slices each? "))
+slices = people * each
+pizzas = (slices + 7) // 8
+print(f"{pizzas * 8 - slices} slices left over")
+```
+
+What is left is what was ordered minus what is eaten. slices % 8 answers a different question and happens to agree sometimes, which is worse than always being wrong.
+
+## ch03-expressions-and-operators-practice#4
+
+```python
+people = int(input("How many people? "))
+each = int(input("Slices each? "))
+slices = people * each
+pizzas = (slices + 7) // 8
+cost = pizzas * 13.50
+print(f"That comes to {cost:.2f}")
+```
+
+:.2f shows money properly, so 27.0 prints as 27.00.
+
+## ch03-expressions-and-operators-practice#5
+
+```python
+people = int(input("How many people? "))
+each = int(input("Slices each? "))
+slices = people * each
+pizzas = (slices + 7) // 8
+cost = pizzas * 13.50
+print(f"Each of you owes {round(cost / people, 2):.2f}")
+```
+
+Split between people, not between slices. Both are numbers in scope, which is exactly how that mistake happens.
+
+## ch03-expressions-and-operators-practice#6
+
+```python
+people = int(input("How many people? "))
+each = int(input("Slices each? "))
+slices = people * each
+print(f"Would one pizza have done? {slices <= 8}")
+```
+
+A comparison is a value in its own right and can be printed. Chapter 4 puts the same expression inside an if.
+
+## ch03-expressions-and-operators-practice#7
+
+```python
+people = int(input("How many people? "))
+each = int(input("Slices each? "))
+slices = people * each
+pizzas = (slices + 7) // 8
+cost = pizzas * 13.50
+delivered = cost * 1.15
+print(f"With delivery: {delivered:.2f}")
+print(f"Each: {delivered / people:.2f}")
+```
+
+Multiplying by 1.15 adds the 15% and keeps the original. Multiplying by 0.15 throws the pizza away and bills for the delivery.
+
+## ch03-expressions-and-operators-practice#8
+
+```python
+people = int(input("How many people? "))
+each = int(input("Slices each? "))
+slices = people * each
+pizzas = (slices + 7) // 8
+cost = pizzas * 13.50
+delivered = cost * 1.15
+
+print(f"Slices needed:  {slices}")
+print(f"Pizzas to order: {pizzas}")
+print(f"Slices left:    {pizzas * 8 - slices}")
+print(f"Cost:           {cost:.2f}")
+print(f"With delivery:  {delivered:.2f}")
+print(f"Each of you:    {delivered / people:.2f}")
+```
+
+Nothing new, only arrangement. The f-strings line the numbers up in a column by padding the labels.
+
+## ch05-repetition-practice#1
+
+```python
+for week in range(1, 9):
+    print("Week", week)
+```
+
+range(1, 9) starts at 1 and stops before 9. range(8) would start at 0 and label the first week zero.
+
+## ch05-repetition-practice#2
+
+```python
+weekly = float(input("Saving how much a week? "))
+total = 0
+for week in range(1, 9):
+    total += weekly
+    print(f"Week {week}: {total}")
+```
+
+total starts at 0 outside the loop and survives each turn. Declared inside, it would reset every week.
+
+## ch05-repetition-practice#3
+
+```python
+weekly = float(input("Saving how much a week? "))
+total = 0
+weeks = 0
+while total < 240:
+    total += weekly
+    weeks += 1
+print("Weeks needed:", weeks)
+```
+
+while total < 240 stops the moment the goal is met. Using <= keeps going for one more week after it is already reached.
+
+## ch05-repetition-practice#4
+
+```python
+weekly = float(input("Saving how much a week? "))
+total = 0
+week = 0
+for week in range(1, 53):
+    total += weekly
+    if total >= 240:
+        break
+
+if total >= 240:
+    print("Reached in week", week)
+else:
+    print("Not this year")
+```
+
+The break leaves week holding the week it stopped on, and the report happens once, afterwards. Without it the loop runs all 52 weeks and reports week 52.
+
+## ch05-repetition-practice#5
+
+```python
+weekly = float(input("Saving how much a week? "))
+total = 0
+for week in range(1, 200):
+    if week % 5 == 0:
+        continue
+    total += weekly
+    if total >= 240:
+        print("Reached in week", week)
+        break
+```
+
+continue skips the rest of this turn and moves to the next week. break would end the loop entirely, which here means giving up in week 5.
+
+## ch05-repetition-practice#6
+
+```python
+weekly = float(input("Saving how much a week? "))
+total = 0
+for week in range(1, 200):
+    total += weekly
+    if week % 4 == 0:
+        total += 10
+    if total >= 240:
+        print("Reached in week", week)
+        break
+```
+
+week % 4 == 0 is every fourth week: 4, 8, 12. Comparing to 1 picks weeks 1, 5 and 9 instead, which pays the bonus a week early and forever after.
+
+## ch05-repetition-practice#7
+
+```python
+weekly = float(input("Saving how much a week? "))
+total = 0
+for week in range(1, 200):
+    total += weekly
+    total = total * 1.01
+    if total >= 240:
+        print("Reached in week", week)
+        break
+```
+
+The deposit goes in first, then the interest is worked out on the new balance. Doing it the other way round pays nothing on the money just paid in.
+
+## ch05-repetition-practice#8
+
+```python
+weekly = float(input("Saving how much a week? "))
+total = 0
+for week in range(1, 9):
+    total += weekly
+    print(f"Week {week}: {total}")
+
+total = 0
+for week in range(1, 200):
+    if week % 5 == 0:
+        continue
+    total += weekly
+    if week % 4 == 0:
+        total += 10
+    if total >= 240:
+        print("Goal reached in week", week)
+        break
+```
+
+The bonus and the skipped weeks pull in opposite directions, and together they land on week 17 rather than either answer on its own.
+
+## ch06-functions-practice#1
+
+```python
+def c_to_f(celsius):
+    return round(celsius * 9 / 5 + 32, 1)
+```
+
+Multiply first, then add 32. Adding first is the classic way to get this wrong, and it even looks right at a glance.
+
+## ch06-functions-practice#2
+
+```python
+def f_to_c(fahrenheit):
+    return round((fahrenheit - 32) * 5 / 9, 1)
+```
+
+Going back the other way means subtracting first and turning the fraction upside down. -40 is the temperature where the two scales meet.
+
+## ch06-functions-practice#3
+
+```python
+def km_to_miles(km):
+    return round(km * 0.621371, 2)
+```
+
+A mile is longer than a kilometre, so the number gets smaller. Dividing gives 1.61, which is the answer to the opposite question.
+
+## ch06-functions-practice#4
+
+```python
+def cups_to_ml(cups):
+    return round(cups * 236.588, 1)
+```
+
+A cup is not 250 ml, however tempting the round number is. The error is small per cup and ruins bread at three.
+
+## ch06-functions-practice#5
+
+```python
+def c_to_f(celsius):
+    return round(celsius * 9 / 5 + 32, 1)
+
+
+def oven_setting(celsius):
+    return round(c_to_f(celsius) / 25) * 25
+```
+
+Dividing by 25, rounding, then multiplying back is how you snap a number to a step of any size. Calling c_to_f() means the conversion lives in one place.
+
+## ch06-functions-practice#6
+
+```python
+def minutes_to_h_m(total):
+    return total // 60, total % 60
+
+print(minutes_to_h_m(90))
+print(minutes_to_h_m(45))
+print(minutes_to_h_m(125))
+```
+
+A return with a comma in it hands back a tuple, and printing one shows the brackets. Hours come from // and minutes from %, and swapping them is silent until the numbers happen to differ.
+
+## ch06-functions-practice#7
+
+```python
+def scale_recipe(amount, factor):
+    return round(amount * factor, 2)
+```
+
+Two parameters, in the order the name suggests. Scaling by 1 should give the amount back, which is a quick way to check you have not mixed them up.
+
+## ch06-functions-practice#8
+
+```python
+def c_to_f(celsius):
+    return round(celsius * 9 / 5 + 32, 1)
+def km_to_miles(km):
+    return round(km * 0.621371, 2)
+def cups_to_ml(cups):
+    return round(cups * 236.588, 1)
+
+print("180 C is", c_to_f(180), "F")
+print("5 km is", km_to_miles(5), "miles")
+print("2 cups is", cups_to_ml(2), "ml")
+```
+
+Three functions defined once and called once each. The program reads as the table it prints, which is the whole point of giving the arithmetic a name.
+
+## ch07-lists-practice#1
+
+```python
+def total_seconds(seconds):
+    return sum(seconds)
+```
+
+sum() over a list of numbers. The empty case falls out for free, which a hand-written loop only manages if the total starts at 0.
+
+## ch07-lists-practice#2
+
+```python
+def average_seconds(seconds):
+    return round(sum(seconds) / len(seconds), 1)
+```
+
+Divide by len(), not by the number of songs you happen to be testing with.
+
+## ch07-lists-practice#3
+
+```python
+def longest_title(titles):
+    best = titles[0]
+    for title in titles:
+        if len(title) > len(best):
+            best = title
+    return best
+```
+
+Comparing titles with > compares them alphabetically, which answers a different question and gets 'Ribbons' most of the time by luck.
+
+## ch07-lists-practice#4
+
+```python
+def playlist_with(titles, title):
+    new = titles.copy()
+    new.append(title)
+    return new
+```
+
+copy() first, so the caller's playlist is left alone. titles + [title] builds a new list too and says the same thing more briefly.
+
+## ch07-lists-practice#5
+
+```python
+def first_three(titles):
+    return titles[:3]
+```
+
+A slice that runs off the end simply stops, which is why the short playlist does not raise. Indexing three times does raise.
+
+## ch07-lists-practice#6
+
+```python
+def has_song(titles, title):
+    return title in titles
+```
+
+in asks whether the list contains it. == asks whether the title IS the list, which is never true.
+
+## ch07-lists-practice#7
+
+```python
+def positions(titles, title):
+    return [i for i, t in enumerate(titles) if t == title]
+```
+
+enumerate() hands you the index and the item together. index() finds only the first, and raises when there is none.
+
+## ch07-lists-practice#8
+
+```python
+def by_length(titles, seconds):
+    pairs = []
+    for i in range(len(titles)):
+        pairs.append([seconds[i], titles[i]])
+    pairs.sort()
+    return [pair[1] for pair in pairs]
+```
+
+Putting the length first makes the pair sort by length. Sorting the titles themselves sorts them alphabetically, which is a different playlist entirely.
+
+## ch08-strings-as-data-practice#1
+
+```python
+def level_of(line):
+    return line.split("|")[0]
+```
+
+Splitting on the separator the format actually uses. Splitting on a space happens to work here and breaks the moment a level is followed by anything else.
+
+## ch08-strings-as-data-practice#2
+
+```python
+def time_of(line):
+    return line.split("|")[1]
+```
+
+Index 1 is the second field. Counting from 0 is the whole of this mistake.
+
+## ch08-strings-as-data-practice#3
+
+```python
+def message_of(line):
+    return line.split("|")[2]
+```
+
+The message is the last field, so [2] and [-1] both find it.
+
+## ch08-strings-as-data-practice#4
+
+```python
+def is_warning(line):
+    return line.split("|")[0].upper() == "WARN"
+```
+
+Put both sides in the same case before comparing. Without that, half the services are never warned about.
+
+## ch08-strings-as-data-practice#5
+
+```python
+def tidy(line):
+    level, time, message = line.split("|")
+    return "|".join([level.upper(), time, message.strip()])
+```
+
+join() is the opposite of split(): it puts the separator back between the pieces. A line that was already tidy must come back unchanged.
+
+## ch08-strings-as-data-practice#6
+
+```python
+def words_in(message):
+    return [word for word in message.split() if word.isalpha()]
+```
+
+split() with no argument splits on any run of whitespace. isalpha() is False for '91', which is how the number drops out.
+
+## ch08-strings-as-data-practice#7
+
+```python
+def redact(line, word):
+    return line.replace(word, "****")
+```
+
+replace() changes every appearance, not just the first, and leaves the line alone when the word is not there.
+
+## ch08-strings-as-data-practice#8
+
+```python
+def warning_messages(lines):
+    out = []
+    for line in lines:
+        if line.split("|")[0].upper() == "WARN":
+            out.append(line.split("|")[2].strip())
+    return out
+```
+
+The messages, not the lines. The lowercase line has to be caught and its message tidied, which is why the earlier steps were worth writing separately.
+
+## ch09-dictionaries-and-sets-practice#1
+
+```python
+def count_of(register, item):
+    return register.get(item, 0)
+```
+
+get() with a second argument answers for something that was never handed in. Square brackets raise a KeyError instead.
+
+## ch09-dictionaries-and-sets-practice#2
+
+```python
+def total_items(register):
+    return sum(register.values())
+```
+
+values() is the counts. len() is how many kinds of thing are held, which is a different number and looks plausible until someone hands in a second umbrella.
+
+## ch09-dictionaries-and-sets-practice#3
+
+```python
+def add_item(register, item):
+    new = register.copy()
+    new[item] = new.get(item, 0) + 1
+    return new
+```
+
+get(item, 0) + 1 covers both cases at once: a new item starts from 0, an existing one carries on. Setting it to 1 loses the two umbrellas already there.
+
+## ch09-dictionaries-and-sets-practice#4
+
+```python
+def remove_item(register, item):
+    new = register.copy()
+    if item not in new:
+        return new
+    new[item] = new[item] - 1
+    if new[item] == 0:
+        del new[item]
+    return new
+```
+
+One fewer, and the entry disappears only when it reaches zero. Deleting outright hands back all three umbrellas to someone who claimed one.
+
+## ch09-dictionaries-and-sets-practice#5
+
+```python
+def sorted_items(register):
+    return sorted(register)
+```
+
+Looping over a dictionary, or sorting one, works on its keys. values() would sort the counts and lose the names.
+
+## ch09-dictionaries-and-sets-practice#6
+
+```python
+def busiest(register):
+    return max(register, key=lambda item: register[item])
+```
+
+Without a key, max() compares the names themselves and returns the last one alphabetically. The zebra case is there to catch exactly that.
+
+## ch09-dictionaries-and-sets-practice#7
+
+```python
+def in_both(left, right):
+    return sorted(set(left) & set(right))
+```
+
+& is what both have in common, | is everything either has. The repeated 'a' collapses because a set holds one of each.
+
+## ch09-dictionaries-and-sets-practice#8
+
+```python
+def register_from(found):
+    register = {}
+    for item in found:
+        register[item] = register.get(item, 0) + 1
+    return register
+```
+
+The same get(item, 0) + 1 as step 3, now in a loop. This is the counting pattern, and it turns up everywhere once you have seen it.
+
+## ch10-tuples-and-structured-records-practice#1
+
+```python
+def route_of(service):
+    route, departs, destination = service
+    return route
+```
+
+Unpacking names the fields once, at the top, so the rest of the function reads in words rather than in numbers.
+
+## ch10-tuples-and-structured-records-practice#2
+
+```python
+def clock(minutes):
+    return f"{minutes // 60:02d}:{minutes % 60:02d}"
+```
+
+02d pads to two digits with a zero. Without it, five past ten prints as 10:5 and the timetable stops lining up.
+
+## ch10-tuples-and-structured-records-practice#3
+
+```python
+def destinations(services):
+    return sorted(set(service[2] for service in services))
+```
+
+Two services run to the Harbour, so without the set it appears twice.
+
+## ch10-tuples-and-structured-records-practice#4
+
+```python
+def by_time(services):
+    return sorted(services, key=lambda service: service[1])
+
+def next_after(services, minute):
+    for service in by_time(services):
+        if service[1] > minute:
+            return service
+    return None
+```
+
+Strictly after, so the bus leaving at exactly that minute is the one you just missed. Sorting first means the first match found is the earliest.
+
+## ch10-tuples-and-structured-records-practice#5
+
+```python
+def by_time(services):
+    return sorted(services, key=lambda service: service[1])
+```
+
+The key says which part to sort on. Without it, sorted() compares whole records and starts with the route, so route 12 comes before route 9 as text.
+
+## ch10-tuples-and-structured-records-practice#6
+
+```python
+def count_by_route(services):
+    counts = {}
+    for service in services:
+        counts.setdefault(service[0], 0)
+        counts[service[0]] += 1
+    return counts
+```
+
+setdefault() puts a 0 there only if nothing is there yet, so the line after it can always add. Route 47 runs twice, which is what catches the version that assigns 1.
+
+## ch10-tuples-and-structured-records-practice#7
+
+```python
+def label(minute):
+    return "peak" if 420 <= minute < 560 or 960 <= minute < 1140 else "off-peak"
+```
+
+Up to but not including, so 560 is already off-peak. The cases sit on both boundaries because that is the only place this can be wrong.
+
+## ch10-tuples-and-structured-records-practice#8
+
+```python
+def clock(minutes):
+    return f"{minutes // 60:02d}:{minutes % 60:02d}"
+def by_time(services):
+    return sorted(services, key=lambda service: service[1])
+
+def timetable_lines(services):
+    lines = []
+    for route, departs, destination in by_time(services):
+        lines.append(f"{route} {clock(departs)} {destination}")
+    return lines
+```
+
+Two functions you already wrote, used rather than repeated. The test passes the services out of order on purpose.
+
+## ch11-searching-and-sorting-practice#1
+
+```python
+def fastest_name(results):
+    best = results[0]
+    for result in results:
+        if result[1] < best[1]:
+            best = result
+    return best[0]
+```
+
+Fastest is the smallest time, so the comparison is <. Everything about a race says 'best' and means 'least'.
+
+## ch11-searching-and-sorting-practice#2
+
+```python
+def ranked(results):
+    return sorted(results, key=lambda result: result[1])
+```
+
+The key picks the time out of each record. Without it sorted() compares the names, and the leaderboard comes out alphabetical.
+
+## ch11-searching-and-sorting-practice#3
+
+```python
+def ranked(results):
+    return sorted(results, key=lambda result: result[1])
+
+def place_of(results, name):
+    for place, result in enumerate(ranked(results), 1):
+        if result[0] == name:
+            return place
+    return None
+```
+
+enumerate() takes a starting number, which saves adding 1 in two places and forgetting it in one. Nobody finishes in place 0.
+
+## ch11-searching-and-sorting-practice#4
+
+```python
+def result_for(results, name):
+    for result in results:
+        if result[0] == name:
+            return result
+    return None
+```
+
+The whole record, not the name that was passed in. A binary search is no use here: the list is not sorted by name.
+
+## ch11-searching-and-sorting-practice#5
+
+```python
+def insertion_point(times, target):
+    low = 0
+    high = len(times)
+    while low < high:
+        middle = (low + high) // 2
+        if times[middle] < target:
+            low = middle + 1
+        else:
+            high = middle
+    return low
+```
+
+< rather than <= is what puts an equal time before the one already there. The two versions differ only on that case, which is why it is tested.
+
+## ch11-searching-and-sorting-practice#6
+
+```python
+def ranked(results):
+    return sorted(results, key=lambda result: result[1])
+
+def podium(results):
+    return [r[0] for r in ranked(results)[:3]]
+```
+
+A slice stops politely at the end of a short list. Indexing 0, 1 and 2 raises when only two people ran.
+
+## ch11-searching-and-sorting-practice#7
+
+```python
+def sort_times(times):
+    out = times.copy()
+    for i in range(1, len(out)):
+        current = out[i]
+        j = i - 1
+        while j >= 0 and out[j] > current:
+            out[j + 1] = out[j]
+            j -= 1
+        out[j + 1] = current
+    return out
+```
+
+After the while loop stops, j has gone one too far, so the value belongs at j + 1. Putting it at j is the classic off-by-one here, and it leaves the list almost sorted, which is the hardest kind of wrong to spot.
+
+## ch11-searching-and-sorting-practice#8
+
+```python
+def ranked(results):
+    return sorted(results, key=lambda result: result[1])
+
+def leaderboard_lines(results):
+    lines = []
+    for place, result in enumerate(ranked(results), 1):
+        lines.append(f"{place}. {result[0]} {result[1]}")
+    return lines
+```
+
+Rank first, then number. Numbering the clipboard order gives everyone a place and gets all of them wrong.
+
+## ch12-recursion-and-problem-solving-practice#1
+
+```python
+def total_size(folder):
+    size = sum(folder["files"])
+    for inner in folder["folders"]:
+        size += total_size(inner)
+    return size
+```
+
+Its own files, plus whatever each folder inside reports. No base case is written out: a folder with no folders inside simply never enters the loop.
+
+## ch12-recursion-and-problem-solving-practice#2
+
+```python
+def file_count(folder):
+    count = len(folder["files"])
+    for inner in folder["folders"]:
+        count += file_count(inner)
+    return count
+```
+
+The same shape as step 1 with len() in place of sum(). Most recursive functions over a tree look like this.
+
+## ch12-recursion-and-problem-solving-practice#3
+
+```python
+def depth(folder):
+    deepest = 0
+    for inner in folder["folders"]:
+        if depth(inner) > deepest:
+            deepest = depth(inner)
+    return 1 + deepest
+```
+
+One for this folder, plus the deepest of what is inside — not how many are inside. On this tree those two happen to agree everywhere, so the wide case and the deep chain are there to pull them apart.
+
+## ch12-recursion-and-problem-solving-practice#4
+
+```python
+def folder_names(folder):
+    names = [folder["name"]]
+    for inner in folder["folders"]:
+        names += folder_names(inner)
+    return names
+```
+
+This folder first, then each subtree in full. The version that lists only the folders one level down misses raw entirely.
+
+## ch12-recursion-and-problem-solving-practice#5
+
+```python
+def largest_file(folder):
+    biggest = None
+    for size in folder["files"]:
+        if biggest is None or size > biggest:
+            biggest = size
+    for inner in folder["folders"]:
+        inner_biggest = largest_file(inner)
+        if inner_biggest is None:
+            continue
+        if biggest is None or inner_biggest > biggest:
+            biggest = inner_biggest
+    return biggest
+```
+
+None is not zero: an empty folder has no biggest file, and a real file of size 0 would be a different answer. That is why the comparisons check for None rather than starting from 0.
+
+## ch12-recursion-and-problem-solving-practice#6
+
+```python
+def find_folder(folder, name):
+    if folder["name"] == name:
+        return folder
+    for inner in folder["folders"]:
+        found = find_folder(inner, name)
+        if found:
+            return found
+    return None
+```
+
+A folder that was found is a dictionary, which is truthy, and None is not, so a plain if separates them. Stop as soon as something is found, and keep looking otherwise. Checking only the children finds docs and images but never raw, which is two levels down.
+
+## ch12-recursion-and-problem-solving-practice#7
+
+```python
+def all_sizes(folder):
+    sizes = list(folder["files"])
+    for inner in folder["folders"]:
+        sizes += all_sizes(inner)
+    return sizes
+```
+
+list() takes a copy, so adding to it does not grow the folder's own list. Returning folder['files'] hands back the real list, and the caller can then change the tree by accident.
+
+## ch12-recursion-and-problem-solving-practice#8
+
+```python
+def total_size(folder):
+    size = sum(folder["files"])
+    for inner in folder["folders"]:
+        size += total_size(inner)
+    return size
+
+def size_report(folder):
+    lines = [f"{folder['name']}: {total_size(folder)}"]
+    for inner in folder["folders"]:
+        lines += size_report(inner)
+    return lines
+```
+
+Two recursions working together: size_report walks the tree, and total_size walks each subtree again to add it up. Slow on a big tree, and perfectly clear on this one.

@@ -1,6 +1,6 @@
 import { loadPyodide } from "pyodide";
 import { readFileSync } from "node:fs";
-import { checks, boxes, qualify } from "./volume.mjs";
+import { checks, boxes, qualify, VOLUME } from "./volume.mjs";
 const REPO = new URL("..", import.meta.url).pathname;
 const SP = new URL(".", import.meta.url).pathname;
 
@@ -13,13 +13,25 @@ const checkPrediction = py.globals.get("check_prediction");
 const GOOD = py.globals.get("GOOD"), MUTANT = py.globals.get("MUTANT");
 const OG = py.globals.get("OUTPUT_GOOD"), OM = py.globals.get("OUTPUT_MUTANT");
 
+// Case data is parsed by Python from the original JSON text, exactly as the
+// page does it. Going through JavaScript loses 61.0 to an int and null to
+// something that is not None, so a validator that converted it here would be
+// checking behaviour the reader never gets.
+const fromJson = py.globals.get("from_json");
+const casesByVolume = [fromJson(
+  readFileSync(`${REPO}/volumes/${VOLUME}/content/_checks.json`, "utf8"))];
+const casesFor = (id) => {
+  for (const parsed of casesByVolume) if (parsed.has(id)) return parsed.get(id).get("cases");
+  throw new Error(`no raw check for ${id}`);
+};
+
 let bad = 0, n = 0;
 const call = (fn, ...a) => { const r = fn(...a); const v = [r.get(0), r.get(1).toJs()]; r.destroy(); return v; };
 
 for (const [id, spec] of Object.entries(checks)) {
   n++;
   if (spec.kind === "function") {
-    const cases = py.toPy(spec.cases);
+    const cases = casesFor(id);
     const [g] = call(checkFunction, GOOD.get(spec.name), spec.name, cases);
     const [m, notes] = call(checkFunction, MUTANT.get(spec.name), spec.name, cases);
     cases.destroy();

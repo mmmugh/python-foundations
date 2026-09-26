@@ -1292,5 +1292,3261 @@
     ]
    }
   ]
+ },
+ "ch02-variables-and-types-practice#1": {
+  "kind": "output",
+  "expected": "Kettle Ridge is 12.4 km"
+ },
+ "ch02-variables-and-types-practice#2": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "11"
+    ],
+    "numbers": [
+     136.4
+    ]
+   }
+  ]
+ },
+ "ch02-variables-and-types-practice#3": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "11"
+    ],
+    "numbers": [
+     2.2733333
+    ]
+   }
+  ]
+ },
+ "ch02-variables-and-types-practice#4": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "11"
+    ],
+    "numbers": [
+     1.705
+    ]
+   }
+  ]
+ },
+ "ch02-variables-and-types-practice#5": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "11",
+     "4"
+    ],
+    "numbers": [
+     6.82
+    ]
+   }
+  ]
+ },
+ "ch02-variables-and-types-practice#6": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "4"
+    ],
+    "numbers": [
+     18.0
+    ]
+   }
+  ]
+ },
+ "ch02-variables-and-types-practice#7": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "12.4",
+     "11",
+     "4"
+    ],
+    "numbers": [
+     12.4,
+     136.4,
+     2.2733333,
+     1.705,
+     6.82,
+     18.0
+    ]
+   }
+  ]
+ },
+ "ch03-expressions-and-operators-practice#1": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "5",
+     "3"
+    ],
+    "numbers": [
+     15
+    ]
+   }
+  ]
+ },
+ "ch03-expressions-and-operators-practice#2": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "5",
+     "3"
+    ],
+    "numbers": [
+     2
+    ]
+   },
+   {
+    "typed": [
+     "4",
+     "2"
+    ],
+    "numbers": [
+     1
+    ]
+   }
+  ]
+ },
+ "ch03-expressions-and-operators-practice#3": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "5",
+     "3"
+    ],
+    "numbers": [
+     1
+    ]
+   },
+   {
+    "typed": [
+     "3",
+     "3"
+    ],
+    "numbers": [
+     7
+    ]
+   }
+  ]
+ },
+ "ch03-expressions-and-operators-practice#4": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "5",
+     "3"
+    ],
+    "numbers": [
+     27.0
+    ]
+   }
+  ]
+ },
+ "ch03-expressions-and-operators-practice#5": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "5",
+     "3"
+    ],
+    "numbers": [
+     5.4
+    ]
+   }
+  ]
+ },
+ "ch03-expressions-and-operators-practice#6": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "5",
+     "3"
+    ],
+    "contains": "False"
+   },
+   {
+    "typed": [
+     "2",
+     "3"
+    ],
+    "contains": "True"
+   }
+  ]
+ },
+ "ch03-expressions-and-operators-practice#7": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "5",
+     "3"
+    ],
+    "numbers": [
+     31.05,
+     6.21
+    ]
+   }
+  ]
+ },
+ "ch03-expressions-and-operators-practice#8": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "5",
+     "3"
+    ],
+    "numbers": [
+     15,
+     2,
+     1,
+     27.0,
+     31.05,
+     6.21
+    ]
+   }
+  ]
+ },
+ "ch05-repetition-practice#1": {
+  "kind": "output",
+  "expected": "Week 1\nWeek 2\nWeek 3\nWeek 4\nWeek 5\nWeek 6\nWeek 7\nWeek 8"
+ },
+ "ch05-repetition-practice#2": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "15"
+    ],
+    "numbers": [
+     15,
+     30,
+     45,
+     60,
+     75,
+     90,
+     105,
+     120
+    ]
+   }
+  ]
+ },
+ "ch05-repetition-practice#3": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "15"
+    ],
+    "numbers": [
+     16
+    ]
+   },
+   {
+    "typed": [
+     "18"
+    ],
+    "numbers": [
+     14
+    ]
+   }
+  ]
+ },
+ "ch05-repetition-practice#4": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "15"
+    ],
+    "numbers": [
+     16
+    ]
+   },
+   {
+    "typed": [
+     "3"
+    ],
+    "contains": "Not this year"
+   }
+  ]
+ },
+ "ch05-repetition-practice#5": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "15"
+    ],
+    "numbers": [
+     19
+    ]
+   },
+   {
+    "typed": [
+     "18"
+    ],
+    "numbers": [
+     17
+    ]
+   }
+  ]
+ },
+ "ch05-repetition-practice#6": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "15"
+    ],
+    "numbers": [
+     14
+    ]
+   },
+   {
+    "typed": [
+     "9"
+    ],
+    "numbers": [
+     22
+    ]
+   }
+  ]
+ },
+ "ch05-repetition-practice#7": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "18"
+    ],
+    "numbers": [
+     13
+    ]
+   },
+   {
+    "typed": [
+     "3"
+    ],
+    "numbers": [
+     59
+    ]
+   }
+  ]
+ },
+ "ch05-repetition-practice#8": {
+  "kind": "stdin",
+  "runs": [
+   {
+    "typed": [
+     "15"
+    ],
+    "numbers": [
+     15,
+     30,
+     45,
+     60,
+     75,
+     90,
+     105,
+     120,
+     17
+    ]
+   }
+  ]
+ },
+ "ch06-functions-practice#1": {
+  "kind": "function",
+  "name": "c_to_f",
+  "cases": [
+   [
+    [
+     0
+    ],
+    32.0
+   ],
+   [
+    [
+     100
+    ],
+    212.0
+   ],
+   [
+    [
+     37
+    ],
+    98.6
+   ],
+   [
+    [
+     -40
+    ],
+    -40.0
+   ]
+  ]
+ },
+ "ch06-functions-practice#2": {
+  "kind": "function",
+  "name": "f_to_c",
+  "cases": [
+   [
+    [
+     212
+    ],
+    100.0
+   ],
+   [
+    [
+     32
+    ],
+    0.0
+   ],
+   [
+    [
+     98.6
+    ],
+    37.0
+   ],
+   [
+    [
+     -40
+    ],
+    -40.0
+   ]
+  ]
+ },
+ "ch06-functions-practice#3": {
+  "kind": "function",
+  "name": "km_to_miles",
+  "cases": [
+   [
+    [
+     1
+    ],
+    0.62
+   ],
+   [
+    [
+     10
+    ],
+    6.21
+   ],
+   [
+    [
+     42.195
+    ],
+    26.22
+   ],
+   [
+    [
+     0
+    ],
+    0.0
+   ]
+  ]
+ },
+ "ch06-functions-practice#4": {
+  "kind": "function",
+  "name": "cups_to_ml",
+  "cases": [
+   [
+    [
+     1
+    ],
+    236.6
+   ],
+   [
+    [
+     0.5
+    ],
+    118.3
+   ],
+   [
+    [
+     3
+    ],
+    709.8
+   ]
+  ]
+ },
+ "ch06-functions-practice#5": {
+  "kind": "function",
+  "name": "oven_setting",
+  "cases": [
+   [
+    [
+     180
+    ],
+    350
+   ],
+   [
+    [
+     200
+    ],
+    400
+   ],
+   [
+    [
+     220
+    ],
+    425
+   ],
+   [
+    [
+     100
+    ],
+    200
+   ]
+  ]
+ },
+ "ch06-functions-practice#6": {
+  "kind": "output",
+  "expected": "(1, 30)\n(0, 45)\n(2, 5)"
+ },
+ "ch06-functions-practice#7": {
+  "kind": "function",
+  "name": "scale_recipe",
+  "cases": [
+   [
+    [
+     200,
+     0.5
+    ],
+    100.0
+   ],
+   [
+    [
+     1.5,
+     3
+    ],
+    4.5
+   ],
+   [
+    [
+     0.25,
+     4
+    ],
+    1.0
+   ],
+   [
+    [
+     125,
+     1
+    ],
+    125.0
+   ]
+  ]
+ },
+ "ch06-functions-practice#8": {
+  "kind": "output",
+  "expected": "180 C is 356.0 F\n5 km is 3.11 miles\n2 cups is 473.2 ml"
+ },
+ "ch07-lists-practice#1": {
+  "kind": "function",
+  "name": "total_seconds",
+  "cases": [
+   [
+    [
+     [
+      210,
+      185,
+      240
+     ]
+    ],
+    635
+   ],
+   [
+    [
+     []
+    ],
+    0
+   ],
+   [
+    [
+     [
+      90
+     ]
+    ],
+    90
+   ]
+  ]
+ },
+ "ch07-lists-practice#2": {
+  "kind": "function",
+  "name": "average_seconds",
+  "cases": [
+   [
+    [
+     [
+      210,
+      185,
+      240
+     ]
+    ],
+    211.7
+   ],
+   [
+    [
+     [
+      100,
+      200
+     ]
+    ],
+    150.0
+   ],
+   [
+    [
+     [
+      90
+     ]
+    ],
+    90.0
+   ]
+  ]
+ },
+ "ch07-lists-practice#3": {
+  "kind": "function",
+  "name": "longest_title",
+  "cases": [
+   [
+    [
+     [
+      "Anvil",
+      "Ghost Town",
+      "Ribbons"
+     ]
+    ],
+    "Ghost Town"
+   ],
+   [
+    [
+     [
+      "Ribbons"
+     ]
+    ],
+    "Ribbons"
+   ],
+   [
+    [
+     [
+      "Anvil",
+      "Ribbons"
+     ]
+    ],
+    "Ribbons"
+   ]
+  ]
+ },
+ "ch07-lists-practice#4": {
+  "kind": "function",
+  "name": "playlist_with",
+  "cases": [
+   [
+    [
+     [
+      "Anvil"
+     ],
+     "Ribbons"
+    ],
+    [
+     "Anvil",
+     "Ribbons"
+    ]
+   ],
+   [
+    [
+     [],
+     "Anvil"
+    ],
+    [
+     "Anvil"
+    ]
+   ],
+   [
+    [
+     [
+      "a",
+      "b"
+     ],
+     "c"
+    ],
+    [
+     "a",
+     "b",
+     "c"
+    ]
+   ]
+  ]
+ },
+ "ch07-lists-practice#5": {
+  "kind": "function",
+  "name": "first_three",
+  "cases": [
+   [
+    [
+     [
+      "a",
+      "b",
+      "c",
+      "d"
+     ]
+    ],
+    [
+     "a",
+     "b",
+     "c"
+    ]
+   ],
+   [
+    [
+     [
+      "a"
+     ]
+    ],
+    [
+     "a"
+    ]
+   ],
+   [
+    [
+     []
+    ],
+    []
+   ]
+  ]
+ },
+ "ch07-lists-practice#6": {
+  "kind": "function",
+  "name": "has_song",
+  "cases": [
+   [
+    [
+     [
+      "Anvil",
+      "Ribbons"
+     ],
+     "Ribbons"
+    ],
+    true
+   ],
+   [
+    [
+     [
+      "Anvil",
+      "Ribbons"
+     ],
+     "Nope"
+    ],
+    false
+   ],
+   [
+    [
+     [],
+     "Anvil"
+    ],
+    false
+   ]
+  ]
+ },
+ "ch07-lists-practice#7": {
+  "kind": "function",
+  "name": "positions",
+  "cases": [
+   [
+    [
+     [
+      "Ribbons",
+      "Anvil",
+      "Ribbons"
+     ],
+     "Ribbons"
+    ],
+    [
+     0,
+     2
+    ]
+   ],
+   [
+    [
+     [
+      "Anvil"
+     ],
+     "Anvil"
+    ],
+    [
+     0
+    ]
+   ],
+   [
+    [
+     [
+      "Anvil"
+     ],
+     "Ribbons"
+    ],
+    []
+   ]
+  ]
+ },
+ "ch07-lists-practice#8": {
+  "kind": "function",
+  "name": "by_length",
+  "cases": [
+   [
+    [
+     [
+      "Anvil",
+      "Ribbons",
+      "Ghost Town"
+     ],
+     [
+      240,
+      185,
+      210
+     ]
+    ],
+    [
+     "Ribbons",
+     "Ghost Town",
+     "Anvil"
+    ]
+   ],
+   [
+    [
+     [
+      "a",
+      "b"
+     ],
+     [
+      2,
+      1
+     ]
+    ],
+    [
+     "b",
+     "a"
+    ]
+   ],
+   [
+    [
+     [],
+     []
+    ],
+    []
+   ]
+  ]
+ },
+ "ch08-strings-as-data-practice#1": {
+  "kind": "function",
+  "name": "level_of",
+  "cases": [
+   [
+    [
+     "WARN|14:03|Disk usage at 91 percent"
+    ],
+    "WARN"
+   ],
+   [
+    [
+     "INFO|09:15|Backup finished"
+    ],
+    "INFO"
+   ],
+   [
+    [
+     "ERROR|00:01|Down"
+    ],
+    "ERROR"
+   ]
+  ]
+ },
+ "ch08-strings-as-data-practice#2": {
+  "kind": "function",
+  "name": "time_of",
+  "cases": [
+   [
+    [
+     "WARN|14:03|Disk usage at 91 percent"
+    ],
+    "14:03"
+   ],
+   [
+    [
+     "INFO|09:15|Backup finished"
+    ],
+    "09:15"
+   ]
+  ]
+ },
+ "ch08-strings-as-data-practice#3": {
+  "kind": "function",
+  "name": "message_of",
+  "cases": [
+   [
+    [
+     "WARN|14:03|Disk usage at 91 percent"
+    ],
+    "Disk usage at 91 percent"
+   ],
+   [
+    [
+     "INFO|09:15|Backup finished"
+    ],
+    "Backup finished"
+   ]
+  ]
+ },
+ "ch08-strings-as-data-practice#4": {
+  "kind": "function",
+  "name": "is_warning",
+  "cases": [
+   [
+    [
+     "WARN|14:03|Disk usage at 91 percent"
+    ],
+    true
+   ],
+   [
+    [
+     "INFO|09:15|Backup finished"
+    ],
+    false
+   ],
+   [
+    [
+     "warn|08:00|  Fan speed low  "
+    ],
+    true
+   ],
+   [
+    [
+     "ERROR|00:01|Down"
+    ],
+    false
+   ]
+  ]
+ },
+ "ch08-strings-as-data-practice#5": {
+  "kind": "function",
+  "name": "tidy",
+  "cases": [
+   [
+    [
+     "warn|08:00|  Fan speed low  "
+    ],
+    "WARN|08:00|Fan speed low"
+   ],
+   [
+    [
+     "WARN|14:03|Disk usage at 91 percent"
+    ],
+    "WARN|14:03|Disk usage at 91 percent"
+   ],
+   [
+    [
+     "INFO|09:15|Backup finished"
+    ],
+    "INFO|09:15|Backup finished"
+   ]
+  ]
+ },
+ "ch08-strings-as-data-practice#6": {
+  "kind": "function",
+  "name": "words_in",
+  "cases": [
+   [
+    [
+     "Disk usage at 91 percent"
+    ],
+    [
+     "Disk",
+     "usage",
+     "at",
+     "percent"
+    ]
+   ],
+   [
+    [
+     "Backup finished"
+    ],
+    [
+     "Backup",
+     "finished"
+    ]
+   ],
+   [
+    [
+     "91 42"
+    ],
+    []
+   ]
+  ]
+ },
+ "ch08-strings-as-data-practice#7": {
+  "kind": "function",
+  "name": "redact",
+  "cases": [
+   [
+    [
+     "WARN|14:03|Disk usage at 91 percent",
+     "91"
+    ],
+    "WARN|14:03|Disk usage at **** percent"
+   ],
+   [
+    [
+     "a b a",
+     "a"
+    ],
+    "**** b ****"
+   ],
+   [
+    [
+     "INFO|09:15|Backup finished",
+     "nothing"
+    ],
+    "INFO|09:15|Backup finished"
+   ]
+  ]
+ },
+ "ch08-strings-as-data-practice#8": {
+  "kind": "function",
+  "name": "warning_messages",
+  "cases": [
+   [
+    [
+     [
+      "WARN|14:03|Disk usage at 91 percent",
+      "INFO|09:15|Backup finished",
+      "warn|08:00|  Fan speed low  "
+     ]
+    ],
+    [
+     "Disk usage at 91 percent",
+     "Fan speed low"
+    ]
+   ],
+   [
+    [
+     [
+      "INFO|09:15|Backup finished"
+     ]
+    ],
+    []
+   ],
+   [
+    [
+     []
+    ],
+    []
+   ]
+  ]
+ },
+ "ch09-dictionaries-and-sets-practice#1": {
+  "kind": "function",
+  "name": "count_of",
+  "cases": [
+   [
+    [
+     {
+      "umbrella": 3,
+      "phone": 1,
+      "scarf": 2
+     },
+     "phone"
+    ],
+    1
+   ],
+   [
+    [
+     {
+      "umbrella": 3,
+      "phone": 1,
+      "scarf": 2
+     },
+     "umbrella"
+    ],
+    3
+   ],
+   [
+    [
+     {
+      "umbrella": 3,
+      "phone": 1,
+      "scarf": 2
+     },
+     "hat"
+    ],
+    0
+   ],
+   [
+    [
+     {},
+     "hat"
+    ],
+    0
+   ]
+  ]
+ },
+ "ch09-dictionaries-and-sets-practice#2": {
+  "kind": "function",
+  "name": "total_items",
+  "cases": [
+   [
+    [
+     {
+      "umbrella": 3,
+      "phone": 1,
+      "scarf": 2
+     }
+    ],
+    6
+   ],
+   [
+    [
+     {}
+    ],
+    0
+   ],
+   [
+    [
+     {
+      "hat": 5
+     }
+    ],
+    5
+   ]
+  ]
+ },
+ "ch09-dictionaries-and-sets-practice#3": {
+  "kind": "function",
+  "name": "add_item",
+  "cases": [
+   [
+    [
+     {
+      "umbrella": 3,
+      "phone": 1,
+      "scarf": 2
+     },
+     "hat"
+    ],
+    {
+     "umbrella": 3,
+     "phone": 1,
+     "scarf": 2,
+     "hat": 1
+    }
+   ],
+   [
+    [
+     {
+      "umbrella": 3,
+      "phone": 1,
+      "scarf": 2
+     },
+     "phone"
+    ],
+    {
+     "umbrella": 3,
+     "phone": 2,
+     "scarf": 2
+    }
+   ],
+   [
+    [
+     {},
+     "hat"
+    ],
+    {
+     "hat": 1
+    }
+   ]
+  ]
+ },
+ "ch09-dictionaries-and-sets-practice#4": {
+  "kind": "function",
+  "name": "remove_item",
+  "cases": [
+   [
+    [
+     {
+      "umbrella": 3,
+      "phone": 1,
+      "scarf": 2
+     },
+     "phone"
+    ],
+    {
+     "umbrella": 3,
+     "scarf": 2
+    }
+   ],
+   [
+    [
+     {
+      "umbrella": 3,
+      "phone": 1,
+      "scarf": 2
+     },
+     "umbrella"
+    ],
+    {
+     "umbrella": 2,
+     "phone": 1,
+     "scarf": 2
+    }
+   ],
+   [
+    [
+     {
+      "umbrella": 3,
+      "phone": 1,
+      "scarf": 2
+     },
+     "hat"
+    ],
+    {
+     "umbrella": 3,
+     "phone": 1,
+     "scarf": 2
+    }
+   ],
+   [
+    [
+     {},
+     "hat"
+    ],
+    {}
+   ]
+  ]
+ },
+ "ch09-dictionaries-and-sets-practice#5": {
+  "kind": "function",
+  "name": "sorted_items",
+  "cases": [
+   [
+    [
+     {
+      "umbrella": 3,
+      "phone": 1,
+      "scarf": 2
+     }
+    ],
+    [
+     "phone",
+     "scarf",
+     "umbrella"
+    ]
+   ],
+   [
+    [
+     {}
+    ],
+    []
+   ],
+   [
+    [
+     {
+      "b": 1,
+      "a": 1
+     }
+    ],
+    [
+     "a",
+     "b"
+    ]
+   ]
+  ]
+ },
+ "ch09-dictionaries-and-sets-practice#6": {
+  "kind": "function",
+  "name": "busiest",
+  "cases": [
+   [
+    [
+     {
+      "umbrella": 3,
+      "phone": 1,
+      "scarf": 2
+     }
+    ],
+    "umbrella"
+   ],
+   [
+    [
+     {
+      "hat": 9,
+      "zebra": 2
+     }
+    ],
+    "hat"
+   ],
+   [
+    [
+     {
+      "a": 1
+     }
+    ],
+    "a"
+   ]
+  ]
+ },
+ "ch09-dictionaries-and-sets-practice#7": {
+  "kind": "function",
+  "name": "in_both",
+  "cases": [
+   [
+    [
+     [
+      "umbrella",
+      "phone"
+     ],
+     [
+      "phone",
+      "hat"
+     ]
+    ],
+    [
+     "phone"
+    ]
+   ],
+   [
+    [
+     [
+      "a"
+     ],
+     [
+      "b"
+     ]
+    ],
+    []
+   ],
+   [
+    [
+     [
+      "a",
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "a"
+     ]
+    ],
+    [
+     "a",
+     "b"
+    ]
+   ]
+  ]
+ },
+ "ch09-dictionaries-and-sets-practice#8": {
+  "kind": "function",
+  "name": "register_from",
+  "cases": [
+   [
+    [
+     [
+      "hat",
+      "scarf",
+      "hat"
+     ]
+    ],
+    {
+     "hat": 2,
+     "scarf": 1
+    }
+   ],
+   [
+    [
+     []
+    ],
+    {}
+   ],
+   [
+    [
+     [
+      "a",
+      "a",
+      "a"
+     ]
+    ],
+    {
+     "a": 3
+    }
+   ]
+  ]
+ },
+ "ch10-tuples-and-structured-records-practice#1": {
+  "kind": "function",
+  "name": "route_of",
+  "cases": [
+   [
+    [
+     [
+      "47",
+      415,
+      "Harbour"
+     ]
+    ],
+    "47"
+   ],
+   [
+    [
+     [
+      "12",
+      380,
+      "Museum"
+     ]
+    ],
+    "12"
+   ],
+   [
+    [
+     [
+      "9",
+      1000,
+      "Airport"
+     ]
+    ],
+    "9"
+   ]
+  ]
+ },
+ "ch10-tuples-and-structured-records-practice#2": {
+  "kind": "function",
+  "name": "clock",
+  "cases": [
+   [
+    [
+     415
+    ],
+    "06:55"
+   ],
+   [
+    [
+     380
+    ],
+    "06:20"
+   ],
+   [
+    [
+     0
+    ],
+    "00:00"
+   ],
+   [
+    [
+     1000
+    ],
+    "16:40"
+   ],
+   [
+    [
+     605
+    ],
+    "10:05"
+   ]
+  ]
+ },
+ "ch10-tuples-and-structured-records-practice#3": {
+  "kind": "function",
+  "name": "destinations",
+  "cases": [
+   [
+    [
+     [
+      [
+       "12",
+       380,
+       "Museum"
+      ],
+      [
+       "47",
+       415,
+       "Harbour"
+      ],
+      [
+       "47",
+       500,
+       "Harbour"
+      ]
+     ]
+    ],
+    [
+     "Harbour",
+     "Museum"
+    ]
+   ],
+   [
+    [
+     [
+      [
+       "47",
+       415,
+       "Harbour"
+      ],
+      [
+       "47",
+       500,
+       "Harbour"
+      ]
+     ]
+    ],
+    [
+     "Harbour"
+    ]
+   ],
+   [
+    [
+     []
+    ],
+    []
+   ]
+  ]
+ },
+ "ch10-tuples-and-structured-records-practice#4": {
+  "kind": "function",
+  "name": "next_after",
+  "cases": [
+   [
+    [
+     [
+      [
+       "12",
+       380,
+       "Museum"
+      ],
+      [
+       "47",
+       415,
+       "Harbour"
+      ],
+      [
+       "47",
+       500,
+       "Harbour"
+      ]
+     ],
+     400
+    ],
+    [
+     "47",
+     415,
+     "Harbour"
+    ]
+   ],
+   [
+    [
+     [
+      [
+       "12",
+       380,
+       "Museum"
+      ],
+      [
+       "47",
+       415,
+       "Harbour"
+      ],
+      [
+       "47",
+       500,
+       "Harbour"
+      ]
+     ],
+     415
+    ],
+    [
+     "47",
+     500,
+     "Harbour"
+    ]
+   ],
+   [
+    [
+     [
+      [
+       "12",
+       380,
+       "Museum"
+      ],
+      [
+       "47",
+       415,
+       "Harbour"
+      ],
+      [
+       "47",
+       500,
+       "Harbour"
+      ]
+     ],
+     600
+    ],
+    null
+   ],
+   [
+    [
+     [],
+     0
+    ],
+    null
+   ]
+  ]
+ },
+ "ch10-tuples-and-structured-records-practice#5": {
+  "kind": "function",
+  "name": "by_time",
+  "cases": [
+   [
+    [
+     [
+      [
+       "47",
+       500,
+       "Harbour"
+      ],
+      [
+       "12",
+       380,
+       "Museum"
+      ],
+      [
+       "47",
+       415,
+       "Harbour"
+      ]
+     ]
+    ],
+    [
+     [
+      "12",
+      380,
+      "Museum"
+     ],
+     [
+      "47",
+      415,
+      "Harbour"
+     ],
+     [
+      "47",
+      500,
+      "Harbour"
+     ]
+    ]
+   ],
+   [
+    [
+     [
+      [
+       "12",
+       380,
+       "Museum"
+      ],
+      [
+       "9",
+       300,
+       "Airport"
+      ]
+     ]
+    ],
+    [
+     [
+      "9",
+      300,
+      "Airport"
+     ],
+     [
+      "12",
+      380,
+      "Museum"
+     ]
+    ]
+   ],
+   [
+    [
+     []
+    ],
+    []
+   ]
+  ]
+ },
+ "ch10-tuples-and-structured-records-practice#6": {
+  "kind": "function",
+  "name": "count_by_route",
+  "cases": [
+   [
+    [
+     [
+      [
+       "12",
+       380,
+       "Museum"
+      ],
+      [
+       "47",
+       415,
+       "Harbour"
+      ],
+      [
+       "47",
+       500,
+       "Harbour"
+      ]
+     ]
+    ],
+    {
+     "12": 1,
+     "47": 2
+    }
+   ],
+   [
+    [
+     []
+    ],
+    {}
+   ],
+   [
+    [
+     [
+      [
+       "9",
+       1000,
+       "Airport"
+      ]
+     ]
+    ],
+    {
+     "9": 1
+    }
+   ]
+  ]
+ },
+ "ch10-tuples-and-structured-records-practice#7": {
+  "kind": "function",
+  "name": "label",
+  "cases": [
+   [
+    [
+     415
+    ],
+    "off-peak"
+   ],
+   [
+    [
+     420
+    ],
+    "peak"
+   ],
+   [
+    [
+     500
+    ],
+    "peak"
+   ],
+   [
+    [
+     560
+    ],
+    "off-peak"
+   ],
+   [
+    [
+     1000
+    ],
+    "peak"
+   ],
+   [
+    [
+     1140
+    ],
+    "off-peak"
+   ]
+  ]
+ },
+ "ch10-tuples-and-structured-records-practice#8": {
+  "kind": "function",
+  "name": "timetable_lines",
+  "cases": [
+   [
+    [
+     [
+      [
+       "47",
+       500,
+       "Harbour"
+      ],
+      [
+       "12",
+       380,
+       "Museum"
+      ],
+      [
+       "47",
+       415,
+       "Harbour"
+      ]
+     ]
+    ],
+    [
+     "12 06:20 Museum",
+     "47 06:55 Harbour",
+     "47 08:20 Harbour"
+    ]
+   ],
+   [
+    [
+     []
+    ],
+    []
+   ],
+   [
+    [
+     [
+      [
+       "9",
+       1000,
+       "Airport"
+      ]
+     ]
+    ],
+    [
+     "9 16:40 Airport"
+    ]
+   ]
+  ]
+ },
+ "ch11-searching-and-sorting-practice#1": {
+  "kind": "function",
+  "name": "fastest_name",
+  "cases": [
+   [
+    [
+     [
+      [
+       "Nadia",
+       58.2
+      ],
+      [
+       "Omar",
+       61.0
+      ],
+      [
+       "Priya",
+       57.4
+      ],
+      [
+       "Quinn",
+       63.5
+      ]
+     ]
+    ],
+    "Priya"
+   ],
+   [
+    [
+     [
+      [
+       "Nadia",
+       58.2
+      ],
+      [
+       "Omar",
+       61.0
+      ]
+     ]
+    ],
+    "Nadia"
+   ],
+   [
+    [
+     [
+      [
+       "Quinn",
+       63.5
+      ]
+     ]
+    ],
+    "Quinn"
+   ]
+  ]
+ },
+ "ch11-searching-and-sorting-practice#2": {
+  "kind": "function",
+  "name": "ranked",
+  "cases": [
+   [
+    [
+     [
+      [
+       "Nadia",
+       58.2
+      ],
+      [
+       "Omar",
+       61.0
+      ],
+      [
+       "Priya",
+       57.4
+      ],
+      [
+       "Quinn",
+       63.5
+      ]
+     ]
+    ],
+    [
+     [
+      "Priya",
+      57.4
+     ],
+     [
+      "Nadia",
+      58.2
+     ],
+     [
+      "Omar",
+      61.0
+     ],
+     [
+      "Quinn",
+      63.5
+     ]
+    ]
+   ],
+   [
+    [
+     []
+    ],
+    []
+   ],
+   [
+    [
+     [
+      [
+       "Omar",
+       61.0
+      ],
+      [
+       "Priya",
+       57.4
+      ]
+     ]
+    ],
+    [
+     [
+      "Priya",
+      57.4
+     ],
+     [
+      "Omar",
+      61.0
+     ]
+    ]
+   ]
+  ]
+ },
+ "ch11-searching-and-sorting-practice#3": {
+  "kind": "function",
+  "name": "place_of",
+  "cases": [
+   [
+    [
+     [
+      [
+       "Nadia",
+       58.2
+      ],
+      [
+       "Omar",
+       61.0
+      ],
+      [
+       "Priya",
+       57.4
+      ],
+      [
+       "Quinn",
+       63.5
+      ]
+     ],
+     "Priya"
+    ],
+    1
+   ],
+   [
+    [
+     [
+      [
+       "Nadia",
+       58.2
+      ],
+      [
+       "Omar",
+       61.0
+      ],
+      [
+       "Priya",
+       57.4
+      ],
+      [
+       "Quinn",
+       63.5
+      ]
+     ],
+     "Nadia"
+    ],
+    2
+   ],
+   [
+    [
+     [
+      [
+       "Nadia",
+       58.2
+      ],
+      [
+       "Omar",
+       61.0
+      ],
+      [
+       "Priya",
+       57.4
+      ],
+      [
+       "Quinn",
+       63.5
+      ]
+     ],
+     "Quinn"
+    ],
+    4
+   ],
+   [
+    [
+     [
+      [
+       "Nadia",
+       58.2
+      ],
+      [
+       "Omar",
+       61.0
+      ],
+      [
+       "Priya",
+       57.4
+      ],
+      [
+       "Quinn",
+       63.5
+      ]
+     ],
+     "Zed"
+    ],
+    null
+   ]
+  ]
+ },
+ "ch11-searching-and-sorting-practice#4": {
+  "kind": "function",
+  "name": "result_for",
+  "cases": [
+   [
+    [
+     [
+      [
+       "Nadia",
+       58.2
+      ],
+      [
+       "Omar",
+       61.0
+      ],
+      [
+       "Priya",
+       57.4
+      ],
+      [
+       "Quinn",
+       63.5
+      ]
+     ],
+     "Omar"
+    ],
+    [
+     "Omar",
+     61.0
+    ]
+   ],
+   [
+    [
+     [
+      [
+       "Nadia",
+       58.2
+      ],
+      [
+       "Omar",
+       61.0
+      ],
+      [
+       "Priya",
+       57.4
+      ],
+      [
+       "Quinn",
+       63.5
+      ]
+     ],
+     "Zed"
+    ],
+    null
+   ],
+   [
+    [
+     [],
+     "Omar"
+    ],
+    null
+   ]
+  ]
+ },
+ "ch11-searching-and-sorting-practice#5": {
+  "kind": "function",
+  "name": "insertion_point",
+  "cases": [
+   [
+    [
+     [
+      57.4,
+      58.2,
+      61.0
+     ],
+     60.0
+    ],
+    2
+   ],
+   [
+    [
+     [
+      57.4,
+      58.2,
+      61.0
+     ],
+     57.0
+    ],
+    0
+   ],
+   [
+    [
+     [
+      57.4,
+      58.2,
+      61.0
+     ],
+     62.0
+    ],
+    3
+   ],
+   [
+    [
+     [
+      57.4,
+      58.2,
+      61.0
+     ],
+     58.2
+    ],
+    1
+   ],
+   [
+    [
+     [],
+     10
+    ],
+    0
+   ]
+  ]
+ },
+ "ch11-searching-and-sorting-practice#6": {
+  "kind": "function",
+  "name": "podium",
+  "cases": [
+   [
+    [
+     [
+      [
+       "Nadia",
+       58.2
+      ],
+      [
+       "Omar",
+       61.0
+      ],
+      [
+       "Priya",
+       57.4
+      ],
+      [
+       "Quinn",
+       63.5
+      ]
+     ]
+    ],
+    [
+     "Priya",
+     "Nadia",
+     "Omar"
+    ]
+   ],
+   [
+    [
+     [
+      [
+       "Nadia",
+       58.2
+      ],
+      [
+       "Omar",
+       61.0
+      ]
+     ]
+    ],
+    [
+     "Nadia",
+     "Omar"
+    ]
+   ],
+   [
+    [
+     []
+    ],
+    []
+   ]
+  ]
+ },
+ "ch11-searching-and-sorting-practice#7": {
+  "kind": "function",
+  "name": "sort_times",
+  "cases": [
+   [
+    [
+     [
+      61.0,
+      57.4,
+      58.2
+     ]
+    ],
+    [
+     57.4,
+     58.2,
+     61.0
+    ]
+   ],
+   [
+    [
+     [
+      3,
+      1,
+      2,
+      5,
+      4
+     ]
+    ],
+    [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   ],
+   [
+    [
+     [
+      1
+     ]
+    ],
+    [
+     1
+    ]
+   ],
+   [
+    [
+     []
+    ],
+    []
+   ],
+   [
+    [
+     [
+      2,
+      1
+     ]
+    ],
+    [
+     1,
+     2
+    ]
+   ]
+  ]
+ },
+ "ch11-searching-and-sorting-practice#8": {
+  "kind": "function",
+  "name": "leaderboard_lines",
+  "cases": [
+   [
+    [
+     [
+      [
+       "Nadia",
+       58.2
+      ],
+      [
+       "Omar",
+       61.0
+      ],
+      [
+       "Priya",
+       57.4
+      ],
+      [
+       "Quinn",
+       63.5
+      ]
+     ]
+    ],
+    [
+     "1. Priya 57.4",
+     "2. Nadia 58.2",
+     "3. Omar 61.0",
+     "4. Quinn 63.5"
+    ]
+   ],
+   [
+    [
+     []
+    ],
+    []
+   ],
+   [
+    [
+     [
+      [
+       "Omar",
+       61.0
+      ]
+     ]
+    ],
+    [
+     "1. Omar 61.0"
+    ]
+   ]
+  ]
+ },
+ "ch12-recursion-and-problem-solving-practice#1": {
+  "kind": "function",
+  "name": "total_size",
+  "cases": [
+   [
+    [
+     {
+      "name": "root",
+      "files": [
+       10,
+       20
+      ],
+      "folders": [
+       {
+        "name": "docs",
+        "files": [
+         100
+        ],
+        "folders": []
+       },
+       {
+        "name": "images",
+        "files": [
+         300,
+         40
+        ],
+        "folders": [
+         {
+          "name": "raw",
+          "files": [
+           1000
+          ],
+          "folders": []
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    1470
+   ],
+   [
+    [
+     {
+      "name": "images",
+      "files": [
+       300,
+       40
+      ],
+      "folders": [
+       {
+        "name": "raw",
+        "files": [
+         1000
+        ],
+        "folders": []
+       }
+      ]
+     }
+    ],
+    1340
+   ],
+   [
+    [
+     {
+      "name": "docs",
+      "files": [
+       100
+      ],
+      "folders": []
+     }
+    ],
+    100
+   ],
+   [
+    [
+     {
+      "name": "empty",
+      "files": [],
+      "folders": []
+     }
+    ],
+    0
+   ]
+  ]
+ },
+ "ch12-recursion-and-problem-solving-practice#2": {
+  "kind": "function",
+  "name": "file_count",
+  "cases": [
+   [
+    [
+     {
+      "name": "root",
+      "files": [
+       10,
+       20
+      ],
+      "folders": [
+       {
+        "name": "docs",
+        "files": [
+         100
+        ],
+        "folders": []
+       },
+       {
+        "name": "images",
+        "files": [
+         300,
+         40
+        ],
+        "folders": [
+         {
+          "name": "raw",
+          "files": [
+           1000
+          ],
+          "folders": []
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    6
+   ],
+   [
+    [
+     {
+      "name": "images",
+      "files": [
+       300,
+       40
+      ],
+      "folders": [
+       {
+        "name": "raw",
+        "files": [
+         1000
+        ],
+        "folders": []
+       }
+      ]
+     }
+    ],
+    3
+   ],
+   [
+    [
+     {
+      "name": "empty",
+      "files": [],
+      "folders": []
+     }
+    ],
+    0
+   ],
+   [
+    [
+     {
+      "name": "a",
+      "files": [],
+      "folders": [
+       {
+        "name": "b",
+        "files": [],
+        "folders": []
+       }
+      ]
+     }
+    ],
+    0
+   ]
+  ]
+ },
+ "ch12-recursion-and-problem-solving-practice#3": {
+  "kind": "function",
+  "name": "depth",
+  "cases": [
+   [
+    [
+     {
+      "name": "root",
+      "files": [
+       10,
+       20
+      ],
+      "folders": [
+       {
+        "name": "docs",
+        "files": [
+         100
+        ],
+        "folders": []
+       },
+       {
+        "name": "images",
+        "files": [
+         300,
+         40
+        ],
+        "folders": [
+         {
+          "name": "raw",
+          "files": [
+           1000
+          ],
+          "folders": []
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    3
+   ],
+   [
+    [
+     {
+      "name": "images",
+      "files": [
+       300,
+       40
+      ],
+      "folders": [
+       {
+        "name": "raw",
+        "files": [
+         1000
+        ],
+        "folders": []
+       }
+      ]
+     }
+    ],
+    2
+   ],
+   [
+    [
+     {
+      "name": "docs",
+      "files": [
+       100
+      ],
+      "folders": []
+     }
+    ],
+    1
+   ],
+   [
+    [
+     {
+      "name": "empty",
+      "files": [],
+      "folders": []
+     }
+    ],
+    1
+   ],
+   [
+    [
+     {
+      "name": "wide",
+      "files": [],
+      "folders": [
+       {
+        "name": "x",
+        "files": [],
+        "folders": []
+       },
+       {
+        "name": "y",
+        "files": [],
+        "folders": []
+       },
+       {
+        "name": "z",
+        "files": [],
+        "folders": []
+       }
+      ]
+     }
+    ],
+    2
+   ],
+   [
+    [
+     {
+      "name": "d1",
+      "files": [],
+      "folders": [
+       {
+        "name": "d2",
+        "files": [],
+        "folders": [
+         {
+          "name": "d3",
+          "files": [],
+          "folders": [
+           {
+            "name": "d4",
+            "files": [],
+            "folders": []
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    4
+   ]
+  ]
+ },
+ "ch12-recursion-and-problem-solving-practice#4": {
+  "kind": "function",
+  "name": "folder_names",
+  "cases": [
+   [
+    [
+     {
+      "name": "root",
+      "files": [
+       10,
+       20
+      ],
+      "folders": [
+       {
+        "name": "docs",
+        "files": [
+         100
+        ],
+        "folders": []
+       },
+       {
+        "name": "images",
+        "files": [
+         300,
+         40
+        ],
+        "folders": [
+         {
+          "name": "raw",
+          "files": [
+           1000
+          ],
+          "folders": []
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    [
+     "root",
+     "docs",
+     "images",
+     "raw"
+    ]
+   ],
+   [
+    [
+     {
+      "name": "images",
+      "files": [
+       300,
+       40
+      ],
+      "folders": [
+       {
+        "name": "raw",
+        "files": [
+         1000
+        ],
+        "folders": []
+       }
+      ]
+     }
+    ],
+    [
+     "images",
+     "raw"
+    ]
+   ],
+   [
+    [
+     {
+      "name": "empty",
+      "files": [],
+      "folders": []
+     }
+    ],
+    [
+     "empty"
+    ]
+   ]
+  ]
+ },
+ "ch12-recursion-and-problem-solving-practice#5": {
+  "kind": "function",
+  "name": "largest_file",
+  "cases": [
+   [
+    [
+     {
+      "name": "root",
+      "files": [
+       10,
+       20
+      ],
+      "folders": [
+       {
+        "name": "docs",
+        "files": [
+         100
+        ],
+        "folders": []
+       },
+       {
+        "name": "images",
+        "files": [
+         300,
+         40
+        ],
+        "folders": [
+         {
+          "name": "raw",
+          "files": [
+           1000
+          ],
+          "folders": []
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    1000
+   ],
+   [
+    [
+     {
+      "name": "images",
+      "files": [
+       300,
+       40
+      ],
+      "folders": [
+       {
+        "name": "raw",
+        "files": [
+         1000
+        ],
+        "folders": []
+       }
+      ]
+     }
+    ],
+    1000
+   ],
+   [
+    [
+     {
+      "name": "docs",
+      "files": [
+       100
+      ],
+      "folders": []
+     }
+    ],
+    100
+   ],
+   [
+    [
+     {
+      "name": "empty",
+      "files": [],
+      "folders": []
+     }
+    ],
+    null
+   ],
+   [
+    [
+     {
+      "name": "a",
+      "files": [],
+      "folders": [
+       {
+        "name": "b",
+        "files": [],
+        "folders": []
+       }
+      ]
+     }
+    ],
+    null
+   ]
+  ]
+ },
+ "ch12-recursion-and-problem-solving-practice#6": {
+  "kind": "function",
+  "name": "find_folder",
+  "cases": [
+   [
+    [
+     {
+      "name": "root",
+      "files": [
+       10,
+       20
+      ],
+      "folders": [
+       {
+        "name": "docs",
+        "files": [
+         100
+        ],
+        "folders": []
+       },
+       {
+        "name": "images",
+        "files": [
+         300,
+         40
+        ],
+        "folders": [
+         {
+          "name": "raw",
+          "files": [
+           1000
+          ],
+          "folders": []
+         }
+        ]
+       }
+      ]
+     },
+     "raw"
+    ],
+    {
+     "name": "raw",
+     "files": [
+      1000
+     ],
+     "folders": []
+    }
+   ],
+   [
+    [
+     {
+      "name": "root",
+      "files": [
+       10,
+       20
+      ],
+      "folders": [
+       {
+        "name": "docs",
+        "files": [
+         100
+        ],
+        "folders": []
+       },
+       {
+        "name": "images",
+        "files": [
+         300,
+         40
+        ],
+        "folders": [
+         {
+          "name": "raw",
+          "files": [
+           1000
+          ],
+          "folders": []
+         }
+        ]
+       }
+      ]
+     },
+     "root"
+    ],
+    {
+     "name": "root",
+     "files": [
+      10,
+      20
+     ],
+     "folders": [
+      {
+       "name": "docs",
+       "files": [
+        100
+       ],
+       "folders": []
+      },
+      {
+       "name": "images",
+       "files": [
+        300,
+        40
+       ],
+       "folders": [
+        {
+         "name": "raw",
+         "files": [
+          1000
+         ],
+         "folders": []
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   [
+    [
+     {
+      "name": "root",
+      "files": [
+       10,
+       20
+      ],
+      "folders": [
+       {
+        "name": "docs",
+        "files": [
+         100
+        ],
+        "folders": []
+       },
+       {
+        "name": "images",
+        "files": [
+         300,
+         40
+        ],
+        "folders": [
+         {
+          "name": "raw",
+          "files": [
+           1000
+          ],
+          "folders": []
+         }
+        ]
+       }
+      ]
+     },
+     "docs"
+    ],
+    {
+     "name": "docs",
+     "files": [
+      100
+     ],
+     "folders": []
+    }
+   ],
+   [
+    [
+     {
+      "name": "root",
+      "files": [
+       10,
+       20
+      ],
+      "folders": [
+       {
+        "name": "docs",
+        "files": [
+         100
+        ],
+        "folders": []
+       },
+       {
+        "name": "images",
+        "files": [
+         300,
+         40
+        ],
+        "folders": [
+         {
+          "name": "raw",
+          "files": [
+           1000
+          ],
+          "folders": []
+         }
+        ]
+       }
+      ]
+     },
+     "nowhere"
+    ],
+    null
+   ],
+   [
+    [
+     {
+      "name": "empty",
+      "files": [],
+      "folders": []
+     },
+     "raw"
+    ],
+    null
+   ]
+  ]
+ },
+ "ch12-recursion-and-problem-solving-practice#7": {
+  "kind": "function",
+  "name": "all_sizes",
+  "cases": [
+   [
+    [
+     {
+      "name": "root",
+      "files": [
+       10,
+       20
+      ],
+      "folders": [
+       {
+        "name": "docs",
+        "files": [
+         100
+        ],
+        "folders": []
+       },
+       {
+        "name": "images",
+        "files": [
+         300,
+         40
+        ],
+        "folders": [
+         {
+          "name": "raw",
+          "files": [
+           1000
+          ],
+          "folders": []
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    [
+     10,
+     20,
+     100,
+     300,
+     40,
+     1000
+    ]
+   ],
+   [
+    [
+     {
+      "name": "images",
+      "files": [
+       300,
+       40
+      ],
+      "folders": [
+       {
+        "name": "raw",
+        "files": [
+         1000
+        ],
+        "folders": []
+       }
+      ]
+     }
+    ],
+    [
+     300,
+     40,
+     1000
+    ]
+   ],
+   [
+    [
+     {
+      "name": "empty",
+      "files": [],
+      "folders": []
+     }
+    ],
+    []
+   ]
+  ]
+ },
+ "ch12-recursion-and-problem-solving-practice#8": {
+  "kind": "function",
+  "name": "size_report",
+  "cases": [
+   [
+    [
+     {
+      "name": "root",
+      "files": [
+       10,
+       20
+      ],
+      "folders": [
+       {
+        "name": "docs",
+        "files": [
+         100
+        ],
+        "folders": []
+       },
+       {
+        "name": "images",
+        "files": [
+         300,
+         40
+        ],
+        "folders": [
+         {
+          "name": "raw",
+          "files": [
+           1000
+          ],
+          "folders": []
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    [
+     "root: 1470",
+     "docs: 100",
+     "images: 1340",
+     "raw: 1000"
+    ]
+   ],
+   [
+    [
+     {
+      "name": "images",
+      "files": [
+       300,
+       40
+      ],
+      "folders": [
+       {
+        "name": "raw",
+        "files": [
+         1000
+        ],
+        "folders": []
+       }
+      ]
+     }
+    ],
+    [
+     "images: 1340",
+     "raw: 1000"
+    ]
+   ],
+   [
+    [
+     {
+      "name": "empty",
+      "files": [],
+      "folders": []
+     }
+    ],
+    [
+     "empty: 0"
+    ]
+   ]
+  ]
  }
 }

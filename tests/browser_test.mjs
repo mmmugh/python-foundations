@@ -50,7 +50,16 @@ const server = spawn("python3", [join(ROOT, "scripts", "serve.py"), String(PORT)
 const stop = () => { try { server.kill(); } catch {} };
 process.on("exit", stop);
 
-await new Promise(r => setTimeout(r, 1500));
+// Wait for the server to actually answer rather than guessing at a delay.
+// A fixed sleep here was a race: anything that slows start-up turns into
+// "the page never got there", which reads as a broken site.
+for (let i = 0; ; i++) {
+  try { await fetch(`http://localhost:${PORT}/`); break; }
+  catch {
+    if (i > 100) { stop(); console.log("  FAIL  the server never came up"); process.exit(1); }
+    await new Promise(r => setTimeout(r, 200));
+  }
+}
 
 let browser;
 try {

@@ -90,3 +90,90 @@ A.update({
  'w = float(input())\nt = float(input())\nc = float(input())\nf = input()\nok_w = w < 30\nok_t = 2 <= t <= 35\nok_c = c >= 2000\nok_f = f.isdigit() and int(f) >= 95\nprint("Wind: OK" if ok_w else "Wind: TOO STRONG")\nprint("Temperature: OK" if ok_t else "Temperature: OUT OF RANGE")\nif c >= 5000:\n    print("Ceiling: CLEAR")\nelif c >= 2000:\n    print("Ceiling: MARGINAL")\nelse:\n    print("Ceiling: TOO LOW")\nif f.isdigit():\n    print(f"Fuel: {int(f)}%")\nelse:\n    print("Fuel: NOT A NUMBER")\nif ok_w and ok_t and ok_c and ok_f:\n    print("LAUNCH: GO")\nelse:\n    print("LAUNCH: NO GO")\n    if not ok_w:\n        print("HOLD: wind")\n    elif not ok_t:\n        print("HOLD: temperature")\n    elif not ok_c:\n        print("HOLD: ceiling")\n    else:\n        print("HOLD: fuel")',
  'w = float(input())\nt = float(input())\nc = float(input())\nf = input()\nok_w = w < 30\nok_t = 2 <= t <= 35\nok_c = c >= 2000\nok_f = f.isdigit() and int(f) >= 95\nif ok_w:\n    print("Wind: OK")\nelse:\n    print("Wind: TOO STRONG")\nprint("Temperature: OK" if ok_t else "Temperature: OUT OF RANGE")\nif c >= 5000:\n    print("Ceiling: CLEAR")\nelif c >= 2000:\n    print("Ceiling: MARGINAL")\nelse:\n    print("Ceiling: TOO LOW")\nif f.isdigit():\n    print(f"Fuel: {int(f)}%")\nelse:\n    print("Fuel: NOT A NUMBER")\nif ok_w and ok_t and ok_c and ok_f:\n    print("LAUNCH: GO")\nelse:\n    print("LAUNCH: NO GO")\n    if not ok_w:\n        print("HOLD: wind")\n    elif not ok_t:\n        print("HOLD: temperature")\n    elif not ok_c:\n        print("HOLD: ceiling")\n    else:\n        print("HOLD: fuel")',
  'w = float(input())\nt = float(input())\nc = float(input())\nf = input()\nok_w = w < 30\nok_t = 2 <= t <= 35\nok_c = c >= 2000\nok_f = f.isdigit() and int(f) >= 95\nprint("Wind: OK" if ok_w else "Wind: TOO STRONG")\nif c >= 5000:\n    print("Ceiling: CLEAR")\nelif c >= 2000:\n    print("Ceiling: MARGINAL")\nelse:\n    print("Ceiling: TOO LOW")\nif f.isdigit():\n    print(f"Fuel: {int(f)}%")\nelse:\n    print("Fuel: NOT A NUMBER")\nif ok_w and ok_t and ok_c and ok_f:\n    print("LAUNCH: GO")\nelse:\n    print("LAUNCH: NO GO")\n    if not ok_w:\n        print("HOLD: wind")\n    elif not ok_t:\n        print("HOLD: temperature")\n    elif not ok_c:\n        print("HOLD: ceiling")\n    else:\n        print("HOLD: fuel")')})
+
+# Practice pages, chapters 2, 3 and 5: programs that ask for input.
+A.update({
+"ch02-variables-and-types-practice#2": (
+ 'distance_km = 12.4\npace = float(input("Pace in minutes per km? "))\nminutes = distance_km * pace\nprint("That takes", minutes, "minutes")',
+ 'd = 12.4\np = float(input())\nprint("Minutes:", d * p)',
+ 'distance_km = 12.4\npace = input("Pace? ")\nprint("That takes", distance_km * pace, "minutes")'),
+"ch02-variables-and-types-practice#3": (
+ 'distance_km = 12.4\npace = float(input("Pace in minutes per km? "))\nminutes = distance_km * pace\nhours = minutes / 60\nprint("That takes", minutes, "minutes, which is", hours, "hours")',
+ 'd = 12.4\np = float(input())\nmins = d * p\nprint(mins, "minutes =", mins / 60, "hours")',
+ 'distance_km = 12.4\npace = float(input("Pace in minutes per km? "))\nminutes = distance_km * pace\nhours = minutes / 100\nprint(minutes, "minutes, which is", hours, "hours")'),
+"ch02-variables-and-types-practice#4": (
+ 'distance_km = 12.4\npace = float(input("Pace in minutes per km? "))\nminutes = distance_km * pace\nhours = minutes / 60\nwater = hours * 0.75\nprint("Water per person:", water, "litres")',
+ 'd = 12.4\np = float(input())\nh = d * p / 60\nprint("Litres each:", h * 0.75)',
+ 'distance_km = 12.4\npace = float(input("Pace in minutes per km? "))\nminutes = distance_km * pace\nwater = minutes * 0.75\nprint("Water per person:", water, "litres")'),
+"ch02-variables-and-types-practice#5": (
+ 'distance_km = 12.4\npace = float(input("Pace in minutes per km? "))\nminutes = distance_km * pace\nhours = minutes / 60\nwater = hours * 0.75\npeople = int(input("How many people? "))\nprint("Water for the group:", water * people, "litres")',
+ 'd = 12.4\np = float(input())\nn = int(input())\nprint("Group litres:", d * p / 60 * 0.75 * n)',
+ 'distance_km = 12.4\npace = float(input("Pace in minutes per km? "))\nminutes = distance_km * pace\nhours = minutes / 60\nwater = hours * 0.75\npeople = int(input("How many people? "))\nprint("Water for the group:", water, "litres")'),
+"ch02-variables-and-types-practice#6": (
+ 'people = int(input("How many people? "))\nprint("Permits:", 4.50 * people)',
+ 'n = int(input())\ncost = n * 4.5\nprint("Permit total:", cost)',
+ 'people = input("How many people? ")\nprint("Permits:", 4.50 * people)'),
+"ch02-variables-and-types-practice#7": (
+ 'distance_km = float(input("Trail length in km? "))\npace = float(input("Pace in minutes per km? "))\npeople = int(input("How many people? "))\n\nminutes = distance_km * pace\nhours = minutes / 60\nwater = hours * 0.75\n\nprint("Length:", distance_km, "km")\nprint("Time:", minutes, "minutes")\nprint("Time:", hours, "hours")\nprint("Water each:", water, "litres")\nprint("Water total:", water * people, "litres")\nprint("Permits:", 4.50 * people)',
+ 'd = float(input())\np = float(input())\nn = int(input())\nm = d * p\nh = m / 60\nw = h * 0.75\nprint(d, "km")\nprint(m, "minutes")\nprint(h, "hours")\nprint(w, "litres each")\nprint(w * n, "litres total")\nprint(4.5 * n, "for permits")',
+ 'd = float(input())\np = float(input())\nn = int(input())\nm = d * p\nh = m / 60\nw = h * 0.75\nprint(d, "km")\nprint(m, "minutes")\nprint(h, "hours")\nprint(w, "litres each")\nprint(4.5 * n, "for permits")'),
+"ch03-expressions-and-operators-practice#1": (
+ 'people = int(input("How many people? "))\neach = int(input("Slices each? "))\nslices = people * each\nprint(f"You need {slices} slices")',
+ 'p = int(input())\ne = int(input())\nprint("Slices needed:", p * e)',
+ 'people = input("How many people? ")\neach = int(input("Slices each? "))\nprint(f"You need {people * each} slices")'),
+"ch03-expressions-and-operators-practice#2": (
+ 'people = int(input("How many people? "))\neach = int(input("Slices each? "))\nslices = people * each\npizzas = (slices + 7) // 8\nprint(f"Order {pizzas} pizzas")',
+ 'n = int(input()) * int(input())\nprint("Pizzas:", (n + 7) // 8)',
+ 'people = int(input("How many people? "))\neach = int(input("Slices each? "))\nslices = people * each\npizzas = slices // 8\nprint(f"Order {pizzas} pizzas")'),
+"ch03-expressions-and-operators-practice#3": (
+ 'people = int(input("How many people? "))\neach = int(input("Slices each? "))\nslices = people * each\npizzas = (slices + 7) // 8\nprint(f"{pizzas * 8 - slices} slices left over")',
+ 'n = int(input()) * int(input())\nordered = ((n + 7) // 8) * 8\nprint("Left over:", ordered - n)',
+ 'people = int(input("How many people? "))\neach = int(input("Slices each? "))\nslices = people * each\nprint(f"{slices % 8} slices left over")'),
+"ch03-expressions-and-operators-practice#4": (
+ 'people = int(input("How many people? "))\neach = int(input("Slices each? "))\nslices = people * each\npizzas = (slices + 7) // 8\ncost = pizzas * 13.50\nprint(f"That comes to {cost:.2f}")',
+ 'n = int(input()) * int(input())\nprint(f"Cost: {((n + 7) // 8) * 13.5:.2f}")',
+ 'people = int(input("How many people? "))\neach = int(input("Slices each? "))\nslices = people * each\ncost = (slices // 8) * 13.50\nprint(f"That comes to {cost:.2f}")'),
+"ch03-expressions-and-operators-practice#5": (
+ 'people = int(input("How many people? "))\neach = int(input("Slices each? "))\nslices = people * each\npizzas = (slices + 7) // 8\ncost = pizzas * 13.50\nprint(f"Each of you owes {round(cost / people, 2):.2f}")',
+ 'p = int(input())\ne = int(input())\nc = ((p * e + 7) // 8) * 13.5\nprint(f"{c / p:.2f} each")',
+ 'people = int(input("How many people? "))\neach = int(input("Slices each? "))\nslices = people * each\npizzas = (slices + 7) // 8\ncost = pizzas * 13.50\nprint(f"Each of you owes {round(cost / slices, 2):.2f}")'),
+"ch03-expressions-and-operators-practice#6": (
+ 'people = int(input("How many people? "))\neach = int(input("Slices each? "))\nslices = people * each\nprint(f"Would one pizza have done? {slices <= 8}")',
+ 'n = int(input()) * int(input())\nprint("One pizza enough:", n <= 8)',
+ 'people = int(input("How many people? "))\neach = int(input("Slices each? "))\nslices = people * each\nprint(f"Would one pizza have done? {slices >= 8}")'),
+"ch03-expressions-and-operators-practice#7": (
+ 'people = int(input("How many people? "))\neach = int(input("Slices each? "))\nslices = people * each\npizzas = (slices + 7) // 8\ncost = pizzas * 13.50\ndelivered = cost * 1.15\nprint(f"With delivery: {delivered:.2f}")\nprint(f"Each: {delivered / people:.2f}")',
+ 'p = int(input())\ne = int(input())\nc = ((p * e + 7) // 8) * 13.5\nd = c + c * 0.15\nprint(f"{d:.2f} delivered, {d / p:.2f} each")',
+ 'people = int(input("How many people? "))\neach = int(input("Slices each? "))\nslices = people * each\npizzas = (slices + 7) // 8\ncost = pizzas * 13.50\ndelivered = cost * 0.15\nprint(f"With delivery: {delivered:.2f}")\nprint(f"Each: {delivered / people:.2f}")'),
+"ch03-expressions-and-operators-practice#8": (
+ 'people = int(input("How many people? "))\neach = int(input("Slices each? "))\nslices = people * each\npizzas = (slices + 7) // 8\ncost = pizzas * 13.50\ndelivered = cost * 1.15\n\nprint(f"Slices needed:  {slices}")\nprint(f"Pizzas to order: {pizzas}")\nprint(f"Slices left:    {pizzas * 8 - slices}")\nprint(f"Cost:           {cost:.2f}")\nprint(f"With delivery:  {delivered:.2f}")\nprint(f"Each of you:    {delivered / people:.2f}")',
+ 'p = int(input())\ne = int(input())\nn = p * e\nz = (n + 7) // 8\nc = z * 13.5\nd = c * 1.15\nprint(n, "slices")\nprint(z, "pizzas")\nprint(z * 8 - n, "left")\nprint(f"{c:.2f}")\nprint(f"{d:.2f}")\nprint(f"{d / p:.2f}")',
+ 'p = int(input())\ne = int(input())\nn = p * e\nz = (n + 7) // 8\nc = z * 13.5\nprint(n, "slices")\nprint(z, "pizzas")\nprint(z * 8 - n, "left")\nprint(f"{c:.2f}")'),
+"ch05-repetition-practice#2": (
+ 'weekly = float(input("Saving how much a week? "))\ntotal = 0\nfor week in range(1, 9):\n    total += weekly\n    print(f"Week {week}: {total}")',
+ 'w = float(input())\nt = 0\nfor i in range(8):\n    t = t + w\n    print(t)',
+ 'weekly = float(input("Saving how much a week? "))\nfor week in range(1, 9):\n    print(f"Week {week}: {weekly * 8}")'),
+"ch05-repetition-practice#3": (
+ 'weekly = float(input("Saving how much a week? "))\ntotal = 0\nweeks = 0\nwhile total < 240:\n    total += weekly\n    weeks += 1\nprint("Weeks needed:", weeks)',
+ 'w = float(input())\nt = 0\nn = 0\nwhile t < 240:\n    t += w\n    n += 1\nprint(n)',
+ 'weekly = float(input("Saving how much a week? "))\ntotal = 0\nweeks = 0\nwhile total <= 240:\n    total += weekly\n    weeks += 1\nprint("Weeks needed:", weeks)'),
+"ch05-repetition-practice#4": (
+ 'weekly = float(input("Saving how much a week? "))\ntotal = 0\nweek = 0\nfor week in range(1, 53):\n    total += weekly\n    if total >= 240:\n        break\n\nif total >= 240:\n    print("Reached in week", week)\nelse:\n    print("Not this year")',
+ 'w = float(input())\nt = 0\nfound = 0\nfor n in range(1, 53):\n    t += w\n    if t >= 240:\n        found = n\n        break\nif found:\n    print("Reached in week", found)\nelse:\n    print("Not this year")',
+ 'weekly = float(input("Saving how much a week? "))\ntotal = 0\nweek = 0\nfor week in range(1, 53):\n    total += weekly\nif total >= 240:\n    print("Reached in week", week)\nelse:\n    print("Not this year")'),
+"ch05-repetition-practice#5": (
+ 'weekly = float(input("Saving how much a week? "))\ntotal = 0\nfor week in range(1, 200):\n    if week % 5 == 0:\n        continue\n    total += weekly\n    if total >= 240:\n        print("Reached in week", week)\n        break',
+ 'w = float(input())\nt = 0\nn = 0\nwhile t < 240:\n    n += 1\n    if n % 5 == 0:\n        continue\n    t += w\nprint("Reached in week", n)',
+ 'weekly = float(input("Saving how much a week? "))\ntotal = 0\nfor week in range(1, 200):\n    if week % 5 == 0:\n        break\n    total += weekly\n    if total >= 240:\n        print("Reached in week", week)\n        break'),
+"ch05-repetition-practice#6": (
+ 'weekly = float(input("Saving how much a week? "))\ntotal = 0\nfor week in range(1, 200):\n    total += weekly\n    if week % 4 == 0:\n        total += 10\n    if total >= 240:\n        print("Reached in week", week)\n        break',
+ 'w = float(input())\nt = 0\nn = 0\nwhile t < 240:\n    n += 1\n    t += w\n    if n % 4 == 0:\n        t += 10\nprint("Reached in week", n)',
+ 'weekly = float(input("Saving how much a week? "))\ntotal = 0\nfor week in range(1, 200):\n    total += weekly\n    if week % 4 == 1:\n        total += 10\n    if total >= 240:\n        print("Reached in week", week)\n        break'),
+"ch05-repetition-practice#7": (
+ 'weekly = float(input("Saving how much a week? "))\ntotal = 0\nfor week in range(1, 200):\n    total += weekly\n    total = total * 1.01\n    if total >= 240:\n        print("Reached in week", week)\n        break',
+ 'w = float(input())\nt = 0\nn = 0\nwhile t < 240:\n    n += 1\n    t = (t + w) * 1.01\nprint("Reached in week", n)',
+ 'weekly = float(input("Saving how much a week? "))\ntotal = 0\nfor week in range(1, 200):\n    total = total * 1.01\n    total += weekly\n    if total >= 240:\n        print("Reached in week", week)\n        break'),
+"ch05-repetition-practice#8": (
+ 'weekly = float(input("Saving how much a week? "))\ntotal = 0\nfor week in range(1, 9):\n    total += weekly\n    print(f"Week {week}: {total}")\n\ntotal = 0\nfor week in range(1, 200):\n    if week % 5 == 0:\n        continue\n    total += weekly\n    if week % 4 == 0:\n        total += 10\n    if total >= 240:\n        print("Goal reached in week", week)\n        break',
+ 'w = float(input())\nt = 0\nfor n in range(1, 9):\n    t += w\n    print(n, t)\nt = 0\nn = 0\nwhile t < 240:\n    n += 1\n    if n % 5 == 0:\n        continue\n    t += w\n    if n % 4 == 0:\n        t += 10\nprint("Goal reached in week", n)',
+ 'weekly = float(input("Saving how much a week? "))\ntotal = 0\nfor week in range(1, 9):\n    total += weekly\n    print(f"Week {week}: {total}")\n\ntotal = 0\nfor week in range(1, 200):\n    total += weekly\n    if week % 4 == 0:\n        total += 10\n    if total >= 240:\n        print("Goal reached in week", week)\n        break')})

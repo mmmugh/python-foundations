@@ -13,6 +13,7 @@ runs to the end no matter what this does.
 """
 
 import builtins
+import json
 import sys
 import time
 
@@ -81,6 +82,22 @@ def _capture(source, seconds, namespace, stdin=None):
     finally:
         sys.stdout = stdout
     return buffer.getvalue()
+
+
+def from_json(text):
+    """Parse a check's data here rather than letting the browser convert it.
+
+    The page hands a check over as its original JSON text, because the
+    JavaScript conversion loses two things that matter. JSON's 61.0 is an
+    ordinary JavaScript number and arrives as a Python int, so an answer that
+    correctly prints "61.0" is marked wrong. And JSON's null arrives as a
+    JavaScript null, which is not None, so a case expecting None can never
+    match and the check rejects every answer including the right one.
+
+    json.loads has neither problem, and both faults are invisible from
+    CPython, where the same file parses correctly.
+    """
+    return json.loads(text)
 
 
 def check_function(source, name, cases, seconds=5):

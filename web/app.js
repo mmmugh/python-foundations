@@ -64,7 +64,7 @@ async function boot() {
     });
 
     pyodide.runPython(BOX_RUNNER);
-    for (const name of ["run_box", "check_function", "check_output",
+    for (const name of ["run_box", "from_json", "check_function", "check_output",
                         "check_prediction", "check_stdin", "repl_run"]) {
       python[name] = pyodide.globals.get(name);
     }
@@ -100,18 +100,23 @@ async function runPython(source, onOutput) {
 }
 
 /** Check one answer. Returns {passed, notes, total}. */
-async function checkAnswer(spec, source, prediction) {
+async function checkAnswer(spec, specText, source, prediction) {
   await boot();
   sink = null;
   let result;
+  // The case data goes over as its original JSON text and is parsed on the
+  // Python side. Converting it here instead turns 61.0 into an int and null
+  // into something that is not None, either of which quietly makes a check
+  // reject the correct answer.
+  const data = specText ? python.from_json(specText) : null;
   if (spec.kind === "function") {
-    const cases = pyodide.toPy(spec.cases);
+    const cases = data.get("cases");
     result = python.check_function(source, spec.name, cases);
     cases.destroy();
   } else if (spec.kind === "output") {
     result = python.check_output(source, spec.expected);
   } else if (spec.kind === "stdin") {
-    const runs = pyodide.toPy(spec.runs);
+    const runs = data.get("runs");
     result = python.check_stdin(source, runs);
     runs.destroy();
   } else {
@@ -120,6 +125,7 @@ async function checkAnswer(spec, source, prediction) {
   const passed = result.get(0);
   const notes = result.get(1).toJs();
   result.destroy();
+  if (data) data.destroy();
   return { passed, notes, total: (spec.cases || spec.runs || [1]).length };
 }
 
@@ -230,7 +236,7 @@ document.querySelectorAll(".box").forEach((box) => {
     checkButton.addEventListener("click", async () => {
       await beginWork(checkButton, "checking…");
       const { passed, notes, total } = await checkAnswer(
-        spec, area.value, prediction ? prediction.value : "");
+        spec, box.dataset.check, area.value, prediction ? prediction.value : "");
 
       if (passed) {
         result.className = "result passed";
