@@ -151,8 +151,15 @@ This repo is meant to be public, so `.githooks/leak-scan` reads a diff and
 refuses anything whose **added** lines or added file paths match a deny
 pattern: absolute home directories, private LAN addresses, and the shapes of
 AWS keys, GitHub tokens, API keys and PEM private keys. It runs from
-`pre-commit` and again from `pre-push`, which is the net for anything committed
-with `--no-verify` or pushed from another clone.
+`pre-commit` and again from `pre-push`, which catches anything committed with
+`--no-verify` or pushed from another clone.
+
+`pre-push` scans **each new commit separately**, not the difference between
+the two ends of the push. Scanning the net is the obvious implementation and
+it is wrong: a leak committed with `--no-verify` and deleted in a later commit
+nets to nothing, so the push is allowed — and both commits still land in the
+remote, where the token is as readable as ever. A commit already made cannot
+be fixed by deleting the content in a later one.
 
 Git does not carry hooks in a clone, so after cloning:
 
@@ -173,8 +180,12 @@ point: a deny list that itself leaks is no use.
 Known blind spot, documented rather than hidden: a binary file produces no
 added lines, so a secret inside one is not seen.
 
-`python3 tests/leak_scan_test.py` checks the guard blocks what it claims to and
-allows what it should, including the scrub-out case.
+`python3 tests/leak_scan_test.py` checks the scanner blocks what it claims to
+and allows what it should, including the scrub-out case.
+`python3 tests/pre_push_test.py` is a separate question — whether the hook
+hands the scanner the right diffs — and answers it by pushing at a throwaway
+bare remote in a temp directory. The scanner was already correct on the day a
+push carrying a token in its history sailed through.
 
 ## Editing
 
