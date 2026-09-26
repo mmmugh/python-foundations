@@ -30,6 +30,10 @@ SCAN = ROOT / ".githooks" / "leak-scan"
 # not be committed through the hook it tests -- which is the guard working,
 # not a problem with it, but it would mean reaching for --no-verify to land
 # the test, and a guard routinely bypassed is a guard nobody trusts.
+# A made-up address. An earlier version of this file used the real one
+# from this machine -- the same address the worksheet was redacted to
+# remove -- reassembled so the hook could not see it. Any RFC1918
+# address tests the pattern equally well, and this one is nobody's.
 LAN = "192.168." + "99.99"
 GH_TOKEN = "ghp_" + "a" * 36
 ANTHROPIC_KEY = "sk-" + "ant-" + "a" * 22
@@ -97,6 +101,17 @@ CASES = [
     ("the local file is only consulted for its own patterns",
      diff_of("+nothing to see\n"), False,
      {"patterns": "", "local": "Acme Corp\n"}),
+    # Regression: git emits "\ No newline at end of file" mid-hunk whenever the
+    # OLD version of a file had no trailing newline. That line is none of "+",
+    # "-" or " ", so it used to end the hunk as far as the scanner was
+    # concerned and every added line after it went unscanned -- a real bypass,
+    # reproduced with a genuine `git diff --cached` before it was fixed.
+    ("an added line AFTER a no-newline marker is still scanned",
+     "--- a/x.md\n+++ b/x.md\n@@ -1 +1,2 @@\n-last\n"
+     "\\ No newline at end of file\n" f"+{GH_TOKEN}\n", True, {}),
+    ("a clean added line after that marker is still allowed",
+     "--- a/x.md\n+++ b/x.md\n@@ -1 +1,2 @@\n-last\n"
+     "\\ No newline at end of file\n" "+ordinary prose\n", False, {}),
     ("an empty diff is allowed",
      "", False, {}),
 ]

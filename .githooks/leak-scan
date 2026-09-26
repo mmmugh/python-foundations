@@ -32,7 +32,13 @@ cat > "$diff"
 # ADDED content (hunk-aware: only in-hunk '+' lines, strip the leading '+';
 # never the pre-hunk '+++'/'---' file headers or '-'/context lines). Robust to
 # content lines that themselves begin with '+'.
-awk '/^@@/{inhunk=1;next} /^[+ -]/{if(inhunk&&substr($0,1,1)=="+")print substr($0,2);next} {inhunk=0}' "$diff" > "$work"
+#
+# The '\ No newline at end of file' marker is skipped rather than treated as
+# the end of the hunk. Without that skip it is none of '+', '-' or ' ', so it
+# cleared inhunk and every '+' line after it went unscanned -- and git emits
+# it mid-hunk whenever the OLD version of a file had no trailing newline. That
+# was a real bypass: appending a token to such a file passed the scan.
+awk '/^@@/{inhunk=1;next} /^\\/{next} /^[+ -]/{if(inhunk&&substr($0,1,1)=="+")print substr($0,2);next} {inhunk=0}' "$diff" > "$work"
 
 # ADDED file paths (new-file / rename / copy targets).
 grep -E '^\+\+\+ b/|^rename to |^copy to ' "$diff" 2>/dev/null \
