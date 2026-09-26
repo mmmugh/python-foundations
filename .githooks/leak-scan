@@ -44,6 +44,17 @@ awk '/^@@/{inhunk=1;next} /^\\/{next} /^[+ -]/{if(inhunk&&substr($0,1,1)=="+")pr
 grep -E '^\+\+\+ b/|^rename to |^copy to ' "$diff" 2>/dev/null \
   | sed -E -e 's|^\+\+\+ b/||' -e 's|^rename to ||' -e 's|^copy to ||' >> "$work" || true
 
+# ADDED paths that have NO text hunk, which the rule above therefore misses:
+# a new binary file emits only "Binary files ... differ", and a new EMPTY file
+# emits no hunk at all, so neither produces a '+++ b/' header. Both still
+# carry a filename, and a filename can hold a token or an employer's name.
+# "new file mode" marks an addition specifically -- a DELETED file must not be
+# scanned by path, or a badly named file could never be removed.
+# Limitation: a path containing " b/" is ambiguous on the "diff --git" line.
+# Git quotes such paths, and the '+++ b/' rule above reads text files exactly.
+awk '/^diff --git /{p=$0; sub(/^diff --git a\//, "", p); sub(/ b\/.*$/, "", p); next}
+     /^new file mode /{if (p != "") print p; next}' "$diff" >> "$work" || true
+
 [ -s "$work" ] || exit 0
 
 matched=""

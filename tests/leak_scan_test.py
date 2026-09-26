@@ -112,6 +112,27 @@ CASES = [
     ("a clean added line after that marker is still allowed",
      "--- a/x.md\n+++ b/x.md\n@@ -1 +1,2 @@\n-last\n"
      "\\ No newline at end of file\n" "+ordinary prose\n", False, {}),
+    # A new file with no text hunk still has a filename, and a filename can
+    # carry a token or an employer's name. Git gives a new BINARY file only a
+    # "Binary files ... differ" line and a new EMPTY file no hunk at all, so
+    # neither produces the "+++ b/" header the rule above reads.
+    ("a new BINARY file's path is scanned",
+     f"diff --git a/notes-{GH_TOKEN}.bin b/notes-{GH_TOKEN}.bin\n"
+     "new file mode 100644\nindex 0000000..c94be36\n"
+     f"Binary files /dev/null and b/notes-{GH_TOKEN}.bin differ\n", True, {}),
+    ("a new EMPTY file's path is scanned",
+     f"diff --git a/empty-{GH_TOKEN}.md b/empty-{GH_TOKEN}.md\n"
+     "new file mode 100644\nindex 0000000..e69de29\n", True, {}),
+    # The mirror of the added-lines-only rule: scanning a DELETED file by path
+    # would make a badly named file impossible to remove.
+    ("DELETING a badly named file is allowed",
+     f"diff --git a/del-{GH_TOKEN}.md b/del-{GH_TOKEN}.md\n"
+     "deleted file mode 100644\nindex ce01362..0000000\n"
+     f"--- a/del-{GH_TOKEN}.md\n+++ /dev/null\n@@ -1 +0,0 @@\n-hi\n", False, {}),
+    ("an ordinary new file is allowed",
+     "diff --git a/plain.md b/plain.md\nnew file mode 100644\n"
+     "index 0000000..9766475\n--- /dev/null\n+++ b/plain.md\n@@ -0,0 +1 @@\n+ok\n",
+     False, {}),
     ("an empty diff is allowed",
      "", False, {}),
 ]
