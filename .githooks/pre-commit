@@ -8,7 +8,7 @@
 set -e
 
 HOOK_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-if ! git diff --cached --no-color -U0 | "$HOOK_DIR/leak-scan"; then
+if ! git -c core.quotePath=false diff --cached --no-color -U0 | "$HOOK_DIR/leak-scan"; then
   echo "pre-commit: leak-scan blocked this commit (see above). Override: git commit --no-verify" >&2
   exit 1
 fi

@@ -39,6 +39,11 @@ GH_TOKEN = "ghp_" + "a" * 36
 ANTHROPIC_KEY = "sk-" + "ant-" + "a" * 22
 PEM_HEADER = "-----BEGIN RSA " + "PRIVATE KEY-----"
 HOME_PATH = "/Users" + "/someone/secret"
+# A repo-relative path that LOOKS like a home directory once the diff
+# header's "a/" prefix is in front of it. Assembled for the same reason
+# as the shapes above: written out, this fixture would match the
+# home-path pattern and block the very file that tests it.
+REPO_PATH = "Users" + "/guide.md"
 
 
 def scan(diff, patterns=None, local=None):
@@ -133,6 +138,33 @@ CASES = [
      "diff --git a/plain.md b/plain.md\nnew file mode 100644\n"
      "index 0000000..9766475\n--- /dev/null\n+++ b/plain.md\n@@ -0,0 +1 @@\n+ok\n",
      False, {}),
+    # Git does NOT quote a path merely for holding a space, so a folder named
+    # "notes b" puts a literal " b/" inside the path and defeats any attempt
+    # to find the split point in "diff --git a/P b/P". The path is recovered
+    # by length instead, which is exact.
+    ("a token-named binary inside a folder called 'notes b'",
+     f"diff --git a/notes b/{GH_TOKEN}.bin b/notes b/{GH_TOKEN}.bin\n"
+     "new file mode 100644\nindex 0000000..c94be36\n"
+     f"Binary files /dev/null and b/notes b/{GH_TOKEN}.bin differ\n", True, {}),
+    ("a CLEAN binary in that same folder is not a false positive",
+     "diff --git a/notes b/asset.bin b/notes b/asset.bin\n"
+     "new file mode 100644\nindex 0000000..c94be36\n"
+     "Binary files /dev/null and b/notes b/asset.bin differ\n", False, {}),
+    # Recovering the path exactly matters in both directions: scanning the raw
+    # header would make the "a/" prefix read as the start of a home path.
+    ("a repo path that begins with Users/ is not a home directory",
+     f"diff --git a/{REPO_PATH} b/{REPO_PATH}\n"
+     "new file mode 100644\nindex 0000000..9766475\n"
+     f"--- /dev/null\n+++ b/{REPO_PATH}\n@@ -0,0 +1 @@\n+hi\n", False, {}),
+    # Non-ASCII paths, and the reason the hooks pass -c core.quotePath=false.
+    ("a personal literal in an accented filename is caught when unquoted",
+     "diff --git a/Caf\u00e9-Corp notes.md b/Caf\u00e9-Corp notes.md\n"
+     "new file mode 100644\nindex 0000000..e69de29\n", True,
+     {"patterns": "", "local": "caf\u00e9-corp\n"}),
+    ("and is MISSED when git octal-escapes it, which the flag prevents",
+     'diff --git "a/Caf\\303\\251-Corp notes.md" "b/Caf\\303\\251-Corp notes.md"\n'
+     "new file mode 100644\nindex 0000000..e69de29\n", False,
+     {"patterns": "", "local": "caf\u00e9-corp\n"}),
     ("an empty diff is allowed",
      "", False, {}),
 ]
@@ -142,6 +174,16 @@ def main():
     if not SCAN.exists():
         sys.exit(f"{SCAN} is missing -- the leak guard is not installed")
     bad = 0
+    # The scanner cannot undo git's octal-escaping of non-ASCII paths, so the
+    # hooks have to ask git not to do it. That makes the flag part of the
+    # contract rather than a detail of how they happen to be written.
+    for hook in ("pre-commit", "pre-push"):
+        text = (ROOT / ".githooks" / hook).read_text()
+        ok = "core.quotePath=false" in text
+        if not ok:
+            bad += 1
+        print(f"  {'ok  ' if ok else 'FAIL'}  {hook} asks git for unquoted paths")
+
     for label, diff, should_block, kw in CASES:
         blocked = scan(diff, **kw)
         ok = blocked == should_block

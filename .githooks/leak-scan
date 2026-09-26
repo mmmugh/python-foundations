@@ -18,6 +18,11 @@
 #   leak-patterns        tracked, generic shapes only (SAFE to publish)
 #   leak-patterns.local  untracked, your personal literals (NEVER committed)
 # Override either path with LEAK_PATTERNS / LEAK_PATTERNS_LOCAL (the test does).
+# CALLERS MUST PASS -c core.quotePath=false. Git otherwise writes a non-ASCII
+# path as quoted octal escapes ("b/Caf\303\251-Corp.md"), which no pattern
+# for the real name can match, and which does not even match the '+++ b/'
+# rule. The scanner cannot undo that encoding from here, so the hooks set the
+# flag and anything calling this by hand must too.
 set -eu
 
 here=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
@@ -50,9 +55,15 @@ grep -E '^\+\+\+ b/|^rename to |^copy to ' "$diff" 2>/dev/null \
 # carry a filename, and a filename can hold a token or an employer's name.
 # "new file mode" marks an addition specifically -- a DELETED file must not be
 # scanned by path, or a badly named file could never be removed.
-# Limitation: a path containing " b/" is ambiguous on the "diff --git" line.
-# Git quotes such paths, and the '+++ b/' rule above reads text files exactly.
-awk '/^diff --git /{p=$0; sub(/^diff --git a\//, "", p); sub(/ b\/.*$/, "", p); next}
+#
+# The path is recovered by length, not by splitting. "diff --git a/P b/P"
+# repeats the SAME path, so the remainder after "diff --git " is always
+# 2*len(P)+5 characters and P starts at offset 3. Splitting on " b/" instead
+# is wrong whenever the path itself contains " b/" -- a folder named "notes b"
+# is enough -- and git does NOT quote a path merely for holding a space, so
+# that is reachable rather than theoretical.
+awk '/^diff --git /{r=substr($0,12); n=(length(r)-5)/2;
+                     p=(n>0)?substr(r,3,n):""; next}
      /^new file mode /{if (p != "") print p; next}' "$diff" >> "$work" || true
 
 [ -s "$work" ] || exit 0
