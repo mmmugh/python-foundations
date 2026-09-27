@@ -6,7 +6,7 @@ Builds a throwaway bare remote in a temp directory and pushes at it with the
 repo's real hooks installed. Nothing here touches this repo or any network.
 
 This is a separate test from leak_scan_test.py on purpose. That one asks
-whether the scanner recognises a leak in a diff it is handed; this one asks
+whether the scanner recognizes a leak in a diff it is handed; this one asks
 whether the hook hands it the right diffs. The distinction is not academic:
 the scanner was already correct when a push carrying a token in its history
 sailed through, because the hook was feeding it the NET difference between

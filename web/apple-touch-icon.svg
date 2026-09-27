@@ -5,7 +5,7 @@
        is full bleed with square corners; shipping the rounded tile instead
        rounds it twice and leaves the wallpaper showing in the gap.
 
-       Same glyph, same colours. Edit both files together, or run
+       Same glyph, same colors. Edit both files together, or run
        scripts/make_icons.py which will tell you if they have drifted.
 
        Note: this is XML, so a comment may not contain two hyphens in a row. -->

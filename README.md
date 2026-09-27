@@ -100,7 +100,7 @@ The build refuses to ship a course that is wrong about itself:
 
 It has caught two real errors so far: a stated output in Chapter 7 that the
 code did not produce, and sixteen appendix fragments that were offering a Run
-button they could not honour.
+button they could not honor.
 
 ## The Python runtime
 
@@ -141,7 +141,7 @@ of each chapter. Its `answer-keys/*-answers.txt` is not, and must not be:
 everything under
 `site/` is fetchable by anyone who guesses a filename, with no traversal bug
 required. `build.py` copies by an explicit whitelist of `*-quiz.txt` rather than
-excluding what it recognises as a key — an exclusion rule fails open the first
+excluding what it recognizes as a key — an exclusion rule fails open the first
 time a key is named something unexpected — and then greps everything it wrote
 for the answer-key marker and fails the build if one is found.
 

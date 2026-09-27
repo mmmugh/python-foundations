@@ -575,7 +575,7 @@ def build(check=False):
         verify(built)
 
 
-# Dropped into every volume directory this script writes, so it can recognise
+# Dropped into every volume directory this script writes, so it can recognize
 # its own output later. Nothing reads it; its existence is the whole point.
 BUILT_MARKER = ".built-volume"
 
@@ -589,7 +589,7 @@ def prune_removed_volumes():
     is the kind of thing nobody notices until someone else does.
 
     Only directories carrying BUILT_MARKER are removed -- a whitelist of what
-    this script made, not a blacklist of what it does not recognise. Deleting
+    this script made, not a blacklist of what it does not recognize. Deleting
     by non-recognition would take a .well-known/ put there for a certificate,
     or a .git/ used to publish site/ to a hosting branch, with one printed line
     as the only warning.
@@ -893,7 +893,7 @@ def copy_runtime():
     for name in hashes:
         shutil.copyfile(fetch_pyodide.VENDOR / name, target / name)
 
-    # Pyodide is MPL-2.0, which asks that the licence travel with the binary.
+    # Pyodide is MPL-2.0, which asks that the license travel with the binary.
     # site/ is what gets hosted, so the copy has to be there and not only here.
     shutil.copyfile(fetch_pyodide.VENDOR / "LICENSE", target / "LICENSE")
     print(f"copied pyodide {version} -> site/pyodide/ ({len(hashes)} files, verified)")
@@ -903,7 +903,7 @@ def copy_quizzes(vol):
     """Copy one volume's student quizzes into the site, and nothing else.
 
     An explicit whitelist, not an exclusion: a rule that copies everything
-    except the files it recognises as keys fails open the moment a key is named
+    except the files it recognizes as keys fails open the moment a key is named
     something unexpected. This fails closed. The answer keys sit in the same
     volume directory, one level up from here, and are never copied.
     """

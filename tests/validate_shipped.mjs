@@ -16,7 +16,7 @@ const OG = py.globals.get("OUTPUT_GOOD"), OM = py.globals.get("OUTPUT_MUTANT");
 // Case data is parsed by Python from the original JSON text, exactly as the
 // page does it. Going through JavaScript loses 61.0 to an int and null to
 // something that is not None, so a validator that converted it here would be
-// checking behaviour the reader never gets.
+// checking behavior the reader never gets.
 const fromJson = py.globals.get("from_json");
 const casesByVolume = [fromJson(
   readFileSync(`${REPO}/volumes/${VOLUME}/content/_checks.json`, "utf8"))];

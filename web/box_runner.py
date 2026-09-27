@@ -261,7 +261,7 @@ def repl_run(source, seconds, namespace):
     a bracket and the console should keep taking lines instead of running it.
 
     A bare expression shows its value here, because that is what a REPL is --
-    and deliberately NOT in the code boxes, where a file is being modelled and
+    and deliberately NOT in the code boxes, where a file is being modeled and
     `2 + 3` on its own line correctly prints nothing.
     """
     import ast

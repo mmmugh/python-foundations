@@ -6,9 +6,9 @@
        happens to be installed.
 
        The cursor sits ON the baseline, level with the foot of the chevron. A
-       first version centred it, which at 16px reads as a dash rather than a
+       first version centered it, which at 16px reads as a dash rather than a
        prompt. Before that came three chevrons, truer to Python, which smear
-       into an uncountable blob at that size. Both were settled by rasterising
+       into an uncountable blob at that size. Both were settled by rasterizing
        at 16px and looking, which is the only way to tell.
 
        Note for editing: this is XML, so a comment may not contain two hyphens

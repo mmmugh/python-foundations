@@ -971,10 +971,10 @@ pace = float(input("Pace in minutes per km? "))
 minutes = distance_km * pace
 hours = minutes / 60
 water = hours * 0.75
-print("Water per person:", water, "litres")
+print("Water per person:", water, "liters")
 ```
 
-Per hour, so it multiplies the hours. Multiplying the minutes asks for 102 litres, which is a clue that the units were wrong.
+Per hour, so it multiplies the hours. Multiplying the minutes asks for 102 liters, which is a clue that the units were wrong.
 
 ## ch02-variables-and-types-practice#5
 
@@ -985,7 +985,7 @@ minutes = distance_km * pace
 hours = minutes / 60
 water = hours * 0.75
 people = int(input("How many people? "))
-print("Water for the group:", water * people, "litres")
+print("Water for the group:", water * people, "liters")
 ```
 
 int() for a head count, since half a walker does not turn up.
@@ -1013,8 +1013,8 @@ water = hours * 0.75
 print("Length:", distance_km, "km")
 print("Time:", minutes, "minutes")
 print("Time:", hours, "hours")
-print("Water each:", water, "litres")
-print("Water total:", water * people, "litres")
+print("Water each:", water, "liters")
+print("Water total:", water * people, "liters")
 print("Permits:", 4.50 * people)
 ```
 

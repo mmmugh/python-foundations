@@ -17,7 +17,7 @@ The output is checked rather than trusted. Quick Look renders an SVG it cannot
 parse as its *source text* instead, which produces a perfectly valid PNG of the
 wrong thing; that happened here once and a favicon nobody can see is a hard
 thing to notice. So each render is decoded and its middle pixel compared to the
-colour the tile is supposed to be.
+color the tile is supposed to be.
 """
 
 import hashlib
@@ -46,9 +46,9 @@ def decode(path):
         length = struct.unpack(">I", data[pos:pos + 4])[0]
         kind, body = data[pos + 4:pos + 8], data[pos + 8:pos + 8 + length]
         if kind == b"IHDR":
-            w, h, depth, colour = struct.unpack(">IIBB", body[:10])
-            if (depth, colour) != (8, 6):
-                sys.exit(f"{path.name}: expected 8-bit RGBA, got depth {depth} type {colour}")
+            w, h, depth, color = struct.unpack(">IIBB", body[:10])
+            if (depth, color) != (8, 6):
+                sys.exit(f"{path.name}: expected 8-bit RGBA, got depth {depth} type {color}")
         elif kind == b"IDAT":
             idat += body
         pos += 12 + length
@@ -96,7 +96,7 @@ def render(source, target, size):
 
     # A corner inset from the edge: inside the tile for the square icon, and
     # inside the rounded one too. If Quick Look fell back to rendering the SVG
-    # as source text this is white, not the tile colour.
+    # as source text this is white, not the tile color.
     x = y = max(2, size // 6)
     at = rows[y][x * 4:x * 4 + 3]
     if not near(tuple(at), TILE):

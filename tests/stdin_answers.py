@@ -102,21 +102,21 @@ A.update({
  'd = 12.4\np = float(input())\nmins = d * p\nprint(mins, "minutes =", mins / 60, "hours")',
  'distance_km = 12.4\npace = float(input("Pace in minutes per km? "))\nminutes = distance_km * pace\nhours = minutes / 100\nprint(minutes, "minutes, which is", hours, "hours")'),
 "ch02-variables-and-types-practice#4": (
- 'distance_km = 12.4\npace = float(input("Pace in minutes per km? "))\nminutes = distance_km * pace\nhours = minutes / 60\nwater = hours * 0.75\nprint("Water per person:", water, "litres")',
- 'd = 12.4\np = float(input())\nh = d * p / 60\nprint("Litres each:", h * 0.75)',
- 'distance_km = 12.4\npace = float(input("Pace in minutes per km? "))\nminutes = distance_km * pace\nwater = minutes * 0.75\nprint("Water per person:", water, "litres")'),
+ 'distance_km = 12.4\npace = float(input("Pace in minutes per km? "))\nminutes = distance_km * pace\nhours = minutes / 60\nwater = hours * 0.75\nprint("Water per person:", water, "liters")',
+ 'd = 12.4\np = float(input())\nh = d * p / 60\nprint("Liters each:", h * 0.75)',
+ 'distance_km = 12.4\npace = float(input("Pace in minutes per km? "))\nminutes = distance_km * pace\nwater = minutes * 0.75\nprint("Water per person:", water, "liters")'),
 "ch02-variables-and-types-practice#5": (
- 'distance_km = 12.4\npace = float(input("Pace in minutes per km? "))\nminutes = distance_km * pace\nhours = minutes / 60\nwater = hours * 0.75\npeople = int(input("How many people? "))\nprint("Water for the group:", water * people, "litres")',
- 'd = 12.4\np = float(input())\nn = int(input())\nprint("Group litres:", d * p / 60 * 0.75 * n)',
- 'distance_km = 12.4\npace = float(input("Pace in minutes per km? "))\nminutes = distance_km * pace\nhours = minutes / 60\nwater = hours * 0.75\npeople = int(input("How many people? "))\nprint("Water for the group:", water, "litres")'),
+ 'distance_km = 12.4\npace = float(input("Pace in minutes per km? "))\nminutes = distance_km * pace\nhours = minutes / 60\nwater = hours * 0.75\npeople = int(input("How many people? "))\nprint("Water for the group:", water * people, "liters")',
+ 'd = 12.4\np = float(input())\nn = int(input())\nprint("Group liters:", d * p / 60 * 0.75 * n)',
+ 'distance_km = 12.4\npace = float(input("Pace in minutes per km? "))\nminutes = distance_km * pace\nhours = minutes / 60\nwater = hours * 0.75\npeople = int(input("How many people? "))\nprint("Water for the group:", water, "liters")'),
 "ch02-variables-and-types-practice#6": (
  'people = int(input("How many people? "))\nprint("Permits:", 4.50 * people)',
  'n = int(input())\ncost = n * 4.5\nprint("Permit total:", cost)',
  'people = input("How many people? ")\nprint("Permits:", 4.50 * people)'),
 "ch02-variables-and-types-practice#7": (
- 'distance_km = float(input("Trail length in km? "))\npace = float(input("Pace in minutes per km? "))\npeople = int(input("How many people? "))\n\nminutes = distance_km * pace\nhours = minutes / 60\nwater = hours * 0.75\n\nprint("Length:", distance_km, "km")\nprint("Time:", minutes, "minutes")\nprint("Time:", hours, "hours")\nprint("Water each:", water, "litres")\nprint("Water total:", water * people, "litres")\nprint("Permits:", 4.50 * people)',
- 'd = float(input())\np = float(input())\nn = int(input())\nm = d * p\nh = m / 60\nw = h * 0.75\nprint(d, "km")\nprint(m, "minutes")\nprint(h, "hours")\nprint(w, "litres each")\nprint(w * n, "litres total")\nprint(4.5 * n, "for permits")',
- 'd = float(input())\np = float(input())\nn = int(input())\nm = d * p\nh = m / 60\nw = h * 0.75\nprint(d, "km")\nprint(m, "minutes")\nprint(h, "hours")\nprint(w, "litres each")\nprint(4.5 * n, "for permits")'),
+ 'distance_km = float(input("Trail length in km? "))\npace = float(input("Pace in minutes per km? "))\npeople = int(input("How many people? "))\n\nminutes = distance_km * pace\nhours = minutes / 60\nwater = hours * 0.75\n\nprint("Length:", distance_km, "km")\nprint("Time:", minutes, "minutes")\nprint("Time:", hours, "hours")\nprint("Water each:", water, "liters")\nprint("Water total:", water * people, "liters")\nprint("Permits:", 4.50 * people)',
+ 'd = float(input())\np = float(input())\nn = int(input())\nm = d * p\nh = m / 60\nw = h * 0.75\nprint(d, "km")\nprint(m, "minutes")\nprint(h, "hours")\nprint(w, "liters each")\nprint(w * n, "liters total")\nprint(4.5 * n, "for permits")',
+ 'd = float(input())\np = float(input())\nn = int(input())\nm = d * p\nh = m / 60\nw = h * 0.75\nprint(d, "km")\nprint(m, "minutes")\nprint(h, "hours")\nprint(w, "liters each")\nprint(4.5 * n, "for permits")'),
 "ch03-expressions-and-operators-practice#1": (
  'people = int(input("How many people? "))\neach = int(input("Slices each? "))\nslices = people * each\nprint(f"You need {slices} slices")',
  'p = int(input())\ne = int(input())\nprint("Slices needed:", p * e)',

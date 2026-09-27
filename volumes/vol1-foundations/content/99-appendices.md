@@ -424,7 +424,7 @@ with `python3 myfile.py` does exactly the same. To see a value, print it.
 print(2 + 3)
 ```
 
-This is the behaviour the whole course is written around, which is why the
+This is the behavior the whole course is written around, which is why the
 chapter boxes work this way.
 
 ### The scratchpad is an interpreter
