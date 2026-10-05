@@ -37,7 +37,7 @@ The five failure modes the spec implies but its own success criteria do not exer
 2. **A skipped browser test is a green run that tested nothing.** Pinned in **Task 9**: `REQUIRE_BROWSER=1` turns every skip into a failure, demonstrated with a missing browser binary.
 3. **A history scan that cannot see the history reports it clean,** in a shallow clone or a repository with no commits. Pinned in **Tasks 4 and 7**: both history scanners refuse, and tests prove it.
 4. **Something added and then deleted between two looks,** the net-diff class that already let a token through pre-push. Pinned for answer keys in **Task 4** (`--history`) and for leaks in **Task 7**.
-5. **An empty or comments-only personal list passes silently,** since matching nothing looks exactly like a clean history. Pinned in **Task 12**.
+5. **A personal list that checks nothing passes silently,** since matching nothing looks exactly like a clean history: an empty list, a comments-only list, or one holding a single pattern that will not compile, which makes grep abandon the whole list. The last was a live bug in `leak-scan`, fixed at `8d161fd` after the review panel found it. Pinned in **Task 12**, end to end.
 
 ## File Map
 
@@ -496,7 +496,13 @@ Break the content rule and confirm the renamed-key case notices:
 
 ```bash
 cp tests/answer_key_guard.py /tmp/answer_key_guard.bak
-sed -i '' 's/return any(line.strip() == MARKER/return False and any(line.strip() == MARKER/' tests/answer_key_guard.py
+python3 - <<'EOF'
+from pathlib import Path
+p = Path("tests/answer_key_guard.py"); s = p.read_text()
+old = "return any(line.strip() == MARKER"
+assert s.count(old) == 1
+p.write_text(s.replace(old, "return False and any(line.strip() == MARKER", 1))
+EOF
 python3 tests/answer_key_guard_test.py | grep -E "FAIL|wrong"
 cp /tmp/answer_key_guard.bak tests/answer_key_guard.py
 python3 tests/answer_key_guard_test.py | tail -1
@@ -636,7 +642,7 @@ EOF
 A public repository's CI logs are public. When `LEAK_SCAN_REDACT` is set, a match reports a count and nothing else: not the line, and not the path, because a filename can itself be the match.
 
 **Files:**
-- Modify: `.githooks/leak-scan:85-90`
+- Modify: `.githooks/leak-scan` (the final `if [ -n "$matched" ]` block, and one header line)
 - Modify: `tests/leak_scan_test.py`
 
 **Interfaces:**
@@ -685,6 +691,9 @@ REDACT_CASES = [
     ("redacted: a personal literal in a PATH is never printed either",
      "--- /dev/null\n+++ b/acme-corp-plan.md\n@@ -0,0 +1 @@\n+nothing in the body\n",
      {"patterns": "", "local": "acme-corp\n"}, True, ["acme-corp"], "redacted"),
+    ("redacted: a pattern that will not compile fails without printing it",
+     diff_of("+we work at acme-corp now\n"),
+     {"patterns": "", "local": "acme-corp(\n"}, True, ["acme-corp"], "will not compile"),
     ("redacted: a clean diff passes and prints nothing",
      diff_of("+ordinary prose\n"), {}, False, [], ""),
 ]
@@ -1503,7 +1512,13 @@ Expected: every line `ok` in all three, including `every request stays under /py
 Make the built page fetch Pyodide from an absolute path. That works at the root and breaks under a subpath:
 
 ```bash
-sed -i '' 's|new URL("pyodide/", import.meta.url)|new URL("/pyodide/", import.meta.url)|' site/app.js
+python3 - <<'EOF'
+from pathlib import Path
+p = Path("site/app.js"); s = p.read_text()
+old = 'new URL("pyodide/", import.meta.url)'
+assert s.count(old) == 1
+p.write_text(s.replace(old, 'new URL("/pyodide/", import.meta.url)', 1))
+EOF
 (cd tests && node browser_test.mjs | tail -1)
 (cd tests && BASE=/python-foundations/ node browser_test.mjs | grep -E "FAIL|problem")
 python3 build.py >/dev/null && grep -c 'new URL("pyodide/", import.meta.url)' site/app.js
@@ -1664,7 +1679,13 @@ Expected: three `ok` lines and the final summary.
 Put the old conversion back into the built `app.js` (generated output, not the source):
 
 ```bash
-sed -i '' 's|const cases = data.get("cases");|const cases = pyodide.toPy(spec.cases);|' site/app.js
+python3 - <<'EOF'
+from pathlib import Path
+p = Path("site/app.js"); s = p.read_text()
+old = 'const cases = data.get("cases");'
+assert s.count(old) == 1
+p.write_text(s.replace(old, "const cases = pyodide.toPy(spec.cases);", 1))
+EOF
 (cd tests && node browser_check_test.mjs | grep -E "FAIL|problem")
 python3 build.py >/dev/null && grep -c 'const cases = data.get("cases");' site/app.js
 ```
@@ -1883,6 +1904,10 @@ def main():
         code, out = sweep(clean, "# just a comment\n\n   \n")
         expect("a list of only comments and blanks fails too", code, 1)
 
+        code, out = sweep(clean, f"{LITERAL}(\n")
+        expect("a list holding a pattern that will not compile fails",
+               (code, LITERAL in out.lower()), (1, False))
+
         code, out = sweep(clean, f"{LITERAL}\n")
         expect("a real list over a clean history passes", code, 0)
 
@@ -2034,13 +2059,17 @@ Create `tests/workflow_test.py`:
     python3 tests/workflow_test.py
 
 There is no YAML parser in the standard library, so this reads the workflow
-as text. That is enough for what it checks, each of which shows up on a line
-of its own, and it does not claim to be more:
+as text, by indentation. That is enough for what it checks, each of which
+shows up on lines of its own, and it does not claim to be more:
 
   - every action is pinned to a full commit SHA, because a tag can be moved
     by whoever controls the action's repository and a SHA cannot;
-  - the default token is read-only, a top-level permissions block granting
+  - the default token is read-only: a top-level permissions block granting
     exactly `contents: read`;
+  - only the deploy job grants itself anything with "write" in it. A job's
+    own permissions block overrides the default, so checking the top level
+    alone would pass a copy-pasted `contents: write` on any other job. An
+    earlier draft of this test did exactly that; the review panel caught it;
   - no `pull_request_target`, which runs a fork's code with this repository's
     secrets and a write token.
 """
@@ -2051,37 +2080,57 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 WORKFLOWS = sorted((ROOT / ".github" / "workflows").glob("*.yml"))
+WRITE_ALLOWED = {"deploy"}
 
 
-def top_level_permissions(lines):
-    for i, line in enumerate(lines):
-        if re.match(r"permissions:\s*$", line):
-            block = []
-            for nxt in lines[i + 1:]:
-                if nxt.strip() and not nxt.startswith((" ", "\t")):
-                    break
-                if nxt.strip() and not nxt.strip().startswith("#"):
-                    block.append(nxt.strip())
-            return block
-    return None
+def block_under(lines, i):
+    """What lines[i] (a `permissions:` key) grants: its inline value, if any,
+    plus every non-comment line nested under it, with trailing comments cut."""
+    line = lines[i]
+    indent = len(line) - len(line.lstrip())
+    grants = []
+    inline = re.sub(r"\s+#.*$", "", line.split(":", 1)[1]).strip()
+    if inline:
+        grants.append(inline)
+    for nxt in lines[i + 1:]:
+        if nxt.strip() and len(nxt) - len(nxt.lstrip()) <= indent:
+            break
+        text = re.sub(r"\s+#.*$", "", nxt).strip()
+        if text and not text.startswith("#"):
+            grants.append(text)
+    return grants
 
 
 def problems_in(path):
-    text = path.read_text()
-    lines = text.splitlines()
+    lines = path.read_text().splitlines()
     found = []
-    for n, line in enumerate(lines, 1):
-        if line.lstrip().startswith("#"):
+    top, job, in_jobs = None, None, False
+    for i, line in enumerate(lines):
+        n, stripped = i + 1, line.strip()
+        if not stripped or stripped.startswith("#"):
             continue
         m = re.match(r"\s*(?:-\s*)?uses:\s*(\S+)", line)
         if m and not re.fullmatch(r"[^@\s]+@[0-9a-f]{40}", m.group(1)):
             found.append(f"{path.name}:{n}: not pinned to a commit SHA: {m.group(1)}")
         if "pull_request_target" in line:
             found.append(f"{path.name}:{n}: pull_request_target")
-    block = top_level_permissions(lines)
-    if block != ["contents: read"]:
+        if re.match(r"jobs:\s*$", line):
+            in_jobs = True
+            continue
+        if in_jobs:
+            m = re.match(r"  ([A-Za-z0-9_-]+):\s*$", line)
+            if m:
+                job = m.group(1)
+        if re.match(r"\s*permissions:", line):
+            grants = block_under(lines, i)
+            if not line.startswith((" ", "\t")):
+                top = grants
+            elif job not in WRITE_ALLOWED and any("write" in g for g in grants):
+                found.append(f"{path.name}:{n}: job '{job}' grants itself {grants}; "
+                             f"only {sorted(WRITE_ALLOWED)} may write")
+    if top != ["contents: read"]:
         found.append(f"{path.name}: top-level permissions should be exactly "
-                     f"'contents: read', found {block}")
+                     f"'contents: read', found {top}")
     return found
 
 
@@ -2092,7 +2141,7 @@ def main():
     for problem in found:
         print(f"  FAIL  {problem}")
     print(f"\n{len(WORKFLOWS)} workflow(s): "
-          f"{'pinned, read-only by default, no pull_request_target' if not found else str(len(found)) + ' problem(s)'}")
+          f"{'pinned, read-only by default, write only in deploy, no pull_request_target' if not found else str(len(found)) + ' problem(s)'}")
     sys.exit(1 if found else 0)
 
 
@@ -2355,24 +2404,48 @@ python3 tests/workflow_test.py
 actionlint .github/workflows/ci.yml && echo "actionlint: clean"
 ```
 
-Expected: `1 workflow(s): pinned, read-only by default, no pull_request_target` twice; `actionlint: clean`. If actionlint reports anything, fix it in the YAML and re-run; do not silence it.
+Expected: `1 workflow(s): pinned, read-only by default, write only in deploy, no pull_request_target` twice; `actionlint: clean`. If actionlint reports anything, fix it in the YAML and re-run; do not silence it.
 
-- [ ] **Step 5: Show the guard test failing on purpose**
+- [ ] **Step 5: Show every clause failing on purpose, one at a time**
+
+Each of the four promises gets its own planted violation, and the file is restored after each. A clause never shown failing is how the first draft of this test came to miss job-level write grants.
 
 ```bash
 cp .github/workflows/ci.yml /tmp/ci.bak
-python3 - <<'EOF'
+plant() {   # $1 = text to find, $2 = text to put in its place
+  python3 - "$1" "$2" <<'EOF'
+import sys
 from pathlib import Path
 p = Path(".github/workflows/ci.yml"); s = p.read_text()
-p.write_text(s.replace("actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
-                       "actions/checkout@v7.0.1", 1))
+old, new = sys.argv[1], sys.argv[2]
+assert s.count(old) == 1, f"plant target found {s.count(old)} times"
+p.write_text(s.replace(old, new, 1))
 EOF
-python3 tests/workflow_test.py | grep -E "FAIL|problem"
-cp /tmp/ci.bak .github/workflows/ci.yml
+  python3 tests/workflow_test.py | grep FAIL
+  cp /tmp/ci.bak .github/workflows/ci.yml
+}
+# actions/cache appears once; checkout appears in every job, and the plant
+# refuses an ambiguous target rather than guessing which one to break.
+plant "actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9" "actions/cache@v6.1.0"
+plant "permissions:
+  contents: read
+" "permissions:
+  contents: write
+"
+plant "  node-gates:
+    needs: build
+" "  node-gates:
+    needs: build
+    permissions:
+      contents: write
+"
+plant "  pull_request:
+    branches: [main]" "  pull_request_target:
+    branches: [main]"
 python3 tests/workflow_test.py | tail -1
 ```
 
-Expected: `FAIL  ci.yml:<line>: not pinned to a commit SHA: actions/checkout@v7.0.1`, then the restored run passes.
+Expected, in order: a `FAIL … not pinned to a commit SHA: actions/cache@v6.1.0` line; a `FAIL … top-level permissions should be exactly 'contents: read'` line; a `FAIL … job 'node-gates' grants itself ['contents: write']` line; a `FAIL … pull_request_target` line; then the restored file passes.
 
 - [ ] **Step 6: Commit**
 
@@ -2393,7 +2466,8 @@ real URL).
 
 Every action is pinned by commit SHA, the token is read-only except in
 deploy, there is no pull_request_target, and tests/workflow_test.py checks
-those three. Shown failing on purpose with one action pinned by tag.
+those four, including a write grant on any job but deploy. Each clause
+shown failing on purpose with its own planted violation.
 actionlint reports nothing.
 
 It first runs in Plan C. Until the history is rewritten, the two history
