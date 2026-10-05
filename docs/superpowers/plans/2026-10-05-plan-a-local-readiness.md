@@ -1,6 +1,6 @@
 # Plan A: Local Readiness Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **Execution: Native, chosen by Justin on 2026-10-05.** REQUIRED SUB-SKILL: superpowers:executing-plans. Implement every task in the main session, then one fresh reviewer on the most capable model checks the whole branch. Do not switch to subagent-driven: Tasks 1, 2 and 14 stop for Justin's input, which a subagent cannot get. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Make the repository ready to go public, entirely locally: answer keys out of the tree, every leak and answer-key guard able to scan whole histories, browser tests that work under the GitHub Pages subpath and against a live URL, licenses, and a CI workflow written and linted but not yet run.
 

@@ -1075,6 +1075,33 @@ def write_bundle(vol, pages):
     print(f"generated {len(written)} bundle files -> site/{vol['slug']}/bundle/")
 
 
+def run_box_file(source, where):
+    """Run one code box as a script, from a directory of its own.
+
+    These runs used to write each box to NamedTemporaryFile(delete=False) in
+    the shared temp directory and never remove it: 253 files per --check. On
+    a machine that had not rebooted in 51 days that directory reached 2.1
+    million entries, and Python 3.14 then took 30 to 40 seconds to report a
+    deliberate error from a script there -- measured, and gone under -I, which
+    stops putting the script's own directory on sys.path -- so every example
+    that raises on purpose timed out and --check failed. Python 3.9 has no
+    such delay, which is why the same build passed under it.
+
+    A fresh directory per box fixes both halves: nothing is left behind, and
+    sys.path[0] holds one file whatever state the shared directory is in.
+    """
+    with tempfile.TemporaryDirectory() as scratch:
+        path = Path(scratch) / "box.py"
+        path.write_text(source + "\n")
+        try:
+            return subprocess.run([sys.executable, str(path)], capture_output=True,
+                                  text=True, stdin=subprocess.DEVNULL, timeout=30)
+        except subprocess.TimeoutExpired:
+            # Name the box. This used to surface as an anonymous traceback from
+            # inside subprocess, which said nothing about which example hung.
+            sys.exit(f"{where}: still running after 30 seconds")
+
+
 def verify(built):
     """Run every code box in every volume on this machine's python3."""
     print("\nchecking every code box against python3:")
@@ -1100,11 +1127,7 @@ def verify(built):
             if declared.get("setup"):
                 source = declared["setup"] + "\n" + code
 
-            with tempfile.NamedTemporaryFile("w", suffix=".py", delete=False) as f:
-                f.write(source + "\n")
-                temp = f.name
-            run = subprocess.run([sys.executable, temp], capture_output=True,
-                                 text=True, stdin=subprocess.DEVNULL, timeout=30)
+            run = run_box_file(source, f"{page['key']}#{index - 1}")
 
             if run.returncode == 0:
                 tally["clean"] += 1
@@ -1143,11 +1166,7 @@ def audit_book_output(dump):
             continue
 
         source = (box["setup"] + "\n" if box["setup"] else "") + box["code"]
-        with tempfile.NamedTemporaryFile("w", suffix=".py", delete=False) as f:
-            f.write(source + "\n")
-            temp = f.name
-        run = subprocess.run([sys.executable, temp], capture_output=True, text=True,
-                             stdin=subprocess.DEVNULL, timeout=30)
+        run = run_box_file(source, box["id"])
         if run.returncode != 0:
             continue
         checked += 1
