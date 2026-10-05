@@ -1,7 +1,7 @@
 # Spec: Python Foundations goes public
 
-Status: draft for review, 2026-10-05. Decisions marked **(decided)** were made
-by Justin on that date; everything under Open Questions is not yet decided.
+Status: **approved 2026-10-05.** Decisions marked **(decided)** were made by
+Justin on that date; everything under Open Questions is not yet decided.
 
 ## Objective
 
@@ -68,7 +68,7 @@ repo's entire history contains nothing on the list above.
 
 | Piece | Version | Notes |
 | --- | --- | --- |
-| Python | 3.14 locally; README claims 3.9 too | `build.py` is stdlib only |
+| Python | 3.14 locally; **3.9 is the floor** | `build.py` is stdlib only; 3.9.6 is the `python3` that macOS's Command Line Tools provide |
 | Node | 25 (v25.9.0 locally) | test harnesses only |
 | Pyodide | 314.0.7 | fetched into `vendor/pyodide/`, pinned by `CHECKSUMS` |
 | `pyodide` (npm) | 314.0.7 | already pinned in `tests/package.json` |
@@ -347,11 +347,35 @@ anything in that history is public.
 4. **The worksheet** (`WORKSHEET-2026-09-21-web-app.md`). It is part of the
    design record, and the Java port reads it, but its FEEDBACK block is
    internal. Keep it as is, move it under `docs/`, or keep it private.
-5. **Python 3.9 in CI.** 3.9 is past end of life and may not be installable on
-   current runners. If it is not, the README's "verified on 3.9" claim changes
-   rather than CI quietly dropping it.
+5. **Python 3.9 in CI — resolved: keep it.** The first draft of this question
+   said 3.9 "may not be installable on current runners". That was never
+   checked, and it is false: setup-python's manifest carries 3.9.25 for Ubuntu
+   22.04 and 24.04, x64 and arm64. It also missed why 3.9 matters. On a Mac,
+   `/usr/bin/python3` is the same stub binary as `/usr/bin/git`, both handing
+   off to the Command Line Tools, whose Python is 3.9.6 (June 2021, branch
+   end-of-life since 2025-10-31). Anyone who can run the README's `git clone`
+   already has that interpreter, so supporting it is what makes "nothing to
+   install" true. Re-verified 2026-10-05: `build.py --check` and all four
+   Python tests pass under 3.9.6. The 3.9 row in the CI matrix is the only
+   thing that would catch a 3.10+ feature slipping into `build.py`. The README
+   should say 3.9 *works* and recommend a current Python, not endorse 3.9.
 6. **`Claude-Session` trailers.** They become public. They grant no access, but
    they do expose session IDs. The default is to keep them.
 7. **External references.** The Java brief and the tokenwatt findings cite
    SHAs that the rewrite will change. Update them from the commit map, or note
    the change once in each.
+8. **The course's name. Must be decided before Plan C,** because the Pages URL
+   contains the repo name and a rename after launch moves the site and breaks
+   every shared link. Researched 2026-10-05: neither "Python Foundations" nor
+   "Java Foundations" is a registered US mark (a register mirror, not a
+   clearance search). But neither name is stale. "Python Foundations" is in
+   active use by Pluralsight, Coursera/Packt, Zenva, and a book series launched
+   in 2026; the PSF policy allows "Python" in the name of a free publication,
+   but not inside a trademark of one's own. "Java Foundations" is the name of
+   Oracle's own beginner course and of Oracle's 1Z0-811 exam, and Oracle's Java
+   branding guidelines list "Java [My Product]" as the incorrect form, "[My
+   Product] for Java" as the correct one. So the Java course must be renamed
+   regardless, and a shared family name for both courses is worth
+   considering. A rename touches titles across the whole site, so the
+   user-facing text in Plan A (README introduction, license headers) is best
+   written after this is settled.
