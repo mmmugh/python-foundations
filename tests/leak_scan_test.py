@@ -165,6 +165,16 @@ CASES = [
      'diff --git "a/Caf\\303\\251-Corp notes.md" "b/Caf\\303\\251-Corp notes.md"\n'
      "new file mode 100644\nindex 0000000..e69de29\n", False,
      {"patterns": "", "local": "caf\u00e9-corp\n"}),
+    # A pattern that will not compile must fail the scan, not pass it. grep
+    # exits 2 on such a pattern and, worse, abandons the whole -f run, so the
+    # VALID patterns in the same list stop matching too. `|| true` used to
+    # swallow that, and one unbalanced parenthesis turned a list off silently.
+    ("a generic pattern that will not compile fails the scan",
+     diff_of("+a line holding SECRETWORD\n"), True,
+     {"patterns": "acme-corp(\nSECRETWORD\n"}),
+    ("a personal pattern that will not compile fails the scan",
+     diff_of("+we work at acme-corp now\n"), True,
+     {"patterns": "", "local": "acme-corp(\n"}),
     ("an empty diff is allowed",
      "", False, {}),
 ]

@@ -116,14 +116,23 @@ def main():
                         problems.append(f"{key}: uses {kind} the course has not "
                                         f"shown by chapter {chapter}: {extra}")
                 spec = checks.get(key)
-                if spec:
-                    result = run_check(spec, entry["code"])
-                    if result is not None:
-                        checked += 1
-                        ok, why = result
-                        if not ok:
-                            problems.append(f"{key}: the worked solution fails its "
-                                            f"own check -- {why[0] if why else ''}")
+                if not spec:
+                    # Every practice step is checked by design, so a worked
+                    # solution with no check means the two files have drifted
+                    # apart: a renamed page, a typo in a key. Skipping it, as
+                    # this once did, quietly shrinks what the test proves.
+                    problems.append(f"{key}: has a worked solution but no check")
+                    continue
+                result = run_check(spec, entry["code"])
+                if result is None:
+                    problems.append(f"{key}: a check of kind {spec.get('kind')!r}, "
+                                    f"which this test cannot run")
+                    continue
+                checked += 1
+                ok, why = result
+                if not ok:
+                    problems.append(f"{key}: the worked solution fails its "
+                                    f"own check -- {why[0] if why else ''}")
             print(f"  {slug:<44} {len(mine):>2} steps, {checked:>2} checked, "
                   f"{'nothing early' if not late else str(late) + ' TOO EARLY'}")
 

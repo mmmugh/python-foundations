@@ -68,17 +68,36 @@ awk '/^diff --git /{r=substr($0,12); n=(length(r)-5)/2;
 
 [ -s "$work" ] || exit 0
 
+# grep exits 0 on a match, 1 on none, and 2 on an error such as a pattern
+# that will not compile. `|| true` used to treat all three alike -- and one
+# bad pattern makes grep abandon the whole -f run, so the VALID patterns in
+# that list stopped matching too. A single unbalanced parenthesis turned a
+# list off, and every scan passed. An error now fails the scan. grep's own
+# message is discarded rather than echoed, in case some grep quotes the
+# offending pattern back; the list is named instead.
+search() {  # $1 = filtered pattern file, $2 = the list's name; the rest go to grep
+  list=$1; name=$2; shift 2
+  status=0
+  found=$(grep -E "$@" -f "$list" "$work" 2>/dev/null) || status=$?
+  if [ "$status" -eq 0 ]; then
+    matched=$found
+  elif [ "$status" -ne 1 ]; then
+    echo "leak-scan: ERROR — a pattern in $name will not compile (grep exit $status), so nothing in that list can be checked; fix the list" >&2
+    exit 2
+  fi
+}
+
 matched=""
 if [ -f "$PATTERNS" ]; then
   sed -e '/^[[:space:]]*#/d' -e '/^[[:space:]]*$/d' "$PATTERNS" > "$pg"
   if [ -s "$pg" ]; then
-    matched=$(grep -E -f "$pg" "$work" || true)
+    search "$pg" "$PATTERNS"
   fi
 fi
 if [ -z "$matched" ] && [ -f "$PATTERNS_LOCAL" ]; then
   sed -e '/^[[:space:]]*#/d' -e '/^[[:space:]]*$/d' "$PATTERNS_LOCAL" > "$pl"
   if [ -s "$pl" ]; then
-    matched=$(grep -E -i -f "$pl" "$work" || true)
+    search "$pl" "$PATTERNS_LOCAL" -i
   fi
 fi
 
