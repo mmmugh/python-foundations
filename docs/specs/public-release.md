@@ -2,14 +2,17 @@
 
 Status: **approved 2026-10-05.** Decisions marked **(decided)** were made by
 Justin on that date; decisions 5 to 8 were added the same day, while Plan B was
-being written. Everything still under Open Questions is not yet decided.
+being written, decision 9 after Plan B's final review, and decisions 10 to 13
+on 2026-10-06, when the questions Plan C needed were settled. Decision 2 was
+reversed that day. No question remains open.
 
 ## Objective
 
 Publish Python Foundations as a public GitHub repository whose site is built
 and deployed by CI to GitHub Pages, without publishing anything that should
-not be public: the author's personal email, the quiz answer keys, the LAN
-address once recorded in the worksheet, or any personal string.
+not be public: the author's personal email, the LAN address once recorded in
+the worksheet, the private worksheet itself, or any personal string. (The
+quiz answer keys were on this list until decision 2 was reversed.)
 
 Who it is for: a learner who wants to read the course in a browser, with
 nothing to install, at `https://mmmugh.github.io/python-foundations/`; and
@@ -59,11 +62,14 @@ repo's entire history contains nothing on the list above.
    garbage-collects them, so flipping the existing private repo public would
    expose exactly what the rewrite removed. A new repository never held those
    objects. The old private repo is renamed and kept, private, as a backup.
-2. **Answer keys are private; everything else is public.** The twelve keys
-   leave the repository and every commit of its history, and live in a private
-   companion. Worked solutions are already shown on the site behind a
-   disclosure, and the test fixtures in `tests/` must stay public because CI
-   cannot validate the checks without them.
+2. **Everything is public, the answer keys included. (Reversed 2026-10-06.)**
+   First decided the other way: the keys were to leave the repository and its
+   history for a private companion, and Plan A untracked them and added a
+   guard. Justin reversed it before launch. The keys are tracked again, the
+   history keeps them, and `tests/answer_key_guard.py` and its CI steps are
+   retired. `build.py` still keeps them off the site, so the course pages stay
+   free of answers; anyone who wants them finds them in the repository. Worked
+   solutions are shown on the site behind a disclosure, as before.
 3. **Licenses match Java Foundations.** CC BY-NC-SA 4.0 for the course
    (everything under `volumes/`), Apache-2.0 for everything else, third-party
    material under its own license (`vendor/pyodide/LICENSE`, MPL-2.0).
@@ -102,6 +108,28 @@ repo's entire history contains nothing on the list above.
    `-Users-<user>-…`. The working copies were changed the same way first, so
    criterion 5 holds, and `.githooks/leak-patterns` now blocks the dash form.
    Decided by Justin on 2026-10-06, after the final review of Plan B.
+10. **The name stays "Python Foundations", with a disclaimer.** The README and
+    the site's front page say the course is independent and free, is not
+    affiliated with or endorsed by the Python Software Foundation or any other
+    course, book or program of the same name, and that "Python" is a
+    registered trademark of the PSF. (Was Open Question 8.)
+11. **The old repository becomes `python-foundations-private`, archived.** It
+    stays private and read-only, as the backup of the original history. The
+    working copy's `origin` is pointed at it straight after the rename, before
+    the new public repository takes the old name, so that no stray push can
+    send the old history there. A git bundle of the full original history is
+    kept in the private notes directory too, since the archived repository
+    lacks the commits that were never pushed to it. (Was Open Question 3.)
+12. **External references get a note, not a translation.** The tokenwatt
+    findings and this project's seed prompts cite pre-rewrite hashes; each
+    gains one line saying those hashes name commits in the archived private
+    repository. The Java project's own notes and repository are its own
+    session's business. (Was Open Question 7.)
+13. **No commit carries a `Claude-Session` line from now on.** `Co-Authored-By`
+    stays. A generic leak pattern for session URLs makes CI, which reads every
+    commit message, refuse one, and a `commit-msg` hook refuses one locally,
+    before the commit exists. That hook scans each message with the generic
+    and personal lists, which nothing local did before.
 
 ## Tech Stack
 
@@ -150,7 +178,7 @@ python3 scripts/scan_history.py --redact      # what CI runs: never prints match
 (cd tests && BASE=/python-foundations/ node browser_test.mjs)   # under the Pages subpath
 (cd tests && SITE_URL=https://mmmugh.github.io/python-foundations/ node browser_test.mjs)
 (cd tests && node browser_check_test.mjs)     # promoted from scratchpad: Check round-trip
-python3 tests/answer_key_guard.py             # no answer key tracked, by path or content
+python3 tests/answer_key_guard.py             # retired by Plan C: the keys are public (decision 2)
 ```
 
 One-time, during the rewrite (Plan B):
@@ -181,7 +209,7 @@ LICENSE-COURSE                   CC BY-NC-SA 4.0
 README.md                        gains a public-facing top section and a
                                  Licenses table; developer docs stay below
 .github/workflows/ci.yml         gates, build, deploy, live check
-.gitignore                       + volumes/*/answer-keys/, the worksheet
+.gitignore                       + the worksheet
 .githooks/leak-scan              + LEAK_SCAN_REDACT mode
 .githooks/leak-patterns.local    NEVER tracked; Justin's personal strings
 scripts/scan_history.py          leak-scan over every commit
@@ -189,7 +217,8 @@ tests/package.json               playwright-core pinned to 1.63.0
 tests/package-lock.json          now tracked, for npm ci
 tests/browser_test.mjs           + BASE (subpath) and SITE_URL (live) modes
 tests/browser_check_test.mjs     promoted from scratchpad
-tests/answer_key_guard.py        new
+tests/answer_key_guard.py        added in Plan A, retired in Plan C (decision 2)
+.githooks/commit-msg             Plan C: scans every message before it exists
 docs/specs/public-release.md     this file
 ```
 
@@ -236,7 +265,7 @@ granted more. All actions pinned by commit SHA. No `pull_request_target`.
 
 | Job | Needs | Runs |
 | --- | --- | --- |
-| `leaks` | — | `leak_scan_test.py`, `pre_push_test.py`, `scan_history.py --redact` with the generic patterns, gitleaks over full history with `--redact`, the personal sweep, `answer_key_guard.py` |
+| `leaks` | — | `leak_scan_test.py`, `pre_push_test.py`, `scan_history.py --redact` with the generic patterns, gitleaks over full history with `--redact`, the personal sweep (`answer_key_guard.py` until Plan C retired it) |
 | `build` | — | matrix Python 3.9 and 3.14: fetch and verify Pyodide (cached by `CHECKSUMS` hash), `build.py --check`, `practice_test.py`, `second_volume_test.py`. The 3.14 leg uploads `site/` twice from the same directory: once as a normal artifact for the other jobs, once as the Pages artifact |
 | `node-gates` | `build` | `npm ci`, then `verify2`, `validate_shipped`, `validate_stdin`, `validate_projects` against the built `site/` |
 | `browser` | `build` | Chromium via `playwright-core`; `browser_test` at the root **and** under `/python-foundations/`; `browser_check_test` |
@@ -282,7 +311,7 @@ testing anything.
 | --- | --- |
 | `leak_scan_test.py` + redact cases | redacted output contains the pattern text, the matched line, or a matched path |
 | `scan_history.py` (exercised in `pre_push_test.py` or its own test) | a leak in a middle commit, deleted later, is missed |
-| `answer_key_guard.py` | an answer key is tracked under any path, or a tracked file under `volumes/` carries the answer-key header |
+| `answer_key_guard.py` (retired in Plan C) | an answer key is tracked under any path, or a tracked file under `volumes/` carries the answer-key header |
 | `browser_test.mjs` with `BASE` | any request escapes the subpath or the runtime fails to load there |
 | `browser_check_test.mjs` | the JSON boundary fix is reverted (the `None` case and the `61.0` case both fail) |
 | CI as a whole | a pushed branch with a wrong expected output, a token, or a broken page goes red — proven once per job |
@@ -326,9 +355,9 @@ Each of these is a check someone can run, not a judgment.
    `build.txt` equals the deployed commit.
 2. `git log --format='%ae%n%ce' | sort -u` on the public repo prints exactly one
    line: `71140104+mmmugh@users.noreply.github.com`.
-3. No commit in the public history contains a path with `answer-keys` in it,
-   or the worksheet, and the twelve keys exist in the private companion with
-   checksums matching the originals.
+3. No commit in the public history contains the worksheet. (This criterion
+   also covered the answer keys until decision 2 was reversed; the twelve keys
+   are now tracked, and match the checksummed backup.)
 4. `scan_history.py` with the generic and the personal patterns, and gitleaks,
    all report zero findings across every commit of the public history.
 5. The rewritten `HEAD`'s tree equals the pre-rewrite `HEAD`'s tree — the
@@ -370,25 +399,27 @@ then one commit translating the hashes cited in files.
 Verify criteria 2 through 6 locally and keep filter-repo's commit map. Nothing
 pushed. Reversible: delete the clone.
 
-**Plan C — cutover.** Every step here needs Justin's explicit go-ahead. Rename
-the old repo, create the new one, set push protection, the email block, the
+**Plan C — cutover.** It begins locally, because the questions it needed
+changed what goes public: the answer keys are tracked again (decision 2), the
+disclaimer is written (10), session lines are refused locally and in CI (13),
+and Plan B's rewrite is run again with the answer-key paths kept. Then the
+GitHub steps, each of which needs Justin's explicit go-ahead: prove the email
+block, bundle the original history, rename and archive the old repo and
+re-point the working copy (11), create the new one with push protection, the
 Actions secret and the Pages source, then push. Watch the first CI run, add
-branch protection once its checks exist, verify the live site, run the
-fresh-clone check, swap the local working copy for a clone of the new repo
-while keeping the untracked files it needs, and — if approved — update the
-SHAs cited outside the repo. The push is the one-way door: once public,
-anything in that history is public.
+branch protection once its checks exist, prove CI catches breakage, verify the
+live site, run the fresh-clone check, swap the working copy's history for the
+new repository's while keeping its untracked files, and add a note to each
+external reference (12). The push is the one-way door: once public, anything
+in that history is public.
 
 ## Open Questions
 
 1. **The personal list — resolved.** It exists, locally only, in
    `.githooks/leak-patterns.local`; its contents are deliberately not here.
-2. **The private companion for the keys.** A private repository (proposed:
-   `mmmugh/python-foundations-answers`, cloned into the now-ignored
-   `answer-keys/` path so authoring does not change) or the private notes
-   directory.
-3. **The old repository's new name.** Proposed:
-   `python-foundations-private`.
+2. **The private companion for the keys — moot.** Decision 2 was reversed;
+   the keys are public.
+3. **The old repository's new name — resolved.** See decision 11.
 4. **The worksheet — resolved: private.** See decision 5.
 5. **Python 3.9 in CI — resolved: keep it.** The first draft of this question
    said 3.9 "may not be installable on current runners". That was never
@@ -403,10 +434,9 @@ anything in that history is public.
    thing that would catch a 3.10+ feature slipping into `build.py`. The README
    should say 3.9 *works* and recommend a current Python, not endorse 3.9.
 6. **`Claude-Session` trailers — resolved: stripped.** See decision 6.
-7. **External references.** The Java brief and the tokenwatt findings cite
-   SHAs that the rewrite will change. Update them from the commit map, or note
-   the change once in each.
-8. **The course's name. Must be decided before Plan C,** because the Pages URL
+7. **External references — resolved: a note in each.** See decision 12.
+8. **The course's name — resolved: "Python Foundations", with a disclaimer.**
+   See decision 10. The research that informed it follows. The Pages URL
    contains the repo name and a rename after launch moves the site and breaks
    every shared link. Researched 2026-10-05: neither "Python Foundations" nor
    "Java Foundations" is a registered US mark (a register mirror, not a
