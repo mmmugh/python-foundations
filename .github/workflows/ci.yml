@@ -1,0 +1,235 @@
+# CI for the course: every gate on every push and pull request, then, on main
+# only, deploy the exact artifact those gates tested to GitHub Pages and test
+# the live site.
+#
+# Security posture for a public repository (docs/specs/public-release.md):
+# actions pinned by full commit SHA, a read-only token by default, write access
+# for the deploy job alone, no pull_request_target, and nothing that prints a
+# secret or a matched personal string. tests/workflow_test.py checks the first
+# three.
+name: ci
+
+on:
+  push:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  leaks:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0            # a shallow clone would scan one commit and call it clean
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.14"
+      - name: The scanner blocks what it claims to
+        run: python3 tests/leak_scan_test.py
+      - name: pre-push scans what reaches the remote
+        run: python3 tests/pre_push_test.py
+      - name: The history scan and the personal sweep behave
+        run: |
+          python3 tests/scan_history_test.py
+          python3 tests/personal_sweep_test.py
+      - name: Every commit, generic patterns (redacted)
+        run: python3 scripts/scan_history.py --redact
+      - name: gitleaks over the full history (redacted)
+        env:
+          GITLEAKS_VERSION: 8.30.1
+          GITLEAKS_SHA256: 551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb
+        run: |
+          tarball="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          curl -fsSLO "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/${tarball}"
+          echo "${GITLEAKS_SHA256}  ${tarball}" | sha256sum -c -
+          tar -xzf "${tarball}" gitleaks
+          ./gitleaks git --redact --no-banner --log-opts="--all" .
+      - name: Every commit, personal patterns (redacted)
+        env:
+          PERSONAL_PATTERNS: ${{ secrets.LEAK_PATTERNS_LOCAL }}
+          FORK_PULL_REQUEST: ${{ github.event.pull_request.head.repo.fork || 'false' }}
+        run: sh scripts/personal_sweep.sh
+      - name: The answer-key guard itself
+        run: python3 tests/answer_key_guard_test.py
+      - name: No answer key in the tree
+        run: python3 tests/answer_key_guard.py
+      - name: No answer key anywhere in history
+        run: python3 tests/answer_key_guard.py --history
+      - name: The workflow keeps its own promises
+        run: python3 tests/workflow_test.py
+
+  build:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        # 3.9 is the python3 the Command Line Tools give every Mac with git.
+        python: ["3.9", "3.14"]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: vendor/pyodide
+          key: pyodide-${{ hashFiles('vendor/pyodide/CHECKSUMS') }}
+      - name: Fetch Pyodide and verify it against CHECKSUMS
+        run: python3 scripts/fetch_pyodide.py --download
+      - name: Build, and verify every example
+        run: python3 build.py --check
+      - name: Practice pages and volumes
+        run: |
+          python3 tests/practice_test.py
+          python3 tests/second_volume_test.py
+      - name: Mark the build with its commit
+        if: matrix.python == '3.14'
+        run: echo "${GITHUB_SHA}" > site/build.txt
+      - name: Keep the site for the jobs that test it
+        if: matrix.python == '3.14'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: site
+          path: site/
+          if-no-files-found: error
+      - name: Keep the same bytes for Pages
+        if: matrix.python == '3.14'
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: site/
+
+  node-gates:
+    needs: build
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "25"
+          cache: npm
+          cache-dependency-path: tests/package-lock.json
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: site
+          path: site
+      - name: Install the harness, without the browser library
+        working-directory: tests
+        run: npm ci --omit=optional --no-audit --no-fund
+      - name: Pyodide harnesses
+        working-directory: tests
+        run: |
+          node verify2.mjs
+          node validate_shipped.mjs
+          node validate_stdin.mjs
+          node validate_projects.mjs
+
+  browser:
+    needs: build
+    runs-on: ubuntu-24.04
+    env:
+      REQUIRE_BROWSER: "1"          # a skipped browser test must not read as green
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.14"    # serve.py serves the site
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "25"
+          cache: npm
+          cache-dependency-path: tests/package-lock.json
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: site
+          path: site
+      - name: Install the harness and Chromium
+        working-directory: tests
+        run: |
+          npm ci --no-audit --no-fund
+          npx playwright-core install --with-deps chromium
+      - name: The page works at the root
+        working-directory: tests
+        run: node browser_test.mjs
+      - name: The page works under /<repo>/, the way Pages serves it
+        working-directory: tests
+        env:
+          BASE: /${{ github.event.repository.name }}/
+        run: node browser_test.mjs
+      - name: Check works across the JavaScript-to-Python boundary
+        working-directory: tests
+        run: node browser_check_test.mjs
+
+  deploy:
+    needs: [leaks, build, node-gates, browser]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+      - id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+
+  live:
+    needs: deploy
+    runs-on: ubuntu-24.04
+    env:
+      REQUIRE_BROWSER: "1"
+      SITE_URL: ${{ needs.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "25"
+          cache: npm
+          cache-dependency-path: tests/package-lock.json
+      - name: Install the harness and Chromium
+        working-directory: tests
+        run: |
+          npm ci --no-audit --no-fund
+          npx playwright-core install --with-deps chromium
+      - name: Wait until the live site is this build
+        # Pages sends max-age=600, so for up to ten minutes the previous deploy
+        # can still be what a reader gets. Test nothing until it is not.
+        run: |
+          base="${SITE_URL%/}/"
+          for _ in $(seq 1 72); do
+            if [ "$(curl -fsS "${base}build.txt" 2>/dev/null)" = "${GITHUB_SHA}" ]; then
+              echo "live at ${base}"; exit 0
+            fi
+            sleep 10
+          done
+          echo "::error::${base} never served build ${GITHUB_SHA}"
+          exit 1
+      - name: The live page works, under its real host and path
+        working-directory: tests
+        run: node browser_test.mjs
+      - name: Check works on the live site
+        working-directory: tests
+        run: node browser_check_test.mjs
