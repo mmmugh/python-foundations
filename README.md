@@ -194,6 +194,12 @@ hands the scanner the right diffs — and answers it by pushing at a throwaway
 bare remote in a temp directory. The scanner was already correct on the day a
 push carrying a token in its history sailed through.
 
+`python3 scripts/scan_history.py` runs the scanner over every commit in the
+history, which is what a public repository publishes, rather than over the
+final tree. It refuses a shallow clone or an empty history instead of calling
+either clean. CI runs it with `--redact`, which prints a commit and a count and
+never what matched.
+
 ## Editing
 
 Edit `volumes/<volume>/content/*.md` and rebuild. The chapters are the only
