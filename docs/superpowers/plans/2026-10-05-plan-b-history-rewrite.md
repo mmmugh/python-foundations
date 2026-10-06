@@ -4,18 +4,20 @@
 
 **Goal:** Produce, locally and nowhere else, a rewritten copy of this repository's history that meets the spec's success criteria 2 to 6, plus one commit that points the hashes cited in files at the new history, ready for Plan C to push.
 
-**Architecture:** The working repository is only read. A `--mirror --no-local` clone of it is rewritten by one `git filter-repo` run: mailmap, three paths removed, commit messages edited by exact phrase. A plain clone of the result is checked by a verify script that is first shown failing against an untouched clone, then gets one translation commit, then is built and tested the way a stranger would. All of Plan B's machinery lives in `~/python_foundations-notes/rewrite/`, outside the repository: it is one-time, and the mailmap it writes holds the address being removed.
+**Architecture:** The working repository is only read. A `--mirror --no-local` clone of it is rewritten by one `git filter-repo` run: mailmap, three paths removed, text replaced in older blobs, commit messages edited by exact phrase. A plain clone of the result is checked by a verify script that is first shown failing against an untouched clone, then gets one translation commit, then is built and tested the way a stranger would. All of Plan B's machinery lives in `~/python_foundations-notes/rewrite/`, outside the repository: it is one-time, and the mailmap it writes holds the address being removed.
 
 **Tech Stack:** git-filter-repo 2.47.0 (Homebrew), git, Python 3.9+ stdlib, POSIX sh, gitleaks 8.30.1, the repository's own `scan_history.py` and `answer_key_guard.py`.
 
 **Spec:** `docs/specs/public-release.md`, decisions 1 to 8. Decisions 5 to 8 (worksheet private, session trailers stripped, the afed4d6 correction, file hashes translated) were made by Justin on 2026-10-05 while this plan was written; read them before starting.
+
+> **Amended 2026-10-06, after the final review.** The plan below ran as written and verified 18 of 18; the fresh reviewer then found what none of its checks could see. (1) The private address was also in a test fixture, in d97d91d, built from two string literals: "every copy is inside the worksheet" was wrong, and every scan looked only for the whole address. (2) The session URL that decision 6 strips from messages sat in the plans' commit-message templates, 14 times. (3) The author's username reached this plan inside Claude Code's dash-encoded memory path, which the slash-form home-path pattern cannot see. The fixes, now embedded below: `rewrite.sh` generates `inputs/blob-replacements.txt` from history and passes it as `--replace-text`; the working copies of both plans were scrubbed the same way first, so `main`'s tree still matches; `verify_rewrite.py` gained `[addr]` (the worksheet's address in any blob or message, whole, split across literals, or octet by octet) and a session-URL check over files, for 20 checks; `.githooks/leak-patterns` blocks the dash-encoded home path; and the message edits were re-wrapped and given a note for 6e50706, whose diff no longer shows the fixture change. `run/` was deleted and Tasks 4 to 6 repeated. Spec decision 9 records it.
 
 ## Global Constraints
 
 - **The working repository is read, never rewritten.** Plan B commits to it exactly once more (Task 2). After Task 4 runs the rewrite, nothing more is committed there. A later commit would be missing from the public history; `verify_rewrite.py`'s `[current]` check catches it, and the fix is to delete `run/` and repeat Tasks 4 to 6.
 - **Nothing is pushed, and nothing touches GitHub.** The rewritten history stays in `~/python_foundations-notes/rewrite/run/`. Plan C pushes it.
 - **The worksheet and the answer keys are backed up and verified before anything removes them, and are never deleted.**
-- **Never type the personal Gmail address or the LAN address** into a tracked file, the plan, a commit message, or terminal output. `rewrite.sh` writes the mailmap from `git log` into the notes directory. The LAN address needs no handling of its own: every copy of it is inside the worksheet.
+- **Never type the personal Gmail address or the LAN address** into a tracked file, the plan, a commit message, or terminal output. `rewrite.sh` writes the mailmap from `git log` into the notes directory. The LAN address: every copy but one is inside the worksheet; the other, a test fixture that built it from two string literals, is replaced by a line `rewrite.sh` generates from history (spec decision 9).
 - **No dropped commit's hash appears in any tracked file.** Six commits are dropped; `translate_shas.py` refuses a file that cites one, because the citation would point at nothing. Refer to them by description. The message edits that must name two of them spell the hashes with `\x` escapes for that reason.
 - **Python 3.9 floor** for every tool here, stdlib only, as for the repository's own scripts.
 - **Every guard is shown failing once before it is trusted**, and the step says how.
@@ -48,6 +50,7 @@ The five failure modes the spec implies that its success criteria do not exercis
 | Messages edited besides trailers | | 15 |
 | `Claude-Session` lines | one per commit since the trailers began | 0 |
 | `main`'s tree | | identical to the working repository's |
+| Older blobs with text replaced | | the d97d91d fixture line; the plans' session URL and dash-encoded home directory |
 
 No commit becomes empty from the answer-key paths alone: every commit that touched them changed other files too. The history is linear, unsigned, and has no merges. `web-app` and the lightweight tag `ws/web-app` are ancestors of `main`; the tag sits on a commit that is dropped, and filter-repo moves such a ref to the nearest commit it keeps.
 
@@ -59,6 +62,7 @@ No commit becomes empty from the answer-key paths alone: every commit that touch
 | `WORKSHEET-2026-09-21-web-app.md` | untrack | stays on disk, private |
 | `$RW/inputs/message-edits.txt` | create | every message edit, one per line, in filter-repo's syntax |
 | `$RW/inputs/mailmap` | generated | written by `rewrite.sh`; never typed, never tracked |
+| `$RW/inputs/blob-replacements.txt` | generated | written by `rewrite.sh`: text replaced in older blobs; never typed, never tracked |
 | `$RW/tools/check_message_edits.py` | create | preview the message edits against the real history |
 | `$RW/tools/translate_shas.py` | create | point hashes cited in files at the new history |
 | `$RW/tools/translate_shas_test.py` | create | prove it translates commits and nothing else |
@@ -217,11 +221,12 @@ about runtime behaviour was verified==>about runtime behavior was verified
 labelled as what it is==>labeled as what it is
 relabelled "A sample run"==>relabeled "A sample run"
 relabelled "The book showed"==>relabeled "The book showed"
-fix: --check leaked a temp file per box, until Python 3.14 choked on them==>fix: --check leaked a temp file per box into a temp dir that stalled Python 3.14
-regex:The two million leaked files are not\ntouched from here:==>The two million entries are not\ntouched from here (most were never build.py's: deleting every tmp*.py more\nthan a day old later removed none):
-regex:since 147fb\x33d, which is already pushed==>since the worksheet's first commit, which is already pushed
-regex:\b147fb\x33d onward==>the worksheet's first commit onward
+fix: --check leaked a temp file per box, until Python 3.14 choked on them==>fix: --check left a temp file per box in a dir that stalled Python 3.14
+regex:The two million leaked files are not\ntouched from here: the directory is shared by every process on the machine,\nso clearing it is Justin's call\.==>The two million entries are not\ntouched from here (most were never build.py's: deleting every tmp*.py\nmore than a day old later removed none). The directory is shared by\nevery process on the machine, so clearing it is Justin's call.
+regex:since 147fb\x33d, which is already pushed\. Redacted here\. The history question is\nseparate and is Justin's to make -- see below\.==>since the worksheet's first commit, which is already pushed. Redacted\nhere. The history question is separate and is Justin's to make -- see\nbelow.
+regex:\b147fb\x33d onward, and those are on the private origin\. Redacting the working\ntree does not remove it from the log, and the log goes public with the repo\.==>the worksheet's first commit onward, and those are on the private\norigin. Redacting the working tree does not remove it from the log, and\nthe log goes public with the repo.
 regex:\b975ae\x30a\.\.HEAD==>0840a6e..HEAD
+regex:RFC1918 address exercises the pattern equally well\. Now it is a made-up one\.\n==>RFC1918 address exercises the pattern equally well. Now it is a made-up one.\n(When this history was rewritten for publication, the original line was\nreplaced in d97d91d as well, so this diff no longer shows the change.)\n
 regex:(?m)^Claude-Session: [^\n]*\n?==>
 ```
 
@@ -615,8 +620,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from check_message_edits import AMERICAN, QUOTED, STEMS   # noqa: E402
 
 NOREPLY = "71140104+mmmugh@users.noreply.github.com"
-CORRECTED_SUBJECT = "into a temp dir that stalled Python 3.14"
+CORRECTED_SUBJECT = "in a dir that stalled Python 3.14"
 HEX = re.compile(r"\b[0-9a-f]{7,40}\b")
+PRIVATE = re.compile(r"(?<![0-9.])(192\.168\.[0-9]{1,3}\.[0-9]{1,3}|10\.[0-9]{1,3}\.[0-9]{1,3}"
+                     r"\.[0-9]{1,3}|172\.(?:1[6-9]|2[0-9]|3[01])\.[0-9]{1,3}\.[0-9]{1,3})(?![0-9])")
+JOIN = re.compile(r"""(["'])\s*\+\s*\1""")          # "ab" + "cd" reads as "abcd"
+SESSION = re.compile(r"claude\.ai/code/session_[A-Za-z0-9]{6,}")
 
 
 def git(repo, *args, check=True):
@@ -645,6 +654,26 @@ def dropped_by(repo, removed):
         if paths and all(under(p, removed) for p in paths):
             out.add(sha)
     return out
+
+
+def blobs_of(repo):
+    """{blob id: a path it appears at} for every blob reachable from any ref."""
+    listing = git(repo, "rev-list", "--all", "--objects").splitlines()
+    names = dict((l.split(" ", 1) + [""])[:2] for l in listing)
+    kinds = subprocess.run(["git", "-C", repo, "cat-file",
+                            "--batch-check=%(objecttype) %(objectname)"],
+                           input="\n".join(names), capture_output=True, text=True).stdout
+    return {oid: names[oid] for kind, oid in (l.split() for l in kinds.splitlines())
+            if kind == "blob"}
+
+
+def text_of(repo, oid):
+    raw = subprocess.run(["git", "-C", repo, "cat-file", "-p", oid],
+                         capture_output=True).stdout
+    try:
+        return raw.decode("utf-8")
+    except UnicodeDecodeError:
+        return None
 
 
 def main():
@@ -767,6 +796,35 @@ def main():
     check("6", issues.exists() and "No filtering problems" in issues.read_text(),
           "filter-repo reports no commit cited after being dropped")
     check("msg", trailers == 0, f"no Claude-Session trailer ({trailers} found)")
+
+    # Every blob and message, not only the diffs a scanner reads. The private
+    # address once hid in a test fixture built from two string literals, which
+    # no scan matching the unbroken address could see; the address itself is
+    # read from the worksheet's own history, never typed.
+    addresses = set()
+    for sha in git(old, "log", "--all", "--format=%H", "--", *[r for r in args.remove
+                                                               if r.endswith(".md")]).split():
+        for r in args.remove:
+            if r.endswith(".md"):
+                addresses.update(PRIVATE.findall(git(old, "show", f"{sha}:{r}", check=False)))
+    loose = [re.compile(r"(?<!\d)" + r"\D{1,12}".join(a.split(".")) + r"(?!\d)")
+             for a in addresses]
+    found_addr, found_session = set(), set()
+    texts = [(path, text_of(new, oid)) for oid, path in blobs_of(new).items()]
+    texts.append(("(commit messages)", git(new, "log", "--all", "--format=%B")))
+    for path, text in texts:
+        if text is None:
+            continue
+        joined = JOIN.sub("", text)
+        if any(a in text or a in joined for a in addresses) or any(l.search(text) for l in loose):
+            found_addr.add(path)
+        if SESSION.search(text):
+            found_session.add(path)
+    check("addr", bool(addresses) and not found_addr,
+          f"the worksheet's private address ({len(addresses)} known) is in no blob or message, "
+          f"whole, split across literals, or octet by octet ({sorted(found_addr) or 'none'})")
+    check("msg", not found_session,
+          f"no session URL in any file or message ({sorted(found_session) or 'none'})")
     check("msg", british == 0, f"no British spelling outside quotations ({british} found)")
     check("msg", corrected, "afed4d6's subject carries the corrected cause")
 
@@ -793,7 +851,7 @@ git clone -q --no-local "$WR" "$PLAIN"
   --remove WORKSHEET-2026-09-21-web-app.md; echo "exit=$?"
 ```
 
-Expected: `exit=1`, `18 checks, 13 failed`. The thirteen: `[current]` (no commit map); `[2]` (2 distinct addresses); both `[3]` (25 removed paths, and 48 answer-key findings); both scans in `[4]` (generic: 2 blocked; personal: 51 blocked); `[5]` dropped commits and commit count; `[6]` file citations and the filter-repo report; and all three `[msg]` checks (trailers, 16 British spellings, the uncorrected subject). The five that pass are correct to pass on an untouched history: gitleaks, tree equality, nothing added on top, every ref present, and the hashes messages cite all resolve.
+Expected: `exit=1`, `20 checks, 15 failed`. The fifteen: `[current]` (no commit map); `[2]` (2 distinct addresses); both `[3]` (25 removed paths, and 48 answer-key findings); both scans in `[4]` (generic: 2 blocked; personal: 51 blocked); `[5]` dropped commits and commit count; `[6]` file citations and the filter-repo report; `[addr]` (the worksheet and the d97d91d fixture); and all four `[msg]` checks (trailers, session URLs in the two plans, 16 British spellings, the uncorrected subject). The five that pass are correct to pass on an untouched history: gitleaks, tree equality, nothing added on top, every ref present, and the hashes messages cite all resolve.
 
 - [ ] **Step 9: Show the personal check refusing a list that checks nothing**
 
@@ -849,6 +907,27 @@ if [ "$count" -ne 1 ]; then
 fi
 printf 'Justin Stewart <%s> <%s>\n' "$NOREPLY" "$others" > "$inputs/mailmap"
 
+# Text replaced in every blob of history (decisions 6 and 9 of the spec),
+# written here like the mailmap so that nothing it removes is ever typed:
+#  - the test fixture that built the private address from two string
+#    literals, where no scan for the whole address could see it: d97d91d's
+#    line becomes the made-up line its next commit, 6e50706, put there;
+#  - the session URL and the dash-encoded home directory the plans carried.
+#    The working repository's copies were changed the same way first, so
+#    main's tree is untouched and criterion 5 still holds.
+old_line=$(git -C "$src" show d97d91d:tests/leak_scan_test.py | grep '^LAN = ' || true)
+new_line=$(git -C "$src" show 6e50706:tests/leak_scan_test.py | grep '^LAN = ' || true)
+if [ "$(printf '%s\n' "$old_line" | grep -c .)" -ne 1 ] ||
+   [ "$(printf '%s\n' "$new_line" | grep -c .)" -ne 1 ] || [ "$old_line" = "$new_line" ]; then
+  echo "refusing: expected one LAN fixture line in each of d97d91d and 6e50706, differing" >&2
+  exit 1
+fi
+{
+  printf '%s==>%s\n' "$old_line" "$new_line"
+  printf '%s\n' 'regex:https://claude\.ai/code/session_[A-Za-z0-9]+==><session URL>'
+  printf '%s\n' 'regex:-(Users|home)-[A-Za-z0-9._]+-python-foundations==>-\1-<user>-python-foundations'
+} > "$inputs/blob-replacements.txt"
+
 mkdir -p "$run"
 # --no-local: a local clone hard-links its objects and fails filter-repo's
 # fresh-clone check. filter-repo's manual names this flag as the fix, not
@@ -858,6 +937,7 @@ git clone -q --mirror --no-local "$src" "$run/rewrite.git"
   cd "$run/rewrite.git"
   git filter-repo \
     --mailmap "$inputs/mailmap" \
+    --replace-text "$inputs/blob-replacements.txt" \
     --replace-message "$inputs/message-edits.txt" \
     --invert-paths \
     --path answer-keys/ \
@@ -928,7 +1008,7 @@ python3 "$RW/tools/verify_rewrite.py" --old "$WR" --new "$RW/run/public" --tree-
   --remove WORKSHEET-2026-09-21-web-app.md --metadata "$M"; echo "exit=$?"
 ```
 
-Expected: `exit=1` with exactly one failure: `[6] no tracked file cites a pre-rewrite commit (N citations do)`, where N is the count of hashes cited in the spec and the two plans. That is Task 5's job, and it is this task's red. Every other check is `ok`, including `[current]`, `[2]` (1 distinct), both `[3]`, all three `[4]`, all `[5]` (tree equal, 6 dropped as predicted), `[refs]`, and the `[msg]` checks. If anything else fails: stop, note it, `rm -rf "$RW/run"`, fix the input, and repeat from Step 1.
+Expected: `exit=1` with exactly one failure: `[6] no tracked file cites a pre-rewrite commit (N citations do)`, where N is the count of hashes cited in the spec and the two plans. That is Task 5's job, and it is this task's red. Every other check is `ok`, including `[current]`, `[2]` (1 distinct), both `[3]`, all three `[4]`, all `[5]` (tree equal, 6 dropped as predicted), `[refs]`, `[addr]`, and the `[msg]` checks. If anything else fails: stop, note it, `rm -rf "$RW/run"`, fix the input, and repeat from Step 1.
 
 - [ ] **Step 5: Look at the result with your own eyes**
 
@@ -1003,7 +1083,7 @@ python3 "$RW/tools/verify_rewrite.py" --old "$WR" --new "$RW/run/public" --tree-
   --remove WORKSHEET-2026-09-21-web-app.md --metadata "$M"; echo "exit=$?"
 ```
 
-Expected: `18 checks, all pass: the rewrite meets criteria 2 to 6`, `exit=0`. `--tree-ref main~1` because the tree that must equal the working repository's is the rewrite's own, before this commit.
+Expected: `20 checks, all pass: the rewrite meets criteria 2 to 6`, `exit=0`. `--tree-ref main~1` because the tree that must equal the working repository's is the rewrite's own, before this commit.
 
 ---
 

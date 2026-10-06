@@ -31,9 +31,12 @@ repo's entire history contains nothing on the list above.
   files are the only copy of the answers.
 - The LAN address is gone from the working tree but present in the added
   content of two historical commits (the worksheet's KEY-FACTS line). Every
-  copy of it in history is inside the worksheet, so removing the worksheet
-  from history (decision 5) removes the address with it, and no text
-  replacement is needed.
+  copy of it but one is inside the worksheet, which decision 5 removes. The
+  other is a test fixture in d97d91d that built the address from two string
+  literals, so no scan for the whole address could see it; the next commit,
+  6e50706, says so and replaced it with a made-up one. An earlier draft of this
+  spec said every copy was in the worksheet. The final review of Plan B found
+  the fixture; decision 9 replaces it.
 - Leak-scanning hooks are installed (`.githooks/`, 28 scanner cases, 7 push
   cases), but `.githooks/leak-patterns.local` was never created, so no
   personal string is checked anywhere.
@@ -75,7 +78,10 @@ repo's entire history contains nothing on the list above.
    worksheet become empty and are dropped. Two commit messages cite two of
    them; the message edits reword those citations. (Was Open Question 4.)
 6. **`Claude-Session` trailers are stripped** from every commit message by the
-   rewrite. `Co-Authored-By` lines stay. (Was Open Question 6.)
+   rewrite. `Co-Authored-By` lines stay. The same session URL also sat in the
+   plans' commit-message templates; it is replaced with `<session URL>` in the
+   working copies and, by decision 9, in every older version. (Was Open
+   Question 6.)
 7. **One commit message is corrected.** afed4d6 attributed the 2.1M-entry temp
    directory to build.py's leaked files; a later cleanup showed most were never
    build.py's. The rewrite replaces its subject and that one sentence, and
@@ -86,7 +92,16 @@ repo's entire history contains nothing on the list above.
 8. **Hashes cited in files are translated.** filter-repo rewrites the hashes
    cited in commit messages but not those in files. After the rewrite is
    verified, one commit on the new history maps each cited hash to its new one
-   from filter-repo's commit map. The rewrite itself still changes no file.
+   from filter-repo's commit map. The rewrite changes no file in `main`'s
+   tree; decision 9 changes only older versions of files.
+9. **Text replaced in every older blob**, by a `--replace-text` file that the
+   rewrite script generates from history, so that nothing it removes is ever
+   typed: the d97d91d fixture line becomes 6e50706's made-up one; the session
+   URL becomes `<session URL>`; and the home directory in Claude Code's
+   dash-encoded form (`-Users-<name>-…`), which reached Plan B's text, becomes
+   `-Users-<user>-…`. The working copies were changed the same way first, so
+   criterion 5 holds, and `.githooks/leak-patterns` now blocks the dash form.
+   Decided by Justin on 2026-10-06, after the final review of Plan B.
 
 ## Tech Stack
 
@@ -144,7 +159,8 @@ One-time, during the rewrite (Plan B):
 brew install git-filter-repo
 git clone --mirror --no-local <local repo> rewrite.git    # --no-local, or filter-repo's
 cd rewrite.git                                            # fresh-clone check refuses it
-git filter-repo --mailmap mailmap --replace-message message-edits.txt \
+git filter-repo --mailmap mailmap --replace-text blob-replacements.txt \
+    --replace-message message-edits.txt \
     --invert-paths --path answer-keys/ --path volumes/vol1-foundations/answer-keys/ \
     --path WORKSHEET-2026-09-21-web-app.md
 ```
@@ -348,8 +364,9 @@ locally. Fully reversible.
 
 **Plan B — history rewrite.** On a mirror clone; the working repo is not
 touched. Mailmap; path removal for both answer-key directories and the
-worksheet; message edits (spellings by exact phrase, the afed4d6 correction,
-the session trailers); then one commit translating the hashes cited in files.
+worksheet; text replaced in older blobs (decision 9); message edits
+(spellings by exact phrase, the afed4d6 correction, the session trailers);
+then one commit translating the hashes cited in files.
 Verify criteria 2 through 6 locally and keep filter-repo's commit map. Nothing
 pushed. Reversible: delete the clone.
 
