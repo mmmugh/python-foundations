@@ -1,7 +1,8 @@
 # Spec: Python Foundations goes public
 
 Status: **approved 2026-10-05.** Decisions marked **(decided)** were made by
-Justin on that date; everything under Open Questions is not yet decided.
+Justin on that date; decisions 5 to 8 were added the same day, while Plan B was
+being written. Everything still under Open Questions is not yet decided.
 
 ## Objective
 
@@ -29,7 +30,10 @@ repo's entire history contains nothing on the list above.
   never tracked and **no longer exists anywhere on this machine**. The twelve
   files are the only copy of the answers.
 - The LAN address is gone from the working tree but present in the added
-  content of two historical commits (the worksheet's KEY-FACTS line).
+  content of two historical commits (the worksheet's KEY-FACTS line). Every
+  copy of it in history is inside the worksheet, so removing the worksheet
+  from history (decision 5) removes the address with it, and no text
+  replacement is needed.
 - Leak-scanning hooks are installed (`.githooks/`, 28 scanner cases, 7 push
   cases), but `.githooks/leak-patterns.local` was never created, so no
   personal string is checked anywhere.
@@ -65,6 +69,24 @@ repo's entire history contains nothing on the list above.
    Actions secret and catches commits made elsewhere. CI runs after a push, so
    on a public repo it detects rather than prevents, and its logs are public,
    so it never prints what matched.
+5. **The worksheet is private.** `WORKSHEET-2026-09-21-web-app.md` is untracked
+   and gitignored, backed up to the private notes directory, and removed from
+   every commit by the rewrite. The six commits whose only change was the
+   worksheet become empty and are dropped. Two commit messages cite two of
+   them; the message edits reword those citations. (Was Open Question 4.)
+6. **`Claude-Session` trailers are stripped** from every commit message by the
+   rewrite. `Co-Authored-By` lines stay. (Was Open Question 6.)
+7. **One commit message is corrected.** afed4d6 attributed the 2.1M-entry temp
+   directory to build.py's leaked files; a later cleanup showed most were never
+   build.py's. The rewrite replaces its subject and that one sentence, and
+   leaves its measured facts as written. British spellings in messages are
+   Americanized by exact phrase, not word by word, because the commit that
+   Americanized the files names the British words it replaced, and those
+   lines are quotations.
+8. **Hashes cited in files are translated.** filter-repo rewrites the hashes
+   cited in commit messages but not those in files. After the rewrite is
+   verified, one commit on the new history maps each cited hash to its new one
+   from filter-repo's commit map. The rewrite itself still changes no file.
 
 ## Tech Stack
 
@@ -120,10 +142,11 @@ One-time, during the rewrite (Plan B):
 
 ```
 brew install git-filter-repo
-git clone --mirror <local repo> rewrite.git
-git -C rewrite.git filter-repo --mailmap mailmap --replace-text replacements \
+git clone --mirror --no-local <local repo> rewrite.git    # --no-local, or filter-repo's
+cd rewrite.git                                            # fresh-clone check refuses it
+git filter-repo --mailmap mailmap --replace-message message-edits.txt \
     --invert-paths --path answer-keys/ --path volumes/vol1-foundations/answer-keys/ \
-    --message-callback '<American spellings, from the df232d4 word list>'
+    --path WORKSHEET-2026-09-21-web-app.md
 ```
 
 `scripts/scan_history.py` exists because scanning history is easy to get
@@ -142,7 +165,7 @@ LICENSE-COURSE                   CC BY-NC-SA 4.0
 README.md                        gains a public-facing top section and a
                                  Licenses table; developer docs stay below
 .github/workflows/ci.yml         gates, build, deploy, live check
-.gitignore                       + volumes/*/answer-keys/
+.gitignore                       + volumes/*/answer-keys/, the worksheet
 .githooks/leak-scan              + LEAK_SCAN_REDACT mode
 .githooks/leak-patterns.local    NEVER tracked; Justin's personal strings
 scripts/scan_history.py          leak-scan over every commit
@@ -288,14 +311,15 @@ Each of these is a check someone can run, not a judgment.
 2. `git log --format='%ae%n%ce' | sort -u` on the public repo prints exactly one
    line: `71140104+mmmugh@users.noreply.github.com`.
 3. No commit in the public history contains a path with `answer-keys` in it,
-   and the twelve keys exist in the private companion with checksums matching
-   the originals.
+   or the worksheet, and the twelve keys exist in the private companion with
+   checksums matching the originals.
 4. `scan_history.py` with the generic and the personal patterns, and gitleaks,
    all report zero findings across every commit of the public history.
 5. The rewritten `HEAD`'s tree equals the pre-rewrite `HEAD`'s tree — the
    answer keys having been untracked in Plan A — so the rewrite changed
    history and nothing else. Any commit dropped because it became empty is
-   listed, not discovered.
+   listed, not discovered: six are predicted, the commits whose only change
+   was the worksheet.
 6. Every commit SHA quoted in a commit message resolves in the new history.
 7. CI runs every gate on push and on pull request; a deliberately broken
    branch turns each job red once; pull requests never deploy.
@@ -323,9 +347,11 @@ track the lockfile; write `ci.yml` and lint it. Ends with every gate green
 locally. Fully reversible.
 
 **Plan B — history rewrite.** On a mirror clone; the working repo is not
-touched. Mailmap, path removal for both answer-key directories, text
-replacement, message spellings. Verify criteria 2 through 6 locally and keep
-filter-repo's commit map. Nothing pushed. Reversible: delete the clone.
+touched. Mailmap; path removal for both answer-key directories and the
+worksheet; message edits (spellings by exact phrase, the afed4d6 correction,
+the session trailers); then one commit translating the hashes cited in files.
+Verify criteria 2 through 6 locally and keep filter-repo's commit map. Nothing
+pushed. Reversible: delete the clone.
 
 **Plan C — cutover.** Every step here needs Justin's explicit go-ahead. Rename
 the old repo, create the new one, set push protection, the email block, the
@@ -338,17 +364,15 @@ anything in that history is public.
 
 ## Open Questions
 
-1. **The personal list.** What goes in it is Justin's call. Candidates are
-   discussed in conversation, deliberately not here.
+1. **The personal list — resolved.** It exists, locally only, in
+   `.githooks/leak-patterns.local`; its contents are deliberately not here.
 2. **The private companion for the keys.** A private repository (proposed:
    `mmmugh/python-foundations-answers`, cloned into the now-ignored
    `answer-keys/` path so authoring does not change) or the private notes
    directory.
 3. **The old repository's new name.** Proposed:
    `python-foundations-private`.
-4. **The worksheet** (`WORKSHEET-2026-09-21-web-app.md`). It is part of the
-   design record, and the Java port reads it, but its FEEDBACK block is
-   internal. Keep it as is, move it under `docs/`, or keep it private.
+4. **The worksheet — resolved: private.** See decision 5.
 5. **Python 3.9 in CI — resolved: keep it.** The first draft of this question
    said 3.9 "may not be installable on current runners". That was never
    checked, and it is false: setup-python's manifest carries 3.9.25 for Ubuntu
@@ -361,8 +385,7 @@ anything in that history is public.
    Python tests pass under 3.9.6. The 3.9 row in the CI matrix is the only
    thing that would catch a 3.10+ feature slipping into `build.py`. The README
    should say 3.9 *works* and recommend a current Python, not endorse 3.9.
-6. **`Claude-Session` trailers.** They become public. They grant no access, but
-   they do expose session IDs. The default is to keep them.
+6. **`Claude-Session` trailers — resolved: stripped.** See decision 6.
 7. **External references.** The Java brief and the tokenwatt findings cite
    SHAs that the rewrite will change. Update them from the commit map, or note
    the change once in each.
