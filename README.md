@@ -145,6 +145,13 @@ excluding what it recognizes as a key — an exclusion rule fails open the first
 time a key is named something unexpected — and then greps everything it wrote
 for the answer-key marker and fails the build if one is found.
 
+The keys are not in this repository either. They are private and kept outside
+version control, and `.gitignore` excludes `volumes/*/answer-keys/`. An ignore
+rule does not stop `git add -f`, so `tests/answer_key_guard.py` fails if one is
+ever committed, recognizing a key by its path or by the header
+`make_quizzes.py` writes into every one; `--history` checks every commit rather
+than only the tree.
+
 ## The leak guard
 
 This repo is meant to be public, so `.githooks/leak-scan` reads a diff and
