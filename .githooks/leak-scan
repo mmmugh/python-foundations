@@ -2,6 +2,7 @@
 # leak-scan: read a unified diff on stdin; exit 1 if any ADDED line
 # (or added file PATH) matches a deny pattern, 0 otherwise. Used by the
 # pre-commit and pre-push hooks.
+# LEAK_SCAN_REDACT=1 prints a count instead of the match (see the end).
 #
 # Scope on purpose:
 #   - ADDED lines only. Removing a leak (a '-' line) or an unchanged context line
@@ -102,6 +103,15 @@ if [ -z "$matched" ] && [ -f "$PATTERNS_LOCAL" ]; then
 fi
 
 if [ -n "$matched" ]; then
+  if [ -n "${LEAK_SCAN_REDACT:-}" ]; then
+    # Redacted, for CI: a public repository's CI logs are public. Print that
+    # something matched and how much, and nothing else -- not the line, and
+    # not the path, since a filename can itself be the leak. Look at it
+    # locally, without this variable set.
+    n=$(printf '%s\n' "$matched" | wc -l | tr -d ' ')
+    echo "leak-scan: BLOCKED — $n added line(s) match a deny pattern (redacted)" >&2
+    exit 1
+  fi
   echo "leak-scan: BLOCKED — added content matches a deny pattern:" >&2
   printf '%s\n' "$matched" | sed 's/^/    /' >&2
   echo "  Patterns: $PATTERNS (+ $PATTERNS_LOCAL if present)" >&2

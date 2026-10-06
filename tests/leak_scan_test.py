@@ -46,9 +46,11 @@ HOME_PATH = "/Users" + "/someone/secret"
 REPO_PATH = "Users" + "/guide.md"
 
 
-def scan(diff, patterns=None, local=None):
-    """True when the scan blocks. Patterns default to the repo's own."""
+def scan_output(diff, redact=False, patterns=None, local=None):
+    """(exit code, everything printed). Patterns default to the repo's own."""
     env = {"PATH": "/usr/bin:/bin:/usr/sbin:/sbin"}
+    if redact:
+        env["LEAK_SCAN_REDACT"] = "1"
     with tempfile.TemporaryDirectory() as tmp:
         if patterns is not None:
             p = Path(tmp) / "p"; p.write_text(patterns); env["LEAK_PATTERNS"] = str(p)
@@ -56,7 +58,12 @@ def scan(diff, patterns=None, local=None):
             p = Path(tmp) / "l"; p.write_text(local); env["LEAK_PATTERNS_LOCAL"] = str(p)
         done = subprocess.run([str(SCAN)], input=diff, capture_output=True,
                               text=True, env=env)
-    return done.returncode != 0
+    return done.returncode, done.stdout + done.stderr
+
+
+def scan(diff, patterns=None, local=None):
+    """True when the scan blocks."""
+    return scan_output(diff, False, patterns, local)[0] != 0
 
 
 def diff_of(*lines, path="notes.md"):
@@ -180,6 +187,29 @@ CASES = [
 ]
 
 
+# Redacted mode, for CI, where the log of a public repository is public. A
+# match must say there is one and print nothing that matched: not the line,
+# and not a path, since a filename can itself be the leak. The last case is
+# the other half: without the variable, a human at a terminal still sees what
+# matched, so redaction is a mode and not the new default.
+REDACT_CASES = [
+    # label, diff, pattern kwargs, should block, must not appear, must appear
+    ("redacted: a token is blocked and never printed",
+     diff_of(f"+export TOKEN={GH_TOKEN}\n"), {}, True, [GH_TOKEN], "redacted"),
+    ("redacted: a personal literal in content is never printed",
+     diff_of("+we work at acme-corp now\n"),
+     {"patterns": "", "local": "acme-corp\n"}, True, ["acme-corp"], "redacted"),
+    ("redacted: a personal literal in a PATH is never printed either",
+     "--- /dev/null\n+++ b/acme-corp-plan.md\n@@ -0,0 +1 @@\n+nothing in the body\n",
+     {"patterns": "", "local": "acme-corp\n"}, True, ["acme-corp"], "redacted"),
+    ("redacted: a pattern that will not compile fails without printing it",
+     diff_of("+we work at acme-corp now\n"),
+     {"patterns": "", "local": "acme-corp(\n"}, True, ["acme-corp"], "will not compile"),
+    ("redacted: a clean diff passes and prints nothing",
+     diff_of("+ordinary prose\n"), {}, False, [], ""),
+]
+
+
 def main():
     if not SCAN.exists():
         sys.exit(f"{SCAN} is missing -- the leak guard is not installed")
@@ -201,6 +231,21 @@ def main():
             bad += 1
         print(f"  {'ok  ' if ok else 'FAIL'}  {label}"
               f"{'' if ok else f'  (blocked={blocked}, expected {should_block})'}")
+    for label, diff, kw, should_block, hidden, shown in REDACT_CASES:
+        code, out = scan_output(diff, True, **kw)
+        leaked = [h for h in hidden if h.lower() in out.lower()]
+        ok = ((code != 0) == should_block and not leaked and shown in out
+              and (should_block or out.strip() == ""))
+        if not ok:
+            bad += 1
+        print(f"  {'ok  ' if ok else 'FAIL'}  {label}"
+              f"{'' if ok else f'  (exit={code}, leaked={leaked}, output={out.strip()!r})'}")
+
+    code, out = scan_output(diff_of(f"+export TOKEN={GH_TOKEN}\n"), False)
+    ok = code != 0 and GH_TOKEN in out
+    if not ok:
+        bad += 1
+    print(f"  {'ok  ' if ok else 'FAIL'}  unredacted: a person at a terminal still sees what matched")
     print(f"\n{'the leak guard blocks what it claims to' if not bad else f'{bad} wrong'}")
     sys.exit(1 if bad else 0)
 
