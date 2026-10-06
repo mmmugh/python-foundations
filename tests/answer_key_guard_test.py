@@ -95,6 +95,32 @@ def main():
         code, out = guard(shallow, "--history")
         expect("--history refuses a shallow clone", (code != 0, "shallow" in out), (True, True))
 
+    # --history finds a key two ways, by path and by header, and the case
+    # above is caught by both, so it would stay green with either one broken.
+    # Each of these is caught by exactly one, or must be caught by neither.
+    with tempfile.TemporaryDirectory() as tmp:
+        repo = new_repo(tmp)
+        commit(repo, {"README.md": "hello\n"})
+        commit(repo, {"notes/chapter-one.txt": KEY_TEXT}, "a renamed key")
+        commit(repo, {"notes/chapter-one.txt": None}, "gone again")
+        expect("--history finds a renamed key, added then deleted, by its header alone",
+               guard(repo, "--history")[0], 1)
+
+    with tempfile.TemporaryDirectory() as tmp:
+        repo = new_repo(tmp)
+        commit(repo, {"README.md": "hello\n"})
+        commit(repo, {"notes/ch01-intro-answers.txt": "no header\n"}, "a key by name")
+        commit(repo, {"notes/ch01-intro-answers.txt": None}, "gone again")
+        expect("--history finds a key-named file, added then deleted, by its path alone",
+               guard(repo, "--history")[0], 1)
+
+    with tempfile.TemporaryDirectory() as tmp:
+        repo = new_repo(tmp)
+        commit(repo, {"README.md": "hello\n"})
+        commit(repo, {"build.py": 'ANSWER_MARKER = "ANSWER KEY"\n'})
+        expect("--history passes a history that never held a key",
+               guard(repo, "--history")[0], 0)
+
     with tempfile.TemporaryDirectory() as tmp:
         repo = new_repo(tmp)
         code, out = guard(repo, "--history")

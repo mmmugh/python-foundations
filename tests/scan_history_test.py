@@ -112,6 +112,40 @@ def main():
         expect("...and its match is never printed when redacted",
                LITERAL in out.lower(), False)
 
+    # A merge can introduce content of its own, in a conflict resolution or
+    # an "evil merge". git diff-tree shows a merge's diff only when asked
+    # (-m), so without it this commit would be skipped.
+    with tempfile.TemporaryDirectory() as tmp:
+        listfile = Path(tmp) / "list"
+        listfile.write_text(f"{LITERAL}\n")
+        repo = new_repo(tmp)
+        commit(repo, "a.md", "hello\n", "base")
+        git(repo, "checkout", "-q", "-b", "side")
+        commit(repo, "b.md", "side\n", "side")
+        git(repo, "checkout", "-q", "main")
+        commit(repo, "c.md", "main\n", "main")
+        git(repo, "merge", "-q", "--no-ff", "--no-commit", "side")
+        (repo / "d.md").write_text(f"slipped in at {LITERAL}\n")
+        git(repo, "add", "d.md")
+        git(repo, "commit", "-q", "--no-verify", "-m", "merge side")
+        merge = git(repo, "rev-parse", "--short=7", "HEAD")
+        code, out = run(repo, "--redact", LEAK_PATTERNS="/dev/null",
+                        LEAK_PATTERNS_LOCAL=str(listfile))
+        expect("a leak introduced only by a merge commit is found",
+               (code, merge in out), (1, True))
+
+    # git octal-escapes a non-ASCII filename unless core.quotePath is off,
+    # and no pattern for the real name matches the escaped one.
+    with tempfile.TemporaryDirectory() as tmp:
+        accented = "caf\u00e9-corp"
+        listfile = Path(tmp) / "list"
+        listfile.write_text(f"{accented}\n", encoding="utf-8")
+        repo = new_repo(tmp)
+        commit(repo, f"{accented.title()} plan.md", "nothing in the body\n", "add")
+        code, out = run(repo, "--redact", LEAK_PATTERNS="/dev/null",
+                        LEAK_PATTERNS_LOCAL=str(listfile))
+        expect("a personal literal in a non-ASCII filename is found", code, 1)
+
     # A commit publishes more than its diff: its message, and the name and
     # address of whoever wrote and committed it. Neither the diff scan nor
     # gitleaks reads those, so this does.
