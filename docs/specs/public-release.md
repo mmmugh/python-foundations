@@ -34,8 +34,10 @@ repo's entire history contains nothing on the list above.
   cases), but `.githooks/leak-patterns.local` was never created, so no
   personal string is checked anywhere.
 - No CI. No LICENSE. `site/` is gitignored and built locally only.
-- `browser_test.mjs` needs `playwright-core`, which is declared nowhere in the
-  repo; the copy it ran against lived in a session scratchpad and is gone.
+- `browser_test.mjs` needs `playwright-core`, which `tests/package.json` listed
+  only as an optional dependency with the range `^1.0.0`, and with the lockfile
+  untracked nothing recorded what would be installed. (Corrected in Plan A: an
+  earlier draft said it was declared nowhere.)
 - `tests/package-lock.json` is gitignored, so `npm` installs are not
   reproducible.
 - The in-browser round-trip test that proved the JSON boundary fix (a check
@@ -72,7 +74,7 @@ repo's entire history contains nothing on the list above.
 | Node | 25 (v25.9.0 locally) | test harnesses only |
 | Pyodide | 314.0.7 | fetched into `vendor/pyodide/`, pinned by `CHECKSUMS` |
 | `pyodide` (npm) | 314.0.7 | already pinned in `tests/package.json` |
-| `playwright-core` | pin at plan time | to be declared as a devDependency |
+| `playwright-core` | 1.63.0 | pinned exactly; an optional dependency |
 | gitleaks | pin at plan time | CLI binary, version and checksum pinned, not the Action |
 | git-filter-repo | current | one-time rewrite; **not installed yet** |
 | GitHub Actions | pinned by full commit SHA | public repo: no floating tags |
@@ -144,7 +146,7 @@ README.md                        gains a public-facing top section and a
 .githooks/leak-scan              + LEAK_SCAN_REDACT mode
 .githooks/leak-patterns.local    NEVER tracked; Justin's personal strings
 scripts/scan_history.py          leak-scan over every commit
-tests/package.json               + playwright-core (devDependency)
+tests/package.json               playwright-core pinned to 1.63.0
 tests/package-lock.json          now tracked, for npm ci
 tests/browser_test.mjs           + BASE (subpath) and SITE_URL (live) modes
 tests/browser_check_test.mjs     promoted from scratchpad

@@ -7,7 +7,6 @@ site/
 
 # answer-keys/ is tracked on purpose: it belongs in the repo but never in site/.
 tests/node_modules/
-tests/package-lock.json
 
 # The Pyodide runtime is fetched at install time, not committed: 13 MB of
 # someone else's binaries do not belong in this history. What IS tracked is

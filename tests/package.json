@@ -7,6 +7,6 @@
   "pyodide": "314.0.7"
  },
  "optionalDependencies": {
-  "playwright-core": "^1.0.0"
+  "playwright-core": "1.63.0"
  }
 }
