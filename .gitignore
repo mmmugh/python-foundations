@@ -25,3 +25,7 @@ vendor/pyodide/*
 # tests/answer_key_guard.py fails if one is ever committed.
 volumes/*/answer-keys/
 answer-keys/
+
+# The session worksheet is private (decision 5 of docs/specs/public-release.md).
+# It stays on disk and sessions keep writing to it; it is never committed.
+WORKSHEET-2026-09-21-web-app.md
