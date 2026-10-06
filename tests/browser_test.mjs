@@ -4,86 +4,57 @@
  * Everything else here drives box_runner.py under Pyodide in node, which skips
  * the entire interface -- the module graph, the served content types, and
  * whether Python is fetched from this site or from someone else's CDN. Those
- * are the parts that break when the build is reorganised, and node cannot see
+ * are the parts that break when the build is reorganized, and node cannot see
  * any of them.
  *
- * Optional, because a headless browser is ~140 MB and the rest of this project
- * needs nothing:
+ * It runs against site/ at the root, one level down (BASE, the way GitHub
+ * Pages serves a project site), or a deployed site (SITE_URL); see
+ * browser_harness.mjs. Optional locally, because a headless browser is
+ * ~140 MB and the rest of this project needs nothing:
  *
- *     npm install playwright-core && npx playwright-core install chromium
+ *     npm ci && npx playwright-core install chromium
  *     node browser_test.mjs
  */
 
-import { spawn } from "node:child_process";
-import { readFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
-import { dirname, join } from "node:path";
+import { launch, loadChromium, skip, startSite } from "./browser_harness.mjs";
 
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const PORT = 8741;
 
-// Read the first chapter out of the built site rather than naming one, so this
-// keeps working when a volume is added, renamed or reordered.
-const boxes = JSON.parse(readFileSync(join(ROOT, "site", "boxes.json"), "utf8"));
-const first = boxes.find(b => /\/ch\d\d-/.test(b.id));
-if (!first) { console.log("skipped: no chapter pages in site/ -- build first."); process.exit(0); }
-const PAGE = `${first.volume}/${first.slug}.html`;
+const chromium = await loadChromium();
+const { baseUrl, stop } = await startSite(PORT);
+const origin = new URL(baseUrl).origin;
+const basePath = new URL(baseUrl).pathname;
 
-let chromium;
+// Read the first chapter out of the site under test rather than naming one,
+// so this keeps working when a volume is added, renamed or reordered.
+let boxes;
 try {
-  ({ chromium } = await import("playwright-core"));
-} catch (e) {
-  // Only "it is not installed" is a skip. A corrupted install or a broken
-  // import is a failure: swallowing it would turn a real breakage into a
-  // green run that says "skipped".
-  if (e.code !== "ERR_MODULE_NOT_FOUND") {
-    console.log(`FAIL  playwright-core is installed but will not load: ${e.message}`);
-    process.exit(1);
-  }
-  console.log("skipped: playwright-core is not installed.");
-  console.log("  npm install playwright-core && npx playwright-core install chromium");
-  process.exit(0);
-}
-
-const server = spawn("python3", [join(ROOT, "scripts", "serve.py"), String(PORT)],
-                     { stdio: "ignore" });
-const stop = () => { try { server.kill(); } catch {} };
-process.on("exit", stop);
-
-// Wait for the server to actually answer rather than guessing at a delay.
-// A fixed sleep here was a race: anything that slows start-up turns into
-// "the page never got there", which reads as a broken site.
-for (let i = 0; ; i++) {
-  try { await fetch(`http://localhost:${PORT}/`); break; }
-  catch {
-    if (i > 100) { stop(); console.log("  FAIL  the server never came up"); process.exit(1); }
-    await new Promise(r => setTimeout(r, 200));
-  }
-}
-
-let browser;
-try {
-  browser = await chromium.launch();
+  boxes = await (await fetch(`${baseUrl}boxes.json`)).json();
 } catch (e) {
   stop();
-  // Same rule: a missing executable is a skip, any other launch failure is a
-  // failure. A sandbox problem or a bad launch argument must not read as
-  // "no browser installed".
-  if (!/Executable doesn't exist|please run.*install/i.test(e.message)) {
-    console.log(`FAIL  the browser is installed but would not start: ${e.message.split("\n")[0]}`);
-    process.exit(1);
-  }
-  console.log("skipped: no browser binary installed.");
-  console.log("  npx playwright-core install chromium");
-  process.exit(0);
+  console.log(`FAIL  could not read ${baseUrl}boxes.json: ${e.message}`);
+  process.exit(1);
 }
+const first = boxes.find(b => /\/ch\d\d-/.test(b.id));
+if (!first) { stop(); skip("no chapter pages in the site -- build first."); }
+const PAGE = `${first.volume}/${first.slug}.html`;
+
+const browser = await launch(chromium, stop);
 const page = await browser.newPage();
 
-const external = [], failed = [], errors = [], fetched = [];
+const external = [], escaped = [], failed = [], errored = [], errors = [], fetched = [];
+const types = {};
 page.on("request", r => {
   const u = new URL(r.url());
-  if (u.hostname !== "localhost") external.push(r.url());
+  if (u.origin !== origin) external.push(r.url());
+  else if (!u.pathname.startsWith(basePath)) escaped.push(u.pathname);
   if (u.pathname.includes("/pyodide/")) fetched.push(u.pathname);
+});
+page.on("response", r => {
+  const u = new URL(r.url());
+  if (r.status() >= 400) errored.push(`${r.status()} ${u.pathname}`);
+  const name = u.pathname.split("/").pop();
+  if (name === "pyodide.mjs" || name.endsWith(".wasm")) types[name] = r.headers()["content-type"] || "";
 });
 page.on("requestfailed", r => failed.push(`${r.url()} :: ${r.failure()?.errorText}`));
 page.on("pageerror", e => errors.push(String(e)));
@@ -93,7 +64,7 @@ const check = (ok, what) => { console.log(`  ${ok ? "ok  " : "FAIL"}  ${what}`);
                               if (!ok) problems.push(what); };
 
 try {
-  await page.goto(`http://localhost:${PORT}/${PAGE}`, { waitUntil: "load" });
+  await page.goto(`${baseUrl}${PAGE}`, { waitUntil: "load" });
 
   // Pyodide boots on the first Run, not on load: a reader who only reads must
   // not be made to download 13 MB.
@@ -123,12 +94,28 @@ try {
   check(edited === "42\nedited", `an edited box runs the edit (got ${JSON.stringify(edited)})`);
 
   check(fetched.length === 5, `all 5 runtime files come from this site (${fetched.length})`);
-  check(external.length === 0,
-        `no request leaves this origin${external.length ? ": " + external.join(", ") : ""}`);
-  check(failed.length === 0, `no failed request${failed.length ? ": " + failed.join(", ") : ""}`);
-  check(errors.length === 0, `no page error${errors.length ? ": " + errors.join(", ") : ""}`);
 } catch (e) {
   check(false, `the page never got there: ${e.message.split("\n")[0]}`);
+}
+
+// What the network saw is checked whether or not the page got there. When the
+// runtime never loads, an escaped path or a 404 is usually the reason, and
+// these lines are what say so; left inside the try above, a timeout skipped
+// them and the only report was "the page never got there".
+try {
+  check(external.length === 0,
+        `no request leaves this origin${external.length ? ": " + external.join(", ") : ""}`);
+  check(escaped.length === 0,
+        `every request stays under ${basePath}${escaped.length ? ": " + escaped.join(", ") : ""}`);
+  check(errored.length === 0,
+        `no response is an error${errored.length ? ": " + errored.join(", ") : ""}`);
+  const mjs = types["pyodide.mjs"] || "";
+  const wasm = Object.entries(types).find(([name]) => name.endsWith(".wasm"))?.[1] || "";
+  check(/javascript/.test(mjs), `pyodide.mjs is served as JavaScript (${mjs || "not seen"})`);
+  check(wasm.startsWith("application/wasm"),
+        `the runtime .wasm is served as application/wasm (${wasm || "not seen"})`);
+  check(failed.length === 0, `no failed request${failed.length ? ": " + failed.join(", ") : ""}`);
+  check(errors.length === 0, `no page error${errors.length ? ": " + errors.join(", ") : ""}`);
 } finally {
   await browser.close();
   stop();

@@ -1,6 +1,6 @@
 """Serve the built site, with content types a phone will believe.
 
-    python3 scripts/serve.py [port]
+    python3 scripts/serve.py [port] [directory]
 
 python3 -m http.server sends plain text as "text/plain" with no charset, which
 leaves the browser to guess the encoding. On a phone that guess is often
@@ -16,6 +16,11 @@ from pathlib import Path
 
 SITE = Path(__file__).resolve().parent.parent / "site"
 PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8731
+# An optional second argument serves a different directory. The browser test
+# uses it to put site/ one level down, the way GitHub Pages serves a project
+# site under /<repo>/, so that a path that only works at the root is caught.
+if len(sys.argv) > 2:
+    SITE = Path(sys.argv[2]).resolve()
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -38,7 +43,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
 
 if not SITE.exists():
-    sys.exit("site/ does not exist yet — run: python3 build.py --check")
+    sys.exit(f"{SITE} does not exist yet; build first: python3 build.py --check")
 
 class Server(http.server.ThreadingHTTPServer):
     """Threaded, and without the reverse DNS lookup on the way up.
