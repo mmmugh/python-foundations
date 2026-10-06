@@ -44,6 +44,10 @@ HOME_PATH = "/Users" + "/someone/secret"
 # as the shapes above: written out, this fixture would match the
 # home-path pattern and block the very file that tests it.
 REPO_PATH = "Users" + "/guide.md"
+# Claude Code names a project's memory directory after the project's path with
+# every "/" turned into "-", so a home directory survives in it with no slash
+# for the home-path pattern to find. One reached a plan this way.
+DASHED_HOME = "-Users" + "-someone-python-foundations"
 
 
 def scan_output(diff, redact=False, patterns=None, local=None, locale=None):
@@ -89,6 +93,10 @@ CASES = [
      diff_of(f"+{PEM_HEADER}\n"), True, {}),
     ("an added home path is blocked",
      diff_of(f"+cd {HOME_PATH}\n"), True, {}),
+    ("a home path in Claude Code's dash-encoded form is blocked",
+     diff_of(f"+see ~/.claude/projects/{DASHED_HOME}/memory/notes.md\n"), True, {}),
+    ("the same path with a placeholder for the name is allowed",
+     diff_of("+see ~/.claude/projects/-Users-<user>-python-foundations/memory/\n"), False, {}),
     # A path in a diff is repo-relative and so never begins with "/", which
     # means the home-path pattern cannot match one however the file is named.
     # Scanning paths earns its place on the other patterns instead: a token or
