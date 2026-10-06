@@ -106,19 +106,20 @@ Decision 5. The worksheet leaves version control here, so that the rewritten `ma
 **Interfaces:**
 - Produces: a `main` that tracks no worksheet. Task 4's tree-equality check relies on it.
 
-- [ ] **Step 1: Check the worksheet is committed as it stands, then back it up**
+- [ ] **Step 1: Back it up as it is on disk**
+
+Back up the file on disk, not `HEAD`'s copy: it may hold edits newer than its last commit, and **it must not be committed again first**. A commit that changes only the worksheet is one more commit the rewrite drops, and every count in this plan expects six.
 
 ```bash
 cd "$WR"
-git status --short WORKSHEET-2026-09-21-web-app.md
 B="$HOME/python_foundations-notes/worksheet-backup"
 mkdir -p "$B"
 cp -p WORKSHEET-2026-09-21-web-app.md "$B/"
 (cd "$B" && shasum -a 256 WORKSHEET-2026-09-21-web-app.md > SHA256SUMS && shasum -a 256 -c SHA256SUMS)
-git show HEAD:WORKSHEET-2026-09-21-web-app.md | cmp - "$B/WORKSHEET-2026-09-21-web-app.md" && echo "backup equals HEAD"
+cmp WORKSHEET-2026-09-21-web-app.md "$B/WORKSHEET-2026-09-21-web-app.md" && echo "backup equals the file on disk"
 ```
 
-Expected: `git status` prints nothing (if it prints ` M`, commit the worksheet first, then repeat); `WORKSHEET-2026-09-21-web-app.md: OK`; `backup equals HEAD`. **Stop here if either check fails.** The private repository on GitHub keeps every earlier version, but do not rely on it.
+Expected: `WORKSHEET-2026-09-21-web-app.md: OK`; `backup equals the file on disk`. **Stop here if either check fails.** The private repository on GitHub keeps every committed version, but do not rely on it.
 
 - [ ] **Step 2: Stop tracking it and ignore it**
 
@@ -168,9 +169,13 @@ MSG
 git log --oneline -1
 ```
 
-- [ ] **Step 5: Tell future sessions**
+- [ ] **Step 5: Confirm future sessions are told**
 
-Add one line to the project memory (`~/.claude/projects/-Users-<user>-python-foundations/memory/python-foundations-course.md`): the worksheet is private and untracked from this commit on; keep writing to it, never commit it, never tag `ws/*`. This overrides the global habit of committing the worksheet.
+```bash
+grep -c "worksheet is PRIVATE" ~/.claude/projects/-Users-<user>-python-foundations/memory/python-foundations-course.md
+```
+
+Expected: `1`. The project memory says the worksheet is private and untracked from this commit on: keep writing to it, never commit it, never tag `ws/*`. That overrides the global habit of committing the worksheet. If the line is missing, add it.
 
 ---
 
