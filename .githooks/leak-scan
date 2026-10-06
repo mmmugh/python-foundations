@@ -3,6 +3,7 @@
 # (or added file PATH) matches a deny pattern, 0 otherwise. Used by the
 # pre-commit and pre-push hooks.
 # LEAK_SCAN_REDACT=1 prints a count instead of the match (see the end).
+# Adapted from tokenwatt (github.com/mmmugh/tokenwatt, MIT), by the same author.
 #
 # Scope on purpose:
 #   - ADDED lines only. Removing a leak (a '-' line) or an unchanged context line

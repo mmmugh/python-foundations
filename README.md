@@ -10,10 +10,12 @@ browser via Pyodide.
 
 ## Running it
 
-Nothing to install—no package manager, no build toolchain, no accounts. A
-Python 3 is the only requirement, and `build.py` uses only the standard
-library. Verified on 3.9 and 3.14, including `--check`, which runs every
-example under whichever interpreter you used.
+Nothing to install—no package manager, no build toolchain, no accounts.
+Python 3.9 or newer is the only requirement, and `build.py` uses only the
+standard library. On a Mac, the `python3` that comes with the Command Line
+Tools, the same install that provides `git`, is 3.9.6, and it works; any
+current Python is a better choice. Verified on 3.9 and 3.14, including
+`--check`, which runs every example under whichever interpreter you used.
 
 ```
 git clone https://github.com/mmmugh/python-foundations.git
@@ -205,3 +207,15 @@ never what matched.
 Edit `volumes/<volume>/content/*.md` and rebuild. The chapters are the only
 source of truth: the code files, the site and the exercise stubs are all
 generated from them.
+
+## Licenses
+
+| What | License |
+| --- | --- |
+| The course: everything under `volumes/`, meaning the chapters and their example programs, exercises, worked solutions, practice pages and quizzes | [CC BY-NC-SA 4.0](LICENSE-COURSE) |
+| Everything else: the build, the page scripts, the tests and the git hooks | [Apache-2.0](LICENSE) |
+| Pyodide, fetched into `vendor/pyodide/` and served from `site/pyodide/` | its own license, MPL-2.0 ([`vendor/pyodide/LICENSE`](vendor/pyodide/LICENSE)) |
+
+The git hooks in `.githooks/` were adapted from
+[tokenwatt](https://github.com/mmmugh/tokenwatt), by the same author, where they
+are MIT-licensed.
