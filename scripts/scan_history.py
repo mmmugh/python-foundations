@@ -7,7 +7,9 @@ right. `git diff <empty tree> HEAD | leak-scan` reads like a history scan and
 only scans the final tree, so a leak added and deleted in between is invisible
 to it. That mistake was made once already, in this repository's first audit.
 This scans each commit's own diff, which is what a public repository actually
-publishes.
+publishes, and with it the parts of a commit that are not in any diff: its
+message, and the name and address of its author and committer. gitleaks reads
+none of those, so nothing else here would.
 
 It refuses, rather than reporting clean, when it cannot see the history: no
 commits at all, or a shallow clone, where everything before the cut-off is
@@ -65,7 +67,18 @@ def main(argv=None):
             capture_output=True)
         if diff.returncode:
             sys.exit(f"git diff-tree failed on {commit[:7]}")
-        scan = subprocess.run([str(SCAN)], input=diff.stdout, capture_output=True, env=env)
+        # The message and the identities follow the diff as one more added
+        # file. The "diff --git" line closes whatever hunk came before, so the
+        # scanner reads them as added lines and as nothing else.
+        meta = subprocess.run(
+            ["git", "-C", args.repo, "show", "-s",
+             "--format=%an <%ae>%n%cn <%ce>%n%B", commit],
+            capture_output=True)
+        if meta.returncode:
+            sys.exit(f"git show failed on {commit[:7]}")
+        added = b"".join(b"+" + line + b"\n" for line in meta.stdout.splitlines())
+        text = diff.stdout + b"diff --git a/.commit b/.commit\n@@ -0,0 +1 @@\n" + added
+        scan = subprocess.run([str(SCAN)], input=text, capture_output=True, env=env)
         if scan.returncode:
             blocked += 1
             print(f"  {commit[:7]}  {scan.stderr.decode(errors='replace').strip()}")

@@ -198,7 +198,8 @@ push carrying a token in its history sailed through.
 
 `python3 scripts/scan_history.py` runs the scanner over every commit in the
 history, which is what a public repository publishes, rather than over the
-final tree. It refuses a shallow clone or an empty history instead of calling
+final tree: each commit's diff, its message, and its author's and committer's
+names and addresses. It refuses a shallow clone or an empty history instead of calling
 either clean. CI runs it with `--redact`, which prints a commit and a count and
 never what matched.
 

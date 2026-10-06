@@ -112,6 +112,36 @@ def main():
         expect("...and its match is never printed when redacted",
                LITERAL in out.lower(), False)
 
+    # A commit publishes more than its diff: its message, and the name and
+    # address of whoever wrote and committed it. Neither the diff scan nor
+    # gitleaks reads those, so this does.
+    with tempfile.TemporaryDirectory() as tmp:
+        listfile = Path(tmp) / "list"
+        listfile.write_text(f"{LITERAL}\n")
+        personal = {"LEAK_PATTERNS": "/dev/null", "LEAK_PATTERNS_LOCAL": str(listfile)}
+
+        repo = new_repo(tmp, "message")
+        commit(repo, "a.md", "hello\n", f"notes from the {LITERAL.title()} offsite")
+        code, out = run(repo, "--redact", **personal)
+        expect("a personal literal in a commit message is found", code, 1)
+        expect("...and is never printed when redacted", LITERAL in out.lower(), False)
+
+        repo = new_repo(tmp, "token-message")
+        commit(repo, "a.md", "hello\n", f"rotate {GH_TOKEN}")
+        code, out = run(repo)
+        expect("a token in a commit message is found", code, 1)
+
+        repo = new_repo(tmp, "identity")
+        git(repo, "config", "user.name", f"someone at {LITERAL}")
+        commit(repo, "a.md", "hello\n", "ordinary")
+        code, out = run(repo, "--redact", **personal)
+        expect("a personal literal in the author's name is found", code, 1)
+
+        repo = new_repo(tmp, "plain")
+        commit(repo, "a.md", "hello\n", "ordinary")
+        code, out = run(repo, "--redact", **personal)
+        expect("an ordinary message and identity pass", code, 0)
+
     bad = 0
     for label, ok, got, want in results:
         if not ok:
