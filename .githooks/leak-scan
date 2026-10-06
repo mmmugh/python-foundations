@@ -16,7 +16,8 @@
 #     so a secret inside a committed binary is NOT seen. Don't commit binaries with
 #     secrets; *.sqlite is already gitignored.
 #
-# Patterns: one ERE per line; whole-line '#' comments and blanks ignored.
+# Patterns: one ERE per line; whole-line '#' comments and blanks ignored, and
+# trailing whitespace stripped (a pattern that must end in a space: '[ ]').
 #   leak-patterns        tracked, generic shapes only (SAFE to publish)
 #   leak-patterns.local  untracked, your personal literals (NEVER committed)
 # Override either path with LEAK_PATTERNS / LEAK_PATTERNS_LOCAL (the test does).
@@ -70,6 +71,12 @@ awk '/^diff --git /{r=substr($0,12); n=(length(r)-5)/2;
 
 [ -s "$work" ] || exit 0
 
+# -a: GNU grep, in a UTF-8 locale, withholds a matching line that holds a
+# byte that is not valid UTF-8, notes "binary file matches" on stderr, and
+# still exits 0, which read here as a match with nothing in it: a token on a
+# Latin-1 line passed. CI runs in C.UTF-8 on Ubuntu, where that is the
+# default. -a makes grep treat every line as text.
+#
 # grep exits 0 on a match, 1 on none, and 2 on an error such as a pattern
 # that will not compile. `|| true` used to treat all three alike -- and one
 # bad pattern makes grep abandon the whole -f run, so the VALID patterns in
@@ -80,7 +87,7 @@ awk '/^diff --git /{r=substr($0,12); n=(length(r)-5)/2;
 search() {  # $1 = filtered pattern file, $2 = the list's name; the rest go to grep
   list=$1; name=$2; shift 2
   status=0
-  found=$(grep -E "$@" -f "$list" "$work" 2>/dev/null) || status=$?
+  found=$(grep -a -E "$@" -f "$list" "$work" 2>/dev/null) || status=$?
   if [ "$status" -eq 0 ]; then
     matched=$found
   elif [ "$status" -ne 1 ]; then
@@ -89,15 +96,23 @@ search() {  # $1 = filtered pattern file, $2 = the list's name; the rest go to g
   fi
 }
 
+# A list's patterns, without comments, blank lines, or trailing whitespace.
+# The last matters: a list saved with CRLF line endings, or one pattern typed
+# with a trailing space, made every pattern demand a \r or a space that no
+# line holds, so the list matched nothing and every scan passed.
+patterns_of() {
+  sed -e 's/[[:space:]]*$//' -e '/^[[:space:]]*#/d' -e '/^$/d' "$1"
+}
+
 matched=""
 if [ -f "$PATTERNS" ]; then
-  sed -e '/^[[:space:]]*#/d' -e '/^[[:space:]]*$/d' "$PATTERNS" > "$pg"
+  patterns_of "$PATTERNS" > "$pg"
   if [ -s "$pg" ]; then
     search "$pg" "$PATTERNS"
   fi
 fi
 if [ -z "$matched" ] && [ -f "$PATTERNS_LOCAL" ]; then
-  sed -e '/^[[:space:]]*#/d' -e '/^[[:space:]]*$/d' "$PATTERNS_LOCAL" > "$pl"
+  patterns_of "$PATTERNS_LOCAL" > "$pl"
   if [ -s "$pl" ]; then
     search "$pl" "$PATTERNS_LOCAL" -i
   fi

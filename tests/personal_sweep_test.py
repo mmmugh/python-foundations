@@ -77,6 +77,11 @@ def main():
         expect("a match fails the sweep", code, 1)
         expect("...and what matched is never printed", LITERAL in out.lower(), False)
 
+        # A secret pasted with Windows line endings: every pattern then ends
+        # in \r, matches nothing, and the history looks clean.
+        code, out = sweep(leaky, f"{LITERAL}\r\nsomething-else\r\n")
+        expect("a list with CRLF line endings still finds the match", code, 1)
+
     bad = 0
     for label, ok, got, want in results:
         if not ok:

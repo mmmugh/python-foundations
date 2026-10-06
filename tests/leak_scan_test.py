@@ -46,19 +46,22 @@ HOME_PATH = "/Users" + "/someone/secret"
 REPO_PATH = "Users" + "/guide.md"
 
 
-def scan_output(diff, redact=False, patterns=None, local=None):
-    """(exit code, everything printed). Patterns default to the repo's own."""
+def scan_output(diff, redact=False, patterns=None, local=None, locale=None):
+    """(exit code, everything printed). Patterns default to the repo's own.
+    `diff` may be bytes, for content that is not valid UTF-8."""
     env = {"PATH": "/usr/bin:/bin:/usr/sbin:/sbin"}
     if redact:
         env["LEAK_SCAN_REDACT"] = "1"
+    if locale:
+        env["LC_ALL"] = locale
     with tempfile.TemporaryDirectory() as tmp:
         if patterns is not None:
             p = Path(tmp) / "p"; p.write_text(patterns); env["LEAK_PATTERNS"] = str(p)
         if local is not None:
             p = Path(tmp) / "l"; p.write_text(local); env["LEAK_PATTERNS_LOCAL"] = str(p)
-        done = subprocess.run([str(SCAN)], input=diff, capture_output=True,
-                              text=True, env=env)
-    return done.returncode, done.stdout + done.stderr
+        done = subprocess.run([str(SCAN)], capture_output=True, env=env,
+                              input=diff if isinstance(diff, bytes) else diff.encode())
+    return done.returncode, (done.stdout + done.stderr).decode(errors="replace")
 
 
 def scan(diff, patterns=None, local=None):
@@ -182,6 +185,16 @@ CASES = [
     ("a personal pattern that will not compile fails the scan",
      diff_of("+we work at acme-corp now\n"), True,
      {"patterns": "", "local": "acme-corp(\n"}),
+    # A list saved with Windows line endings, or a pattern typed with a
+    # trailing space, demanded that \r or that space in every match, so it
+    # matched nothing and every scan passed. A list that checks nothing looks
+    # exactly like a clean history.
+    ("a personal list with CRLF line endings still matches",
+     diff_of("+we work at acme-corp now\n"), True,
+     {"patterns": "", "local": "acme-corp\r\n"}),
+    ("a personal pattern with a trailing space still matches",
+     diff_of("+we work at acme-corp\n"), True,
+     {"patterns": "", "local": "acme-corp \n"}),
     ("an empty diff is allowed",
      "", False, {}),
 ]
@@ -231,6 +244,25 @@ def main():
             bad += 1
         print(f"  {'ok  ' if ok else 'FAIL'}  {label}"
               f"{'' if ok else f'  (blocked={blocked}, expected {should_block})'}")
+    # GNU grep, in a UTF-8 locale, will not print a line holding a byte that
+    # is not valid UTF-8: it says "binary file matches" on stderr and exits 0,
+    # and the scan took that for a match with nothing in it. CI runs on
+    # Ubuntu, in C.UTF-8, so a token on a Latin-1 line passed there. macOS's
+    # awk fails loud on the same line instead, so on a Mac this passes either
+    # way; it is the Linux run that it guards.
+    latin1 = "--- a/notes.md\n+++ b/notes.md\n@@ -0,0 +1 @@\n+caf\xe9 ".encode("latin-1")
+    for label, tail, kw in (
+            ("a token on a Latin-1 line does not pass, in a UTF-8 locale",
+             GH_TOKEN, {"local": ""}),
+            ("a personal literal on a Latin-1 line does not pass, in a UTF-8 locale",
+             "acme-corp", {"patterns": "", "local": "acme-corp\n"})):
+        code, out = scan_output(latin1 + tail.encode() + b"\n", locale="C.UTF-8", **kw)
+        ok = code != 0
+        if not ok:
+            bad += 1
+        print(f"  {'ok  ' if ok else 'FAIL'}  {label}"
+              f"{'' if ok else f'  (exit={code}, output={out.strip()!r})'}")
+
     for label, diff, kw, should_block, hidden, shown in REDACT_CASES:
         code, out = scan_output(diff, True, **kw)
         leaked = [h for h in hidden if h.lower() in out.lower()]
