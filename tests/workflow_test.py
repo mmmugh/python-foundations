@@ -15,7 +15,10 @@ shows up on lines of its own, and it does not claim to be more:
     alone would pass a copy-pasted `contents: write` on any other job. An
     earlier draft of this test did exactly that; the review panel caught it;
   - no `pull_request_target`, which runs a fork's code with this repository's
-    secrets and a write token.
+    secrets and a write token;
+  - every job has a `timeout-minutes`. Without one, GitHub waits six hours: on
+    2026-10-07 the browser job's apt-get stalled on the runner's Ubuntu mirror
+    and sat there, twice, holding back the deploy.
 """
 
 import re
@@ -49,6 +52,7 @@ def problems_in(path):
     lines = path.read_text().splitlines()
     found = []
     top, job, in_jobs = None, None, False
+    jobs, timed = [], set()
     for i, line in enumerate(lines):
         n, stripped = i + 1, line.strip()
         if not stripped or stripped.startswith("#"):
@@ -65,6 +69,9 @@ def problems_in(path):
             m = re.match(r"  ([A-Za-z0-9_-]+):\s*$", line)
             if m:
                 job = m.group(1)
+                jobs.append(job)
+            if job and re.match(r"    timeout-minutes:\s*[1-9][0-9]*\s*(#.*)?$", line):
+                timed.add(job)
         if re.match(r"\s*permissions:", line):
             grants = block_under(lines, i)
             if not line.startswith((" ", "\t")):
@@ -72,6 +79,9 @@ def problems_in(path):
             elif job not in WRITE_ALLOWED and any("write" in g for g in grants):
                 found.append(f"{path.name}:{n}: job '{job}' grants itself {grants}; "
                              f"only {sorted(WRITE_ALLOWED)} may write")
+    for job in jobs:
+        if job not in timed:
+            found.append(f"{path.name}: job '{job}' has no timeout-minutes, so a hang lasts six hours")
     if top != ["contents: read"]:
         found.append(f"{path.name}: top-level permissions should be exactly "
                      f"'contents: read', found {top}")
@@ -85,7 +95,7 @@ def main():
     for problem in found:
         print(f"  FAIL  {problem}")
     print(f"\n{len(WORKFLOWS)} workflow(s): "
-          f"{'pinned, read-only by default, write only in deploy, no pull_request_target' if not found else str(len(found)) + ' problem(s)'}")
+          f"{'pinned, read-only by default, write only in deploy, no pull_request_target, every job timed' if not found else str(len(found)) + ' problem(s)'}")
     sys.exit(1 if found else 0)
 
 

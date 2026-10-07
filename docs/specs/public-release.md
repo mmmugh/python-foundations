@@ -262,6 +262,8 @@ GH_TOKEN = "ghp_" + "a" * 36
 One workflow, `.github/workflows/ci.yml`, on every push and every pull
 request. Workflow-level `permissions: contents: read`; only the deploy job is
 granted more. All actions pinned by commit SHA. No `pull_request_target`.
+Every job has a `timeout-minutes`, so a stalled step fails in minutes rather
+than GitHub's default six hours.
 
 | Job | Needs | Runs |
 | --- | --- | --- |

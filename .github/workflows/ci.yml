@@ -24,6 +24,7 @@ concurrency:
 jobs:
   leaks:
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -64,6 +65,7 @@ jobs:
 
   build:
     runs-on: ubuntu-24.04
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
@@ -109,6 +111,7 @@ jobs:
   node-gates:
     needs: build
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -136,6 +139,7 @@ jobs:
   browser:
     needs: build
     runs-on: ubuntu-24.04
+    timeout-minutes: 15
     env:
       REQUIRE_BROWSER: "1"          # a skipped browser test must not read as green
     steps:
@@ -175,6 +179,7 @@ jobs:
     needs: [leaks, build, node-gates, browser]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     permissions:
       contents: read
       pages: write
@@ -195,6 +200,7 @@ jobs:
   live:
     needs: deploy
     runs-on: ubuntu-24.04
+    timeout-minutes: 25    # the wait for the CDN alone can take twelve minutes
     env:
       REQUIRE_BROWSER: "1"
       SITE_URL: ${{ needs.deploy.outputs.page_url }}
