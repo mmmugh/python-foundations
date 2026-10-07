@@ -266,7 +266,7 @@ granted more. All actions pinned by commit SHA. No `pull_request_target`.
 | Job | Needs | Runs |
 | --- | --- | --- |
 | `leaks` | — | `leak_scan_test.py`, `pre_push_test.py`, `commit_msg_test.py`, `scan_history.py --redact` with the generic patterns, gitleaks over full history with `--redact`, the personal sweep (`answer_key_guard.py` until Plan C retired it) |
-| `build` | — | matrix Python 3.9 and 3.14: fetch and verify Pyodide (cached by `CHECKSUMS` hash), `build.py --check`, `practice_test.py`, `second_volume_test.py`. The 3.14 leg uploads `site/` twice from the same directory: once as a normal artifact for the other jobs, once as the Pages artifact |
+| `build` | — | matrix Python 3.9 and 3.14: fetch and verify Pyodide (cached by `CHECKSUMS` hash), `build.py --check`, `practice_test.py`, `second_volume_test.py`, `site_guard_test.py`, `disclaimer_test.py`. The 3.14 leg uploads `site/` twice from the same directory: once as a normal artifact for the other jobs, once as the Pages artifact |
 | `node-gates` | `build` | `npm ci`, then `verify2`, `validate_shipped`, `validate_stdin`, `validate_projects` against the built `site/` |
 | `browser` | `build` | Chromium via `playwright-core`; `browser_test` at the root **and** under `/python-foundations/`; `browser_check_test` |
 | `deploy` | all of the above | only on push to `main`; deploys the Pages artifact that was tested — never a rebuild |

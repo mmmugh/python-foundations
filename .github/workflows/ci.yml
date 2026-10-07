@@ -84,10 +84,12 @@ jobs:
         run: python3 scripts/fetch_pyodide.py --download
       - name: Build, and verify every example
         run: python3 build.py --check
-      - name: Practice pages and volumes
+      - name: Practice pages, volumes, the site guard and the disclaimer
         run: |
           python3 tests/practice_test.py
           python3 tests/second_volume_test.py
+          python3 tests/site_guard_test.py
+          python3 tests/disclaimer_test.py
       - name: Mark the build with its commit
         if: matrix.python == '3.14'
         run: echo "${GITHUB_SHA}" > site/build.txt
