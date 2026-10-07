@@ -46,7 +46,14 @@ cat > "$diff"
 # cleared inhunk and every '+' line after it went unscanned -- and git emits
 # it mid-hunk whenever the OLD version of a file had no trailing newline. That
 # was a real bypass: appending a token to such a file passed the scan.
-awk '/^@@/{inhunk=1;next} /^\\/{next} /^[+ -]/{if(inhunk&&substr($0,1,1)=="+")print substr($0,2);next} {inhunk=0}' "$diff" > "$work"
+#
+# Both awk calls run in the C locale. They only take the diff apart; grep does
+# the matching, in the caller's locale. macOS's awk, in a UTF-8 locale, aborts
+# on a byte that is not valid UTF-8 ("towc: multibyte conversion failure"), so
+# a harmless Latin-1 line was refused, and the error printed the line itself,
+# past LEAK_SCAN_REDACT. In C every byte is a character, and the path recovery
+# below still holds: both copies of a path have the same length in bytes.
+LC_ALL=C awk '/^@@/{inhunk=1;next} /^\\/{next} /^[+ -]/{if(inhunk&&substr($0,1,1)=="+")print substr($0,2);next} {inhunk=0}' "$diff" > "$work"
 
 # ADDED file paths (new-file / rename / copy targets).
 grep -E '^\+\+\+ b/|^rename to |^copy to ' "$diff" 2>/dev/null \
@@ -65,7 +72,7 @@ grep -E '^\+\+\+ b/|^rename to |^copy to ' "$diff" 2>/dev/null \
 # is wrong whenever the path itself contains " b/" -- a folder named "notes b"
 # is enough -- and git does NOT quote a path merely for holding a space, so
 # that is reachable rather than theoretical.
-awk '/^diff --git /{r=substr($0,12); n=(length(r)-5)/2;
+LC_ALL=C awk '/^diff --git /{r=substr($0,12); n=(length(r)-5)/2;
                      p=(n>0)?substr(r,3,n):""; next}
      /^new file mode /{if (p != "") print p; next}' "$diff" >> "$work" || true
 
@@ -76,6 +83,11 @@ awk '/^diff --git /{r=substr($0,12); n=(length(r)-5)/2;
 # still exits 0, which read here as a match with nothing in it: a token on a
 # Latin-1 line passed. CI runs in C.UTF-8 on Ubuntu, where that is the
 # default. -a makes grep treat every line as text.
+#
+# macOS's grep is worse: in a UTF-8 locale it does not match such a line at
+# all, -a or not, and exits 1. So when the caller's locale finds nothing, grep
+# looks again in the C locale, where every byte is a character. The first pass
+# stays, so a non-ASCII personal literal still matches in any case under -i.
 #
 # grep exits 0 on a match, 1 on none, and 2 on an error such as a pattern
 # that will not compile. `|| true` used to treat all three alike -- and one
@@ -88,6 +100,10 @@ search() {  # $1 = filtered pattern file, $2 = the list's name; the rest go to g
   list=$1; name=$2; shift 2
   status=0
   found=$(grep -a -E "$@" -f "$list" "$work" 2>/dev/null) || status=$?
+  if [ "$status" -eq 1 ]; then
+    status=0
+    found=$(LC_ALL=C grep -a -E "$@" -f "$list" "$work" 2>/dev/null) || status=$?
+  fi
   if [ "$status" -eq 0 ]; then
     matched=$found
   elif [ "$status" -ne 1 ]; then

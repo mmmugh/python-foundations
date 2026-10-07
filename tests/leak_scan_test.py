@@ -262,9 +262,9 @@ def main():
     # GNU grep, in a UTF-8 locale, will not print a line holding a byte that
     # is not valid UTF-8: it says "binary file matches" on stderr and exits 0,
     # and the scan took that for a match with nothing in it. CI runs on
-    # Ubuntu, in C.UTF-8, so a token on a Latin-1 line passed there. macOS's
-    # awk fails loud on the same line instead, so on a Mac this passes either
-    # way; it is the Linux run that it guards.
+    # Ubuntu, in C.UTF-8, so a token on a Latin-1 line passed there. (macOS's
+    # awk used to abort on the same line, which hid this on a Mac; it runs in
+    # the C locale now, so these cases guard both.)
     latin1 = "--- a/notes.md\n+++ b/notes.md\n@@ -0,0 +1 @@\n+caf\xe9 ".encode("latin-1")
     for label, tail, kw in (
             ("a token on a Latin-1 line does not pass, in a UTF-8 locale",
@@ -277,6 +277,17 @@ def main():
             bad += 1
         print(f"  {'ok  ' if ok else 'FAIL'}  {label}"
               f"{'' if ok else f'  (exit={code}, output={out.strip()!r})'}")
+
+    # The other half: an ORDINARY Latin-1 line must pass, and say nothing.
+    # macOS's awk, in a UTF-8 locale, aborted on the byte ("towc: multibyte
+    # conversion failure"), so the scan refused a harmless commit, and awk's
+    # error message printed the line, past LEAK_SCAN_REDACT.
+    code, out = scan_output(latin1 + b"au lait\n", redact=True, locale="C.UTF-8")
+    ok = code == 0 and out.strip() == ""
+    if not ok:
+        bad += 1
+    print(f"  {'ok  ' if ok else 'FAIL'}  an ordinary Latin-1 line passes, silently, in a UTF-8 locale"
+          f"{'' if ok else f'  (exit={code}, output={out.strip()[:80]!r})'}")
 
     for label, diff, kw, should_block, hidden, shown in REDACT_CASES:
         code, out = scan_output(diff, True, **kw)
