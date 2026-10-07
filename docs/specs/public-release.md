@@ -1,6 +1,6 @@
 # Spec: Python Foundations goes public
 
-Status: **approved 2026-10-05.** Decisions marked **(decided)** were made by
+Status: **launched 2026-10-07; approved 2026-10-05.** Decisions marked **(decided)** were made by
 Justin on that date; decisions 5 to 8 were added the same day, while Plan B was
 being written, decision 9 after Plan B's final review, and decisions 10 to 13
 on 2026-10-06, when the questions Plan C needed were settled. Decision 2 was
@@ -265,7 +265,7 @@ granted more. All actions pinned by commit SHA. No `pull_request_target`.
 
 | Job | Needs | Runs |
 | --- | --- | --- |
-| `leaks` | — | `leak_scan_test.py`, `pre_push_test.py`, `scan_history.py --redact` with the generic patterns, gitleaks over full history with `--redact`, the personal sweep (`answer_key_guard.py` until Plan C retired it) |
+| `leaks` | — | `leak_scan_test.py`, `pre_push_test.py`, `commit_msg_test.py`, `scan_history.py --redact` with the generic patterns, gitleaks over full history with `--redact`, the personal sweep (`answer_key_guard.py` until Plan C retired it) |
 | `build` | — | matrix Python 3.9 and 3.14: fetch and verify Pyodide (cached by `CHECKSUMS` hash), `build.py --check`, `practice_test.py`, `second_volume_test.py`. The 3.14 leg uploads `site/` twice from the same directory: once as a normal artifact for the other jobs, once as the Pages artifact |
 | `node-gates` | `build` | `npm ci`, then `verify2`, `validate_shipped`, `validate_stdin`, `validate_projects` against the built `site/` |
 | `browser` | `build` | Chromium via `playwright-core`; `browser_test` at the root **and** under `/python-foundations/`; `browser_check_test` |
@@ -349,6 +349,15 @@ testing anything.
 
 Each of these is a check someone can run, not a judgment.
 
+**Results at launch (2026-10-07), with the Plan C task that checked each:** 1, the
+live job and the browser tests against the live URL (Task 10); 2, 3, 9 and 12,
+the fresh clone (Task 14); 4, 5 and 6, `verify_rewrite.py` 20 of 20 (Task 5,
+again in Task 9); 7, one broken branch per gate and a pull request that did
+not deploy (Task 13); 8, the empty-secret run (Task 13), with the fork clause
+covered by `personal_sweep_test.py` only, since one account cannot make a fork
+pull request; 10, the refused scratch push and push protection (Tasks 6 and
+8); 11, the swapped working copy (Task 11).
+
 1. `https://mmmugh.github.io/python-foundations/` serves the course; the `live`
    job passes against it: Run prints `Hello, world!`, no request leaves the
    origin, `.mjs` and `.wasm` arrive with working content types, and
@@ -361,10 +370,10 @@ Each of these is a check someone can run, not a judgment.
 4. `scan_history.py` with the generic and the personal patterns, and gitleaks,
    all report zero findings across every commit of the public history.
 5. The rewritten `HEAD`'s tree equals the pre-rewrite `HEAD`'s tree — the
-   answer keys having been untracked in Plan A — so the rewrite changed
-   history and nothing else. Any commit dropped because it became empty is
-   listed, not discovered: six are predicted, the commits whose only change
-   was the worksheet.
+   worksheet, the one path the rewrite removes, having been untracked first —
+   so the rewrite changed history and nothing else. Any commit dropped because
+   it became empty is listed, not discovered: six are predicted, the commits
+   whose only change was the worksheet.
 6. Every commit SHA quoted in a commit message resolves in the new history.
 7. CI runs every gate on push and on pull request; a deliberately broken
    branch turns each job red once; pull requests never deploy.
