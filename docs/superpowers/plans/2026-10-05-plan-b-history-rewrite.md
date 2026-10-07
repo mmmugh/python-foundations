@@ -8,9 +8,9 @@
 
 **Tech Stack:** git-filter-repo 2.47.0 (Homebrew), git, Python 3.9+ stdlib, POSIX sh, gitleaks 8.30.1, the repository's own `scan_history.py` and `answer_key_guard.py`.
 
-**Spec:** `docs/specs/public-release.md`, decisions 1 to 8. Decisions 5 to 8 (worksheet private, session trailers stripped, the afed4d6 correction, file hashes translated) were made by Justin on 2026-10-05 while this plan was written; read them before starting.
+**Spec:** `docs/specs/public-release.md`, decisions 1 to 8. Decisions 5 to 8 (worksheet private, session trailers stripped, the 98c0b9c correction, file hashes translated) were made by Justin on 2026-10-05 while this plan was written; read them before starting.
 
-> **Amended 2026-10-06, after the final review.** The plan below ran as written and verified 18 of 18; the fresh reviewer then found what none of its checks could see. (1) The private address was also in a test fixture, in d97d91d, built from two string literals: "every copy is inside the worksheet" was wrong, and every scan looked only for the whole address. (2) The session URL that decision 6 strips from messages sat in the plans' commit-message templates, 14 times. (3) The author's username reached this plan inside Claude Code's dash-encoded memory path, which the slash-form home-path pattern cannot see. The fixes, now embedded below: `rewrite.sh` generates `inputs/blob-replacements.txt` from history and passes it as `--replace-text`; the working copies of both plans were scrubbed the same way first, so `main`'s tree still matches; `verify_rewrite.py` gained `[addr]` (the worksheet's address in any blob or message, whole, split across literals, or octet by octet) and a session-URL check over files, for 20 checks; `.githooks/leak-patterns` blocks the dash-encoded home path; and the message edits were re-wrapped and given a note for 6e50706, whose diff no longer shows the fixture change. `run/` was deleted and Tasks 4 to 6 repeated. Spec decision 9 records it. **Run again by Plan C** after decision 2 was reversed: `rewrite.sh` no longer removes the two answer-key directories, and `verify_rewrite.py` checks that all twelve keys go out, matching the backup, in place of the answer-key guard (Plan C, Task 4).
+> **Amended 2026-10-06, after the final review.** The plan below ran as written and verified 18 of 18; the fresh reviewer then found what none of its checks could see. (1) The private address was also in a test fixture, in 21a13f2, built from two string literals: "every copy is inside the worksheet" was wrong, and every scan looked only for the whole address. (2) The session URL that decision 6 strips from messages sat in the plans' commit-message templates, 14 times. (3) The author's username reached this plan inside Claude Code's dash-encoded memory path, which the slash-form home-path pattern cannot see. The fixes, now embedded below: `rewrite.sh` generates `inputs/blob-replacements.txt` from history and passes it as `--replace-text`; the working copies of both plans were scrubbed the same way first, so `main`'s tree still matches; `verify_rewrite.py` gained `[addr]` (the worksheet's address in any blob or message, whole, split across literals, or octet by octet) and a session-URL check over files, for 20 checks; `.githooks/leak-patterns` blocks the dash-encoded home path; and the message edits were re-wrapped and given a note for b595b31, whose diff no longer shows the fixture change. `run/` was deleted and Tasks 4 to 6 repeated. Spec decision 9 records it. **Run again by Plan C** after decision 2 was reversed: `rewrite.sh` no longer removes the two answer-key directories, and `verify_rewrite.py` checks that all twelve keys go out, matching the backup, in place of the answer-key guard (Plan C, Task 4).
 
 ## Global Constraints
 
@@ -50,7 +50,7 @@ The five failure modes the spec implies that its success criteria do not exercis
 | Messages edited besides trailers | | 15 |
 | `Claude-Session` lines | one per commit since the trailers began | 0 |
 | `main`'s tree | | identical to the working repository's |
-| Older blobs with text replaced | | the d97d91d fixture line; the plans' session URL and dash-encoded home directory |
+| Older blobs with text replaced | | the 21a13f2 fixture line; the plans' session URL and dash-encoded home directory |
 
 No commit becomes empty from the answer-key paths alone: every commit that touched them changed other files too. The history is linear, unsigned, and has no merges. `web-app` and the lightweight tag `ws/web-app` are ancestors of `main`; the tag sits on a commit that is dropped, and filter-repo moves such a ref to the nearest commit it keeps.
 
@@ -225,8 +225,8 @@ fix: --check leaked a temp file per box, until Python 3.14 choked on them==>fix:
 regex:The two million leaked files are not\ntouched from here: the directory is shared by every process on the machine,\nso clearing it is Justin's call\.==>The two million entries are not\ntouched from here (most were never build.py's: deleting every tmp*.py\nmore than a day old later removed none). The directory is shared by\nevery process on the machine, so clearing it is Justin's call.
 regex:since 147fb\x33d, which is already pushed\. Redacted here\. The history question is\nseparate and is Justin's to make -- see below\.==>since the worksheet's first commit, which is already pushed. Redacted\nhere. The history question is separate and is Justin's to make -- see\nbelow.
 regex:\b147fb\x33d onward, and those are on the private origin\. Redacting the working\ntree does not remove it from the log, and the log goes public with the repo\.==>the worksheet's first commit onward, and those are on the private\norigin. Redacting the working tree does not remove it from the log, and\nthe log goes public with the repo.
-regex:\b975ae\x30a\.\.HEAD==>0840a6e..HEAD
-regex:RFC1918 address exercises the pattern equally well\. Now it is a made-up one\.\n==>RFC1918 address exercises the pattern equally well. Now it is a made-up one.\n(When this history was rewritten for publication, the original line was\nreplaced in d97d91d as well, so this diff no longer shows the change.)\n
+regex:\b975ae\x30a\.\.HEAD==>fb95c1f..HEAD
+regex:RFC1918 address exercises the pattern equally well\. Now it is a made-up one\.\n==>RFC1918 address exercises the pattern equally well. Now it is a made-up one.\n(When this history was rewritten for publication, the original line was\nreplaced in 21a13f2 as well, so this diff no longer shows the change.)\n
 regex:(?m)^Claude-Session: [^\n]*\n?==>
 ```
 
@@ -826,7 +826,7 @@ def main():
     check("msg", not found_session,
           f"no session URL in any file or message ({sorted(found_session) or 'none'})")
     check("msg", british == 0, f"no British spelling outside quotations ({british} found)")
-    check("msg", corrected, "afed4d6's subject carries the corrected cause")
+    check("msg", corrected, "98c0b9c's subject carries the corrected cause")
 
     failed = results.count(False)
     print(f"\n{len(results)} checks, "
@@ -851,7 +851,7 @@ git clone -q --no-local "$WR" "$PLAIN"
   --remove WORKSHEET-2026-09-21-web-app.md; echo "exit=$?"
 ```
 
-Expected: `exit=1`, `20 checks, 15 failed`. The fifteen: `[current]` (no commit map); `[2]` (2 distinct addresses); both `[3]` (25 removed paths, and 48 answer-key findings); both scans in `[4]` (generic: 2 blocked; personal: 51 blocked); `[5]` dropped commits and commit count; `[6]` file citations and the filter-repo report; `[addr]` (the worksheet and the d97d91d fixture); and all four `[msg]` checks (trailers, session URLs in the two plans, 16 British spellings, the uncorrected subject). The five that pass are correct to pass on an untouched history: gitleaks, tree equality, nothing added on top, every ref present, and the hashes messages cite all resolve.
+Expected: `exit=1`, `20 checks, 15 failed`. The fifteen: `[current]` (no commit map); `[2]` (2 distinct addresses); both `[3]` (25 removed paths, and 48 answer-key findings); both scans in `[4]` (generic: 2 blocked; personal: 51 blocked); `[5]` dropped commits and commit count; `[6]` file citations and the filter-repo report; `[addr]` (the worksheet and the 21a13f2 fixture); and all four `[msg]` checks (trailers, session URLs in the two plans, 16 British spellings, the uncorrected subject). The five that pass are correct to pass on an untouched history: gitleaks, tree equality, nothing added on top, every ref present, and the hashes messages cite all resolve.
 
 - [ ] **Step 9: Show the personal check refusing a list that checks nothing**
 
@@ -910,16 +910,16 @@ printf 'Justin Stewart <%s> <%s>\n' "$NOREPLY" "$others" > "$inputs/mailmap"
 # Text replaced in every blob of history (decisions 6 and 9 of the spec),
 # written here like the mailmap so that nothing it removes is ever typed:
 #  - the test fixture that built the private address from two string
-#    literals, where no scan for the whole address could see it: d97d91d's
-#    line becomes the made-up line its next commit, 6e50706, put there;
+#    literals, where no scan for the whole address could see it: 21a13f2's
+#    line becomes the made-up line its next commit, b595b31, put there;
 #  - the session URL and the dash-encoded home directory the plans carried.
 #    The working repository's copies were changed the same way first, so
 #    main's tree is untouched and criterion 5 still holds.
-old_line=$(git -C "$src" show d97d91d:tests/leak_scan_test.py | grep '^LAN = ' || true)
-new_line=$(git -C "$src" show 6e50706:tests/leak_scan_test.py | grep '^LAN = ' || true)
+old_line=$(git -C "$src" show 21a13f2:tests/leak_scan_test.py | grep '^LAN = ' || true)
+new_line=$(git -C "$src" show b595b31:tests/leak_scan_test.py | grep '^LAN = ' || true)
 if [ "$(printf '%s\n' "$old_line" | grep -c .)" -ne 1 ] ||
    [ "$(printf '%s\n' "$new_line" | grep -c .)" -ne 1 ] || [ "$old_line" = "$new_line" ]; then
-  echo "refusing: expected one LAN fixture line in each of d97d91d and 6e50706, differing" >&2
+  echo "refusing: expected one LAN fixture line in each of 21a13f2 and b595b31, differing" >&2
   exit 1
 fi
 {
@@ -1020,7 +1020,7 @@ git log --all --format=%B | grep -c '^Claude-Session:'
 git log --format='%h %s' -1 ws/web-app
 ```
 
-Expected: the noreply address on every line; the corrected afed4d6 subject; `0`; and the tag on the commit just before the review-panel worksheet commit it used to name.
+Expected: the noreply address on every line; the corrected 98c0b9c subject; `0`; and the tag on the commit just before the review-panel worksheet commit it used to name.
 
 ---
 

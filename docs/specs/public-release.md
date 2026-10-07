@@ -35,9 +35,9 @@ repo's entire history contains nothing on the list above.
 - The LAN address is gone from the working tree but present in the added
   content of two historical commits (the worksheet's KEY-FACTS line). Every
   copy of it but one is inside the worksheet, which decision 5 removes. The
-  other is a test fixture in d97d91d that built the address from two string
+  other is a test fixture in 21a13f2 that built the address from two string
   literals, so no scan for the whole address could see it; the next commit,
-  6e50706, says so and replaced it with a made-up one. An earlier draft of this
+  b595b31, says so and replaced it with a made-up one. An earlier draft of this
   spec said every copy was in the worksheet. The final review of Plan B found
   the fixture; decision 9 replaces it.
 - Leak-scanning hooks are installed (`.githooks/`, 28 scanner cases, 7 push
@@ -88,7 +88,7 @@ repo's entire history contains nothing on the list above.
    plans' commit-message templates; it is replaced with `<session URL>` in the
    working copies and, by decision 9, in every older version. (Was Open
    Question 6.)
-7. **One commit message is corrected.** afed4d6 attributed the 2.1M-entry temp
+7. **One commit message is corrected.** 98c0b9c attributed the 2.1M-entry temp
    directory to build.py's leaked files; a later cleanup showed most were never
    build.py's. The rewrite replaces its subject and that one sentence, and
    leaves its measured facts as written. British spellings in messages are
@@ -102,7 +102,7 @@ repo's entire history contains nothing on the list above.
    tree; decision 9 changes only older versions of files.
 9. **Text replaced in every older blob**, by a `--replace-text` file that the
    rewrite script generates from history, so that nothing it removes is ever
-   typed: the d97d91d fixture line becomes 6e50706's made-up one; the session
+   typed: the 21a13f2 fixture line becomes b595b31's made-up one; the session
    URL becomes `<session URL>`; and the home directory in Claude Code's
    dash-encoded form (`-Users-<name>-…`), which reached Plan B's text, becomes
    `-Users-<user>-…`. The working copies were changed the same way first, so
@@ -394,7 +394,7 @@ locally. Fully reversible.
 **Plan B — history rewrite.** On a mirror clone; the working repo is not
 touched. Mailmap; path removal for both answer-key directories and the
 worksheet; text replaced in older blobs (decision 9); message edits
-(spellings by exact phrase, the afed4d6 correction, the session trailers);
+(spellings by exact phrase, the 98c0b9c correction, the session trailers);
 then one commit translating the hashes cited in files.
 Verify criteria 2 through 6 locally and keep filter-repo's commit map. Nothing
 pushed. Reversible: delete the clone.

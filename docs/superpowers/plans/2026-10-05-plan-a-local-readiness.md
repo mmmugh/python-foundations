@@ -37,7 +37,7 @@ The five failure modes the spec implies but its own success criteria do not exer
 2. **A skipped browser test is a green run that tested nothing.** Pinned in **Task 9**: `REQUIRE_BROWSER=1` turns every skip into a failure, demonstrated with a missing browser binary.
 3. **A history scan that cannot see the history reports it clean,** in a shallow clone or a repository with no commits. Pinned in **Tasks 4 and 7**: both history scanners refuse, and tests prove it.
 4. **Something added and then deleted between two looks,** the net-diff class that already let a token through pre-push. Pinned for answer keys in **Task 4** (`--history`) and for leaks in **Task 7**.
-5. **A personal list that checks nothing passes silently,** since matching nothing looks exactly like a clean history: an empty list, a comments-only list, or one holding a single pattern that will not compile, which makes grep abandon the whole list. The last was a live bug in `leak-scan`, fixed at `8d161fd` after the review panel found it. Pinned in **Task 12**, end to end.
+5. **A personal list that checks nothing passes silently,** since matching nothing looks exactly like a clean history: an empty list, a comments-only list, or one holding a single pattern that will not compile, which makes grep abandon the whole list. The last was a live bug in `leak-scan`, fixed at `85b9892` after the review panel found it. Pinned in **Task 12**, end to end.
 
 ## File Map
 
