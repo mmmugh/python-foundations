@@ -8,6 +8,14 @@ answer), an interactive scratchpad, and four appendices. No accounts, no
 backend, no build toolchain — it is a static site, and Python runs in the
 browser via Pyodide.
 
+**Read it at <https://mmmugh.github.io/python-foundations/>.** Nothing to
+install or sign up for: every example runs in your browser.
+
+> Python Foundations is an independent, free course. It is not affiliated with,
+> or endorsed by, the Python Software Foundation or any other course, book or
+> program of the same name. "Python" is a registered trademark of the Python
+> Software Foundation.
+
 ## Running it
 
 Nothing to install—no package manager, no build toolchain, no accounts.

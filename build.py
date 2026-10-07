@@ -754,6 +754,15 @@ def box_list(vol, pages):
     return dump
 
 
+# The course shares its name with other courses and a book series, and "Python"
+# is the Python Software Foundation's registered mark. Said on the front page,
+# where a reader first meets the name, and in the README (spec decision 10).
+DISCLAIMER = ('Python Foundations is an independent, free course. It is not '
+              'affiliated with, or endorsed by, the Python Software Foundation or '
+              'any other course, book or program of the same name. "Python" is a '
+              'registered trademark of the Python Software Foundation.')
+
+
 def write_library(built):
     """site/index.html: the way in, whatever number of volumes there are.
 
@@ -777,6 +786,7 @@ def write_library(built):
         sections.append(f'<p><a href="{vol["slug"]}/bundle.html">'
                         f'The code from {heading} as files</a></p>')
         nav.append(f'<a href="{vol["slug"]}/{first}.html">{heading}</a>')
+    sections.append(f'<p class="notice">{html.escape(DISCLAIMER, quote=False)}</p>')
 
     # With one volume this page is that volume's contents and should carry its
     # name; with two it is a shelf and must not claim to be either of them.
