@@ -8,9 +8,11 @@
 # The whole message file goes to leak-scan as the added lines of one synthetic
 # file, so the same lists apply, the personal one included. All of it, git's
 # comment lines too: with -F or -m, git keeps a '#' line in the message, so
-# skipping them would skip text that is published. The one cost: `git commit
-# -v` appends the staged diff to this file, so committing the removal of a
-# leak with -v is refused too. Commit that one without -v.
+# skipping them would skip text that is published. The cost: git's own
+# comments are scanned too. When an editor opens, git lists the staged files
+# in them ("#	deleted: <path>"), and `git commit -v` appends the staged diff,
+# so removing a leak, or a file whose NAME matches a pattern, is refused that
+# way. Commit such a removal with -m or -F.
 set -eu
 here=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 if ! { printf 'diff --git a/.commit b/.commit\n@@ -0,0 +1 @@\n'; sed 's/^/+/' "$1"; } \

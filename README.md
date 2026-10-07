@@ -165,10 +165,10 @@ the reversal.)
 
 This repo is meant to be public, so `.githooks/leak-scan` reads a diff and
 refuses anything whose **added** lines or added file paths match a deny
-pattern: absolute home directories, private LAN addresses, and the shapes of
-AWS keys, GitHub tokens, API keys and PEM private keys. It runs from
-`pre-commit` and again from `pre-push`, which catches anything committed with
-`--no-verify` or pushed from another clone.
+pattern: absolute home directories, private LAN addresses, Claude Code session
+URLs, and the shapes of AWS keys, GitHub tokens, API keys and PEM private
+keys. It runs from `pre-commit` and again from `pre-push`, which catches
+anything committed with `--no-verify` or pushed from another clone.
 
 `pre-push` scans **each new commit separately**, not the difference between
 the two ends of the push. Scanning the net is the obvious implementation and
@@ -183,8 +183,10 @@ it. `pre-push` scans the message of every commit it pushes as well, since a
 cherry-pick, a rebase, `git am` or `--no-verify` never runs `commit-msg`.
 Between them they refuse a `Claude-Session` line, whatever it holds, which
 commits here do not carry (spec decision 13); CI's history scan refuses a
-session URL too. One cost: `git commit -v` puts the staged diff in the message
-file, so commit the removal of a leak without `-v`.
+session URL too. One cost: git's own comments in the message file are scanned
+as well. When an editor opens, they list the staged files, and `git commit -v`
+adds the staged diff, so commit the removal of a leak, or of a file whose name
+matches a pattern, with `-m` or `-F`.
 
 Git does not carry hooks in a clone, so after cloning:
 
