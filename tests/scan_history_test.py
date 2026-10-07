@@ -60,6 +60,9 @@ def run(repo, *args, **env_extra):
 def main():
     results = []
 
+    # A "found" case checks the summary as well as the exit code: the scan also
+    # exits 1 when it refuses to scan at all (a shallow clone, no commits), and
+    # a refusal must not pass for a match.
     def expect(label, got, want):
         results.append((label, got == want, got, want))
 
@@ -108,7 +111,8 @@ def main():
         listfile.write_text(f"{LITERAL}\n")
         code, out = run(repo, "--redact", LEAK_PATTERNS="/dev/null",
                         LEAK_PATTERNS_LOCAL=str(listfile))
-        expect("a personal list from the environment is used", code, 1)
+        expect("a personal list from the environment is used",
+               (code, "1 blocked" in out), (1, True))
         expect("...and its match is never printed when redacted",
                LITERAL in out.lower(), False)
 
@@ -144,7 +148,8 @@ def main():
         commit(repo, f"{accented.title()} plan.md", "nothing in the body\n", "add")
         code, out = run(repo, "--redact", LEAK_PATTERNS="/dev/null",
                         LEAK_PATTERNS_LOCAL=str(listfile))
-        expect("a personal literal in a non-ASCII filename is found", code, 1)
+        expect("a personal literal in a non-ASCII filename is found",
+               (code, "1 blocked" in out), (1, True))
 
     # A commit publishes more than its diff: its message, and the name and
     # address of whoever wrote and committed it. Neither the diff scan nor
@@ -157,25 +162,29 @@ def main():
         repo = new_repo(tmp, "message")
         commit(repo, "a.md", "hello\n", f"notes from the {LITERAL.title()} offsite")
         code, out = run(repo, "--redact", **personal)
-        expect("a personal literal in a commit message is found", code, 1)
+        expect("a personal literal in a commit message is found",
+               (code, "1 blocked" in out), (1, True))
         expect("...and is never printed when redacted", LITERAL in out.lower(), False)
 
         repo = new_repo(tmp, "token-message")
         commit(repo, "a.md", "hello\n", f"rotate {GH_TOKEN}")
         code, out = run(repo)
-        expect("a token in a commit message is found", code, 1)
+        expect("a token in a commit message is found",
+               (code, "1 blocked" in out), (1, True))
 
         repo = new_repo(tmp, "identity")
         git(repo, "config", "user.name", f"someone at {LITERAL}")
         commit(repo, "a.md", "hello\n", "ordinary")
         code, out = run(repo, "--redact", **personal)
-        expect("a personal literal in the author's name is found", code, 1)
+        expect("a personal literal in the author's name is found",
+               (code, "1 blocked" in out), (1, True))
 
         repo = new_repo(tmp, "session")
         commit(repo, "a.md", "hello\n", "docs: x\n\nClaude-Session: https://claude.ai/code/"
                + "session_" + "0aB1cD2eF3gH")
         code, out = run(repo, "--redact")
-        expect("a session URL in a message is found by the generic patterns", code, 1)
+        expect("a session URL in a message is found by the generic patterns",
+               (code, "1 blocked" in out), (1, True))
 
         repo = new_repo(tmp, "plain")
         commit(repo, "a.md", "hello\n", "ordinary")
