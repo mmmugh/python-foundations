@@ -26,6 +26,7 @@ ROOT = Path(__file__).resolve().parent.parent
 # Assembled, not written out: a file containing this literally could not be
 # committed through the very hook it tests.
 TOKEN = "ghp_" + "a" * 36
+SESSION_URL = "https://claude.ai/code/" + "session_" + "0aB1cD2eF3gH"
 
 
 def git(repo, *args, allow_fail=False):
@@ -97,9 +98,20 @@ def main():
         expect("a merge that brings the leaky branch in is blocked",
                push(work, "origin", "main"), False)
 
-        found = subprocess.run(["git", "-C", str(remote), "log", "-p", "--all"],
-                               capture_output=True, text=True).stdout.count(TOKEN)
-        expect("the remote ends with no copy of the token at all", found, 0)
+        # A message is published with its commit, and commit-msg never runs on
+        # a cherry-pick, a rebase, `git am` or --no-verify. pre-push is the
+        # last local chance to refuse one.
+        git(work, "checkout", "-q", "-b", "session", safe)
+        (work / "plain.md").write_text("ordinary content\n")
+        git(work, "add", "-A")
+        git(work, "commit", "-q", "--no-verify", "-m", f"docs: x\n\nClaude-Session: {SESSION_URL}")
+        expect("a session URL in a message that skipped commit-msg is blocked",
+               push(work, "origin", "session"), False)
+
+        log = subprocess.run(["git", "-C", str(remote), "log", "-p", "--all"],
+                             capture_output=True, text=True).stdout
+        expect("the remote ends with no copy of the token at all", log.count(TOKEN), 0)
+        expect("the remote ends with no copy of the session URL", log.count(SESSION_URL), 0)
 
     bad = 0
     for label, ok, got, want in results:

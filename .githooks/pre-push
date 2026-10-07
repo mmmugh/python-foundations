@@ -1,5 +1,6 @@
 #!/bin/sh
-# Refuse to push commits or tags whose ADDED content matches a leak pattern.
+# Refuse to push commits or tags whose ADDED content, or whose message, matches
+# a leak pattern.
 # git feeds ref updates on stdin, one per line:
 #   <local ref> <local sha> <remote ref> <remote sha>
 # and passes the remote's name as $1.
@@ -45,6 +46,16 @@ while read -r local_ref local_sha remote_ref remote_sha; do
     if ! git -c core.quotePath=false diff-tree -p -U0 --root -m --no-color "$commit" \
          | "$HOOK_DIR/leak-scan"; then
       echo "pre-push: leak-scan blocked $local_ref at commit $(git rev-parse --short "$commit")" >&2
+      fail=1
+    fi
+    # The message too: it is published with the commit, and commit-msg never
+    # runs on a cherry-pick, a rebase, `git am` or --no-verify. Fed to
+    # leak-scan the way commit-msg feeds it. Read first, so that a message git
+    # cannot read stops the push under set -e rather than scanning nothing.
+    message=$(git log -1 --format=%B "$commit")
+    if ! { printf 'diff --git a/.commit b/.commit\n@@ -0,0 +1 @@\n'
+           printf '%s\n' "$message" | sed 's/^/+/'; } | "$HOOK_DIR/leak-scan"; then
+      echo "pre-push: leak-scan blocked the message of $local_ref at commit $(git rev-parse --short "$commit")" >&2
       fail=1
     fi
   done
