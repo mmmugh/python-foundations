@@ -1,0 +1,20 @@
+#!/bin/sh
+# commit-msg: refuse a commit whose message matches a deny pattern, before the
+# commit exists. pre-commit and pre-push read diffs only, and a message is
+# published with its commit all the same: a Claude-Session URL (spec decision
+# 13), a token pasted in, a personal string. CI's scan_history.py reads
+# messages too, but on a public repository that is after the fact.
+#
+# The whole message file goes to leak-scan as the added lines of one synthetic
+# file, so the same lists apply, the personal one included. All of it, git's
+# comment lines too: with -F or -m, git keeps a '#' line in the message, so
+# skipping them would skip text that is published. The one cost: `git commit
+# -v` appends the staged diff to this file, so committing the removal of a
+# leak with -v is refused too. Commit that one without -v.
+set -eu
+here=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+if ! { printf 'diff --git a/.commit b/.commit\n@@ -0,0 +1 @@\n'; sed 's/^/+/' "$1"; } \
+     | "$here/leak-scan"; then
+  echo "commit-msg: the message was refused and nothing was committed; edit it and commit again" >&2
+  exit 1
+fi

@@ -177,6 +177,13 @@ nets to nothing, so the push is allowed — and both commits still land in the
 remote, where the token is as readable as ever. A commit already made cannot
 be fixed by deleting the content in a later one.
 
+`commit-msg` scans each commit message before the commit exists, with the same
+lists: a message is published with its commit, and the diff scans never see
+it. It is what refuses a `Claude-Session` line, which commits here do not
+carry (spec decision 13); CI's history scan refuses one too. One cost: `git
+commit -v` puts the staged diff in the message file, so commit the removal of
+a leak without `-v`.
+
 Git does not carry hooks in a clone, so after cloning:
 
     git config core.hooksPath .githooks

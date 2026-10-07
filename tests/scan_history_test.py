@@ -171,6 +171,12 @@ def main():
         code, out = run(repo, "--redact", **personal)
         expect("a personal literal in the author's name is found", code, 1)
 
+        repo = new_repo(tmp, "session")
+        commit(repo, "a.md", "hello\n", "docs: x\n\nClaude-Session: https://claude.ai/code/"
+               + "session_" + "0aB1cD2eF3gH")
+        code, out = run(repo, "--redact")
+        expect("a session URL in a message is found by the generic patterns", code, 1)
+
         repo = new_repo(tmp, "plain")
         commit(repo, "a.md", "hello\n", "ordinary")
         code, out = run(repo, "--redact", **personal)

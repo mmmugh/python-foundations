@@ -36,6 +36,8 @@ jobs:
         run: python3 tests/leak_scan_test.py
       - name: pre-push scans what reaches the remote
         run: python3 tests/pre_push_test.py
+      - name: Every commit message is scanned before it exists
+        run: python3 tests/commit_msg_test.py
       - name: The history scan and the personal sweep behave
         run: |
           python3 tests/scan_history_test.py

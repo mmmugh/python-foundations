@@ -48,6 +48,9 @@ REPO_PATH = "Users" + "/guide.md"
 # every "/" turned into "-", so a home directory survives in it with no slash
 # for the home-path pattern to find. One reached a plan this way.
 DASHED_HOME = "-Users" + "-someone-python-foundations"
+# A Claude Code session URL. This repository's history was scrubbed of them
+# (spec decisions 6, 9 and 13), so one in a file or a message is a regression.
+SESSION_URL = "https://claude.ai/code/" + "session_" + "0aB1cD2eF3gH"
 
 
 def scan_output(diff, redact=False, patterns=None, local=None, locale=None):
@@ -95,6 +98,10 @@ CASES = [
      diff_of(f"+cd {HOME_PATH}\n"), True, {}),
     ("a home path in Claude Code's dash-encoded form is blocked",
      diff_of(f"+see ~/.claude/projects/{DASHED_HOME}/memory/notes.md\n"), True, {}),
+    ("a Claude Code session URL is blocked",
+     diff_of(f"+Claude-Session: {SESSION_URL}\n"), True, {}),
+    ("the placeholder the history was scrubbed to is allowed",
+     diff_of("+Claude-Session: <session URL>\n"), False, {}),
     ("the same path with a placeholder for the name is allowed",
      diff_of("+see ~/.claude/projects/-Users-<user>-python-foundations/memory/\n"), False, {}),
     # A path in a diff is repo-relative and so never begins with "/", which
