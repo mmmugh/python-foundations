@@ -236,3 +236,5 @@ generated from them.
 The git hooks in `.githooks/` were adapted from
 [tokenwatt](https://github.com/mmmugh/tokenwatt), by the same author, where they
 are MIT-licensed.
+
+<!-- CI check from Plan C, Task 13. -->
