@@ -1,0 +1,129 @@
+PYTHON FOUNDATIONS
+Chapter 8 - Strings as Data
+
+ANSWER KEY
+
+
+VOCABULARY
+----------
+
+ 1. A string is a ____ of characters, so indexing and slicing work on it
+    much like they do on a list.
+
+      ANSWER: sequence
+
+ 2. Unlike a list, a string is ____-it cannot be changed after it is
+    created, so every string method returns a new string instead of
+    modifying it.
+
+      ANSWER: immutable
+
+ 3. The ____ operator tests whether one string appears inside another, as
+    in "quick" in sentence.
+
+      ANSWER: in
+
+ 4. Sequences like \n and \t, which represent characters that can't be
+    typed directly into a string, are called ____ sequences.
+
+      ANSWER: escape
+
+
+READING CODE
+------------
+
+ 5. What does this print?
+
+        word = "Python"
+        print(word[0:3])
+        print(word[::-1])
+
+      ANSWER: Pyt
+          nohtyP
+
+ 6. What does this print?
+
+        messy = "   Ada LOVELACE  "
+        clean = messy.strip().title()
+        print(f"[{clean}]")
+
+      ANSWER: [Ada Lovelace]
+
+ 7. What does this print?
+
+        answer = " Yes "
+        print(answer == "yes")
+        print(answer.strip().lower() == "yes")
+
+      ANSWER: False
+          True
+
+ 8. What does this print?
+
+        row = "Ada,88,A"
+        name, score, grade = row.split(",")
+        print(f"{name} scored {score} for a {grade}")
+
+      ANSWER: Ada scored 88 for a A
+
+ 9. What does this print?
+
+        word = "python"
+        word.upper()
+        print(word)
+
+      ANSWER: python
+
+10. What does this print?
+
+        def count_vowels(text):
+            count = 0
+            for letter in text.lower():
+                if letter in "aeiou":
+                    count += 1
+            return count
+        
+        
+        print(count_vowels("Hello World"))
+
+      ANSWER: 3
+
+
+WRITING CODE
+------------
+
+11. word = "hello" print(word.____()) # prints HELLO
+
+      ANSWER: upper
+
+12. sentence = "the quick brown fox" words = sentence.____() # splits the
+    sentence into a list of words print(words)
+
+      ANSWER: split
+
+13. words = ["the", "quick", "brown"] print(" ".____(words)) # glues the
+    words together with a space between each one
+
+      ANSWER: join
+
+
+WHY IT WORKS
+------------
+
+14. word.upper() by itself does not change word, because strings are ____;
+    every string method returns a ____ string rather than modifying the
+    original.
+
+        word = "python"
+        word.upper()
+        print(word)
+
+      ANSWER: immutable
+      ANSWER: new
+
+15. .find(x) returns ____ when x does not appear in the string at all; a
+    return value of ____ means the match starts at the very first
+    character.
+
+      ANSWER: -1
+      ANSWER: 0

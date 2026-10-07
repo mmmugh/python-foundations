@@ -1,0 +1,147 @@
+PYTHON FOUNDATIONS
+Chapter 10 - Tuples and Structured Records
+
+ANSWER KEY
+
+
+VOCABULARY
+----------
+
+ 1. A ____ is an ordered collection, like a list, that cannot be changed
+    after it is made.
+
+      ANSWER: tuple
+
+ 2. Assigning a tuple to several names at once, like x, y = point, is
+    called ____.
+
+      ANSWER: unpacking
+
+ 3. Real data is usually a collection of records, and in Python that is
+    represented as a ____.
+
+      ANSWER: list of dictionaries
+
+ 4. LOW_STOCK = 10 is written in capitals, the Python convention for a
+    ____ - a value fixed for the whole program.
+
+      ANSWER: constant
+
+ 5. The line state = "OUT OF STOCK" if item["quantity"] == 0 else
+    f"{item['quantity']} left" is a ____ - an if/else that produces a
+    value rather than choosing statements.
+
+      ANSWER: conditional expression
+
+
+READING CODE
+------------
+
+ 6. What does this print?
+
+        point = (3, 4)
+        color = (255, 128, 0)
+        
+        print(point[0])
+        print(len(color))
+        
+        for value in color:
+            print(value)
+
+      ANSWER: 3
+          3
+          255
+          128
+          0
+
+ 7. What does this print?
+
+        a = 1
+        b = 2
+        a, b = b, a
+        print(a, b)
+
+      ANSWER: 2 1
+
+ 8. What does this print?
+
+        board = {}
+        board[(0, 0)] = "X"
+        board[(1, 1)] = "O"
+        board[(2, 2)] = "X"
+        
+        print(board[(1, 1)])
+        print((0, 0) in board)
+        print((0, 1) in board)
+
+      ANSWER: O
+          True
+          False
+
+ 9. What does this print?
+
+        def min_max(numbers):
+            return min(numbers), max(numbers)
+        
+        
+        result = min_max([5, 2, 9, 1])
+        print(result)
+        print(type(result))
+
+      ANSWER: (1, 9)
+          <class 'tuple'>
+
+10. What does this print?
+
+        single = (5,)
+        not_a_tuple = (5)
+        print(type(single))
+        print(type(not_a_tuple))
+
+      ANSWER: <class 'tuple'>
+          <class 'int'>
+
+
+WRITING CODE
+------------
+
+11. Unpack the tuple point into its two coordinates: x, y =
+
+        point = (3, 4)
+
+      ANSWER: point
+
+12. Write a one-item tuple containing just the number 5 (not the number 5
+    in parentheses): single = ____
+
+      ANSWER: (5,)
+
+13. Complete the line that inserts an empty list for a new category before
+    appending to it: groups.____(item["category"], []).append(item)
+
+        groups = {}
+
+      ANSWER: setdefault
+
+
+WHY IT WORKS
+------------
+
+14. Passing a tuple to a function carries no risk that the function will
+    alter your data, because a tuple is ____ and cannot be changed no
+    matter what the function tries to do.
+
+      ANSWER: immutable
+
+15. A dictionary key must never change while it is in use, or the
+    dictionary could no longer find it - that is why a list cannot be a
+    key but a ____ can.
+
+      ANSWER: tuple
+
+16. Sorting a list of student records by score keeps each student's name
+    and score correctly matched, because every field for one student lives
+    together inside a single ____, so sorting only reorders those units in
+    the list, not the values inside them.
+
+      ANSWER: dictionary

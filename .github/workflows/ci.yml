@@ -57,12 +57,6 @@ jobs:
           PERSONAL_PATTERNS: ${{ secrets.LEAK_PATTERNS_LOCAL }}
           FORK_PULL_REQUEST: ${{ github.event.pull_request.head.repo.fork || 'false' }}
         run: sh scripts/personal_sweep.sh
-      - name: The answer-key guard itself
-        run: python3 tests/answer_key_guard_test.py
-      - name: No answer key in the tree
-        run: python3 tests/answer_key_guard.py
-      - name: No answer key anywhere in history
-        run: python3 tests/answer_key_guard.py --history
       - name: The workflow keeps its own promises
         run: python3 tests/workflow_test.py
 

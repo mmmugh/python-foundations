@@ -1,0 +1,170 @@
+PYTHON FOUNDATIONS
+Chapter 12 - Recursion and Problem Solving
+
+ANSWER KEY
+
+
+VOCABULARY
+----------
+
+ 1. A ____ function is one that calls itself, as long as it always calls
+    itself on a smaller version of the problem and knows when to stop.
+
+      ANSWER: recursive
+
+ 2. The ____ is a version of the problem small enough to answer outright,
+    with no further call.
+
+      ANSWER: base case
+
+ 3. The ____ calls the function again on a smaller input and builds the
+    answer from the result.
+
+      ANSWER: recursive case
+
+ 4. Recursion is not a loop that goes around; it is a ____ of unfinished
+    work that unwinds.
+
+      ANSWER: stack
+
+ 5. Remembering answers already computed, so they are never recalculated,
+    is a technique called ____.
+
+      ANSWER: memoization
+
+
+READING CODE
+------------
+
+ 6. What does this print?
+
+        def factorial(n):
+            if n <= 1:
+                return 1
+            return n * factorial(n - 1)
+        
+        
+        print(factorial(5))
+
+      ANSWER: 120
+
+ 7. What does this print?
+
+        def reverse(text):
+            if len(text) <= 1:
+                return text
+            return reverse(text[1:]) + text[0]
+        
+        
+        print(reverse("recursion"))
+
+      ANSWER: noisrucer
+
+ 8. What does this print?
+
+        def countdown(n):
+            if n <= 0:
+                print("Liftoff.")
+                return
+            print(n)
+            countdown(n - 1)
+        
+        
+        countdown(3)
+
+      ANSWER: 3
+          2
+          1
+          Liftoff.
+
+ 9. What does this print?
+
+        def factorial_traced(n, depth=0):
+            indent = "  " * depth
+            print(f"{indent}factorial({n}) called")
+        
+            if n <= 1:
+                print(f"{indent}base case, returning 1")
+                return 1
+        
+            result = n * factorial_traced(n - 1, depth + 1)
+            print(f"{indent}returning {n} * factorial({n - 1}) = {result}")
+            return result
+        
+        
+        factorial_traced(2)
+
+      ANSWER: factorial(2) called
+            factorial(1) called
+            base case, returning 1
+          returning 2 * factorial(1) = 2
+
+10. What does this print?
+
+        def fib(n):
+            if n <= 1:
+                return n
+            return fib(n - 1) + fib(n - 2)
+        
+        
+        for i in range(6):
+            print(fib(i))
+
+      ANSWER: 0
+          1
+          1
+          2
+          3
+          5
+
+
+WRITING CODE
+------------
+
+11. Complete the base case, which stops the recursion: if n <= 1: return
+
+        def factorial(n):
+
+      ANSWER: 1
+
+12. Complete the recursive case: return n * ____(n - 1)
+
+        def factorial(n):
+            if n <= 1:
+                return 1
+
+      ANSWER: factorial
+
+13. Complete the line that computes and stores a new Fibonacci value:
+    memo[n] = fib_fast(n - 1, memo) + ____(n - 2, memo)
+
+        def fib_fast(n, memo=None):
+            if memo is None:
+                memo = {}
+            if n in memo:
+                return memo[n]
+            if n <= 1:
+                return n
+
+      ANSWER: fib_fast
+
+
+WHY IT WORKS
+------------
+
+14. factorial(n) crashes with a RecursionError when the recursive case
+    never moves toward the ____, so n never becomes small enough to stop.
+
+      ANSWER: base case
+
+15. fib(30) takes about 1.6 million calls because the naive recursive
+    Fibonacci function ____ the same values over and over instead of
+    remembering them.
+
+      ANSWER: recomputes
+
+16. In factorial_traced(4), nothing is actually multiplied until the
+    bottom is reached, because each level of the recursion is ____,
+    holding its own n, for the level below to finish.
+
+      ANSWER: waiting
