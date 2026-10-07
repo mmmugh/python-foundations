@@ -58,6 +58,12 @@ while read -r local_ref local_sha remote_ref remote_sha; do
       echo "pre-push: leak-scan blocked the message of $local_ref at commit $(git rev-parse --short "$commit")" >&2
       fail=1
     fi
+    # And the Claude-Session line itself, whatever it holds (spec decision 13;
+    # see commit-msg).
+    if printf '%s\n' "$message" | grep -i -q '^Claude-Session:'; then
+      echo "pre-push: the message of $local_ref at commit $(git rev-parse --short "$commit") carries a Claude-Session line" >&2
+      fail=1
+    fi
   done
 done
 

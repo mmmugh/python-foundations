@@ -181,10 +181,10 @@ be fixed by deleting the content in a later one.
 lists: a message is published with its commit, and the diff scans never see
 it. `pre-push` scans the message of every commit it pushes as well, since a
 cherry-pick, a rebase, `git am` or `--no-verify` never runs `commit-msg`.
-Between them they refuse a `Claude-Session` line, which commits here do not
-carry (spec decision 13); CI's history scan refuses one too. One cost: `git
-commit -v` puts the staged diff in the message file, so commit the removal of
-a leak without `-v`.
+Between them they refuse a `Claude-Session` line, whatever it holds, which
+commits here do not carry (spec decision 13); CI's history scan refuses a
+session URL too. One cost: `git commit -v` puts the staged diff in the message
+file, so commit the removal of a leak without `-v`.
 
 Git does not carry hooks in a clone, so after cloning:
 

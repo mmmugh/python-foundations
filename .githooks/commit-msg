@@ -18,3 +18,11 @@ if ! { printf 'diff --git a/.commit b/.commit\n@@ -0,0 +1 @@\n'; sed 's/^/+/' "$
   echo "commit-msg: the message was refused and nothing was committed; edit it and commit again" >&2
   exit 1
 fi
+# Spec decision 13 bans the Claude-Session line itself, not only a session
+# URL: a placeholder, another host or a new ID format is refused as well. It
+# is checked here, on messages only, because tracked documents quote the
+# placeholder at the start of a line, so the diff patterns cannot hold it.
+if grep -i -q '^Claude-Session:' "$1"; then
+  echo "commit-msg: commits here carry no Claude-Session line (spec decision 13); remove it and commit again" >&2
+  exit 1
+fi

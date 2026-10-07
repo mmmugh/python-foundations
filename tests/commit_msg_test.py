@@ -56,8 +56,12 @@ def main():
         expect("a token in a message is refused", commit(f"fix: rotate {GH_TOKEN}\n"), False)
         expect("a personal literal in a message is refused",
                commit(f"notes from the {LITERAL.title()} offsite\n"), False)
-        expect("the placeholder the history was scrubbed to is allowed",
-               commit("docs: y\n\nClaude-Session: <session URL>\n"), True)
+        # Decision 13 bans the line, not only the URL: a placeholder, another
+        # host or a new ID format is refused too. Naming it mid-line is fine.
+        expect("a Claude-Session line is refused whatever it holds",
+               commit("docs: y\n\nClaude-Session: <session URL>\n"), False)
+        expect("a message that names the trailer mid-line is committed",
+               commit("docs: commits here carry no Claude-Session line\n"), True)
         count = subprocess.run(["git", "-C", str(repo), "rev-list", "--count", "HEAD"],
                                capture_output=True, text=True).stdout.strip()
         expect("only the two allowed commits exist", count, "2")

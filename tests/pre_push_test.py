@@ -108,6 +108,13 @@ def main():
         expect("a session URL in a message that skipped commit-msg is blocked",
                push(work, "origin", "session"), False)
 
+        git(work, "checkout", "-q", "-b", "trailer", safe)
+        (work / "plain2.md").write_text("ordinary content\n")
+        git(work, "add", "-A")
+        git(work, "commit", "-q", "--no-verify", "-m", "docs: z\n\nClaude-Session: <session URL>")
+        expect("a Claude-Session line that skipped commit-msg is blocked, whatever it holds",
+               push(work, "origin", "trailer"), False)
+
         log = subprocess.run(["git", "-C", str(remote), "log", "-p", "--all"],
                              capture_output=True, text=True).stdout
         expect("the remote ends with no copy of the token at all", log.count(TOKEN), 0)
