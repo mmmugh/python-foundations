@@ -42,11 +42,11 @@ async function boot() {
   loading = (async () => {
     say("Starting Python… (13 MB, once)");
     const { loadPyodide } = await import(PYODIDE + "pyodide.mjs");
-    // packageBaseUrl as well as indexURL: left unset, Pyodide keeps a built-in
-    // https://cdn.jsdelivr.net/pyodide/... fallback for loadPackage and micropip.
-    // The course never calls either, so it never fires -- but pointing it at our
-    // own origin makes "no external CDN" a property of the code rather than a
-    // consequence of what we happen not to call.
+    // packageBaseUrl spelled out, though in a browser Pyodide 314.0.7 already
+    // derives it from indexURL (the directory of pyodide-lock.json); its
+    // cdn.jsdelivr.net fallback for packages runs only under Node. Stating it
+    // keeps "packages come from this site" true even if that default changes --
+    // not that the course loads packages: it never calls loadPackage or micropip.
     pyodide = await loadPyodide({ indexURL: PYODIDE, packageBaseUrl: PYODIDE });
 
     pyodide.setStdout({ batched: (text) => sink && sink(text) });
