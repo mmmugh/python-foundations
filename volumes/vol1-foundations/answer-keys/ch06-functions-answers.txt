@@ -99,20 +99,37 @@ READING CODE
 WRITING CODE
 ------------
 
-10. ____ greet(name): print(f"Hello, {name}!")
+10. Fill in the blank:
+
+        ____ greet(name):
+            print(f"Hello, {name}!")
 
       ANSWER: def
 
-11. def area(width, height): ____ width * height room = area(12, 10)
-    print(room) # should print 120
+11. Fill in the blank:
+
+        def area(width, height):
+            ____ width * height
+        
+        room = area(12, 10)
+        print(room)  # should print 120
 
       ANSWER: return
 
-12. def celsius_to_fahrenheit(celsius): ____ return celsius * 9 / 5 + 32
+12. Fill in the blank:
+
+        def celsius_to_fahrenheit(celsius):
+            ____
+            return celsius * 9 / 5 + 32
 
       ANSWER: """Convert a Celsius temperature to Fahrenheit.""" (any accurate one-line docstring in triple quotes works)
 
-13. def main(): print("Running the program.") ____()
+13. Fill in the blank:
+
+        def main():
+            print("Running the program.")
+        
+        ____()
 
       ANSWER: main
 

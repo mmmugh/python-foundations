@@ -91,15 +91,31 @@ READING CODE
 WRITING CODE
 ------------
 
-10. __________________ greet(name): print(f"Hello, {name}!")
+10. Fill in the blank:
 
-11. def area(width, height): __________________ width * height room =
-    area(12, 10) print(room) # should print 120
+        __________________ greet(name):
+            print(f"Hello, {name}!")
 
-12. def celsius_to_fahrenheit(celsius): __________________ return celsius
-    * 9 / 5 + 32
+11. Fill in the blank:
 
-13. def main(): print("Running the program.") __________________()
+        def area(width, height):
+            __________________ width * height
+        
+        room = area(12, 10)
+        print(room)  # should print 120
+
+12. Fill in the blank:
+
+        def celsius_to_fahrenheit(celsius):
+            __________________
+            return celsius * 9 / 5 + 32
+
+13. Fill in the blank:
+
+        def main():
+            print("Running the program.")
+        
+        __________________()
 
 
 WHY IT WORKS

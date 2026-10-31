@@ -105,21 +105,26 @@ READING CODE
 WRITING CODE
 ------------
 
-11. Unpack the tuple point into its two coordinates: x, y =
+11. Unpack the tuple point into its two coordinates:
 
         point = (3, 4)
+        x, y = ____
 
       ANSWER: point
 
 12. Write a one-item tuple containing just the number 5 (not the number 5
-    in parentheses): single = ____
+    in parentheses):
+
+        single = ____
 
       ANSWER: (5,)
 
 13. Complete the line that inserts an empty list for a new category before
-    appending to it: groups.____(item["category"], []).append(item)
+    appending to it:
 
         groups = {}
+        for item in items:
+            groups.____(item["category"], []).append(item)
 
       ANSWER: setdefault
 

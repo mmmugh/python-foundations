@@ -86,13 +86,23 @@ READING CODE
 WRITING CODE
 ------------
 
-11. word = "hello" print(word.__________________()) # prints HELLO
+11. Fill in the blank:
 
-12. sentence = "the quick brown fox" words = sentence.__________________()
-    # splits the sentence into a list of words print(words)
+        word = "hello"
+        print(word.__________________())  # prints HELLO
 
-13. words = ["the", "quick", "brown"] print(" ".__________________(words))
-    # glues the words together with a space between each one
+12. Fill in the blank:
+
+        sentence = "the quick brown fox"
+        # splits the sentence into a list of words
+        words = sentence.__________________()
+        print(words)
+
+13. Fill in the blank:
+
+        words = ["the", "quick", "brown"]
+        # glues the words together with a space between each one
+        print(" ".__________________(words))
 
 
 WHY IT WORKS

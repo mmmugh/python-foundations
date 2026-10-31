@@ -105,20 +105,20 @@ READING CODE
 WRITING CODE
 ------------
 
-11. Complete the base case, which stops the recursion: if n <= 1: return
+11. Complete the base case, which stops the recursion:
 
         def factorial(n):
+            if n <= 1:
+                return __________________
 
-    ____________________________________
-
-12. Complete the recursive case: return n * __________________(n - 1)
+12. Complete the recursive case:
 
         def factorial(n):
             if n <= 1:
                 return 1
+            return n * __________________(n - 1)
 
 13. Complete the line that computes and stores a new Fibonacci value:
-    memo[n] = fib_fast(n - 1, memo) + __________________(n - 2, memo)
 
         def fib_fast(n, memo=None):
             if memo is None:
@@ -127,6 +127,7 @@ WRITING CODE
                 return memo[n]
             if n <= 1:
                 return n
+            memo[n] = fib_fast(n - 1, memo) + __________________(n - 2, memo)
 
 
 WHY IT WORKS

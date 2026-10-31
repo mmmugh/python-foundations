@@ -88,14 +88,23 @@ READING CODE
 WRITING CODE
 ------------
 
-11. scores = {"Ada": 88} print(scores.__________________("Grace", 0)) #
-    returns 0 instead of raising a KeyError
+11. Fill in the blank:
 
-12. scores = {"Ada": 88, "Grace": 92, "Alan": 45} __________________
-    scores["Alan"] # removes the "Alan" entry entirely print(scores)
+        scores = {"Ada": 88}
+        # returns 0 instead of raising a KeyError
+        print(scores.__________________("Grace", 0))
 
-13. numbers = [1, 2, 2, 3, 3, 3] unique = __________________(numbers) #
-    removes the duplicates print(unique)
+12. Fill in the blank:
+
+        scores = {"Ada": 88, "Grace": 92, "Alan": 45}
+        __________________ scores["Alan"]  # removes the "Alan" entry entirely
+        print(scores)
+
+13. Fill in the blank:
+
+        numbers = [1, 2, 2, 3, 3, 3]
+        unique = __________________(numbers)  # removes the duplicates
+        print(unique)
 
 
 WHY IT WORKS

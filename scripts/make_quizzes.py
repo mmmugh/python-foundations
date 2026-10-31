@@ -102,8 +102,12 @@ def render(quiz, title, number, answers=False):
                 text = text.replace("____", BLANK)
             lines += wrap(text, "    ", f"{n:>2}. ")
             if q.get("code"):
+                # A program with a blank in it lives here, not in the question
+                # text: the text is reflowed to WIDTH, which would run its
+                # lines together into one paragraph.
+                code = q["code"] if answers else q["code"].replace("____", BLANK)
                 lines.append("")
-                lines += ["        " + l for l in q["code"].split("\n")]
+                lines += ["        " + l for l in code.split("\n")]
                 if trailing and not answers:
                     lines += ["", "    " + BLANK + BLANK]
             if answers:

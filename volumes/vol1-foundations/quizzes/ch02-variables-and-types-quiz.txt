@@ -74,15 +74,20 @@ WRITING CODE
 ------------
 
 11. Complete this line so the text typed by the user is converted to a
-    whole number before arithmetic is done: age =
-    __________________(input('How old are you? '))
+    whole number before arithmetic is done:
+
+        age = __________________(input('How old are you? '))
 
 12. Complete this program so the variable used on the last line exists:
-    score = 42 __________________ = "Ada" print(player, "scored", score)
+
+        score = 42
+        __________________ = "Ada"
+        print(player, "scored", score)
 
 13. Complete this line so a temperature with a decimal point can be read
-    without crashing: fahrenheit = __________________(input("Temperature
-    in degrees F: "))
+    without crashing:
+
+        fahrenheit = __________________(input("Temperature in degrees F: "))
 
 
 WHY IT WORKS

@@ -70,13 +70,20 @@ WRITING CODE
 ------------
 
 10. Complete this line so it prints the text 3 + 4 exactly, with no
-    arithmetic performed: print(__________________)
+    arithmetic performed:
+
+        print(__________________)
 
 11. Complete this program so a blank line separates the two sections:
-    print("Section 1") __________________ print("Section 2")
+
+        print("Section 1")
+        __________________
+        print("Section 2")
 
 12. Complete this line so it prints three items separated by single
-    spaces: print("Hydrogen", __________________, "Lithium")
+    spaces:
+
+        print("Hydrogen", __________________, "Lithium")
 
 
 WHY IT WORKS

@@ -73,21 +73,24 @@
     },
     {
      "section": "Writing code",
-     "text": "Complete this line so it prints the text 3 + 4 exactly, with no arithmetic performed: print(____)",
+     "text": "Complete this line so it prints the text 3 + 4 exactly, with no arithmetic performed:",
+     "code": "print(____)",
      "answers": [
       "\"3 + 4\""
      ]
     },
     {
      "section": "Writing code",
-     "text": "Complete this program so a blank line separates the two sections: print(\"Section 1\") ____ print(\"Section 2\")",
+     "text": "Complete this program so a blank line separates the two sections:",
+     "code": "print(\"Section 1\")\n____\nprint(\"Section 2\")",
      "answers": [
       "print()"
      ]
     },
     {
      "section": "Writing code",
-     "text": "Complete this line so it prints three items separated by single spaces: print(\"Hydrogen\", ____, \"Lithium\")",
+     "text": "Complete this line so it prints three items separated by single spaces:",
+     "code": "print(\"Hydrogen\", ____, \"Lithium\")",
      "answers": [
       "\"Helium\""
      ]
@@ -198,21 +201,24 @@
     },
     {
      "section": "Writing code",
-     "text": "Complete this line so the text typed by the user is converted to a whole number before arithmetic is done: age = ____(input('How old are you? '))",
+     "text": "Complete this line so the text typed by the user is converted to a whole number before arithmetic is done:",
+     "code": "age = ____(input('How old are you? '))",
      "answers": [
       "int"
      ]
     },
     {
      "section": "Writing code",
-     "text": "Complete this program so the variable used on the last line exists: score = 42 ____ = \"Ada\" print(player, \"scored\", score)",
+     "text": "Complete this program so the variable used on the last line exists:",
+     "code": "score = 42\n____ = \"Ada\"\nprint(player, \"scored\", score)",
      "answers": [
       "player"
      ]
     },
     {
      "section": "Writing code",
-     "text": "Complete this line so a temperature with a decimal point can be read without crashing: fahrenheit = ____(input(\"Temperature in degrees F: \"))",
+     "text": "Complete this line so a temperature with a decimal point can be read without crashing:",
+     "code": "fahrenheit = ____(input(\"Temperature in degrees F: \"))",
      "answers": [
       "float"
      ]
@@ -322,21 +328,24 @@
     },
     {
      "section": "Writing code",
-     "text": "Complete this line so it uses the exponent operator to print 1024: print(2 ____ 10)",
+     "text": "Complete this line so it uses the exponent operator to print 1024:",
+     "code": "print(2 ____ 10)",
      "answers": [
       "**"
      ]
     },
     {
      "section": "Writing code",
-     "text": "Complete this f-string's format specifier so a dollar total always shows exactly two decimal places: total = 7.5 print(f\"Total: ${total:____}\")",
+     "text": "Complete this f-string's format specifier so a dollar total always shows exactly two decimal places:",
+     "code": "total = 7.5\nprint(f\"Total: ${total:____}\")",
      "answers": [
       ".2f"
      ]
     },
     {
      "section": "Writing code",
-     "text": "Rewrite x = x + 3 using the shorthand assignment operator: x ____ 3",
+     "text": "Rewrite x = x + 3 using the shorthand assignment operator:",
+     "code": "x ____ 3",
      "answers": [
       "+="
      ]
@@ -438,28 +447,32 @@
     },
     {
      "section": "Writing code",
-     "text": "age = ____(input(\"Your age: \")) if age >= 18: print(\"You are eligible to vote.\") else: print(f\"You can vote in {18 - age} years.\")",
+     "text": "Fill in the blank:",
+     "code": "age = ____(input(\"Your age: \"))\nif age >= 18:\n    print(\"You are eligible to vote.\")\nelse:\n    print(f\"You can vote in {18 - age} years.\")",
      "answers": [
       "int"
      ]
     },
     {
      "section": "Writing code",
-     "text": "answer = input(\"How many tickets? \") if answer.____(): tickets = int(answer) print(f\"That will be ${tickets * 12}.\") else: print(\"Please enter a whole number.\")",
+     "text": "Fill in the blank:",
+     "code": "answer = input(\"How many tickets? \")\nif answer.____():\n    tickets = int(answer)\n    print(f\"That will be ${tickets * 12}.\")\nelse:\n    print(\"Please enter a whole number.\")",
      "answers": [
       "isdigit"
      ]
     },
     {
      "section": "Writing code",
-     "text": "answer = input(\"Enter a price: \") ____: price = float(answer) print(f\"With tax: ${price * 1.08:.2f}\") except ValueError: print(\"That is not a number.\")",
+     "text": "Fill in the blank:",
+     "code": "answer = input(\"Enter a price: \")\n____:\n    price = float(answer)\n    print(f\"With tax: ${price * 1.08:.2f}\")\nexcept ValueError:\n    print(\"That is not a number.\")",
      "answers": [
       "try"
      ]
     },
     {
      "section": "Writing code",
-     "text": "discount = 0 # Only apply the discount when price is greater than 0 (skip the free infant ticket) if day == \"tuesday\" and price ____ 0: discount = 3 price -= discount",
+     "text": "Fill in the blank:",
+     "code": "discount = 0\n# Only apply the discount when price is greater than 0\n# (skip the free infant ticket)\nif day == \"tuesday\" and price ____ 0:\n    discount = 3\nprice -= discount",
      "answers": [
       ">"
      ]
@@ -561,28 +574,32 @@
     },
     {
      "section": "Writing code",
-     "text": "answer = input(\"Enter a number: \") while not answer.____(): print(\"That is not a whole number.\") answer = input(\"Enter a number: \") print(f\"Thank you. You entered {int(answer)}.\")",
+     "text": "Fill in the blank:",
+     "code": "answer = input(\"Enter a number: \")\nwhile not answer.____():\n    print(\"That is not a whole number.\")\n    answer = input(\"Enter a number: \")\nprint(f\"Thank you. You entered {int(answer)}.\")",
      "answers": [
       "isdigit"
      ]
     },
     {
      "section": "Writing code",
-     "text": "for i in ____(5, 0, -1): print(i)",
+     "text": "Fill in the blank:",
+     "code": "for i in ____(5, 0, -1):\n    print(i)",
      "answers": [
       "range"
      ]
     },
     {
      "section": "Writing code",
-     "text": "count = 1 while count <= 5: print(f\"Count is {count}\") count ____ 1 print(\"Done.\")",
+     "text": "Fill in the blank:",
+     "code": "count = 1\nwhile count <= 5:\n    print(f\"Count is {count}\")\n    count ____ 1\nprint(\"Done.\")",
      "answers": [
       "+="
      ]
     },
     {
      "section": "Writing code",
-     "text": "while True: command = input(\"Enter a command (or 'quit'): \") if command == \"quit\": ____ print(f\"You said: {command}\")",
+     "text": "Fill in the blank:",
+     "code": "while True:\n    command = input(\"Enter a command (or 'quit'): \")\n    if command == \"quit\":\n        ____\n    print(f\"You said: {command}\")",
      "answers": [
       "break"
      ]
@@ -684,28 +701,35 @@
     },
     {
      "section": "Writing code",
-     "text": "____ greet(name): print(f\"Hello, {name}!\")",
+     "text": "Fill in the blank:",
+     "code": "____ greet(name):\n    print(f\"Hello, {name}!\")",
      "answers": [
       "def"
      ]
     },
     {
      "section": "Writing code",
-     "text": "def area(width, height): ____ width * height room = area(12, 10) print(room) # should print 120",
+     "text": "Fill in the blank:",
+     "code": "def area(width, height):\n    ____ width * height\n\nroom = area(12, 10)\nprint(room)  # should print 120",
      "answers": [
       "return"
      ]
     },
     {
      "section": "Writing code",
-     "text": "def celsius_to_fahrenheit(celsius): ____ return celsius * 9 / 5 + 32",
+     "text": "Fill in the blank:",
+     "code": "def celsius_to_fahrenheit(celsius):\n    ____\n    return celsius * 9 / 5 + 32",
+     "fill": [
+      "\"\"\"Convert a Celsius temperature to Fahrenheit.\"\"\""
+     ],
      "answers": [
       "\"\"\"Convert a Celsius temperature to Fahrenheit.\"\"\" (any accurate one-line docstring in triple quotes works)"
      ]
     },
     {
      "section": "Writing code",
-     "text": "def main(): print(\"Running the program.\") ____()",
+     "text": "Fill in the blank:",
+     "code": "def main():\n    print(\"Running the program.\")\n\n____()",
      "answers": [
       "main"
      ]
@@ -816,21 +840,24 @@
     },
     {
      "section": "Writing code",
-     "text": "names = [\"Ada\", \"Grace\"] names.____(\"Alan\") # adds \"Alan\" to the end of the list print(names)",
+     "text": "Fill in the blank:",
+     "code": "names = [\"Ada\", \"Grace\"]\nnames.____(\"Alan\")  # adds \"Alan\" to the end of the list\nprint(names)",
      "answers": [
       "append"
      ]
     },
     {
      "section": "Writing code",
-     "text": "scores = [88, 92, 79] ordered = ____(scores) # returns a new sorted list; scores itself is left unchanged print(ordered, scores)",
+     "text": "Fill in the blank:",
+     "code": "scores = [88, 92, 79]\n# returns a new sorted list; scores itself is left unchanged\nordered = ____(scores)\nprint(ordered, scores)",
      "answers": [
       "sorted"
      ]
     },
     {
      "section": "Writing code",
-     "text": "evens = [] for n in numbers: if n % 2 == 0: evens.____(n) # adds n to the end of evens",
+     "text": "Fill in the blank:",
+     "code": "evens = []\nfor n in numbers:\n    if n % 2 == 0:\n        evens.____(n)  # adds n to the end of evens",
      "answers": [
       "append"
      ]
@@ -935,21 +962,24 @@
     },
     {
      "section": "Writing code",
-     "text": "word = \"hello\" print(word.____()) # prints HELLO",
+     "text": "Fill in the blank:",
+     "code": "word = \"hello\"\nprint(word.____())  # prints HELLO",
      "answers": [
       "upper"
      ]
     },
     {
      "section": "Writing code",
-     "text": "sentence = \"the quick brown fox\" words = sentence.____() # splits the sentence into a list of words print(words)",
+     "text": "Fill in the blank:",
+     "code": "sentence = \"the quick brown fox\"\n# splits the sentence into a list of words\nwords = sentence.____()\nprint(words)",
      "answers": [
       "split"
      ]
     },
     {
      "section": "Writing code",
-     "text": "words = [\"the\", \"quick\", \"brown\"] print(\" \".____(words)) # glues the words together with a space between each one",
+     "text": "Fill in the blank:",
+     "code": "words = [\"the\", \"quick\", \"brown\"]\n# glues the words together with a space between each one\nprint(\" \".____(words))",
      "answers": [
       "join"
      ]
@@ -1055,21 +1085,24 @@
     },
     {
      "section": "Writing code",
-     "text": "scores = {\"Ada\": 88} print(scores.____(\"Grace\", 0)) # returns 0 instead of raising a KeyError",
+     "text": "Fill in the blank:",
+     "code": "scores = {\"Ada\": 88}\n# returns 0 instead of raising a KeyError\nprint(scores.____(\"Grace\", 0))",
      "answers": [
       "get"
      ]
     },
     {
      "section": "Writing code",
-     "text": "scores = {\"Ada\": 88, \"Grace\": 92, \"Alan\": 45} ____ scores[\"Alan\"] # removes the \"Alan\" entry entirely print(scores)",
+     "text": "Fill in the blank:",
+     "code": "scores = {\"Ada\": 88, \"Grace\": 92, \"Alan\": 45}\n____ scores[\"Alan\"]  # removes the \"Alan\" entry entirely\nprint(scores)",
      "answers": [
       "del"
      ]
     },
     {
      "section": "Writing code",
-     "text": "numbers = [1, 2, 2, 3, 3, 3] unique = ____(numbers) # removes the duplicates print(unique)",
+     "text": "Fill in the blank:",
+     "code": "numbers = [1, 2, 2, 3, 3, 3]\nunique = ____(numbers)  # removes the duplicates\nprint(unique)",
      "answers": [
       "set"
      ]
@@ -1172,23 +1205,24 @@
     },
     {
      "section": "Writing code",
-     "text": "Unpack the tuple point into its two coordinates: x, y = ____",
-     "code": "point = (3, 4)",
+     "text": "Unpack the tuple point into its two coordinates:",
+     "code": "point = (3, 4)\nx, y = ____",
      "answers": [
       "point"
      ]
     },
     {
      "section": "Writing code",
-     "text": "Write a one-item tuple containing just the number 5 (not the number 5 in parentheses): single = ____",
+     "text": "Write a one-item tuple containing just the number 5 (not the number 5 in parentheses):",
+     "code": "single = ____",
      "answers": [
       "(5,)"
      ]
     },
     {
      "section": "Writing code",
-     "text": "Complete the line that inserts an empty list for a new category before appending to it: groups.____(item[\"category\"], []).append(item)",
-     "code": "groups = {}",
+     "text": "Complete the line that inserts an empty list for a new category before appending to it:",
+     "code": "groups = {}\nfor item in items:\n    groups.____(item[\"category\"], []).append(item)",
      "answers": [
       "setdefault"
      ]
@@ -1296,24 +1330,24 @@
     },
     {
      "section": "Writing code",
-     "text": "Complete the loop bound so every index in items gets checked: for i in range(____):",
-     "code": "def linear_search(items, target):",
+     "text": "Complete the loop bound so every index in items gets checked:",
+     "code": "def linear_search(items, target):\n    for i in range(____):\n        if items[i] == target:\n            return i\n    return -1",
      "answers": [
       "len(items)"
      ]
     },
     {
      "section": "Writing code",
-     "text": "Compute the middle index using integer division: middle = (low + high) ____ 2",
-     "code": "low = 0\nhigh = len(items) - 1",
+     "text": "Compute the middle index using integer division:",
+     "code": "low = 0\nhigh = len(items) - 1\nmiddle = (low + high) ____ 2",
      "answers": [
       "//"
      ]
     },
     {
      "section": "Writing code",
-     "text": "Complete the swap that places the smallest value found so far into position i: result[i], result[smallest] = ____",
-     "code": "result = items.copy()",
+     "text": "Complete the swap that places the smallest value found so far into position i:",
+     "code": "result = items.copy()\nresult[i], result[smallest] = ____",
      "answers": [
       "result[smallest], result[i]"
      ]
@@ -1421,24 +1455,24 @@
     },
     {
      "section": "Writing code",
-     "text": "Complete the base case, which stops the recursion: if n <= 1: return ____",
-     "code": "def factorial(n):",
+     "text": "Complete the base case, which stops the recursion:",
+     "code": "def factorial(n):\n    if n <= 1:\n        return ____",
      "answers": [
       "1"
      ]
     },
     {
      "section": "Writing code",
-     "text": "Complete the recursive case: return n * ____(n - 1)",
-     "code": "def factorial(n):\n    if n <= 1:\n        return 1",
+     "text": "Complete the recursive case:",
+     "code": "def factorial(n):\n    if n <= 1:\n        return 1\n    return n * ____(n - 1)",
      "answers": [
       "factorial"
      ]
     },
     {
      "section": "Writing code",
-     "text": "Complete the line that computes and stores a new Fibonacci value: memo[n] = fib_fast(n - 1, memo) + ____(n - 2, memo)",
-     "code": "def fib_fast(n, memo=None):\n    if memo is None:\n        memo = {}\n    if n in memo:\n        return memo[n]\n    if n <= 1:\n        return n",
+     "text": "Complete the line that computes and stores a new Fibonacci value:",
+     "code": "def fib_fast(n, memo=None):\n    if memo is None:\n        memo = {}\n    if n in memo:\n        return memo[n]\n    if n <= 1:\n        return n\n    memo[n] = fib_fast(n - 1, memo) + ____(n - 2, memo)",
      "answers": [
       "fib_fast"
      ]

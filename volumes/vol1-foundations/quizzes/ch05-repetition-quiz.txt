@@ -79,18 +79,34 @@ READING CODE
 WRITING CODE
 ------------
 
-10. answer = input("Enter a number: ") while not
-    answer.__________________(): print("That is not a whole number.")
-    answer = input("Enter a number: ") print(f"Thank you. You entered
-    {int(answer)}.")
+10. Fill in the blank:
 
-11. for i in __________________(5, 0, -1): print(i)
+        answer = input("Enter a number: ")
+        while not answer.__________________():
+            print("That is not a whole number.")
+            answer = input("Enter a number: ")
+        print(f"Thank you. You entered {int(answer)}.")
 
-12. count = 1 while count <= 5: print(f"Count is {count}") count
-    __________________ 1 print("Done.")
+11. Fill in the blank:
 
-13. while True: command = input("Enter a command (or 'quit'): ") if
-    command == "quit": __________________ print(f"You said: {command}")
+        for i in __________________(5, 0, -1):
+            print(i)
+
+12. Fill in the blank:
+
+        count = 1
+        while count <= 5:
+            print(f"Count is {count}")
+            count __________________ 1
+        print("Done.")
+
+13. Fill in the blank:
+
+        while True:
+            command = input("Enter a command (or 'quit'): ")
+            if command == "quit":
+                __________________
+            print(f"You said: {command}")
 
 
 WHY IT WORKS

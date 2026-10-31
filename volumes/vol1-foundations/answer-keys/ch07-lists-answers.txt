@@ -95,18 +95,29 @@ READING CODE
 WRITING CODE
 ------------
 
-11. names = ["Ada", "Grace"] names.____("Alan") # adds "Alan" to the end
-    of the list print(names)
+11. Fill in the blank:
+
+        names = ["Ada", "Grace"]
+        names.____("Alan")  # adds "Alan" to the end of the list
+        print(names)
 
       ANSWER: append
 
-12. scores = [88, 92, 79] ordered = ____(scores) # returns a new sorted
-    list; scores itself is left unchanged print(ordered, scores)
+12. Fill in the blank:
+
+        scores = [88, 92, 79]
+        # returns a new sorted list; scores itself is left unchanged
+        ordered = ____(scores)
+        print(ordered, scores)
 
       ANSWER: sorted
 
-13. evens = [] for n in numbers: if n % 2 == 0: evens.____(n) # adds n to
-    the end of evens
+13. Fill in the blank:
+
+        evens = []
+        for n in numbers:
+            if n % 2 == 0:
+                evens.____(n)  # adds n to the end of evens
 
       ANSWER: append
 

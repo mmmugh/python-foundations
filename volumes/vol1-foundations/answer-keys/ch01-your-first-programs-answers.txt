@@ -82,17 +82,24 @@ WRITING CODE
 ------------
 
 10. Complete this line so it prints the text 3 + 4 exactly, with no
-    arithmetic performed: print(____)
+    arithmetic performed:
+
+        print(____)
 
       ANSWER: "3 + 4"
 
 11. Complete this program so a blank line separates the two sections:
-    print("Section 1") ____ print("Section 2")
+
+        print("Section 1")
+        ____
+        print("Section 2")
 
       ANSWER: print()
 
 12. Complete this line so it prints three items separated by single
-    spaces: print("Hydrogen", ____, "Lithium")
+    spaces:
+
+        print("Hydrogen", ____, "Lithium")
 
       ANSWER: "Helium"
 

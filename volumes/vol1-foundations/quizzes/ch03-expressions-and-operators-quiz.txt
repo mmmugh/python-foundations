@@ -81,14 +81,18 @@ WRITING CODE
 ------------
 
 11. Complete this line so it uses the exponent operator to print 1024:
-    print(2 __________________ 10)
+
+        print(2 __________________ 10)
 
 12. Complete this f-string's format specifier so a dollar total always
-    shows exactly two decimal places: total = 7.5 print(f"Total:
-    ${total:__________________}")
+    shows exactly two decimal places:
 
-13. Rewrite x = x + 3 using the shorthand assignment operator: x
-    __________________ 3
+        total = 7.5
+        print(f"Total: ${total:__________________}")
+
+13. Rewrite x = x + 3 using the shorthand assignment operator:
+
+        x __________________ 3
 
 
 WHY IT WORKS

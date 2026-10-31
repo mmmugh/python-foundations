@@ -85,19 +85,24 @@ WRITING CODE
 ------------
 
 11. Complete this line so the text typed by the user is converted to a
-    whole number before arithmetic is done: age = ____(input('How old are
-    you? '))
+    whole number before arithmetic is done:
+
+        age = ____(input('How old are you? '))
 
       ANSWER: int
 
 12. Complete this program so the variable used on the last line exists:
-    score = 42 ____ = "Ada" print(player, "scored", score)
+
+        score = 42
+        ____ = "Ada"
+        print(player, "scored", score)
 
       ANSWER: player
 
 13. Complete this line so a temperature with a decimal point can be read
-    without crashing: fahrenheit = ____(input("Temperature in degrees F:
-    "))
+    without crashing:
+
+        fahrenheit = ____(input("Temperature in degrees F: "))
 
       ANSWER: float
 

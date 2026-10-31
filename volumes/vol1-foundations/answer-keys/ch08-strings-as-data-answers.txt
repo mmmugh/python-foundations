@@ -92,17 +92,27 @@ READING CODE
 WRITING CODE
 ------------
 
-11. word = "hello" print(word.____()) # prints HELLO
+11. Fill in the blank:
+
+        word = "hello"
+        print(word.____())  # prints HELLO
 
       ANSWER: upper
 
-12. sentence = "the quick brown fox" words = sentence.____() # splits the
-    sentence into a list of words print(words)
+12. Fill in the blank:
+
+        sentence = "the quick brown fox"
+        # splits the sentence into a list of words
+        words = sentence.____()
+        print(words)
 
       ANSWER: split
 
-13. words = ["the", "quick", "brown"] print(" ".____(words)) # glues the
-    words together with a space between each one
+13. Fill in the blank:
+
+        words = ["the", "quick", "brown"]
+        # glues the words together with a space between each one
+        print(" ".____(words))
 
       ANSWER: join
 

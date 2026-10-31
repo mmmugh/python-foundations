@@ -96,23 +96,40 @@ READING CODE
 WRITING CODE
 ------------
 
-10. answer = input("Enter a number: ") while not answer.____():
-    print("That is not a whole number.") answer = input("Enter a number:
-    ") print(f"Thank you. You entered {int(answer)}.")
+10. Fill in the blank:
+
+        answer = input("Enter a number: ")
+        while not answer.____():
+            print("That is not a whole number.")
+            answer = input("Enter a number: ")
+        print(f"Thank you. You entered {int(answer)}.")
 
       ANSWER: isdigit
 
-11. for i in ____(5, 0, -1): print(i)
+11. Fill in the blank:
+
+        for i in ____(5, 0, -1):
+            print(i)
 
       ANSWER: range
 
-12. count = 1 while count <= 5: print(f"Count is {count}") count ____ 1
-    print("Done.")
+12. Fill in the blank:
+
+        count = 1
+        while count <= 5:
+            print(f"Count is {count}")
+            count ____ 1
+        print("Done.")
 
       ANSWER: +=
 
-13. while True: command = input("Enter a command (or 'quit'): ") if
-    command == "quit": ____ print(f"You said: {command}")
+13. Fill in the blank:
+
+        while True:
+            command = input("Enter a command (or 'quit'): ")
+            if command == "quit":
+                ____
+            print(f"You said: {command}")
 
       ANSWER: break
 

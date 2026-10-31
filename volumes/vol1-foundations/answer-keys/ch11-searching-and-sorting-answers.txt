@@ -132,25 +132,29 @@ READING CODE
 WRITING CODE
 ------------
 
-11. Complete the loop bound so every index in items gets checked: for i in
-    range(____):
+11. Complete the loop bound so every index in items gets checked:
 
         def linear_search(items, target):
+            for i in range(____):
+                if items[i] == target:
+                    return i
+            return -1
 
       ANSWER: len(items)
 
-12. Compute the middle index using integer division: middle = (low + high)
-    ____ 2
+12. Compute the middle index using integer division:
 
         low = 0
         high = len(items) - 1
+        middle = (low + high) ____ 2
 
       ANSWER: //
 
 13. Complete the swap that places the smallest value found so far into
-    position i: result[i], result[smallest] =
+    position i:
 
         result = items.copy()
+        result[i], result[smallest] = ____
 
       ANSWER: result[smallest], result[i]
 

@@ -85,15 +85,25 @@ READING CODE
 WRITING CODE
 ------------
 
-11. names = ["Ada", "Grace"] names.__________________("Alan") # adds
-    "Alan" to the end of the list print(names)
+11. Fill in the blank:
 
-12. scores = [88, 92, 79] ordered = __________________(scores) # returns a
-    new sorted list; scores itself is left unchanged print(ordered,
-    scores)
+        names = ["Ada", "Grace"]
+        names.__________________("Alan")  # adds "Alan" to the end of the list
+        print(names)
 
-13. evens = [] for n in numbers: if n % 2 == 0:
-    evens.__________________(n) # adds n to the end of evens
+12. Fill in the blank:
+
+        scores = [88, 92, 79]
+        # returns a new sorted list; scores itself is left unchanged
+        ordered = __________________(scores)
+        print(ordered, scores)
+
+13. Fill in the blank:
+
+        evens = []
+        for n in numbers:
+            if n % 2 == 0:
+                evens.__________________(n)  # adds n to the end of evens
 
 
 WHY IT WORKS
