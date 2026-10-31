@@ -1,0 +1,1470 @@
+{
+ "quizzes": [
+  {
+   "slug": "ch01-your-first-programs",
+   "questions": [
+    {
+     "section": "Vocabulary",
+     "text": "A ____ is a list of instructions written in an order a computer can follow.",
+     "answers": [
+      "program"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "The ____ function displays something on the screen; it is how a program tells you what it is doing.",
+     "answers": [
+      "print()"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Text inside quotes, like \"hello\", is called a ____.",
+     "answers": [
+      "string"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "A line beginning with # is called a ____, and Python ignores it completely.",
+     "answers": [
+      "comment"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "print(\"Hydrogen\", \"Helium\", \"Lithium\")",
+     "answers": [
+      "Hydrogen Helium Lithium"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "print(7)\nprint(3 + 4)\nprint(\"3 + 4\")",
+     "answers": [
+      "7\n7\n3 + 4"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "# This line does nothing\nprint(\"Done\")",
+     "answers": [
+      "Done"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "print(\"A\")\nprint(\"B\", \"C\")\nprint()\nprint(2 * 3)\nprint(\"2 * 3\")",
+     "answers": [
+      "A\nB C\n\n6\n2 * 3"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "print(\"Section 1\")\nprint()\nprint(\"Section 2\")",
+     "answers": [
+      "Section 1\n\nSection 2"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete this line so it prints the text 3 + 4 exactly, with no arithmetic performed: print(____)",
+     "answers": [
+      "\"3 + 4\""
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete this program so a blank line separates the two sections: print(\"Section 1\") ____ print(\"Section 2\")",
+     "answers": [
+      "print()"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete this line so it prints three items separated by single spaces: print(\"Hydrogen\", ____, \"Lithium\")",
+     "answers": [
+      "\"Helium\""
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Python runs your instructions one line at a time, from ____ to ____, which is why swapping the order of two print() calls changes the order of the output.",
+     "answers": [
+      "top",
+      "bottom"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Without quotes, 3 + 4 is ____ that Python works out and prints as 7; with quotes, \"3 + 4\" is ____ that Python prints exactly as written.",
+     "answers": [
+      "a calculation",
+      "a string"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "When Python cannot run a program, read the error message from ____ to ____: the last line names the problem, and the line above it points to where Python noticed.",
+     "answers": [
+      "bottom",
+      "top"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "ch02-variables-and-types",
+   "questions": [
+    {
+     "section": "Vocabulary",
+     "text": "A ____ is a name that refers to a value.",
+     "answers": [
+      "variable"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Every value in Python has a ____, which determines what you can do with it.",
+     "answers": [
+      "type"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Adding two strings together glues them end to end, an operation called ____.",
+     "answers": [
+      "concatenation"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "The text inside input() that asks the user a question, such as \"What is your name? \", is called the ____.",
+     "answers": [
+      "prompt"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Python's naming convention of lowercase words joined by underscores, as in final_score, is called ____.",
+     "answers": [
+      "snake_case"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "count = 5\ncount = count + 1\nprint(count)",
+     "answers": [
+      "6"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "print(type(7))\nprint(type(7.0))\nprint(type(\"7\"))\nprint(type(True))",
+     "answers": [
+      "<class 'int'>\n<class 'float'>\n<class 'str'>\n<class 'bool'>"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "print(7 + 7)\nprint(\"7\" + \"7\")",
+     "answers": [
+      "14\n77"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "a = 10\nb = a\na = 99\nprint(a, b)",
+     "answers": [
+      "99 10"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "print(int(3.9))\nprint(int(\"14\"))",
+     "answers": [
+      "3\n14"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete this line so the text typed by the user is converted to a whole number before arithmetic is done: age = ____(input('How old are you? '))",
+     "answers": [
+      "int"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete this program so the variable used on the last line exists: score = 42 ____ = \"Ada\" print(player, \"scored\", score)",
+     "answers": [
+      "player"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete this line so a temperature with a decimal point can be read without crashing: fahrenheit = ____(input(\"Temperature in degrees F: \"))",
+     "answers": [
+      "float"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "In a = 10; b = a; a = 99, the line b = a copies the value 10 into b at that moment; b does not stay linked to the name a. So after a = 99 runs, printing b still shows ____.",
+     "answers": [
+      "10"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Python fully evaluates the right side of = before doing anything else, so count = count + 1 first works out count's ____ value, adds 1, and only then points the name count at the ____ value.",
+     "answers": [
+      "old",
+      "new"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "print(age + 1) crashes with a TypeError when age comes from input(), because input() always returns a ____, even when the user types a number made only of digits.",
+     "answers": [
+      "string"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "ch03-expressions-and-operators",
+   "questions": [
+    {
+     "section": "Vocabulary",
+     "text": "An ____ is anything Python can work out to produce a single value, such as 7 or 3 + 4.",
+     "answers": [
+      "expression"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Python ____ an expression, reducing it down to one value.",
+     "answers": [
+      "evaluates"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Putting an f before the opening quote of a string creates an ____, which lets you insert values directly inside the text using curly braces.",
+     "answers": [
+      "f-string"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "The :.2f inside an f-string's curly braces is called a ____: it controls how the value is displayed.",
+     "answers": [
+      "format specifier"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "print(17 // 5, 17 % 5, 17 / 5)",
+     "answers": [
+      "3 2 3.4"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "print(10 + 3 * 2)\nprint((10 + 3) * 2)\nprint(2 ** 3 * 4)",
+     "answers": [
+      "16\n26\n32"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "name = \"Ada\"\nscore = 91.5\nprint(f\"{name} scored {score:.1f} points.\")",
+     "answers": [
+      "Ada scored 91.5 points."
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "print(\"-\" * 10)\nprint(\"ab\" * 3)",
+     "answers": [
+      "----------\nababab"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "score = 0\nscore += 10\nscore += 25\nscore *= 2\nprint(score)",
+     "answers": [
+      "70"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "print(7 // 2, 7 % 2, 7 / 2)\nprint(2 ** 3 ** 2)\nprint(\"5\" * 3)\nprint(int(\"5\") * 3)",
+     "answers": [
+      "3 1 3.5\n512\n555\n15"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete this line so it uses the exponent operator to print 1024: print(2 ____ 10)",
+     "answers": [
+      "**"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete this f-string's format specifier so a dollar total always shows exactly two decimal places: total = 7.5 print(f\"Total: ${total:____}\")",
+     "answers": [
+      ".2f"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Rewrite x = x + 3 using the shorthand assignment operator: x ____ 3",
+     "answers": [
+      "+="
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "0.1 + 0.2 prints 0.30000000000000004 because computers store floats in ____, and just as 1/3 cannot be written exactly as a decimal, 0.1 cannot be written exactly in that format either.",
+     "answers": [
+      "binary"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "// rounds ____, toward negative infinity, which is why -17 // 5 is -4 rather than -3.",
+     "answers": [
+      "down"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "____ assigns a value to a variable, while ____ asks whether two values are equal and produces a boolean.",
+     "answers": [
+      "=",
+      "=="
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "ch04-making-decisions",
+   "questions": [
+    {
+     "section": "Vocabulary",
+     "text": "A ____ is an expression that follows the `if` keyword and produces `True` or `False`.",
+     "answers": [
+      "condition"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "The indented lines that run only when a condition is true are called a ____.",
+     "answers": [
+      "block"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "____ (short for \"else if\") lets you chain more than two possibilities together in one decision.",
+     "answers": [
+      "elif"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "The idea that non-boolean values such as `0`, the empty string, and `None` can act like `True` or `False` in a condition is called ____.",
+     "answers": [
+      "truthiness"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "score = 85\n\nif score >= 90:\n    grade = \"A\"\nelif score >= 80:\n    grade = \"B\"\nelif score >= 70:\n    grade = \"C\"\nelif score >= 60:\n    grade = \"D\"\nelse:\n    grade = \"F\"\n\nprint(f\"Score {score} earns a {grade}.\")",
+     "answers": [
+      "Score 85 earns a B."
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "score = 95\n\nif score >= 60:\n    grade = \"D\"\nelif score >= 70:\n    grade = \"C\"\nelif score >= 90:\n    grade = \"A\"\n\nprint(grade)",
+     "answers": [
+      "D"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "name = \"\"\n\nif name:\n    print(f\"Hello, {name}.\")\nelse:\n    print(\"Hello, stranger.\")",
+     "answers": [
+      "Hello, stranger."
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "has_ticket = False\nage = 20\n\nif has_ticket:\n    if age >= 13:\n        print(\"Enjoy the show.\")\n    else:\n        print(\"You need an adult with you.\")\nelse:\n    print(\"Please buy a ticket first.\")",
+     "answers": [
+      "Please buy a ticket first."
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "score = 45\n\nif score >= 60:\n    print(\"You passed.\")\nprint(\"Congratulations.\")",
+     "answers": [
+      "Congratulations."
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "age = ____(input(\"Your age: \")) if age >= 18: print(\"You are eligible to vote.\") else: print(f\"You can vote in {18 - age} years.\")",
+     "answers": [
+      "int"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "answer = input(\"How many tickets? \") if answer.____(): tickets = int(answer) print(f\"That will be ${tickets * 12}.\") else: print(\"Please enter a whole number.\")",
+     "answers": [
+      "isdigit"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "answer = input(\"Enter a price: \") ____: price = float(answer) print(f\"With tax: ${price * 1.08:.2f}\") except ValueError: print(\"That is not a number.\")",
+     "answers": [
+      "try"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "discount = 0 # Only apply the discount when price is greater than 0 (skip the free infant ticket) if day == \"tuesday\" and price ____ 0: discount = 3 price -= discount",
+     "answers": [
+      ">"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Python checks `elif` conditions in the order they are written and stops at the first one that is ____, which is why a score of 95 in the reordered chain gets the grade \"____\" instead of \"A\".",
+     "answers": [
+      "true",
+      "D"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "The ticket program checks `.isdigit()` before calling `int()` because converting text that contains letters with `int()` would ____, so testing first avoids ever attempting an unsafe conversion.",
+     "answers": [
+      "crash the program"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "An empty string counts as ____ in a condition, which is why `if name:` prints \"Hello, stranger.\" when the user presses Enter without typing anything.",
+     "answers": [
+      "False"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "ch05-repetition",
+   "questions": [
+    {
+     "section": "Vocabulary",
+     "text": "A loop that repeats as long as its condition stays true is called a ____ loop.",
+     "answers": [
+      "while"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "A loop whose condition never becomes false, so it repeats forever, is called an ____ loop.",
+     "answers": [
+      "infinite"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "The pattern of setting up a variable before a loop and updating it on every pass - to build a sum, a count, or a string - is called the ____ pattern.",
+     "answers": [
+      "accumulator"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "A boolean variable used to record how a loop ended, such as whether the player won or ran out of tries, is called a ____.",
+     "answers": [
+      "flag"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "count = 1\n\nwhile count <= 5:\n    print(f\"Count is {count}\")\n    count += 1\n\nprint(\"Done.\")",
+     "answers": [
+      "Count is 1\nCount is 2\nCount is 3\nCount is 4\nCount is 5\nDone."
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "for i in range(2, 6):\n    print(i)",
+     "answers": [
+      "2\n3\n4\n5"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "for table in range(1, 3):\n    for multiplier in range(1, 3):\n        print(f\"{table} x {multiplier} = {table * multiplier}\")",
+     "answers": [
+      "1 x 1 = 1\n1 x 2 = 2\n2 x 1 = 2\n2 x 2 = 4"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "for number in range(1, 11):\n    if number % 3 != 0:\n        continue\n    print(number)",
+     "answers": [
+      "3\n6\n9"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "total = 0\nfor i in range(1, 6):\n    if i == 3:\n        continue\n    total += i\nprint(total)",
+     "answers": [
+      "12"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "answer = input(\"Enter a number: \") while not answer.____(): print(\"That is not a whole number.\") answer = input(\"Enter a number: \") print(f\"Thank you. You entered {int(answer)}.\")",
+     "answers": [
+      "isdigit"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "for i in ____(5, 0, -1): print(i)",
+     "answers": [
+      "range"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "count = 1 while count <= 5: print(f\"Count is {count}\") count ____ 1 print(\"Done.\")",
+     "answers": [
+      "+="
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "while True: command = input(\"Enter a command (or 'quit'): \") if command == \"quit\": ____ print(f\"You said: {command}\")",
+     "answers": [
+      "break"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "A `while` loop needs a variable set up before the loop, a condition that can become false, and something inside the loop that moves toward that. Deleting `count += 1` means `count` never changes, so `count <= 5` stays ____ forever and the loop never ends.",
+     "answers": [
+      "true"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "`range(n)` always produces exactly ____ values, which is why `range(5)` produces `0` through `4` rather than `0` through `5`.",
+     "answers": [
+      "n"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Starting `largest` at `0` before the loop gives the wrong answer when every number entered is ____, because none of them would ever be greater than `0`.",
+     "answers": [
+      "negative"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "ch06-functions",
+   "questions": [
+    {
+     "section": "Vocabulary",
+     "text": "Names listed in the parentheses of a `def` line are called ____, while the values you pass in when calling the function are called ____.",
+     "answers": [
+      "parameters",
+      "arguments"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "A variable created inside a function exists only inside it; this is called ____ scope.",
+     "answers": [
+      "local"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "A string on the first line of a function that describes what it does is called a ____.",
+     "answers": [
+      "docstring"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Breaking a problem into small functions that each do one job, and giving each a name, is called ____.",
+     "answers": [
+      "decomposition"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def double_print(n):\n    print(n * 2)\n\ndef double_return(n):\n    return n * 2\n\na = double_print(5)\nb = double_return(5)\n\nprint(\"a is\", a)\nprint(\"b is\", b)",
+     "answers": [
+      "10\na is None\nb is 10"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def greet(name, greeting=\"Hello\"):\n    print(f\"{greeting}, {name}!\")\n\ngreet(\"Ada\")\ngreet(\"Ada\", \"Good morning\")",
+     "answers": [
+      "Hello, Ada!\nGood morning, Ada!"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def safe_divide(a, b):\n    if b == 0:\n        return None\n    return a / b\n\nprint(safe_divide(10, 2))\nprint(safe_divide(10, 0))",
+     "answers": [
+      "5.0\nNone"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def split_time(total_seconds):\n    return total_seconds // 60, total_seconds % 60\n\nminutes, seconds = split_time(500)\nprint(f\"{minutes} minutes and {seconds} seconds\")",
+     "answers": [
+      "8 minutes and 20 seconds"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def add_ten(n):\n    n = n + 10\n\nx = 5\nadd_ten(x)\nprint(x)",
+     "answers": [
+      "5"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "____ greet(name): print(f\"Hello, {name}!\")",
+     "answers": [
+      "def"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "def area(width, height): ____ width * height room = area(12, 10) print(room) # should print 120",
+     "answers": [
+      "return"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "def celsius_to_fahrenheit(celsius): ____ return celsius * 9 / 5 + 32",
+     "answers": [
+      "\"\"\"Convert a Celsius temperature to Fahrenheit.\"\"\" (any accurate one-line docstring in triple quotes works)"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "def main(): print(\"Running the program.\") ____()",
+     "answers": [
+      "main"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "`double_print` calls `print()` but has no `return` statement, so Python automatically returns ____, which is why `a` ends up holding that value instead of `10`.",
+     "answers": [
+      "None"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "`result` is created inside `calculate` and stops existing once the function returns, because variables created inside a function have ____ scope; the only way to get a value out of a function is to ____ it.",
+     "code": "def calculate():\n    result = 42\n    return result\n\nprint(calculate())\nprint(result)",
+     "answers": [
+      "local",
+      "return"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Inside `add_ten`, the line `n = n + 10` creates a new value for the parameter `n` inside the function; it does not reach back and change `x`, because assigning to a parameter only affects that function's own ____ copy of the value.",
+     "answers": [
+      "local"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "ch07-lists",
+   "questions": [
+    {
+     "section": "Vocabulary",
+     "text": "A ____ holds many values in one variable, in order, and is created with square brackets.",
+     "answers": [
+      "list"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Each item in a list has a position called its ____. Python counts these starting from zero.",
+     "answers": [
+      "index"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "The property that lets a list be changed after it is created-unlike a string or a number-is called ____.",
+     "answers": [
+      "mutability"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "A ____ takes a section of a list using list[start:stop], and always produces a new list rather than changing the original.",
+     "answers": [
+      "slice"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "names = [\"Ada\", \"Grace\", \"Alan\", \"Katherine\"]\nprint(names[1])\nprint(names[-1])",
+     "answers": [
+      "Grace\nKatherine"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "letters = [\"a\", \"b\", \"c\", \"d\", \"e\", \"f\"]\nprint(letters[2:5])\nprint(letters[:2])",
+     "answers": [
+      "['c', 'd', 'e']\n['a', 'b']"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "scores = [88, 92, 79]\nresult = scores.sort()\nprint(result)\nprint(scores)",
+     "answers": [
+      "None\n[79, 88, 92]"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "a = [1, 2, 3]\nb = a\nb.append(4)\nprint(a)",
+     "answers": [
+      "[1, 2, 3, 4]"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "names = [\"Ada\", \"Grace\", \"Alan\"]\nfor position, name in enumerate(names):\n    print(f\"{position + 1}. {name}\")",
+     "answers": [
+      "1. Ada\n2. Grace\n3. Alan"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "scores = [55, 82, 91, 40, 76]\npassing = []\nfor score in scores:\n    if score >= 60:\n        passing.append(score)\nprint(passing)\nprint(len(passing))",
+     "answers": [
+      "[82, 91, 76]\n3"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "names = [\"Ada\", \"Grace\"] names.____(\"Alan\") # adds \"Alan\" to the end of the list print(names)",
+     "answers": [
+      "append"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "scores = [88, 92, 79] ordered = ____(scores) # returns a new sorted list; scores itself is left unchanged print(ordered, scores)",
+     "answers": [
+      "sorted"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "evens = [] for n in numbers: if n % 2 == 0: evens.____(n) # adds n to the end of evens",
+     "answers": [
+      "append"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Printing a shows [1, 2, 3, 4] even though only b was changed, because b = a does not create a second list-it creates a second ____ that refers to the ____ list as a.",
+     "code": "a = [1, 2, 3]\nb = a\nb.append(4)\nprint(a)",
+     "answers": [
+      "name",
+      "same"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": ".sort() changes a list ____ and returns ____, which is why writing scores = scores.sort() destroys the list by replacing it with the return value.",
+     "answers": [
+      "in place",
+      "None"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "ch08-strings-as-data",
+   "questions": [
+    {
+     "section": "Vocabulary",
+     "text": "A string is a ____ of characters, so indexing and slicing work on it much like they do on a list.",
+     "answers": [
+      "sequence"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Unlike a list, a string is ____-it cannot be changed after it is created, so every string method returns a new string instead of modifying it.",
+     "answers": [
+      "immutable"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "The ____ operator tests whether one string appears inside another, as in \"quick\" in sentence.",
+     "answers": [
+      "in"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Sequences like \\n and \\t, which represent characters that can't be typed directly into a string, are called ____ sequences.",
+     "answers": [
+      "escape"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "word = \"Python\"\nprint(word[0:3])\nprint(word[::-1])",
+     "answers": [
+      "Pyt\nnohtyP"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "messy = \"   Ada LOVELACE  \"\nclean = messy.strip().title()\nprint(f\"[{clean}]\")",
+     "answers": [
+      "[Ada Lovelace]"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "answer = \" Yes \"\nprint(answer == \"yes\")\nprint(answer.strip().lower() == \"yes\")",
+     "answers": [
+      "False\nTrue"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "row = \"Ada,88,A\"\nname, score, grade = row.split(\",\")\nprint(f\"{name} scored {score} for a {grade}\")",
+     "answers": [
+      "Ada scored 88 for a A"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "word = \"python\"\nword.upper()\nprint(word)",
+     "answers": [
+      "python"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def count_vowels(text):\n    count = 0\n    for letter in text.lower():\n        if letter in \"aeiou\":\n            count += 1\n    return count\n\n\nprint(count_vowels(\"Hello World\"))",
+     "answers": [
+      "3"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "word = \"hello\" print(word.____()) # prints HELLO",
+     "answers": [
+      "upper"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "sentence = \"the quick brown fox\" words = sentence.____() # splits the sentence into a list of words print(words)",
+     "answers": [
+      "split"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "words = [\"the\", \"quick\", \"brown\"] print(\" \".____(words)) # glues the words together with a space between each one",
+     "answers": [
+      "join"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "word.upper() by itself does not change word, because strings are ____; every string method returns a ____ string rather than modifying the original.",
+     "code": "word = \"python\"\nword.upper()\nprint(word)",
+     "answers": [
+      "immutable",
+      "new"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": ".find(x) returns ____ when x does not appear in the string at all; a return value of ____ means the match starts at the very first character.",
+     "answers": [
+      "-1",
+      "0"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "ch09-dictionaries-and-sets",
+   "questions": [
+    {
+     "section": "Vocabulary",
+     "text": "A ____ stores a connection between a key and a value directly, so a lookup doesn't depend on two lists staying in the same order.",
+     "answers": [
+      "dictionary"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "In a dictionary entry, the part before the colon is the ____ and the part after the colon is the ____.",
+     "answers": [
+      "key",
+      "value"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "A ____ is an unordered collection with no duplicates, best suited to answering one question: is this thing in here?",
+     "answers": [
+      "set"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "A ____ is a small unnamed function, often passed as the key= argument to sorted() or max().",
+     "answers": [
+      "lambda"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "scores = {\"Ada\": 88, \"Grace\": 92}\nscores[\"Alan\"] = 45\nscores[\"Ada\"] = 91\nprint(scores)",
+     "answers": [
+      "{'Ada': 91, 'Grace': 92, 'Alan': 45}"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "scores = {\"Ada\": 88}\nprint(scores.get(\"Grace\"))\nprint(scores.get(\"Grace\", 0))",
+     "answers": [
+      "None\n0"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "text = \"a b a c b a\"\ncounts = {}\nfor word in text.split():\n    counts[word] = counts.get(word, 0) + 1\nprint(counts)",
+     "answers": [
+      "{'a': 3, 'b': 2, 'c': 1}"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "scores = {\"Ada\": 88, \"Grace\": 92, \"Alan\": 45}\ntop = max(scores, key=scores.get)\nprint(top)",
+     "answers": [
+      "Grace"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "band = {\"Ada\", \"Grace\", \"Alan\"}\nchorus = {\"Grace\", \"Alan\", \"Katherine\"}\nprint(len(band & chorus))\nprint(\"Ada\" in (band - chorus))",
+     "answers": [
+      "2\nTrue"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "students = {\n    \"Ada\": {\"score\": 88, \"grade\": \"B\"},\n    \"Grace\": {\"score\": 92, \"grade\": \"A\"},\n}\nfor name, record in students.items():\n    print(f\"{name}: {record['score']} ({record['grade']})\")",
+     "answers": [
+      "Ada: 88 (B)\nGrace: 92 (A)"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "scores = {\"Ada\": 88} print(scores.____(\"Grace\", 0)) # returns 0 instead of raising a KeyError",
+     "answers": [
+      "get"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "scores = {\"Ada\": 88, \"Grace\": 92, \"Alan\": 45} ____ scores[\"Alan\"] # removes the \"Alan\" entry entirely print(scores)",
+     "answers": [
+      "del"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "numbers = [1, 2, 2, 3, 3, 3] unique = ____(numbers) # removes the duplicates print(unique)",
+     "answers": [
+      "set"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "counts.get(word, 0) returns the current count, or ____ the very first time a word is seen, so counts[word] = counts.get(word, 0) + 1 works whether or not the key already ____.",
+     "answers": [
+      "0",
+      "exists"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Looping directly over a dictionary, as in for name in scores:, hands you the ____ only; to get the key and value together in one loop you need .____().",
+     "answers": [
+      "keys",
+      "items"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "ch10-tuples-and-structured-records",
+   "questions": [
+    {
+     "section": "Vocabulary",
+     "text": "A ____ is an ordered collection, like a list, that cannot be changed after it is made.",
+     "answers": [
+      "tuple"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Assigning a tuple to several names at once, like x, y = point, is called ____.",
+     "answers": [
+      "unpacking"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Real data is usually a collection of records, and in Python that is represented as a ____.",
+     "answers": [
+      "list of dictionaries"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "LOW_STOCK = 10 is written in capitals, the Python convention for a ____ - a value fixed for the whole program.",
+     "answers": [
+      "constant"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "The line state = \"OUT OF STOCK\" if item[\"quantity\"] == 0 else f\"{item['quantity']} left\" is a ____ - an if/else that produces a value rather than choosing statements.",
+     "answers": [
+      "conditional expression"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "point = (3, 4)\ncolor = (255, 128, 0)\n\nprint(point[0])\nprint(len(color))\n\nfor value in color:\n    print(value)",
+     "answers": [
+      "3\n3\n255\n128\n0"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "a = 1\nb = 2\na, b = b, a\nprint(a, b)",
+     "answers": [
+      "2 1"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "board = {}\nboard[(0, 0)] = \"X\"\nboard[(1, 1)] = \"O\"\nboard[(2, 2)] = \"X\"\n\nprint(board[(1, 1)])\nprint((0, 0) in board)\nprint((0, 1) in board)",
+     "answers": [
+      "O\nTrue\nFalse"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def min_max(numbers):\n    return min(numbers), max(numbers)\n\n\nresult = min_max([5, 2, 9, 1])\nprint(result)\nprint(type(result))",
+     "answers": [
+      "(1, 9)\n<class 'tuple'>"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "single = (5,)\nnot_a_tuple = (5)\nprint(type(single))\nprint(type(not_a_tuple))",
+     "answers": [
+      "<class 'tuple'>\n<class 'int'>"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Unpack the tuple point into its two coordinates: x, y = ____",
+     "code": "point = (3, 4)",
+     "answers": [
+      "point"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Write a one-item tuple containing just the number 5 (not the number 5 in parentheses): single = ____",
+     "answers": [
+      "(5,)"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete the line that inserts an empty list for a new category before appending to it: groups.____(item[\"category\"], []).append(item)",
+     "code": "groups = {}",
+     "answers": [
+      "setdefault"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Passing a tuple to a function carries no risk that the function will alter your data, because a tuple is ____ and cannot be changed no matter what the function tries to do.",
+     "answers": [
+      "immutable"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "A dictionary key must never change while it is in use, or the dictionary could no longer find it - that is why a list cannot be a key but a ____ can.",
+     "answers": [
+      "tuple"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Sorting a list of student records by score keeps each student's name and score correctly matched, because every field for one student lives together inside a single ____, so sorting only reorders those units in the list, not the values inside them.",
+     "answers": [
+      "dictionary"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "ch11-searching-and-sorting",
+   "questions": [
+    {
+     "section": "Vocabulary",
+     "text": "A ____ is a procedure for solving a problem: a finite sequence of unambiguous steps that turns an input into the right output.",
+     "answers": [
+      "algorithm"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Looking at each item in a list, one after another, until you find the target, is called ____.",
+     "answers": [
+      "linear search"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Searching a sorted list by repeatedly checking the middle of the remaining range and throwing away half is called ____.",
+     "answers": [
+      "binary search"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "The standard notation for describing how an algorithm's work scales as the input grows, deliberately ignoring constant factors and machine speed, is called ____.",
+     "answers": [
+      "big-O"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Selection sort and bubble sort both make roughly n squared comparisons in the worst case, which puts them in the ____ class, notated O(n squared).",
+     "answers": [
+      "quadratic"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def linear_search(items, target):\n    for i in range(len(items)):\n        if items[i] == target:\n            return i\n    return -1\n\n\nnumbers = [17, 4, 23, 8, 42, 15, 9]\n\nprint(linear_search(numbers, 42))\nprint(linear_search(numbers, 99))",
+     "answers": [
+      "4\n-1"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def binary_search(items, target):\n    low = 0\n    high = len(items) - 1\n\n    while low <= high:\n        middle = (low + high) // 2\n\n        if items[middle] == target:\n            return middle\n        elif items[middle] < target:\n            low = middle + 1\n        else:\n            high = middle - 1\n\n    return -1\n\n\nnumbers = [4, 8, 9, 15, 17, 23, 42]\n\nprint(binary_search(numbers, 42))\nprint(binary_search(numbers, 4))\nprint(binary_search(numbers, 99))",
+     "answers": [
+      "6\n0\n-1"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def selection_sort(items):\n    result = items.copy()\n\n    for i in range(len(result)):\n        smallest = i\n        for j in range(i + 1, len(result)):\n            if result[j] < result[smallest]:\n                smallest = j\n        result[i], result[smallest] = result[smallest], result[i]\n\n    return result\n\n\nprint(selection_sort([64, 25, 12, 22, 11]))",
+     "answers": [
+      "[11, 12, 22, 25, 64]"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "words = [\"Banana\", \"apple\", \"Cherry\"]\nprint(sorted(words))\nprint(sorted(words, key=str.lower))",
+     "answers": [
+      "['Banana', 'Cherry', 'apple']\n['apple', 'Banana', 'Cherry']"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def linear_search_counted(items, target):\n    comparisons = 0\n    for i in range(len(items)):\n        comparisons += 1\n        if items[i] == target:\n            return i, comparisons\n    return -1, comparisons\n\n\nindex, comparisons = linear_search_counted([5, 3, 8, 1, 9], 1)\nprint(index, comparisons)",
+     "answers": [
+      "3 4"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete the loop bound so every index in items gets checked: for i in range(____):",
+     "code": "def linear_search(items, target):",
+     "answers": [
+      "len(items)"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Compute the middle index using integer division: middle = (low + high) ____ 2",
+     "code": "low = 0\nhigh = len(items) - 1",
+     "answers": [
+      "//"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete the swap that places the smallest value found so far into position i: result[i], result[smallest] = ____",
+     "code": "result = items.copy()",
+     "answers": [
+      "result[smallest], result[i]"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Binary search only works correctly when the list is already ____, because each step assumes everything below the middle is smaller and everything above is larger.",
+     "answers": [
+      "sorted"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Linear search is described as O(n) because doubling the size of the list ____ the number of comparisons needed in the worst case.",
+     "answers": [
+      "doubles"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "A dictionary lookup stays fast no matter how large the dictionary grows, because it does not check keys one at a time the way linear search does - that is why dictionary lookup is O(____), constant time regardless of size.",
+     "answers": [
+      "1"
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "ch12-recursion-and-problem-solving",
+   "questions": [
+    {
+     "section": "Vocabulary",
+     "text": "A ____ function is one that calls itself, as long as it always calls itself on a smaller version of the problem and knows when to stop.",
+     "answers": [
+      "recursive"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "The ____ is a version of the problem small enough to answer outright, with no further call.",
+     "answers": [
+      "base case"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "The ____ calls the function again on a smaller input and builds the answer from the result.",
+     "answers": [
+      "recursive case"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Recursion is not a loop that goes around; it is a ____ of unfinished work that unwinds.",
+     "answers": [
+      "stack"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Remembering answers already computed, so they are never recalculated, is a technique called ____.",
+     "answers": [
+      "memoization"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def factorial(n):\n    if n <= 1:\n        return 1\n    return n * factorial(n - 1)\n\n\nprint(factorial(5))",
+     "answers": [
+      "120"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def reverse(text):\n    if len(text) <= 1:\n        return text\n    return reverse(text[1:]) + text[0]\n\n\nprint(reverse(\"recursion\"))",
+     "answers": [
+      "noisrucer"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def countdown(n):\n    if n <= 0:\n        print(\"Liftoff.\")\n        return\n    print(n)\n    countdown(n - 1)\n\n\ncountdown(3)",
+     "answers": [
+      "3\n2\n1\nLiftoff."
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def factorial_traced(n, depth=0):\n    indent = \"  \" * depth\n    print(f\"{indent}factorial({n}) called\")\n\n    if n <= 1:\n        print(f\"{indent}base case, returning 1\")\n        return 1\n\n    result = n * factorial_traced(n - 1, depth + 1)\n    print(f\"{indent}returning {n} * factorial({n - 1}) = {result}\")\n    return result\n\n\nfactorial_traced(2)",
+     "answers": [
+      "factorial(2) called\n  factorial(1) called\n  base case, returning 1\nreturning 2 * factorial(1) = 2"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def fib(n):\n    if n <= 1:\n        return n\n    return fib(n - 1) + fib(n - 2)\n\n\nfor i in range(6):\n    print(fib(i))",
+     "answers": [
+      "0\n1\n1\n2\n3\n5"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete the base case, which stops the recursion: if n <= 1: return ____",
+     "code": "def factorial(n):",
+     "answers": [
+      "1"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete the recursive case: return n * ____(n - 1)",
+     "code": "def factorial(n):\n    if n <= 1:\n        return 1",
+     "answers": [
+      "factorial"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete the line that computes and stores a new Fibonacci value: memo[n] = fib_fast(n - 1, memo) + ____(n - 2, memo)",
+     "code": "def fib_fast(n, memo=None):\n    if memo is None:\n        memo = {}\n    if n in memo:\n        return memo[n]\n    if n <= 1:\n        return n",
+     "answers": [
+      "fib_fast"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "factorial(n) crashes with a RecursionError when the recursive case never moves toward the ____, so n never becomes small enough to stop.",
+     "answers": [
+      "base case"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "fib(30) takes about 1.6 million calls because the naive recursive Fibonacci function ____ the same values over and over instead of remembering them.",
+     "answers": [
+      "recomputes"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "In factorial_traced(4), nothing is actually multiplied until the bottom is reached, because each level of the recursion is ____, holding its own n, for the level below to finish.",
+     "answers": [
+      "waiting"
+     ]
+    }
+   ]
+  }
+ ]
+}
