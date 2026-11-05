@@ -85,6 +85,10 @@ def render(quiz, title, number, answers=False):
             "line.", "")
         lines.append("")
 
+    unknown = sorted({q["section"] for q in quiz["questions"]} - set(SECTIONS))
+    if unknown:
+        raise SystemExit(f"{quiz['slug']}: unknown section(s) {unknown}; "
+                         f"a question must be in one of {SECTIONS} or it is dropped")
     n = 0
     for section in SECTIONS:
         items = [q for q in quiz["questions"] if q["section"] == section]

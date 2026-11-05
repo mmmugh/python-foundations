@@ -63,6 +63,16 @@ def main():
     expect("every code question is a program that compiles with its answer",
            not unreadable, "; ".join(unreadable))
 
+    # A section name the generator does not know used to drop the question
+    # from the quiz and the key without a word, and this test, comparing
+    # rendered output with rendered output, could not see it.
+    typo = {"slug": "x", "questions": [{"section": "Writing Code", "text": "A ____.", "answers": ["b"]}]}
+    try:
+        make_quizzes.render(typo, "T", 1)
+        expect("a question in an unknown section is refused, not dropped", False, "rendered without it")
+    except SystemExit:
+        expect("a question in an unknown section is refused, not dropped", True)
+
     bad = 0
     for label, ok, detail in results:
         bad += not ok
