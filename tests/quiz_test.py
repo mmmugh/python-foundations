@@ -60,6 +60,18 @@ def main():
                     compile(code.replace("____", answer), where, "exec")
                 except SyntaxError as err:
                     unreadable.append(f"{where}: with {answer!r}, {err.msg} (line {err.lineno})")
+    # The programs above come from quizzes.json; what students read is what
+    # the generator printed. Every program must appear whole in the rendered
+    # key (which keeps "____"), so a generator that drops or mangles a line is
+    # caught here rather than only by eye.
+    by_name = {p.name: text for p, text in files.items()}
+    for quiz in data["quizzes"]:
+        key_text = by_name[f"{quiz['slug']}-answers.txt"]
+        for n, q in enumerate(quiz["questions"], 1):
+            if q.get("code"):
+                block = "\n".join("        " + line for line in q["code"].split("\n"))
+                if block not in key_text:
+                    unreadable.append(f"{quiz['slug'][:4]} q{n}: the rendered key does not hold the whole program")
     expect("every code question is a program that compiles with its answer",
            not unreadable, "; ".join(unreadable))
 

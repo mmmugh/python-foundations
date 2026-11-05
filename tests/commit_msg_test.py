@@ -62,6 +62,8 @@ def main():
                commit("docs: y\n\nClaude-Session: <session URL>\n"), False)
         expect("the line is refused with a space before its colon too, as git reads it",
                commit("docs: z\n\nClaude-Session : <session URL>\n"), False)
+        expect("the line is refused whatever its capitalization",
+               commit("docs: w\n\nclaude-session: <session URL>\n"), False)
         expect("a message that names the trailer mid-line is committed",
                commit("docs: commits here carry no Claude-Session line\n"), True)
         count = subprocess.run(["git", "-C", str(repo), "rev-list", "--count", "HEAD"],
