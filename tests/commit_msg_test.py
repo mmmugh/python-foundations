@@ -60,6 +60,8 @@ def main():
         # host or a new ID format is refused too. Naming it mid-line is fine.
         expect("a Claude-Session line is refused whatever it holds",
                commit("docs: y\n\nClaude-Session: <session URL>\n"), False)
+        expect("the line is refused with a space before its colon too, as git reads it",
+               commit("docs: z\n\nClaude-Session : <session URL>\n"), False)
         expect("a message that names the trailer mid-line is committed",
                commit("docs: commits here carry no Claude-Session line\n"), True)
         count = subprocess.run(["git", "-C", str(repo), "rev-list", "--count", "HEAD"],

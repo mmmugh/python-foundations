@@ -24,7 +24,9 @@ fi
 # URL: a placeholder, another host or a new ID format is refused as well. It
 # is checked here, on messages only, because tracked documents quote the
 # placeholder at the start of a line, so the diff patterns cannot hold it.
-if grep -i -q '^Claude-Session:' "$1"; then
+# Whitespace before the colon is allowed because git's trailer parser allows
+# it: "Claude-Session : x" is the same trailer to git.
+if grep -i -E -q '^Claude-Session[[:space:]]*:' "$1"; then
   echo "commit-msg: commits here carry no Claude-Session line (spec decision 13); remove it and commit again" >&2
   exit 1
 fi
