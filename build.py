@@ -944,7 +944,7 @@ def assert_nothing_private_published():
     """
     leaked = sorted({p.relative_to(SITE) for p in SITE.rglob("*") if p.is_file()
                      and (any(p.stem.startswith(n) for n in PRIVATE_CONTENT)
-                          or (p.suffix in (".txt", ".md", ".html")
+                          or (p.suffix in (".txt", ".md", ".html", ".json")
                               and ANSWER_MARKER in p.read_text(errors="ignore")))})
     # Word documents are a zip of XML, so a plain read finds nothing in them.
     for doc in SITE.rglob("*.docx"):

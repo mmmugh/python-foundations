@@ -67,6 +67,13 @@ def main():
         refused = guard_refuses()
         expect("a key inside a .docx is refused", refused is not None and "course.docx" in refused)
 
+        # The build itself publishes site/boxes.json, so a marker in a JSON
+        # file is as public as one in a page.
+        (build.SITE / "boxes.json").write_text(f'[{{"code": "{build.ANSWER_MARKER}"}}]')
+        refused = guard_refuses()
+        expect("a key inside a published .json file is refused",
+               refused is not None and "boxes.json" in refused)
+
     keys = sorted((ROOT / "volumes").glob("*/answer-keys/*-answers.txt"))
     unmarked = [k.name for k in keys if build.ANSWER_MARKER not in k.read_text()]
     expect(f"every real answer key carries the marker the guard looks for ({len(keys)} keys)",
