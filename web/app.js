@@ -149,7 +149,7 @@ function restore(key, area, original) {
   } catch (e) { /* ignore */ }
 }
 
-document.querySelectorAll(".box").forEach((box) => {
+document.querySelectorAll(".box:not(.choice):not(.trace)").forEach((box) => {
   const area = box.querySelector("textarea:not(.prediction)");
   const prediction = box.querySelector(".prediction");
   const runButton = box.querySelector(".run");
@@ -260,6 +260,30 @@ document.querySelectorAll(".box").forEach((box) => {
   }
 });
 
+
+/* ----------------------------------------------------------------- choices */
+
+/* A multiple-choice exercise is checked in the page: there is no program to
+ * run, only which option was picked. A wrong pick is not told the answer. */
+document.querySelectorAll(".box.choice").forEach((box) => {
+  const spec = JSON.parse(box.dataset.check);
+  const button = box.querySelector(".check");
+  const result = box.querySelector(".result");
+  button.addEventListener("click", () => {
+    const picked = box.querySelector("input:checked");
+    result.hidden = false;
+    if (!picked) {
+      result.className = "result failed";
+      result.textContent = "Pick one first.";
+    } else if (Number(picked.value) === spec.answer) {
+      result.className = "result passed";
+      result.textContent = spec.why ? `Correct. ${spec.why}` : "Correct.";
+    } else {
+      result.className = "result failed";
+      result.textContent = "Not that one. Have another look.";
+    }
+  });
+});
 
 /* ------------------------------------------------------------------ hints */
 

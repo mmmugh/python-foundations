@@ -94,6 +94,24 @@ def main():
         "## L\n\n### Practice\n\n1. Try.\n\n> Say it: a hint.\n".split("\n")), "trial/ch02d-x")
     expect("hints without a worked solution still render", no_solution.count('class="hint"'), 1)
 
+    build.CHECKS["trial/ch02e-choice#1"] = {
+        "kind": "choice", "options": ["`x = 3600`", "`seconds_per_hour = 3600`", "`a < b & c`"],
+        "answer": 1, "why": "The name says what the number means."}
+    choice = build.render(build.split_blocks(
+        "## L\n\n### Practice\n\n1. Which name explains itself?\n".split("\n")), "trial/ch02e-choice")
+    expect("a choice exercise renders one radio per option", choice.count('type="radio"'), 3)
+    expect("a choice exercise has no code textarea", '<textarea' in choice, False)
+    expect("a choice exercise has no Run button", 'class="run"' in choice, False)
+    expect("code in an option is escaped", "a &lt; b &amp; c" in choice, True)
+
+    for label, bad_spec in (("an answer outside the options", {"kind": "choice", "options": ["a", "b"], "answer": 2}),
+                            ("only one option", {"kind": "choice", "options": ["a"], "answer": 0})):
+        try:
+            build.validate_check("trial/x#1", bad_spec)
+            expect(f"the build refuses {label}", "accepted", "refused")
+        except SystemExit:
+            expect(f"the build refuses {label}", "refused", "refused")
+
     bad = 0
     for label, ok, got, want in results:
         bad += not ok

@@ -360,9 +360,44 @@ def worked_cases(check):
     return "\n".join(lines)
 
 
+def validate_check(key, spec):
+    """Refuse a check that cannot work, at build time rather than in front of a
+    learner. Only the kinds added for lessons are validated here; the original
+    four are covered by validate_shipped.mjs and practice_test.py."""
+    kind = spec.get("kind")
+    if kind == "choice":
+        options = spec.get("options") or []
+        if len(options) < 2:
+            sys.exit(f"{key}: a choice check needs at least two options")
+        if not isinstance(spec.get("answer"), int) or not 0 <= spec["answer"] < len(options):
+            sys.exit(f"{key}: a choice check's answer must be the index of one option")
+    if kind == "trace" and not spec.get("names"):
+        sys.exit(f"{key}: a trace check needs the names of the variables to trace")
+
+
+def choice_html(key, number, exercise, check):
+    """A multiple-choice exercise: radio buttons and Check, no code to run."""
+    body = [f'<p class="prompt"><span class="num">{number}</span>{inline(exercise["text"])}</p>']
+    if exercise["code"]:
+        body.append(f'<pre class="given">{html.escape(exercise["code"])}</pre>')
+    name = html.escape(key, quote=True)
+    options = "".join(
+        f'<label><input type="radio" name="{name}" value="{i}"> <span>{inline(text)}</span></label>'
+        for i, text in enumerate(check["options"]))
+    body.append(f'<fieldset class="options"><legend class="sr-only">Choose one</legend>{options}</fieldset>')
+    body.append('<div class="bar"><button class="check">Check</button><span class="status"></span></div>'
+                '<pre class="result" hidden></pre>')
+    return (f'<div class="box exercise choice" data-box="{name}" '
+            f'data-check="{html.escape(json.dumps(check), quote=True)}">' + "".join(body) + "</div>")
+
+
 def exercise_html(slug, number, exercise):
     check = CHECKS.get(f"{slug}#{number}")
     key = f"{slug}#{number}"
+    if check:
+        validate_check(key, check)
+    if check and check["kind"] == "choice":
+        return choice_html(key, number, exercise, check)
     body = [f'<p class="prompt"><span class="num">{number}</span>{inline(exercise["text"])}</p>']
 
     starter = exercise["code"]
