@@ -14,8 +14,8 @@ each answer from the key in the blank, the program compiles.
 """
 
 import json
-import shutil
 import sys
+import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -92,17 +92,17 @@ def main():
            f"{counts}")
 
     # A unit's quiz hangs off its last lesson and is headed with the unit.
-    trial = {"slug": "_trial-units", "dir": ROOT / "volumes" / "_trial-units",
-             "content": ROOT / "volumes" / "_trial-units" / "content",
-             "quizzes": ROOT / "volumes" / "_trial-units" / "quizzes"}
-    try:
-        trial["content"].mkdir(parents=True)
+    # outputs() only reads the pages, so the trial lives in a temporary
+    # directory: nothing is written under volumes/, and a read-only checkout
+    # (the GNU review container mounts one) runs it too.
+    with tempfile.TemporaryDirectory() as scratch:
+        trial = {"slug": "_trial-units", "dir": Path(scratch),
+                 "content": Path(scratch) / "content", "quizzes": Path(scratch) / "quizzes"}
+        trial["content"].mkdir()
         (trial["content"] / "ch02d-together.md").write_text(UNIT_PAGE)
         unit_files = make_quizzes.outputs(UNIT_QUIZ, trial)
         heading = next(t for p, t in unit_files.items() if p.name.endswith("-quiz.txt")).split("\n")[1]
         expect("a unit's quiz is headed with the unit", heading == "Unit 2 - Variables", heading)
-    finally:
-        shutil.rmtree(trial["dir"], ignore_errors=True)
 
     # A section name the generator does not know used to drop the question
     # from the quiz and the key without a word, and this test, comparing
