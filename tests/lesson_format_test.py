@@ -112,6 +112,14 @@ def main():
         except SystemExit:
             expect(f"the build refuses {label}", "refused", "refused")
 
+    build.CHECKS["trial/ch02f-trace#1"] = {"kind": "trace", "names": ["price", "count"]}
+    traced = build.render(build.split_blocks(
+        "## L\n\n### Practice\n\n1. Fill in the table.\n\n```python\nprice = 12\ncount = 3\n```\n".split("\n")),
+        "trial/ch02f-trace")
+    expect("a trace exercise renders a row per executed line", traced.count('<tr class="step"'), 2)
+    expect("and a cell per name per row", traced.count('<input class="cell"'), 4)
+    expect("a trace exercise carries its program for the check", 'data-code=' in traced, True)
+
     bad = 0
     for label, ok, got, want in results:
         bad += not ok

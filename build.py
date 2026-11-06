@@ -391,6 +391,35 @@ def choice_html(key, number, exercise, check):
             f'data-check="{html.escape(json.dumps(check), quote=True)}">' + "".join(body) + "</div>")
 
 
+def trace_html(key, number, exercise, check):
+    """A trace table: the program, read-only, and a row of cells per executed line."""
+    sys.path.insert(0, str(ROOT / "web"))
+    import box_runner
+
+    code = exercise["code"]
+    if not code:
+        sys.exit(f"{key}: a trace exercise needs a code fence to trace")
+    rows = box_runner.trace_rows(code, check["names"])
+    lines = code.split("\n")
+    head = "".join(f"<th>{html.escape(n)}</th>" for n in check["names"])
+    body_rows = "".join(
+        f'<tr class="step"><td><code>{line}: {html.escape(lines[line - 1].strip())}</code></td>'
+        + "".join(f'<td><input class="cell" aria-label="{html.escape(n, quote=True)} after line {line}" '
+                  f'spellcheck="false"></td>' for n in check["names"])
+        + "</tr>"
+        for line, _ in rows)
+    name = html.escape(key, quote=True)
+    return (f'<div class="box exercise trace" data-box="{name}" '
+            f'data-check="{html.escape(json.dumps(check), quote=True)}" '
+            f'data-code="{html.escape(code, quote=True)}">'
+            f'<p class="prompt"><span class="num">{number}</span>{inline(exercise["text"])}</p>'
+            f'<pre class="given">{html.escape(code)}</pre>'
+            f'<div class="trace-wrap"><table class="trace-table"><thead><tr><th>After line</th>{head}</tr></thead>'
+            f'<tbody>{body_rows}</tbody></table></div>'
+            '<div class="bar"><button class="check">Check</button><span class="status"></span></div>'
+            '<pre class="result" hidden></pre></div>')
+
+
 def exercise_html(slug, number, exercise):
     check = CHECKS.get(f"{slug}#{number}")
     key = f"{slug}#{number}"
@@ -398,6 +427,8 @@ def exercise_html(slug, number, exercise):
         validate_check(key, check)
     if check and check["kind"] == "choice":
         return choice_html(key, number, exercise, check)
+    if check and check["kind"] == "trace":
+        return trace_html(key, number, exercise, check)
     body = [f'<p class="prompt"><span class="num">{number}</span>{inline(exercise["text"])}</p>']
 
     starter = exercise["code"]

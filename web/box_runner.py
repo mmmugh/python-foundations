@@ -182,6 +182,76 @@ def check_prediction(book_code, prediction, seconds=5):
     return False, [f"you wrote {len(got)} lines, it prints {len(want)}"], actual
 
 
+def trace_rows(source, names, max_steps=200):
+    """Run `source` and record, after every executed line, the repr of each
+    name in `names` ("" for a name not yet set). Output is swallowed.
+
+    The expected answer to a trace table, worked out by Python itself so it can
+    never disagree with what the program does.
+    """
+    import contextlib
+    import io
+
+    code = compile(source, "<trace>", "exec")
+    namespace = {}
+    steps = []
+
+    def snapshot():
+        return [repr(namespace[n]) if n in namespace else "" for n in names]
+
+    def local(frame, event, arg):
+        if frame.f_code is code and event == "line":
+            if len(steps) >= max_steps:
+                raise RuntimeError(f"traced more than {max_steps} lines")
+            steps.append((frame.f_lineno, snapshot()))
+        return local
+
+    def start(frame, event, arg):
+        return local if frame.f_code is code else None
+
+    with contextlib.redirect_stdout(io.StringIO()):
+        sys.settrace(start)
+        try:
+            exec(code, namespace)
+        finally:
+            sys.settrace(None)
+    return [(line, steps[i + 1][1] if i + 1 < len(steps) else snapshot())
+            for i, (line, _) in enumerate(steps)]
+
+
+def _same_value(entered, expected):
+    """Does what the learner wrote mean the value Python holds? By value, not
+    spelling: quotes optional around text, 3 for 3.0, "-" or blank for unset."""
+    import ast
+
+    entered = entered.strip()
+    if expected == "":
+        return entered in ("", "-")
+    value = ast.literal_eval(expected)
+    try:
+        return ast.literal_eval(entered) == value
+    except (ValueError, SyntaxError):
+        return isinstance(value, str) and entered == value
+
+
+def check_trace(source, payload):
+    """Check a trace table. `payload` is JSON text: {"names", "entered"}."""
+    data = json.loads(payload)
+    names, entered = data["names"], data["entered"]
+    try:
+        rows = trace_rows(source, names)
+    except BaseException as e:
+        return False, [f"the program itself failed: {e}"]
+    if len(entered) != len(rows):
+        return False, [f"the table has {len(rows)} rows; {len(entered)} were filled in"]
+    for (line, want), got in zip(rows, entered):
+        for name, w, g in zip(names, want, got):
+            if not _same_value(g, w):
+                shown = w if w else "not set yet"
+                return False, [f"line {line}, {name}: you wrote {g.strip() or 'nothing'!r}, it is {shown}"]
+    return True, []
+
+
 def _readable(n):
     """Show 555555.0 as 555555, not 5.55556e+06. A learner is looking at their
     own output here, so it has to read back the way they wrote it."""

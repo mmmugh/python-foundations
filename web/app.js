@@ -65,7 +65,7 @@ async function boot() {
 
     pyodide.runPython(BOX_RUNNER);
     for (const name of ["run_box", "from_json", "check_function", "check_output",
-                        "check_prediction", "check_stdin", "repl_run"]) {
+                        "check_prediction", "check_stdin", "repl_run", "check_trace"]) {
       python[name] = pyodide.globals.get(name);
     }
 
@@ -282,6 +282,34 @@ document.querySelectorAll(".box.choice").forEach((box) => {
       result.className = "result failed";
       result.textContent = "Not that one. Have another look.";
     }
+  });
+});
+
+/* ------------------------------------------------------------ trace tables */
+
+/* A trace table is checked by Python: box_runner runs the program, works out
+ * each variable after each line, and compares by value, not spelling. */
+document.querySelectorAll(".box.trace").forEach((box) => {
+  const spec = JSON.parse(box.dataset.check);
+  const button = box.querySelector(".check");
+  const status = box.querySelector(".status");
+  const result = box.querySelector(".result");
+  button.addEventListener("click", async () => {
+    button.disabled = true;
+    status.textContent = pyodide ? "checking…" : "starting Python…";
+    await boot();
+    const entered = [...box.querySelectorAll("tr.step")].map((row) =>
+      [...row.querySelectorAll("input.cell")].map((cell) => cell.value));
+    const outcome = python.check_trace(box.dataset.code,
+      JSON.stringify({ names: spec.names, entered }));
+    const passed = outcome.get(0);
+    const notes = outcome.get(1).toJs();
+    outcome.destroy();
+    result.hidden = false;
+    result.className = passed ? "result passed" : "result failed";
+    result.textContent = passed ? "Correct, every value." : notes.join("\n");
+    status.textContent = "";
+    button.disabled = false;
   });
 });
 

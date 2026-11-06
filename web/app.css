@@ -605,6 +605,12 @@ pre.reference {
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 pre.given { margin: .5rem 0; }
 
+/* Trace tables: each variable's value after each line. */
+.trace-wrap { overflow-x: auto; }
+.trace-table { border-collapse: collapse; margin: .5rem 0; }
+.trace-table th, .trace-table td { padding: .3rem .5rem; border: 1px solid var(--rule); text-align: left; }
+.trace-table input.cell { width: 6rem; font: inherit; }
+
 /* Hints, revealed one per click before the worked solution. */
 .hints { display: grid; gap: .5rem; margin: 0 0.9rem 0.7rem; }
 .hint { margin: 0; padding: .5rem .75rem; border-left: 3px solid var(--accent); background: var(--panel); }
