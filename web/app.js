@@ -301,7 +301,7 @@ document.querySelectorAll(".box.trace").forEach((box) => {
     const entered = [...box.querySelectorAll("tr.step")].map((row) =>
       [...row.querySelectorAll("input.cell")].map((cell) => cell.value));
     const outcome = python.check_trace(box.dataset.code,
-      JSON.stringify({ names: spec.names, entered }));
+      JSON.stringify({ names: spec.names, entered, lines: spec.lines }));
     const passed = outcome.get(0);
     const notes = outcome.get(1).toJs();
     outcome.destroy();

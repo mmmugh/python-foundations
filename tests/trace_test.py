@@ -46,6 +46,28 @@ def main():
     expect("and is named by line and variable", "line 3" in notes[0] and "price" in notes[0], True)
     expect("a missing row fails, not crashes", check(right[:2])[0], False)
 
+
+    # Found in review. A value whose repr is not a literal must not crash the
+    # check (the page's Check button would hang); True is not 1, because the
+    # lesson on kinds of value exists to teach exactly that; a wrong kind is
+    # said in words; and a table built on another Python is refused plainly.
+    def check_src(source, names, entered, **extra):
+        return box_runner.check_trace(source, json.dumps({"names": names, "entered": entered, **extra}))
+
+    try:
+        outcome = check_src("r = range(3)\n", ["r"], [["range(0, 3)"]])
+        expect("a value that is not a literal gives a verdict, not a crash", isinstance(outcome, tuple), True)
+    except Exception as e:
+        expect("a value that is not a literal gives a verdict, not a crash", repr(e), "a tuple")
+    expect("1 is not True", check_src("ok = 5 > 3\n", ["ok"], [["1"]])[0], False)
+    expect("True is True", check_src("ok = 5 > 3\n", ["ok"], [["True"]])[0], True)
+    expect("True is not 1", check_src("n = 1\n", ["n"], [["True"]])[0], False)
+    ok, notes = check_src("s = '3'\n", ["s"], [["3"]])
+    expect("a number written for text says so", not ok and "text" in notes[0] and "number" in notes[0], True)
+    ok, notes = check_src(PROGRAM, NAMES, right, lines=[1, 2, 3, 3, 4])
+    expect("rows from another Python are refused plainly", not ok and "version of Python" in notes[0], True)
+    expect("matching rows are accepted", check_src(PROGRAM, NAMES, right, lines=[1, 2, 3, 4])[0], True)
+
     bad = 0
     for label, ok, got, want in results:
         bad += not ok

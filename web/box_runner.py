@@ -221,36 +221,69 @@ def trace_rows(source, names, max_steps=200):
 
 def _same_value(entered, expected):
     """Does what the learner wrote mean the value Python holds? By value, not
-    spelling: quotes optional around text, 3 for 3.0, "-" or blank for unset."""
+    spelling: quotes optional around text, 3 for 3.0, "-" or blank for unset.
+    True and False are their own kind of value, so 1 is not True."""
     import ast
 
     entered = entered.strip()
     if expected == "":
         return entered in ("", "-")
-    value = ast.literal_eval(expected)
     try:
-        return ast.literal_eval(entered) == value
-    except (ValueError, SyntaxError):
+        value = ast.literal_eval(expected)
+    except Exception:
+        return entered == expected       # not a literal: only its exact repr matches
+    try:
+        got = ast.literal_eval(entered)
+    except Exception:
         return isinstance(value, str) and entered == value
+    if isinstance(value, bool) or isinstance(got, bool):
+        return type(got) is type(value) and got == value
+    return got == value
+
+
+def _kind(text):
+    """What kind of value `text` reads as, in the course's words."""
+    import ast
+
+    try:
+        value = ast.literal_eval(text)
+    except Exception:
+        return "text"                    # an unquoted word reads as text
+    if isinstance(value, bool):
+        return "True or False"
+    if isinstance(value, (int, float)):
+        return "a number"
+    return "text" if isinstance(value, str) else f"a {type(value).__name__}"
 
 
 def check_trace(source, payload):
-    """Check a trace table. `payload` is JSON text: {"names", "entered"}."""
+    """Check a trace table. `payload` is JSON text: {"names", "entered", "lines"}.
+
+    "lines" are the rows' line numbers as the build's Python traced them. A
+    different Python can step through the same program differently, and then
+    the table on the page cannot be checked here: say so, rather than mark a
+    correct table wrong.
+    """
     data = json.loads(payload)
     names, entered = data["names"], data["entered"]
     try:
         rows = trace_rows(source, names)
     except BaseException as e:
         return False, [f"the program itself failed: {e}"]
+    if data.get("lines") and [line for line, _ in rows] != data["lines"]:
+        return False, ["this table was made on a different version of Python than the one in "
+                       "this page, so it cannot be checked here; the course needs fixing, not your answer"]
     if len(entered) != len(rows):
         return False, [f"the table has {len(rows)} rows; {len(entered)} were filled in"]
     for (line, want), got in zip(rows, entered):
         for name, w, g in zip(names, want, got):
             if not _same_value(g, w):
                 shown = w if w else "not set yet"
-                return False, [f"line {line}, {name}: you wrote {g.strip() or 'nothing'!r}, it is {shown}"]
+                note = f"line {line}, {name}: you wrote {g.strip() or 'nothing'!r}, it is {shown}"
+                if g.strip() and w and _kind(g.strip()) != _kind(w):
+                    note += f" (you wrote {_kind(g.strip())}; it is {_kind(w)})"
+                return False, [note]
     return True, []
-
 
 def _readable(n):
     """Show 555555.0 as 555555, not 5.55556e+06. A learner is looking at their
