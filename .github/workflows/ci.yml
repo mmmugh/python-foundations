@@ -177,6 +177,17 @@ jobs:
       - name: Check works across the JavaScript-to-Python boundary
         working-directory: tests
         run: node browser_check_test.mjs
+      # Last, because it rebuilds site/ around a throwaway lesson volume, and
+      # the build needs the pinned Pyodide in vendor/, as the build job does.
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: vendor/pyodide
+          key: pyodide-${{ hashFiles('vendor/pyodide/CHECKSUMS') }}
+      - name: Fetch Pyodide and verify it against CHECKSUMS
+        run: python3 scripts/fetch_pyodide.py --download
+      - name: The lesson format works in a real browser
+        working-directory: tests
+        run: node lesson_browser_test.mjs
 
   deploy:
     needs: [leaks, build, node-gates, browser]
