@@ -11,6 +11,7 @@ A volume is a course. There is one today; adding another means adding a
 directory with a volume.json in it, and changing nothing here.
 """
 
+import ast
 import hashlib
 import html
 import json
@@ -375,6 +376,25 @@ def validate_check(key, spec):
         sys.exit(f"{key}: a trace check needs the names of the variables to trace")
 
 
+def hints_and_solution(key, exercise):
+    """The exercise's hints, then its worked solution, hidden until the last
+    hint is out. Empty if it has neither."""
+    hints = exercise.get("hints", [])
+    out = ""
+    if hints:
+        out += ('<div class="hints">'
+                + "".join(f'<p class="hint" hidden>{inline(h)}</p>' for h in hints)
+                + f'<button class="hint-next" type="button">Show a hint (1 of {len(hints)})</button>'
+                + '</div>')
+    solution = SOLUTIONS.get(key)
+    if solution:
+        note = f'<p class="why">{inline(solution["note"])}</p>' if solution["note"] else ""
+        hidden = " hidden" if hints else ""
+        out += (f'<details class="solution"{hidden}><summary>Show a solution</summary>'
+                f'<pre>{html.escape(solution["code"])}</pre>{note}</details>')
+    return out
+
+
 def choice_html(key, number, exercise, check):
     """A multiple-choice exercise: radio buttons and Check, no code to run."""
     body = [f'<p class="prompt"><span class="num">{number}</span>{inline(exercise["text"])}</p>']
@@ -387,8 +407,45 @@ def choice_html(key, number, exercise, check):
     body.append(f'<fieldset class="options"><legend class="sr-only">Choose one</legend>{options}</fieldset>')
     body.append('<div class="bar"><button class="check">Check</button><span class="status"></span></div>'
                 '<pre class="result" hidden></pre>')
+    body.append(hints_and_solution(key, exercise))
     return (f'<div class="box exercise choice" data-box="{name}" '
             f'data-check="{html.escape(json.dumps(check), quote=True)}">' + "".join(body) + "</div>")
+
+
+def trace_refusal(code):
+    """Why `code` cannot be a trace exercise, or None.
+
+    The table is built from the build's Python and checked again by the page's
+    (Pyodide), so every row must come out the same on both: comprehensions and
+    statements spread over several lines, or squeezed onto one, step
+    differently from one Python version to the next. Lines inside a function
+    are not traced, and input() would wait for typing while the site builds.
+    """
+    try:
+        tree = ast.parse(code)
+    except SyntaxError as e:
+        return f"it does not parse ({e.msg})"
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.ListComp, ast.SetComp, ast.DictComp, ast.GeneratorExp)):
+            return "a comprehension steps differently on different Pythons"
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.Lambda, ast.ClassDef)):
+            return "lines inside a function or class are not traced"
+        if isinstance(node, ast.Call) and getattr(node.func, "id", None) == "input":
+            return "input() would wait for typing while the site builds"
+        if not isinstance(node, ast.stmt):
+            continue
+        body = getattr(node, "body", None)
+        if not body:
+            if node.end_lineno != node.lineno:
+                return f"line {node.lineno} is one statement over several lines"
+            continue
+        if body[0].lineno == node.lineno:
+            return f"line {node.lineno} puts a statement and its body on one line"
+        for _, value in ast.iter_fields(node):
+            for part in value if isinstance(value, list) else [value]:
+                if isinstance(part, ast.expr) and part.end_lineno != node.lineno:
+                    return f"line {node.lineno} is one statement over several lines"
+    return None
 
 
 def trace_html(key, number, exercise, check):
@@ -399,7 +456,24 @@ def trace_html(key, number, exercise, check):
     code = exercise["code"]
     if not code:
         sys.exit(f"{key}: a trace exercise needs a code fence to trace")
-    rows = box_runner.trace_rows(code, check["names"])
+    refusal = trace_refusal(code)
+    if refusal:
+        sys.exit(f"{key}: this program cannot be traced: {refusal}")
+    try:
+        rows = box_runner.trace_rows(code, check["names"])
+    except Exception as e:
+        sys.exit(f"{key}: the program to trace raised {e!r}")
+    for line, cells in rows:
+        for name, cell in zip(check["names"], cells):
+            try:
+                if cell:
+                    ast.literal_eval(cell)
+            except Exception:
+                sys.exit(f"{key}: after line {line}, {name} is {cell}, which a learner cannot "
+                         f"write down as a value")
+    # The page compares its own rows with these, so a Python that steps
+    # through the program differently is caught rather than failing a learner.
+    check = dict(check, lines=[line for line, _ in rows])
     lines = code.split("\n")
     head = "".join(f"<th>{html.escape(n)}</th>" for n in check["names"])
     body_rows = "".join(
@@ -417,7 +491,7 @@ def trace_html(key, number, exercise, check):
             f'<div class="trace-wrap"><table class="trace-table"><thead><tr><th>After line</th>{head}</tr></thead>'
             f'<tbody>{body_rows}</tbody></table></div>'
             '<div class="bar"><button class="check">Check</button><span class="status"></span></div>'
-            '<pre class="result" hidden></pre></div>')
+            '<pre class="result" hidden></pre>' + hints_and_solution(key, exercise) + '</div>')
 
 
 def exercise_html(slug, number, exercise):
@@ -457,20 +531,8 @@ def exercise_html(slug, number, exercise):
                 '<span class="status"></span>')
     body.append(f'<div class="bar">{buttons}</div><pre class="result" hidden></pre>')
 
-    hints = exercise.get("hints", [])
-    if hints:
-        body.append('<div class="hints">'
-                    + "".join(f'<p class="hint" hidden>{inline(h)}</p>' for h in hints)
-                    + f'<button class="hint-next" type="button">Show a hint (1 of {len(hints)})</button>'
-                    + '</div>')
-
-    solution = SOLUTIONS.get(key)
-    if solution:
-        note = f'<p class="why">{inline(solution["note"])}</p>' if solution["note"] else ""
-        hidden = " hidden" if hints else ""
-        body.append(f'<details class="solution"{hidden}><summary>Show a solution</summary>'
-                    f'<pre>{html.escape(solution["code"])}</pre>{note}</details>')
-    elif not check:
+    body.append(hints_and_solution(key, exercise))
+    if not SOLUTIONS.get(key) and not check:
         body.append('<p class="unchecked">No single correct answer to check '
                     'against \u2014 run it and see.</p>')
 

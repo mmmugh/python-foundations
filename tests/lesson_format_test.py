@@ -120,6 +120,40 @@ def main():
     expect("and a cell per name per row", traced.count('<input class="cell"'), 4)
     expect("a trace exercise carries its program for the check", 'data-code=' in traced, True)
 
+
+    # Found in review: a trace program must give the same rows on the build's
+    # Python and the page's, and must give values a learner can write down.
+    for label, program in (("a comprehension", "s = [n for n in range(3)]"),
+                           ("a statement over two lines", "x = (1 +\n     2)"),
+                           ("an if whose test spans lines", "x = 2\nif (x > 0 and\n    x < 5):\n    y = 1"),
+                           ("a loop on one line", "x = 3\nwhile x: x = x - 1"),
+                           ("a function", "def f():\n    return 1\ny = f()"),
+                           ("input()", "name = input()"),
+                           ("a value that is not a literal", "x = range(3)")):
+        build.CHECKS["trial/ch02g-bad#1"] = {"kind": "trace", "names": ["x"]}
+        try:
+            build.render(build.split_blocks(
+                f"## L\n\n### Practice\n\n1. T.\n\n```python\n{program}\n```\n".split("\n")), "trial/ch02g-bad")
+            expect(f"the build refuses a trace of {label}", "accepted", "refused")
+        except SystemExit:
+            expect(f"the build refuses a trace of {label}", "refused", "refused")
+    expect("a trace carries the rows' line numbers for the page to compare",
+           '&quot;lines&quot;: [1, 2]' in traced, True)
+
+    # Found in review: hints and a worked solution on a choice or a trace
+    # exercise were dropped without a word.
+    build.CHECKS["trial/ch02h-x#1"] = {"kind": "choice", "options": ["a", "b"], "answer": 0}
+    build.CHECKS["trial/ch02h-x#2"] = {"kind": "trace", "names": ["price"]}
+    build.SOLUTIONS["trial/ch02h-x#2"] = {"code": "price = 12", "note": ""}
+    both = build.render(build.split_blocks(
+        "## L\n\n### Practice\n\n1. Pick.\n\n> Say it: a hint.\n\n2. Trace.\n\n```python\nprice = 12\n```\n\n"
+        "> Split it: a hint.\n".split("\n")), "trial/ch02h-x")
+    first, second = both.split('data-box="trial/ch02h-x#2"')
+    expect("a choice exercise keeps its hints", first.count('class="hint" hidden'), 1)
+    expect("a trace exercise keeps its hints", second.count('class="hint" hidden'), 1)
+    expect("a trace exercise keeps its worked solution, behind its hints",
+           '<details class="solution" hidden>' in second, True)
+
     bad = 0
     for label, ok, got, want in results:
         bad += not ok
