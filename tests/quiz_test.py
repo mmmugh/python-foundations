@@ -14,13 +14,19 @@ each answer from the key in the blank, the program compiles.
 """
 
 import json
+import shutil
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts"))
-sys.argv = sys.argv[:1]                    # make_quizzes reads a volume slug from argv
-import make_quizzes                                             # noqa: E402
+import build                                                     # noqa: E402
+import make_quizzes                                              # noqa: E402
+
+UNIT_PAGE = "<!-- part: Unit 2 — Variables -->\n## Lesson 2.4 — Putting it together\n\nText.\n"
+UNIT_QUIZ = {"quizzes": [{"slug": "ch02d-together", "questions": [
+    {"section": "Vocabulary", "text": "A name for a value is a ____.", "answers": ["variable"]}]}]}
 
 
 def main():
@@ -29,51 +35,74 @@ def main():
     def expect(label, ok, detail=""):
         results.append((label, ok, detail))
 
-    data = json.loads(make_quizzes.SOURCE.read_text())
-    files = make_quizzes.outputs(data)
-    stale = [p.relative_to(ROOT).as_posix() for p, text in files.items()
-             if not p.exists() or p.read_text() != text]
-    expect(f"all {len(files)} quizzes and keys are what quizzes.json renders",
-           len(files) == 24 and not stale, f"differ: {stale}")
+    # Every volume with a quizzes.json, by name: find_volume() with no name
+    # stops once there are two content volumes.
+    counts = {}
+    for vol in build.VOLS:
+        source = vol["dir"] / make_quizzes.SOURCE_NAME
+        if not source.exists():
+            continue
+        data = json.loads(source.read_text())
+        files = make_quizzes.outputs(data, vol)
+        counts[vol["slug"]] = len(files)
+        stale = [p.relative_to(ROOT).as_posix() for p, text in files.items()
+                 if not p.exists() or p.read_text() != text]
+        expect(f"{vol['slug']}: all {len(files)} quizzes and keys are what quizzes.json renders",
+               not stale, f"differ: {stale}")
 
-    # Students print these. The question text is wrapped to 74 columns, but a
-    # program is not, so a long line in one runs off a printed page.
-    wide = [f"{p.name}:{i}" for p, text in files.items() if p.name.endswith("-quiz.txt")
-            for i, line in enumerate(text.split("\n"), 1) if len(line) > 79]
-    expect("no line of a student's quiz is wider than 79 characters", not wide,
-           f"too wide: {wide}")
+        # Students print these. The question text is wrapped to 74 columns, but a
+        # program is not, so a long line in one runs off a printed page.
+        wide = [f"{p.name}:{i}" for p, text in files.items() if p.name.endswith("-quiz.txt")
+                for i, line in enumerate(text.split("\n"), 1) if len(line) > 79]
+        expect(f"{vol['slug']}: no line of a student's quiz is wider than 79 characters", not wide,
+               f"too wide: {wide}")
 
-    unreadable = []
-    for quiz in data["quizzes"]:
-        for n, q in enumerate(quiz["questions"], 1):
-            if q["section"] != "Writing code":
-                continue
-            where = f"{quiz['slug'][:4]} q{n}"
-            code = q.get("code", "")
-            if "____" in q["text"] or code.count("____") != 1:
-                unreadable.append(f"{where}: the blank is not in the code block")
-                continue
-            # "fill" is the exact code to try, where an answer carries a note
-            # for the marker ("any accurate one-line docstring works").
-            for answer in q.get("fill", q["answers"]):
-                try:
-                    compile(code.replace("____", answer), where, "exec")
-                except SyntaxError as err:
-                    unreadable.append(f"{where}: with {answer!r}, {err.msg} (line {err.lineno})")
-    # The programs above come from quizzes.json; what students read is what
-    # the generator printed. Every program must appear whole in the rendered
-    # key (which keeps "____"), so a generator that drops or mangles a line is
-    # caught here rather than only by eye.
-    by_name = {p.name: text for p, text in files.items()}
-    for quiz in data["quizzes"]:
-        key_text = by_name[f"{quiz['slug']}-answers.txt"]
-        for n, q in enumerate(quiz["questions"], 1):
-            if q.get("code"):
-                block = "\n".join("        " + line for line in q["code"].split("\n"))
-                if block not in key_text:
-                    unreadable.append(f"{quiz['slug'][:4]} q{n}: the rendered key does not hold the whole program")
-    expect("every code question is a program that compiles with its answer",
-           not unreadable, "; ".join(unreadable))
+        unreadable = []
+        for quiz in data["quizzes"]:
+            for n, q in enumerate(quiz["questions"], 1):
+                if q["section"] != "Writing code":
+                    continue
+                where = f"{quiz['slug'][:4]} q{n}"
+                code = q.get("code", "")
+                if "____" in q["text"] or code.count("____") != 1:
+                    unreadable.append(f"{where}: the blank is not in the code block")
+                    continue
+                # "fill" is the exact code to try, where an answer carries a note
+                # for the marker ("any accurate one-line docstring works").
+                for answer in q.get("fill", q["answers"]):
+                    try:
+                        compile(code.replace("____", answer), where, "exec")
+                    except SyntaxError as err:
+                        unreadable.append(f"{where}: with {answer!r}, {err.msg} (line {err.lineno})")
+        # The programs above come from quizzes.json; what students read is what
+        # the generator printed. Every program must appear whole in the rendered
+        # key (which keeps "____"), so a generator that drops or mangles a line is
+        # caught here rather than only by eye.
+        by_name = {p.name: text for p, text in files.items()}
+        for quiz in data["quizzes"]:
+            key_text = by_name[f"{quiz['slug']}-answers.txt"]
+            for n, q in enumerate(quiz["questions"], 1):
+                if q.get("code"):
+                    block = "\n".join("        " + line for line in q["code"].split("\n"))
+                    if block not in key_text:
+                        unreadable.append(f"{quiz['slug'][:4]} q{n}: the rendered key does not hold the whole program")
+        expect(f"{vol['slug']}: every code question is a program that compiles with its answer",
+               not unreadable, "; ".join(unreadable))
+    expect("vol1-foundations still has its 24 quiz files", counts.get("vol1-foundations") == 24,
+           f"{counts}")
+
+    # A unit's quiz hangs off its last lesson and is headed with the unit.
+    trial = {"slug": "_trial-units", "dir": ROOT / "volumes" / "_trial-units",
+             "content": ROOT / "volumes" / "_trial-units" / "content",
+             "quizzes": ROOT / "volumes" / "_trial-units" / "quizzes"}
+    try:
+        trial["content"].mkdir(parents=True)
+        (trial["content"] / "ch02d-together.md").write_text(UNIT_PAGE)
+        unit_files = make_quizzes.outputs(UNIT_QUIZ, trial)
+        heading = next(t for p, t in unit_files.items() if p.name.endswith("-quiz.txt")).split("\n")[1]
+        expect("a unit's quiz is headed with the unit", heading == "Unit 2 - Variables", heading)
+    finally:
+        shutil.rmtree(trial["dir"], ignore_errors=True)
 
     # A section name the generator does not know used to drop the question
     # from the quiz and the key without a word, and this test, comparing

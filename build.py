@@ -773,9 +773,11 @@ def build_volume(vol):
                               f'what you have met so far</p>')
             quiz = vol["quizzes"] / f"{page['slug']}-quiz.txt"
             if quiz.exists():
+                unit = re.match(r"(Unit \d+)", page["part"] or "")
+                label = (f"{unit.group(1)} quiz" if unit else
+                         f'Chapter {page["title"].split()[1].rstrip("—").strip()} quiz')
                 extras.append(
-                    f'<p class="quiz"><a href="quizzes/{quiz.name}">'
-                    f'Chapter {page["title"].split()[1].rstrip("—").strip()} quiz</a>'
+                    f'<p class="quiz"><a href="quizzes/{quiz.name}">{label}</a>'
                     f' — fill it in, then show or print it</p>')
         quiz_link = "".join(extras)
 

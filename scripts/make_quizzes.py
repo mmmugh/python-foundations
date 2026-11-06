@@ -1,6 +1,6 @@
 """Render the chapter quizzes from structured data.
 
-    python3 scripts/make_quizzes.py [volume-slug]
+    python3 scripts/make_quizzes.py [volume-slug]   # required once there are two volumes
 
 Reads volumes/<volume>/quizzes.json and writes two files per chapter: the
 student's copy into quizzes/, and the answer key into answer-keys/.
@@ -30,16 +30,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from build import find_volume                                   # noqa: E402
 
-VOLUME = find_volume(sys.argv[1] if len(sys.argv) > 1 else None)
-QUIZZES = VOLUME["quizzes"]
-SOURCE = VOLUME["dir"] / "quizzes.json"
-
-# Answer keys live OUTSIDE the directory the site is built from, and outside
-# the directory the build copies into it. Nothing under site/ is private: a
-# file there is fetchable by anyone who guesses its name, without needing any
-# traversal bug at all. Keeping the keys out of the copy path is the control;
-# an unguessable filename would not be one.
-KEYS = VOLUME["dir"] / "answer-keys"
+SOURCE_NAME = "quizzes.json"
 BLANK = "_" * 18
 ASCII_ONLY = {"\u2014": "-", "\u2013": "-", "\u2018": "'", "\u2019": "'",
               "\u201c": '"', "\u201d": '"', "\u2026": "...", "\u00a0": " "}
@@ -68,10 +59,10 @@ def wrap(text, indent, first_indent=None):
     return out
 
 
-def render(quiz, title, number, answers=False):
+def render(quiz, title, number, answers=False, label="Chapter"):
     lines = [
         "PYTHON FOUNDATIONS",
-        plain(f"Chapter {number} - {title}"),
+        plain(f"{label} {number} - {title}"),
         "",
         "ANSWER KEY" if answers else
         "Name: ________________________________     Date: ______________",
@@ -129,33 +120,56 @@ def render(quiz, title, number, answers=False):
     return out
 
 
-def outputs(data):
-    """{path: text} for every quiz and answer key the data describes."""
+def titles_of(vol):
+    """{page slug: (label, number, title)} for every page a quiz can belong to.
+
+    A chapter names itself in its "## Chapter N — Title" heading. A lesson
+    belongs to a unit, named in its "<!-- part: Unit N — Title -->" line; a
+    unit's quiz hangs off its last lesson and is headed with the unit.
+    """
+    found = {}
+    for md in vol["content"].glob("*.md"):
+        text = md.read_text()
+        unit = re.match(r"<!-- part: (Unit) (\d+) — (.+?) -->", text)
+        head = re.search(r"^## (Chapter) (\d+) — (.+)$", text, re.M)
+        match = unit or head
+        if match:
+            found[md.stem] = (match.group(1), int(match.group(2)), match.group(3))
+    return found
+
+
+def outputs(data, vol):
+    """{path: text} for every quiz and answer key the data describes.
+
+    Answer keys live OUTSIDE the directory the site is built from, and outside
+    the directory the build copies into it. Nothing under site/ is private: a
+    file there is fetchable by anyone who guesses its name, without needing any
+    traversal bug at all. Keeping the keys out of the copy path is the control;
+    an unguessable filename would not be one.
+    """
     quizzes = data["quizzes"] if isinstance(data, dict) else data
-    titles = {}
-    for md in VOLUME["content"].glob("ch*.md"):
-        head = re.search(r"^## Chapter (\d+) — (.+)$", md.read_text(), re.M)
-        titles[md.stem] = (int(head.group(1)), head.group(2))
+    titles = titles_of(vol)
     files = {}
     for quiz in sorted(quizzes, key=lambda q: q["slug"]):
-        number, title = titles[quiz["slug"]]
+        label, number, title = titles[quiz["slug"]]
         stem = quiz["slug"]
-        files[QUIZZES / f"{stem}-quiz.txt"] = render(quiz, title, number)
-        files[KEYS / f"{stem}-answers.txt"] = render(quiz, title, number, answers=True)
+        files[vol["quizzes"] / f"{stem}-quiz.txt"] = render(quiz, title, number, label=label)
+        files[vol["dir"] / "answer-keys" / f"{stem}-answers.txt"] = render(
+            quiz, title, number, answers=True, label=label)
     return files
 
 
 def main():
-    data = json.loads(SOURCE.read_text())
-    QUIZZES.mkdir(exist_ok=True)
-    KEYS.mkdir(exist_ok=True)
-    for path, text in outputs(data).items():
+    vol = find_volume(sys.argv[1] if len(sys.argv) > 1 else None)
+    data = json.loads((vol["dir"] / SOURCE_NAME).read_text())
+    vol["quizzes"].mkdir(exist_ok=True)
+    (vol["dir"] / "answer-keys").mkdir(exist_ok=True)
+    for path, text in outputs(data, vol).items():
         path.write_text(text)
     for quiz in sorted(data["quizzes"], key=lambda q: q["slug"]):
         blanks = sum(q["text"].count("____") + q.get("code", "").count("____")
                      for q in quiz["questions"])
         print(f"  {quiz['slug']:<38}{len(quiz['questions']):>3} questions, {blanks:>3} blanks")
-
 
 if __name__ == "__main__":
     main()
