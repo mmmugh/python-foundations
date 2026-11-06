@@ -599,6 +599,11 @@ pre.reference {
   color: var(--ink);
 }
 
+/* Hints, revealed one per click before the worked solution. */
+.hints { display: grid; gap: .5rem; margin: 0 0.9rem 0.7rem; }
+.hint { margin: 0; padding: .5rem .75rem; border-left: 3px solid var(--accent); background: var(--panel); }
+.hint-next { justify-self: start; }
+
 .exercise .solution .why {
   margin: 0;
   padding: 0 0.9rem 0.8rem;

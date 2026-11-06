@@ -261,6 +261,34 @@ document.querySelectorAll(".box").forEach((box) => {
 });
 
 
+/* ------------------------------------------------------------------ hints */
+
+/* Hints come one at a time, so a stuck learner gets the next step of the
+ * thinking rather than the answer. The worked solution, if there is one,
+ * appears only after the last hint. */
+document.querySelectorAll(".hints").forEach((hints) => {
+  const items = [...hints.querySelectorAll(".hint")];
+  const button = hints.querySelector(".hint-next");
+  const solution = hints.parentElement.querySelector(".solution");
+  let shown = 0;
+  button.addEventListener("click", () => {
+    if (shown === items.length) {          // every hint is out: this click is for the solution
+      solution.hidden = false;
+      button.hidden = true;
+      return;
+    }
+    items[shown].hidden = false;
+    shown += 1;
+    if (shown < items.length) {
+      button.textContent = `Show another hint (${shown + 1} of ${items.length})`;
+    } else if (solution) {
+      button.textContent = "Show the worked solution";
+    } else {
+      button.hidden = true;                // no solution behind the hints: nothing more to show
+    }
+  });
+});
+
 /* -------------------------------------------------------------- scratchpad */
 
 /* A place to poke at Python and see what comes back, which is how a lot of

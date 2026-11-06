@@ -341,6 +341,8 @@ def render_exercises(slug, blocks, start=1):
                 exercises.append({"text": item, "code": ""})
         elif kind == "code" and exercises:
             exercises[-1]["code"] = payload      # a fence belongs to the item above it
+        elif kind == "quote" and exercises:
+            exercises[-1].setdefault("hints", []).append(payload)
 
     out = [exercise_html(slug, number, exercise)
            for number, exercise in enumerate(exercises, start)]
@@ -389,10 +391,18 @@ def exercise_html(slug, number, exercise):
                 '<span class="status"></span>')
     body.append(f'<div class="bar">{buttons}</div><pre class="result" hidden></pre>')
 
+    hints = exercise.get("hints", [])
+    if hints:
+        body.append('<div class="hints">'
+                    + "".join(f'<p class="hint" hidden>{inline(h)}</p>' for h in hints)
+                    + f'<button class="hint-next" type="button">Show a hint (1 of {len(hints)})</button>'
+                    + '</div>')
+
     solution = SOLUTIONS.get(key)
     if solution:
         note = f'<p class="why">{inline(solution["note"])}</p>' if solution["note"] else ""
-        body.append('<details class="solution"><summary>Show a solution</summary>'
+        hidden = " hidden" if hints else ""
+        body.append(f'<details class="solution"{hidden}><summary>Show a solution</summary>'
                     f'<pre>{html.escape(solution["code"])}</pre>{note}</details>')
     elif not check:
         body.append('<p class="unchecked">No single correct answer to check '

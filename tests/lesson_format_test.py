@@ -68,6 +68,32 @@ def main():
            [p.stem for p in sorted(names, key=build.page_order)],
            ["00-front-matter", "ch01-one", "ch02a-a", "ch02b-b", "ch02c-c", "99-appendix"])
 
+    hinted = """## L
+
+### Try It
+
+1. Add two prices and print the total.
+
+> Say it: two prices go in, their sum comes out.
+> Split it: store each price, add them, print the result.
+> Name it: `first_price`, `second_price`, `total`.
+
+2. No hints on this one.
+"""
+    build.SOLUTIONS["trial/ch02c-hints#1"] = {"code": "total = 3 + 4\nprint(total)", "note": ""}
+    html_text = build.render(build.split_blocks(hinted.split("\n")), "trial/ch02c-hints")
+    first, second = html_text.split('data-box="trial/ch02c-hints#2"')
+    expect("each > line after an exercise is a hidden hint", first.count('<p class="hint" hidden>'), 3)
+    where = [first.find(h) for h in ("Say it", "Split it", "Name it")]
+    expect("hints keep their order", -1 not in where and where == sorted(where), True)
+    expect("a hinted exercise has a reveal button", 'class="hint-next"' in first, True)
+    expect("its worked solution waits behind the hints", '<details class="solution" hidden>' in first, True)
+    expect("an exercise with no hints gets no hint block", 'class="hints"' in second, False)
+
+    no_solution = build.render(build.split_blocks(
+        "## L\n\n### Practice\n\n1. Try.\n\n> Say it: a hint.\n".split("\n")), "trial/ch02d-x")
+    expect("hints without a worked solution still render", no_solution.count('class="hint"'), 1)
+
     bad = 0
     for label, ok, got, want in results:
         bad += not ok
