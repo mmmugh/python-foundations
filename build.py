@@ -238,10 +238,17 @@ def render_table(rows):
     return "".join(out)
 
 
+# Headings whose list items are exercises, each with its own box and check.
+# A chapter has one ("Try It", or "Steps" on a practice page); a lesson has
+# several, and its exercises are numbered straight through the page.
+EXERCISE_SECTIONS = ("Warm-up", "Practice", "Try It", "Steps")
+
+
 def render(blocks, slug):
     """Blocks to HTML. Code fences become boxes; the next output fence is its answer."""
     parts = []
     box = 0
+    exercise = 0
     i = 0
     section = ""
     while i < len(blocks):
@@ -256,14 +263,14 @@ def render(blocks, slug):
             i += 1
             continue
 
-        # "Steps" is what a practice page calls its exercises; it renders the
-        # same way, as numbered items each with a box of their own.
-        if kind == "h3" and payload in ("Try It", "Steps"):
+        if kind == "h3" and payload in EXERCISE_SECTIONS:
             parts.append(f"<h3>{inline(payload)}</h3>")
             j = i + 1
             while j < len(blocks) and blocks[j][0] != "h3":
                 j += 1
-            parts.append(render_exercises(slug, blocks[i + 1:j]))
+            rendered, count = render_exercises(slug, blocks[i + 1:j], exercise + 1)
+            parts.append(rendered)
+            exercise += count
             # Exercise fences still consume a box number, so that "<slug>#<n>"
             # means the same fence here as it does in verify() and the bundle.
             box += sum(1 for kind, _ in blocks[i + 1:j] if kind == "code")
@@ -320,11 +327,12 @@ def render(blocks, slug):
 SIGNATURE = re.compile(r"`([a-z_][a-z_0-9]*\([^)]*\))`")
 
 
-def render_exercises(slug, blocks):
-    """Render a Try It section as numbered exercises, each with its own box.
+def render_exercises(slug, blocks, start=1):
+    """Render one exercise section. Returns (html, how many exercises).
 
-    Exercises are numbered across the whole section, not per list, because the
-    book's numbering runs straight through even where a code fence splits it.
+    Exercises are numbered across the whole page, not per list or per section,
+    because a check is found by "<page>#<n>": a lesson's warm-up, practice and
+    try it are one sequence. `start` is the number of this section's first one.
     """
     exercises = []
     for kind, payload in blocks:
@@ -334,10 +342,9 @@ def render_exercises(slug, blocks):
         elif kind == "code" and exercises:
             exercises[-1]["code"] = payload      # a fence belongs to the item above it
 
-    out = []
-    for number, exercise in enumerate(exercises, 1):
-        out.append(exercise_html(slug, number, exercise))
-    return "\n".join(out)
+    out = [exercise_html(slug, number, exercise)
+           for number, exercise in enumerate(exercises, start)]
+    return "\n".join(out), len(exercises)
 
 
 def worked_cases(check):
@@ -497,12 +504,14 @@ def page_order(path):
 
     Sorting the filenames puts 99-appendices second, because "9" sorts before
     "c" — which read as a missing chapter rather than an ordering accident.
+    The stem breaks ties, so the lessons of one unit (ch02a, ch02b, ...) keep
+    their order whatever order the filesystem lists them in.
     """
     if path.stem.startswith("00"):
-        return (0, 0)
+        return (0, 0, path.stem)
     if path.stem.startswith("99"):
-        return (2, 0)
-    return (1, int(path.stem[2:4]))
+        return (2, 0, path.stem)
+    return (1, int(path.stem[2:4]), path.stem)
 
 
 def practice_files(vol):
