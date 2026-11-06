@@ -12,7 +12,8 @@ A volume opts into lessons in its `volume.json`:
 {"number": 2, "title": "Python Foundations, step by step", "subtitle": "...", "lessons": true}
 ```
 
-`"lessons": true` turns on the vocabulary gate (below) for that volume.
+`"lessons": true` turns on the vocabulary gate (below) for that volume. A volume with lesson files
+(`chNNx-slug.md`) but without the flag fails the gate, so a forgotten flag cannot switch it off.
 
 ## Lesson files
 
@@ -76,7 +77,8 @@ per click; the routine's first three steps are the usual hints:
 ```
 
 If the exercise has a worked solution, it stays hidden until the last hint has been shown. Hints with no worked
-solution behind them are fine.
+solution behind them are fine. Hints and worked solutions work the same way on every kind of exercise, choice and
+trace included.
 
 ## Worked solutions
 
@@ -131,8 +133,20 @@ read-only above the options. The build refuses fewer than two options, or an `an
 
 The exercise's code fence is the program to trace; `names` are the variables, in column order. The table has a
 row per executed line. The expected values are worked out by running the program, at build time and again in
-the page, so the program must not call `input()`. Answers are compared by value: `'Ada'`, `"Ada"` and `Ada` are
-the same string, `3` is `3.0`, and blank or `-` means "not set yet". A wrong cell is named by line and variable.
+the page, and both must step through it the same way, so the build refuses a program that has:
+
+- a statement spread over several lines, or a statement and its body on one line (`while x: x = x - 1`);
+- a comprehension;
+- a function, `lambda` or class (lines inside them are not traced);
+- `input()`;
+- a value a learner cannot write down (`range(3)`, `float('inf')`).
+
+Plain assignments, `if`/`elif`/`else`, and `for` and `while` loops with their bodies on their own lines are fine.
+
+Answers are compared by value: `'Ada'`, `"Ada"` and `Ada` are the same string, `3` is `3.0`, and blank or `-`
+means "not set yet". Quotes are optional only when the text could not be read as anything else: `3` written for
+the text `'3'` is wrong, and so is `1` for `True`, because the kind of value is part of the answer. A wrong cell
+is named by line and variable, and says when the kind is wrong ("you wrote a number; it is text").
 
 ````markdown
 2. Fill in the table.
@@ -168,7 +182,8 @@ Sections are `Vocabulary`, `Reading code`, `Writing code` and `Why it works`; an
 
 What a lesson teaches is what its examples show: every construct, built-in function and method in the code
 fences outside its exercise sections. Its exercises, their starting code and their worked solutions may use what
-this lesson's examples and every earlier lesson's examples have shown, and nothing else.
+this lesson's examples and every earlier lesson's examples have shown, and nothing else. So may the
+`inline code` in its hints and in its choice options.
 `tests/lesson_vocabulary_test.py` enforces it. To use something new in an exercise, show it in an example first.
 
 This fails, because `.upper()` appears only in the exercise:
