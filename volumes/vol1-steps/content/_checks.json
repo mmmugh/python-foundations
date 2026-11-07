@@ -102,5 +102,83 @@
         ]
       }
     ]
+  },
+  "ch02b-names-and-kinds#1": {
+    "kind": "trace",
+    "names": [
+      "x"
+    ]
+  },
+  "ch02b-names-and-kinds#2": {
+    "kind": "predict"
+  },
+  "ch02b-names-and-kinds#3": {
+    "kind": "choice",
+    "options": [
+      "`x = 3600`",
+      "`seconds_per_hour = 3600`"
+    ],
+    "answer": 1,
+    "why": "The name says what 3600 is."
+  },
+  "ch02b-names-and-kinds#4": {
+    "kind": "choice",
+    "options": [
+      "`2nd_place`",
+      "`second_place`",
+      "`second place`"
+    ],
+    "answer": 1,
+    "why": "A name cannot start with a digit or contain a space."
+  },
+  "ch02b-names-and-kinds#5": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "numbers": [
+          6
+        ]
+      }
+    ]
+  },
+  "ch02b-names-and-kinds#6": {
+    "kind": "predict"
+  },
+  "ch02b-names-and-kinds#7": {
+    "kind": "choice",
+    "options": [
+      "a whole number (int)",
+      "text (str)"
+    ],
+    "answer": 1,
+    "why": "Quotes make it text, whatever is inside."
+  },
+  "ch02b-names-and-kinds#8": {
+    "kind": "choice",
+    "options": [
+      "`\"False\"`",
+      "`False`",
+      "`false`"
+    ],
+    "answer": 1,
+    "why": "No quotes, and a capital F."
+  },
+  "ch02b-names-and-kinds#9": {
+    "kind": "trace",
+    "names": [
+      "lights_on"
+    ]
+  },
+  "ch02b-names-and-kinds#10": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "numbers": [
+          12
+        ]
+      }
+    ]
   }
 }

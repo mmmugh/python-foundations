@@ -58,3 +58,27 @@ coins = coins - 2
 coins = coins + 4
 print(coins)
 ```
+
+## ch02b-names-and-kinds#5
+
+```python
+boxes = 3
+pencils_per_box = 2
+total_pencils = boxes * pencils_per_box
+print(total_pencils)
+```
+
+Any names that say what each number is are right.
+
+## ch02b-names-and-kinds#10
+
+```python
+# Say it: work out how many eggs 4 cakes need, at 3 eggs a cake.
+# Split it:
+# 1. store the eggs each cake needs
+# 2. store how many cakes
+# 3. multiply, and print the answer
+eggs_per_cake = 3
+cakes = 4
+print(eggs_per_cake * cakes)
+```
