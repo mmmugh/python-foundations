@@ -41,7 +41,8 @@ def main():
               "no bundle page is written for it")
         check('href="vol1-foundations/bundle.html"' in index,
               "the chapter volume keeps its bundle")
-        check(index.count('class="status"') == 1,
+        plain = re.search(r'<h2><a href="vol1-foundations/[^"]*">.*?</h2>', index)
+        check(plain is not None and 'class="status"' not in plain.group(0),
               "a volume without a status gets no mark")
     finally:
         lesson_trial.down()
