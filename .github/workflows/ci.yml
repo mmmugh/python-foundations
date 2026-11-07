@@ -179,6 +179,14 @@ jobs:
       - name: Check works across the JavaScript-to-Python boundary
         working-directory: tests
         run: node browser_check_test.mjs
+      - name: The lessons work on a phone, at the root
+        working-directory: tests
+        run: node steps_browser_test.mjs
+      - name: The lessons work under /<repo>/
+        working-directory: tests
+        env:
+          BASE: /${{ github.event.repository.name }}/
+        run: node steps_browser_test.mjs
       # Last, because it rebuilds site/ around a throwaway lesson volume, and
       # the build needs the pinned Pyodide in vendor/, as the build job does.
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
