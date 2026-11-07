@@ -277,5 +277,84 @@
         ]
       }
     ]
+  },
+  "ch02d-putting-it-together#1": {
+    "kind": "predict"
+  },
+  "ch02d-putting-it-together#2": {
+    "kind": "choice",
+    "options": [
+      "a number, if you type digits",
+      "text, always"
+    ],
+    "answer": 1,
+    "why": "Even digits come back as text. That is why int() and float() exist."
+  },
+  "ch02d-putting-it-together#3": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "Ada"
+        ],
+        "words": [
+          "Ada"
+        ]
+      }
+    ]
+  },
+  "ch02d-putting-it-together#4": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "Ada"
+        ],
+        "numbers": [
+          3.5,
+          2.25,
+          1.75
+        ]
+      }
+    ]
+  },
+  "ch02d-putting-it-together#5": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "Ada"
+        ],
+        "numbers": [
+          3.5,
+          2.25,
+          1.75,
+          7.5
+        ]
+      }
+    ]
+  },
+  "ch02d-putting-it-together#6": {
+    "kind": "choice",
+    "options": [
+      "It stays 7.5 until you change the total too",
+      "It becomes 8.25 by itself"
+    ],
+    "answer": 1,
+    "why": "The total is worked out from the variables each time the program runs."
+  },
+  "ch02d-putting-it-together#7": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "Ada"
+        ],
+        "numbers": [
+          1.25,
+          8.75
+        ]
+      }
+    ]
   }
 }

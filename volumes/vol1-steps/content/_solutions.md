@@ -121,3 +121,93 @@ print("That is", hours, "hours")
 ```
 
 45 gives 0.75 hours, which is right: three quarters of an hour.
+
+## ch02d-putting-it-together#3
+
+```python
+# Say it: ask who the customer is, then print a receipt whose total
+# is worked out from the prices, each stored once.
+# Split it:
+# 1. ask for the customer's name and print it
+# 2. store each price in a variable
+# 3. print a line for each item
+# 4. work out the total from the variables and print it
+customer = input("Customer name: ")
+print("Customer:", customer)
+```
+
+## ch02d-putting-it-together#4
+
+```python
+# Say it: ask who the customer is, then print a receipt whose total
+# is worked out from the prices, each stored once.
+# Split it:
+# 1. ask for the customer's name and print it
+# 2. store each price in a variable
+# 3. print a line for each item
+# 4. work out the total from the variables and print it
+customer = input("Customer name: ")
+print("Customer:", customer)
+
+notebook_price = 3.50
+pens_price = 2.25
+stickers_price = 1.75
+
+print("Notebook", notebook_price)
+print("Pens", pens_price)
+print("Stickers", stickers_price)
+```
+
+## ch02d-putting-it-together#5
+
+```python
+# Say it: ask who the customer is, then print a receipt whose total
+# is worked out from the prices, each stored once.
+# Split it:
+# 1. ask for the customer's name and print it
+# 2. store each price in a variable
+# 3. print a line for each item
+# 4. work out the total from the variables and print it
+customer = input("Customer name: ")
+print("Customer:", customer)
+
+notebook_price = 3.50
+pens_price = 2.25
+stickers_price = 1.75
+
+print("Notebook", notebook_price)
+print("Pens", pens_price)
+print("Stickers", stickers_price)
+
+total = notebook_price + pens_price + stickers_price
+print("Total", total)
+```
+
+## ch02d-putting-it-together#7
+
+```python
+# Say it: ask who the customer is, then print a receipt whose total
+# is worked out from the prices, each stored once.
+# Split it:
+# 1. ask for the customer's name and print it
+# 2. store each price in a variable, the ruler's too
+# 3. print a line for each item, the ruler's too
+# 4. work out the total from the variables and print it
+customer = input("Customer name: ")
+print("Customer:", customer)
+
+notebook_price = 3.50
+pens_price = 2.25
+stickers_price = 1.75
+ruler_price = 1.25
+
+print("Notebook", notebook_price)
+print("Pens", pens_price)
+print("Stickers", stickers_price)
+print("Ruler", ruler_price)
+
+total = notebook_price + pens_price + stickers_price + ruler_price
+print("Total", total)
+```
+
+The ruler needed three changes, one for each step it touches: its price, its line, and its place in the total.

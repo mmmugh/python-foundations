@@ -1,0 +1,145 @@
+{
+ "quizzes": [
+  {
+   "slug": "ch02d-putting-it-together",
+   "questions": [
+    {
+     "section": "Vocabulary",
+     "text": "A ____ is a name that refers to a value.",
+     "answers": [
+      "variable"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Every value in Python has a ____, which determines what you can do with it.",
+     "answers": [
+      "type"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Adding two strings together glues them end to end, an operation called ____.",
+     "answers": [
+      "concatenation"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "The text inside input() that asks the user a question, such as \"What is your name? \", is called the ____.",
+     "answers": [
+      "prompt"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Python's naming convention of lowercase words joined by underscores, as in final_score, is called ____.",
+     "answers": [
+      "snake_case"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "count = 5\ncount = count + 1\nprint(count)",
+     "answers": [
+      "6"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "print(type(7))\nprint(type(7.0))\nprint(type(\"7\"))\nprint(type(True))",
+     "answers": [
+      "<class 'int'>\n<class 'float'>\n<class 'str'>\n<class 'bool'>"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "print(7 + 7)\nprint(\"7\" + \"7\")",
+     "answers": [
+      "14\n77"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "a = 10\nb = a\na = 99\nprint(a, b)",
+     "answers": [
+      "99 10"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "print(int(3.9))\nprint(int(\"14\"))",
+     "answers": [
+      "3\n14"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "coins = 5\ncoins = coins - 2\ncoins = coins + 4\nprint(coins)",
+     "answers": [
+      "7"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete this line so the text typed by the user is converted to a whole number before arithmetic is done:",
+     "code": "age = ____(input('How old are you? '))",
+     "answers": [
+      "int"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete this program so the variable used on the last line exists:",
+     "code": "score = 42\n____ = \"Ada\"\nprint(player, \"scored\", score)",
+     "answers": [
+      "player"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete this line so a temperature with a decimal point can be read without crashing:",
+     "code": "fahrenheit = ____(input(\"Temperature in degrees F: \"))",
+     "answers": [
+      "float"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "In a = 10; b = a; a = 99, the line b = a copies the value 10 into b at that moment; b does not stay linked to the name a. So after a = 99 runs, printing b still shows ____.",
+     "answers": [
+      "10"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Python fully evaluates the right side of = before doing anything else, so count = count + 1 first works out count's ____ value, adds 1, and only then points the name count at the ____ value.",
+     "answers": [
+      "old",
+      "new"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "print(age + 1) crashes with a TypeError when age comes from input(), because input() always returns a ____, even when the user types a number made only of digits.",
+     "answers": [
+      "string"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Trying an input that might break a program, such as a word where a number is expected, is the ____ it step of the routine.",
+     "answers": [
+      "Check"
+     ]
+    }
+   ]
+  }
+ ]
+}

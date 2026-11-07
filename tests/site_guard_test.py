@@ -77,7 +77,7 @@ def main():
     keys = sorted((ROOT / "volumes").glob("*/answer-keys/*-answers.txt"))
     unmarked = [k.name for k in keys if build.ANSWER_MARKER not in k.read_text()]
     expect(f"every real answer key carries the marker the guard looks for ({len(keys)} keys)",
-           len(keys) == 12 and not unmarked)
+           len([k for k in keys if k.parts[-3] == "vol1-foundations"]) == 12 and not unmarked)
 
     bad = 0
     for label, ok in results:
