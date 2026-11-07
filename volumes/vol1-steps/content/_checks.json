@@ -1,1 +1,48 @@
-{}
+{
+  "ch01z-welcome-back#1": {
+    "kind": "choice",
+    "options": [
+      "`print(3 + 4)`",
+      "`print(\"3 + 4\")`"
+    ],
+    "answer": 1,
+    "why": "Inside quotes, Python prints the characters exactly."
+  },
+  "ch01z-welcome-back#2": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "words": [
+          "cats",
+          "dogs"
+        ]
+      }
+    ]
+  },
+  "ch01z-welcome-back#3": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "numbers": [
+          10080
+        ]
+      }
+    ]
+  },
+  "ch01z-welcome-back#4": {
+    "kind": "predict"
+  },
+  "ch01z-welcome-back#5": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "numbers": [
+          5
+        ]
+      }
+    ]
+  }
+}
