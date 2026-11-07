@@ -2,10 +2,10 @@
   "ch01z-welcome-back#1": {
     "kind": "choice",
     "options": [
-      "`print(3 + 4)`",
-      "`print(\"3 + 4\")`"
+      "`print(\"3 + 4\")`",
+      "`print(3 + 4)`"
     ],
-    "answer": 1,
+    "answer": 0,
     "why": "Inside quotes, Python prints the characters exactly."
   },
   "ch01z-welcome-back#2": {
@@ -82,14 +82,14 @@
   "ch02a-naming-a-value#5": {
     "kind": "trace",
     "names": [
-      "price",
-      "count"
+      "lives"
     ]
   },
   "ch02a-naming-a-value#6": {
     "kind": "trace",
     "names": [
-      "lives"
+      "price",
+      "count"
     ]
   },
   "ch02a-naming-a-value#7": {
@@ -124,23 +124,12 @@
   "ch02b-names-and-kinds#4": {
     "kind": "choice",
     "options": [
-      "`2nd_place`",
       "`second_place`",
+      "`2nd_place`",
       "`second place`"
     ],
-    "answer": 1,
+    "answer": 0,
     "why": "A name cannot start with a digit or contain a space."
-  },
-  "ch02b-names-and-kinds#5": {
-    "kind": "stdin",
-    "runs": [
-      {
-        "typed": [],
-        "numbers": [
-          6
-        ]
-      }
-    ]
   },
   "ch02b-names-and-kinds#6": {
     "kind": "predict"
@@ -148,20 +137,20 @@
   "ch02b-names-and-kinds#7": {
     "kind": "choice",
     "options": [
-      "a whole number (int)",
-      "text (str)"
+      "text (str)",
+      "a whole number (int)"
     ],
-    "answer": 1,
+    "answer": 0,
     "why": "Quotes make it text, whatever is inside."
   },
   "ch02b-names-and-kinds#8": {
     "kind": "choice",
     "options": [
       "`\"False\"`",
-      "`False`",
-      "`false`"
+      "`false`",
+      "`False`"
     ],
-    "answer": 1,
+    "answer": 2,
     "why": "No quotes, and a capital F."
   },
   "ch02b-names-and-kinds#9": {
@@ -193,10 +182,10 @@
   "ch02c-asking-the-user#2": {
     "kind": "choice",
     "options": [
-      "`n`",
-      "`number_of_guests`"
+      "`number_of_guests`",
+      "`n`"
     ],
-    "answer": 1,
+    "answer": 0,
     "why": "It says what the number counts."
   },
   "ch02c-asking-the-user#3": {
@@ -337,10 +326,10 @@
   "ch02d-putting-it-together#6": {
     "kind": "choice",
     "options": [
-      "It stays 7.5 until you change the total too",
-      "It becomes 8.25 by itself"
+      "It becomes 8.25 by itself",
+      "It stays 7.5 until you change the total too"
     ],
-    "answer": 1,
+    "answer": 0,
     "why": "The total is worked out from the variables each time the program runs."
   },
   "ch02d-putting-it-together#7": {
@@ -351,7 +340,14 @@
           "Ada"
         ],
         "numbers": [
-          1.25,
+          1.25
+        ]
+      },
+      {
+        "typed": [
+          "Sam"
+        ],
+        "numbers": [
           8.75
         ]
       }

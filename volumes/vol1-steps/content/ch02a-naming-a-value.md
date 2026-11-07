@@ -124,24 +124,31 @@ Output:
 99 10
 ```
 
-`b = a` gave `b` the value 10 at that moment. Changing `a` afterward does not change `b`: `b` does not follow `a` around.
+`b = a` gave `b` the value 10 at that moment. Changing `a` afterward does not change `b`: `b` does not follow `a` around. Its trace table has a column for each variable. After line 1, `b` has no value yet, so its cell is left empty:
+
+| After line | a | b |
+| --- | --- | --- |
+| 1 | 10 |  |
+| 2 | 10 | 10 |
+| 3 | 99 | 10 |
+| 4 | 99 | 10 |
 
 ### Practice
 
-5. Fill in the table: the value of each variable after each line. Leave a cell empty (or write -) if the variable has no value yet. Then press Check.
-
-```python
-price = 12
-count = 3
-price = price + count
-```
-
-6. Fill in the table, then press Check.
+5. Fill in the table: the value of `lives` after each line. Then press Check.
 
 ```python
 lives = 3
 lives = lives - 1
 lives = lives + 2
+```
+
+6. Fill in the table for two variables. As in the table for `a` and `b`, leave a cell empty (or write -) while a variable has no value yet. Then press Check.
+
+```python
+price = 12
+count = 3
+price = price + count
 ```
 
 ### Try It

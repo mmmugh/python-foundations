@@ -22,6 +22,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "tests"))
+sys.path.insert(0, str(ROOT / "web"))
+import box_runner                                               # noqa: E402
 import build                                                    # noqa: E402
 from practice_test import run_check                             # noqa: E402
 
@@ -52,8 +54,8 @@ ALTERNATES = {
     "ch02d-putting-it-together#7": (
         'customer = input("Name: ")\nnotebook = 3.50\npens = 2.25\nstickers = 1.75\nruler = 1.25\n'
         'print("Customer:", customer)\nprint("Notebook", notebook)\nprint("Pens", pens)\n'
-        'print("Stickers", stickers)\nprint("Ruler", ruler)\n'
-        'print("Total", notebook + pens + stickers + ruler)'),
+        'print("Stickers", stickers)\n'
+        'print("Total", notebook + pens + stickers + ruler)\nprint("(includes a ruler at", ruler, ")")'),
 }
 
 
@@ -128,6 +130,12 @@ def lesson_problems(slug, heading, hint_steps, text, checks, solutions):
         spec, solution = checks.get(key), solutions.get(key)
         if not spec and not solution:
             say(f"{key}: has neither a check nor a worked solution")
+        # A check that passes the starting code says "Correct" to a learner
+        # who changed nothing: it cannot see what the exercise asks for.
+        if spec and code and spec["kind"] not in ("predict", "trace", "choice"):
+            untouched = run_check(spec, code)
+            if untouched is not None and untouched[0]:
+                say(f"{key}: its check passes the starting code unchanged")
         for label, answer in (("worked solution", solution and solution["code"]),
                               ("alternate answer", ALTERNATES.get(key))):
             if spec and answer:
@@ -145,6 +153,34 @@ def lesson_problems(slug, heading, hint_steps, text, checks, solutions):
                 say(f"{key}: the worked solution keeps its Say it and Split it comments")
             if spec and key not in ALTERNATES:
                 say(f"{key}: a checked try it needs an alternate answer in ALTERNATES")
+    return problems
+
+
+def cells(row):
+    return [c.strip() for c in row.strip().strip("|").split("|")]
+
+
+def trace_problems(slug, text, checks, shown):
+    """A trace exercise is a one-step change from a worked trace table: no
+    wider than one already shown, and with "not set yet" cells only once a
+    worked table has shown one. `shown` carries what earlier pages showed."""
+    problems = []
+    for kind, payload in blocks_of(text):
+        if kind == "table" and cells(payload[0])[0] == "After line":
+            body = [cells(r) for r in payload[2:]]
+            shown["width"] = max(shown["width"], len(cells(payload[0])) - 1)
+            shown["blank"] = shown["blank"] or any(c in ("", "-") for r in body for c in r[1:])
+    for number, _, _, code, _ in exercises(blocks_of(text)):
+        spec = checks.get(f"{slug}#{number}", {})
+        if spec.get("kind") != "trace":
+            continue
+        if len(spec["names"]) > shown["width"]:
+            problems.append(f"{slug}#{number}: traces {len(spec['names'])} variables; no worked "
+                            f"table before it shows more than {shown['width']}")
+        blanks = any(c == "" for _, row in box_runner.trace_rows(code, spec["names"]) for c in row)
+        if blanks and not shown["blank"]:
+            problems.append(f"{slug}#{number}: has 'not set yet' cells, which no worked table "
+                            f"before it shows")
     return problems
 
 
@@ -182,14 +218,19 @@ def main():
     solutions = build.load_solutions(vol)
     pages = {p.stem: p.read_text() for p in build.chapter_files(vol)}
     problems = []
+    shown = {"width": 0, "blank": False}
 
     for slug, heading, steps in LESSONS:
         if only and slug not in only:
+            # Still read it: what its worked tables show counts for later lessons.
+            if slug in pages:
+                trace_problems(slug, pages[slug], checks, shown)
             continue
         if slug not in pages:
             problems.append(f"{slug}: missing")
             continue
         problems += lesson_problems(slug, heading, steps, pages[slug], checks, solutions)
+        problems += trace_problems(slug, pages[slug], checks, shown)
 
     if not only or REFERENCE in only:
         text = pages.get(REFERENCE, "")
@@ -206,6 +247,11 @@ def main():
         if list(pages) != order:
             problems.append(f"the pages, in reading order, must be {order}; found {list(pages)}")
         problems += unit_problems(pages, checks)
+        # Options are never shuffled, so a pattern in where the right one sits
+        # would pass a learner who learned the pattern, not the idea.
+        answers = [spec["answer"] for spec in checks.values() if spec.get("kind") == "choice"]
+        if answers and max(answers.count(i) for i in set(answers)) > 2 * len(answers) / 3:
+            problems.append(f"choice answers sit at the same option too often: {answers}")
         for path in sorted(vol["dir"].rglob("*")):
             if path.is_file() and "claude.ai" in path.read_text(errors="replace"):
                 problems.append(f"{path.relative_to(ROOT)}: the public course never links to claude.ai")
