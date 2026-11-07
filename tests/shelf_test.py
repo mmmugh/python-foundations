@@ -32,7 +32,10 @@ def main():
     try:
         lesson_trial.up()
         index = (SITE / "index.html").read_text()
-        heading = re.search(r"<h2>[^\n]*?A Trial Lesson Volume.*?</h2>", index)
+        # Anchored to the trial's own heading: the shelf is one line, and an
+        # unanchored match ran from the first volume's heading to the trial's,
+        # passing on vol1-steps' real mark whatever the trial showed.
+        heading = re.search(r'<h2><a href="_trial-lessons/[^"]*">A Trial Lesson Volume</a>.*?</h2>', index)
         check(heading is not None and '<span class="status">in progress</span>' in heading.group(0),
               "the shelf marks the lesson volume in progress")
         check('href="_trial-lessons/bundle.html"' not in index,
