@@ -44,5 +44,63 @@
         ]
       }
     ]
+  },
+  "ch02a-naming-a-value#1": {
+    "kind": "predict"
+  },
+  "ch02a-naming-a-value#2": {
+    "kind": "choice",
+    "options": [
+      "Runs it",
+      "Skips it: it is a note for people"
+    ],
+    "answer": 1,
+    "why": "A comment is for whoever reads the code."
+  },
+  "ch02a-naming-a-value#3": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "numbers": [
+          168
+        ]
+      }
+    ]
+  },
+  "ch02a-naming-a-value#4": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "numbers": [
+          5
+        ]
+      }
+    ]
+  },
+  "ch02a-naming-a-value#5": {
+    "kind": "trace",
+    "names": [
+      "price",
+      "count"
+    ]
+  },
+  "ch02a-naming-a-value#6": {
+    "kind": "trace",
+    "names": [
+      "lives"
+    ]
+  },
+  "ch02a-naming-a-value#7": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "numbers": [
+          7
+        ]
+      }
+    ]
   }
 }

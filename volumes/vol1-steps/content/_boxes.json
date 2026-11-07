@@ -1,1 +1,6 @@
-{}
+{
+  "ch02a-naming-a-value#4": {
+    "raises": "NameError",
+    "why": "Fix-the-bug practice: the name is used before it exists."
+  }
+}

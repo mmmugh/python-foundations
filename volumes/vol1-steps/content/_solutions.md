@@ -27,3 +27,34 @@ print("Total:", 2 * 1 + 3)
 ```
 
 Your words can differ. What matters is a comment for each step, and a total that Python works out.
+
+## ch02a-naming-a-value#3
+
+```python
+days = 7
+print(days * 24)
+```
+
+## ch02a-naming-a-value#4
+
+```python
+total = 5
+print(total)
+```
+
+Python runs top to bottom, so a name must get its value before anything uses it. The error said `NameError: name 'total' is not defined`, which means not defined *yet*.
+
+## ch02a-naming-a-value#7
+
+```python
+# Say it: start with 5 coins, spend 2, find 4, show what is left.
+# Split it:
+# 1. start with 5 coins
+# 2. spend 2
+# 3. find 4 more
+# 4. print the coins
+coins = 5
+coins = coins - 2
+coins = coins + 4
+print(coins)
+```
