@@ -82,3 +82,42 @@ eggs_per_cake = 3
 cakes = 4
 print(eggs_per_cake * cakes)
 ```
+
+## ch02c-asking-the-user#3
+
+```python
+animal = input("What is your favorite animal? ")
+print("I like", animal, "too!")
+```
+
+## ch02c-asking-the-user#4
+
+```python
+height = float(input("Height in inches: "))
+print("That is", height / 12, "feet")
+```
+
+`int()` works too, for whole inches.
+
+## ch02c-asking-the-user#5
+
+```python
+first = int(input("First number: "))
+second = int(input("Second number: "))
+print(first + second)
+```
+
+## ch02c-asking-the-user#7
+
+```python
+# Say it: ask for a movie's length in minutes, and show it in hours.
+# Split it:
+# 1. ask for the minutes, as a number
+# 2. divide by 60
+# 3. print the hours
+minutes = int(input("How many minutes is the movie? "))
+hours = minutes / 60
+print("That is", hours, "hours")
+```
+
+45 gives 0.75 hours, which is right: three quarters of an hour.

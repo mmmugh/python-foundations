@@ -180,5 +180,102 @@
         ]
       }
     ]
+  },
+  "ch02c-asking-the-user#1": {
+    "kind": "choice",
+    "options": [
+      "`10`",
+      "`55`"
+    ],
+    "answer": 1,
+    "why": "Two strings glued together."
+  },
+  "ch02c-asking-the-user#2": {
+    "kind": "choice",
+    "options": [
+      "`n`",
+      "`number_of_guests`"
+    ],
+    "answer": 1,
+    "why": "It says what the number counts."
+  },
+  "ch02c-asking-the-user#3": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "otter"
+        ],
+        "words": [
+          "otter"
+        ]
+      }
+    ]
+  },
+  "ch02c-asking-the-user#4": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "60"
+        ],
+        "numbers": [
+          5
+        ]
+      }
+    ]
+  },
+  "ch02c-asking-the-user#5": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "6",
+          "4"
+        ],
+        "numbers": [
+          10
+        ]
+      },
+      {
+        "typed": [
+          "0",
+          "-3"
+        ],
+        "numbers": [
+          -3
+        ]
+      }
+    ]
+  },
+  "ch02c-asking-the-user#6": {
+    "kind": "choice",
+    "options": [
+      "`10`",
+      "`ten`"
+    ],
+    "answer": 1,
+    "why": "A word cannot become a whole number, so int() stops with a ValueError."
+  },
+  "ch02c-asking-the-user#7": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "90"
+        ],
+        "numbers": [
+          1.5
+        ]
+      },
+      {
+        "typed": [
+          "120"
+        ],
+        "numbers": [
+          2
+        ]
+      }
+    ]
   }
 }

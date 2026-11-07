@@ -2,5 +2,9 @@
   "ch02a-naming-a-value#4": {
     "raises": "NameError",
     "why": "Fix-the-bug practice: the name is used before it exists."
+  },
+  "ch02c-asking-the-user#6": {
+    "raises": "ValueError",
+    "why": "Shows the error an awkward input causes."
   }
 }
