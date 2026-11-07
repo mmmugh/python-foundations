@@ -849,7 +849,10 @@ def build_volume(vol):
                  quiz=quiz_link, prevnext=prev_next, slug=page["slug"]))
 
     boxes = box_list(vol, pages)
-    write_bundle(vol, pages)
+    # A lesson's warm-up and practice fences are exercises, not examples, so a
+    # lesson volume has no bundle: it would hand out starters as course code.
+    if not vol.get("lessons"):
+        write_bundle(vol, pages)
     copy_quizzes(vol)
     return vol, pages, boxes
 
@@ -924,7 +927,9 @@ def write_library(built):
         listed = [p for p in pages if not p.get("practice")]
         first = listed[0]["slug"] if listed else ""
         heading = html.escape(vol["title"])
-        sections.append(f'<h2><a href="{vol["slug"]}/{first}.html">{heading}</a></h2>')
+        status = (f' <span class="status">{html.escape(vol["status"])}</span>'
+                  if vol.get("status") else "")
+        sections.append(f'<h2><a href="{vol["slug"]}/{first}.html">{heading}</a>{status}</h2>')
         if vol.get("subtitle"):
             sections.append(f'<p class="part">{html.escape(vol["subtitle"])}</p>')
         if vol.get("blurb"):
@@ -932,8 +937,9 @@ def write_library(built):
         sections.append("<ul class=\"contents\">" + "".join(
             f'<li><a href="{vol["slug"]}/{p["slug"]}.html">{html.escape(p["title"])}</a></li>'
             for p in pages if not p.get("practice")) + "</ul>")
-        sections.append(f'<p><a href="{vol["slug"]}/bundle.html">'
-                        f'The code from {heading} as files</a></p>')
+        if not vol.get("lessons"):
+            sections.append(f'<p><a href="{vol["slug"]}/bundle.html">'
+                            f'The code from {heading} as files</a></p>')
         nav.append(f'<a href="{vol["slug"]}/{first}.html">{heading}</a>')
     sections.append(f'<p class="notice">{html.escape(DISCLAIMER, quote=False)}</p>')
 

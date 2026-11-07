@@ -125,6 +125,10 @@ main {
 }
 .part:empty { display: none; }
 
+/* The shelf's mark for a volume still being written. Scoped to the heading:
+ * code boxes use class="status" for their own running/checking text. */
+h2 > .status { font-size: .7em; font-weight: 600; padding: .1em .5em; border: 1px solid var(--rule); border-radius: 1em; color: var(--soft); vertical-align: middle; }
+
 h1, h2 {
   font-size: 1.85rem;
   line-height: 1.2;

@@ -9,10 +9,13 @@ the build supports, and every example below is taken from a test, so it is known
 A volume opts into lessons in its `volume.json`:
 
 ```json
-{"number": 2, "title": "Python Foundations, step by step", "subtitle": "...", "lessons": true}
+{"number": 2, "title": "Python Foundations, step by step", "subtitle": "...", "lessons": true,
+ "status": "in progress"}
 ```
 
-`"lessons": true` turns on the vocabulary gate (below) for that volume. A volume with lesson files
+`"lessons": true` turns on the vocabulary gate (below) for that volume, and means the volume has no code
+bundle: a lesson's warm-up and practice fences are exercises, not examples to hand out as files. The shelf shows
+`status` beside the volume's title; drop it when the volume replaces the old course. A volume with lesson files
 (`chNNx-slug.md`) but without the flag fails the gate, so a forgotten flag cannot switch it off.
 
 ## Lesson files

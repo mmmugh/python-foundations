@@ -65,7 +65,8 @@ def up():
         sys.exit(f"{TRIAL} already exists; run 'down' first")
     (TRIAL / "content").mkdir(parents=True)
     (TRIAL / "volume.json").write_text(json.dumps(
-        {"number": 98, "title": "A Trial Lesson Volume", "subtitle": "Not a real course"}))
+        {"number": 98, "title": "A Trial Lesson Volume", "subtitle": "Not a real course",
+         "lessons": True, "status": "in progress"}))
     (TRIAL / "content" / "ch02a-trial.md").write_text(LESSON)
     (TRIAL / "content" / "_checks.json").write_text(json.dumps(CHECKS))
     (TRIAL / "content" / "_boxes.json").write_text("{}")

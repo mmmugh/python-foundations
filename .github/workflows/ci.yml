@@ -189,6 +189,8 @@ jobs:
       - name: The lesson format works in a real browser
         working-directory: tests
         run: node lesson_browser_test.mjs
+      - name: The shelf tells a lesson volume from a chapter volume
+        run: python3 tests/shelf_test.py
 
   deploy:
     needs: [leaks, build, node-gates, browser]
