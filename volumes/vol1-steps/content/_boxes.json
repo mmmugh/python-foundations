@@ -22,5 +22,13 @@
   "ch03a-more-arithmetic#10": {
     "raises": "ZeroDivisionError",
     "why": "Shows what an awkward value, 0, does to //."
+  },
+  "ch03d-comparing#9": {
+    "raises": "TypeError",
+    "why": "One = inside print() stores instead of asking. The error message is the lesson."
+  },
+  "ch03d-comparing#11": {
+    "raises": "TypeError",
+    "why": "Fix-the-bug practice: = where == is meant."
   }
 }

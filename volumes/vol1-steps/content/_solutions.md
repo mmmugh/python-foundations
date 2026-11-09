@@ -401,3 +401,27 @@ print(f"Total: ${total:.2f}")
 ```
 
 0 items gives `Total: $0.00`, which is right: nothing bought, nothing to pay.
+
+## ch03d-comparing#5
+
+```python
+score = 10
+print(score == 10)
+```
+
+One `=` stores; two ask. The error said `print()` got something it did not expect: an instruction to store, where a question belonged.
+
+## ch03d-comparing#7
+
+```python
+# Say it: say whether a whole number is even, as True or False.
+# Split it:
+# 1. ask for the number, as a whole number
+# 2. find the remainder when it is divided by 2
+# 3. ask whether that remainder is 0, and print the answer
+number = int(input("Whole number: "))
+remainder = number % 2
+print(remainder == 0)
+```
+
+A number is even when 2 goes into it with nothing left over. 0 is even, and prints `True`; -3 is odd, and prints `False`.

@@ -685,5 +685,78 @@
         ]
       }
     ]
+  },
+  "ch03d-comparing#1": {
+    "kind": "predict"
+  },
+  "ch03d-comparing#2": {
+    "kind": "predict"
+  },
+  "ch03d-comparing#3": {
+    "kind": "trace",
+    "names": [
+      "score",
+      "won"
+    ]
+  },
+  "ch03d-comparing#4": {
+    "kind": "predict"
+  },
+  "ch03d-comparing#5": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "words": [
+          "True"
+        ]
+      }
+    ]
+  },
+  "ch03d-comparing#6": {
+    "kind": "choice",
+    "options": [
+      "`lives == 0`",
+      "`lives = 0`"
+    ],
+    "answer": 0,
+    "why": "Two equals signs ask. One equals sign would store 0 in lives."
+  },
+  "ch03d-comparing#7": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "4"
+        ],
+        "words": [
+          "True"
+        ]
+      },
+      {
+        "typed": [
+          "7"
+        ],
+        "words": [
+          "False"
+        ]
+      },
+      {
+        "typed": [
+          "0"
+        ],
+        "words": [
+          "True"
+        ]
+      },
+      {
+        "typed": [
+          "-3"
+        ],
+        "words": [
+          "False"
+        ]
+      }
+    ]
   }
 }

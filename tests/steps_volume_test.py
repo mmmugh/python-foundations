@@ -49,6 +49,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch03c-formatting", "Lesson 3.3 — Formatting output",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch03d-comparing", "Lesson 3.4 — Comparing values",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300
