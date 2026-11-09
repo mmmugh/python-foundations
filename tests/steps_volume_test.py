@@ -75,6 +75,17 @@ def prose_words(blocks):
     return words
 
 
+def is_awkward(value):
+    """0, "", [], {} or a negative number -- the kind of input Check it asks
+    a learner to try on purpose, because it is where an off-by-one or an
+    unguarded division shows up."""
+    if isinstance(value, bool):
+        return False
+    if isinstance(value, (int, float)):
+        return value <= 0
+    return value in ("", [], {})
+
+
 def lesson_problems(slug, heading, hint_steps, text, checks, solutions, alternates):
     problems = []
     say = problems.append
@@ -122,6 +133,9 @@ def lesson_problems(slug, heading, hint_steps, text, checks, solutions, alternat
             untouched = run_check(spec, code)
             if untouched is not None and untouched[0]:
                 say(f"{key}: its check passes the starting code unchanged")
+        if spec and spec["kind"] == "function":
+            if not any(is_awkward(a) for case in spec["cases"] for a in case[0]):
+                say(f"{key}: a function check needs an awkward case (0, empty or negative)")
         for label, answer in (("worked solution", solution and solution["code"]),
                               ("alternate answer", alternates.get(key))):
             if spec and answer:
