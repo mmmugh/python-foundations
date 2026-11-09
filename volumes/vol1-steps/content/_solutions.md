@@ -1508,3 +1508,32 @@ print(shopping)
 ```
 
 The empty answer is the stop value, so it is checked before it is appended, and never goes into the list. When Enter is pressed straight away, the loop makes no passes, and the list stays `[]`.
+
+## ch07d-inserting-and-removing#7
+
+```python
+def move_to_front(items, item):
+    items.remove(item)
+    items.insert(0, item)
+    return items
+```
+
+`remove()` finds the item by its value, wherever it is, and `insert(0, item)` puts it back at the front. When it is already at the front, it is taken out and put straight back, so nothing changes.
+
+## ch07d-inserting-and-removing#8
+
+```python
+# Say it: serve a number of people from the front of the line, then print the rest.
+# Split it:
+# 1. ask how many to serve
+# 2. that many times: take out the person at the front, and print their name
+# 3. print the line
+line = ["Ada", "Bo", "Cy"]
+how_many = int(input("How many to serve? "))
+for turn in range(how_many):
+    person = line.pop(0)
+    print(f"Serving {person}")
+print(line)
+```
+
+`pop(0)` takes out the person at the front and gives them back, so `person` can be printed. With 0, `range(0)` makes no passes, and the whole line is printed. With 3, the loop empties the line, and it prints `[]`.

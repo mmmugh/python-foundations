@@ -4088,5 +4088,180 @@
         "contains": "['apples']"
       }
     ]
+  },
+  "ch07d-inserting-and-removing#1": {
+    "kind": "predict"
+  },
+  "ch07d-inserting-and-removing#2": {
+    "kind": "choice",
+    "options": [
+      "`[1, 2]`",
+      "`[3]`",
+      "`[1, 2, 3]`"
+    ],
+    "answer": 2,
+    "why": "`b = a` gives the same list a second name. `b.append(3)` changes that one list, so `a` shows the change too."
+  },
+  "ch07d-inserting-and-removing#3": {
+    "kind": "predict"
+  },
+  "ch07d-inserting-and-removing#4": {
+    "kind": "predict"
+  },
+  "ch07d-inserting-and-removing#5": {
+    "kind": "predict"
+  },
+  "ch07d-inserting-and-removing#6": {
+    "kind": "choice",
+    "options": [
+      "`fruit.remove(\"plum\")`",
+      "`fruit.pop()`",
+      "`fruit.pop(0)`"
+    ],
+    "answer": 0,
+    "why": "`remove()` finds an item by what it is. `pop()` needs to know where: with no index it takes the last item, and `pop(0)` the first, whatever they are."
+  },
+  "ch07d-inserting-and-removing#7": {
+    "kind": "function",
+    "name": "move_to_front",
+    "cases": [
+      [
+        [
+          [
+            "a",
+            "b",
+            "c"
+          ],
+          "c"
+        ],
+        [
+          "c",
+          "a",
+          "b"
+        ]
+      ],
+      [
+        [
+          [
+            3,
+            1,
+            2
+          ],
+          2
+        ],
+        [
+          2,
+          3,
+          1
+        ]
+      ],
+      [
+        [
+          [
+            0,
+            5
+          ],
+          0
+        ],
+        [
+          0,
+          5
+        ]
+      ],
+      [
+        [
+          [
+            "x"
+          ],
+          "x"
+        ],
+        [
+          "x"
+        ]
+      ],
+      [
+        [
+          [
+            "b",
+            "a",
+            "b"
+          ],
+          "b"
+        ],
+        [
+          "b",
+          "a",
+          "b"
+        ]
+      ],
+      [
+        [
+          [
+            4,
+            4,
+            7
+          ],
+          7
+        ],
+        [
+          7,
+          4,
+          4
+        ]
+      ]
+    ]
+  },
+  "ch07d-inserting-and-removing#8": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "2"
+        ],
+        "words": [
+          "Serving Ada",
+          "Serving Bo"
+        ],
+        "contains": "['Cy']",
+        "absent": [
+          "Serving Cy"
+        ]
+      },
+      {
+        "typed": [
+          "0"
+        ],
+        "contains": "['Ada', 'Bo', 'Cy']",
+        "absent": [
+          "Serving Ada",
+          "Serving Bo",
+          "Serving Cy"
+        ]
+      },
+      {
+        "typed": [
+          "3"
+        ],
+        "words": [
+          "Serving Ada",
+          "Serving Bo",
+          "Serving Cy"
+        ],
+        "contains": "[]"
+      },
+      {
+        "typed": [
+          "1"
+        ],
+        "words": [
+          "Serving Ada"
+        ],
+        "contains": "['Bo', 'Cy']",
+        "absent": [
+          "Serving Bo",
+          "Serving Cy"
+        ]
+      }
+    ]
   }
 }
