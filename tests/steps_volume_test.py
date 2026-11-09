@@ -61,6 +61,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch04c-nesting-and-truthiness", "Lesson 4.3 — Nesting, and what counts as true",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch04d-checking-input", "Lesson 4.4 — Checking input",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

@@ -1348,5 +1348,162 @@
         ]
       }
     ]
+  },
+  "ch04d-checking-input#1": {
+    "kind": "predict"
+  },
+  "ch04d-checking-input#2": {
+    "kind": "choice",
+    "options": [
+      "when at least one side is `True`",
+      "only when both sides are `True`"
+    ],
+    "answer": 0,
+    "why": "One `True` side is enough for `or`. Needing both is what `and` does."
+  },
+  "ch04d-checking-input#3": {
+    "kind": "choice",
+    "options": [
+      "`month < 1 and month > 12`",
+      "`1 <= month <= 12`",
+      "`month < 1 or month > 12`"
+    ],
+    "answer": 2,
+    "why": "A bad month is below 1 or above 12. No number is both, so the `and` test is never True, and the middle test is True for a good month."
+  },
+  "ch04d-checking-input#4": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "85"
+        ],
+        "contains": "Grade: B"
+      },
+      {
+        "typed": [
+          "150"
+        ],
+        "words": [
+          "from 0 to 100"
+        ]
+      },
+      {
+        "typed": [
+          "-5"
+        ],
+        "words": [
+          "from 0 to 100"
+        ]
+      },
+      {
+        "typed": [
+          "0"
+        ],
+        "contains": "Grade: F"
+      },
+      {
+        "typed": [
+          "100"
+        ],
+        "contains": "Grade: A"
+      }
+    ]
+  },
+  "ch04d-checking-input#5": {
+    "kind": "predict"
+  },
+  "ch04d-checking-input#6": {
+    "kind": "predict"
+  },
+  "ch04d-checking-input#7": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "ten"
+        ],
+        "words": [
+          "whole number"
+        ]
+      },
+      {
+        "typed": [
+          "3"
+        ],
+        "numbers": [
+          3
+        ]
+      }
+    ]
+  },
+  "ch04d-checking-input#8": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "1"
+        ],
+        "numbers": [
+          31
+        ]
+      },
+      {
+        "typed": [
+          "2"
+        ],
+        "numbers": [
+          28
+        ]
+      },
+      {
+        "typed": [
+          "4"
+        ],
+        "numbers": [
+          30
+        ]
+      },
+      {
+        "typed": [
+          "11"
+        ],
+        "numbers": [
+          30
+        ]
+      },
+      {
+        "typed": [
+          "12"
+        ],
+        "numbers": [
+          31
+        ]
+      },
+      {
+        "typed": [
+          "13"
+        ],
+        "words": [
+          "1 to 12"
+        ]
+      },
+      {
+        "typed": [
+          "0"
+        ],
+        "words": [
+          "1 to 12"
+        ]
+      },
+      {
+        "typed": [
+          "June"
+        ],
+        "words": [
+          "1 to 12"
+        ]
+      }
+    ]
   }
 }

@@ -613,3 +613,64 @@ else:
 ```
 
 `if name:` is True whenever something was typed, because only the empty string counts as False. The age question is nested inside, so it only matters once there is a name. `>=` makes exactly 13 welcome.
+
+## ch04d-checking-input#4
+
+```python
+score = int(input("Test score: "))
+if score < 0 or score > 100:
+    print("A score must be from 0 to 100.")
+else:
+    if score >= 90:
+        grade = "A"
+    elif score >= 80:
+        grade = "B"
+    elif score >= 70:
+        grade = "C"
+    elif score >= 60:
+        grade = "D"
+    else:
+        grade = "F"
+    print(f"Grade: {grade}")
+```
+
+The check comes first, and the grading moves inside its `else`, one level deeper, so a bad score is never graded. 0 and 100 are real scores, so they still get a grade.
+
+## ch04d-checking-input#7
+
+```python
+try:
+    pets = int(input("How many pets? "))
+    print(f"You have {pets} pets.")
+except ValueError:
+    print("Please type a whole number.")
+```
+
+Both lines go in the `try` block: the one that might fail, and the one that needs its answer.
+
+## ch04d-checking-input#8
+
+```python
+# Say it: say how many days a month has, or ask for a real month.
+# Split it:
+# 1. in a try block, ask for the month, as a whole number
+# 2. if it is outside 1 to 12, print the message
+# 3. February has 28
+# 4. April, June, September and November have 30
+# 5. every other month has 31
+# 6. if a word was typed, print the message
+try:
+    month = int(input("Month (1 to 12): "))
+    if month < 1 or month > 12:
+        print("Please type a month from 1 to 12.")
+    elif month == 2:
+        print("28 days")
+    elif month == 4 or month == 6 or month == 9 or month == 11:
+        print("30 days")
+    else:
+        print("31 days")
+except ValueError:
+    print("Please type a month from 1 to 12.")
+```
+
+The check comes first, so 0 and 13 never reach the days. The `else` catches the seven 31-day months, which is shorter than naming them all. A word stops `int()`, so Python jumps to the `except` block.
