@@ -3916,5 +3916,110 @@
   "ch07a-lists-and-indexing#8": {
     "kind": "output",
     "expected": "Winner: Mo\nLast: Bo"
+  },
+  "ch07b-slicing#1": {
+    "kind": "predict"
+  },
+  "ch07b-slicing#2": {
+    "kind": "choice",
+    "options": [
+      "`letters[-1]`",
+      "`letters[3]`",
+      "`letters[-3]`"
+    ],
+    "answer": 0,
+    "why": "`-1` is always the last item. The list has three items, at index 0, 1 and 2, so `letters[3]` is an `IndexError`, and `letters[-3]` counts back three, to `\"a\"`."
+  },
+  "ch07b-slicing#3": {
+    "kind": "predict"
+  },
+  "ch07b-slicing#4": {
+    "kind": "predict"
+  },
+  "ch07b-slicing#5": {
+    "kind": "predict"
+  },
+  "ch07b-slicing#6": {
+    "kind": "output",
+    "expected": "['Sat', 'Sun']"
+  },
+  "ch07b-slicing#7": {
+    "kind": "predict"
+  },
+  "ch07b-slicing#8": {
+    "kind": "function",
+    "name": "middle_three",
+    "cases": [
+      [
+        [
+          [
+            5,
+            6,
+            7,
+            8,
+            9
+          ]
+        ],
+        [
+          6,
+          7,
+          8
+        ]
+      ],
+      [
+        [
+          [
+            1,
+            1,
+            2,
+            3,
+            3
+          ]
+        ],
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      [
+        [
+          []
+        ],
+        []
+      ],
+      [
+        [
+          [
+            -3,
+            -1,
+            0,
+            2,
+            4
+          ]
+        ],
+        [
+          -1,
+          0,
+          2
+        ]
+      ],
+      [
+        [
+          [
+            7.5,
+            8,
+            8.5,
+            9,
+            9.5
+          ]
+        ],
+        [
+          8,
+          8.5,
+          9
+        ]
+      ]
+    ]
   }
 }

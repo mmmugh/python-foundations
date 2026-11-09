@@ -1439,3 +1439,31 @@ print("Last:", finishers[-1])
 ```
 
 `finishers[4]` also finds `Bo` today. But add a sixth finisher and index 4 is no longer the last one, while `finishers[-1]` still is. That is what the awkward check in Check it shows.
+
+## ch07b-slicing#6
+
+```python
+week = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+print(week[5:])
+```
+
+`Sat` is at index 5, and leaving out the stop goes to the end. `week[-2:]`, the last two, works as well, and so does `week[5:7]`.
+
+## ch07b-slicing#8
+
+```python
+# Say it: give back the three scores in the middle of five.
+# Split it:
+# 1. the middle three of five are at index 1, 2 and 3
+# 2. slice from 1, stopping just before 4
+# 3. give back the slice
+def middle_three(scores):
+    middle = scores[1:4]
+    return middle
+
+
+print(middle_three([5, 6, 7, 8, 9]))
+print(middle_three([]))
+```
+
+The stop is 4, one past the last index you want, as with `range()`. `scores[1:-1]` works too: from index 1, up to just before the last item. An empty list gives back `[]`, with no error, because a slice is never out of range.
