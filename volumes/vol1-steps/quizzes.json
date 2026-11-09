@@ -714,6 +714,152 @@
      ]
     }
    ]
+  },
+  {
+   "slug": "ch06e-splitting-into-functions",
+   "questions": [
+    {
+     "section": "Vocabulary",
+     "text": "Names listed in the brackets of a `def` line are called ____, while the values you pass in when calling the function are called ____.",
+     "answers": [
+      "parameters",
+      "arguments"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "A variable made inside a function exists only inside it; it is called a ____ variable.",
+     "answers": [
+      "local"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "A value a parameter takes when the call leaves its argument out, like `greeting=\"Hello\"`, is called a ____ value.",
+     "answers": [
+      "default"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "A string on the first line of a function's block that says what the function does is called a ____.",
+     "answers": [
+      "docstring"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Splitting a problem into small functions that each do one job, each with a name, is called ____.",
+     "answers": [
+      "decomposition"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def double_print(n):\n    print(n * 2)\n\ndef double_return(n):\n    return n * 2\n\na = double_print(5)\nb = double_return(5)\n\nprint(\"a is\", a)\nprint(\"b is\", b)",
+     "answers": [
+      "10\na is None\nb is 10"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def greet(name, greeting=\"Hello\"):\n    print(f\"{greeting}, {name}!\")\n\ngreet(\"Ada\")\ngreet(\"Ada\", \"Good morning\")",
+     "answers": [
+      "Hello, Ada!\nGood morning, Ada!"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def safe_divide(a, b):\n    if b == 0:\n        return None\n    return a / b\n\nprint(safe_divide(10, 2))\nprint(safe_divide(10, 0))",
+     "answers": [
+      "5.0\nNone"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def add_ten(n):\n    n = n + 10\n\nx = 5\nadd_ten(x)\nprint(x)",
+     "answers": [
+      "5"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def has_letter(word, letter):\n    for character in word:\n        if character == letter:\n            return True\n    return False\n\nprint(has_letter(\"rhythm\", \"y\"))",
+     "answers": [
+      "True"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Fill in the blank:",
+     "code": "____ greet(name):\n    print(f\"Hello, {name}!\")",
+     "answers": [
+      "def"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Fill in the blank:",
+     "code": "def area(width, height):\n    ____ width * height\n\nroom = area(12, 10)\nprint(room)  # should print 120",
+     "answers": [
+      "return"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Fill in the blank:",
+     "code": "def celsius_to_fahrenheit(celsius):\n    ____\n    return celsius * 9 / 5 + 32",
+     "fill": [
+      "\"\"\"Convert a Celsius temperature to Fahrenheit.\"\"\""
+     ],
+     "answers": [
+      "\"\"\"Convert a Celsius temperature to Fahrenheit.\"\"\" (any accurate one-line docstring in triple quotes works)"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Fill in the blank:",
+     "code": "def main():\n    print(\"Running the program.\")\n\n____()",
+     "answers": [
+      "main"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "`double_print` calls `print()` but has no `return`, so Python hands back ____, which is why `a` ends up holding that value instead of `10`.",
+     "answers": [
+      "None"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "`result` is made inside `calculate` and is gone once the function returns, because it is a ____ variable; the only way to get a value out of a function is to ____ it.",
+     "code": "def calculate():\n    result = 42\n    return result\n\nprint(calculate())\nprint(result)",
+     "answers": [
+      "local",
+      "return"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Inside `add_ten`, the line `n = n + 10` changes only the parameter `n`, not `x`, because a parameter is a ____ variable of the function.",
+     "answers": [
+      "local"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "In Split it, a step that is the same job done more than once, like asking for a score four times, becomes one ____, called once for each time it is needed.",
+     "answers": [
+      "function"
+     ]
+    }
+   ]
   }
  ]
 }

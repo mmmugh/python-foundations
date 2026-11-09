@@ -211,3 +211,5 @@ print(has_letter("rhythm", "y"))
 - Use `return` inside a loop, to stop as soon as the answer is known.
 
 Key words: **decomposition**, **main()**.
+
+That is the end of unit 6. Its quiz is below: fill it in, then show or print it.

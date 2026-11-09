@@ -1,0 +1,150 @@
+PYTHON FOUNDATIONS
+Unit 6 - Functions
+
+Name: ________________________________     Date: ______________
+
+Fill in every blank. Where a term is asked for, write the word the course
+uses. Where code is asked for, write exact Python. Where output is asked
+for, write what the program prints, one line per line.
+
+
+VOCABULARY
+----------
+
+ 1. Names listed in the brackets of a `def` line are called
+    __________________, while the values you pass in when calling the
+    function are called __________________.
+
+ 2. A variable made inside a function exists only inside it; it is called
+    a __________________ variable.
+
+ 3. A value a parameter takes when the call leaves its argument out, like
+    `greeting="Hello"`, is called a __________________ value.
+
+ 4. A string on the first line of a function's block that says what the
+    function does is called a __________________.
+
+ 5. Splitting a problem into small functions that each do one job, each
+    with a name, is called __________________.
+
+
+READING CODE
+------------
+
+ 6. What does this print?
+
+        def double_print(n):
+            print(n * 2)
+        
+        def double_return(n):
+            return n * 2
+        
+        a = double_print(5)
+        b = double_return(5)
+        
+        print("a is", a)
+        print("b is", b)
+
+    ____________________________________
+
+ 7. What does this print?
+
+        def greet(name, greeting="Hello"):
+            print(f"{greeting}, {name}!")
+        
+        greet("Ada")
+        greet("Ada", "Good morning")
+
+    ____________________________________
+
+ 8. What does this print?
+
+        def safe_divide(a, b):
+            if b == 0:
+                return None
+            return a / b
+        
+        print(safe_divide(10, 2))
+        print(safe_divide(10, 0))
+
+    ____________________________________
+
+ 9. What does this print?
+
+        def add_ten(n):
+            n = n + 10
+        
+        x = 5
+        add_ten(x)
+        print(x)
+
+    ____________________________________
+
+10. What does this print?
+
+        def has_letter(word, letter):
+            for character in word:
+                if character == letter:
+                    return True
+            return False
+        
+        print(has_letter("rhythm", "y"))
+
+    ____________________________________
+
+
+WRITING CODE
+------------
+
+11. Fill in the blank:
+
+        __________________ greet(name):
+            print(f"Hello, {name}!")
+
+12. Fill in the blank:
+
+        def area(width, height):
+            __________________ width * height
+        
+        room = area(12, 10)
+        print(room)  # should print 120
+
+13. Fill in the blank:
+
+        def celsius_to_fahrenheit(celsius):
+            __________________
+            return celsius * 9 / 5 + 32
+
+14. Fill in the blank:
+
+        def main():
+            print("Running the program.")
+        
+        __________________()
+
+
+WHY IT WORKS
+------------
+
+15. `double_print` calls `print()` but has no `return`, so Python hands
+    back __________________, which is why `a` ends up holding that value
+    instead of `10`.
+
+16. `result` is made inside `calculate` and is gone once the function
+    returns, because it is a __________________ variable; the only way to
+    get a value out of a function is to __________________ it.
+
+        def calculate():
+            result = 42
+            return result
+        
+        print(calculate())
+        print(result)
+
+17. Inside `add_ten`, the line `n = n + 10` changes only the parameter
+    `n`, not `x`, because a parameter is a __________________ variable of
+    the function.
+
+18. In Split it, a step that is the same job done more than once, like
+    asking for a score four times, becomes one __________________, called
+    once for each time it is needed.
