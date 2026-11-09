@@ -34,10 +34,14 @@ class _Deadline:
         self.queued = list(stdin) if stdin is not None else None
         self.check_every = check_every
         self.counter = 0
+        self.ran_out = False                        # asked for more than was queued
 
     def _input(self, prompt=""):
         if self.queued is not None:                 # checking: answer from a script
-            return self.queued.pop(0) if self.queued else ""
+            if self.queued:
+                return self.queued.pop(0)
+            self.ran_out = True
+            return ""
         started = time.monotonic()
         try:
             return builtins.input(prompt)
@@ -65,20 +69,23 @@ class _Deadline:
         return False
 
 
-def run_box(source, seconds, namespace, check_every=2000, stdin=None):
-    """exec source in namespace, raising KeyboardInterrupt if it runs too long."""
-    with _Deadline(seconds, namespace, stdin, check_every):
+def run_box(source, seconds, namespace, check_every=2000, stdin=None, seen=None):
+    """exec source in namespace, raising KeyboardInterrupt if it runs too long.
+    `seen`, a list, is given the guard, so a caller can ask what happened."""
+    with _Deadline(seconds, namespace, stdin, check_every) as deadline:
+        if seen is not None:
+            seen.append(deadline)
         exec(compile(source, "<box>", "exec"), namespace)
 
 
-def _capture(source, seconds, namespace, stdin=None):
+def _capture(source, seconds, namespace, stdin=None, seen=None):
     """Run source under the same guard, collecting whatever it printed."""
     import io
 
     buffer = io.StringIO()
     stdout, sys.stdout = sys.stdout, buffer
     try:
-        run_box(source, seconds, namespace, stdin=stdin)
+        run_box(source, seconds, namespace, stdin=stdin, seen=seen)
     finally:
         sys.stdout = stdout
     return buffer.getvalue()
@@ -324,11 +331,21 @@ def check_stdin(source, runs, seconds=5):
         typed = list(attempt.get("typed", []))
         shown = ", ".join(repr(t) for t in typed)
         lead = f"with {shown} typed in, " if typed else ""
+        # Once every typed line is used up, input() gets "". A loop that
+        # missed its stop value then fails on int("") or never ends, and
+        # neither error says why, so the message does.
+        more = (f"{lead}your program asked for more input than was typed in, and "
+                if typed else "your program asked for input, but this check types none in, and ")
+        seen = []
         try:
-            printed = _capture(source, seconds, {}, stdin=typed)
+            printed = _capture(source, seconds, {}, stdin=typed, seen=seen)
         except KeyboardInterrupt as e:
+            if seen and seen[0].ran_out:
+                return False, [f"{more}never finished -- {e}"]
             return False, [f"{lead}your code never finished -- {e}"]
         except Exception as e:
+            if seen and seen[0].ran_out:
+                return False, [f"{more}then stopped: {type(e).__name__}: {e}"]
             return False, [f"{lead}your code stopped: "
                            f"{type(e).__name__}: {e}"]
 

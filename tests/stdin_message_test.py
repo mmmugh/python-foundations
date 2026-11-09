@@ -59,6 +59,30 @@ def main():
     expect("absent with nothing typed: no mention of typing; lines compare stripped and case-insensitively",
            not ok and notes == ["your program also printed the line 'Pass', which should not appear here"], notes)
 
+    # A loop that reads until a stop value keeps asking if the stop value
+    # never comes, or comes and is missed. The check has typed every line it
+    # had, so input() gets "" from then on: int("") is a ValueError about '',
+    # and a loop that skips bad input never finishes. Neither says what
+    # happened, so the message does.
+    missed = 'n = int(input())\nwhile n > 100:\n    n = int(input())\nprint(n)'
+    ok, notes = box_runner.check_stdin(missed, [{"typed": ["500", "300"], "numbers": [5]}])
+    expect("a loop that asks past the typed lines says so, then names the error",
+           not ok and notes[0].startswith("with '500', '300' typed in, your program asked for more input "
+                                          "than was typed in, and then stopped: ValueError"), notes)
+    skipping = ('while True:\n    try:\n        n = int(input())\n        break\n'
+                '    except ValueError:\n        print("again")\nprint(n)')
+    ok, notes = box_runner.check_stdin(skipping, [{"typed": ["x"], "numbers": [5]}], seconds=1)
+    expect("a loop that asks past the typed lines forever says so",
+           not ok and notes[0].startswith("with 'x' typed in, your program asked for more input "
+                                          "than was typed in, and never finished"), notes)
+    ok, notes = box_runner.check_stdin('print(int(input()) + 1)', [{"typed": [], "numbers": [5]}])
+    expect("input() with nothing typed in: says no input is typed for this check",
+           not ok and notes[0].startswith("your program asked for input, but this check types none in, "
+                                          "and then stopped: ValueError"), notes)
+    ok, notes = box_runner.check_stdin('print(int(input()))\nprint(1/0)', [{"typed": ["4"], "numbers": [4]}])
+    expect("an error with every typed line used: no mention of asking for more",
+           not ok and notes[0] == "with '4' typed in, your code stopped: ZeroDivisionError: division by zero", notes)
+
     bad = 0
     for label, ok, detail in results:
         bad += not ok
