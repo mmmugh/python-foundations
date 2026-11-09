@@ -321,13 +321,14 @@ def check_stdin(source, runs, seconds=5):
     """
     for attempt in runs:
         typed = list(attempt.get("typed", []))
-        shown = ", ".join(repr(t) for t in typed) or "nothing"
+        shown = ", ".join(repr(t) for t in typed)
+        lead = f"with {shown} typed in, " if typed else ""
         try:
             printed = _capture(source, seconds, {}, stdin=typed)
         except KeyboardInterrupt as e:
-            return False, [f"with {shown} typed in, your code never finished -- {e}"]
+            return False, [f"{lead}your code never finished -- {e}"]
         except Exception as e:
-            return False, [f"with {shown} typed in, your code stopped: "
+            return False, [f"{lead}your code stopped: "
                            f"{type(e).__name__}: {e}"]
 
         wanted = attempt.get("numbers")
@@ -337,7 +338,7 @@ def check_stdin(source, runs, seconds=5):
             if miss is not None:
                 seen = ", ".join(_readable(n) for n in found[:10]) or "nothing"
                 more = ", ..." if len(found) > 10 else ""
-                return False, [f"with {shown} typed in, expected {_readable(miss)} among "
+                return False, [f"{lead}expected {_readable(miss)} among "
                                f"the numbers printed, in order. Got: {seen}{more}"]
 
         words = attempt.get("words")
@@ -346,13 +347,13 @@ def check_stdin(source, runs, seconds=5):
             for word in words:
                 found_at = lowered.find(word.lower(), at)
                 if found_at < 0:
-                    return False, [f"with {shown} typed in, expected to see "
+                    return False, [f"{lead}expected to see "
                                    f"{word!r} in what you printed"]
                 at = found_at + len(word)
 
         exact = attempt.get("contains")
         if exact and exact not in printed:
-            return False, [f"with {shown} typed in, expected this line: {exact!r}"]
+            return False, [f"{lead}expected this line: {exact!r}"]
 
     return True, []
 
