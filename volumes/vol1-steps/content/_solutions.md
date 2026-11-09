@@ -333,3 +333,28 @@ print(minutes, "minutes and", seconds_left, "seconds")
 ```
 
 It is how many whole, how many left, with 60 seconds in each minute. 59 gives 0 minutes and 59 seconds, and 0 gives 0 and 0: both make sense.
+
+## ch03b-order-and-rounding#5
+
+```python
+print(round(22 / 7, 3))
+```
+
+Python works out `22 / 7` inside the brackets first, then rounds the answer.
+
+## ch03b-order-and-rounding#6
+
+```python
+# Say it: work out the average of three test scores, to 1 decimal place.
+# Split it:
+# 1. ask for each score, as a number
+# 2. add them up, then divide by 3
+# 3. round to 1 place, and print it
+first_score = int(input("First score: "))
+second_score = int(input("Second score: "))
+third_score = int(input("Third score: "))
+average = (first_score + second_score + third_score) / 3
+print("Average:", round(average, 1))
+```
+
+The parentheses matter: without them, Python would divide only the third score by 3. Three zeros give 0.0, which is right.

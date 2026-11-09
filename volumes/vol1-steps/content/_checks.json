@@ -559,5 +559,65 @@
         ]
       }
     ]
+  },
+  "ch03b-order-and-rounding#1": {
+    "kind": "predict"
+  },
+  "ch03b-order-and-rounding#2": {
+    "kind": "choice",
+    "options": [
+      "`47 % 10`",
+      "`47 // 10`"
+    ],
+    "answer": 0,
+    "why": "`%` gives what is left: four whole pages hold 40, and 7 are left. It is how many whole, how many left again."
+  },
+  "ch03b-order-and-rounding#3": {
+    "kind": "predict"
+  },
+  "ch03b-order-and-rounding#4": {
+    "kind": "choice",
+    "options": [
+      "`print(4 + 8 / 2)`",
+      "`print((4 + 8) / 2)`"
+    ],
+    "answer": 1,
+    "why": "The parentheses make Python add first. Without them it divides 8 by 2 first, and prints 8.0."
+  },
+  "ch03b-order-and-rounding#5": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "words": [
+          "3.143"
+        ]
+      }
+    ]
+  },
+  "ch03b-order-and-rounding#6": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "90",
+          "85",
+          "82"
+        ],
+        "words": [
+          "85.7"
+        ]
+      },
+      {
+        "typed": [
+          "0",
+          "0",
+          "2"
+        ],
+        "words": [
+          "0.7"
+        ]
+      }
+    ]
   }
 }
