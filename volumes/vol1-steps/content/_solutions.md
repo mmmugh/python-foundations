@@ -905,3 +905,49 @@ print(f"Highest: {highest}")
 ```
 
 Both accumulators start from the first round, so the highest is always a score someone really got. With -3, -8, -1 and -4, the highest is -1; starting from 0, it would have said 0. The two `print()` lines are not indented, so they run once, after the loop.
+
+## ch05f-until-a-stop-value#5
+
+```python
+name = input("Name (or stop): ")
+while name != "stop":
+    print(f"Hello, {name}!")
+    name = input("Name (or stop): ")
+```
+
+Read, loop, read again, as in the words program. `stop` never reaches the greeting, because the condition sees it first.
+
+## ch05f-until-a-stop-value#6
+
+```python
+month = int(input("Month (1 to 12): "))
+while month < 1 or month > 12:
+    print("Please type a month from 1 to 12.")
+    month = int(input("Month (1 to 12): "))
+print(f"Month: {month}")
+```
+
+The condition is the range check from lesson 4.4, and it keeps the loop going while the month is bad. 1 and 12 are real months, so the tests are `<` and `>`.
+
+## ch05f-until-a-stop-value#9
+
+```python
+# Say it: add up numbers until 0, and count how many there were.
+# Split it:
+# 1. start the total and the count at 0
+# 2. read the first number
+# 3. while it is not 0: add it to the total, add 1 to the count,
+#    and read the next number
+# 4. after the loop, print the total, then the count
+total = 0
+count = 0
+number = int(input("Number (0 to stop): "))
+while number != 0:
+    total += number
+    count += 1
+    number = int(input("Number (0 to stop): "))
+print(f"Total: {total}")
+print(f"Count: {count}")
+```
+
+The stop value is a number this time, so `int()` can go on the `input()` lines. The 0 is checked before it is counted, so it is never added or counted. With 0 first, the block never runs, and both are 0.

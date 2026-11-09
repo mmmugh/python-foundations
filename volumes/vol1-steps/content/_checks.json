@@ -2482,5 +2482,207 @@
         ]
       }
     ]
+  },
+  "ch05f-until-a-stop-value#1": {
+    "kind": "predict"
+  },
+  "ch05f-until-a-stop-value#2": {
+    "kind": "choice",
+    "options": [
+      "at 0",
+      "at 100",
+      "at the first number"
+    ],
+    "answer": 2,
+    "why": "The first number is really one of the numbers, so it can never win by mistake. 0 wins when every number is below 0, and 100 wins when they are all smaller."
+  },
+  "ch05f-until-a-stop-value#3": {
+    "kind": "choice",
+    "options": [
+      "`You typed cat.` is printed again and again, until the page stops it.",
+      "The program asks for every word twice.",
+      "The loop ends after one pass."
+    ],
+    "answer": 0,
+    "why": "Nothing inside the loop changes `word`, so it stays `cat`, and `word != \"stop\"` stays `True`: an infinite loop, as in lesson 5.1."
+  },
+  "ch05f-until-a-stop-value#4": {
+    "kind": "choice",
+    "options": [
+      "`int()` only works inside a loop.",
+      "`int(\"done\")` would stop the program with a `ValueError`."
+    ],
+    "answer": 1,
+    "why": "The stop value is a word, not a number. By the time a value is inside the block, the condition has already turned `done` away."
+  },
+  "ch05f-until-a-stop-value#5": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "Ada",
+          "Bo",
+          "stop"
+        ],
+        "words": [
+          "Hello, Ada!",
+          "Hello, Bo!"
+        ],
+        "absent": [
+          "Hello, stop!"
+        ]
+      },
+      {
+        "typed": [
+          "Cy",
+          "stop"
+        ],
+        "words": [
+          "Hello, Cy!"
+        ],
+        "absent": [
+          "Hello, stop!"
+        ]
+      },
+      {
+        "typed": [
+          "stop"
+        ],
+        "absent": [
+          "Hello, stop!"
+        ]
+      }
+    ]
+  },
+  "ch05f-until-a-stop-value#6": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "13",
+          "0",
+          "5"
+        ],
+        "contains": "Month: 5",
+        "absent": [
+          "Month: 13",
+          "Month: 0"
+        ],
+        "words": [
+          "1 to 12",
+          "1 to 12"
+        ]
+      },
+      {
+        "typed": [
+          "5"
+        ],
+        "contains": "Month: 5",
+        "absent": [
+          "Please type a month from 1 to 12."
+        ]
+      },
+      {
+        "typed": [
+          "12"
+        ],
+        "contains": "Month: 12",
+        "absent": [
+          "Please type a month from 1 to 12."
+        ]
+      },
+      {
+        "typed": [
+          "-1",
+          "13",
+          "1"
+        ],
+        "contains": "Month: 1",
+        "absent": [
+          "Month: -1",
+          "Month: 13"
+        ],
+        "words": [
+          "1 to 12",
+          "1 to 12"
+        ]
+      }
+    ]
+  },
+  "ch05f-until-a-stop-value#7": {
+    "kind": "choice",
+    "options": [
+      "`answer != \"y\" and answer != \"n\"`",
+      "`answer != \"y\" or answer != \"n\"`"
+    ],
+    "answer": 0,
+    "why": "`and` is True only when the answer is neither. Every answer is different from at least one of `y` and `n`, so the `or` version is always True, and the loop would never stop."
+  },
+  "ch05f-until-a-stop-value#8": {
+    "kind": "predict"
+  },
+  "ch05f-until-a-stop-value#9": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "5",
+          "10",
+          "3",
+          "0"
+        ],
+        "numbers": [
+          18,
+          3
+        ],
+        "absent": [
+          "Count: 4",
+          "Total: 15",
+          "Total: 5"
+        ]
+      },
+      {
+        "typed": [
+          "0"
+        ],
+        "numbers": [
+          0,
+          0
+        ],
+        "absent": [
+          "Count: 1"
+        ]
+      },
+      {
+        "typed": [
+          "7",
+          "-2",
+          "0"
+        ],
+        "numbers": [
+          5,
+          2
+        ],
+        "absent": [
+          "Count: 3",
+          "Total: 7"
+        ]
+      },
+      {
+        "typed": [
+          "-4",
+          "4",
+          "0"
+        ],
+        "numbers": [
+          0,
+          2
+        ],
+        "absent": [
+          "Count: 3",
+          "Total: -4"
+        ]
+      }
+    ]
   }
 }
