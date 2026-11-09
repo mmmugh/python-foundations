@@ -38,5 +38,17 @@
   "ch03e-comparing#12": {
     "raises": "TypeError",
     "why": "Fix-the-bug practice: = where == is meant."
+  },
+  "ch04a-if-and-else#6": {
+    "raises": "SyntaxError",
+    "why": "A missing colon after the condition. The error message is the lesson."
+  },
+  "ch04a-if-and-else#7": {
+    "raises": "IndentationError",
+    "why": "The block under the if is not indented. The error message is the lesson."
+  },
+  "ch04a-if-and-else#8": {
+    "raises": "SyntaxError",
+    "why": "One = in a condition, where == is meant. The error message is the lesson."
   }
 }

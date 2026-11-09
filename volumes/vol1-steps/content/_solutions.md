@@ -510,3 +510,32 @@ print(f"Total coins: {quarters + dimes + nickels + pennies}")
 ```
 
 Each coin is the same two lines: `//` takes as many as fit, and `%` keeps what is left for the next coin. Taking the biggest coin first is what makes the number of coins the fewest. 0 cents gives 0 of everything, which is right.
+
+## ch04a-if-and-else#8
+
+```python
+age = int(input("How old are you? "))
+if age > 12:
+    print("You are a teenager or older.")
+else:
+    print("You are 12 or younger.")
+```
+
+`input()` always gives back text, as in lesson 2.3, and `>` cannot compare text with a number. `int()` turns the text into a whole number first. `if int(age) > 12:` works too.
+
+## ch04a-if-and-else#9
+
+```python
+# Say it: say whether a test score passes or fails.
+# Split it:
+# 1. ask for the score, as a whole number
+# 2. if it is 50 or more, print Pass
+# 3. otherwise, print Fail
+score = int(input("Test score: "))
+if score >= 50:
+    print("Pass")
+else:
+    print("Fail")
+```
+
+`>=` is what makes exactly 50 a pass: with `>`, a score of 50 would fail. 0 fails, which is right.

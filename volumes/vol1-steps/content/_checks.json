@@ -995,5 +995,125 @@
         ]
       }
     ]
+  },
+  "ch04a-if-and-else#1": {
+    "kind": "predict"
+  },
+  "ch04a-if-and-else#2": {
+    "kind": "choice",
+    "options": [
+      "`points > 50`",
+      "`points = 50`",
+      "`points >= 50`"
+    ],
+    "answer": 2,
+    "why": "`>=` asks \"at least\", so 50 itself counts. `>` would leave out 50, and one `=` stores instead of asking."
+  },
+  "ch04a-if-and-else#3": {
+    "kind": "predict"
+  },
+  "ch04a-if-and-else#4": {
+    "kind": "trace",
+    "names": [
+      "price",
+      "age"
+    ]
+  },
+  "ch04a-if-and-else#5": {
+    "kind": "choice",
+    "options": [
+      "`if score == 90`",
+      "`if score == 90:`",
+      "`if score = 90:`"
+    ],
+    "answer": 1,
+    "why": "It asks with `==` and ends with a colon. The first has no colon, and the last stores with one `=`."
+  },
+  "ch04a-if-and-else#6": {
+    "kind": "choice",
+    "options": [
+      "the colon at the end of the `if` line",
+      "the line under the `if`: it needs four spaces in front",
+      "a name that is spelled wrong"
+    ],
+    "answer": 1,
+    "why": "The block under an `if` must be indented. Without the spaces, Python cannot tell which lines belong to the `if`."
+  },
+  "ch04a-if-and-else#7": {
+    "kind": "predict"
+  },
+  "ch04a-if-and-else#8": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "14"
+        ],
+        "words": [
+          "teenager"
+        ]
+      },
+      {
+        "typed": [
+          "9"
+        ],
+        "words": [
+          "younger"
+        ]
+      },
+      {
+        "typed": [
+          "12"
+        ],
+        "words": [
+          "younger"
+        ]
+      },
+      {
+        "typed": [
+          "13"
+        ],
+        "words": [
+          "teenager"
+        ]
+      }
+    ]
+  },
+  "ch04a-if-and-else#9": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "75"
+        ],
+        "words": [
+          "pass"
+        ]
+      },
+      {
+        "typed": [
+          "30"
+        ],
+        "words": [
+          "fail"
+        ]
+      },
+      {
+        "typed": [
+          "50"
+        ],
+        "words": [
+          "pass"
+        ]
+      },
+      {
+        "typed": [
+          "0"
+        ],
+        "words": [
+          "fail"
+        ]
+      }
+    ]
   }
 }

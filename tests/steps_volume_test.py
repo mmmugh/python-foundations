@@ -55,6 +55,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch03f-combining-and-change", "Lesson 3.6 — Combining conditions, and the change machine",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch04a-if-and-else", "Lesson 4.1 — If, and else",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300
