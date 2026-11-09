@@ -125,6 +125,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch08i-character-by-character", "Lesson 8.9 — One character at a time, and palindromes",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch08j-special-characters", "Lesson 8.10 — Special characters, and text over several lines",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

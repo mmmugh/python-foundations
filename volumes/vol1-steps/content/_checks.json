@@ -6474,5 +6474,79 @@
         false
       ]
     ]
+  },
+  "ch08j-special-characters#1": {
+    "kind": "predict"
+  },
+  "ch08j-special-characters#2": {
+    "kind": "choice",
+    "options": [
+      "Each new letter goes in front of the ones already there.",
+      "`+` turns strings around.",
+      "The loop goes through the word from its last letter."
+    ],
+    "answer": 0,
+    "why": "The loop goes from the first letter to the last, as always. But `letter + backward` puts each new letter in front, so the last letter ends up first."
+  },
+  "ch08j-special-characters#3": {
+    "kind": "predict"
+  },
+  "ch08j-special-characters#4": {
+    "kind": "output",
+    "expected": "Name:\tAda\nAge:\t13"
+  },
+  "ch08j-special-characters#5": {
+    "kind": "output",
+    "expected": "Ada scored 88\nGrace scored 92\nAlan scored 45"
+  },
+  "ch08j-special-characters#6": {
+    "kind": "predict"
+  },
+  "ch08j-special-characters#7": {
+    "kind": "function",
+    "name": "make_list",
+    "cases": [
+      [
+        [
+          [
+            "eggs",
+            "milk"
+          ]
+        ],
+        "- eggs\n- milk"
+      ],
+      [
+        [
+          []
+        ],
+        ""
+      ],
+      [
+        [
+          [
+            "tea"
+          ]
+        ],
+        "- tea"
+      ],
+      [
+        [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        "- a\n- b\n- c"
+      ],
+      [
+        [
+          [
+            ""
+          ]
+        ],
+        "- "
+      ]
+    ]
   }
 }

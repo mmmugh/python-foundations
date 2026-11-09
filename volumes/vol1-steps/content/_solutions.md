@@ -2205,3 +2205,43 @@ print(is_palindrome(""))
 ```
 
 `replace(" ", "")` takes out every space, the middle ones too, which `strip()` would not. Cleaning comes first, so that both sides of the comparison are cleaned. A loop that keeps only the letters, made small, as `letters_only()` did in lesson 8.6, works as well, and ignores signs like commas too.
+
+## ch08j-special-characters#4
+
+```python
+print("Name:\tAda\nAge:\t13")
+```
+
+`\t` is one tab and `\n` is one new line, each written inside the string where it goes. Two `print()` calls, one for each line, print the same thing.
+
+## ch08j-special-characters#5
+
+```python
+records = "Ada,88\nGrace,92\nAlan,45"
+for line in records.split("\n"):
+    parts = line.split(",")
+    print(parts[0], "scored", parts[1])
+```
+
+Splitting at `"\n"` gives a list of three lines. Each line is split again, at the comma, so `parts[0]` is the name and `parts[1]` the score. An f-string, `f"{parts[0]} scored {parts[1]}"`, works too.
+
+## ch08j-special-characters#7
+
+```python
+# Say it: give back one string, a line for each item, each starting with a dash and a space.
+# Split it:
+# 1. start a new, empty list of lines
+# 2. for each item, append a dash, a space and the item
+# 3. join the lines with "\n", and give that back
+def make_list(items):
+    lines = []
+    for item in items:
+        lines.append("- " + item)
+    return "\n".join(lines)
+
+
+print(make_list(["eggs", "milk"]))
+print(make_list(["tea"]))
+```
+
+`join()` puts the glue only between items, so there is no new line after the last one, and an empty list gives `""`. Adding `"- " + item + "\n"` to a string in the loop would leave a new line after the last item.
