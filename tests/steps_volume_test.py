@@ -99,6 +99,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch07e-asking-and-sorting", "Lesson 7.5 — Asking about a list, and sorting it",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch07f-looping-over-a-list", "Lesson 7.6 — Looping over a list",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

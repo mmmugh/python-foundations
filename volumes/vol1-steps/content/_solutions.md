@@ -1601,3 +1601,52 @@ print(average([]))
 ```
 
 Without step 1, `average([])` divides 0 by 0, and stops with a `ZeroDivisionError`. Checking the empty list first, and returning, means the division only ever runs when there is at least one number.
+
+## ch07f-looping-over-a-list#4
+
+```python
+def evens(numbers):
+    even_numbers = []
+    for number in numbers:
+        if number % 2 == 0:
+            even_numbers.append(number)
+    return even_numbers
+```
+
+The shape of `passing`: an empty list, a loop, an `if`, and `append()`. `% 2` gives 0 for every even number, 0 and the ones below 0 included. An empty list makes no passes, and gives back `[]`.
+
+## ch07f-looping-over-a-list#5
+
+```python
+def count_above(numbers, threshold):
+    count = 0
+    for number in numbers:
+        if number > threshold:
+            count += 1
+    return count
+```
+
+A count, as in lesson 5.3, kept in a loop over the list. `>` and not `>=`, because a number equal to the threshold is not above it. Building a list of the numbers above it, and giving back its `len()`, works too.
+
+## ch07f-looping-over-a-list#9
+
+```python
+# Say it: give back every index where target appears in items.
+# Split it:
+# 1. start with an empty list of indexes
+# 2. loop over the items, with their indexes
+# 3. if an item is the target, append its index
+# 4. after the loop, give back the list of indexes
+def positions(items, target):
+    indexes = []
+    for index, item in enumerate(items):
+        if item == target:
+            indexes.append(index)
+    return indexes
+
+
+print(positions(["a", "b", "a"], "a"))
+print(positions([], "a"))
+```
+
+`enumerate()` hands over each index with its item, so the index is there to append when the item matches. If nothing matches, or the list is empty, nothing is appended, and `[]` comes back, as it should. `range(len(items))` with `items[i]` works the same way.
