@@ -79,13 +79,24 @@ def run_check(spec, code):
     if spec["kind"] == "stdin":
         return box_runner.check_stdin(code, spec["runs"])
     if spec["kind"] == "function":
+        # A fresh copy each time, as the page parses its own: an answer that
+        # changes the list it is given must not change the next answer's case.
+        cases = json.loads(json.dumps(spec["cases"]))
         return box_runner.check_function(
-            code, spec["name"], [(tuple(a), e) for a, e in spec["cases"]])
+            code, spec["name"], [(tuple(a), e) for a, e in cases])
     return None
 
 
 def main():
     problems = []
+    # steps_volume_test checks a starter, a worked solution and an alternate
+    # against one spec. An answer that sorts the list it is given in place
+    # must not leave the spec's case sorted: the next answer would be handed
+    # the answer instead of the question, and a wrong one would pass.
+    spec = {"kind": "function", "name": "ordered", "cases": [[[[3, 1, 2]], [1, 2, 3]]]}
+    run_check(spec, "def ordered(items):\n    items.sort()\n    return items\n")
+    if run_check(spec, "def ordered(items):\n    return items\n")[0]:
+        problems.append("run_check: an answer that changed its argument changed the case for the next answer")
     for vol in build.VOLS:
         pages = build.practice_files(vol)
         if not pages:
