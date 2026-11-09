@@ -1932,5 +1932,40 @@
         ]
       }
     ]
+  },
+  "ch05a-while#1": {
+    "kind": "predict"
+  },
+  "ch05a-while#2": {
+    "kind": "choice",
+    "options": [
+      "`count <= 5`",
+      "`count > 5`",
+      "`count < 6`"
+    ],
+    "answer": 1,
+    "why": "6 is more than 5. It is not 5 or less, and it is not less than 6: 6 is equal to 6."
+  },
+  "ch05a-while#3": {
+    "kind": "predict"
+  },
+  "ch05a-while#4": {
+    "kind": "output",
+    "expected": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10"
+  },
+  "ch05a-while#5": {
+    "kind": "trace",
+    "names": [
+      "passes",
+      "coins"
+    ]
+  },
+  "ch05a-while#6": {
+    "kind": "output",
+    "expected": "8"
+  },
+  "ch05a-while#7": {
+    "kind": "output",
+    "expected": "5\n4\n3\n2\n1\nLiftoff!"
   }
 }

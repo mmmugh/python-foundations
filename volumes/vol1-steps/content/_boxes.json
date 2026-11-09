@@ -50,5 +50,9 @@
   "ch04a-if-and-else#8": {
     "raises": "SyntaxError",
     "why": "One = in a condition, where == is meant. The error message is the lesson."
+  },
+  "ch05a-while#8": {
+    "raises": "KeyboardInterrupt",
+    "why": "Fix-the-bug practice: a loop that never ends, which the page stops after 5 seconds."
   }
 }

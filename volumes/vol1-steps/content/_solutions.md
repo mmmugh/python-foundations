@@ -753,3 +753,44 @@ except ValueError:
 ```
 
 Step 2's program moved one level deeper, into the `else` block, and it did not otherwise change. That is what building one decision at a time looks like. A word or an unrealistic age never reaches the price, and a free ticket stays free on a Tuesday.
+
+## ch05a-while#4
+
+```python
+count = 1
+while count <= 10:
+    print(count)
+    count += 1
+```
+
+Only the condition changes. The loop now stops once `count` is past 10, not past 5. `count < 11` works too.
+
+## ch05a-while#6
+
+```python
+count = 1
+number = 1
+while count <= 3:
+    number *= 2
+    count += 1
+print(number)
+```
+
+The loop had the first two parts but not the third: nothing moved `count`, so `count <= 3` stayed `True` forever. `count += 1` in the block moves it, one each pass, until it reaches 4. It has to be indented, so that it is part of the block.
+
+## ch05a-while#7
+
+```python
+# Say it: count down from 5 to 1, then print Liftoff!
+# Split it:
+# 1. start the count at 5
+# 2. while it is 1 or more: print it, then take 1 away
+# 3. after the loop, print Liftoff!
+countdown = 5
+while countdown >= 1:
+    print(countdown)
+    countdown -= 1
+print("Liftoff!")
+```
+
+The count moves down this time, so the condition asks whether it is still 1 or more. With `countdown >= 0`, the loop would make one pass too many and print 0. `Liftoff!` is not indented, so it runs once, after the loop.
