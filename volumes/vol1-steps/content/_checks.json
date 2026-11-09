@@ -758,5 +758,129 @@
         ]
       }
     ]
+  },
+  "ch03e-combining-and-change#1": {
+    "kind": "predict"
+  },
+  "ch03e-combining-and-change#2": {
+    "kind": "choice",
+    "options": [
+      "`lives == 0`",
+      "`lives = 0`"
+    ],
+    "answer": 1,
+    "why": "One equals sign stores. Two would only ask whether lives is 0."
+  },
+  "ch03e-combining-and-change#3": {
+    "kind": "choice",
+    "options": [
+      "`height >= 120 or age >= 8`",
+      "`height >= 120 and age >= 8`"
+    ],
+    "answer": 1,
+    "why": "Both must be true, so it is `and`. With `or`, a tall 5-year-old would get on."
+  },
+  "ch03e-combining-and-change#4": {
+    "kind": "choice",
+    "options": [
+      "`True`",
+      "`False`"
+    ],
+    "answer": 0,
+    "why": "`or` needs only one side to be True, and raining is."
+  },
+  "ch03e-combining-and-change#5": {
+    "kind": "trace",
+    "names": [
+      "coins"
+    ]
+  },
+  "ch03e-combining-and-change#6": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "87"
+        ],
+        "words": [
+          "$0.87"
+        ]
+      },
+      {
+        "typed": [
+          "5"
+        ],
+        "words": [
+          "$0.05"
+        ]
+      }
+    ]
+  },
+  "ch03e-combining-and-change#7": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "87"
+        ],
+        "words": [
+          "$0.87"
+        ],
+        "numbers": [
+          3,
+          12
+        ]
+      },
+      {
+        "typed": [
+          "20"
+        ],
+        "numbers": [
+          0,
+          20
+        ]
+      }
+    ]
+  },
+  "ch03e-combining-and-change#8": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "87"
+        ],
+        "numbers": [
+          3,
+          1,
+          0,
+          2,
+          6
+        ]
+      },
+      {
+        "typed": [
+          "41"
+        ],
+        "numbers": [
+          1,
+          1,
+          1,
+          1,
+          4
+        ]
+      },
+      {
+        "typed": [
+          "0"
+        ],
+        "numbers": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
   }
 }

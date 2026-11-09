@@ -425,3 +425,61 @@ print(remainder == 0)
 ```
 
 A number is even when 2 goes into it with nothing left over. 0 is even, and prints `True`; -3 is odd, and prints `False`.
+
+## ch03e-combining-and-change#6
+
+```python
+# Say it: ask for an amount in cents, and show how to pay it
+# with the fewest quarters, dimes, nickels and pennies.
+cents = int(input("Amount in cents: "))
+print(f"{cents} cents is ${cents / 100:.2f}")
+```
+
+There are 100 cents in a dollar, so dividing by 100 gives dollars.
+
+## ch03e-combining-and-change#7
+
+```python
+# Say it: ask for an amount in cents, and show how to pay it
+# with the fewest quarters, dimes, nickels and pennies.
+cents = int(input("Amount in cents: "))
+print(f"{cents} cents is ${cents / 100:.2f}")
+
+quarters = cents // 25
+cents_left = cents % 25
+print(f"Quarters: {quarters}, leaving {cents_left} cents")
+```
+
+It is how many whole, how many left, with 25 cents in each quarter.
+
+## ch03e-combining-and-change#8
+
+```python
+# Say it: ask for an amount in cents, and show how to pay it
+# with the fewest quarters, dimes, nickels and pennies.
+# Split it:
+# 1. ask for the cents, and show them in dollars
+# 2. as many quarters as fit, and keep what is left
+# 3. as many dimes as fit in that, and keep what is left
+# 4. as many nickels as fit in that; what is left is pennies
+# 5. print each coin, then the total number of coins
+cents = int(input("Amount in cents: "))
+print(f"{cents} cents is ${cents / 100:.2f}")
+
+quarters = cents // 25
+cents_left = cents % 25
+
+dimes = cents_left // 10
+cents_left = cents_left % 10
+
+nickels = cents_left // 5
+pennies = cents_left % 5
+
+print(f"Quarters: {quarters}")
+print(f"Dimes: {dimes}")
+print(f"Nickels: {nickels}")
+print(f"Pennies: {pennies}")
+print(f"Total coins: {quarters + dimes + nickels + pennies}")
+```
+
+Each coin is the same two lines: `//` takes as many as fit, and `%` keeps what is left for the next coin. Taking the biggest coin first is what makes the number of coins the fewest. 0 cents gives 0 of everything, which is right.
