@@ -1267,6 +1267,20 @@ def run_box_file(source, where):
             sys.exit(f"{where}: still running after 30 seconds")
 
 
+def raised_name(stderr):
+    """The exception class named on a traceback's last line, or None.
+
+    A fix-the-bug box that returns nonzero might have raised anything --
+    reading the name back off its own stderr is how verify() tells a box
+    that crashed as declared from one that crashed some other way.
+    """
+    for line in reversed(stderr.strip().split("\n")):
+        match = re.match(r"^(\w+(?:\.\w+)*)\s*:", line)
+        if match:
+            return match.group(1).rsplit(".", 1)[-1]
+    return None
+
+
 def verify(built):
     """Run every code box in every volume on this machine's python3."""
     print("\nchecking every code box against python3:")
@@ -1296,8 +1310,13 @@ def verify(built):
 
             if run.returncode == 0:
                 tally["clean"] += 1
-            elif declared.get("raises"):
+            elif declared.get("raises") and raised_name(run.stderr) == declared["raises"]:
                 tally["raises on purpose"] += 1
+            elif declared.get("raises"):
+                tally["UNEXPECTED"] += 1
+                problems.append((f"{page['key']}#{index - 1}",
+                                 code.strip().split("\n")[0],
+                                 f"declared {declared['raises']}, raised {raised_name(run.stderr)}"))
             else:
                 tally["UNEXPECTED"] += 1
                 problems.append((f"{page['key']}#{index - 1}",
