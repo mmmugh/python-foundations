@@ -6172,5 +6172,148 @@
         ]
       }
     ]
+  },
+  "ch08h-joining-a-list#1": {
+    "kind": "predict"
+  },
+  "ch08h-joining-a-list#2": {
+    "kind": "choice",
+    "options": [
+      "`['Ada', 'Grace']`",
+      "`['Ada', ' Grace']`",
+      "`['Ada,', 'Grace']`"
+    ],
+    "answer": 1,
+    "why": "The cut is at the comma alone, so the space after it stays at the start of the next piece. `split(\", \")` would give `['Ada', 'Grace']`."
+  },
+  "ch08h-joining-a-list#3": {
+    "kind": "predict"
+  },
+  "ch08h-joining-a-list#4": {
+    "kind": "function",
+    "name": "dashes",
+    "cases": [
+      [
+        [
+          "the quick fox"
+        ],
+        "the-quick-fox"
+      ],
+      [
+        [
+          "  hi  there "
+        ],
+        "hi-there"
+      ],
+      [
+        [
+          ""
+        ],
+        ""
+      ],
+      [
+        [
+          "one"
+        ],
+        "one"
+      ],
+      [
+        [
+          "a b c d"
+        ],
+        "a-b-c-d"
+      ]
+    ]
+  },
+  "ch08h-joining-a-list#5": {
+    "kind": "output",
+    "expected": "3 + 1 + 4"
+  },
+  "ch08h-joining-a-list#6": {
+    "kind": "function",
+    "name": "capitalize_words",
+    "cases": [
+      [
+        [
+          "ada LOVELACE"
+        ],
+        "Ada Lovelace"
+      ],
+      [
+        [
+          "hello WORLD"
+        ],
+        "Hello World"
+      ],
+      [
+        [
+          ""
+        ],
+        ""
+      ],
+      [
+        [
+          "one"
+        ],
+        "One"
+      ],
+      [
+        [
+          "  x   y "
+        ],
+        "X Y"
+      ],
+      [
+        [
+          "the HOBBIT and me"
+        ],
+        "The Hobbit And Me"
+      ]
+    ]
+  },
+  "ch08h-joining-a-list#7": {
+    "kind": "predict"
+  },
+  "ch08h-joining-a-list#8": {
+    "kind": "function",
+    "name": "initials",
+    "cases": [
+      [
+        [
+          "ada lovelace"
+        ],
+        "AL"
+      ],
+      [
+        [
+          "Grace Brewster Hopper"
+        ],
+        "GBH"
+      ],
+      [
+        [
+          ""
+        ],
+        ""
+      ],
+      [
+        [
+          "  bo  "
+        ],
+        "B"
+      ],
+      [
+        [
+          "Alan Turing"
+        ],
+        "AT"
+      ],
+      [
+        [
+          "x y z"
+        ],
+        "XYZ"
+      ]
+    ]
   }
 }

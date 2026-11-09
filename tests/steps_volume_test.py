@@ -121,6 +121,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch08g-splitting-text", "Lesson 8.7 — Splitting text into a list",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch08h-joining-a-list", "Lesson 8.8 — Joining a list into text",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

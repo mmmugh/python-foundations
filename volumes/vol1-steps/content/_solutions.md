@@ -2111,3 +2111,61 @@ print("Words:", len(words))
 ```
 
 `split()` with nothing in its brackets cuts at runs of spaces and drops the ends, so extra spaces make no empty words, and nothing typed gives an empty list, of length 0. `split(" ")` would cut at every single space, and count the empty pieces between them as words.
+
+## ch08h-joining-a-list#4
+
+```python
+def dashes(sentence):
+    words = sentence.split()
+    return "-".join(words)
+```
+
+`split()` drops the extra spaces, so `"  hi  there "` gives two words, and `join()` puts one dash between them. An empty sentence gives an empty list, and joining an empty list gives `""`. `sentence.replace(" ", "-")` is not the same: it would put a dash for every space, the extra ones too.
+
+## ch08h-joining-a-list#5
+
+```python
+numbers = [3, 1, 4]
+texts = []
+for number in numbers:
+    texts.append(str(number))
+print(" + ".join(texts))
+```
+
+`join()` glues strings only, so each number becomes a string first, in a new list. Writing the list as strings to begin with, `["3", "1", "4"]`, also prints the right line, but it no longer starts from the numbers.
+
+## ch08h-joining-a-list#6
+
+```python
+def capitalize_words(sentence):
+    words = sentence.split()
+    capitalized = []
+    for word in words:
+        capitalized.append(word[0].upper() + word[1:].lower())
+    return " ".join(capitalized)
+```
+
+`split()` never gives back an empty word, so `word[0]` is always there. An empty sentence makes no passes, and joining an empty list gives `""`. `title()` does the same job in one method, as the next section shows; for these sentences it gives the same answers.
+
+## ch08h-joining-a-list#8
+
+```python
+# Say it: give back the first letter of each word, in capitals, as one string.
+# Split it:
+# 1. split the name into words
+# 2. start a new, empty list
+# 3. for each word, append its first letter, in capitals
+# 4. join the list with "", and give it back
+def initials(full_name):
+    words = full_name.split()
+    letters = []
+    for word in words:
+        letters.append(word[0].upper())
+    return "".join(letters)
+
+
+print(initials("ada lovelace"))
+print(initials(""))
+```
+
+`split()` with nothing in its brackets drops extra spaces, so every word has a first letter. `split(" ")` would give empty pieces for `"  bo  "`, and `word[0]` would stop with an `IndexError`. Adding each letter to a string that starts as `""`, then giving back its `upper()`, works too.

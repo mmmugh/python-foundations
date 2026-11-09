@@ -106,5 +106,13 @@
   "ch08a-text-is-a-sequence#7": {
     "raises": "TypeError",
     "why": "Fix-the-bug practice: item assignment on a string."
+  },
+  "ch08h-joining-a-list#4": {
+    "raises": "TypeError",
+    "why": "join() given numbers. The error message is the lesson."
+  },
+  "ch08h-joining-a-list#6": {
+    "raises": "TypeError",
+    "why": "Fix-the-bug practice: join() given a list of numbers."
   }
 }
