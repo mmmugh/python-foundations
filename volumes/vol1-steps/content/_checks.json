@@ -2311,5 +2311,176 @@
         ]
       }
     ]
+  },
+  "ch05e-adding-up#1": {
+    "kind": "predict"
+  },
+  "ch05e-adding-up#2": {
+    "kind": "choice",
+    "options": [
+      "`5`",
+      "`4`",
+      "nothing: it is gone"
+    ],
+    "answer": 1,
+    "why": "`range(5)` gives 0 to 4, so the last value `number` was given is 4, and it keeps it after the loop."
+  },
+  "ch05e-adding-up#3": {
+    "kind": "trace",
+    "names": [
+      "bonus",
+      "points"
+    ]
+  },
+  "ch05e-adding-up#4": {
+    "kind": "predict"
+  },
+  "ch05e-adding-up#5": {
+    "kind": "predict"
+  },
+  "ch05e-adding-up#6": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "12",
+          "8",
+          "15"
+        ],
+        "numbers": [
+          8
+        ],
+        "absent": [
+          "The coldest was 0."
+        ]
+      },
+      {
+        "typed": [
+          "15",
+          "12",
+          "8"
+        ],
+        "numbers": [
+          8
+        ],
+        "absent": [
+          "The coldest was 0.",
+          "The coldest was 15.",
+          "The coldest was 12."
+        ]
+      },
+      {
+        "typed": [
+          "-3",
+          "-9",
+          "-1"
+        ],
+        "numbers": [
+          -9
+        ],
+        "absent": [
+          "The coldest was 0.",
+          "The coldest was -3.",
+          "The coldest was -1."
+        ]
+      },
+      {
+        "typed": [
+          "5",
+          "5",
+          "5"
+        ],
+        "numbers": [
+          5
+        ],
+        "absent": [
+          "The coldest was 0."
+        ]
+      },
+      {
+        "typed": [
+          "0",
+          "4",
+          "7"
+        ],
+        "numbers": [
+          0
+        ]
+      }
+    ]
+  },
+  "ch05e-adding-up#7": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "3",
+          "5",
+          "10",
+          "2"
+        ],
+        "numbers": [
+          20,
+          10
+        ],
+        "absent": [
+          "Highest: 0",
+          "Highest: 3",
+          "Highest: 5",
+          "Total: 18",
+          "Total: 3",
+          "Total: 8"
+        ]
+      },
+      {
+        "typed": [
+          "-3",
+          "-8",
+          "-1",
+          "-4"
+        ],
+        "numbers": [
+          -16,
+          -1
+        ],
+        "absent": [
+          "Highest: -3",
+          "Highest: 0",
+          "Total: -11",
+          "Total: -12",
+          "Total: -3"
+        ]
+      },
+      {
+        "typed": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "numbers": [
+          0,
+          0
+        ]
+      },
+      {
+        "typed": [
+          "7",
+          "-2",
+          "7",
+          "1"
+        ],
+        "numbers": [
+          13,
+          7
+        ],
+        "absent": [
+          "Highest: 0",
+          "Total: 12",
+          "Total: 5",
+          "Total: 7"
+        ]
+      }
+    ]
   }
 }

@@ -73,6 +73,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch05d-loops-inside-loops", "Lesson 5.4 — Loops inside loops",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch05e-adding-up", "Lesson 5.5 — Adding up as you go",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

@@ -868,3 +868,40 @@ for first_die in range(1, 7):
 ```
 
 The inner loop tries all six faces of the second die for each face of the first, so all 36 pairs are tried, and the `if` lets through only those that add up. A die goes up to 6, so the stop is 7. With 13, no pair adds up, and nothing is printed, which is right.
+
+## ch05e-adding-up#6
+
+```python
+coldest = int(input("Temperature: "))
+for day in range(2):
+    temperature = int(input("Temperature: "))
+    if temperature < coldest:
+        coldest = temperature
+print(f"The coldest was {coldest}.")
+```
+
+It is the largest-so-far fix, turned around. Starting at 0, no temperature above 0 could ever be colder, so 0 won. Starting from the first temperature, the coldest so far is one that was really typed. The loop then reads the other two, so it is `range(2)`.
+
+## ch05e-adding-up#7
+
+```python
+# Say it: add up the points of four rounds, and find the highest round.
+# Split it:
+# 1. ask for the first round's points: the total and the highest so far
+# 2. for the other three rounds:
+#    ask for the points, add them to the total,
+#    and keep them as the highest if they beat it
+# 3. after the loop, print the total, then the highest
+points = int(input("Points: "))
+total = points
+highest = points
+for round_number in range(3):
+    points = int(input("Points: "))
+    total += points
+    if points > highest:
+        highest = points
+print(f"Total: {total}")
+print(f"Highest: {highest}")
+```
+
+Both accumulators start from the first round, so the highest is always a score someone really got. With -3, -8, -1 and -4, the highest is -1; starting from 0, it would have said 0. The two `print()` lines are not indented, so they run once, after the loop.
