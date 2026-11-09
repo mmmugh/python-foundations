@@ -1,5 +1,5 @@
 <!-- part: Unit 7 — Lists -->
-## Lesson 7.6 — Looping over a list
+## Lesson 7.7 — Looping over a list
 
 In lesson 5.3, a `for` loop stepped through a string, one character at a time. In this lesson it steps through a list, one item at a time: to build a new list from an old one, and to know where each item is.
 

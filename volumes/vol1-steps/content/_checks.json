@@ -4264,10 +4264,10 @@
       }
     ]
   },
-  "ch07e-asking-and-sorting#1": {
+  "ch07e-asking-about-a-list#1": {
     "kind": "predict"
   },
-  "ch07e-asking-and-sorting#2": {
+  "ch07e-asking-about-a-list#2": {
     "kind": "choice",
     "options": [
       "`remove()`",
@@ -4277,10 +4277,10 @@
     "answer": 1,
     "why": "`pop()` takes out an item and gives it back, so `taken = cards.pop()` keeps it. `remove()` and `insert()` only change the list."
   },
-  "ch07e-asking-and-sorting#3": {
+  "ch07e-asking-about-a-list#3": {
     "kind": "predict"
   },
-  "ch07e-asking-and-sorting#4": {
+  "ch07e-asking-about-a-list#4": {
     "kind": "function",
     "name": "spread",
     "cases": [
@@ -4338,18 +4338,18 @@
       ]
     ]
   },
-  "ch07e-asking-and-sorting#5": {
+  "ch07f-sorting-a-list#4": {
     "kind": "predict"
   },
-  "ch07e-asking-and-sorting#6": {
+  "ch07f-sorting-a-list#5": {
     "kind": "output",
     "expected": "79"
   },
-  "ch07e-asking-and-sorting#7": {
+  "ch07f-sorting-a-list#6": {
     "kind": "output",
     "expected": "[79, 88, 92]\n[88, 92, 79]"
   },
-  "ch07e-asking-and-sorting#8": {
+  "ch07f-sorting-a-list#3": {
     "kind": "stdin",
     "runs": [
       {
@@ -4382,7 +4382,7 @@
       }
     ]
   },
-  "ch07e-asking-and-sorting#9": {
+  "ch07e-asking-about-a-list#6": {
     "kind": "function",
     "name": "average",
     "cases": [
@@ -4441,10 +4441,10 @@
       ]
     ]
   },
-  "ch07f-looping-over-a-list#1": {
+  "ch07g-looping-over-a-list#1": {
     "kind": "predict"
   },
-  "ch07f-looping-over-a-list#2": {
+  "ch07g-looping-over-a-list#2": {
     "kind": "choice",
     "options": [
       "the sorted list",
@@ -4454,10 +4454,10 @@
     "answer": 2,
     "why": "`sort()` puts the list itself in order, and gives back nothing, which is `None`. `sorted()` is the one that gives back a sorted list."
   },
-  "ch07f-looping-over-a-list#3": {
+  "ch07g-looping-over-a-list#3": {
     "kind": "predict"
   },
-  "ch07f-looping-over-a-list#4": {
+  "ch07g-looping-over-a-list#4": {
     "kind": "function",
     "name": "evens",
     "cases": [
@@ -4532,7 +4532,7 @@
       ]
     ]
   },
-  "ch07f-looping-over-a-list#5": {
+  "ch07g-looping-over-a-list#5": {
     "kind": "function",
     "name": "count_above",
     "cases": [
@@ -4597,13 +4597,13 @@
       ]
     ]
   },
-  "ch07f-looping-over-a-list#6": {
+  "ch07g-looping-over-a-list#6": {
     "kind": "predict"
   },
-  "ch07f-looping-over-a-list#7": {
+  "ch07g-looping-over-a-list#7": {
     "kind": "predict"
   },
-  "ch07f-looping-over-a-list#8": {
+  "ch07g-looping-over-a-list#8": {
     "kind": "choice",
     "options": [
       "`for i in range(len(names)):` then `print(names[i])`",
@@ -4612,7 +4612,7 @@
     "answer": 1,
     "why": "Both print every name. The loop only needs the items, so an index is one more thing to read and get right."
   },
-  "ch07f-looping-over-a-list#9": {
+  "ch07g-looping-over-a-list#9": {
     "kind": "function",
     "name": "positions",
     "cases": [
@@ -4691,10 +4691,10 @@
       ]
     ]
   },
-  "ch07g-lists-inside-lists#1": {
+  "ch07h-lists-inside-lists#1": {
     "kind": "predict"
   },
-  "ch07g-lists-inside-lists#2": {
+  "ch07h-lists-inside-lists#2": {
     "kind": "choice",
     "options": [
       "The items after a removed one move back a place, and the loop steps past one of them.",
@@ -4704,19 +4704,19 @@
     "answer": 0,
     "why": "The loop goes through the list by position. Removing an item moves every later item back one place, so the next item lands where the loop has just looked, and is never seen. Build a new list instead."
   },
-  "ch07g-lists-inside-lists#3": {
+  "ch07h-lists-inside-lists#3": {
     "kind": "predict"
   },
-  "ch07g-lists-inside-lists#4": {
+  "ch07h-lists-inside-lists#4": {
     "kind": "trace",
     "names": [
       "board"
     ]
   },
-  "ch07g-lists-inside-lists#5": {
+  "ch07h-lists-inside-lists#5": {
     "kind": "predict"
   },
-  "ch07g-lists-inside-lists#6": {
+  "ch07h-lists-inside-lists#6": {
     "kind": "stdin",
     "runs": [
       {
@@ -4729,7 +4729,7 @@
       }
     ]
   },
-  "ch07g-lists-inside-lists#7": {
+  "ch07h-lists-inside-lists#7": {
     "kind": "stdin",
     "runs": [
       {
@@ -4745,10 +4745,10 @@
       }
     ]
   },
-  "ch07h-the-gradebook#1": {
+  "ch07i-the-gradebook#1": {
     "kind": "predict"
   },
-  "ch07h-the-gradebook#2": {
+  "ch07i-the-gradebook#2": {
     "kind": "choice",
     "options": [
       "It puts a space before the value.",
@@ -4758,13 +4758,13 @@
     "answer": 1,
     "why": "`print()` usually ends with a new line. `end=\" \"` ends it with a space instead, so the next value printed stays on the same line."
   },
-  "ch07h-the-gradebook#3": {
+  "ch07i-the-gradebook#3": {
     "kind": "predict"
   },
-  "ch07h-the-gradebook#4": {
+  "ch07i-the-gradebook#4": {
     "kind": "predict"
   },
-  "ch07h-the-gradebook#5": {
+  "ch07i-the-gradebook#5": {
     "kind": "choice",
     "options": [
       "Nothing goes wrong: each name keeps its score.",
@@ -4774,7 +4774,7 @@
     "answer": 2,
     "why": "Parallel lists only work while both stay in the same order. Sorting one of them breaks the match between index 1 in `names` and index 1 in `scores`, and Python can't tell: there is no error, just wrong answers."
   },
-  "ch07h-the-gradebook#6": {
+  "ch07i-the-gradebook#6": {
     "kind": "function",
     "name": "top_student",
     "cases": [
@@ -4856,7 +4856,7 @@
       ]
     ]
   },
-  "ch07h-the-gradebook#7": {
+  "ch07i-the-gradebook#7": {
     "kind": "function",
     "name": "count_passing",
     "cases": [
@@ -4906,11 +4906,106 @@
       ]
     ]
   },
-  "ch07h-the-gradebook#8": {
+  "ch07i-the-gradebook#8": {
     "kind": "predict"
   },
-  "ch07h-the-gradebook#9": {
+  "ch07i-the-gradebook#9": {
     "kind": "output",
     "expected": "Ada 88 B\nGrace 92 A\nAlan 45 F\nKatherine 95 A\nEdsger 71 C\nAverage: 78.2\nTop: Katherine 95\nPassing: 4 of 5"
+  },
+  "ch07e-asking-about-a-list#5": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "numbers": [
+          25,
+          6,
+          1
+        ]
+      }
+    ]
+  },
+  "ch07f-sorting-a-list#1": {
+    "kind": "predict"
+  },
+  "ch07f-sorting-a-list#2": {
+    "kind": "choice",
+    "options": [
+      "It gives back 0.",
+      "It gives back `None`.",
+      "It stops with a `ValueError`: an empty list has no largest item."
+    ],
+    "answer": 2,
+    "why": "`len(empty)` and `sum(empty)` are both 0, but there is nothing for `max()` to choose from, so Python stops with a `ValueError`. That is why an empty list is the awkward case to check."
+  },
+  "ch07f-sorting-a-list#7": {
+    "kind": "function",
+    "name": "second_largest",
+    "cases": [
+      [
+        [
+          [
+            3,
+            9,
+            5
+          ]
+        ],
+        5
+      ],
+      [
+        [
+          []
+        ],
+        null
+      ],
+      [
+        [
+          [
+            7
+          ]
+        ],
+        null
+      ],
+      [
+        [
+          [
+            -1,
+            -5,
+            -3
+          ]
+        ],
+        -3
+      ],
+      [
+        [
+          [
+            4,
+            9,
+            9
+          ]
+        ],
+        9
+      ],
+      [
+        [
+          [
+            2,
+            8
+          ]
+        ],
+        2
+      ],
+      [
+        [
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        0
+      ]
+    ]
   }
 }

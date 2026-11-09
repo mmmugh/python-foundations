@@ -1,5 +1,5 @@
 <!-- part: Unit 7 — Lists -->
-## Lesson 7.7 — Lists inside lists
+## Lesson 7.8 — Lists inside lists
 
 An item of a list can be any value, and that includes another list. In this lesson a list of lists holds a grid, like a game board or a table, and you print it row by row.
 

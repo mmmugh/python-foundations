@@ -1538,7 +1538,7 @@ print(line)
 
 `pop(0)` takes out the person at the front and gives them back, so `person` can be printed. With 0, `range(0)` makes no passes, and the whole line is printed. With 3, the loop empties the line, and it prints `[]`.
 
-## ch07e-asking-and-sorting#4
+## ch07e-asking-about-a-list#4
 
 ```python
 def spread(numbers):
@@ -1549,41 +1549,18 @@ def spread(numbers):
 
 Without the first `if`, an empty list stops at `max()` with a `ValueError`. The `return 0` ends the function first (lesson 6.2), so `max()` never sees an empty list. A list of one number has the same largest and smallest, so its spread is 0 with no special case.
 
-## ch07e-asking-and-sorting#6
+## ch07e-asking-about-a-list#5
 
 ```python
-scores = [88, 92, 79]
-scores.sort()
-print(scores[0])
+rolls = [4, 6, 1, 5, 3, 6]
+print(sum(rolls))
+print(max(rolls))
+print(min(rolls))
 ```
 
-`scores.sort()` sorts the list and gives back `None`, so `scores = scores.sort()` threw the list away and kept `None`, and `None[0]` makes no sense. Call `sort()` on its own line. `scores = sorted(scores)` works too, because `sorted()` gives back the new list.
+One question about the whole list per line, each in one word. Labels, like `print("Total:", sum(rolls))`, are fine too.
 
-## ch07e-asking-and-sorting#7
-
-```python
-def in_order(scores):
-    return sorted(scores)
-
-marks = [88, 92, 79]
-print(in_order(marks))
-print(marks)
-```
-
-`scores.sort()` sorted the caller's list itself, because `scores` and `marks` are two names for one list. `sorted(scores)` makes a new list in order, and leaves the one it was given alone. Sorting a copy, `scores[:]`, then giving that back, works too.
-
-## ch07e-asking-and-sorting#8
-
-```python
-words = []
-for turn in range(4):
-    words.append(input("Word: "))
-print(sorted(words))
-```
-
-The loop asks four times and appends each word, as in lesson 7.3. `sorted()` gives back the list in order. `words.sort()` on its own line, then `print(words)`, works as well.
-
-## ch07e-asking-and-sorting#9
+## ch07e-asking-about-a-list#6
 
 ```python
 # Say it: give back the average of a list of numbers, or 0 for an empty list.
@@ -1602,7 +1579,62 @@ print(average([]))
 
 Without step 1, `average([])` divides 0 by 0, and stops with a `ZeroDivisionError`. Checking the empty list first, and returning, means the division only ever runs when there is at least one number.
 
-## ch07f-looping-over-a-list#4
+## ch07f-sorting-a-list#3
+
+```python
+words = []
+for turn in range(4):
+    words.append(input("Word: "))
+print(sorted(words))
+```
+
+The loop asks four times and appends each word, as in lesson 7.3. `sorted()` gives back the list in order. `words.sort()` on its own line, then `print(words)`, works as well.
+
+## ch07f-sorting-a-list#5
+
+```python
+scores = [88, 92, 79]
+scores.sort()
+print(scores[0])
+```
+
+`scores.sort()` sorts the list and gives back `None`, so `scores = scores.sort()` threw the list away and kept `None`, and `None[0]` makes no sense. Call `sort()` on its own line. `scores = sorted(scores)` works too, because `sorted()` gives back the new list.
+
+## ch07f-sorting-a-list#6
+
+```python
+def in_order(scores):
+    return sorted(scores)
+
+marks = [88, 92, 79]
+print(in_order(marks))
+print(marks)
+```
+
+`scores.sort()` sorted the caller's list itself, because `scores` and `marks` are two names for one list. `sorted(scores)` makes a new list in order, and leaves the one it was given alone. Sorting a copy, `scores[:]`, then giving that back, works too.
+
+## ch07f-sorting-a-list#7
+
+```python
+# Say it: give back the second-largest number, or None if there are fewer than two.
+# Split it:
+# 1. if the list has fewer than two numbers, give back None
+# 2. make a sorted copy of the list
+# 3. give back its second item from the end
+def second_largest(numbers):
+    if len(numbers) < 2:
+        return None
+    in_order = sorted(numbers)
+    return in_order[-2]
+
+
+print(second_largest([3, 9, 5]))
+print(second_largest([]))
+```
+
+`sorted()` makes a new list, so the caller's list is left as it was; `numbers.sort()` would have sorted the caller's list too. In order, the largest is at index -1 and the second-largest at -2. Without step 1, `[7]` would stop with an `IndexError`, because a list of one item has no index -2.
+
+## ch07g-looping-over-a-list#4
 
 ```python
 def evens(numbers):
@@ -1615,7 +1647,7 @@ def evens(numbers):
 
 The shape of `passing`: an empty list, a loop, an `if`, and `append()`. `% 2` gives 0 for every even number, 0 and the ones below 0 included. An empty list makes no passes, and gives back `[]`.
 
-## ch07f-looping-over-a-list#5
+## ch07g-looping-over-a-list#5
 
 ```python
 def count_above(numbers, threshold):
@@ -1628,7 +1660,7 @@ def count_above(numbers, threshold):
 
 A count, as in lesson 5.3, kept in a loop over the list. `>` and not `>=`, because a number equal to the threshold is not above it. Building a list of the numbers above it, and giving back its `len()`, works too.
 
-## ch07f-looping-over-a-list#9
+## ch07g-looping-over-a-list#9
 
 ```python
 # Say it: give back every index where target appears in items.
@@ -1651,7 +1683,7 @@ print(positions([], "a"))
 
 `enumerate()` hands over each index with its item, so the index is there to append when the item matches. If nothing matches, or the list is empty, nothing is appended, and `[]` comes back, as it should. `range(len(items))` with `items[i]` works the same way.
 
-## ch07g-lists-inside-lists#6
+## ch07h-lists-inside-lists#6
 
 ```python
 sales = [[3, 5, 2], [4, 0, 6], [1, 1, 1]]
@@ -1661,7 +1693,7 @@ for row in sales:
 
 Each time round, `row` is one whole row, a list, so `sum(row)` adds it up. A loop inside the loop that keeps a total, set back to 0 at the start of each row, works too.
 
-## ch07g-lists-inside-lists#7
+## ch07h-lists-inside-lists#7
 
 ```python
 # Say it: change two squares of the board, then print it as three rows of three.
@@ -1684,7 +1716,7 @@ for row in board:
 
 Rows and squares both count from 0, so the center is row 1, index 1, and the top right is row 0, index 2, which is also `board[0][-1]`. The bare `print()` ends each row; without it, all nine squares would be on one line.
 
-## ch07h-the-gradebook#6
+## ch07i-the-gradebook#6
 
 ```python
 def top_student(names, scores):
@@ -1697,7 +1729,7 @@ def top_student(names, scores):
 
 The same three steps as the example: the top score, its index, and the name at that index. The `if` comes first, because `max()` of an empty list stops with a `ValueError`. With a tie, `index()` finds the first of them, so the first student with that score is the answer.
 
-## ch07h-the-gradebook#7
+## ch07i-the-gradebook#7
 
 ```python
 def count_passing(scores):
@@ -1708,9 +1740,9 @@ def count_passing(scores):
     return count
 ```
 
-`count_above()` from lesson 7.6, with `>=` in place of `>`, because 60 is a pass. An empty list makes no passes, so the count stays 0.
+`count_above()` from lesson 7.7, with `>=` in place of `>`, because 60 is a pass. An empty list makes no passes, so the count stays 0.
 
-## ch07h-the-gradebook#9
+## ch07i-the-gradebook#9
 
 ```python
 # Say it: print each student's line, then a summary of the class.

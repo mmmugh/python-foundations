@@ -1,5 +1,5 @@
 <!-- part: Unit 7 — Lists -->
-## Lesson 7.8 — Finding a position, and a gradebook
+## Lesson 7.9 — Finding a position, and a gradebook
 
 `max()` tells you the top score, but not where it is in the list. In this lesson you find an item's index, keep two lists side by side, and build a class gradebook from them, one function at a time.
 
@@ -125,12 +125,12 @@ Steps 1 and 2 use functions you already have. Steps 3 and 4 are new; build and c
 
 7. Step 4: write `count_passing(scores)`, which gives back how many scores are 60 or more.
 
-> Split it: it has the shape of `count_above()` in lesson 7.6. Is 60 itself a pass?
+> Split it: it has the shape of `count_above()` in lesson 7.7. Is 60 itself a pass?
 > Check it: try `[88, 92, 45, 95, 71]`, which gives 4. Then the awkward ones: `[]`, and `[60, 59]`, which gives 1.
 
 ### Another way to write it
 
-In lesson 7.6, a loop with an `if` built `passing`, a new list of the passing scores. Python has a shorter way to write that loop, called a **list comprehension**:
+In lesson 7.7, a loop with an `if` built `passing`, a new list of the passing scores. Python has a shorter way to write that loop, called a **list comprehension**:
 
 ```python
 scores = [88, 92, 45, 95, 71]
