@@ -1,0 +1,141 @@
+PYTHON FOUNDATIONS
+Unit 5 - Repetition
+
+Name: ________________________________     Date: ______________
+
+Fill in every blank. Where a term is asked for, write the word the course
+uses. Where code is asked for, write exact Python. Where output is asked
+for, write what the program prints, one line per line.
+
+
+VOCABULARY
+----------
+
+ 1. A loop that repeats as long as its condition stays true is called a
+    __________________ loop.
+
+ 2. A loop whose condition never becomes false, so it repeats forever, is
+    called an __________________ loop.
+
+ 3. A loop inside another loop is called a __________________ loop.
+
+ 4. The pattern of setting up a variable before a loop and updating it on
+    every pass - to build a sum, a count, or a string - is called the
+    __________________ pattern.
+
+ 5. A value that means "that's all", such as `stop` or `0`, and ends a
+    loop that reads input, is called a __________________ value.
+
+ 6. A `True` or `False` variable used to record how a loop ended, such as
+    whether the player won or ran out of guesses, is called a
+    __________________.
+
+
+READING CODE
+------------
+
+ 7. What does this print?
+
+        count = 1
+        
+        while count <= 5:
+            print(f"Count is {count}")
+            count += 1
+        
+        print("Done.")
+
+    ____________________________________
+
+ 8. What does this print?
+
+        for i in range(2, 6):
+            print(i)
+
+    ____________________________________
+
+ 9. What does this print?
+
+        for table in range(1, 3):
+            for multiplier in range(1, 3):
+                print(f"{table} x {multiplier} = {table * multiplier}")
+
+    ____________________________________
+
+10. What does this print?
+
+        for number in range(1, 11):
+            if number % 3 != 0:
+                continue
+            print(number)
+
+    ____________________________________
+
+11. What does this print?
+
+        total = 0
+        for i in range(1, 6):
+            if i == 3:
+                continue
+            total += i
+        print(total)
+
+    ____________________________________
+
+12. This loop makes three passes. Which lines get a row in its trace
+    table, in order? Lines
+
+        count = 1
+        while count <= 3:
+            count += 1
+
+    ____________________________________
+
+
+WRITING CODE
+------------
+
+13. Fill in the blank, so the loop reads the next word before it asks
+    again:
+
+        word = input("Word (or stop): ")
+        while word != "stop":
+            print(f"You typed {word}.")
+            word = __________________("Word (or stop): ")
+        print("Goodbye.")
+
+14. Fill in the blank:
+
+        for i in __________________(5, 0, -1):
+            print(i)
+
+15. Fill in the blank:
+
+        count = 1
+        while count <= 5:
+            print(f"Count is {count}")
+            count __________________ 1
+        print("Done.")
+
+16. Fill in the blank:
+
+        while True:
+            command = input("Enter a command (or 'quit'): ")
+            if command == "quit":
+                __________________
+            print(f"You said: {command}")
+
+
+WHY IT WORKS
+------------
+
+17. A `while` loop needs a variable set up before the loop, a condition
+    that can become false, and something inside the loop that moves toward
+    that. Deleting `count += 1` means `count` never changes, so `count <=
+    5` stays __________________ forever and the loop never ends.
+
+18. `range(n)` always produces exactly __________________ values, which is
+    why `range(5)` produces `0` through `4` rather than `0` through `5`.
+
+19. Starting `largest` at `0` before the loop gives the wrong answer when
+    every number entered is __________________, because none of them would
+    ever be greater than `0`.
