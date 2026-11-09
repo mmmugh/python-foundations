@@ -850,3 +850,21 @@ print(f"Vowels: {vowels}")
 ```
 
 The printing and the counting share one loop: on each pass, the letter is printed, and then the `if` decides whether it counts. `rhythm` has no vowels, so the count stays at 0, and the program still says so.
+
+## ch05d-loops-inside-loops#8
+
+```python
+# Say it: print every pair of dice that adds up to a total.
+# Split it:
+# 1. ask for the total, as a whole number
+# 2. loop over the first die, 1 to 6
+# 3.   inside it, loop over the second die, 1 to 6
+# 4.     if the two add up to the total, print the pair
+total = int(input("Total: "))
+for first_die in range(1, 7):
+    for second_die in range(1, 7):
+        if first_die + second_die == total:
+            print(f"{first_die} + {second_die}")
+```
+
+The inner loop tries all six faces of the second die for each face of the first, so all 36 pairs are tried, and the `if` lets through only those that add up. A die goes up to 6, so the stop is 7. With 13, no pair adds up, and nothing is printed, which is right.

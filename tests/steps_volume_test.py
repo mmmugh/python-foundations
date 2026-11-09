@@ -71,6 +71,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch05c-looping-over-text", "Lesson 5.3 — Looping over a string",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch05d-loops-inside-loops", "Lesson 5.4 — Loops inside loops",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

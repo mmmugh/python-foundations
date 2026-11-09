@@ -2203,5 +2203,113 @@
         ]
       }
     ]
+  },
+  "ch05d-loops-inside-loops#1": {
+    "kind": "predict"
+  },
+  "ch05d-loops-inside-loops#2": {
+    "kind": "predict"
+  },
+  "ch05d-loops-inside-loops#3": {
+    "kind": "predict"
+  },
+  "ch05d-loops-inside-loops#4": {
+    "kind": "choice",
+    "options": [
+      "9",
+      "20",
+      "5"
+    ],
+    "answer": 1,
+    "why": "The outer loop makes 4 passes, and on each one the inner loop makes 5. 4 times 5 is 20."
+  },
+  "ch05d-loops-inside-loops#5": {
+    "kind": "predict"
+  },
+  "ch05d-loops-inside-loops#6": {
+    "kind": "choice",
+    "options": [
+      "`i` and `j`",
+      "`first` and `second`",
+      "`row` and `column`"
+    ],
+    "answer": 2,
+    "why": "A grid has rows and columns, so those names say what each loop variable holds. `first` and `second` say only which loop came first."
+  },
+  "ch05d-loops-inside-loops#7": {
+    "kind": "predict"
+  },
+  "ch05d-loops-inside-loops#8": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "7"
+        ],
+        "absent": [
+          "1 + 1",
+          "3 + 3",
+          "6 + 6",
+          "1 + 5"
+        ],
+        "numbers": [
+          1,
+          6,
+          2,
+          5,
+          3,
+          4,
+          4,
+          3,
+          5,
+          2,
+          6,
+          1
+        ]
+      },
+      {
+        "typed": [
+          "2"
+        ],
+        "absent": [
+          "1 + 2",
+          "2 + 1",
+          "1 + 6",
+          "2 + 0",
+          "6 + -4"
+        ],
+        "numbers": [
+          1,
+          1
+        ]
+      },
+      {
+        "typed": [
+          "12"
+        ],
+        "absent": [
+          "5 + 6",
+          "6 + 5",
+          "1 + 1",
+          "1 + 11",
+          "5 + 7"
+        ],
+        "numbers": [
+          6,
+          6
+        ]
+      },
+      {
+        "typed": [
+          "13"
+        ],
+        "absent": [
+          "6 + 6",
+          "1 + 1",
+          "1 + 12",
+          "6 + 7"
+        ]
+      }
+    ]
   }
 }
