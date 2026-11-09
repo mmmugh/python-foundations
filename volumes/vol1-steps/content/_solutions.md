@@ -1094,3 +1094,62 @@ greet(typed_name)
 ```
 
 An empty string counts as `False` (lesson 4.3), so `not name` is `True` only when nothing was typed. `name == ""` works too. Without the `if`, an empty name prints `Hello, !`.
+
+## ch06b-returning#4
+
+```python
+def average(first, second, third):
+    total = first + second + third
+    return round(total / 3, 1)
+```
+
+The brackets around the addition matter if you do it in one line: `round((first + second + third) / 3, 1)`. Without them, only `third` would be divided by 3 (lesson 3.2). Three zeros average to 0.0, and numbers below 0 work the same as any others.
+
+## ch06b-returning#6
+
+```python
+def total_price(price, count):
+    return price * count
+
+
+cost = total_price(3, 4)
+print(cost)
+```
+
+`print()` showed the answer on the screen, but handed nothing back, so `cost` got `None`. With `return`, the answer goes back to the call, `cost` keeps 12, and the `print()` below shows it.
+
+## ch06b-returning#8
+
+```python
+def sign(number):
+    if number > 0:
+        return "positive"
+    elif number < 0:
+        return "negative"
+    else:
+        return "zero"
+```
+
+Three outcomes, so three branches, each with its own `return`, like `ticket_price`. 0 is neither above nor below 0, so it falls through to the `else`.
+
+## ch06b-returning#9
+
+```python
+# Say it: give back the largest of three numbers.
+# Split it:
+# 1. if a is at least as big as both others, it is the largest
+# 2. otherwise, the largest is b or c: whichever is bigger
+def largest_of_three(a, b, c):
+    if a >= b and a >= c:
+        return a
+    elif b >= c:
+        return b
+    else:
+        return c
+
+
+print(largest_of_three(3, 9, 5))
+print(largest_of_three(-1, -5, -3))
+```
+
+The second test only compares `b` and `c`, because by then `a` has lost to one of them. When two numbers tie for largest, either one is the right answer: with 7, 7 and 2, `a >= b` is `True`, so `a` comes back, which is 7. `>` in place of `>=` works too: then `b` comes back, which is also 7.

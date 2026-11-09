@@ -81,6 +81,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch06a-defining", "Lesson 6.1 — Making your own function",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch06b-returning", "Lesson 6.2 — Giving back a value",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

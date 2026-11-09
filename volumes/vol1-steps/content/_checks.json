@@ -3039,5 +3039,229 @@
         ]
       }
     ]
+  },
+  "ch06b-returning#1": {
+    "kind": "predict"
+  },
+  "ch06b-returning#2": {
+    "kind": "choice",
+    "options": [
+      "a parameter",
+      "an argument",
+      "a function"
+    ],
+    "answer": 1,
+    "why": "The value in the call is the argument. The variable in the `def` line that receives it, `player`, is the parameter."
+  },
+  "ch06b-returning#3": {
+    "kind": "predict"
+  },
+  "ch06b-returning#4": {
+    "kind": "function",
+    "name": "average",
+    "cases": [
+      [
+        [
+          80,
+          90,
+          75
+        ],
+        81.7
+      ],
+      [
+        [
+          0,
+          0,
+          0
+        ],
+        0.0
+      ],
+      [
+        [
+          -2,
+          4,
+          1
+        ],
+        1.0
+      ],
+      [
+        [
+          1,
+          2,
+          2
+        ],
+        1.7
+      ],
+      [
+        [
+          100,
+          100,
+          99
+        ],
+        99.7
+      ]
+    ]
+  },
+  "ch06b-returning#5": {
+    "kind": "predict"
+  },
+  "ch06b-returning#6": {
+    "kind": "function",
+    "name": "total_price",
+    "cases": [
+      [
+        [
+          3,
+          4
+        ],
+        12
+      ],
+      [
+        [
+          2.5,
+          2
+        ],
+        5.0
+      ],
+      [
+        [
+          0,
+          5
+        ],
+        0
+      ],
+      [
+        [
+          3,
+          0
+        ],
+        0
+      ]
+    ]
+  },
+  "ch06b-returning#7": {
+    "kind": "predict"
+  },
+  "ch06b-returning#8": {
+    "kind": "function",
+    "name": "sign",
+    "cases": [
+      [
+        [
+          5
+        ],
+        "positive"
+      ],
+      [
+        [
+          -3
+        ],
+        "negative"
+      ],
+      [
+        [
+          0
+        ],
+        "zero"
+      ],
+      [
+        [
+          0.5
+        ],
+        "positive"
+      ],
+      [
+        [
+          -0.5
+        ],
+        "negative"
+      ]
+    ]
+  },
+  "ch06b-returning#9": {
+    "kind": "function",
+    "name": "largest_of_three",
+    "cases": [
+      [
+        [
+          3,
+          9,
+          5
+        ],
+        9
+      ],
+      [
+        [
+          7,
+          7,
+          2
+        ],
+        7
+      ],
+      [
+        [
+          -1,
+          -5,
+          -3
+        ],
+        -1
+      ],
+      [
+        [
+          1,
+          2,
+          3
+        ],
+        3
+      ],
+      [
+        [
+          0,
+          0,
+          0
+        ],
+        0
+      ],
+      [
+        [
+          5,
+          1,
+          5
+        ],
+        5
+      ],
+      [
+        [
+          2,
+          8,
+          8
+        ],
+        8
+      ],
+      [
+        [
+          6,
+          2,
+          4
+        ],
+        6
+      ],
+      [
+        [
+          4,
+          2,
+          9
+        ],
+        9
+      ],
+      [
+        [
+          5,
+          9,
+          1
+        ],
+        9
+      ]
+    ]
   }
 }
