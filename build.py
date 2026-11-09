@@ -1267,6 +1267,29 @@ def run_box_file(source, where):
             sys.exit(f"{where}: still running after 30 seconds")
 
 
+def stopped_by_guard(source, seconds=1):
+    """Does the page's guard (web/box_runner.py) stop this box as a runaway loop?
+
+    A box that never ends is the lesson in a fix-the-bug exercise. Run as a
+    script it would only hit run_box_file's 30-second limit, which means "this
+    example hangs"; under the guard it stops the way it does in the page.
+    """
+    import contextlib
+    import io
+
+    sys.path.insert(0, str(ROOT / "web"))
+    import box_runner
+
+    try:
+        with contextlib.redirect_stdout(io.StringIO()):
+            box_runner.run_box(source, seconds, {})
+    except KeyboardInterrupt:
+        return True
+    except Exception:
+        return False
+    return False
+
+
 def raised_name(stderr):
     """The exception class named on a traceback's last line, or None.
 
@@ -1305,6 +1328,17 @@ def verify(built):
             source = code
             if declared.get("setup"):
                 source = declared["setup"] + "\n" + code
+
+            if declared.get("raises") == "KeyboardInterrupt":
+                # A loop that never ends, on purpose: the page's guard stops it
+                # with KeyboardInterrupt, so run it under that same guard here.
+                if stopped_by_guard(source):
+                    tally["raises on purpose"] += 1
+                else:
+                    tally["UNEXPECTED"] += 1
+                    problems.append((f"{page['key']}#{index - 1}", code.strip().split("\n")[0],
+                                     "declared KeyboardInterrupt, raised None"))
+                continue
 
             run = run_box_file(source, f"{page['key']}#{index - 1}")
 

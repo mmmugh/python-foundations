@@ -237,4 +237,7 @@ print(name.upper())
 ````
 
 An exercise fence must parse. A fix-the-bug practice should start from an error raised while the program runs
-(a `NameError`, a `TypeError`), not from a `SyntaxError`.
+(a `NameError`, a `TypeError`), not from a `SyntaxError`. A loop that never ends is one too: the page stops it after 5
+seconds with `KeyboardInterrupt`. Declare its box in `_boxes.json` as `{"raises": "KeyboardInterrupt"}` (boxes are
+numbered by every python fence on the page, from 0), and `build.py --check` runs it under the page's own guard instead
+of waiting for it.
