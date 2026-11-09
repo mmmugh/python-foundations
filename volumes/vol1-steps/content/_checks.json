@@ -6548,5 +6548,231 @@
         "- "
       ]
     ]
+  },
+  "ch08k-the-text-analyzer#1": {
+    "kind": "predict"
+  },
+  "ch08k-the-text-analyzer#2": {
+    "kind": "choice",
+    "options": [
+      "Nothing: the lines run together.",
+      "A space.",
+      "A new line, as if `\\n` were written there."
+    ],
+    "answer": 2,
+    "why": "The new lines typed between three quotes are part of the string. Printing it shows each line on its own, and `split(\"\\n\")` cuts it into its lines."
+  },
+  "ch08k-the-text-analyzer#3": {
+    "kind": "predict"
+  },
+  "ch08k-the-text-analyzer#4": {
+    "kind": "output",
+    "expected": "tea       2.50\ncake      3.25\nsoup      4.00"
+  },
+  "ch08k-the-text-analyzer#5": {
+    "kind": "function",
+    "name": "word_list",
+    "cases": [
+      [
+        [
+          "Hi, Ada! 42"
+        ],
+        [
+          "hi",
+          "ada"
+        ]
+      ],
+      [
+        [
+          "The end."
+        ],
+        [
+          "the",
+          "end"
+        ]
+      ],
+      [
+        [
+          ""
+        ],
+        []
+      ],
+      [
+        [
+          "- 42 -"
+        ],
+        []
+      ],
+      [
+        [
+          "it's OK"
+        ],
+        [
+          "its",
+          "ok"
+        ]
+      ],
+      [
+        [
+          "  Two   spaces "
+        ],
+        [
+          "two",
+          "spaces"
+        ]
+      ]
+    ]
+  },
+  "ch08k-the-text-analyzer#6": {
+    "kind": "function",
+    "name": "count_sentences",
+    "cases": [
+      [
+        [
+          "Hi. Bye!"
+        ],
+        2
+      ],
+      [
+        [
+          ""
+        ],
+        0
+      ],
+      [
+        [
+          "What?!"
+        ],
+        2
+      ],
+      [
+        [
+          "no end"
+        ],
+        0
+      ],
+      [
+        [
+          "One. Two? Three!"
+        ],
+        3
+      ],
+      [
+        [
+          "..."
+        ],
+        3
+      ]
+    ]
+  },
+  "ch08k-the-text-analyzer#7": {
+    "kind": "function",
+    "name": "longest_word",
+    "cases": [
+      [
+        [
+          [
+            "a",
+            "abc",
+            "ab"
+          ]
+        ],
+        "abc"
+      ],
+      [
+        [
+          []
+        ],
+        ""
+      ],
+      [
+        [
+          [
+            "hi",
+            "yo"
+          ]
+        ],
+        "hi"
+      ],
+      [
+        [
+          [
+            "tree"
+          ]
+        ],
+        "tree"
+      ],
+      [
+        [
+          [
+            "ab",
+            "cd",
+            "efg",
+            "hij"
+          ]
+        ],
+        "efg"
+      ],
+      [
+        [
+          [
+            "programming",
+            "computer"
+          ]
+        ],
+        "programming"
+      ]
+    ]
+  },
+  "ch08k-the-text-analyzer#8": {
+    "kind": "function",
+    "name": "average_length",
+    "cases": [
+      [
+        [
+          [
+            "ab",
+            "abcd"
+          ]
+        ],
+        3.0
+      ],
+      [
+        [
+          []
+        ],
+        0.0
+      ],
+      [
+        [
+          [
+            "a"
+          ]
+        ],
+        1.0
+      ],
+      [
+        [
+          [
+            "abc",
+            "de"
+          ]
+        ],
+        2.5
+      ],
+      [
+        [
+          [
+            "the",
+            "end"
+          ]
+        ],
+        3.0
+      ]
+    ]
+  },
+  "ch08k-the-text-analyzer#9": {
+    "kind": "output",
+    "expected": "====================================\nCharacters:                      125\nCharacters (no spaces):          102\nWords:                            24\nSentences:                         3\nVowels:                           34\nLongest word:            programming\nAverage word length:             4.1\n===================================="
   }
 }

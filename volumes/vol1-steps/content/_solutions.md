@@ -2245,3 +2245,152 @@ print(make_list(["tea"]))
 ```
 
 `join()` puts the glue only between items, so there is no new line after the last one, and an empty list gives `""`. Adding `"- " + item + "\n"` to a string in the loop would leave a new line after the last item.
+
+## ch08k-the-text-analyzer#4
+
+```python
+items = ["tea", "cake", "soup"]
+prices = [2.5, 3.25, 4.0]
+for i in range(len(items)):
+    print(f"{items[i]:<8}{prices[i]:>6.2f}")
+```
+
+`<8` fills 8 characters with the item, at the left, and `>6.2f` fills 6 with the price, at the right, with 2 decimal places. So every price ends in the same column. `enumerate()` from lesson 7.7 works too.
+
+## ch08k-the-text-analyzer#5
+
+```python
+def letters_only(text):
+    letters = ""
+    for character in text:
+        if character.isalpha():
+            letters += character
+    return letters
+
+
+def word_list(text):
+    words = []
+    for raw_word in text.split():
+        word = letters_only(raw_word).lower()
+        if word != "":
+            words.append(word)
+    return words
+```
+
+`split()` gives the words with their signs still on, like `Ada!`; `letters_only()` keeps the letters, and `lower()` makes them small. `42` has no letters, so it becomes `""`, and the `if` leaves it out. Without the `if`, `"Hi, Ada! 42"` would give `["hi", "ada", ""]`.
+
+## ch08k-the-text-analyzer#6
+
+```python
+def count_sentences(text):
+    count = 0
+    for character in text:
+        if character in ".!?":
+            count += 1
+    return count
+```
+
+One `in` asks about all three signs, as `in "aeiou"` did for vowels. Adding `text.count(".")`, `text.count("!")` and `text.count("?")` works too.
+
+## ch08k-the-text-analyzer#7
+
+```python
+def longest_word(words):
+    longest = ""
+    for word in words:
+        if len(word) > len(longest):
+            longest = word
+    return longest
+```
+
+Starting from `""` means an empty list gives back `""` with no extra test, and any real word is longer. `>` and not `>=`: a word as long as the longest so far does not replace it, so a tie keeps the first.
+
+## ch08k-the-text-analyzer#8
+
+```python
+def average_length(words):
+    if len(words) == 0:
+        return 0.0
+    total = 0
+    for word in words:
+        total += len(word)
+    return total / len(words)
+```
+
+The total of the lengths, divided by how many words there are, as `average()` did in lesson 7.5. Without the first test, an empty list would divide by 0 and stop with a `ZeroDivisionError`.
+
+## ch08k-the-text-analyzer#9
+
+```python
+# Say it: print a report on a passage of text.
+# Split it:
+# 1. the characters: len() of the text, then of the text with its spaces taken out
+# 2. the words: word_list(text), then len() of it
+# 3. the sentences: count_sentences(text)
+# 4. the vowels: count_vowels() from lesson 8.4
+# 5. the longest word: longest_word(words)
+# 6. the average word length: average_length(words), rounded to 1 place
+# 7. print each one with report_line()
+def letters_only(text):
+    letters = ""
+    for character in text:
+        if character.isalpha():
+            letters += character
+    return letters
+
+def count_vowels(text):
+    count = 0
+    for letter in text.lower():
+        if letter in "aeiou":
+            count += 1
+    return count
+
+sample = "The quick brown fox jumps over the lazy dog. Programming is the art of telling a computer what to do! Is that not remarkable?"
+
+def report_line(label, value):
+    """Print one line of the report: the label at the left, the value at the right."""
+    print(f"{label:<24}{value:>12}")
+
+def word_list(text):
+    words = []
+    for raw_word in text.split():
+        word = letters_only(raw_word).lower()
+        if word != "":
+            words.append(word)
+    return words
+
+def count_sentences(text):
+    count = 0
+    for character in text:
+        if character in ".!?":
+            count += 1
+    return count
+
+def longest_word(words):
+    longest = ""
+    for word in words:
+        if len(word) > len(longest):
+            longest = word
+    return longest
+
+def average_length(words):
+    if len(words) == 0:
+        return 0.0
+    total = 0
+    for word in words:
+        total += len(word)
+    return total / len(words)
+
+words = word_list(sample)
+print("=" * 36)
+report_line("Characters:", len(sample))
+report_line("Characters (no spaces):", len(sample.replace(" ", "")))
+report_line("Words:", len(words))
+report_line("Sentences:", count_sentences(sample))
+report_line("Vowels:", count_vowels(sample))
+report_line("Longest word:", longest_word(words))
+report_line("Average word length:", round(average_length(words), 1))
+print("=" * 36)
+```
+
+Each line is one step of the plan, and each step is a function you checked on its own. The words are worked out once, in `words`, and used three times. `round(..., 1)` gives 4.1, which `report_line()` puts at the right like any other value; `:>12.1f` in an f-string of your own does the same.
