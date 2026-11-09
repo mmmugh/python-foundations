@@ -819,6 +819,9 @@
         "typed": [],
         "words": [
           "True"
+        ],
+        "absent": [
+          "false"
         ]
       }
     ]
@@ -841,6 +844,9 @@
         ],
         "words": [
           "True"
+        ],
+        "absent": [
+          "false"
         ]
       },
       {
@@ -849,6 +855,9 @@
         ],
         "words": [
           "False"
+        ],
+        "absent": [
+          "true"
         ]
       },
       {
@@ -857,6 +866,9 @@
         ],
         "words": [
           "True"
+        ],
+        "absent": [
+          "false"
         ]
       },
       {
@@ -865,6 +877,9 @@
         ],
         "words": [
           "False"
+        ],
+        "absent": [
+          "true"
         ]
       }
     ]
@@ -1051,6 +1066,9 @@
         ],
         "words": [
           "teenager"
+        ],
+        "absent": [
+          "younger"
         ]
       },
       {
@@ -1059,6 +1077,9 @@
         ],
         "words": [
           "younger"
+        ],
+        "absent": [
+          "teenager"
         ]
       },
       {
@@ -1067,6 +1088,9 @@
         ],
         "words": [
           "younger"
+        ],
+        "absent": [
+          "teenager"
         ]
       },
       {
@@ -1075,6 +1099,9 @@
         ],
         "words": [
           "teenager"
+        ],
+        "absent": [
+          "younger"
         ]
       }
     ]
@@ -1088,6 +1115,9 @@
         ],
         "words": [
           "pass"
+        ],
+        "absent": [
+          "fail"
         ]
       },
       {
@@ -1096,6 +1126,9 @@
         ],
         "words": [
           "fail"
+        ],
+        "absent": [
+          "pass"
         ]
       },
       {
@@ -1104,6 +1137,9 @@
         ],
         "words": [
           "pass"
+        ],
+        "absent": [
+          "fail"
         ]
       },
       {
@@ -1112,6 +1148,9 @@
         ],
         "words": [
           "fail"
+        ],
+        "absent": [
+          "pass"
         ]
       }
     ]
@@ -1150,6 +1189,10 @@
         ],
         "words": [
           "positive"
+        ],
+        "absent": [
+          "negative",
+          "zero"
         ]
       },
       {
@@ -1158,6 +1201,10 @@
         ],
         "words": [
           "negative"
+        ],
+        "absent": [
+          "positive",
+          "zero"
         ]
       },
       {
@@ -1166,6 +1213,10 @@
         ],
         "words": [
           "zero"
+        ],
+        "absent": [
+          "positive",
+          "negative"
         ]
       }
     ]
@@ -1178,14 +1229,22 @@
           "3",
           "8"
         ],
-        "contains": "Larger: 8"
+        "contains": "Larger: 8",
+        "absent": [
+          "same",
+          "Larger: 3"
+        ]
       },
       {
         "typed": [
           "8",
           "3"
         ],
-        "contains": "Larger: 8"
+        "contains": "Larger: 8",
+        "absent": [
+          "same",
+          "Larger: 3"
+        ]
       },
       {
         "typed": [
@@ -1194,6 +1253,9 @@
         ],
         "words": [
           "same"
+        ],
+        "absent": [
+          "Larger:"
         ]
       },
       {
@@ -1201,7 +1263,11 @@
           "-2",
           "-7"
         ],
-        "contains": "Larger: -2"
+        "contains": "Larger: -2",
+        "absent": [
+          "same",
+          "Larger: -7"
+        ]
       }
     ]
   },
@@ -1232,6 +1298,9 @@
         ],
         "words": [
           "leap year"
+        ],
+        "absent": [
+          "ordinary"
         ]
       },
       {
@@ -1240,6 +1309,9 @@
         ],
         "words": [
           "ordinary"
+        ],
+        "absent": [
+          "leap"
         ]
       },
       {
@@ -1248,6 +1320,9 @@
         ],
         "words": [
           "ordinary"
+        ],
+        "absent": [
+          "leap"
         ]
       },
       {
@@ -1256,6 +1331,9 @@
         ],
         "words": [
           "leap year"
+        ],
+        "absent": [
+          "ordinary"
         ]
       }
     ]
@@ -1280,6 +1358,9 @@
     ]
   },
   "ch04c-nesting-and-truthiness#4": {
+    "kind": "predict"
+  },
+  "ch04c-nesting-and-truthiness#5": {
     "kind": "choice",
     "options": [
       "`if sunny and temperature > 25:`",
@@ -1289,13 +1370,13 @@
     "answer": 0,
     "why": "The swim line runs only when both questions are True, which is what `and` asks. With `or`, a hot rainy day would mean a swim."
   },
-  "ch04c-nesting-and-truthiness#5": {
-    "kind": "predict"
-  },
   "ch04c-nesting-and-truthiness#6": {
     "kind": "predict"
   },
   "ch04c-nesting-and-truthiness#7": {
+    "kind": "predict"
+  },
+  "ch04c-nesting-and-truthiness#8": {
     "kind": "choice",
     "options": [
       "`\"0\"`",
@@ -1305,7 +1386,7 @@
     "answer": 2,
     "why": "The number 0 counts as False. The other two are strings with something in them, so they count as True."
   },
-  "ch04c-nesting-and-truthiness#8": {
+  "ch04c-nesting-and-truthiness#9": {
     "kind": "stdin",
     "runs": [
       {
@@ -1316,6 +1397,10 @@
         "words": [
           "welcome",
           "ada"
+        ],
+        "absent": [
+          "sorry",
+          "type your name"
         ]
       },
       {
@@ -1326,6 +1411,10 @@
         "words": [
           "sorry",
           "bo"
+        ],
+        "absent": [
+          "welcome",
+          "type your name"
         ]
       },
       {
@@ -1335,6 +1424,10 @@
         ],
         "words": [
           "type your name"
+        ],
+        "absent": [
+          "welcome",
+          "sorry"
         ]
       },
       {
@@ -1345,6 +1438,10 @@
         "words": [
           "welcome",
           "cy"
+        ],
+        "absent": [
+          "sorry",
+          "type your name"
         ]
       }
     ]
@@ -1378,7 +1475,10 @@
         "typed": [
           "85"
         ],
-        "contains": "Grade: B"
+        "contains": "Grade: B",
+        "absent": [
+          "0 to 100"
+        ]
       },
       {
         "typed": [
@@ -1386,6 +1486,9 @@
         ],
         "words": [
           "from 0 to 100"
+        ],
+        "absent": [
+          "Grade:"
         ]
       },
       {
@@ -1394,19 +1497,28 @@
         ],
         "words": [
           "from 0 to 100"
+        ],
+        "absent": [
+          "Grade:"
         ]
       },
       {
         "typed": [
           "0"
         ],
-        "contains": "Grade: F"
+        "contains": "Grade: F",
+        "absent": [
+          "0 to 100"
+        ]
       },
       {
         "typed": [
           "100"
         ],
-        "contains": "Grade: A"
+        "contains": "Grade: A",
+        "absent": [
+          "0 to 100"
+        ]
       }
     ]
   },
@@ -1425,6 +1537,9 @@
         ],
         "words": [
           "whole number"
+        ],
+        "absent": [
+          "you have"
         ]
       },
       {
@@ -1433,6 +1548,9 @@
         ],
         "numbers": [
           3
+        ],
+        "absent": [
+          "whole number"
         ]
       }
     ]
@@ -1446,6 +1564,11 @@
         ],
         "numbers": [
           31
+        ],
+        "absent": [
+          "1 to 12",
+          "28",
+          "30"
         ]
       },
       {
@@ -1454,6 +1577,11 @@
         ],
         "numbers": [
           28
+        ],
+        "absent": [
+          "1 to 12",
+          "30",
+          "31"
         ]
       },
       {
@@ -1462,6 +1590,11 @@
         ],
         "numbers": [
           30
+        ],
+        "absent": [
+          "1 to 12",
+          "28",
+          "31"
         ]
       },
       {
@@ -1470,6 +1603,11 @@
         ],
         "numbers": [
           30
+        ],
+        "absent": [
+          "1 to 12",
+          "28",
+          "31"
         ]
       },
       {
@@ -1478,6 +1616,11 @@
         ],
         "numbers": [
           31
+        ],
+        "absent": [
+          "1 to 12",
+          "28",
+          "30"
         ]
       },
       {
@@ -1486,6 +1629,11 @@
         ],
         "words": [
           "1 to 12"
+        ],
+        "absent": [
+          "28",
+          "30",
+          "31"
         ]
       },
       {
@@ -1494,6 +1642,11 @@
         ],
         "words": [
           "1 to 12"
+        ],
+        "absent": [
+          "28",
+          "30",
+          "31"
         ]
       },
       {
@@ -1502,6 +1655,11 @@
         ],
         "words": [
           "1 to 12"
+        ],
+        "absent": [
+          "28",
+          "30",
+          "31"
         ]
       }
     ]
@@ -1527,6 +1685,11 @@
         ],
         "numbers": [
           0
+        ],
+        "absent": [
+          "8",
+          "14",
+          "10"
         ]
       },
       {
@@ -1535,6 +1698,11 @@
         ],
         "numbers": [
           0
+        ],
+        "absent": [
+          "8",
+          "14",
+          "10"
         ]
       },
       {
@@ -1543,6 +1711,10 @@
         ],
         "numbers": [
           8
+        ],
+        "absent": [
+          "14",
+          "10"
         ]
       },
       {
@@ -1551,6 +1723,10 @@
         ],
         "numbers": [
           8
+        ],
+        "absent": [
+          "14",
+          "10"
         ]
       },
       {
@@ -1559,6 +1735,10 @@
         ],
         "numbers": [
           14
+        ],
+        "absent": [
+          "8",
+          "10"
         ]
       },
       {
@@ -1567,6 +1747,10 @@
         ],
         "numbers": [
           14
+        ],
+        "absent": [
+          "8",
+          "10"
         ]
       },
       {
@@ -1575,6 +1759,10 @@
         ],
         "numbers": [
           10
+        ],
+        "absent": [
+          "8",
+          "14"
         ]
       },
       {
@@ -1583,6 +1771,11 @@
         ],
         "numbers": [
           0
+        ],
+        "absent": [
+          "8",
+          "14",
+          "10"
         ]
       }
     ]
@@ -1597,6 +1790,9 @@
         ],
         "numbers": [
           7
+        ],
+        "absent": [
+          "10"
         ]
       },
       {
@@ -1606,6 +1802,9 @@
         ],
         "numbers": [
           14
+        ],
+        "absent": [
+          "11"
         ]
       },
       {
@@ -1615,6 +1814,9 @@
         ],
         "numbers": [
           11
+        ],
+        "absent": [
+          "14"
         ]
       },
       {
@@ -1624,6 +1826,9 @@
         ],
         "numbers": [
           8
+        ],
+        "absent": [
+          "5"
         ]
       },
       {
@@ -1633,6 +1838,9 @@
         ],
         "numbers": [
           0
+        ],
+        "absent": [
+          "-3"
         ]
       }
     ]
@@ -1647,6 +1855,11 @@
         ],
         "numbers": [
           7
+        ],
+        "absent": [
+          "realistic",
+          "whole number",
+          "10"
         ]
       },
       {
@@ -1656,6 +1869,10 @@
         ],
         "numbers": [
           14
+        ],
+        "absent": [
+          "realistic",
+          "whole number"
         ]
       },
       {
@@ -1665,6 +1882,10 @@
         ],
         "words": [
           "whole number"
+        ],
+        "absent": [
+          "realistic",
+          "price"
         ]
       },
       {
@@ -1674,6 +1895,10 @@
         ],
         "words": [
           "realistic"
+        ],
+        "absent": [
+          "whole number",
+          "price"
         ]
       },
       {
@@ -1683,6 +1908,10 @@
         ],
         "words": [
           "realistic"
+        ],
+        "absent": [
+          "whole number",
+          "price"
         ]
       },
       {
@@ -1692,6 +1921,10 @@
         ],
         "numbers": [
           10
+        ],
+        "absent": [
+          "realistic",
+          "whole number"
         ]
       },
       {
@@ -1701,6 +1934,11 @@
         ],
         "numbers": [
           0
+        ],
+        "absent": [
+          "realistic",
+          "whole number",
+          "-3"
         ]
       },
       {
@@ -1710,6 +1948,11 @@
         ],
         "numbers": [
           0
+        ],
+        "absent": [
+          "realistic",
+          "whole number",
+          "-3"
         ]
       }
     ]

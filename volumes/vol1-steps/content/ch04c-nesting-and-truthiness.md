@@ -84,6 +84,16 @@ else:
     size = "small"
 ```
 
+4. Predict what this prints, then press Check.
+
+```python
+raining = False
+if raining:
+    print("Take an umbrella.")
+else:
+    print("Leave the umbrella at home.")
+```
+
 ### Or use and
 
 When you don't need two different messages, `and` can do the job of an `if` inside an `if`:
@@ -107,7 +117,7 @@ It is shorter, but it loses something: someone without a ticket and someone too 
 
 ### Practice
 
-4. Which one `if` line does the same job as the two `if` lines that lead to `plan = "swim"`?
+5. Which one `if` line does the same job as the two `if` lines that lead to `plan = "swim"`?
 
 ### What counts as true
 
@@ -187,7 +197,7 @@ This counts as true too.
 
 ### Practice
 
-5. Predict what this prints, then press Check.
+6. Predict what this prints, then press Check.
 
 ```python
 score = 0
@@ -200,9 +210,14 @@ if temperature:
     print("C")
 else:
     print("D")
+distance = 0.0
+if distance:
+    print("E")
+else:
+    print("F")
 ```
 
-6. Predict what this prints, then press Check.
+7. Predict what this prints, then press Check.
 
 ```python
 name = ""
@@ -215,11 +230,11 @@ if word:
     print("Got a word")
 ```
 
-7. Which of these counts as `False`?
+8. Which of these counts as `False`?
 
 ### Try It
 
-8. A club lets people in when they type a name and are 13 or older. Ask for a name, then an age. If the name is empty, print `Please type your name.` Otherwise, print `Welcome, Ada!` (with their name) when they are 13 or older, and `Sorry, Bo, you must be 13.` (with their name) when they are younger.
+9. A club lets people in when they type a name and are 13 or older. Ask for a name, then an age. If the name is empty, print `Please type your name.` Otherwise, print `Welcome, Ada!` (with their name) when they are 13 or older, and `Sorry, Bo, you must be 13.` (with their name) when they are younger.
 
 > Say it: a name and an age go in, and one of three messages comes out. ([How to start a problem](99-how-to-start-a-problem.html))
 > Split it: ask for the name; ask for the age, as a whole number; first question: was a name typed? If not, ask for one. If it was, the second question: is the age 13 or more? Then welcome, or sorry.

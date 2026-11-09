@@ -591,7 +591,7 @@ else:
 
 It is the raffle's shape with 4, 100 and 400. 2000 is a multiple of 400, so it is a leap year. 1900 is a multiple of 100 but not of 400, so it is not, even though 4 goes into it.
 
-## ch04c-nesting-and-truthiness#8
+## ch04c-nesting-and-truthiness#9
 
 ```python
 # Say it: let someone into the club if they give a name and are 13 or older.
