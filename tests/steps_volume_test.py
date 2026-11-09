@@ -49,9 +49,11 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch03c-formatting", "Lesson 3.3 — Formatting output",
      ("Say it", "Split it", "Name it", "Check it")),
-    ("ch03d-comparing", "Lesson 3.4 — Comparing values",
+    ("ch03d-joining-text", "Lesson 3.4 — Joining and repeating text",
      ("Say it", "Split it", "Name it", "Check it")),
-    ("ch03e-combining-and-change", "Lesson 3.5 — Combining conditions, and the change machine",
+    ("ch03e-comparing", "Lesson 3.5 — Comparing values",
+     ("Say it", "Split it", "Name it", "Check it")),
+    ("ch03f-combining-and-change", "Lesson 3.6 — Combining conditions, and the change machine",
      ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10

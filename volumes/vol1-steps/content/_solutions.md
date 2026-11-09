@@ -299,6 +299,7 @@ print("Total", total)
 
 The ruler needed three changes, one for each step it touches: its price, its line, and its place in the total.
 
+
 ## ch03a-more-arithmetic#4
 
 ```python
@@ -317,7 +318,7 @@ print(side ** 2)
 
 `side * side` gives the same answer; `**` is the shorter way to say it.
 
-## ch03a-more-arithmetic#7
+## ch03a-more-arithmetic#8
 
 ```python
 # Say it: turn a number of seconds into minutes and seconds.
@@ -334,7 +335,7 @@ print(minutes, "minutes and", seconds_left, "seconds")
 
 It is how many whole, how many left, with 60 seconds in each minute. 59 gives 0 minutes and 59 seconds, and 0 gives 0 and 0: both make sense.
 
-## ch03b-order-and-rounding#5
+## ch03b-order-and-rounding#8
 
 ```python
 print(round(22 / 7, 3))
@@ -342,7 +343,7 @@ print(round(22 / 7, 3))
 
 Python works out `22 / 7` inside the brackets first, then rounds the answer.
 
-## ch03b-order-and-rounding#6
+## ch03b-order-and-rounding#9
 
 ```python
 # Say it: work out the average of three test scores, to 1 decimal place.
@@ -359,33 +360,21 @@ print("Average:", round(average, 1))
 
 The parentheses matter: without them, Python would divide only the third score by 3. Three zeros give 0.0, which is right.
 
-## ch03c-formatting#3
+## ch03c-formatting#5
 
 ```python
 pet = input("Your pet's name: ")
 print(f"Good morning, {pet}!")
 ```
 
-## ch03c-formatting#4
+## ch03c-formatting#7
 
 ```python
 price = 4.5
 print(f"${price:.2f}")
 ```
 
-## ch03c-formatting#5
-
-```python
-print("#" * 20)
-print("#" * 20)
-print("#" * 20)
-print("#" * 20)
-print("#" * 20)
-```
-
-Every row is the same, so every line is the same.
-
-## ch03c-formatting#6
+## ch03c-formatting#8
 
 ```python
 # Say it: work out what some items cost, and show it as dollars and cents.
@@ -402,7 +391,45 @@ print(f"Total: ${total:.2f}")
 
 0 items gives `Total: $0.00`, which is right: nothing bought, nothing to pay.
 
-## ch03d-comparing#5
+## ch03d-joining-text#5
+
+```python
+print("#" * 20)
+print("#" * 20)
+print("#" * 20)
+print("#" * 20)
+print("#" * 20)
+```
+
+Every row is the same, so every line is the same.
+
+## ch03d-joining-text#7
+
+```python
+age = 13
+print("Age: " + str(age))
+```
+
+`str()` turns 13 into the text `"13"`, which `+` can join. `print(f"Age: {age}")` works too.
+
+## ch03d-joining-text#8
+
+```python
+# Say it: say how old someone will be next year, in one sentence.
+# Split it:
+# 1. ask for the name
+# 2. ask for the age, as a whole number
+# 3. add 1, and turn the answer into text
+# 4. join the pieces with + and print
+name = input("Name: ")
+age = int(input("Age: "))
+next_age = age + 1
+print("Next year, " + name + " will be " + str(next_age) + ".")
+```
+
+`str()` is needed because `next_age` is a number, and `+` joins only text to text. With 0, it prints `Next year, Bo will be 1.`, which makes sense.
+
+## ch03e-comparing#7
 
 ```python
 score = 10
@@ -411,7 +438,7 @@ print(score == 10)
 
 One `=` stores; two ask. The error said `print()` got something it did not expect: an instruction to store, where a question belonged.
 
-## ch03d-comparing#7
+## ch03e-comparing#9
 
 ```python
 # Say it: say whether a whole number is even, as True or False.
@@ -426,7 +453,7 @@ print(remainder == 0)
 
 A number is even when 2 goes into it with nothing left over. 0 is even, and prints `True`; -3 is odd, and prints `False`.
 
-## ch03e-combining-and-change#6
+## ch03f-combining-and-change#7
 
 ```python
 # Say it: ask for an amount in cents, and show how to pay it
@@ -437,7 +464,7 @@ print(f"{cents} cents is ${cents / 100:.2f}")
 
 There are 100 cents in a dollar, so dividing by 100 gives dollars.
 
-## ch03e-combining-and-change#7
+## ch03f-combining-and-change#8
 
 ```python
 # Say it: ask for an amount in cents, and show how to pay it
@@ -452,7 +479,7 @@ print(f"Quarters: {quarters}, leaving {cents_left} cents")
 
 It is how many whole, how many left, with 25 cents in each quarter.
 
-## ch03e-combining-and-change#8
+## ch03f-combining-and-change#9
 
 ```python
 # Say it: ask for an amount in cents, and show how to pay it

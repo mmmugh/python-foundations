@@ -70,10 +70,17 @@ print((2 + 3) * 4)
 ```
 
 4. Which line prints the average of 4 and 8?
+5. Predict what this prints, then press Check. Use the order of operations: powers first, then `*`, `/`, `//` and `%` from left to right, then `+` and `-`.
 
-### Rounding
+```python
+print(3 * 2 ** 2)
+print(20 - 8 // 4)
+print(12 // 2 * 3)
+```
 
-Here is a surprise:
+### A surprise
+
+Try adding two small decimals:
 
 ```python
 print(0.1 + 0.2)
@@ -86,6 +93,12 @@ Output:
 ```
 
 Nothing is wrong with your code. A computer stores decimals in binary, and 0.1 cannot be written exactly in binary, just as 1/3 cannot be written exactly as a decimal. The tiny error shows up when you add. It is far too small to matter, but it looks messy on screen.
+
+### Practice
+
+6. Your program prints `0.30000000000000004` for `0.1 + 0.2`. Is something wrong with your code?
+
+### Rounding
 
 `round()` tidies a number. Give it the number, a comma, and how many decimal places to keep:
 
@@ -115,11 +128,18 @@ Output:
 
 ### Practice
 
-5. Print 22 / 7 rounded to 3 decimal places.
+7. Predict what this prints, then press Check.
+
+```python
+print(round(2.6))
+print(round(2.66, 1))
+```
+
+8. Print 22 / 7 rounded to 3 decimal places.
 
 ### Try It
 
-6. Ask for three test scores, and print their average, rounded to 1 decimal place.
+9. Ask for three test scores, and print their average, rounded to 1 decimal place.
 
 > Say it: three scores go in; what comes out? ([How to start a problem](99-how-to-start-a-problem.html))
 > Split it: ask for each score as a number, add them up, divide by 3, round to 1 place, print. Which of those must happen before the dividing?

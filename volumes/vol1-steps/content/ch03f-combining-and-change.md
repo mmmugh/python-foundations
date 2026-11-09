@@ -1,5 +1,5 @@
 <!-- part: Unit 3 — Expressions and operators -->
-## Lesson 3.5 — Combining conditions, and the change machine
+## Lesson 3.6 — Combining conditions, and the change machine
 
 In this lesson you ask two questions at once, and meet a shorter way to change a value. Then you build a program that works out change in coins, using what this unit has taught you.
 
@@ -63,6 +63,13 @@ True
 
 3. A ride lets you on if you are at least 120 cm tall and at least 8 years old. Which line asks that?
 4. `raining` is `True` and `snowing` is `False`. What does `print(raining or snowing)` print?
+5. Predict what this prints, then press Check.
+
+```python
+age = 10
+print(not age > 12)
+print(5 <= age <= 9)
+```
 
 ### A shorter way to change a value
 
@@ -114,13 +121,14 @@ Output:
 
 ### Practice
 
-5. Fill in the table, then press Check.
+6. Fill in the table, then press Check. `/` always gives a number with a decimal point, and so does `/=`.
 
 ```python
-coins = 5
-coins += 3
-coins -= 2
-coins *= 2
+points = 5
+points += 3
+points -= 2
+points *= 2
+points /= 4
 ```
 
 ### The change machine
@@ -131,18 +139,18 @@ Everything it needs, you have met in this unit. You will build it a step at a ti
 
 ### Practice
 
-6. Step 1: ask for an amount in cents, and print it in dollars with two decimal places. 87 cents is `$0.87`.
+7. Step 1: ask for an amount in cents, and print it in dollars with two decimal places. 87 cents is `$0.87`.
 
 ```python
 # Say it: ask for an amount in cents, and show how to pay it
 # with the fewest quarters, dimes, nickels and pennies.
 ```
 
-7. Step 2: print how many quarters fit in the amount, and how many cents are left over after them. Copy your step 1 into this box first.
+8. Step 2: print how many quarters fit in the amount, and how many cents are left over after them. Copy your step 1 into this box first.
 
 ### Try It
 
-8. Finish the machine. After the quarters, print how many dimes, nickels and pennies to give, in that order, then the total number of coins. Copy your program so far into this box first.
+9. Finish the machine. After the quarters, print how many dimes, nickels and pennies to give, in that order, then the total number of coins. Copy your program so far into this box first.
 
 > Say it: in your own words, what does the machine do with the cents left after the quarters? ([How to start a problem](99-how-to-start-a-problem.html))
 > Split it: take the biggest coin first. You already take as many quarters as fit, and keep what is left. From what is left, take as many dimes as fit, and keep what is left after them. Then the same for nickels. Whatever is left at the end is pennies. Each coin is how many whole, how many left again.

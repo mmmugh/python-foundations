@@ -1,7 +1,7 @@
 <!-- part: Unit 3 — Expressions and operators -->
 ## Lesson 3.3 — Formatting output
 
-In this lesson you choose exactly how your output looks: values placed right inside a sentence, money with two decimal places, and lines drawn from repeated characters.
+In this lesson you choose exactly how your output looks: values placed right inside a sentence, and numbers shown with exactly the decimal places you want, like money.
 
 ### Warm-up
 
@@ -74,7 +74,15 @@ Hello, {name}!
 
 ### Practice
 
-3. This program prints a space before the `!`. Rewrite the `print()` as an f-string, so that it doesn't.
+3. Predict what this prints, then press Check.
+
+```python
+side = 3
+print(f"A square with side {side} has area {side ** 2}.")
+```
+
+4. `name` holds `"Sam"`. Which line prints `Hi, Sam`?
+5. This program prints a space before the `!`. Rewrite the `print()` as an f-string, so that it doesn't.
 
 ```python
 pet = input("Your pet's name: ")
@@ -128,65 +136,25 @@ Output:
 
 ### Practice
 
-4. Change the `print()` so it shows the price in dollars with two decimal places, like this: `$4.50`.
+6. Predict what this prints, then press Check.
+
+```python
+height = 1.4567
+print(f"{height:.1f}")
+print(f"{height:.3f}")
+print(height)
+```
+
+7. Change the `print()` so it shows the price in dollars with two decimal places, like this: `$4.50`.
 
 ```python
 price = 4.5
 print(price)
 ```
 
-### Strings with + and *
-
-You met `+` on strings in lesson 2.2: it glues them end to end.
-
-```python
-first = "Ada"
-last = "Lovelace"
-print(first + " " + last)
-```
-
-Output:
-
-```
-Ada Lovelace
-```
-
-`*` with a whole number repeats a string. It is a quick way to draw a line:
-
-```python
-print("-" * 20)
-print("ab" * 3)
-```
-
-Output:
-
-```
---------------------
-ababab
-```
-
-`+` needs text on both sides. `"Score: " + 42` stops with a `TypeError`, just as `age + 1` did in lesson 2.3. There are two fixes. `str()` turns a number into text, the way `int()` turns text into a number. Or use an f-string, which turns the number into text for you:
-
-```python
-score = 42
-print("Score: " + str(score))
-print(f"Score: {score}")
-```
-
-Output:
-
-```
-Score: 42
-Score: 42
-```
-
-### Practice
-
-5. Print a rectangle of `#` characters, 20 wide and 5 tall. Use `*`, so you never type more than one `#` at a time.
-
 ### Try It
 
-6. Ask for the price of one item and how many are being bought. Print the total cost with two decimal places, like `Total: $6.75`.
+8. Ask for the price of one item and how many are being bought. Print the total cost with two decimal places, like `Total: $6.75`.
 
 > Say it: a price and a number of items go in; what comes out? ([How to start a problem](99-how-to-start-a-problem.html))
 > Split it: ask for the price as a decimal number, ask how many as a whole number, multiply them, print the total with `:.2f`.
@@ -195,8 +163,8 @@ Score: 42
 
 ### What you can do now
 
-- Put values inside text with an f-string.
-- Show a number with exactly the decimal places you want, with `:.2f`.
-- Join strings with `+`, and repeat them with `*`.
+- Put values, and whole expressions, inside text with an f-string.
+- Spot a missing `f` from the braces it prints.
+- Show a number with exactly the decimal places you want, like `:.2f`, without changing the value.
 
-Key words: **f-string**, **format specifier**, **str()**.
+Key words: **f-string**, **format specifier**.

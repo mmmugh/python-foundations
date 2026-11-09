@@ -1,5 +1,5 @@
 <!-- part: Unit 3 — Expressions and operators -->
-## Lesson 3.4 — Comparing values
+## Lesson 3.5 — Comparing values
 
 In this lesson Python answers questions about values: is this bigger than that, are these two the same? You also learn to tell apart two signs that look alike, `=` and `==`.
 
@@ -14,8 +14,8 @@ print("=" * 8)
 2. Predict what this prints, then press Check.
 
 ```python
-price = 3.5
-print(f"${price:.2f}")
+score = 7
+print("Score: " + str(score))
 ```
 
 ### Asking a question
@@ -50,6 +50,7 @@ There are six comparison operators:
 ```python
 age = 13
 print(age >= 13)
+print(age <= 12)
 print(age == 12)
 print(age != 12)
 ```
@@ -58,6 +59,7 @@ Output:
 
 ```
 True
+False
 False
 True
 ```
@@ -116,7 +118,17 @@ True
 
 ### Practice
 
-3. Fill in the table, then press Check. Write `True` and `False` with capitals and no quotes.
+3. Predict what this prints, then press Check.
+
+```python
+temperature = 30
+print(temperature < 0)
+print(temperature != 0)
+print(temperature <= 30)
+print(temperature >= 31)
+```
+
+4. Fill in the table, then press Check. Write `True` and `False` with capitals and no quotes.
 
 ```python
 score = 7
@@ -125,13 +137,15 @@ score = score + 5
 won = score > 10
 ```
 
-4. Predict what this prints, then press Check.
+5. Predict what this prints, then press Check. Remember the twist: capitals come first.
 
 ```python
-temperature = 30
-print(temperature < 0)
-print(temperature != 0)
+print("cat" < "dog")
+print("Dog" < "cat")
+print("dog" == "Dog")
 ```
+
+6. Which line prints `True`?
 
 ### One = or two
 
@@ -153,7 +167,7 @@ Python responds with something like:
 TypeError: print() got an unexpected keyword argument 'age'
 ```
 
-Read it from the bottom. Python took `age = 14` inside the brackets as an instruction to store something, and `print()` has no idea what to do with that. One `=` never asks a question. The question needs `==`:
+Read it from the bottom. A keyword argument is Python's name for a `name = value` inside brackets; you don't need to remember it. Python took `age = 14` as an instruction to store something, and `print()` has no idea what to do with that. One `=` never asks a question. The question needs `==`:
 
 ```python
 age = 14
@@ -168,18 +182,18 @@ True
 
 ### Practice
 
-5. This program should print whether `score` is 10. It stops with an error. Run it and read the last line of the error. Then fix it.
+7. This program should print whether `score` is 10. It stops with an error. Run it and read the last line of the error. Then fix it.
 
 ```python
 score = 10
 print(score = 10)
 ```
 
-6. Which one asks whether `lives` is 0, without changing `lives`?
+8. Which one asks whether `lives` is 0, without changing `lives`?
 
 ### Try It
 
-7. Ask for a whole number. Print `True` if it is even, and `False` if it is not.
+9. Ask for a whole number. Print `True` if it is even, and `False` if it is not.
 
 > Say it: a number goes in, and `True` or `False` comes out. What makes a number even? ([How to start a problem](99-how-to-start-a-problem.html))
 > Split it: ask for the number, as a whole number; find the remainder when it is divided by 2; ask whether that remainder is 0; print the answer.

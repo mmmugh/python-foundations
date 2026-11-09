@@ -142,7 +142,17 @@ Output:
 
 `-17 / 5` is -3.4. `//` always rounds down, and for a negative number down means away from zero, so the answer is -4, not -3.
 
-And zero:
+### Practice
+
+6. Predict what this prints, then press Check. Work out the `/` answer first, then round it down.
+
+```python
+print(-7 // 2)
+```
+
+### Dividing by zero
+
+The second awkward value is zero:
 
 ```python
 print(17 // 0)
@@ -158,11 +168,11 @@ No number of 0s adds up to 17, so there is no answer, and Python stops. The same
 
 ### Practice
 
-6. A program works out `cookies // friends`. Which value of `friends` is the awkward one worth trying?
+7. A program works out `cookies // friends`. Which value of `friends` is the awkward one worth trying?
 
 ### Try It
 
-7. Ask how many seconds something took, and print it as minutes and seconds. For example, 125 seconds is 2 minutes and 5 seconds.
+8. Ask how many seconds something took, and print it as minutes and seconds. For example, 125 seconds is 2 minutes and 5 seconds.
 
 > Say it: seconds go in; what comes out? ([How to start a problem](99-how-to-start-a-problem.html))
 > Split it: ask for the seconds as a whole number, work out the whole minutes, work out the seconds left, print both. It is how many whole, how many left again.
