@@ -2246,7 +2246,7 @@ print(make_list(["tea"]))
 
 `join()` puts the glue only between items, so there is no new line after the last one, and an empty list gives `""`. Adding `"- " + item + "\n"` to a string in the loop would leave a new line after the last item.
 
-## ch08k-the-text-analyzer#4
+## ch08k-lining-up-columns#4
 
 ```python
 items = ["tea", "cake", "soup"]
@@ -2257,7 +2257,28 @@ for i in range(len(items)):
 
 `<8` fills 8 characters with the item, at the left, and `>6.2f` fills 6 with the price, at the right, with 2 decimal places. So every price ends in the same column. `enumerate()` from lesson 7.7 works too.
 
-## ch08k-the-text-analyzer#5
+## ch08k-lining-up-columns#5
+
+```python
+# Say it: print each item and its price in two columns, a dashed line, then the total.
+# Split it:
+# 1. loop with each index, and print the item with <12 and the price with >8.2f
+# 2. print 20 - signs
+# 3. work out the total of the prices
+# 4. print Total and the total, with the same widths
+items = ["notebook", "pens", "stickers"]
+prices = [3.5, 2.25, 1.75]
+for i in range(len(items)):
+    print(f"{items[i]:<12}{prices[i]:>8.2f}")
+print("-" * 20)
+total = sum(prices)
+label = "Total"
+print(f"{label:<12}{total:>8.2f}")
+```
+
+Every line uses the same two widths, so the prices end in one column, the total's too. `sum()` from lesson 7.5 adds up the prices; a running total in the loop works as well. `Total` is put in a variable here so that the f-string needs no quotes inside it; `f"{'Total':<12}..."`, with single quotes inside, works too.
+
+## ch08l-the-text-analyzer#3
 
 ```python
 def letters_only(text):
@@ -2279,7 +2300,7 @@ def word_list(text):
 
 `split()` gives the words with their signs still on, like `Ada!`; `letters_only()` keeps the letters, and `lower()` makes them small. `42` has no letters, so it becomes `""`, and the `if` leaves it out. Without the `if`, `"Hi, Ada! 42"` would give `["hi", "ada", ""]`.
 
-## ch08k-the-text-analyzer#6
+## ch08l-the-text-analyzer#4
 
 ```python
 def count_sentences(text):
@@ -2292,7 +2313,7 @@ def count_sentences(text):
 
 One `in` asks about all three signs, as `in "aeiou"` did for vowels. Adding `text.count(".")`, `text.count("!")` and `text.count("?")` works too.
 
-## ch08k-the-text-analyzer#7
+## ch08l-the-text-analyzer#5
 
 ```python
 def longest_word(words):
@@ -2305,7 +2326,7 @@ def longest_word(words):
 
 Starting from `""` means an empty list gives back `""` with no extra test, and any real word is longer. `>` and not `>=`: a word as long as the longest so far does not replace it, so a tie keeps the first.
 
-## ch08k-the-text-analyzer#8
+## ch08l-the-text-analyzer#6
 
 ```python
 def average_length(words):
@@ -2319,7 +2340,7 @@ def average_length(words):
 
 The total of the lengths, divided by how many words there are, as `average()` did in lesson 7.5. Without the first test, an empty list would divide by 0 and stop with a `ZeroDivisionError`.
 
-## ch08k-the-text-analyzer#9
+## ch08l-the-text-analyzer#7
 
 ```python
 # Say it: print a report on a passage of text.

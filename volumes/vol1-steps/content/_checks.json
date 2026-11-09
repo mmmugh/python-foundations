@@ -6549,10 +6549,10 @@
       ]
     ]
   },
-  "ch08k-the-text-analyzer#1": {
+  "ch08k-lining-up-columns#1": {
     "kind": "predict"
   },
-  "ch08k-the-text-analyzer#2": {
+  "ch08k-lining-up-columns#2": {
     "kind": "choice",
     "options": [
       "Nothing: the lines run together.",
@@ -6562,14 +6562,31 @@
     "answer": 2,
     "why": "The new lines typed between three quotes are part of the string. Printing it shows each line on its own, and `split(\"\\n\")` cuts it into its lines."
   },
-  "ch08k-the-text-analyzer#3": {
+  "ch08k-lining-up-columns#3": {
     "kind": "predict"
   },
-  "ch08k-the-text-analyzer#4": {
+  "ch08k-lining-up-columns#4": {
     "kind": "output",
     "expected": "tea       2.50\ncake      3.25\nsoup      4.00"
   },
-  "ch08k-the-text-analyzer#5": {
+  "ch08k-lining-up-columns#5": {
+    "kind": "output",
+    "expected": "notebook        3.50\npens            2.25\nstickers        1.75\n--------------------\nTotal           7.50"
+  },
+  "ch08l-the-text-analyzer#1": {
+    "kind": "predict"
+  },
+  "ch08l-the-text-analyzer#2": {
+    "kind": "choice",
+    "options": [
+      "It puts the name at the right of 10 characters.",
+      "It puts the name at the left of 10 characters, with spaces after it.",
+      "It cuts the name to 10 characters."
+    ],
+    "answer": 1,
+    "why": "`<` means at the left, and 10 is the width: the name and enough spaces after it to fill 10 characters. `>` would put the spaces before it."
+  },
+  "ch08l-the-text-analyzer#3": {
     "kind": "function",
     "name": "word_list",
     "cases": [
@@ -6623,7 +6640,7 @@
       ]
     ]
   },
-  "ch08k-the-text-analyzer#6": {
+  "ch08l-the-text-analyzer#4": {
     "kind": "function",
     "name": "count_sentences",
     "cases": [
@@ -6665,7 +6682,7 @@
       ]
     ]
   },
-  "ch08k-the-text-analyzer#7": {
+  "ch08l-the-text-analyzer#5": {
     "kind": "function",
     "name": "longest_word",
     "cases": [
@@ -6724,7 +6741,7 @@
       ]
     ]
   },
-  "ch08k-the-text-analyzer#8": {
+  "ch08l-the-text-analyzer#6": {
     "kind": "function",
     "name": "average_length",
     "cases": [
@@ -6771,7 +6788,7 @@
       ]
     ]
   },
-  "ch08k-the-text-analyzer#9": {
+  "ch08l-the-text-analyzer#7": {
     "kind": "output",
     "expected": "====================================\nCharacters:                      125\nCharacters (no spaces):          102\nWords:                            24\nSentences:                         3\nVowels:                           34\nLongest word:            programming\nAverage word length:             4.1\n===================================="
   }

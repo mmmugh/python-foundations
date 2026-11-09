@@ -127,7 +127,9 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch08j-special-characters", "Lesson 8.10 — Special characters, and text over several lines",
      ("Say it", "Split it", "Name it", "Check it")),
-    ("ch08k-the-text-analyzer", "Lesson 8.11 — Lining up columns, and a text analyzer",
+    ("ch08k-lining-up-columns", "Lesson 8.11 — Lining up columns",
+     ("Say it", "Split it", "Name it", "Check it")),
+    ("ch08l-the-text-analyzer", "Lesson 8.12 — A text analyzer",
      ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
