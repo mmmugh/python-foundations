@@ -1198,3 +1198,57 @@ print(is_even(-3))
 ```
 
 `number % 2 == 0` is already `True` or `False`, so the function can return it as it is. An `if` with `return True` and `return False` works too. 0 divided by 2 leaves no remainder, so 0 is even, and so is -2.
+
+## ch06d-defaults-and-calls#4
+
+```python
+def repeat_text(text, times=2):
+    return text * times
+```
+
+With one argument, `times` holds its default, 2. With two, the second replaces it. An empty string repeated is still empty, and any string times 0 is `""`.
+
+## ch06d-defaults-and-calls#6
+
+```python
+def is_even(number):
+    """Give back True if the number is even, False if it is not."""
+    return number % 2 == 0
+
+
+for number in range(1, 21):
+    if is_even(number):
+        print(number)
+```
+
+`is_even()` gives back `True` or `False`, so its call can be the whole condition of the `if`. `range(1, 21)` stops just before 21, so 20 is included.
+
+## ch06d-defaults-and-calls#8
+
+```python
+# Say it: count the vowels in a word.
+# Split it:
+# 1. is_vowel: True for a, e, i, o or u, otherwise False
+# 2. count_vowels: start a count at 0
+# 3. for each letter, if is_vowel says so, add 1
+# 4. after the loop, return the count
+def is_vowel(letter):
+    """Give back True if the letter is a vowel."""
+    return letter == "a" or letter == "e" or letter == "i" or letter == "o" or letter == "u"
+
+
+def count_vowels(word):
+    """Give back how many vowels the word has."""
+    count = 0
+    for letter in word:
+        if is_vowel(letter):
+            count += 1
+    return count
+
+
+print(is_vowel("e"))
+print(is_vowel("k"))
+print(count_vowels("banana"))
+```
+
+`count_vowels()` is lesson 5.3's counting loop, inside a function, and the vowel test has a name of its own. The two `is_vowel()` calls check it alone, before `count_vowels()` relies on it. With an empty string, the loop makes no passes, and the count stays 0. The `return` is not indented into the loop: there, it would end the function after the first letter.

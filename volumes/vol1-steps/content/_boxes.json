@@ -70,5 +70,9 @@
   "ch06c-scope-and-docstrings#7": {
     "raises": "NameError",
     "why": "A function called above its def line. The error message is the lesson."
+  },
+  "ch06d-defaults-and-calls#2": {
+    "raises": "SyntaxError",
+    "why": "A parameter with a default before one without. The error message is the lesson."
   }
 }
