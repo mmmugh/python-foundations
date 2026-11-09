@@ -314,7 +314,8 @@ def check_stdin(source, runs, seconds=5):
 
     The exercise says what to compute but not how to word it, so the wording is
     not tested. Fixed input goes in; the numbers or keywords the exercise does
-    pin must come out, in order. "5 x 1 = 5" and a bare "5" both pass.
+    pin must come out, in order. "5 x 1 = 5" and a bare "5" both pass. Words
+    listed as "absent" (another branch's message) must not come out at all.
 
     Input is supplied without echoing it back, so a value that was typed in
     cannot be mistaken for a value the program worked out.
@@ -354,6 +355,13 @@ def check_stdin(source, runs, seconds=5):
         exact = attempt.get("contains")
         if exact and exact not in printed:
             return False, [f"{lead}expected this line: {exact!r}"]
+
+        # A decision's other branches: words that must not appear in this
+        # run, so printing every branch's message unconditionally fails.
+        for word in attempt.get("absent", []):
+            if word.lower() in printed.lower():
+                return False, [f"{lead}your program also printed {word!r}, "
+                               f"which should not appear here"]
 
     return True, []
 
