@@ -5339,5 +5339,174 @@
         4
       ]
     ]
+  },
+  "ch08c-tidying-text#1": {
+    "kind": "predict"
+  },
+  "ch08c-tidying-text#2": {
+    "kind": "choice",
+    "options": [
+      "`answer == \"yes\"`",
+      "`answer.lower() == \"yes\"`",
+      "`answer.upper() == \"yes\"`"
+    ],
+    "answer": 1,
+    "why": "`lower()` turns `YES` and `Yes` into `yes`, so all three match. `upper()` would turn them into `YES`, which is never equal to `\"yes\"`."
+  },
+  "ch08c-tidying-text#3": {
+    "kind": "predict"
+  },
+  "ch08c-tidying-text#4": {
+    "kind": "function",
+    "name": "is_yes",
+    "cases": [
+      [
+        [
+          "yes"
+        ],
+        true
+      ],
+      [
+        [
+          " YES "
+        ],
+        true
+      ],
+      [
+        [
+          "Yes  "
+        ],
+        true
+      ],
+      [
+        [
+          ""
+        ],
+        false
+      ],
+      [
+        [
+          "no"
+        ],
+        false
+      ],
+      [
+        [
+          "y e s"
+        ],
+        false
+      ],
+      [
+        [
+          "  yes please"
+        ],
+        false
+      ],
+      [
+        [
+          "   yEs"
+        ],
+        true
+      ]
+    ]
+  },
+  "ch08c-tidying-text#5": {
+    "kind": "predict"
+  },
+  "ch08c-tidying-text#6": {
+    "kind": "function",
+    "name": "no_spaces",
+    "cases": [
+      [
+        [
+          "a b c"
+        ],
+        "abc"
+      ],
+      [
+        [
+          ""
+        ],
+        ""
+      ],
+      [
+        [
+          "  hi  "
+        ],
+        "hi"
+      ],
+      [
+        [
+          "top spot"
+        ],
+        "topspot"
+      ],
+      [
+        [
+          "none"
+        ],
+        "none"
+      ],
+      [
+        [
+          "   "
+        ],
+        ""
+      ]
+    ]
+  },
+  "ch08c-tidying-text#7": {
+    "kind": "function",
+    "name": "tidy_name",
+    "cases": [
+      [
+        [
+          "  aDA "
+        ],
+        "Ada"
+      ],
+      [
+        [
+          "grace"
+        ],
+        "Grace"
+      ],
+      [
+        [
+          "ALAN"
+        ],
+        "Alan"
+      ],
+      [
+        [
+          ""
+        ],
+        ""
+      ],
+      [
+        [
+          "   "
+        ],
+        ""
+      ],
+      [
+        [
+          "b"
+        ],
+        "B"
+      ],
+      [
+        [
+          " mary ann "
+        ],
+        "Mary ann"
+      ],
+      [
+        [
+          "Bo  "
+        ],
+        "Bo"
+      ]
+    ]
   }
 }

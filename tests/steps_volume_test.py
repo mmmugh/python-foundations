@@ -111,6 +111,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch08b-capital-letters", "Lesson 8.2 — Capital letters, and keeping the result",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch08c-tidying-text", "Lesson 8.3 — Tidying text",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

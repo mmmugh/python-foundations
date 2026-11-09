@@ -1899,3 +1899,43 @@ print(count_letter("Anna", "A"))
 ```
 
 Step 1 is the comparing-safely idea: both sides in small letters, so `A` and `a` match. Without `letter = letter.lower()`, `count_letter("Anna", "A")` would look for a capital in a text of small letters, and give back 0. An empty text makes no passes, so the count stays 0.
+
+## ch08c-tidying-text#4
+
+```python
+def is_yes(answer):
+    return answer.strip().lower() == "yes"
+```
+
+`strip()` first, then `lower()`, then the comparison. The order of the two methods does not matter here: `answer.lower().strip()` gives back the same. Spaces in the middle are not at an end, so `"y e s"` keeps them, and is not `"yes"`.
+
+## ch08c-tidying-text#6
+
+```python
+def no_spaces(text):
+    return text.replace(" ", "")
+```
+
+Every space is swapped for the empty string, so every space is gone. `strip()` alone would give back `"a b c"` unchanged, because its spaces are in the middle.
+
+## ch08c-tidying-text#7
+
+```python
+# Say it: give back the name with no spaces at its ends, a capital first, and small letters after.
+# Split it:
+# 1. strip the spaces from the ends
+# 2. if what is left is "", give it back
+# 3. join the first character, in capitals, and the rest, in small letters
+# 4. give that back
+def tidy_name(name):
+    stripped = name.strip()
+    if stripped == "":
+        return ""
+    return stripped[0].upper() + stripped[1:].lower()
+
+
+print(tidy_name("  aDA "))
+print(tidy_name("   "))
+```
+
+Strip first, so that index 0 is the first letter and not a space. Without step 2, `""` and `"   "` would stop with an `IndexError`, because an empty string has no index 0. A slice is never out of range, so `stripped[:1].upper()` in place of `stripped[0].upper()` works without step 2 as well.
