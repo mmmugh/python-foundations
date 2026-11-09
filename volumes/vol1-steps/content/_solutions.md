@@ -2023,3 +2023,50 @@ print(drop_the("Theory of Everything"))
 ```
 
 `"The "` is four characters, the space included, so the rest starts at index 4. Testing `startswith("The")` without the space would turn `Theory of Everything` into `ory of Everything`. `replace("The ", "")` is not right either: it would take out every `The ` in the title, not only the one at the start.
+
+## ch08f-letters-and-digits#4
+
+```python
+tickets = input("How many tickets? ")
+while not tickets.isdigit():
+    tickets = input("Please type a whole number: ")
+print("Cost:", int(tickets) * 5)
+```
+
+The shape of the age example: read, loop while it is not all digits, read again. `-1` and `3.5` are not all digits, so the loop asks again. `0` is all digits, so it is accepted, and costs 0. The empty answer is not all digits either.
+
+## ch08f-letters-and-digits#5
+
+```python
+def letters_only(text):
+    letters = ""
+    for character in text:
+        if character.isalpha():
+            letters += character
+    return letters
+```
+
+An accumulator that starts as `""`, as `bar` did in lesson 5.5. Only a character that `isalpha()` says is a letter is added, so spaces, digits and signs are left out.
+
+## ch08f-letters-and-digits#6
+
+```python
+# Say it: True if the length is 3 to 12 and every character is a letter or a digit.
+# Split it:
+# 1. if the length is below 3 or above 12, give back False
+# 2. loop over the characters: if one is not a letter and not a digit, give back False
+# 3. after the loop, give back True
+def valid_username(name):
+    if len(name) < 3 or len(name) > 12:
+        return False
+    for character in name:
+        if not character.isalpha() and not character.isdigit():
+            return False
+    return True
+
+
+print(valid_username("ada99"))
+print(valid_username("ada_99"))
+```
+
+One bad character is enough to say `False`, so step 2 gives back as soon as it finds one. Only after every character has passed is the answer `True`. Watch the `and` in step 2: with `or`, every character would be bad, because no character is both a letter and a digit. `""` is caught by step 1, as too short.

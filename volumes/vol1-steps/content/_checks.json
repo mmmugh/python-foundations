@@ -5868,5 +5868,169 @@
         "Into The Wild"
       ]
     ]
+  },
+  "ch08f-letters-and-digits#1": {
+    "kind": "predict"
+  },
+  "ch08f-letters-and-digits#2": {
+    "kind": "choice",
+    "options": [
+      "`\"report.PDF\".lower().endswith(\".pdf\")`",
+      "`\"report.PDF\".endswith(\".pdf\")`"
+    ],
+    "answer": 0,
+    "why": "Capitals matter: `.PDF` is not `.pdf`. `lower()` first makes the name `report.pdf`, and then it ends with `.pdf`."
+  },
+  "ch08f-letters-and-digits#3": {
+    "kind": "predict"
+  },
+  "ch08f-letters-and-digits#4": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "two",
+          "2"
+        ],
+        "numbers": [
+          10
+        ]
+      },
+      {
+        "typed": [
+          "-1",
+          "3.5",
+          "3"
+        ],
+        "numbers": [
+          15
+        ]
+      },
+      {
+        "typed": [
+          "0"
+        ],
+        "numbers": [
+          0
+        ]
+      },
+      {
+        "typed": [
+          "",
+          "4"
+        ],
+        "numbers": [
+          20
+        ]
+      }
+    ]
+  },
+  "ch08f-letters-and-digits#5": {
+    "kind": "function",
+    "name": "letters_only",
+    "cases": [
+      [
+        [
+          "Hi, Ada!"
+        ],
+        "HiAda"
+      ],
+      [
+        [
+          "R2-D2"
+        ],
+        "RD"
+      ],
+      [
+        [
+          ""
+        ],
+        ""
+      ],
+      [
+        [
+          "123"
+        ],
+        ""
+      ],
+      [
+        [
+          "abc"
+        ],
+        "abc"
+      ],
+      [
+        [
+          "a b"
+        ],
+        "ab"
+      ]
+    ]
+  },
+  "ch08f-letters-and-digits#6": {
+    "kind": "function",
+    "name": "valid_username",
+    "cases": [
+      [
+        [
+          "ada99"
+        ],
+        true
+      ],
+      [
+        [
+          "ada_99"
+        ],
+        false
+      ],
+      [
+        [
+          ""
+        ],
+        false
+      ],
+      [
+        [
+          "abc"
+        ],
+        true
+      ],
+      [
+        [
+          "ab"
+        ],
+        false
+      ],
+      [
+        [
+          "abcdefghijklm"
+        ],
+        false
+      ],
+      [
+        [
+          "abcdefghijkl"
+        ],
+        true
+      ],
+      [
+        [
+          "Ada Love"
+        ],
+        false
+      ],
+      [
+        [
+          "123"
+        ],
+        true
+      ],
+      [
+        [
+          "x-1"
+        ],
+        false
+      ]
+    ]
   }
 }

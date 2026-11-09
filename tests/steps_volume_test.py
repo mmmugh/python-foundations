@@ -117,6 +117,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch08e-starts-and-ends", "Lesson 8.5 — How text starts and ends",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch08f-letters-and-digits", "Lesson 8.6 — Letters and digits",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300
