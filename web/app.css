@@ -620,6 +620,8 @@ pre.given { margin: .5rem 0; }
 .hint { margin: 0; padding: .5rem .75rem; border-left: 3px solid var(--accent); background: var(--panel); }
 .hint-next { justify-self: start; }
 
+.exercise .solution pre { overflow-x: auto; }
+
 .exercise .solution .why {
   margin: 0;
   padding: 0 0.9rem 0.8rem;

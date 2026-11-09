@@ -1,19 +1,30 @@
 /* The step-by-step lessons in a real browser. Every page loads without a
  * script error, fits a 390-pixel phone screen without sideways scrolling,
- * and its links (hints to the reference page, the unit quiz) resolve. One
- * checked exercise goes through Python in the page. Run it with BASE=/name/
- * too, the way GitHub Pages serves the site. */
-import { launch, loadChromium, startSite } from "./browser_harness.mjs";
+ * and its links (hints to the reference page, the unit quiz) resolve. A
+ * `pre`, `.trace-wrap` or `.options` may scroll inside itself, but never
+ * pushes the page wider. One checked exercise goes through Python in the
+ * page. Run it with BASE=/name/ too, the way GitHub Pages serves the site. */
+import { readdirSync } from "node:fs";
+import { join } from "node:path";
+import { launch, loadChromium, ROOT, startSite } from "./browser_harness.mjs";
 
 const PORT = 8744;
-const PAGES = ["ch01z-welcome-back", "ch02a-naming-a-value", "ch02b-names-and-kinds",
-               "ch02c-asking-the-user", "ch02d-putting-it-together", "99-how-to-start-a-problem"];
+// Derived from what the build actually produced, not typed in twice: a new
+// lesson shows up here the day its file lands, with nothing to edit here.
+// This volume has no bundle, so every page at the top level is a lesson.
+const PAGES = readdirSync(join(ROOT, "site", "vol1-steps"))
+  .filter((name) => name.endsWith(".html"))
+  .map((name) => name.slice(0, -".html".length))
+  .sort();
 
 const chromium = await loadChromium();
 const { baseUrl, stop } = await startSite(PORT);
 const browser = await launch(chromium, stop);
 let bad = 0;
-const expect = (label, ok) => { if (!ok) bad++; console.log(`  ${ok ? "ok  " : "FAIL"}  ${label}`); };
+const expect = (label, ok, detail) => {
+  if (!ok) bad++;
+  console.log(`  ${ok ? "ok  " : "FAIL"}  ${label}${!ok && detail ? "  (" + detail + ")" : ""}`);
+};
 try {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   const errors = [];
@@ -24,6 +35,17 @@ try {
     expect(`${slug} loads`, response && response.ok());
     expect(`${slug} fits a phone screen`, await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth));
+    const overflowing = await page.$$eval("pre, .trace-wrap, .options", (els) => els
+      // A closed <details> (a hint not yet revealed, a solution not yet
+      // shown) keeps its last-known layout box under content-visibility,
+      // so scrollWidth/clientWidth stay nonzero though nothing is on
+      // screen. Only what the learner can actually see is in scope here.
+      .filter((el) => el.checkVisibility({ checkVisibilityCSS: true }))
+      .filter((el) => el.scrollWidth > el.clientWidth)
+      .filter((el) => !["auto", "scroll"].includes(getComputedStyle(el).overflowX))
+      .map((el) => el.className || el.tagName.toLowerCase()));
+    expect(`${slug} containers scroll inside themselves, never the page`,
+           overflowing.length === 0, JSON.stringify(overflowing));
     for (const href of await page.$$eval("a[href]", (as) => as.map((a) => a.href))) {
       if (!href.startsWith(baseUrl)) continue;
       const linked = await page.request.get(href);
