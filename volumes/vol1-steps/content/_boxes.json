@@ -6,5 +6,17 @@
   "ch02c-asking-the-user#6": {
     "raises": "ValueError",
     "why": "Shows the error an awkward input causes."
+  },
+  "ch01c-errors-and-a-receipt#1": {
+    "raises": "SyntaxError",
+    "why": "A missing closing quote. The error message is the lesson."
+  },
+  "ch01c-errors-and-a-receipt#2": {
+    "raises": "NameError",
+    "why": "Hello has no quotes, so Python looks for a name it does not know."
+  },
+  "ch01c-errors-and-a-receipt#3": {
+    "raises": "NameError",
+    "why": "Fix-the-bug practice: Python does not know the name Print."
   }
 }

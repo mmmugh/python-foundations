@@ -474,5 +474,54 @@
         ]
       }
     ]
+  },
+  "ch01c-errors-and-a-receipt#1": {
+    "kind": "predict"
+  },
+  "ch01c-errors-and-a-receipt#2": {
+    "kind": "choice",
+    "options": [
+      "`print(\"# hello\")`",
+      "`print(\"hello\")  # hello`",
+      "`# print(\"hello\")`"
+    ],
+    "answer": 2,
+    "why": "It starts with #, so the whole line is a comment. The other two run: a # inside quotes is just a character, and a comment at the end of a line skips only what comes after it."
+  },
+  "ch01c-errors-and-a-receipt#3": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "words": [
+          "Good morning",
+          "hi"
+        ]
+      }
+    ]
+  },
+  "ch01c-errors-and-a-receipt#4": {
+    "kind": "choice",
+    "options": [
+      "`print(\"Lunch\", \"at noon\")`",
+      "`print(\"Lunch at noon\"`",
+      "`print(\"Lunch at noon\")`"
+    ],
+    "answer": 1,
+    "why": "The closing bracket is missing, so Python cannot make sense of the line."
+  },
+  "ch01c-errors-and-a-receipt#6": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "numbers": [
+          3.75,
+          3,
+          2.5,
+          9.25
+        ]
+      }
+    ]
   }
 }

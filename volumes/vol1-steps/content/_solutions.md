@@ -72,6 +72,49 @@ print(3 * 12 * 4)
 
 The comments are not checked, but they are the part a reader thanks you for.
 
+## ch01c-errors-and-a-receipt#3
+
+```python
+print("Good morning")
+print("hi")
+```
+
+The last line of the error said `NameError: name 'Print' is not defined`. Python knows `print`, all lowercase, and nothing called `Print`. Capital letters matter.
+
+## ch01c-errors-and-a-receipt#5
+
+```python
+print("CORNER STORE")
+print()
+print("Notebook 3.50")
+print("Pens 2.25")
+print("Stickers 1.75")
+print()
+print("Total", 3.50 + 2.25 + 1.75)
+```
+
+Yours can look different. What matters is a line for each item, and a total that Python works out rather than one you typed. However it went, read on: the next section is a way to start a problem like this.
+
+## ch01c-errors-and-a-receipt#6
+
+```python
+# Say it: print a receipt for one popcorn, one drink and one pretzel,
+# with a total that Python works out.
+# Split it:
+# 1. print the club's name
+# 2. print a line for each item
+# 3. print the total
+print("RIVERSIDE FILM CLUB")
+print()
+print("Popcorn 3.75")
+print("Drink 3.00")
+print("Pretzel 2.50")
+print()
+print("Total", 3.75 + 3.00 + 2.50)
+```
+
+Your words can differ. What matters is a comment for each step, and a total that Python works out.
+
 ## ch01z-welcome-back#2
 
 ```python
