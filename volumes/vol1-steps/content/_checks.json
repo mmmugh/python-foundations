@@ -5508,5 +5508,172 @@
         "Bo"
       ]
     ]
+  },
+  "ch08d-finding-text#1": {
+    "kind": "predict"
+  },
+  "ch08d-finding-text#2": {
+    "kind": "choice",
+    "options": [
+      "`\"a b c\"`",
+      "`\"abc\"`",
+      "`\"a bc\"`"
+    ],
+    "answer": 0,
+    "why": "`strip()` only trims spaces at the start and the end. These spaces are in the middle, so they stay. `replace(\" \", \"\")` would take them all out."
+  },
+  "ch08d-finding-text#3": {
+    "kind": "predict"
+  },
+  "ch08d-finding-text#4": {
+    "kind": "function",
+    "name": "count_vowels",
+    "cases": [
+      [
+        [
+          "Hello World"
+        ],
+        3
+      ],
+      [
+        [
+          ""
+        ],
+        0
+      ],
+      [
+        [
+          "AEIOU"
+        ],
+        5
+      ],
+      [
+        [
+          "rhythm"
+        ],
+        0
+      ],
+      [
+        [
+          "Programming in Python"
+        ],
+        5
+      ],
+      [
+        [
+          "Queue"
+        ],
+        4
+      ]
+    ]
+  },
+  "ch08d-finding-text#5": {
+    "kind": "predict"
+  },
+  "ch08d-finding-text#6": {
+    "kind": "choice",
+    "options": [
+      "`cat` is not in the text.",
+      "The text starts with `cat`.",
+      "`cat` appears 0 times in the text."
+    ],
+    "answer": 1,
+    "why": "`find()` gives back the index where the match starts, and index 0 is the very start. When there is no match, it gives back -1, not 0."
+  },
+  "ch08d-finding-text#7": {
+    "kind": "function",
+    "name": "before_at",
+    "cases": [
+      [
+        [
+          "ada@example.com"
+        ],
+        "ada"
+      ],
+      [
+        [
+          "bo@x.org"
+        ],
+        "bo"
+      ],
+      [
+        [
+          "no-at-sign"
+        ],
+        "no-at-sign"
+      ],
+      [
+        [
+          ""
+        ],
+        ""
+      ],
+      [
+        [
+          "@home"
+        ],
+        ""
+      ],
+      [
+        [
+          "a@b@c"
+        ],
+        "a"
+      ]
+    ]
+  },
+  "ch08d-finding-text#8": {
+    "kind": "function",
+    "name": "is_spam",
+    "cases": [
+      [
+        [
+          "FREE pizza!"
+        ],
+        true
+      ],
+      [
+        [
+          "You are a Winner"
+        ],
+        true
+      ],
+      [
+        [
+          "See you at 6"
+        ],
+        false
+      ],
+      [
+        [
+          ""
+        ],
+        false
+      ],
+      [
+        [
+          "win a prize"
+        ],
+        false
+      ],
+      [
+        [
+          "free"
+        ],
+        true
+      ],
+      [
+        [
+          "WINNER WINNER"
+        ],
+        true
+      ],
+      [
+        [
+          "Fre e"
+        ],
+        false
+      ]
+    ]
   }
 }

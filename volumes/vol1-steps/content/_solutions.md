@@ -1939,3 +1939,47 @@ print(tidy_name("   "))
 ```
 
 Strip first, so that index 0 is the first letter and not a space. Without step 2, `""` and `"   "` would stop with an `IndexError`, because an empty string has no index 0. A slice is never out of range, so `stripped[:1].upper()` in place of `stripped[0].upper()` works without step 2 as well.
+
+## ch08d-finding-text#4
+
+```python
+def count_vowels(text):
+    count = 0
+    for letter in text.lower():
+        if letter in "aeiou":
+            count += 1
+    return count
+```
+
+`text.lower()` makes the capitals small before the loop, so `letter in "aeiou"` catches them too. Writing the test as `letter in "aeiouAEIOU"`, with no `lower()`, works as well.
+
+## ch08d-finding-text#7
+
+```python
+def before_at(email):
+    where = email.find("@")
+    if where == -1:
+        return email
+    return email[:where]
+```
+
+`email[:where]` stops just before the `@`, because a slice stops before its end index (lesson 7.2). Without the -1 test, `"no-at-sign"` would give `email[:-1]`, which drops the last character. `"@home"` has its `@` at index 0, so the slice `[:0]` is `""`. `if "@" not in email:` is a fine first test too.
+
+## ch08d-finding-text#8
+
+```python
+# Say it: True if "free" or "winner" is in the message, in any capitals.
+# Split it:
+# 1. make the message small letters
+# 2. ask whether "free" is in it, or "winner" is
+# 3. give back the answer
+def is_spam(message):
+    small_message = message.lower()
+    return "free" in small_message or "winner" in small_message
+
+
+print(is_spam("FREE pizza!"))
+print(is_spam(""))
+```
+
+Each side of the `or` needs its own `in`. `"free" or "winner" in small_message` reads well in English, but Python sees `"free"` on its own, which is not empty, so it counts as true (lesson 4.3), and every message would be spam. An `if` that gives back `True`, then `False` after it, works too.
