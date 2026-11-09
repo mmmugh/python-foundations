@@ -195,13 +195,21 @@ def trace_problems(slug, text, checks, shown):
 
 
 def unit_problems(pages, checks):
-    """What the spec asks of unit 2 as a whole."""
+    """What the spec asks of each unit as a whole, and of unit 2's lessons."""
     problems = []
+    # The spec gives every unit one fix-the-bug practice from a real error.
+    # Units are read from LESSONS, so a unit is held to it once it has a lesson.
+    for number in sorted({slug[2:4] for slug, *_ in LESSONS}):
+        mine = {slug: exercises(blocks_of(text)) for slug, text in pages.items()
+                if slug.startswith(f"ch{number}")}
+        # A fix-the-bug practice hands over broken code and checks the fixed
+        # program by running it: a question that only names an error is not one.
+        if not any("error" in item.lower() and code
+                   and checks.get(f"{slug}#{n}", {}).get("kind") in ("output", "stdin", "function")
+                   for slug, items in mine.items() for n, _, item, code, _ in items):
+            problems.append(f"unit {int(number)}: needs a checked fix-the-bug practice that starts from an error")
     unit = {slug: text for slug, text in pages.items() if slug.startswith("ch02")}
     found = {slug: exercises(blocks_of(text)) for slug, text in unit.items()}
-    if not any("error" in item.lower() and checks.get(f"{slug}#{n}")
-               for slug, items in found.items() for n, _, item, _, _ in items):
-        problems.append("unit 2: needs a checked fix-the-bug practice that starts from an error")
     if not any(checks.get(f"ch02a-naming-a-value#{n}", {}).get("kind") == "trace"
                for n, *_ in found.get("ch02a-naming-a-value", [])):
         problems.append("ch02a-naming-a-value: tracing starts here, with a trace table")
