@@ -57,8 +57,27 @@ def unflagged(meta, stems):
     return not meta.get("lessons") and any(re.match(r"^ch\d\d[a-z]-", s) for s in stems)
 
 
+def shown_first_by(pages):
+    """{kind: {item: slug}}, the first page whose own examples show each item.
+
+    Lets a refusal tell an author whether to reorder a later lesson or add
+    an example here, instead of leaving them to guess.
+    """
+    shown = {k: {} for k in KINDS}
+    for slug, text in pages:
+        local = {k: set() for k in KINDS}
+        for is_exercise, code in sections(text):
+            if not is_exercise:
+                harvest(code, local)
+        for kind in KINDS:
+            for item in local[kind]:
+                shown[kind].setdefault(item, slug)
+    return shown
+
+
 def violations(pages, solutions, checks=None):
     taught = {k: set() for k in KINDS}
+    shown = shown_first_by(pages)
     found = []
     for slug, text in pages:
         fences = sections(text)
@@ -83,7 +102,9 @@ def violations(pages, solutions, checks=None):
             for kind in KINDS:
                 early = sorted(used[kind] - taught[kind])
                 if early:
-                    found.append(f"{where}: uses {kind} no lesson has shown yet: {early}")
+                    named = [f"{item} (first shown by {shown[kind][item]})" if item in shown[kind] else item
+                             for item in early]
+                    found.append(f"{where}: uses {kind} no lesson has shown yet: {named}")
     return found
 
 
@@ -97,6 +118,17 @@ def main():
                              "1. Print it in capitals.\n\n```python\nname = 'ada'\nprint(name.upper())\n```\n")]
     caught = violations(planted, {})
     expect("the gate catches a method no lesson has shown", any("upper" in v for v in caught), str(caught))
+    expect("no later page shows it, so the message names no page",
+           not any("first shown by" in v for v in caught), str(caught))
+
+    planted_later = [
+        ("ch02a-one", "## L\n\n```python\nprice = 12\nprint(price)\n```\n\n### Practice\n\n"
+                       "1. Print it in capitals.\n\n```python\nname = 'ada'\nprint(name.upper())\n```\n"),
+        ("ch05-text", "## L\n\n```python\nname = 'ada'\nprint(name.upper())\n```\n"),
+    ]
+    caught_later = violations(planted_later, {})
+    expect("a later page that shows the name is named in the message",
+           any("first shown by ch05-text" in v for v in caught_later), str(caught_later))
     expect("and lets through what the lesson's own examples show",
            not violations([("ch02a-one", "## L\n\n```python\nprice = 12\nprint(price)\n```\n\n"
                                          "### Practice\n\n1. P.\n\n```python\ncost = 3\nprint(cost)\n```\n")], {}))
