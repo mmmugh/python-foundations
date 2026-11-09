@@ -98,5 +98,13 @@
   "ch07f-sorting-a-list#7": {
     "raises": "TypeError",
     "why": "Fix-the-bug practice: scores = scores.sort() leaves None in scores."
+  },
+  "ch08a-text-is-a-sequence#5": {
+    "raises": "TypeError",
+    "why": "A string can't change: item assignment on a string. The error message is the lesson."
+  },
+  "ch08a-text-is-a-sequence#7": {
+    "raises": "TypeError",
+    "why": "Fix-the-bug practice: item assignment on a string."
   }
 }

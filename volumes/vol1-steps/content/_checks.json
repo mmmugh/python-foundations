@@ -5007,5 +5007,121 @@
         0
       ]
     ]
+  },
+  "ch08a-text-is-a-sequence#1": {
+    "kind": "predict"
+  },
+  "ch08a-text-is-a-sequence#2": {
+    "kind": "choice",
+    "options": [
+      "`scores[2]`",
+      "`scores[-2]`",
+      "`scores[3]`"
+    ],
+    "answer": 0,
+    "why": "Parallel lists keep the same order, so the same index finds a student in both: index 2 in `names` goes with index 2 in `scores`."
+  },
+  "ch08a-text-is-a-sequence#3": {
+    "kind": "predict"
+  },
+  "ch08a-text-is-a-sequence#4": {
+    "kind": "predict"
+  },
+  "ch08a-text-is-a-sequence#5": {
+    "kind": "function",
+    "name": "ends",
+    "cases": [
+      [
+        [
+          "planet"
+        ],
+        "pt"
+      ],
+      [
+        [
+          ""
+        ],
+        ""
+      ],
+      [
+        [
+          "a"
+        ],
+        "aa"
+      ],
+      [
+        [
+          "Hi"
+        ],
+        "Hi"
+      ],
+      [
+        [
+          "top spot"
+        ],
+        "tt"
+      ],
+      [
+        [
+          "xyz"
+        ],
+        "xz"
+      ]
+    ]
+  },
+  "ch08a-text-is-a-sequence#6": {
+    "kind": "output",
+    "expected": "Grace"
+  },
+  "ch08a-text-is-a-sequence#7": {
+    "kind": "choice",
+    "options": [
+      "`\"bat\"`",
+      "`\"cat\"`",
+      "Nothing: the second line stops with an error."
+    ],
+    "answer": 1,
+    "why": "A string can't change. `\"b\" + word[1:]` makes a new string, `\"bat\"`, and puts it in `new_word`; `word` still holds `\"cat\"`."
+  },
+  "ch08a-text-is-a-sequence#8": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "stressed"
+        ],
+        "words": [
+          "stressed",
+          "desserts"
+        ],
+        "numbers": [
+          8
+        ]
+      },
+      {
+        "typed": [
+          "drawer"
+        ],
+        "words": [
+          "drawer",
+          "reward"
+        ],
+        "numbers": [
+          6
+        ]
+      },
+      {
+        "typed": [
+          "top spot"
+        ],
+        "words": [
+          "top spot",
+          "tops pot"
+        ],
+        "numbers": [
+          8
+        ]
+      }
+    ]
   }
 }

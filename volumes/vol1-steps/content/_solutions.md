@@ -1796,3 +1796,41 @@ print(f"Passing: {count_passing(scores)} of {len(scores)}")
 ```
 
 The loop needs each index, because the same index finds a name in `names` and its score in `scores`. Every summary line is one call to a function that was checked on its own. The average here is exactly 78.2, but rounding it to 1 place keeps a class whose average is 78.2222 from printing all those digits.
+
+## ch08a-text-is-a-sequence#5
+
+```python
+def ends(word):
+    if word == "":
+        return ""
+    return word[0] + word[-1]
+```
+
+`word[0]` is the first character and `word[-1]` the last, and `+` joins them. An empty string has no index 0, so without the first two lines `ends("")` would stop with an `IndexError`. For a word of one letter, index 0 and index -1 are the same letter, so `"a"` gives `"aa"`.
+
+## ch08a-text-is-a-sequence#6
+
+```python
+name = "grace"
+name = "G" + name[1:]
+print(name)
+```
+
+A string can't change, so `name[0] = "G"` stops with a `TypeError`. `name[1:]` is `"race"`, and `"G" + name[1:]` is a new string, `"Grace"`, which `name` then names. Printing `"G" + name[1:]` straight away works too.
+
+## ch08a-text-is-a-sequence#8
+
+```python
+# Say it: print the word, then the word turned around, then its length.
+# Split it:
+# 1. ask for the word
+# 2. print it
+# 3. print it turned around, with a slice
+# 4. print its length
+word = input("Word: ")
+print("Forward:", word)
+print("Backward:", word[::-1])
+print("Length:", len(word))
+```
+
+`word[::-1]` steps backward through the whole word. `len()` counts every character, so a space counts too: `top spot` has 8. An f-string, like `print(f"Length: {len(word)}")`, works as well.

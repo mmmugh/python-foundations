@@ -107,6 +107,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch07i-the-gradebook", "Lesson 7.9 — Finding a position, and a gradebook",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch08a-text-is-a-sequence", "Lesson 8.1 — Text is a sequence, and it can't change",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300
