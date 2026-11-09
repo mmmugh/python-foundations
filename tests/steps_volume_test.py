@@ -43,6 +43,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch02d-putting-it-together", "Lesson 2.4 — Putting it together",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch03a-more-arithmetic", "Lesson 3.1 — More arithmetic",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

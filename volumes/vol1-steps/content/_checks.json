@@ -477,5 +477,87 @@
         ]
       }
     ]
+  },
+  "ch03a-more-arithmetic#1": {
+    "kind": "predict"
+  },
+  "ch03a-more-arithmetic#2": {
+    "kind": "trace",
+    "names": [
+      "minutes",
+      "hours"
+    ]
+  },
+  "ch03a-more-arithmetic#3": {
+    "kind": "trace",
+    "names": [
+      "marbles",
+      "bags",
+      "spare"
+    ]
+  },
+  "ch03a-more-arithmetic#4": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "numbers": [
+          2,
+          15
+        ]
+      }
+    ]
+  },
+  "ch03a-more-arithmetic#5": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "numbers": [
+          81
+        ]
+      }
+    ]
+  },
+  "ch03a-more-arithmetic#6": {
+    "kind": "choice",
+    "options": [
+      "`4`",
+      "`0`"
+    ],
+    "answer": 1,
+    "why": "Dividing by 0 has no answer, so `//` stops with a ZeroDivisionError. Better you find that than someone using your program."
+  },
+  "ch03a-more-arithmetic#7": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "125"
+        ],
+        "numbers": [
+          2,
+          5
+        ]
+      },
+      {
+        "typed": [
+          "59"
+        ],
+        "numbers": [
+          0,
+          59
+        ]
+      },
+      {
+        "typed": [
+          "0"
+        ],
+        "numbers": [
+          0,
+          0
+        ]
+      }
+    ]
   }
 }

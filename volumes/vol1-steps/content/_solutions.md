@@ -298,3 +298,38 @@ print("Total", total)
 ```
 
 The ruler needed three changes, one for each step it touches: its price, its line, and its place in the total.
+
+## ch03a-more-arithmetic#4
+
+```python
+minutes = 135
+print(minutes // 60, "hours and", minutes % 60, "minutes")
+```
+
+60 goes into 135 twice, with 15 left over: 2 hours and 15 minutes.
+
+## ch03a-more-arithmetic#5
+
+```python
+side = 9
+print(side ** 2)
+```
+
+`side * side` gives the same answer; `**` is the shorter way to say it.
+
+## ch03a-more-arithmetic#7
+
+```python
+# Say it: turn a number of seconds into minutes and seconds.
+# Split it:
+# 1. ask for the seconds, as a whole number
+# 2. work out the whole minutes
+# 3. work out the seconds left over
+# 4. print both
+total_seconds = int(input("How many seconds? "))
+minutes = total_seconds // 60
+seconds_left = total_seconds % 60
+print(minutes, "minutes and", seconds_left, "seconds")
+```
+
+It is how many whole, how many left, with 60 seconds in each minute. 59 gives 0 minutes and 59 seconds, and 0 gives 0 and 0: both make sense.
