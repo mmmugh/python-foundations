@@ -87,6 +87,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch06d-defaults-and-calls", "Lesson 6.4 — Default values, and functions that use functions",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch06e-splitting-into-functions", "Lesson 6.5 — Splitting a problem into functions",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

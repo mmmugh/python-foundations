@@ -1252,3 +1252,167 @@ print(count_vowels("banana"))
 ```
 
 `count_vowels()` is lesson 5.3's counting loop, inside a function, and the vowel test has a name of its own. The two `is_vowel()` calls check it alone, before `count_vowels()` relies on it. With an empty string, the loop makes no passes, and the count stays 0. The `return` is not indented into the loop: there, it would end the function after the first letter.
+
+## ch06e-splitting-into-functions#3
+
+```python
+def get_whole_number(prompt):
+    """Ask until a whole number is typed, and give it back."""
+    while True:
+        try:
+            return int(input(prompt))
+        except ValueError:
+            print("Please type a whole number.")
+
+def area(width, length):
+    """Give back the area of a rectangle."""
+    return width * length
+
+def volume(width, length, height):
+    """Give back the volume of a box-shaped room."""
+    return area(width, length) * height
+
+def main():
+    width = get_whole_number("Width: ")
+    length = get_whole_number("Length: ")
+    height = get_whole_number("Height: ")
+    print(f"The room is {area(width, length)} square meters.")
+    print(f"The room holds {volume(width, length, height)} cubic meters.")
+
+main()
+```
+
+`get_whole_number()` did not change: it was checked once, and now it is used three times. `volume()` uses `area()`, though `width * length * height` works too. Only `main()`, the plan, gained a step.
+
+## ch06e-splitting-into-functions#4
+
+```python
+# Say it: ask for a student's name and four scores, then print
+# their average and letter grade.
+# Split it:
+# 1. ask for the name
+# 2. ask for a score, again until it is a whole number
+#    from 0 to 100 (four times)                  -> get_score(prompt)
+# 3. add up the four scores, and divide by 4
+# 4. turn the average into a letter              -> letter_grade(average)
+# 5. print the average and the letter
+# The whole plan, run in order:                  -> main()
+```
+
+Your steps and names can differ. What matters is that a job done four times becomes one function, used four times, and that the step that turns a number into a letter is a function of its own, which you can check without typing a single score.
+
+## ch06e-splitting-into-functions#5
+
+```python
+def letter_grade(average):
+    """Give back the letter grade for an average."""
+    if average >= 90:
+        return "A"
+    elif average >= 80:
+        return "B"
+    elif average >= 70:
+        return "C"
+    elif average >= 60:
+        return "D"
+    else:
+        return "F"
+
+
+print(letter_grade(89.5))
+print(letter_grade(0))
+```
+
+The highest grade is tested first. Tested last, `average >= 60` would catch 95 too, and give it a D. 89.5 is not 90 or above, so it is a B: the rule says nothing about rounding up.
+
+## ch06e-splitting-into-functions#6
+
+```python
+def get_score(prompt):
+    """Ask until a whole number from 0 to 100 is typed, and give it back."""
+    while True:
+        try:
+            score = int(input(prompt))
+            if 0 <= score <= 100:
+                return score
+            print("Please type a whole number from 0 to 100.")
+        except ValueError:
+            print("Please type a whole number from 0 to 100.")
+
+
+print(get_score("Score: "))
+```
+
+A number outside 0 to 100 does not reach the `return`, so the message is printed, and the loop asks again. A word never gets that far: `int()` fails, and the `except` block prints the same message. `<=` at both ends lets 0 and 100 in.
+
+## ch06e-splitting-into-functions#7
+
+```python
+def letter_grade(average):
+    """Give back the letter grade for an average."""
+    if average >= 90:
+        return "A"
+    elif average >= 80:
+        return "B"
+    elif average >= 70:
+        return "C"
+    elif average >= 60:
+        return "D"
+    else:
+        return "F"
+
+
+def get_score(prompt):
+    """Ask until a whole number from 0 to 100 is typed, and give it back."""
+    while True:
+        try:
+            score = int(input(prompt))
+            if 0 <= score <= 100:
+                return score
+            print("Please type a whole number from 0 to 100.")
+        except ValueError:
+            print("Please type a whole number from 0 to 100.")
+
+
+def main():
+    """Run the grade calculator."""
+    name = input("Student name: ")
+    total = 0
+    for turn in range(4):
+        total += get_score("Score: ")
+    average = total / 4
+    print(f"{name}: average {average}")
+    print(f"Grade: {letter_grade(average)}")
+
+
+main()
+```
+
+`main()` reads like the plan: ask for the name, add up four scores, work out the average, print it and its letter. The asking again and the grading rule are inside their own functions, already checked, so `main()` stays short.
+
+## ch06e-splitting-into-functions#9
+
+```python
+# Say it: give back True if a number is prime, False if not;
+# then print the primes below 50.
+# Split it:
+# 1. below 2: not prime
+# 2. try each number from 2 up to one less than the number:
+#    if it divides evenly, not prime
+# 3. if none did, prime
+# 4. loop over 0 to 49, printing each prime
+def is_prime(number):
+    """Give back True if the number is prime, False if it is not."""
+    if number < 2:
+        return False
+    for divisor in range(2, number):
+        if number % divisor == 0:
+            return False
+    return True
+
+
+for candidate in range(50):
+    if is_prime(candidate):
+        print(candidate)
+```
+
+`return False` inside the loop stops at the first divisor found: 9 stops at 3. `return True` is after the loop, so it runs only when no divisor was found. For 2, `range(2, 2)` is empty, the loop makes no passes, and 2 is prime, which is right. Without the first `if`, 1, 0 and -7 would also skip the loop, and come back `True`.

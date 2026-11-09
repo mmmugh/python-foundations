@@ -3515,5 +3515,366 @@
         1
       ]
     ]
+  },
+  "ch06e-splitting-into-functions#1": {
+    "kind": "predict"
+  },
+  "ch06e-splitting-into-functions#2": {
+    "kind": "choice",
+    "options": [
+      "Bo, Hi!",
+      "Nothing: it stops with a TypeError.",
+      "Hi, Bo!"
+    ],
+    "answer": 2,
+    "why": "`\"Bo\"` goes to the first parameter, `name`. The call has no second argument, so `greeting` holds its default, `\"Hi\"`."
+  },
+  "ch06e-splitting-into-functions#3": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "3",
+          "4",
+          "5"
+        ],
+        "numbers": [
+          60
+        ]
+      },
+      {
+        "typed": [
+          "3",
+          "4",
+          "tall",
+          "5"
+        ],
+        "words": [
+          "whole number"
+        ],
+        "numbers": [
+          60
+        ]
+      },
+      {
+        "typed": [
+          "2",
+          "2",
+          "2"
+        ],
+        "numbers": [
+          8
+        ]
+      },
+      {
+        "typed": [
+          "0",
+          "4",
+          "5"
+        ],
+        "numbers": [
+          0
+        ]
+      }
+    ]
+  },
+  "ch06e-splitting-into-functions#5": {
+    "kind": "function",
+    "name": "letter_grade",
+    "cases": [
+      [
+        [
+          95
+        ],
+        "A"
+      ],
+      [
+        [
+          90
+        ],
+        "A"
+      ],
+      [
+        [
+          89.5
+        ],
+        "B"
+      ],
+      [
+        [
+          85
+        ],
+        "B"
+      ],
+      [
+        [
+          80
+        ],
+        "B"
+      ],
+      [
+        [
+          75
+        ],
+        "C"
+      ],
+      [
+        [
+          70
+        ],
+        "C"
+      ],
+      [
+        [
+          65
+        ],
+        "D"
+      ],
+      [
+        [
+          60
+        ],
+        "D"
+      ],
+      [
+        [
+          59.9
+        ],
+        "F"
+      ],
+      [
+        [
+          0
+        ],
+        "F"
+      ],
+      [
+        [
+          100
+        ],
+        "A"
+      ]
+    ]
+  },
+  "ch06e-splitting-into-functions#6": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "105",
+          "abc",
+          "92"
+        ],
+        "words": [
+          "0 to 100",
+          "0 to 100"
+        ],
+        "numbers": [
+          92
+        ]
+      },
+      {
+        "typed": [
+          "0"
+        ],
+        "numbers": [
+          0
+        ],
+        "absent": [
+          "Please type a whole number from 0 to 100."
+        ]
+      },
+      {
+        "typed": [
+          "100"
+        ],
+        "numbers": [
+          100
+        ],
+        "absent": [
+          "Please type a whole number from 0 to 100."
+        ]
+      },
+      {
+        "typed": [
+          "-1",
+          "101",
+          "50"
+        ],
+        "words": [
+          "0 to 100",
+          "0 to 100"
+        ],
+        "numbers": [
+          50
+        ]
+      }
+    ]
+  },
+  "ch06e-splitting-into-functions#7": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "Ada",
+          "88",
+          "105",
+          "92",
+          "79",
+          "95"
+        ],
+        "words": [
+          "Ada"
+        ],
+        "numbers": [
+          88.5
+        ],
+        "contains": "Grade: B",
+        "absent": [
+          "Grade: A",
+          "Grade: C",
+          "Grade: D",
+          "Grade: F"
+        ]
+      },
+      {
+        "typed": [
+          "Bo",
+          "100",
+          "100",
+          "100",
+          "100"
+        ],
+        "numbers": [
+          100
+        ],
+        "contains": "Grade: A",
+        "absent": [
+          "Grade: B",
+          "Grade: C",
+          "Grade: D",
+          "Grade: F"
+        ]
+      },
+      {
+        "typed": [
+          "Cy",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "numbers": [
+          0
+        ],
+        "contains": "Grade: F",
+        "absent": [
+          "Grade: A",
+          "Grade: B",
+          "Grade: C",
+          "Grade: D"
+        ]
+      },
+      {
+        "typed": [
+          "Di",
+          "59",
+          "60",
+          "61",
+          "60"
+        ],
+        "numbers": [
+          60
+        ],
+        "contains": "Grade: D",
+        "absent": [
+          "Grade: A",
+          "Grade: B",
+          "Grade: C",
+          "Grade: F"
+        ]
+      }
+    ]
+  },
+  "ch06e-splitting-into-functions#8": {
+    "kind": "predict"
+  },
+  "ch06e-splitting-into-functions#9": {
+    "kind": "function",
+    "name": "is_prime",
+    "cases": [
+      [
+        [
+          2
+        ],
+        true
+      ],
+      [
+        [
+          3
+        ],
+        true
+      ],
+      [
+        [
+          7
+        ],
+        true
+      ],
+      [
+        [
+          9
+        ],
+        false
+      ],
+      [
+        [
+          1
+        ],
+        false
+      ],
+      [
+        [
+          0
+        ],
+        false
+      ],
+      [
+        [
+          -7
+        ],
+        false
+      ],
+      [
+        [
+          49
+        ],
+        false
+      ],
+      [
+        [
+          47
+        ],
+        true
+      ],
+      [
+        [
+          4
+        ],
+        false
+      ],
+      [
+        [
+          13
+        ],
+        true
+      ],
+      [
+        [
+          15
+        ],
+        false
+      ]
+    ]
   }
 }
