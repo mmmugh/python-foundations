@@ -35,7 +35,7 @@ You will build it in three steps, running after each one. Step 1 sorts the ages.
 
 ### Practice
 
-3. Step 1: ask for the customer's age, as a whole number, and print the price, like `Price: $8`.
+3. Step 1: ask for the customer's age, as a whole number, and print the price exactly like this: `Price: $8`.
 
 ```python
 # Say it: work out the price of a cinema ticket from the
@@ -45,7 +45,7 @@ You will build it in three steps, running after each one. Step 1 sorts the ages.
 > Split it: four prices, so four branches: `if`, two `elif`s and an `else`. The tests overlap, so the narrowest goes first: under 5, then 12 or under, then 64 or under, then everyone else.
 > Check it: try an age from each row, then the edges between the rows: 4 and 5, 12 and 13, 64 and 65.
 
-4. Step 2: after the age, ask for the day of the week. On a Tuesday, take $3 off, but only for a paying customer: a free ticket stays free. Type the day with a capital, `Tuesday`, because capitals matter (lesson 3.5). Copy your step 1 into this box first.
+4. Step 2: after the age, ask for the day of the week. On a Tuesday, take $3 off, but only for a paying customer: a free ticket stays free. Print the price as in step 1, like `Price: $11`. Type the day with a capital, `Tuesday`, because capitals matter (lesson 3.5). Copy your step 1 into this box first.
 
 > Split it: work out the price as in step 1, and keep it in a variable; ask for the day; then one more `if`: is it Tuesday, and is the price more than 0? If both are true, take 3 off. Print the price last.
 > Check it: try 70 on a Tuesday, which is $7, and 30 on a Monday. Then the awkward one: 3 on a Tuesday. Without the check on the price, a free ticket would cost $-3.

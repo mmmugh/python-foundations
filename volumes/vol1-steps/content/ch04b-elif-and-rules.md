@@ -64,7 +64,7 @@ else:
 ```
 
 5. Ask for a whole number. Print `positive`, `negative` or `zero`.
-6. Ask for two whole numbers. Print the larger one after `Larger:`, like `Larger: 8`. If they are equal, print `Same`.
+6. Ask for two whole numbers. Print the larger one after `Larger:`, exactly like `Larger: 8`. If they are equal, print `Same`.
 
 ### Order matters
 
