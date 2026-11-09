@@ -539,3 +539,54 @@ else:
 ```
 
 `>=` is what makes exactly 50 a pass: with `>`, a score of 50 would fail. 0 fails, which is right.
+
+## ch04b-elif-and-rules#5
+
+```python
+number = int(input("Whole number: "))
+if number > 0:
+    print("positive")
+elif number < 0:
+    print("negative")
+else:
+    print("zero")
+```
+
+Three possibilities, so two tests and an `else`. Whatever is neither more than 0 nor less than 0 must be 0.
+
+## ch04b-elif-and-rules#6
+
+```python
+first = int(input("First number: "))
+second = int(input("Second number: "))
+if first > second:
+    print(f"Larger: {first}")
+elif second > first:
+    print(f"Larger: {second}")
+else:
+    print("Same")
+```
+
+The `else` catches the one case the two tests leave: neither number is larger, so they are equal. With -2 and -7, -2 is larger, and the program says so.
+
+## ch04b-elif-and-rules#9
+
+```python
+# Say it: say whether a year is a leap year.
+# Split it, narrowest clause first:
+# 1. a multiple of 400 is a leap year
+# 2. any other multiple of 100 is not
+# 3. any other multiple of 4 is a leap year
+# 4. every other year is not
+year = int(input("Year: "))
+if year % 400 == 0:
+    print("leap year")
+elif year % 100 == 0:
+    print("ordinary year")
+elif year % 4 == 0:
+    print("leap year")
+else:
+    print("ordinary year")
+```
+
+It is the raffle's shape with 4, 100 and 400. 2000 is a multiple of 400, so it is a leap year. 1900 is a multiple of 100 but not of 400, so it is not, even though 4 goes into it.

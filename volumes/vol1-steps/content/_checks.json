@@ -1115,5 +1115,149 @@
         ]
       }
     ]
+  },
+  "ch04b-elif-and-rules#1": {
+    "kind": "predict"
+  },
+  "ch04b-elif-and-rules#2": {
+    "kind": "choice",
+    "options": [
+      "just a colon",
+      "a condition, then a colon"
+    ],
+    "answer": 0,
+    "why": "`else` means \"in every other case\", so it has no condition of its own. The colon comes straight after it."
+  },
+  "ch04b-elif-and-rules#3": {
+    "kind": "choice",
+    "options": [
+      "`grade = \"B\"`",
+      "`grade = \"C\"`",
+      "`grade = \"D\"`"
+    ],
+    "answer": 1,
+    "why": "72 fails `score >= 90` and `score >= 80`, then passes `score >= 70`, and Python stops there. 72 is 60 or more too, but Python never gets to that test."
+  },
+  "ch04b-elif-and-rules#4": {
+    "kind": "predict"
+  },
+  "ch04b-elif-and-rules#5": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "5"
+        ],
+        "words": [
+          "positive"
+        ]
+      },
+      {
+        "typed": [
+          "-3"
+        ],
+        "words": [
+          "negative"
+        ]
+      },
+      {
+        "typed": [
+          "0"
+        ],
+        "words": [
+          "zero"
+        ]
+      }
+    ]
+  },
+  "ch04b-elif-and-rules#6": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "3",
+          "8"
+        ],
+        "contains": "Larger: 8"
+      },
+      {
+        "typed": [
+          "8",
+          "3"
+        ],
+        "contains": "Larger: 8"
+      },
+      {
+        "typed": [
+          "5",
+          "5"
+        ],
+        "words": [
+          "same"
+        ]
+      },
+      {
+        "typed": [
+          "-2",
+          "-7"
+        ],
+        "contains": "Larger: -2"
+      }
+    ]
+  },
+  "ch04b-elif-and-rules#7": {
+    "kind": "choice",
+    "options": [
+      "`age < 20` first, then `age < 13`",
+      "`age < 13` first, then `age < 20`"
+    ],
+    "answer": 1,
+    "why": "`age < 13` is the narrower test, so it goes first. With `age < 20` first, a 9-year-old would pass it and be called a teen."
+  },
+  "ch04b-elif-and-rules#8": {
+    "kind": "choice",
+    "options": [
+      "Wins",
+      "No prize"
+    ],
+    "answer": 0,
+    "why": "100 is a multiple of 50, so the first test is True. It is a multiple of 10 too, but Python never gets that far."
+  },
+  "ch04b-elif-and-rules#9": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "2024"
+        ],
+        "words": [
+          "leap year"
+        ]
+      },
+      {
+        "typed": [
+          "2023"
+        ],
+        "words": [
+          "ordinary"
+        ]
+      },
+      {
+        "typed": [
+          "1900"
+        ],
+        "words": [
+          "ordinary"
+        ]
+      },
+      {
+        "typed": [
+          "2000"
+        ],
+        "words": [
+          "leap year"
+        ]
+      }
+    ]
   }
 }

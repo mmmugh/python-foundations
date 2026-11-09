@@ -57,6 +57,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch04a-if-and-else", "Lesson 4.1 — If, and else",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch04b-elif-and-rules", "Lesson 4.2 — Elif, and turning a rule into code",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300
