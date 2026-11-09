@@ -117,7 +117,7 @@ Six kinds:
 | Kind | What it checks |
 |---|---|
 | `output` | the program prints `expected` |
-| `stdin` | given `typed` lines, the output holds `numbers` (and `words`) in order, or a `contains` line; and none of the `absent` words |
+| `stdin` | given `typed` lines, the output holds `numbers` (and `words`) in order, or a `contains` line; and none of the `absent` lines |
 | `function` | a named function returns each case's result |
 | `predict` | the learner's prediction matches what the fence prints |
 | `choice` | the learner picked option `answer` (an index from 0) |
@@ -138,13 +138,16 @@ The four original kinds, as vol1-foundations uses them:
 ### `stdin` with `absent`
 
 A decision prints one branch's message. A check that only asks for the right word lets through a program that
-prints every branch's message whatever is typed, so each run of a decision names the other branches' words as
-`absent` (case-insensitive, like `words`):
+prints every branch's message whatever is typed, so each run of a decision can name the other branches' messages as
+`absent`. Each entry is a whole line: the run fails only if a printed line, stripped and compared without regard to
+capitals, equals it. A longer line that merely contains the words ("Fail, you did not pass"), or a debug print, is
+never refused. List only messages the exercise pins exactly; where a branch's wording is the learner's own, leave it
+out, because checks test behavior, not form.
 
 ```json
 {"ch04a-if-and-else#9": {"kind": "stdin", "runs": [
-  {"typed": ["75"], "words": ["pass"], "absent": ["fail"]},
-  {"typed": ["30"], "words": ["fail"], "absent": ["pass"]}]}}
+  {"typed": ["75"], "words": ["pass"], "absent": ["Fail"]},
+  {"typed": ["30"], "words": ["fail"], "absent": ["Pass"]}]}}
 ```
 
 ### `choice`
