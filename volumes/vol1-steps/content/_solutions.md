@@ -358,3 +358,46 @@ print("Average:", round(average, 1))
 ```
 
 The parentheses matter: without them, Python would divide only the third score by 3. Three zeros give 0.0, which is right.
+
+## ch03c-formatting#3
+
+```python
+pet = input("Your pet's name: ")
+print(f"Good morning, {pet}!")
+```
+
+## ch03c-formatting#4
+
+```python
+price = 4.5
+print(f"${price:.2f}")
+```
+
+## ch03c-formatting#5
+
+```python
+print("#" * 20)
+print("#" * 20)
+print("#" * 20)
+print("#" * 20)
+print("#" * 20)
+```
+
+Every row is the same, so every line is the same.
+
+## ch03c-formatting#6
+
+```python
+# Say it: work out what some items cost, and show it as dollars and cents.
+# Split it:
+# 1. ask for the price of one item, as a decimal number
+# 2. ask how many, as a whole number
+# 3. multiply them
+# 4. print the total with two decimal places
+price = float(input("Price of one item: "))
+how_many = int(input("How many? "))
+total = price * how_many
+print(f"Total: ${total:.2f}")
+```
+
+0 items gives `Total: $0.00`, which is right: nothing bought, nothing to pay.

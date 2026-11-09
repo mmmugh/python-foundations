@@ -619,5 +619,71 @@
         ]
       }
     ]
+  },
+  "ch03c-formatting#1": {
+    "kind": "predict"
+  },
+  "ch03c-formatting#2": {
+    "kind": "predict"
+  },
+  "ch03c-formatting#3": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "Rex"
+        ],
+        "words": [
+          "Rex!"
+        ]
+      }
+    ]
+  },
+  "ch03c-formatting#4": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "words": [
+          "$4.50"
+        ]
+      }
+    ]
+  },
+  "ch03c-formatting#5": {
+    "kind": "output",
+    "expected": "####################\n####################\n####################\n####################\n####################"
+  },
+  "ch03c-formatting#6": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "2.25",
+          "3"
+        ],
+        "words": [
+          "6.75"
+        ]
+      },
+      {
+        "typed": [
+          "0.50",
+          "4"
+        ],
+        "words": [
+          "2.00"
+        ]
+      },
+      {
+        "typed": [
+          "1.50",
+          "0"
+        ],
+        "words": [
+          "0.00"
+        ]
+      }
+    ]
   }
 }

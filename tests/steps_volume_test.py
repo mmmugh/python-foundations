@@ -47,6 +47,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch03b-order-and-rounding", "Lesson 3.2 — Order of operations, and rounding",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch03c-formatting", "Lesson 3.3 — Formatting output",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300
