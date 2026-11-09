@@ -1,0 +1,164 @@
+PYTHON FOUNDATIONS
+Unit 7 - Lists
+
+Name: ________________________________     Date: ______________
+
+Fill in every blank. Where a term is asked for, write the word the course
+uses. Where code is asked for, write exact Python. Where output is asked
+for, write what the program prints, one line per line.
+
+
+VOCABULARY
+----------
+
+ 1. A __________________ holds many values under one name, in order, and
+    is made with square brackets.
+
+ 2. Each item in a list has a position called its __________________.
+    Python counts these from zero.
+
+ 3. A list can be changed after it is made, so it is called
+    __________________.
+
+ 4. A __________________ takes a piece of a list using `list[start:stop]`,
+    and always makes a new list instead of changing the old one.
+
+ 5. A function that belongs to a value and is called with a dot after it,
+    like `scores.append(95)`, is called a __________________.
+
+ 6. Two lists kept in the same order, so that the same index finds a name
+    in one and its score in the other, are called __________________
+    lists.
+
+
+READING CODE
+------------
+
+ 7. What does this print?
+
+        names = ["Ada", "Grace", "Alan", "Katherine"]
+        print(names[1])
+        print(names[-1])
+
+    ____________________________________
+
+ 8. What does this print?
+
+        letters = ["a", "b", "c", "d", "e", "f"]
+        print(letters[2:5])
+        print(letters[:2])
+
+    ____________________________________
+
+ 9. What does this print?
+
+        scores = [88, 92, 79]
+        result = scores.sort()
+        print(result)
+        print(scores)
+
+    ____________________________________
+
+10. What does this print?
+
+        a = [1, 2, 3]
+        b = a
+        b.append(4)
+        print(a)
+
+    ____________________________________
+
+11. What does this print?
+
+        names = ["Ada", "Grace", "Alan"]
+        for position, name in enumerate(names):
+            print(f"{position + 1}. {name}")
+
+    ____________________________________
+
+12. What does this print?
+
+        scores = [55, 82, 91, 40, 76]
+        passing = []
+        for score in scores:
+            if score >= 60:
+                passing.append(score)
+        print(passing)
+        print(len(passing))
+
+    ____________________________________
+
+13. What does this print? It gives the second-largest number.
+
+        numbers = [3, 9, 5]
+        print(sorted(numbers)[-2])
+
+    ____________________________________
+
+14. What does this print?
+
+        cities = ["Oslo", "Lima", "Cairo"]
+        temps = [4, 31, 19]
+        print(cities[temps.index(max(temps))])
+
+    ____________________________________
+
+
+WRITING CODE
+------------
+
+15. Fill in the blank:
+
+        names = ["Ada", "Grace"]
+        names.__________________("Alan")  # adds "Alan" to the end of the list
+        print(names)
+
+16. Fill in the blank:
+
+        scores = [88, 92, 79]
+        # gives back a new sorted list; scores itself is left as it was
+        ordered = __________________(scores)
+        print(ordered, scores)
+
+17. Fill in the blank:
+
+        evens = []
+        for n in numbers:
+            if n % 2 == 0:
+                evens.__________________(n)  # adds n to the end of evens
+
+18. Fill in the blank, so that the loop builds the list backward:
+
+        numbers = [1, 2, 3]
+        backwards = []
+        for number in numbers:
+            backwards.__________________(0, number)
+        print(backwards)  # [3, 2, 1]
+
+
+WHY IT WORKS
+------------
+
+19. Printing `a` shows `[1, 2, 3, 4]` even though only `b` was changed,
+    because `b = a` does not make a second list: it makes a second
+    __________________ for the __________________ list.
+
+        a = [1, 2, 3]
+        b = a
+        b.append(4)
+        print(a)
+
+20. `.sort()` changes the list itself and gives back __________________,
+    which is why `scores = scores.sort()` throws the list away.
+
+21. In Check it, a function that takes a list should also be tried with an
+    __________________ list, because `max()` stops with an error on it and
+    dividing by its `len()` divides by zero.
+
+22. In a trace table, after `b = a[:]` and then `a.append(3)`, the cell
+    for `b` still shows the old items, because a slice makes a
+    __________________ list.
+
+        a = [1, 2]
+        b = a[:]
+        a.append(3)

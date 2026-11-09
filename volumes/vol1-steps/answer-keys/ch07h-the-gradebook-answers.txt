@@ -1,0 +1,192 @@
+PYTHON FOUNDATIONS
+Unit 7 - Lists
+
+ANSWER KEY
+
+
+VOCABULARY
+----------
+
+ 1. A ____ holds many values under one name, in order, and is made with
+    square brackets.
+
+      ANSWER: list
+
+ 2. Each item in a list has a position called its ____. Python counts
+    these from zero.
+
+      ANSWER: index
+
+ 3. A list can be changed after it is made, so it is called ____.
+
+      ANSWER: mutable
+
+ 4. A ____ takes a piece of a list using `list[start:stop]`, and always
+    makes a new list instead of changing the old one.
+
+      ANSWER: slice
+
+ 5. A function that belongs to a value and is called with a dot after it,
+    like `scores.append(95)`, is called a ____.
+
+      ANSWER: method
+
+ 6. Two lists kept in the same order, so that the same index finds a name
+    in one and its score in the other, are called ____ lists.
+
+      ANSWER: parallel
+
+
+READING CODE
+------------
+
+ 7. What does this print?
+
+        names = ["Ada", "Grace", "Alan", "Katherine"]
+        print(names[1])
+        print(names[-1])
+
+      ANSWER: Grace
+          Katherine
+
+ 8. What does this print?
+
+        letters = ["a", "b", "c", "d", "e", "f"]
+        print(letters[2:5])
+        print(letters[:2])
+
+      ANSWER: ['c', 'd', 'e']
+          ['a', 'b']
+
+ 9. What does this print?
+
+        scores = [88, 92, 79]
+        result = scores.sort()
+        print(result)
+        print(scores)
+
+      ANSWER: None
+          [79, 88, 92]
+
+10. What does this print?
+
+        a = [1, 2, 3]
+        b = a
+        b.append(4)
+        print(a)
+
+      ANSWER: [1, 2, 3, 4]
+
+11. What does this print?
+
+        names = ["Ada", "Grace", "Alan"]
+        for position, name in enumerate(names):
+            print(f"{position + 1}. {name}")
+
+      ANSWER: 1. Ada
+          2. Grace
+          3. Alan
+
+12. What does this print?
+
+        scores = [55, 82, 91, 40, 76]
+        passing = []
+        for score in scores:
+            if score >= 60:
+                passing.append(score)
+        print(passing)
+        print(len(passing))
+
+      ANSWER: [82, 91, 76]
+          3
+
+13. What does this print? It gives the second-largest number.
+
+        numbers = [3, 9, 5]
+        print(sorted(numbers)[-2])
+
+      ANSWER: 5
+
+14. What does this print?
+
+        cities = ["Oslo", "Lima", "Cairo"]
+        temps = [4, 31, 19]
+        print(cities[temps.index(max(temps))])
+
+      ANSWER: Lima
+
+
+WRITING CODE
+------------
+
+15. Fill in the blank:
+
+        names = ["Ada", "Grace"]
+        names.____("Alan")  # adds "Alan" to the end of the list
+        print(names)
+
+      ANSWER: append
+
+16. Fill in the blank:
+
+        scores = [88, 92, 79]
+        # gives back a new sorted list; scores itself is left as it was
+        ordered = ____(scores)
+        print(ordered, scores)
+
+      ANSWER: sorted
+
+17. Fill in the blank:
+
+        evens = []
+        for n in numbers:
+            if n % 2 == 0:
+                evens.____(n)  # adds n to the end of evens
+
+      ANSWER: append
+
+18. Fill in the blank, so that the loop builds the list backward:
+
+        numbers = [1, 2, 3]
+        backwards = []
+        for number in numbers:
+            backwards.____(0, number)
+        print(backwards)  # [3, 2, 1]
+
+      ANSWER: insert
+
+
+WHY IT WORKS
+------------
+
+19. Printing `a` shows `[1, 2, 3, 4]` even though only `b` was changed,
+    because `b = a` does not make a second list: it makes a second ____
+    for the ____ list.
+
+        a = [1, 2, 3]
+        b = a
+        b.append(4)
+        print(a)
+
+      ANSWER: name
+      ANSWER: same
+
+20. `.sort()` changes the list itself and gives back ____, which is why
+    `scores = scores.sort()` throws the list away.
+
+      ANSWER: None
+
+21. In Check it, a function that takes a list should also be tried with an
+    ____ list, because `max()` stops with an error on it and dividing by
+    its `len()` divides by zero.
+
+      ANSWER: empty
+
+22. In a trace table, after `b = a[:]` and then `a.append(3)`, the cell
+    for `b` still shows the old items, because a slice makes a ____ list.
+
+        a = [1, 2]
+        b = a[:]
+        a.append(3)
+
+      ANSWER: new

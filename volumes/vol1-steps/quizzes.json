@@ -860,6 +860,180 @@
      ]
     }
    ]
+  },
+  {
+   "slug": "ch07h-the-gradebook",
+   "questions": [
+    {
+     "section": "Vocabulary",
+     "text": "A ____ holds many values under one name, in order, and is made with square brackets.",
+     "answers": [
+      "list"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Each item in a list has a position called its ____. Python counts these from zero.",
+     "answers": [
+      "index"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "A list can be changed after it is made, so it is called ____.",
+     "answers": [
+      "mutable"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "A ____ takes a piece of a list using `list[start:stop]`, and always makes a new list instead of changing the old one.",
+     "answers": [
+      "slice"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "A function that belongs to a value and is called with a dot after it, like `scores.append(95)`, is called a ____.",
+     "answers": [
+      "method"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Two lists kept in the same order, so that the same index finds a name in one and its score in the other, are called ____ lists.",
+     "answers": [
+      "parallel"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "names = [\"Ada\", \"Grace\", \"Alan\", \"Katherine\"]\nprint(names[1])\nprint(names[-1])",
+     "answers": [
+      "Grace\nKatherine"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "letters = [\"a\", \"b\", \"c\", \"d\", \"e\", \"f\"]\nprint(letters[2:5])\nprint(letters[:2])",
+     "answers": [
+      "['c', 'd', 'e']\n['a', 'b']"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "scores = [88, 92, 79]\nresult = scores.sort()\nprint(result)\nprint(scores)",
+     "answers": [
+      "None\n[79, 88, 92]"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "a = [1, 2, 3]\nb = a\nb.append(4)\nprint(a)",
+     "answers": [
+      "[1, 2, 3, 4]"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "names = [\"Ada\", \"Grace\", \"Alan\"]\nfor position, name in enumerate(names):\n    print(f\"{position + 1}. {name}\")",
+     "answers": [
+      "1. Ada\n2. Grace\n3. Alan"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "scores = [55, 82, 91, 40, 76]\npassing = []\nfor score in scores:\n    if score >= 60:\n        passing.append(score)\nprint(passing)\nprint(len(passing))",
+     "answers": [
+      "[82, 91, 76]\n3"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? It gives the second-largest number. ____",
+     "code": "numbers = [3, 9, 5]\nprint(sorted(numbers)[-2])",
+     "answers": [
+      "5"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "cities = [\"Oslo\", \"Lima\", \"Cairo\"]\ntemps = [4, 31, 19]\nprint(cities[temps.index(max(temps))])",
+     "answers": [
+      "Lima"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Fill in the blank:",
+     "code": "names = [\"Ada\", \"Grace\"]\nnames.____(\"Alan\")  # adds \"Alan\" to the end of the list\nprint(names)",
+     "answers": [
+      "append"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Fill in the blank:",
+     "code": "scores = [88, 92, 79]\n# gives back a new sorted list; scores itself is left as it was\nordered = ____(scores)\nprint(ordered, scores)",
+     "answers": [
+      "sorted"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Fill in the blank:",
+     "code": "evens = []\nfor n in numbers:\n    if n % 2 == 0:\n        evens.____(n)  # adds n to the end of evens",
+     "answers": [
+      "append"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Fill in the blank, so that the loop builds the list backward:",
+     "code": "numbers = [1, 2, 3]\nbackwards = []\nfor number in numbers:\n    backwards.____(0, number)\nprint(backwards)  # [3, 2, 1]",
+     "answers": [
+      "insert"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Printing `a` shows `[1, 2, 3, 4]` even though only `b` was changed, because `b = a` does not make a second list: it makes a second ____ for the ____ list.",
+     "code": "a = [1, 2, 3]\nb = a\nb.append(4)\nprint(a)",
+     "answers": [
+      "name",
+      "same"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "`.sort()` changes the list itself and gives back ____, which is why `scores = scores.sort()` throws the list away.",
+     "answers": [
+      "None"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "In Check it, a function that takes a list should also be tried with an ____ list, because `max()` stops with an error on it and dividing by its `len()` divides by zero.",
+     "answers": [
+      "empty"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "In a trace table, after `b = a[:]` and then `a.append(3)`, the cell for `b` still shows the old items, because a slice makes a ____ list.",
+     "code": "a = [1, 2]\nb = a[:]\na.append(3)",
+     "answers": [
+      "new"
+     ]
+    }
+   ]
   }
  ]
 }
