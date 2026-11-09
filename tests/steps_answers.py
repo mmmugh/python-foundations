@@ -45,22 +45,55 @@ def answer_for(slug, number, spec, code, solutions):
     return kind, solution["code"], "print('not yet')"
 
 
+def built_slugs(vol):
+    """The lesson pages the site actually serves, from its built HTML.
+
+    steps_walk.mjs clicks through what a learner is served, not what the
+    source happens to contain -- a page dropped from the build (or never
+    rebuilt after it was added to the source) must not be walked as if it
+    were there, and must not be silently skipped either.
+    """
+    site_dir = build.SITE / vol["slug"]
+    if not site_dir.exists():
+        sys.exit(f"{site_dir} does not exist -- run python3 build.py before walking the site")
+    return {p.stem for p in site_dir.glob("*.html")}
+
+
 def answers(unit=None):
     vol = next(v for v in build.VOLS if v["slug"] == VOLUME)
     checks = build.load_json(vol, "_checks.json")
     solutions = build.load_solutions(vol)
-    out = []
-    for path in build.chapter_files(vol):
-        slug, text = path.stem, path.read_text()
+    pages = {p.stem: p.read_text() for p in build.chapter_files(vol)}
+    built = built_slugs(vol)
+
+    checked_slugs = {key.split("#")[0] for key in checks}
+    unbuilt = sorted(checked_slugs - built)
+    if unbuilt:
+        sys.exit(f"{VOLUME}: checks exist for {unbuilt}, but site/{VOLUME} has no built page "
+                 f"for them -- run python3 build.py")
+
+    out, produced, in_scope = [], set(), set()
+    for slug in sorted(built):
+        text = pages.get(slug)
+        if text is None:
+            continue
         match = UNIT.match(text)
         if unit and (not match or match.group(1) != str(int(unit))):
             continue
+        in_scope.add(slug)
         for number, _, _, code, _ in exercises(blocks_of(text)):
-            spec = checks.get(f"{slug}#{number}")
+            key = f"{slug}#{number}"
+            spec = checks.get(key)
             if not spec:
                 continue
             kind, right, wrong = answer_for(slug, number, spec, code, solutions)
             out.append({"slug": slug, "n": number, "kind": kind, "right": right, "wrong": wrong})
+            produced.add(key)
+
+    stale = sorted(key for key in checks if key.split("#")[0] in in_scope and key not in produced)
+    if stale:
+        sys.exit(f"{VOLUME}: checks exist for {stale}, but the built page has no exercise that "
+                 f"matches -- stale content, or the site needs rebuilding")
     return out
 
 

@@ -35,12 +35,14 @@ def main():
     build.BOXES["p#0"] = {"raises": "SyntaxError"}
     out = io.StringIO()
     try:
-        with contextlib.redirect_stdout(out):
-            build.verify(built)
-        refused = None
-    except SystemExit as stop:
-        refused = str(stop)
-    del build.BOXES["p#0"]
+        try:
+            with contextlib.redirect_stdout(out):
+                build.verify(built)
+            refused = None
+        except SystemExit as stop:
+            refused = str(stop)
+    finally:
+        del build.BOXES["p#0"]
     expect("a box declared SyntaxError that raises NameError is refused",
            refused is not None and "declared SyntaxError, raised NameError" in out.getvalue(), True)
 
