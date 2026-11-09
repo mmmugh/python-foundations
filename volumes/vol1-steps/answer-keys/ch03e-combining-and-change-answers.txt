@@ -1,0 +1,150 @@
+PYTHON FOUNDATIONS
+Unit 3 - Expressions and operators
+
+ANSWER KEY
+
+
+VOCABULARY
+----------
+
+ 1. An ____ is anything Python can work out to produce a single value,
+    such as 7 or 3 + 4.
+
+      ANSWER: expression
+
+ 2. Python ____ an expression, reducing it down to one value.
+
+      ANSWER: evaluates
+
+ 3. What is left over after a division, which the % operator gives you, is
+    called the ____.
+
+      ANSWER: remainder
+
+ 4. Putting an f before the opening quote of a string creates an ____,
+    which lets you insert values directly inside the text using curly
+    braces.
+
+      ANSWER: f-string
+
+ 5. The :.2f inside an f-string's curly braces is called a ____: it
+    controls how the value is displayed.
+
+      ANSWER: format specifier
+
+
+READING CODE
+------------
+
+ 6. What does this print?
+
+        print(17 // 5, 17 % 5, 17 / 5)
+
+      ANSWER: 3 2 3.4
+
+ 7. What does this print?
+
+        print(10 + 3 * 2)
+        print((10 + 3) * 2)
+        print(2 ** 3 * 4)
+
+      ANSWER: 16
+          26
+          32
+
+ 8. What does this print?
+
+        name = "Ada"
+        score = 91.5
+        print(f"{name} scored {score:.1f} points.")
+
+      ANSWER: Ada scored 91.5 points.
+
+ 9. What does this print?
+
+        print("-" * 10)
+        print("ab" * 3)
+
+      ANSWER: ----------
+          ababab
+
+10. What does this print?
+
+        score = 0
+        score += 10
+        score += 25
+        score *= 2
+        print(score)
+
+      ANSWER: 70
+
+11. What does this print?
+
+        print(7 // 2, 7 % 2, 7 / 2)
+        print(2 ** 3 * 2)
+        print("5" * 3)
+        print(int("5") * 3)
+
+      ANSWER: 3 1 3.5
+          16
+          555
+          15
+
+12. What does this print?
+
+        age = 15
+        print(age >= 13 and age <= 19)
+        print(not age == 15)
+
+      ANSWER: True
+          False
+
+
+WRITING CODE
+------------
+
+13. Complete this line so it uses the exponent operator to print 1024:
+
+        print(2 ____ 10)
+
+      ANSWER: **
+
+14. Complete this f-string's format specifier so a dollar total always
+    shows exactly two decimal places:
+
+        total = 7.5
+        print(f"Total: ${total:____}")
+
+      ANSWER: .2f
+
+15. Rewrite x = x + 3 using the shorthand assignment operator:
+
+        x ____ 3
+
+      ANSWER: +=
+
+
+WHY IT WORKS
+------------
+
+16. 0.1 + 0.2 prints 0.30000000000000004 because computers store floats in
+    ____, and just as 1/3 cannot be written exactly as a decimal, 0.1
+    cannot be written exactly in that format either.
+
+      ANSWER: binary
+
+17. // rounds ____, which is why -17 // 5 is -4 rather than -3.
+
+      ANSWER: down
+
+18. ____ assigns a value to a variable, while ____ asks whether two values
+    are equal and produces a boolean.
+
+      ANSWER: =
+      ANSWER: ==
+
+19. The change machine's plan was to take as many as fit of the biggest
+    coin first, then work only on what is left. Breaking a problem into
+    steps like that is the ____ it step of the routine.
+
+      ANSWER: Split

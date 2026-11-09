@@ -268,6 +268,155 @@
      ]
     }
    ]
+  },
+  {
+   "slug": "ch03e-combining-and-change",
+   "questions": [
+    {
+     "section": "Vocabulary",
+     "text": "An ____ is anything Python can work out to produce a single value, such as 7 or 3 + 4.",
+     "answers": [
+      "expression"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Python ____ an expression, reducing it down to one value.",
+     "answers": [
+      "evaluates"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "What is left over after a division, which the % operator gives you, is called the ____.",
+     "answers": [
+      "remainder"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Putting an f before the opening quote of a string creates an ____, which lets you insert values directly inside the text using curly braces.",
+     "answers": [
+      "f-string"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "The :.2f inside an f-string's curly braces is called a ____: it controls how the value is displayed.",
+     "answers": [
+      "format specifier"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "print(17 // 5, 17 % 5, 17 / 5)",
+     "answers": [
+      "3 2 3.4"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "print(10 + 3 * 2)\nprint((10 + 3) * 2)\nprint(2 ** 3 * 4)",
+     "answers": [
+      "16\n26\n32"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "name = \"Ada\"\nscore = 91.5\nprint(f\"{name} scored {score:.1f} points.\")",
+     "answers": [
+      "Ada scored 91.5 points."
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "print(\"-\" * 10)\nprint(\"ab\" * 3)",
+     "answers": [
+      "----------\nababab"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "score = 0\nscore += 10\nscore += 25\nscore *= 2\nprint(score)",
+     "answers": [
+      "70"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "print(7 // 2, 7 % 2, 7 / 2)\nprint(2 ** 3 * 2)\nprint(\"5\" * 3)\nprint(int(\"5\") * 3)",
+     "answers": [
+      "3 1 3.5\n16\n555\n15"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "age = 15\nprint(age >= 13 and age <= 19)\nprint(not age == 15)",
+     "answers": [
+      "True\nFalse"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete this line so it uses the exponent operator to print 1024:",
+     "code": "print(2 ____ 10)",
+     "answers": [
+      "**"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete this f-string's format specifier so a dollar total always shows exactly two decimal places:",
+     "code": "total = 7.5\nprint(f\"Total: ${total:____}\")",
+     "answers": [
+      ".2f"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Rewrite x = x + 3 using the shorthand assignment operator:",
+     "code": "x ____ 3",
+     "answers": [
+      "+="
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "0.1 + 0.2 prints 0.30000000000000004 because computers store floats in ____, and just as 1/3 cannot be written exactly as a decimal, 0.1 cannot be written exactly in that format either.",
+     "answers": [
+      "binary"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "// rounds ____, which is why -17 // 5 is -4 rather than -3.",
+     "answers": [
+      "down"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "____ assigns a value to a variable, while ____ asks whether two values are equal and produces a boolean.",
+     "answers": [
+      "=",
+      "=="
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "The change machine's plan was to take as many as fit of the biggest coin first, then work only on what is left. Breaking a problem into steps like that is the ____ it step of the routine.",
+     "answers": [
+      "Split"
+     ]
+    }
+   ]
   }
  ]
 }
