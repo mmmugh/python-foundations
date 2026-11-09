@@ -83,6 +83,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch06b-returning", "Lesson 6.2 — Giving back a value",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch06c-scope-and-docstrings", "Lesson 6.3 — Where names live, and describing a function",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

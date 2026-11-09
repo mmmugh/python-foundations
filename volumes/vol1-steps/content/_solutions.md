@@ -1153,3 +1153,48 @@ print(largest_of_three(-1, -5, -3))
 ```
 
 The second test only compares `b` and `c`, because by then `a` has lost to one of them. When two numbers tie for largest, either one is the right answer: with 7, 7 and 2, `a >= b` is `True`, so `a` comes back, which is 7. `>` in place of `>=` works too: then `b` comes back, which is also 7.
+
+## ch06c-scope-and-docstrings#4
+
+```python
+def add_shipping(price):
+    total = price + 4
+    return total
+
+
+cost = add_shipping(20)
+print(cost)
+```
+
+`total` is local to `add_shipping()`, so the last line could not see it: that was the `NameError`. Now the function returns the value, and the program stores it in a variable of its own. Calling that variable `total` too would also work: it would be a second, separate variable, outside the function.
+
+## ch06c-scope-and-docstrings#6
+
+```python
+def add_bonus(score, bonus):
+    return score + bonus
+
+
+print(add_bonus(10, 5))
+```
+
+With `bonus` in the brackets, the function no longer reads the global variable, so the line `bonus = 5` can go. Every call now says what bonus it uses, and a change somewhere else in the program can't change the answer.
+
+## ch06c-scope-and-docstrings#9
+
+```python
+# Say it: give back True if a number is even, False if not.
+# Split it:
+# 1. say what the function does, in a docstring
+# 2. an even number leaves no remainder when divided by 2
+# 3. return True or False
+def is_even(number):
+    """Give back True if the number is even, False if it is not."""
+    return number % 2 == 0
+
+
+print(is_even(4))
+print(is_even(-3))
+```
+
+`number % 2 == 0` is already `True` or `False`, so the function can return it as it is. An `if` with `return True` and `return False` works too. 0 divided by 2 leaves no remainder, so 0 is even, and so is -2.

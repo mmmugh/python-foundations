@@ -3263,5 +3263,143 @@
         9
       ]
     ]
+  },
+  "ch06c-scope-and-docstrings#1": {
+    "kind": "predict"
+  },
+  "ch06c-scope-and-docstrings#2": {
+    "kind": "choice",
+    "options": [
+      "`None`",
+      "`0`",
+      "an empty string, `\"\"`"
+    ],
+    "answer": 0,
+    "why": "With no `return`, a function hands back `None`, Python's value for \"nothing at all\", whatever it printed on the way."
+  },
+  "ch06c-scope-and-docstrings#3": {
+    "kind": "predict"
+  },
+  "ch06c-scope-and-docstrings#4": {
+    "kind": "function",
+    "name": "add_shipping",
+    "cases": [
+      [
+        [
+          20
+        ],
+        24
+      ],
+      [
+        [
+          0
+        ],
+        4
+      ],
+      [
+        [
+          2.5
+        ],
+        6.5
+      ],
+      [
+        [
+          100
+        ],
+        104
+      ]
+    ]
+  },
+  "ch06c-scope-and-docstrings#5": {
+    "kind": "predict"
+  },
+  "ch06c-scope-and-docstrings#6": {
+    "kind": "function",
+    "name": "add_bonus",
+    "cases": [
+      [
+        [
+          10,
+          5
+        ],
+        15
+      ],
+      [
+        [
+          0,
+          20
+        ],
+        20
+      ],
+      [
+        [
+          7,
+          -2
+        ],
+        5
+      ],
+      [
+        [
+          0,
+          0
+        ],
+        0
+      ]
+    ]
+  },
+  "ch06c-scope-and-docstrings#7": {
+    "kind": "choice",
+    "options": [
+      "It prints the menu, as usual.",
+      "Python runs the `def` first, then line 1.",
+      "It stops with a NameError: on line 1, `show_menu` does not exist yet."
+    ],
+    "answer": 2,
+    "why": "Python runs a program from the top. On line 1, the `def` on line 3 has not run yet, so the name `show_menu` has not been made."
+  },
+  "ch06c-scope-and-docstrings#8": {
+    "kind": "predict"
+  },
+  "ch06c-scope-and-docstrings#9": {
+    "kind": "function",
+    "name": "is_even",
+    "cases": [
+      [
+        [
+          4
+        ],
+        true
+      ],
+      [
+        [
+          7
+        ],
+        false
+      ],
+      [
+        [
+          0
+        ],
+        true
+      ],
+      [
+        [
+          -2
+        ],
+        true
+      ],
+      [
+        [
+          -3
+        ],
+        false
+      ],
+      [
+        [
+          100
+        ],
+        true
+      ]
+    ]
   }
 }

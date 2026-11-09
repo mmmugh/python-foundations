@@ -58,5 +58,17 @@
   "ch06a-defining#7": {
     "raises": "TypeError",
     "why": "A call with no argument for a parameter. The error message is the lesson."
+  },
+  "ch06c-scope-and-docstrings#1": {
+    "raises": "NameError",
+    "why": "A local variable used outside its function. The error message is the lesson."
+  },
+  "ch06c-scope-and-docstrings#4": {
+    "raises": "NameError",
+    "why": "Fix-the-bug practice: a local variable used outside its function."
+  },
+  "ch06c-scope-and-docstrings#7": {
+    "raises": "NameError",
+    "why": "A function called above its def line. The error message is the lesson."
   }
 }
