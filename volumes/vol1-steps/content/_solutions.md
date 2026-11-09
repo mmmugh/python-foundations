@@ -2169,3 +2169,39 @@ print(initials(""))
 ```
 
 `split()` with nothing in its brackets drops extra spaces, so every word has a first letter. `split(" ")` would give empty pieces for `"  bo  "`, and `word[0]` would stop with an `IndexError`. Adding each letter to a string that starts as `""`, then giving back its `upper()`, works too.
+
+## ch08i-character-by-character#5
+
+```python
+def hide_digits(text):
+    hidden = ""
+    for character in text:
+        if character.isdigit():
+            hidden += "#"
+        else:
+            hidden += character
+    return hidden
+```
+
+Every character adds something: a `#` for a digit, and the character itself for anything else. Without the `else`, only the `#` marks would be left.
+
+## ch08i-character-by-character#7
+
+```python
+# Say it: True if the text reads the same both ways, ignoring spaces and capitals.
+# Split it:
+# 1. make a cleaned text: the spaces taken out, and the letters made small
+# 2. turn the cleaned text around
+# 3. compare the two
+def is_palindrome(text):
+    cleaned = text.replace(" ", "").lower()
+    backward = cleaned[::-1]
+    return cleaned == backward
+
+
+print(is_palindrome("Never odd or even"))
+print(is_palindrome("rocket"))
+print(is_palindrome(""))
+```
+
+`replace(" ", "")` takes out every space, the middle ones too, which `strip()` would not. Cleaning comes first, so that both sides of the comparison are cleaned. A loop that keeps only the letters, made small, as `letters_only()` did in lesson 8.6, works as well, and ignores signs like commas too.

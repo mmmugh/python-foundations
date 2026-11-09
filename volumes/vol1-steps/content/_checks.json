@@ -6315,5 +6315,164 @@
         "XYZ"
       ]
     ]
+  },
+  "ch08i-character-by-character#1": {
+    "kind": "predict"
+  },
+  "ch08i-character-by-character#2": {
+    "kind": "choice",
+    "options": [
+      "It gives back `\"1 2\"`.",
+      "It stops with a TypeError, because `join()` glues strings only.",
+      "It gives back `\"12\"`."
+    ],
+    "answer": 1,
+    "why": "The items are whole numbers, and `join()` wants strings. Turn each one into a string with `str()` first, then join."
+  },
+  "ch08i-character-by-character#3": {
+    "kind": "predict"
+  },
+  "ch08i-character-by-character#4": {
+    "kind": "trace",
+    "names": [
+      "letter",
+      "result"
+    ]
+  },
+  "ch08i-character-by-character#5": {
+    "kind": "function",
+    "name": "hide_digits",
+    "cases": [
+      [
+        [
+          "Call 555-1234"
+        ],
+        "Call ###-####"
+      ],
+      [
+        [
+          ""
+        ],
+        ""
+      ],
+      [
+        [
+          "abc"
+        ],
+        "abc"
+      ],
+      [
+        [
+          "2026"
+        ],
+        "####"
+      ],
+      [
+        [
+          "R2-D2"
+        ],
+        "R#-D#"
+      ]
+    ]
+  },
+  "ch08i-character-by-character#6": {
+    "kind": "choice",
+    "options": [
+      "`True`",
+      "`False`",
+      "It stops with an error."
+    ],
+    "answer": 0,
+    "why": "The empty string turned around, `\"\"[::-1]`, is still `\"\"`, so the two sides are equal. A slice is never out of range, so nothing stops."
+  },
+  "ch08i-character-by-character#7": {
+    "kind": "function",
+    "name": "is_palindrome",
+    "cases": [
+      [
+        [
+          "Racecar"
+        ],
+        true
+      ],
+      [
+        [
+          "top spot"
+        ],
+        true
+      ],
+      [
+        [
+          "Never odd or even"
+        ],
+        true
+      ],
+      [
+        [
+          "rocket"
+        ],
+        false
+      ],
+      [
+        [
+          ""
+        ],
+        true
+      ],
+      [
+        [
+          "a"
+        ],
+        true
+      ],
+      [
+        [
+          "ab"
+        ],
+        false
+      ],
+      [
+        [
+          "Was it a car or a cat I saw"
+        ],
+        true
+      ],
+      [
+        [
+          "ab ba c"
+        ],
+        false
+      ],
+      [
+        [
+          "  abba "
+        ],
+        true
+      ],
+      [
+        [
+          "Step on no pets"
+        ],
+        true
+      ],
+      [
+        [
+          "palindrome"
+        ],
+        false
+      ],
+      [
+        [
+          "Abca"
+        ],
+        false
+      ],
+      [
+        [
+          "level up level"
+        ],
+        false
+      ]
+    ]
   }
 }

@@ -123,6 +123,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch08h-joining-a-list", "Lesson 8.8 — Joining a list into text",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch08i-character-by-character", "Lesson 8.9 — One character at a time, and palindromes",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300
