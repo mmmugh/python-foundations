@@ -817,3 +817,36 @@ for number in range(1, 11):
 ```
 
 `range(1, 11)` starts at 1, not 0, and stops just before 11, so the last square is 10 times 10, which is 100. `number ** 2` works too.
+
+## ch05c-looping-over-text#6
+
+```python
+word = input("Word: ")
+count = 0
+for letter in word:
+    if letter == "s":
+        count += 1
+print(f"s: {count}")
+```
+
+The `print()` is not indented, so it runs once, after the loop. Indented, it would print a count on every pass. A capital `S` is a different character, so `Sam` has no small `s`.
+
+## ch05c-looping-over-text#7
+
+```python
+# Say it: print a word one letter per line, then how many vowels it has.
+# Split it:
+# 1. ask for the word
+# 2. start the vowel count at 0
+# 3. for each letter: print it; if it is a vowel, add 1
+# 4. after the loop, print the count
+word = input("Word: ")
+vowels = 0
+for letter in word:
+    print(letter)
+    if letter == "a" or letter == "e" or letter == "i" or letter == "o" or letter == "u":
+        vowels += 1
+print(f"Vowels: {vowels}")
+```
+
+The printing and the counting share one loop: on each pass, the letter is printed, and then the `if` decides whether it counts. `rhythm` has no vowels, so the count stays at 0, and the program still says so.

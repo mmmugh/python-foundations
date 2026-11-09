@@ -69,6 +69,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch05b-for-and-range", "Lesson 5.2 — For, and range()",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch05c-looping-over-text", "Lesson 5.3 — Looping over a string",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

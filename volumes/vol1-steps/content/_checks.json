@@ -2077,5 +2077,131 @@
         ]
       }
     ]
+  },
+  "ch05c-looping-over-text#1": {
+    "kind": "predict"
+  },
+  "ch05c-looping-over-text#2": {
+    "kind": "choice",
+    "options": [
+      "`range(5)`",
+      "`range(1, 5)`",
+      "`range(1, 6)`"
+    ],
+    "answer": 2,
+    "why": "It starts at 1 and stops just before 6. `range(5)` gives 0 to 4, and `range(1, 5)` stops at 4."
+  },
+  "ch05c-looping-over-text#3": {
+    "kind": "predict"
+  },
+  "ch05c-looping-over-text#4": {
+    "kind": "predict"
+  },
+  "ch05c-looping-over-text#5": {
+    "kind": "predict"
+  },
+  "ch05c-looping-over-text#6": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "mississippi"
+        ],
+        "contains": "s: 4",
+        "absent": [
+          "s: 0",
+          "s: 1",
+          "s: 2",
+          "s: 3"
+        ]
+      },
+      {
+        "typed": [
+          "sass"
+        ],
+        "contains": "s: 3",
+        "absent": [
+          "s: 0",
+          "s: 1",
+          "s: 2"
+        ]
+      },
+      {
+        "typed": [
+          "Sam"
+        ],
+        "contains": "s: 0",
+        "absent": [
+          "s: 1"
+        ]
+      },
+      {
+        "typed": [
+          ""
+        ],
+        "contains": "s: 0"
+      }
+    ]
+  },
+  "ch05c-looping-over-text#7": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "banana"
+        ],
+        "words": [
+          "b",
+          "a",
+          "n",
+          "a",
+          "n",
+          "a"
+        ],
+        "numbers": [
+          3
+        ],
+        "absent": [
+          "banana"
+        ]
+      },
+      {
+        "typed": [
+          "rhythm"
+        ],
+        "words": [
+          "r",
+          "h",
+          "y",
+          "t",
+          "h",
+          "m"
+        ],
+        "numbers": [
+          0
+        ],
+        "absent": [
+          "rhythm"
+        ]
+      },
+      {
+        "typed": [
+          "queue"
+        ],
+        "words": [
+          "q",
+          "u",
+          "e",
+          "u",
+          "e"
+        ],
+        "numbers": [
+          4
+        ],
+        "absent": [
+          "queue"
+        ]
+      }
+    ]
   }
 }
