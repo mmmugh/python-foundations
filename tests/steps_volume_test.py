@@ -97,6 +97,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch07d-inserting-and-removing", "Lesson 7.4 — Putting items in, and taking them out",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch07e-asking-and-sorting", "Lesson 7.5 — Asking about a list, and sorting it",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

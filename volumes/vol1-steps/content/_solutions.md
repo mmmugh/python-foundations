@@ -1537,3 +1537,67 @@ print(line)
 ```
 
 `pop(0)` takes out the person at the front and gives them back, so `person` can be printed. With 0, `range(0)` makes no passes, and the whole line is printed. With 3, the loop empties the line, and it prints `[]`.
+
+## ch07e-asking-and-sorting#4
+
+```python
+def spread(numbers):
+    if len(numbers) == 0:
+        return 0
+    return max(numbers) - min(numbers)
+```
+
+Without the first `if`, an empty list stops at `max()` with a `ValueError`. The `return 0` ends the function first (lesson 6.2), so `max()` never sees an empty list. A list of one number has the same largest and smallest, so its spread is 0 with no special case.
+
+## ch07e-asking-and-sorting#6
+
+```python
+scores = [88, 92, 79]
+scores.sort()
+print(scores[0])
+```
+
+`scores.sort()` sorts the list and gives back `None`, so `scores = scores.sort()` threw the list away and kept `None`, and `None[0]` makes no sense. Call `sort()` on its own line. `scores = sorted(scores)` works too, because `sorted()` gives back the new list.
+
+## ch07e-asking-and-sorting#7
+
+```python
+def in_order(scores):
+    return sorted(scores)
+
+marks = [88, 92, 79]
+print(in_order(marks))
+print(marks)
+```
+
+`scores.sort()` sorted the caller's list itself, because `scores` and `marks` are two names for one list. `sorted(scores)` makes a new list in order, and leaves the one it was given alone. Sorting a copy, `scores[:]`, then giving that back, works too.
+
+## ch07e-asking-and-sorting#8
+
+```python
+words = []
+for turn in range(4):
+    words.append(input("Word: "))
+print(sorted(words))
+```
+
+The loop asks four times and appends each word, as in lesson 7.3. `sorted()` gives back the list in order. `words.sort()` on its own line, then `print(words)`, works as well.
+
+## ch07e-asking-and-sorting#9
+
+```python
+# Say it: give back the average of a list of numbers, or 0 for an empty list.
+# Split it:
+# 1. if the list is empty, give back 0
+# 2. otherwise, add up the numbers, divide by how many there are, and give that back
+def average(numbers):
+    if len(numbers) == 0:
+        return 0
+    return sum(numbers) / len(numbers)
+
+
+print(average([88, 92, 79, 95]))
+print(average([]))
+```
+
+Without step 1, `average([])` divides 0 by 0, and stops with a `ZeroDivisionError`. Checking the empty list first, and returning, means the division only ever runs when there is at least one number.

@@ -4263,5 +4263,182 @@
         ]
       }
     ]
+  },
+  "ch07e-asking-and-sorting#1": {
+    "kind": "predict"
+  },
+  "ch07e-asking-and-sorting#2": {
+    "kind": "choice",
+    "options": [
+      "`remove()`",
+      "`pop()`",
+      "`insert()`"
+    ],
+    "answer": 1,
+    "why": "`pop()` takes out an item and gives it back, so `taken = cards.pop()` keeps it. `remove()` and `insert()` only change the list."
+  },
+  "ch07e-asking-and-sorting#3": {
+    "kind": "predict"
+  },
+  "ch07e-asking-and-sorting#4": {
+    "kind": "function",
+    "name": "spread",
+    "cases": [
+      [
+        [
+          [
+            3,
+            9,
+            5
+          ]
+        ],
+        6
+      ],
+      [
+        [
+          []
+        ],
+        0
+      ],
+      [
+        [
+          [
+            7
+          ]
+        ],
+        0
+      ],
+      [
+        [
+          [
+            -4,
+            10
+          ]
+        ],
+        14
+      ],
+      [
+        [
+          [
+            2.5,
+            1.0
+          ]
+        ],
+        1.5
+      ],
+      [
+        [
+          [
+            9,
+            3,
+            5
+          ]
+        ],
+        6
+      ]
+    ]
+  },
+  "ch07e-asking-and-sorting#5": {
+    "kind": "predict"
+  },
+  "ch07e-asking-and-sorting#6": {
+    "kind": "output",
+    "expected": "79"
+  },
+  "ch07e-asking-and-sorting#7": {
+    "kind": "output",
+    "expected": "[79, 88, 92]\n[88, 92, 79]"
+  },
+  "ch07e-asking-and-sorting#8": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "pear",
+          "apple",
+          "fig",
+          "kiwi"
+        ],
+        "words": [
+          "apple",
+          "fig",
+          "kiwi",
+          "pear"
+        ]
+      },
+      {
+        "typed": [
+          "zebra",
+          "cat",
+          "yak",
+          "ant"
+        ],
+        "words": [
+          "ant",
+          "cat",
+          "yak",
+          "zebra"
+        ]
+      }
+    ]
+  },
+  "ch07e-asking-and-sorting#9": {
+    "kind": "function",
+    "name": "average",
+    "cases": [
+      [
+        [
+          [
+            88,
+            92,
+            79,
+            95
+          ]
+        ],
+        88.5
+      ],
+      [
+        [
+          []
+        ],
+        0
+      ],
+      [
+        [
+          [
+            7
+          ]
+        ],
+        7
+      ],
+      [
+        [
+          [
+            -2,
+            2
+          ]
+        ],
+        0
+      ],
+      [
+        [
+          [
+            1,
+            2
+          ]
+        ],
+        1.5
+      ],
+      [
+        [
+          [
+            10,
+            20,
+            30
+          ]
+        ],
+        20
+      ]
+    ]
   }
 }

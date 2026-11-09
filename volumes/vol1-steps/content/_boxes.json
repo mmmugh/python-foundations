@@ -90,5 +90,13 @@
   "ch07c-changing-a-list#8": {
     "raises": "TypeError",
     "why": "Fix-the-bug practice: append() given two items at once."
+  },
+  "ch07e-asking-and-sorting#3": {
+    "raises": "ValueError",
+    "why": "max() of an empty list. The error message is the lesson."
+  },
+  "ch07e-asking-and-sorting#11": {
+    "raises": "TypeError",
+    "why": "Fix-the-bug practice: scores = scores.sort() leaves None in scores."
   }
 }
