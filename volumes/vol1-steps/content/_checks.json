@@ -1967,5 +1967,115 @@
   "ch05a-while#7": {
     "kind": "output",
     "expected": "5\n4\n3\n2\n1\nLiftoff!"
+  },
+  "ch05b-for-and-range#1": {
+    "kind": "predict"
+  },
+  "ch05b-for-and-range#2": {
+    "kind": "choice",
+    "options": [
+      "It runs forever, until something stops it.",
+      "It runs once, then stops.",
+      "Python refuses to start it."
+    ],
+    "answer": 0,
+    "why": "Nothing changes the variable, so the condition stays `True`, and the loop never ends. On this page, it is stopped after 5 seconds."
+  },
+  "ch05b-for-and-range#3": {
+    "kind": "predict"
+  },
+  "ch05b-for-and-range#4": {
+    "kind": "choice",
+    "options": [
+      "3 times",
+      "4 times",
+      "5 times"
+    ],
+    "answer": 1,
+    "why": "`range(4)` gives four numbers, 0 to 3, so the block runs four times. The block never uses the number."
+  },
+  "ch05b-for-and-range#5": {
+    "kind": "predict"
+  },
+  "ch05b-for-and-range#6": {
+    "kind": "predict"
+  },
+  "ch05b-for-and-range#7": {
+    "kind": "predict"
+  },
+  "ch05b-for-and-range#8": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "7"
+        ],
+        "numbers": [
+          7,
+          14,
+          21,
+          28,
+          35,
+          42,
+          49,
+          56,
+          63,
+          70,
+          77,
+          84
+        ],
+        "absent": [
+          "7 x 0 = 0",
+          "7 x 13 = 91"
+        ]
+      },
+      {
+        "typed": [
+          "-2"
+        ],
+        "numbers": [
+          -2,
+          -4,
+          -6,
+          -8,
+          -10,
+          -12,
+          -14,
+          -16,
+          -18,
+          -20,
+          -22,
+          -24
+        ],
+        "absent": [
+          "-2 x 0 = 0",
+          "-2 x 13 = -26"
+        ]
+      }
+    ]
+  },
+  "ch05b-for-and-range#9": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "numbers": [
+          1,
+          4,
+          9,
+          16,
+          25,
+          36,
+          49,
+          64,
+          81,
+          100
+        ],
+        "absent": [
+          "0",
+          "121"
+        ]
+      }
+    ]
   }
 }

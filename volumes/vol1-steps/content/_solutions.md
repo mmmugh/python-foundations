@@ -794,3 +794,26 @@ print("Liftoff!")
 ```
 
 The count moves down this time, so the condition asks whether it is still 1 or more. With `countdown >= 0`, the loop would make one pass too many and print 0. `Liftoff!` is not indented, so it runs once, after the loop.
+
+## ch05b-for-and-range#8
+
+```python
+number = int(input("Whole number: "))
+for times in range(1, 13):
+    print(f"{number} x {times} = {number * times}")
+```
+
+The table goes from 1 to 12, so the stop is 13: `range()` leaves its stop out.
+
+## ch05b-for-and-range#9
+
+```python
+# Say it: print the squares of 1 to 10, one per line.
+# Split it:
+# 1. loop over the numbers 1 to 10
+# 2. print each one times itself
+for number in range(1, 11):
+    print(number * number)
+```
+
+`range(1, 11)` starts at 1, not 0, and stops just before 11, so the last square is 10 times 10, which is 100. `number ** 2` works too.

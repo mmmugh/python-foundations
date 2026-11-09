@@ -67,6 +67,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch05a-while", "Lesson 5.1 — Repeating with while",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch05b-for-and-range", "Lesson 5.2 — For, and range()",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300
