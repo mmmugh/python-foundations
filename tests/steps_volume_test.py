@@ -209,17 +209,21 @@ def lesson_problems(slug, heading, hint_steps, text, checks, solutions, alternat
         if not any(k == "p" and p.startswith("Key words:") for k, p in tail):
             say(f"{slug}: the wrap-up names its key words ('Key words: ...')")
 
-    # The page renders an exercise section as its exercises only: a paragraph
-    # or a bare output fence between them is dropped, so the learner never
-    # sees it. It belongs above the section's heading, or under one of its own.
+    # The page renders an exercise section as its exercises only (build.py's
+    # render_exercises keeps lists, their code fences and their hints), so
+    # anything else between them -- a paragraph, an output fence, a table, a
+    # heading -- is dropped and the learner never sees it. The rule names what
+    # is kept, not what was last found dropped, so a new kind of block is
+    # refused too. It belongs above the section's heading, or under one of its own.
+    shown_in_section = ("ol", "ul", "code", "quote")
+    what = {"p": "a paragraph", "output": "an output fence", "table": "a table", "h1": "a heading", "h2": "a heading"}
     section = None
     for kind, payload in blocks:
         if kind == "h3":
             section = payload if payload in build.EXERCISE_SECTIONS else None
-        elif section and kind in ("p", "output"):
-            what = "a paragraph" if kind == "p" else "an output fence"
-            say(f"{slug}: {what} inside the {section} section is never shown; move it above the "
-                f"heading or into an exercise ({str(payload)[:40]!r})")
+        elif section and kind not in shown_in_section:
+            say(f"{slug}: {what.get(kind, 'a ' + kind + ' block')} inside the {section} section is never "
+                f"shown; move it above the heading or into an exercise ({str(payload)[:40]!r})")
 
     found = exercises(blocks)
     if len(found) > MAX_EXERCISES:
