@@ -98,6 +98,17 @@ print(first + second)
 ```
 ````
 
+## Alternates
+
+In `content/_alternates.json`, `{"<page>#<n>": "<code>"}`, private like the checks and solutions. Every
+checked Try It needs an entry: a correct answer in a different style from the worked solution, passing the
+same check. A check that only the worked solution's own shape of answer can pass teaches the shape, not the
+idea.
+
+```json
+{"ch02a-naming-a-value#7": "coins = 5 - 2 + 4\nprint(\"Coins:\", coins)"}
+```
+
 ## Checks
 
 In `content/_checks.json`, keyed by `<page>#<n>`. A check tests what a program does, never how it is written.
@@ -111,6 +122,9 @@ Six kinds:
 | `predict` | the learner's prediction matches what the fence prints |
 | `choice` | the learner picked option `answer` (an index from 0) |
 | `trace` | a trace table: each named variable's value after each line |
+
+A `function` check needs a case with an awkward argument among `0`, `""`, `[]`, `{}` or a negative number,
+because Check it asks for an ordinary input and an awkward one. A check with only ordinary cases is refused.
 
 The four original kinds, as vol1-foundations uses them:
 
