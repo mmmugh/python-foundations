@@ -79,6 +79,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch05g-the-guessing-game", "Lesson 5.7 — Skipping, and a guessing game",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch06a-defining", "Lesson 6.1 — Making your own function",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

@@ -1044,3 +1044,53 @@ else:
 ```
 
 The loop can end two ways: `break` on a right guess, or the count reaching 5. `won` remembers which. `guesses < 5` lets exactly 5 guesses through: with `<=`, the player would get 6. Using `{secret}` in the last line means it stays right when the secret is random.
+
+## ch06a-defining#5
+
+```python
+def draw_line():
+    print("----------")
+
+
+draw_line()
+draw_line()
+draw_line()
+```
+
+The `def` stores the line, and each of the three calls runs it. The calls are not indented: indented, they would be part of the function's block, and nothing would ever call it.
+
+## ch06a-defining#8
+
+```python
+def show_square(number):
+    print(f"{number} squared is {number * number}")
+
+
+typed = int(input("Whole number: "))
+show_square(typed)
+```
+
+The call hands the typed number to the function, and `number` holds it while the block runs. `number ** 2` works too. A number below 0, times itself, is above 0, so -3 gives 9.
+
+## ch06a-defining#9
+
+```python
+# Say it: greet a person by name, or greet a stranger
+# if no name was typed.
+# Split it:
+# 1. the function: if the name is empty, print the stranger line;
+#    otherwise print the hello line
+# 2. ask for a name
+# 3. call the function with it
+def greet(name):
+    if not name:
+        print("Hello, stranger!")
+    else:
+        print(f"Hello, {name}!")
+
+
+typed_name = input("Your name: ")
+greet(typed_name)
+```
+
+An empty string counts as `False` (lesson 4.3), so `not name` is `True` only when nothing was typed. `name == ""` works too. Without the `if`, an empty name prints `Hello, !`.

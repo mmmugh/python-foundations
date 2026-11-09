@@ -2923,5 +2923,121 @@
         ]
       }
     ]
+  },
+  "ch06a-defining#1": {
+    "kind": "predict"
+  },
+  "ch06a-defining#2": {
+    "kind": "choice",
+    "options": [
+      "an accumulator",
+      "a flag",
+      "a stop value"
+    ],
+    "answer": 1,
+    "why": "A flag is a `True` or `False` variable that remembers something that happened in a loop: set before it, changed inside it, read after it."
+  },
+  "ch06a-defining#3": {
+    "kind": "predict"
+  },
+  "ch06a-defining#4": {
+    "kind": "choice",
+    "options": [
+      "`banner`",
+      "`def banner():`",
+      "`banner()`"
+    ],
+    "answer": 2,
+    "why": "The name with brackets calls the function. The `def` line only stores it, and the name without brackets does not call it."
+  },
+  "ch06a-defining#5": {
+    "kind": "output",
+    "expected": "----------\n----------\n----------"
+  },
+  "ch06a-defining#6": {
+    "kind": "predict"
+  },
+  "ch06a-defining#7": {
+    "kind": "choice",
+    "options": [
+      "It stops with a TypeError: one parameter, but two arguments.",
+      "It welcomes Ada, then Bo.",
+      "It welcomes Ada, and leaves Bo out."
+    ],
+    "answer": 0,
+    "why": "A call needs one argument for each parameter, no fewer and no more. Python says so: `welcome() takes 1 positional argument but 2 were given`."
+  },
+  "ch06a-defining#8": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "7"
+        ],
+        "numbers": [
+          7,
+          49
+        ]
+      },
+      {
+        "typed": [
+          "0"
+        ],
+        "numbers": [
+          0,
+          0
+        ]
+      },
+      {
+        "typed": [
+          "-3"
+        ],
+        "numbers": [
+          -3,
+          9
+        ]
+      },
+      {
+        "typed": [
+          "12"
+        ],
+        "numbers": [
+          12,
+          144
+        ]
+      }
+    ]
+  },
+  "ch06a-defining#9": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "Ada"
+        ],
+        "contains": "Hello, Ada!",
+        "absent": [
+          "Hello, stranger!"
+        ]
+      },
+      {
+        "typed": [
+          ""
+        ],
+        "contains": "Hello, stranger!",
+        "absent": [
+          "Hello, !"
+        ]
+      },
+      {
+        "typed": [
+          "Bo"
+        ],
+        "contains": "Hello, Bo!",
+        "absent": [
+          "Hello, stranger!"
+        ]
+      }
+    ]
   }
 }
