@@ -103,6 +103,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch07g-lists-inside-lists", "Lesson 7.7 — Lists inside lists",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch07h-the-gradebook", "Lesson 7.8 — Finding a position, and a gradebook",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

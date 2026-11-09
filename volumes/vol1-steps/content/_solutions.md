@@ -1683,3 +1683,84 @@ for row in board:
 ```
 
 Rows and squares both count from 0, so the center is row 1, index 1, and the top right is row 0, index 2, which is also `board[0][-1]`. The bare `print()` ends each row; without it, all nine squares would be on one line.
+
+## ch07h-the-gradebook#6
+
+```python
+def top_student(names, scores):
+    if len(scores) == 0:
+        return None
+    best = max(scores)
+    where = scores.index(best)
+    return names[where]
+```
+
+The same three steps as the example: the top score, its index, and the name at that index. The `if` comes first, because `max()` of an empty list stops with a `ValueError`. With a tie, `index()` finds the first of them, so the first student with that score is the answer.
+
+## ch07h-the-gradebook#7
+
+```python
+def count_passing(scores):
+    count = 0
+    for score in scores:
+        if score >= 60:
+            count += 1
+    return count
+```
+
+`count_above()` from lesson 7.6, with `>=` in place of `>`, because 60 is a pass. An empty list makes no passes, so the count stays 0.
+
+## ch07h-the-gradebook#9
+
+```python
+# Say it: print each student's line, then a summary of the class.
+# Split it:
+# 1. each student's line: name, score and letter grade
+# 2. the class average
+# 3. who got the top score
+# 4. how many passed
+# 5. print it all
+def letter_grade(score):
+    if score >= 90:
+        return "A"
+    elif score >= 80:
+        return "B"
+    elif score >= 70:
+        return "C"
+    elif score >= 60:
+        return "D"
+    else:
+        return "F"
+
+
+def average(numbers):
+    if len(numbers) == 0:
+        return 0
+    return sum(numbers) / len(numbers)
+
+
+def top_student(names, scores):
+    if len(scores) == 0:
+        return None
+    return names[scores.index(max(scores))]
+
+
+def count_passing(scores):
+    count = 0
+    for score in scores:
+        if score >= 60:
+            count += 1
+    return count
+
+
+names = ["Ada", "Grace", "Alan", "Katherine", "Edsger"]
+scores = [88, 92, 45, 95, 71]
+for index, name in enumerate(names):
+    score = scores[index]
+    print(name, score, letter_grade(score))
+print(f"Average: {round(average(scores), 1)}")
+print(f"Top: {top_student(names, scores)} {max(scores)}")
+print(f"Passing: {count_passing(scores)} of {len(scores)}")
+```
+
+The loop needs each index, because the same index finds a name in `names` and its score in `scores`. Every summary line is one call to a function that was checked on its own. The average here is exactly 78.2, but rounding it to 1 place keeps a class whose average is 78.2222 from printing all those digits.
