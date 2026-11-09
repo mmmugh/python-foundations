@@ -1650,3 +1650,36 @@ print(positions([], "a"))
 ```
 
 `enumerate()` hands over each index with its item, so the index is there to append when the item matches. If nothing matches, or the list is empty, nothing is appended, and `[]` comes back, as it should. `range(len(items))` with `items[i]` works the same way.
+
+## ch07g-lists-inside-lists#6
+
+```python
+sales = [[3, 5, 2], [4, 0, 6], [1, 1, 1]]
+for row in sales:
+    print(sum(row))
+```
+
+Each time round, `row` is one whole row, a list, so `sum(row)` adds it up. A loop inside the loop that keeps a total, set back to 0 at the start of each row, works too.
+
+## ch07g-lists-inside-lists#7
+
+```python
+# Say it: change two squares of the board, then print it as three rows of three.
+# Split it:
+# 1. put the X in the center: row 1, index 1
+# 2. put the O in the top right corner: row 0, index 2
+# 3. for each row: print each square with a space after it, then end the line
+board = [
+    [".", ".", "."],
+    [".", ".", "."],
+    [".", ".", "."],
+]
+board[1][1] = "X"
+board[0][2] = "O"
+for row in board:
+    for square in row:
+        print(square, end=" ")
+    print()
+```
+
+Rows and squares both count from 0, so the center is row 1, index 1, and the top right is row 0, index 2, which is also `board[0][-1]`. The bare `print()` ends each row; without it, all nine squares would be on one line.

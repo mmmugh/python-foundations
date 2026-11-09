@@ -101,6 +101,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch07f-looping-over-a-list", "Lesson 7.6 — Looping over a list",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch07g-lists-inside-lists", "Lesson 7.7 — Lists inside lists",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

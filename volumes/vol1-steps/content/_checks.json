@@ -4690,5 +4690,59 @@
         ]
       ]
     ]
+  },
+  "ch07g-lists-inside-lists#1": {
+    "kind": "predict"
+  },
+  "ch07g-lists-inside-lists#2": {
+    "kind": "choice",
+    "options": [
+      "The items after a removed one move back a place, and the loop steps past one of them.",
+      "`remove()` takes out the wrong item.",
+      "The loop stops as soon as it removes something."
+    ],
+    "answer": 0,
+    "why": "The loop goes through the list by position. Removing an item moves every later item back one place, so the next item lands where the loop has just looked, and is never seen. Build a new list instead."
+  },
+  "ch07g-lists-inside-lists#3": {
+    "kind": "predict"
+  },
+  "ch07g-lists-inside-lists#4": {
+    "kind": "trace",
+    "names": [
+      "board"
+    ]
+  },
+  "ch07g-lists-inside-lists#5": {
+    "kind": "predict"
+  },
+  "ch07g-lists-inside-lists#6": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "numbers": [
+          10,
+          10,
+          3
+        ]
+      }
+    ]
+  },
+  "ch07g-lists-inside-lists#7": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "words": [
+          ". . O",
+          ". X .",
+          ". . ."
+        ],
+        "absent": [
+          ". . O . X . . . ."
+        ]
+      }
+    ]
   }
 }
