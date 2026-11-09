@@ -1,0 +1,156 @@
+PYTHON FOUNDATIONS
+Unit 8 - Strings as data
+
+Name: ________________________________     Date: ______________
+
+Fill in every blank. Where a term is asked for, write the word the course
+uses. Where code is asked for, write exact Python. Where output is asked
+for, write what the program prints, one line per line.
+
+
+VOCABULARY
+----------
+
+ 1. A string is a __________________ of characters, so `len()`, indexing
+    and slicing work on it much as they do on a list.
+
+ 2. Unlike a list, a string is __________________: it cannot be changed
+    after it is made, so every string method gives back a new string
+    instead.
+
+ 3. The __________________ operator asks whether one string appears inside
+    another, as in `"quick" in sentence`.
+
+ 4. `\n` and `\t`, which stand for characters you can't type straight into
+    a string, are called __________________ sequences.
+
+ 5. A word that reads the same forward and backward, like racecar, is a
+    __________________.
+
+
+READING CODE
+------------
+
+ 6. What does this print?
+
+        word = "Python"
+        print(word[0:3])
+        print(word[::-1])
+
+    ____________________________________
+
+ 7. What does this print?
+
+        messy = "   Ada LOVELACE  "
+        clean = messy.strip().title()
+        print(f"[{clean}]")
+
+    ____________________________________
+
+ 8. What does this print?
+
+        answer = " Yes "
+        print(answer == "yes")
+        print(answer.strip().lower() == "yes")
+
+    ____________________________________
+
+ 9. What does this print?
+
+        row = "Ada,88,A"
+        parts = row.split(",")
+        print(f"{parts[0]} scored {parts[1]} for an {parts[2]}")
+
+    ____________________________________
+
+10. What does this print?
+
+        word = "python"
+        word.upper()
+        print(word)
+
+    ____________________________________
+
+11. What does this print?
+
+        def count_vowels(text):
+            count = 0
+            for letter in text.lower():
+                if letter in "aeiou":
+                    count += 1
+            return count
+        
+        
+        print(count_vowels("Hello World"))
+
+    ____________________________________
+
+12. What does this print?
+
+        print("-5".isdigit())
+        print("The Hobbit".startswith("the"))
+
+    ____________________________________
+
+13. What does this print?
+
+        code = "ab"
+        print(f"[{code:>4}]")
+
+    ____________________________________
+
+
+WRITING CODE
+------------
+
+14. Fill in the blank:
+
+        word = "hello"
+        print(word.__________________())  # prints HELLO
+
+15. Fill in the blank:
+
+        phone = "555-867-5309"
+        # takes every dash out
+        print(phone.__________________("-", ""))
+
+16. Fill in the blank:
+
+        sentence = "the quick brown fox"
+        # splits the sentence into a list of words
+        words = sentence.__________________()
+        print(words)
+
+17. Fill in the blank:
+
+        words = ["the", "quick", "brown"]
+        # glues the words together with a space between each one
+        print(" ".__________________(words))
+
+
+WHY IT WORKS
+------------
+
+18. `word.upper()` on its own line does not change `word`, because strings
+    are __________________; every string method gives back a
+    __________________ string, and the old one stays as it was.
+
+        word = "python"
+        word.upper()
+        print(word)
+
+19. `.find(x)` gives back __________________ when `x` does not appear in
+    the string at all; a result of __________________ means the match
+    starts at the very first character.
+
+20. In a trace table of this loop, after the second pass `backward` holds
+    __________________, because each new letter goes in front.
+
+        word = "abc"
+        backward = ""
+        for letter in word:
+            backward = letter + backward
+
+21. Check it tried `is_palindrome("Racecar")` on `word == word[::-1]` and
+    got `False`, because a capital R is a different __________________
+    from a small r.

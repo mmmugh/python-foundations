@@ -1034,6 +1034,174 @@
      ]
     }
    ]
+  },
+  {
+   "slug": "ch08k-the-text-analyzer",
+   "questions": [
+    {
+     "section": "Vocabulary",
+     "text": "A string is a ____ of characters, so `len()`, indexing and slicing work on it much as they do on a list.",
+     "answers": [
+      "sequence"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Unlike a list, a string is ____: it cannot be changed after it is made, so every string method gives back a new string instead.",
+     "answers": [
+      "immutable"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "The ____ operator asks whether one string appears inside another, as in `\"quick\" in sentence`.",
+     "answers": [
+      "in"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "`\\n` and `\\t`, which stand for characters you can't type straight into a string, are called ____ sequences.",
+     "answers": [
+      "escape"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "A word that reads the same forward and backward, like racecar, is a ____.",
+     "answers": [
+      "palindrome"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "word = \"Python\"\nprint(word[0:3])\nprint(word[::-1])",
+     "answers": [
+      "Pyt\nnohtyP"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "messy = \"   Ada LOVELACE  \"\nclean = messy.strip().title()\nprint(f\"[{clean}]\")",
+     "answers": [
+      "[Ada Lovelace]"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "answer = \" Yes \"\nprint(answer == \"yes\")\nprint(answer.strip().lower() == \"yes\")",
+     "answers": [
+      "False\nTrue"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "row = \"Ada,88,A\"\nparts = row.split(\",\")\nprint(f\"{parts[0]} scored {parts[1]} for an {parts[2]}\")",
+     "answers": [
+      "Ada scored 88 for an A"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "word = \"python\"\nword.upper()\nprint(word)",
+     "answers": [
+      "python"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def count_vowels(text):\n    count = 0\n    for letter in text.lower():\n        if letter in \"aeiou\":\n            count += 1\n    return count\n\n\nprint(count_vowels(\"Hello World\"))",
+     "answers": [
+      "3"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "print(\"-5\".isdigit())\nprint(\"The Hobbit\".startswith(\"the\"))",
+     "answers": [
+      "False\nFalse"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "code = \"ab\"\nprint(f\"[{code:>4}]\")",
+     "answers": [
+      "[  ab]"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Fill in the blank:",
+     "code": "word = \"hello\"\nprint(word.____())  # prints HELLO",
+     "answers": [
+      "upper"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Fill in the blank:",
+     "code": "phone = \"555-867-5309\"\n# takes every dash out\nprint(phone.____(\"-\", \"\"))",
+     "answers": [
+      "replace"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Fill in the blank:",
+     "code": "sentence = \"the quick brown fox\"\n# splits the sentence into a list of words\nwords = sentence.____()\nprint(words)",
+     "answers": [
+      "split"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Fill in the blank:",
+     "code": "words = [\"the\", \"quick\", \"brown\"]\n# glues the words together with a space between each one\nprint(\" \".____(words))",
+     "answers": [
+      "join"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "`word.upper()` on its own line does not change `word`, because strings are ____; every string method gives back a ____ string, and the old one stays as it was.",
+     "code": "word = \"python\"\nword.upper()\nprint(word)",
+     "answers": [
+      "immutable",
+      "new"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "`.find(x)` gives back ____ when `x` does not appear in the string at all; a result of ____ means the match starts at the very first character.",
+     "answers": [
+      "-1",
+      "0"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "In a trace table of this loop, after the second pass `backward` holds ____, because each new letter goes in front.",
+     "code": "word = \"abc\"\nbackward = \"\"\nfor letter in word:\n    backward = letter + backward",
+     "answers": [
+      "ba"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Check it tried `is_palindrome(\"Racecar\")` on `word == word[::-1]` and got `False`, because a capital R is a different ____ from a small r.",
+     "answers": [
+      "character"
+     ]
+    }
+   ]
   }
  ]
 }
