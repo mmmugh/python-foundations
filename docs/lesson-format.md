@@ -35,6 +35,10 @@ Three `###` headings hold exercises: `Warm-up`, `Practice` and `Try It` (`Steps`
 the same thing). A lesson may have several, with prose and examples between them. Each list item under one is an
 exercise with its own box; a code fence directly after an item is that exercise's starting code.
 
+An exercise section holds only its exercises, their starting code and their hints. A paragraph or a bare output
+fence between them is never shown on the page, so `steps_volume_test.py` refuses one: put it above the section's
+heading, or under a `###` heading of its own.
+
 Exercises are numbered straight through the page, not per section, because checks and solutions are found by
 `<page>#<n>`. In this lesson the warm-up is `#1`, the practice items are `#2` and `#3`, and the try it is `#4`:
 

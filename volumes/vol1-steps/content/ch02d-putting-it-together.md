@@ -34,9 +34,9 @@ You will write every line of it. First, **Say it** and **Split it**:
 
 Then **Name it**. This receipt needs a name for the customer, one for each price, and one for the total: `customer`, `notebook_price`, `pens_price`, `stickers_price` and `total`. Each says what it holds, so the finished program will explain itself.
 
-### Practice
+The practices below are the routine's **Build it** step: one or two comments at a time, run after each.
 
-These are the routine's **Build it** step: one or two comments at a time, run after each.
+### Practice
 
 1. Step 1: under the plan, ask for the customer's name and print "Customer:" followed by it. Run it.
 

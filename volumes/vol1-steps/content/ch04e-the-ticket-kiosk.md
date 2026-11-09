@@ -50,6 +50,8 @@ You will build it in three steps, running after each one. Step 1 sorts the ages.
 > Split it: work out the price as in step 1, and keep it in a variable; ask for the day; then one more `if`: is it Tuesday, and is the price more than 0? If both are true, take 3 off. Print the price last.
 > Check it: try 70 on a Tuesday, which is $7, and 30 on a Monday. Then the awkward one: 3 on a Tuesday. Without the check on the price, a free ticket would cost $-3.
 
+### Edge cases
+
 A free ticket on a Tuesday is an **edge case**: an unusual input, at the edge of the rules, where a program is most likely to go wrong. Edge cases rarely announce themselves. Finding them is what Check it is for.
 
 ### Try It
