@@ -6032,5 +6032,145 @@
         false
       ]
     ]
+  },
+  "ch08g-splitting-text#1": {
+    "kind": "predict"
+  },
+  "ch08g-splitting-text#2": {
+    "kind": "choice",
+    "options": [
+      "There is no difference.",
+      "`if` cannot call `isdigit()`.",
+      "`while` asks again as many times as it takes; `if` would ask only once more."
+    ],
+    "answer": 2,
+    "why": "A loop repeats until its condition is false, so someone who types two wrong answers is asked a third time. An `if` runs its block at most once."
+  },
+  "ch08g-splitting-text#3": {
+    "kind": "predict"
+  },
+  "ch08g-splitting-text#4": {
+    "kind": "function",
+    "name": "first_word",
+    "cases": [
+      [
+        [
+          "  hello world"
+        ],
+        "hello"
+      ],
+      [
+        [
+          ""
+        ],
+        ""
+      ],
+      [
+        [
+          "   "
+        ],
+        ""
+      ],
+      [
+        [
+          "one"
+        ],
+        "one"
+      ],
+      [
+        [
+          "the quick fox"
+        ],
+        "the"
+      ]
+    ]
+  },
+  "ch08g-splitting-text#5": {
+    "kind": "predict"
+  },
+  "ch08g-splitting-text#6": {
+    "kind": "function",
+    "name": "total_of",
+    "cases": [
+      [
+        [
+          "3,4,5"
+        ],
+        12
+      ],
+      [
+        [
+          ""
+        ],
+        0
+      ],
+      [
+        [
+          "0"
+        ],
+        0
+      ],
+      [
+        [
+          "-2,5"
+        ],
+        3
+      ],
+      [
+        [
+          "10"
+        ],
+        10
+      ],
+      [
+        [
+          "1,1,1,1"
+        ],
+        4
+      ],
+      [
+        [
+          "7,-7"
+        ],
+        0
+      ]
+    ]
+  },
+  "ch08g-splitting-text#7": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "the quick brown fox"
+        ],
+        "numbers": [
+          4
+        ]
+      },
+      {
+        "typed": [
+          "  hello   world  "
+        ],
+        "numbers": [
+          2
+        ]
+      },
+      {
+        "typed": [
+          ""
+        ],
+        "numbers": [
+          0
+        ]
+      },
+      {
+        "typed": [
+          "one"
+        ],
+        "numbers": [
+          1
+        ]
+      }
+    ]
   }
 }

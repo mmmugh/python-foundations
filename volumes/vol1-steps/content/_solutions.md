@@ -2070,3 +2070,44 @@ print(valid_username("ada_99"))
 ```
 
 One bad character is enough to say `False`, so step 2 gives back as soon as it finds one. Only after every character has passed is the answer `True`. Watch the `and` in step 2: with `or`, every character would be bad, because no character is both a letter and a digit. `""` is caught by step 1, as too short.
+
+## ch08g-splitting-text#4
+
+```python
+def first_word(sentence):
+    words = sentence.split()
+    if len(words) == 0:
+        return ""
+    return words[0]
+```
+
+`split()` gives back an empty list for `""` and for `"   "`, because it drops the spaces and there is nothing left. An empty list has no index 0, so the test comes first. `if words == []:` works too.
+
+## ch08g-splitting-text#6
+
+```python
+def total_of(line):
+    if line == "":
+        return 0
+    total = 0
+    for piece in line.split(","):
+        total += int(piece)
+    return total
+```
+
+Each piece is a string, like `"3"`, so `int()` turns it into a number before it is added. `int("-2")` is -2, so numbers below 0 work too. Without the first test, `"".split(",")` gives back `[""]`, one empty piece, and `int("")` stops with a `ValueError`. Building a list of numbers and giving back its `sum()` works as well.
+
+## ch08g-splitting-text#7
+
+```python
+# Say it: print how many words the sentence has.
+# Split it:
+# 1. ask for the sentence
+# 2. split it into a list of words
+# 3. print how many items the list has
+sentence = input("Sentence: ")
+words = sentence.split()
+print("Words:", len(words))
+```
+
+`split()` with nothing in its brackets cuts at runs of spaces and drops the ends, so extra spaces make no empty words, and nothing typed gives an empty list, of length 0. `split(" ")` would cut at every single space, and count the empty pieces between them as words.
