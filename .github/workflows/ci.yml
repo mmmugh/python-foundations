@@ -189,6 +189,9 @@ jobs:
         env:
           BASE: /${{ github.event.repository.name }}/
         run: node steps_browser_test.mjs
+      - name: Every checked exercise refuses a wrong answer and takes the right one
+        working-directory: tests
+        run: node steps_walk.mjs
       # Last, because it rebuilds site/ around a throwaway lesson volume, and
       # the build needs the pinned Pyodide in vendor/, as the build job does.
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
