@@ -3876,5 +3876,45 @@
         false
       ]
     ]
+  },
+  "ch07a-lists-and-indexing#1": {
+    "kind": "predict"
+  },
+  "ch07a-lists-and-indexing#2": {
+    "kind": "choice",
+    "options": [
+      "arguments",
+      "return values",
+      "parameters"
+    ],
+    "answer": 2,
+    "why": "The names in the brackets of a `def` line are parameters. The values in a call, like `area(12, 10)`, are the arguments."
+  },
+  "ch07a-lists-and-indexing#3": {
+    "kind": "predict"
+  },
+  "ch07a-lists-and-indexing#4": {
+    "kind": "choice",
+    "options": [
+      "`things`",
+      "`cart_prices`",
+      "list"
+    ],
+    "answer": 1,
+    "why": "It says what the items are: prices, in a cart. `things` could be anything, and list is Python's own word for lists."
+  },
+  "ch07a-lists-and-indexing#5": {
+    "kind": "predict"
+  },
+  "ch07a-lists-and-indexing#6": {
+    "kind": "predict"
+  },
+  "ch07a-lists-and-indexing#7": {
+    "kind": "output",
+    "expected": "winter"
+  },
+  "ch07a-lists-and-indexing#8": {
+    "kind": "output",
+    "expected": "Winner: Mo\nLast: Bo"
   }
 }

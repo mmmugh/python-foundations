@@ -89,6 +89,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch06e-splitting-into-functions", "Lesson 6.5 — Splitting a problem into functions",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch07a-lists-and-indexing", "Lesson 7.1 — Lists, and finding an item",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

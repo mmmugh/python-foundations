@@ -1416,3 +1416,26 @@ for candidate in range(50):
 ```
 
 `return False` inside the loop stops at the first divisor found: 9 stops at 3. `return True` is after the loop, so it runs only when no divisor was found. For 2, `range(2, 2)` is empty, the loop makes no passes, and 2 is prime, which is right. Without the first `if`, 1, 0 and -7 would also skip the loop, and come back `True`.
+
+## ch07a-lists-and-indexing#7
+
+```python
+seasons = ["spring", "summer", "fall", "winter"]
+print(seasons[3])
+```
+
+The list has four items, at index 0, 1, 2 and 3, so `seasons[4]` is past the end. `winter` is the fourth item, at index 3. `seasons[-1]` works too: it is always the last item.
+
+## ch07a-lists-and-indexing#8
+
+```python
+# Say it: print the first and the last name in the finishing order.
+# Split it:
+# 1. the winner is the first item, at index 0
+# 2. the last finisher is the last item, at index -1
+finishers = ["Mo", "Ada", "Kim", "Lee", "Bo"]
+print("Winner:", finishers[0])
+print("Last:", finishers[-1])
+```
+
+`finishers[4]` also finds `Bo` today. But add a sixth finisher and index 4 is no longer the last one, while `finishers[-1]` still is. That is what the awkward check in Check it shows.

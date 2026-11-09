@@ -74,5 +74,13 @@
   "ch06d-defaults-and-calls#2": {
     "raises": "SyntaxError",
     "why": "A parameter with a default before one without. The error message is the lesson."
+  },
+  "ch07a-lists-and-indexing#8": {
+    "raises": "IndexError",
+    "why": "An index past the end of the list. The error message is the lesson."
+  },
+  "ch07a-lists-and-indexing#9": {
+    "raises": "IndexError",
+    "why": "Fix-the-bug practice: index 4 in a list of four items."
   }
 }
