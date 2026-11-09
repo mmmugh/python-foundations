@@ -63,6 +63,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch04d-checking-input", "Lesson 4.4 — Checking input",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch04e-the-ticket-kiosk", "Lesson 4.5 — The ticket kiosk",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

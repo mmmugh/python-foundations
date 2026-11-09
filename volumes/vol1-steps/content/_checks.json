@@ -1505,5 +1505,213 @@
         ]
       }
     ]
+  },
+  "ch04e-the-ticket-kiosk#1": {
+    "kind": "predict"
+  },
+  "ch04e-the-ticket-kiosk#2": {
+    "kind": "choice",
+    "options": [
+      "`age < 0 or age > 120`",
+      "`0 <= age <= 120`"
+    ],
+    "answer": 1,
+    "why": "It asks whether the age is inside the range, ends included. The other test is True for an age that is outside it."
+  },
+  "ch04e-the-ticket-kiosk#3": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "3"
+        ],
+        "numbers": [
+          0
+        ]
+      },
+      {
+        "typed": [
+          "4"
+        ],
+        "numbers": [
+          0
+        ]
+      },
+      {
+        "typed": [
+          "5"
+        ],
+        "numbers": [
+          8
+        ]
+      },
+      {
+        "typed": [
+          "12"
+        ],
+        "numbers": [
+          8
+        ]
+      },
+      {
+        "typed": [
+          "13"
+        ],
+        "numbers": [
+          14
+        ]
+      },
+      {
+        "typed": [
+          "64"
+        ],
+        "numbers": [
+          14
+        ]
+      },
+      {
+        "typed": [
+          "65"
+        ],
+        "numbers": [
+          10
+        ]
+      },
+      {
+        "typed": [
+          "0"
+        ],
+        "numbers": [
+          0
+        ]
+      }
+    ]
+  },
+  "ch04e-the-ticket-kiosk#4": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "70",
+          "Tuesday"
+        ],
+        "numbers": [
+          7
+        ]
+      },
+      {
+        "typed": [
+          "30",
+          "Monday"
+        ],
+        "numbers": [
+          14
+        ]
+      },
+      {
+        "typed": [
+          "30",
+          "Tuesday"
+        ],
+        "numbers": [
+          11
+        ]
+      },
+      {
+        "typed": [
+          "8",
+          "Friday"
+        ],
+        "numbers": [
+          8
+        ]
+      },
+      {
+        "typed": [
+          "3",
+          "Tuesday"
+        ],
+        "numbers": [
+          0
+        ]
+      }
+    ]
+  },
+  "ch04e-the-ticket-kiosk#5": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "70",
+          "Tuesday"
+        ],
+        "numbers": [
+          7
+        ]
+      },
+      {
+        "typed": [
+          "30",
+          "Monday"
+        ],
+        "numbers": [
+          14
+        ]
+      },
+      {
+        "typed": [
+          "banana",
+          "Tuesday"
+        ],
+        "words": [
+          "whole number"
+        ]
+      },
+      {
+        "typed": [
+          "-1",
+          "Monday"
+        ],
+        "words": [
+          "realistic"
+        ]
+      },
+      {
+        "typed": [
+          "121",
+          "Monday"
+        ],
+        "words": [
+          "realistic"
+        ]
+      },
+      {
+        "typed": [
+          "120",
+          "Monday"
+        ],
+        "numbers": [
+          10
+        ]
+      },
+      {
+        "typed": [
+          "0",
+          "Tuesday"
+        ],
+        "numbers": [
+          0
+        ]
+      },
+      {
+        "typed": [
+          "3",
+          "Tuesday"
+        ],
+        "numbers": [
+          0
+        ]
+      }
+    ]
   }
 }

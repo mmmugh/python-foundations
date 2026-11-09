@@ -674,3 +674,82 @@ except ValueError:
 ```
 
 The check comes first, so 0 and 13 never reach the days. The `else` catches the seven 31-day months, which is shorter than naming them all. A word stops `int()`, so Python jumps to the `except` block.
+
+## ch04e-the-ticket-kiosk#3
+
+```python
+# Say it: work out the price of a cinema ticket from the
+# customer's age and the day of the week.
+age = int(input("Customer age: "))
+if age < 5:
+    price = 0
+elif age <= 12:
+    price = 8
+elif age <= 64:
+    price = 14
+else:
+    price = 10
+print(f"Price: ${price}")
+```
+
+Each `elif` only has to check the top of its row, because Python stops at the first test that is True. Keeping the price in a variable, and printing it once at the end, leaves room for step 2.
+
+## ch04e-the-ticket-kiosk#4
+
+```python
+# Say it: work out the price of a cinema ticket from the
+# customer's age and the day of the week.
+age = int(input("Customer age: "))
+if age < 5:
+    price = 0
+elif age <= 12:
+    price = 8
+elif age <= 64:
+    price = 14
+else:
+    price = 10
+
+day = input("Day of the week: ")
+if day == "Tuesday" and price > 0:
+    price -= 3
+print(f"Price: ${price}")
+```
+
+`price > 0` is the guard on the edge case: a free ticket is not a paying customer, so it gets no discount and stays at $0.
+
+## ch04e-the-ticket-kiosk#5
+
+```python
+# Say it: work out the price of a cinema ticket from the
+# customer's age and the day of the week, refusing an age
+# the kiosk can't use.
+# Split it:
+# 1. in a try block, ask for the age, as a whole number
+# 2. if it is outside 0 to 120, say so
+# 3. otherwise, work out the price from the age,
+#    ask for the day, take $3 off a paying Tuesday ticket,
+#    and print the price
+# 4. if the age was not a whole number, say so
+try:
+    age = int(input("Customer age: "))
+    if age < 0 or age > 120:
+        print("Please enter a realistic age.")
+    else:
+        if age < 5:
+            price = 0
+        elif age <= 12:
+            price = 8
+        elif age <= 64:
+            price = 14
+        else:
+            price = 10
+
+        day = input("Day of the week: ")
+        if day == "Tuesday" and price > 0:
+            price -= 3
+        print(f"Price: ${price}")
+except ValueError:
+    print("Age must be a whole number.")
+```
+
+Step 2's program moved one level deeper, into the `else` block, and it did not otherwise change. That is what building one decision at a time looks like. A word or an unrealistic age never reaches the price, and a free ticket stays free on a Tuesday.
