@@ -352,5 +352,62 @@
         ]
       }
     ]
+  },
+  "ch01a-printing#1": {
+    "kind": "choice",
+    "options": [
+      "`print(\"Good night')`",
+      "`print(Good night)`",
+      "`print('Good night')`"
+    ],
+    "answer": 2,
+    "why": "Both ends of the string have the same kind of quote, so Python knows where the text starts and stops."
+  },
+  "ch01a-printing#2": {
+    "kind": "output",
+    "expected": "I'm learning Python."
+  },
+  "ch01a-printing#3": {
+    "kind": "predict"
+  },
+  "ch01a-printing#4": {
+    "kind": "output",
+    "expected": "*\n**\n***\n****\n*****\n******"
+  },
+  "ch01a-printing#5": {
+    "kind": "choice",
+    "options": [
+      "`AB`",
+      "`A B`",
+      "A and B, on two lines"
+    ],
+    "answer": 1,
+    "why": "A comma between two things prints them on one line, with one space between."
+  },
+  "ch01a-printing#6": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "words": [
+          "cats",
+          "dogs",
+          "fish"
+        ]
+      }
+    ]
+  },
+  "ch01a-printing#7": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "words": [
+          "Name:",
+          "School:",
+          "Favorite subject:"
+        ]
+      }
+    ]
   }
 }

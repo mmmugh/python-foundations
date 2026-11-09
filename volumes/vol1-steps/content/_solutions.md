@@ -1,5 +1,42 @@
 <!-- Worked solutions for vol1-steps, one "## <page>#<n>" heading each. Never published. -->
 
+## ch01a-printing#2
+
+```python
+print("I'm learning Python.")
+```
+
+The double quotes go around the outside, so the apostrophe is just one more character inside the string.
+
+## ch01a-printing#4
+
+```python
+print("*")
+print("**")
+print("***")
+print("****")
+print("*****")
+print("******")
+```
+
+Two more rows, each one star longer than the row above it.
+
+## ch01a-printing#6
+
+```python
+print("cats", "dogs", "fish")
+```
+
+## ch01a-printing#7
+
+```python
+print("Name:", "Ada")
+print("School:", "Riverside Middle School")
+print("Favorite subject:", "math")
+```
+
+Your answers will be different, and that is the point. Any three lines that start with those labels are right.
+
 ## ch01z-welcome-back#2
 
 ```python

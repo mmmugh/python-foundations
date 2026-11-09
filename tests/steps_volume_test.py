@@ -30,7 +30,12 @@ from practice_test import run_check                             # noqa: E402
 VOLUME = "vol1-steps"
 REFERENCE = "99-how-to-start-a-problem"
 LESSONS = [
-    # (slug, heading, the routine steps the try it's hints walk, in order)
+    # (slug, heading, the routine steps the try it's hints walk, in order).
+    # No steps means the routine has not arrived yet: the hints are plain.
+    ("ch01a-printing", "Lesson 1.1 — Printing", ()),
+    ("ch01b-numbers-and-comments", "Lesson 1.2 — Numbers and comments", ()),
+    ("ch01c-errors-and-a-receipt", "Lesson 1.3 — When things go wrong, and a receipt",
+     ("Say it", "Split it")),
     ("ch01z-welcome-back", "Lesson 0 — Welcome back", ("Say it", "Split it")),
     ("ch02a-naming-a-value", "Lesson 2.1 — Naming a value", ("Say it", "Split it")),
     ("ch02b-names-and-kinds", "Lesson 2.2 — Names that explain, and kinds of value",
@@ -97,9 +102,11 @@ def lesson_problems(slug, heading, hint_steps, text, checks, solutions, alternat
 
     h3 = [p for k, p in blocks if k == "h3"]
     has_warmup = "Warm-up" in h3
-    if slug == "ch01z-welcome-back" and has_warmup:
-        say(f"{slug}: lesson 0 is the review, so it has no warm-up")
-    if slug != "ch01z-welcome-back" and (not h3 or h3[0] != "Warm-up"):
+    # The course's first lesson has nothing before it to warm up on.
+    no_warmup = slug in (LESSONS[0][0], "ch01z-welcome-back")
+    if no_warmup and has_warmup:
+        say(f"{slug}: nothing comes before it to warm up on, so it has no warm-up")
+    if not no_warmup and (not h3 or h3[0] != "Warm-up"):
         say(f"{slug}: the first section must be the warm-up")
     if "Practice" not in h3:
         say(f"{slug}: needs a practice after its new idea")
@@ -145,11 +152,15 @@ def lesson_problems(slug, heading, hint_steps, text, checks, solutions, alternat
         if section == "Try It":
             if [h.split(":")[0] for h in hints[:len(hint_steps)]] != list(hint_steps):
                 say(f"{key}: the hints must walk {', '.join(hint_steps)}, in that order")
-            if not hints or f"({REFERENCE}.html)" not in hints[0]:
+            # Before the routine arrives (no steps), the hints are plain: they
+            # neither link its page nor name its steps in the worked solution.
+            if not hints:
+                say(f"{key}: a try it has hints, revealed one at a time")
+            elif hint_steps and f"({REFERENCE}.html)" not in hints[0]:
                 say(f"{key}: the first hint links to the reference page")
             if not solution:
                 say(f"{key}: a try it ends in a worked solution")
-            elif "# Say it" not in solution["code"] or "# Split it" not in solution["code"]:
+            elif hint_steps and ("# Say it" not in solution["code"] or "# Split it" not in solution["code"]):
                 say(f"{key}: the worked solution keeps its Say it and Split it comments")
             if spec and key not in alternates:
                 say(f"{key}: a checked try it needs an alternate answer in _alternates.json")
