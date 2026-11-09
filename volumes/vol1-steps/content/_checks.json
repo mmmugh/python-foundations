@@ -5675,5 +5675,198 @@
         false
       ]
     ]
+  },
+  "ch08e-starts-and-ends#1": {
+    "kind": "predict"
+  },
+  "ch08e-starts-and-ends#2": {
+    "kind": "choice",
+    "options": [
+      "`True`",
+      "`False`"
+    ],
+    "answer": 1,
+    "why": "`\"Ada\"` is one of the items, so `\"Ada\" in guests` is `True`, and `not in` asks the opposite question: `False`."
+  },
+  "ch08e-starts-and-ends#3": {
+    "kind": "predict"
+  },
+  "ch08e-starts-and-ends#4": {
+    "kind": "function",
+    "name": "is_python_file",
+    "cases": [
+      [
+        [
+          "game.py"
+        ],
+        true
+      ],
+      [
+        [
+          "GAME.PY"
+        ],
+        true
+      ],
+      [
+        [
+          "game.pyc"
+        ],
+        false
+      ],
+      [
+        [
+          ""
+        ],
+        false
+      ],
+      [
+        [
+          "py"
+        ],
+        false
+      ],
+      [
+        [
+          "notes.txt"
+        ],
+        false
+      ],
+      [
+        [
+          ".py"
+        ],
+        true
+      ],
+      [
+        [
+          "my.py.txt"
+        ],
+        false
+      ]
+    ]
+  },
+  "ch08e-starts-and-ends#5": {
+    "kind": "choice",
+    "options": [
+      "`\"un\" in word`",
+      "`word.find(\"un\") != -1`",
+      "`word.startswith(\"un\")`"
+    ],
+    "answer": 2,
+    "why": "`in` and `find()` look anywhere, so both are `True` for `fun` too. `startswith()` looks only at the start."
+  },
+  "ch08e-starts-and-ends#6": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "Is it raining?"
+        ],
+        "words": [
+          "That is a question."
+        ],
+        "absent": [
+          "That is not a question."
+        ]
+      },
+      {
+        "typed": [
+          "It is raining."
+        ],
+        "words": [
+          "That is not a question."
+        ],
+        "absent": [
+          "That is a question."
+        ]
+      },
+      {
+        "typed": [
+          ""
+        ],
+        "words": [
+          "That is not a question."
+        ],
+        "absent": [
+          "That is a question."
+        ]
+      },
+      {
+        "typed": [
+          "?"
+        ],
+        "words": [
+          "That is a question."
+        ],
+        "absent": [
+          "That is not a question."
+        ]
+      },
+      {
+        "typed": [
+          "Why? I see."
+        ],
+        "words": [
+          "That is not a question."
+        ],
+        "absent": [
+          "That is a question."
+        ]
+      }
+    ]
+  },
+  "ch08e-starts-and-ends#7": {
+    "kind": "function",
+    "name": "drop_the",
+    "cases": [
+      [
+        [
+          "The Hobbit"
+        ],
+        "Hobbit"
+      ],
+      [
+        [
+          "Dune"
+        ],
+        "Dune"
+      ],
+      [
+        [
+          ""
+        ],
+        ""
+      ],
+      [
+        [
+          "Theory of Everything"
+        ],
+        "Theory of Everything"
+      ],
+      [
+        [
+          "the end"
+        ],
+        "the end"
+      ],
+      [
+        [
+          "The "
+        ],
+        ""
+      ],
+      [
+        [
+          "The Hobbit and The Ring"
+        ],
+        "Hobbit and The Ring"
+      ],
+      [
+        [
+          "Into The Wild"
+        ],
+        "Into The Wild"
+      ]
+    ]
   }
 }

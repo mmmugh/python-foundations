@@ -1983,3 +1983,43 @@ print(is_spam(""))
 ```
 
 Each side of the `or` needs its own `in`. `"free" or "winner" in small_message` reads well in English, but Python sees `"free"` on its own, which is not empty, so it counts as true (lesson 4.3), and every message would be spam. An `if` that gives back `True`, then `False` after it, works too.
+
+## ch08e-starts-and-ends#4
+
+```python
+def is_python_file(name):
+    return name.lower().endswith(".py")
+```
+
+`lower()` first, so `GAME.PY` becomes `game.py`, then `endswith()` looks at the end only. `".py" in name.lower()` would say `True` for `game.pyc` too.
+
+## ch08e-starts-and-ends#6
+
+```python
+sentence = input("Sentence: ")
+if sentence.endswith("?"):
+    print("That is a question.")
+else:
+    print("That is not a question.")
+```
+
+Nothing typed is `""`, which ends with no `?`, so it is not a question. `"?" in sentence` would call `Why? I see.` a question, because it looks anywhere.
+
+## ch08e-starts-and-ends#7
+
+```python
+# Say it: give back the title without "The " at its start, or as it was.
+# Split it:
+# 1. if the title starts with "The ", give back the rest, from index 4 on
+# 2. otherwise, give back the title as it was
+def drop_the(title):
+    if title.startswith("The "):
+        return title[4:]
+    return title
+
+
+print(drop_the("The Hobbit"))
+print(drop_the("Theory of Everything"))
+```
+
+`"The "` is four characters, the space included, so the rest starts at index 4. Testing `startswith("The")` without the space would turn `Theory of Everything` into `ory of Everything`. `replace("The ", "")` is not right either: it would take out every `The ` in the title, not only the one at the start.
