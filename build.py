@@ -960,7 +960,7 @@ ANSWER_MARKER = "ANSWER KEY"
 
 # Content that must never be published whole. Per-exercise reveals are fine;
 # a single page carrying the lot is not.
-PRIVATE_CONTENT = ("_solutions", "_boxes", "_checks")
+PRIVATE_CONTENT = ("_solutions", "_boxes", "_checks", "_alternates")
 
 
 def copy_icons():

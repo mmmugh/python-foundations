@@ -74,6 +74,16 @@ def main():
         expect("a key inside a published .json file is refused",
                refused is not None and "boxes.json" in refused)
 
+        # Alternates are private too: a different correct answer that would
+        # let a learner check their own work against someone else's is as
+        # much a spoiler as the worked solution itself.
+        (build.SITE / "vol1-steps").mkdir(parents=True, exist_ok=True)
+        (build.SITE / "vol1-steps" / "_alternates.json").write_text("{}")
+        refused = guard_refuses()
+        expect("a planted _alternates.json on the site is refused",
+               refused is not None and "_alternates.json" in refused)
+        (build.SITE / "vol1-steps" / "_alternates.json").unlink()
+
     keys = sorted((ROOT / "volumes").glob("*/answer-keys/*-answers.txt"))
     unmarked = [k.name for k in keys if build.ANSWER_MARKER not in k.read_text()]
     expect(f"every real answer key carries the marker the guard looks for ({len(keys)} keys)",

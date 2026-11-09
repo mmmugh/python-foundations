@@ -44,20 +44,6 @@ MAX_EXERCISES = 10
 MAX_WORDS = 1300
 STEPS = ("Say it", "Split it", "Name it", "Build it", "Check it")
 
-# A correct answer in a different style from the worked solution, for every
-# checked try it. Each must pass the same check the solution passes.
-ALTERNATES = {
-    "ch01z-welcome-back#5": 'print("Pencils: 2 x 1 =", 2 * 1)\nprint("Eraser: 1 x 3 =", 3)\nprint("Total", 2 * 1 + 3)',
-    "ch02a-naming-a-value#7": 'coins = 5 - 2 + 4\nprint("Coins:", coins)',
-    "ch02b-names-and-kinds#10": 'eggs_per_cake = 3\ncakes = 4\nprint("You need", eggs_per_cake * cakes, "eggs")',
-    "ch02c-asking-the-user#7": 'minutes = float(input("How long is the movie, in minutes? "))\nhours = minutes / 60\nprint(hours, "hours")',
-    "ch02d-putting-it-together#7": (
-        'customer = input("Name: ")\nnotebook = 3.50\npens = 2.25\nstickers = 1.75\nruler = 1.25\n'
-        'print("Customer:", customer)\nprint("Notebook", notebook)\nprint("Pens", pens)\n'
-        'print("Stickers", stickers)\n'
-        'print("Total", notebook + pens + stickers + ruler)\nprint("(includes a ruler at", ruler, ")")'),
-}
-
 
 def blocks_of(text):
     return build.split_blocks(re.sub(r"^<!-- part: .+ -->\n", "", text).split("\n"))
@@ -89,7 +75,7 @@ def prose_words(blocks):
     return words
 
 
-def lesson_problems(slug, heading, hint_steps, text, checks, solutions):
+def lesson_problems(slug, heading, hint_steps, text, checks, solutions, alternates):
     problems = []
     say = problems.append
     if not re.match(r"<!-- part: Unit \d+ — .+ -->\n", text):
@@ -137,7 +123,7 @@ def lesson_problems(slug, heading, hint_steps, text, checks, solutions):
             if untouched is not None and untouched[0]:
                 say(f"{key}: its check passes the starting code unchanged")
         for label, answer in (("worked solution", solution and solution["code"]),
-                              ("alternate answer", ALTERNATES.get(key))):
+                              ("alternate answer", alternates.get(key))):
             if spec and answer:
                 result = run_check(spec, answer)
                 if result is not None and not result[0]:
@@ -151,8 +137,8 @@ def lesson_problems(slug, heading, hint_steps, text, checks, solutions):
                 say(f"{key}: a try it ends in a worked solution")
             elif "# Say it" not in solution["code"] or "# Split it" not in solution["code"]:
                 say(f"{key}: the worked solution keeps its Say it and Split it comments")
-            if spec and key not in ALTERNATES:
-                say(f"{key}: a checked try it needs an alternate answer in ALTERNATES")
+            if spec and key not in alternates:
+                say(f"{key}: a checked try it needs an alternate answer in _alternates.json")
     return problems
 
 
@@ -216,6 +202,7 @@ def main():
     meta = json.loads((vol["dir"] / "volume.json").read_text())
     checks = build.load_json(vol, "_checks.json")
     solutions = build.load_solutions(vol)
+    alternates = build.load_json(vol, "_alternates.json")
     pages = {p.stem: p.read_text() for p in build.chapter_files(vol)}
     problems = []
     shown = {"width": 0, "blank": False}
@@ -229,7 +216,7 @@ def main():
         if slug not in pages:
             problems.append(f"{slug}: missing")
             continue
-        problems += lesson_problems(slug, heading, steps, pages[slug], checks, solutions)
+        problems += lesson_problems(slug, heading, steps, pages[slug], checks, solutions, alternates)
         problems += trace_problems(slug, pages[slug], checks, shown)
 
     if not only or REFERENCE in only:
