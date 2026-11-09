@@ -1,0 +1,189 @@
+PYTHON FOUNDATIONS
+Unit 4 - Making decisions
+
+ANSWER KEY
+
+
+VOCABULARY
+----------
+
+ 1. A ____ is an expression that follows the `if` keyword and produces
+    `True` or `False`.
+
+      ANSWER: condition
+
+ 2. The indented lines that run only when a condition is true are called a
+    ____.
+
+      ANSWER: block
+
+ 3. ____ (short for "else if") lets you chain more than two possibilities
+    together in one decision.
+
+      ANSWER: elif
+
+ 4. The idea that values such as `0` and the empty string can act like
+    `True` or `False` in a condition is called ____.
+
+      ANSWER: truthiness
+
+ 5. Checking a value before your program uses it, and refusing one it
+    can't use, is called ____ it.
+
+      ANSWER: validating
+
+
+READING CODE
+------------
+
+ 6. What does this print?
+
+        score = 85
+        
+        if score >= 90:
+            grade = "A"
+        elif score >= 80:
+            grade = "B"
+        elif score >= 70:
+            grade = "C"
+        elif score >= 60:
+            grade = "D"
+        else:
+            grade = "F"
+        
+        print(f"Score {score} earns a {grade}.")
+
+      ANSWER: Score 85 earns a B.
+
+ 7. What does this print?
+
+        score = 95
+        
+        if score >= 60:
+            grade = "D"
+        elif score >= 70:
+            grade = "C"
+        elif score >= 90:
+            grade = "A"
+        
+        print(grade)
+
+      ANSWER: D
+
+ 8. What does this print?
+
+        name = ""
+        
+        if name:
+            print(f"Hello, {name}.")
+        else:
+            print("Hello, stranger.")
+
+      ANSWER: Hello, stranger.
+
+ 9. What does this print?
+
+        has_ticket = False
+        age = 20
+        
+        if has_ticket:
+            if age >= 13:
+                print("Enjoy the show.")
+            else:
+                print("You need an adult with you.")
+        else:
+            print("Please buy a ticket first.")
+
+      ANSWER: Please buy a ticket first.
+
+10. What does this print?
+
+        score = 45
+        
+        if score >= 60:
+            print("You passed.")
+        print("Congratulations.")
+
+      ANSWER: Congratulations.
+
+11. Which lines get a row in this program's trace table? Lines
+
+        points = 40
+        bonus = 0
+        if points >= 50:
+            bonus = 10
+        points = points + bonus
+
+      ANSWER: 1, 2, 3, 5
+
+
+WRITING CODE
+------------
+
+12. Fill in the blank:
+
+        age = ____(input("Your age: "))
+        if age >= 18:
+            print("You can vote.")
+        else:
+            print(f"You can vote in {18 - age} years.")
+
+      ANSWER: int
+
+13. Fill in the blank, so the program refuses a score outside 0 to 100:
+
+        score = int(input("Test score: "))
+        if score < 0 ____ score > 100:
+            print("A score must be from 0 to 100.")
+        else:
+            print("Thank you.")
+
+      ANSWER: or
+
+14. Fill in the blank:
+
+        answer = input("Enter a price: ")
+        ____:
+            price = float(answer)
+            print(f"With tax: ${price * 1.08:.2f}")
+        except ValueError:
+            print("That is not a number.")
+
+      ANSWER: try
+
+15. Fill in the blank:
+
+        # Only take $3 off when the ticket is not free
+        if day == "Tuesday" and price ____ 0:
+            price -= 3
+
+      ANSWER: >
+
+
+WHY IT WORKS
+------------
+
+16. Python checks `elif` conditions in the order they are written and
+    stops at the first one that is ____, which is why a score of 95 in the
+    reordered chain gets the grade "____" instead of "A".
+
+      ANSWER: true
+      ANSWER: D
+
+17. The kiosk puts `int(input(...))` inside a `try` block because a word
+    makes `int()` stop with a ____, and the `except` block catches it
+    instead of letting the program crash.
+
+      ANSWER: ValueError
+
+18. An empty string counts as ____ in a condition, which is why `if name:`
+    prints "Hello, stranger." when the user presses Enter without typing
+    anything.
+
+      ANSWER: False
+
+19. The raffle and leap-year rules were split into one comment per clause,
+    then turned around so that the ____ clause, the one the fewest numbers
+    pass, came first.
+
+      ANSWER: narrowest

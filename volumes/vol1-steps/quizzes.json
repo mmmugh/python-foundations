@@ -417,6 +417,155 @@
      ]
     }
    ]
+  },
+  {
+   "slug": "ch04e-the-ticket-kiosk",
+   "questions": [
+    {
+     "section": "Vocabulary",
+     "text": "A ____ is an expression that follows the `if` keyword and produces `True` or `False`.",
+     "answers": [
+      "condition"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "The indented lines that run only when a condition is true are called a ____.",
+     "answers": [
+      "block"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "____ (short for \"else if\") lets you chain more than two possibilities together in one decision.",
+     "answers": [
+      "elif"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "The idea that values such as `0` and the empty string can act like `True` or `False` in a condition is called ____.",
+     "answers": [
+      "truthiness"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Checking a value before your program uses it, and refusing one it can't use, is called ____ it.",
+     "answers": [
+      "validating"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "score = 85\n\nif score >= 90:\n    grade = \"A\"\nelif score >= 80:\n    grade = \"B\"\nelif score >= 70:\n    grade = \"C\"\nelif score >= 60:\n    grade = \"D\"\nelse:\n    grade = \"F\"\n\nprint(f\"Score {score} earns a {grade}.\")",
+     "answers": [
+      "Score 85 earns a B."
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "score = 95\n\nif score >= 60:\n    grade = \"D\"\nelif score >= 70:\n    grade = \"C\"\nelif score >= 90:\n    grade = \"A\"\n\nprint(grade)",
+     "answers": [
+      "D"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "name = \"\"\n\nif name:\n    print(f\"Hello, {name}.\")\nelse:\n    print(\"Hello, stranger.\")",
+     "answers": [
+      "Hello, stranger."
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "has_ticket = False\nage = 20\n\nif has_ticket:\n    if age >= 13:\n        print(\"Enjoy the show.\")\n    else:\n        print(\"You need an adult with you.\")\nelse:\n    print(\"Please buy a ticket first.\")",
+     "answers": [
+      "Please buy a ticket first."
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "score = 45\n\nif score >= 60:\n    print(\"You passed.\")\nprint(\"Congratulations.\")",
+     "answers": [
+      "Congratulations."
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "Which lines get a row in this program's trace table? Lines ____",
+     "code": "points = 40\nbonus = 0\nif points >= 50:\n    bonus = 10\npoints = points + bonus",
+     "answers": [
+      "1, 2, 3, 5"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Fill in the blank:",
+     "code": "age = ____(input(\"Your age: \"))\nif age >= 18:\n    print(\"You can vote.\")\nelse:\n    print(f\"You can vote in {18 - age} years.\")",
+     "answers": [
+      "int"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Fill in the blank, so the program refuses a score outside 0 to 100:",
+     "code": "score = int(input(\"Test score: \"))\nif score < 0 ____ score > 100:\n    print(\"A score must be from 0 to 100.\")\nelse:\n    print(\"Thank you.\")",
+     "answers": [
+      "or"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Fill in the blank:",
+     "code": "answer = input(\"Enter a price: \")\n____:\n    price = float(answer)\n    print(f\"With tax: ${price * 1.08:.2f}\")\nexcept ValueError:\n    print(\"That is not a number.\")",
+     "answers": [
+      "try"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Fill in the blank:",
+     "code": "# Only take $3 off when the ticket is not free\nif day == \"Tuesday\" and price ____ 0:\n    price -= 3",
+     "answers": [
+      ">"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Python checks `elif` conditions in the order they are written and stops at the first one that is ____, which is why a score of 95 in the reordered chain gets the grade \"____\" instead of \"A\".",
+     "answers": [
+      "true",
+      "D"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "The kiosk puts `int(input(...))` inside a `try` block because a word makes `int()` stop with a ____, and the `except` block catches it instead of letting the program crash.",
+     "answers": [
+      "ValueError"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "An empty string counts as ____ in a condition, which is why `if name:` prints \"Hello, stranger.\" when the user presses Enter without typing anything.",
+     "answers": [
+      "False"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "The raffle and leap-year rules were split into one comment per clause, then turned around so that the ____ clause, the one the fewest numbers pass, came first.",
+     "answers": [
+      "narrowest"
+     ]
+    }
+   ]
   }
  ]
 }
