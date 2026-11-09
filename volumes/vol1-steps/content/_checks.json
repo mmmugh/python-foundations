@@ -1259,5 +1259,94 @@
         ]
       }
     ]
+  },
+  "ch04c-nesting-and-truthiness#1": {
+    "kind": "predict"
+  },
+  "ch04c-nesting-and-truthiness#2": {
+    "kind": "choice",
+    "options": [
+      "`True`",
+      "`False`"
+    ],
+    "answer": 1,
+    "why": "`and` needs both sides to be True, and 18 is not more than 25."
+  },
+  "ch04c-nesting-and-truthiness#3": {
+    "kind": "trace",
+    "names": [
+      "x",
+      "size"
+    ]
+  },
+  "ch04c-nesting-and-truthiness#4": {
+    "kind": "choice",
+    "options": [
+      "`if sunny and temperature > 25:`",
+      "`if sunny or temperature > 25:`",
+      "`if temperature > 25:`"
+    ],
+    "answer": 0,
+    "why": "The swim line runs only when both questions are True, which is what `and` asks. With `or`, a hot rainy day would mean a swim."
+  },
+  "ch04c-nesting-and-truthiness#5": {
+    "kind": "predict"
+  },
+  "ch04c-nesting-and-truthiness#6": {
+    "kind": "predict"
+  },
+  "ch04c-nesting-and-truthiness#7": {
+    "kind": "choice",
+    "options": [
+      "`\"0\"`",
+      "`\"False\"`",
+      "`0`"
+    ],
+    "answer": 2,
+    "why": "The number 0 counts as False. The other two are strings with something in them, so they count as True."
+  },
+  "ch04c-nesting-and-truthiness#8": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "Ada",
+          "14"
+        ],
+        "words": [
+          "welcome",
+          "ada"
+        ]
+      },
+      {
+        "typed": [
+          "Bo",
+          "9"
+        ],
+        "words": [
+          "sorry",
+          "bo"
+        ]
+      },
+      {
+        "typed": [
+          "",
+          "14"
+        ],
+        "words": [
+          "type your name"
+        ]
+      },
+      {
+        "typed": [
+          "Cy",
+          "13"
+        ],
+        "words": [
+          "welcome",
+          "cy"
+        ]
+      }
+    ]
   }
 }

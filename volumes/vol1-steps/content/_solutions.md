@@ -590,3 +590,26 @@ else:
 ```
 
 It is the raffle's shape with 4, 100 and 400. 2000 is a multiple of 400, so it is a leap year. 1900 is a multiple of 100 but not of 400, so it is not, even though 4 goes into it.
+
+## ch04c-nesting-and-truthiness#8
+
+```python
+# Say it: let someone into the club if they give a name and are 13 or older.
+# Split it:
+# 1. ask for the name
+# 2. ask for the age, as a whole number
+# 3. if a name was typed:
+#    welcome them if they are 13 or older, otherwise say sorry
+# 4. if no name was typed, ask for one
+name = input("Name: ")
+age = int(input("Age: "))
+if name:
+    if age >= 13:
+        print(f"Welcome, {name}!")
+    else:
+        print(f"Sorry, {name}, you must be 13.")
+else:
+    print("Please type your name.")
+```
+
+`if name:` is True whenever something was typed, because only the empty string counts as False. The age question is nested inside, so it only matters once there is a name. `>=` makes exactly 13 welcome.
