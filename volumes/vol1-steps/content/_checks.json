@@ -2684,5 +2684,244 @@
         ]
       }
     ]
+  },
+  "ch05g-the-guessing-game#1": {
+    "kind": "predict"
+  },
+  "ch05g-the-guessing-game#2": {
+    "kind": "choice",
+    "options": [
+      "a `while` loop",
+      "a `for` loop with `range()`"
+    ],
+    "answer": 0,
+    "why": "Nobody knows how many names are coming, so a `for` loop cannot know how many passes to make. A `while` loop keeps going until the stop value arrives."
+  },
+  "ch05g-the-guessing-game#3": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "3",
+          "9",
+          "7"
+        ],
+        "contains": "Correct! Guesses: 3",
+        "absent": [
+          "Correct! Guesses: 1",
+          "Correct! Guesses: 2"
+        ]
+      },
+      {
+        "typed": [
+          "7"
+        ],
+        "contains": "Correct! Guesses: 1"
+      },
+      {
+        "typed": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7"
+        ],
+        "contains": "Correct! Guesses: 7",
+        "absent": [
+          "Correct! Guesses: 1",
+          "Correct! Guesses: 6"
+        ]
+      }
+    ]
+  },
+  "ch05g-the-guessing-game#4": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "7"
+        ],
+        "contains": "Correct! Guesses: 1",
+        "absent": [
+          "Too high.",
+          "Too low."
+        ]
+      },
+      {
+        "typed": [
+          "9",
+          "7"
+        ],
+        "words": [
+          "too high"
+        ],
+        "contains": "Correct! Guesses: 2",
+        "absent": [
+          "Too low."
+        ]
+      },
+      {
+        "typed": [
+          "2",
+          "7"
+        ],
+        "words": [
+          "too low"
+        ],
+        "contains": "Correct! Guesses: 2",
+        "absent": [
+          "Too high."
+        ]
+      },
+      {
+        "typed": [
+          "3",
+          "9",
+          "7"
+        ],
+        "words": [
+          "too low",
+          "too high"
+        ],
+        "contains": "Correct! Guesses: 3"
+      }
+    ]
+  },
+  "ch05g-the-guessing-game#5": {
+    "kind": "predict"
+  },
+  "ch05g-the-guessing-game#6": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "9",
+          "seven",
+          "7"
+        ],
+        "words": [
+          "too high",
+          "whole number"
+        ],
+        "contains": "Correct! Guesses: 2",
+        "absent": [
+          "Correct! Guesses: 3"
+        ]
+      },
+      {
+        "typed": [
+          "ten",
+          "7"
+        ],
+        "words": [
+          "whole number"
+        ],
+        "contains": "Correct! Guesses: 1",
+        "absent": [
+          "Correct! Guesses: 2"
+        ]
+      },
+      {
+        "typed": [
+          "7"
+        ],
+        "contains": "Correct! Guesses: 1",
+        "absent": [
+          "Please type a whole number."
+        ]
+      }
+    ]
+  },
+  "ch05g-the-guessing-game#7": {
+    "kind": "predict"
+  },
+  "ch05g-the-guessing-game#8": {
+    "kind": "choice",
+    "options": [
+      "any whole number from 1 to 9",
+      "any whole number from 1 to 10",
+      "any whole number from 0 to 10"
+    ],
+    "answer": 1,
+    "why": "`randint()` includes both of its numbers, so 1 and 10 can both come up. `range(1, 10)` would stop at 9."
+  },
+  "ch05g-the-guessing-game#9": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "3",
+          "9",
+          "7"
+        ],
+        "words": [
+          "too low",
+          "too high"
+        ],
+        "contains": "Correct! Guesses: 3",
+        "absent": [
+          "Out of guesses. It was 7."
+        ]
+      },
+      {
+        "typed": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "contains": "Out of guesses. It was 7.",
+        "absent": [
+          "Correct! Guesses: 5"
+        ]
+      },
+      {
+        "typed": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "7"
+        ],
+        "contains": "Correct! Guesses: 5",
+        "absent": [
+          "Out of guesses. It was 7."
+        ]
+      },
+      {
+        "typed": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "7"
+        ],
+        "contains": "Out of guesses. It was 7.",
+        "absent": [
+          "Correct! Guesses: 6"
+        ]
+      },
+      {
+        "typed": [
+          "1",
+          "x",
+          "2",
+          "3",
+          "4",
+          "7"
+        ],
+        "words": [
+          "whole number"
+        ],
+        "contains": "Correct! Guesses: 5",
+        "absent": [
+          "Out of guesses. It was 7."
+        ]
+      }
+    ]
   }
 }

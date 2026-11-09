@@ -951,3 +951,96 @@ print(f"Count: {count}")
 ```
 
 The stop value is a number this time, so `int()` can go on the `input()` lines. The 0 is checked before it is counted, so it is never added or counted. With 0 first, the block never runs, and both are 0.
+
+## ch05g-the-guessing-game#3
+
+```python
+secret = 7
+guesses = 0
+while True:
+    guess = int(input("Guess: "))
+    guesses += 1
+    if guess == secret:
+        break
+print(f"Correct! Guesses: {guesses}")
+```
+
+The count goes up before the test, so the right guess is counted too. Nobody knows how many guesses it will take, so it is a `while` loop, and `break` ends it at the right guess.
+
+## ch05g-the-guessing-game#4
+
+```python
+secret = 7
+guesses = 0
+while True:
+    guess = int(input("Guess: "))
+    guesses += 1
+    if guess == secret:
+        break
+    elif guess > secret:
+        print("Too high.")
+    else:
+        print("Too low.")
+print(f"Correct! Guesses: {guesses}")
+```
+
+Three possibilities, so `if`, `elif` and `else`, as in lesson 4.2. A right guess reaches `break` first, so it never gets a hint.
+
+## ch05g-the-guessing-game#6
+
+```python
+secret = 7
+guesses = 0
+while True:
+    try:
+        guess = int(input("Guess: "))
+    except ValueError:
+        print("Please type a whole number.")
+        continue
+    guesses += 1
+    if guess == secret:
+        break
+    elif guess > secret:
+        print("Too high.")
+    else:
+        print("Too low.")
+print(f"Correct! Guesses: {guesses}")
+```
+
+`continue` skips the rest of the pass, so a word never reaches `guesses += 1`. Where that line sits is a rule of the game: after the check, a slip is free; before it, a slip would cost a guess.
+
+## ch05g-the-guessing-game#9
+
+```python
+# Say it: a guessing game with at most 5 guesses, which says how it ended.
+# Split it:
+# 1. the secret, a count of guesses, and a flag for a win
+# 2. while fewer than 5 guesses have been counted:
+#    ask; skip a word without counting it; count the guess;
+#    if it is right, set the flag and stop; otherwise, say too high or too low
+# 3. after the loop: the Correct line if the flag is set,
+#    otherwise the out-of-guesses line
+secret = 7
+guesses = 0
+won = False
+while guesses < 5:
+    try:
+        guess = int(input("Guess: "))
+    except ValueError:
+        print("Please type a whole number.")
+        continue
+    guesses += 1
+    if guess == secret:
+        won = True
+        break
+    elif guess > secret:
+        print("Too high.")
+    else:
+        print("Too low.")
+if won:
+    print(f"Correct! Guesses: {guesses}")
+else:
+    print(f"Out of guesses. It was {secret}.")
+```
+
+The loop can end two ways: `break` on a right guess, or the count reaching 5. `won` remembers which. `guesses < 5` lets exactly 5 guesses through: with `<=`, the player would get 6. Using `{secret}` in the last line means it stays right when the secret is random.

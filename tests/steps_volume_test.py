@@ -77,6 +77,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch05f-until-a-stop-value", "Lesson 5.6 — Until a stop value, and break",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch05g-the-guessing-game", "Lesson 5.7 — Skipping, and a guessing game",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300
