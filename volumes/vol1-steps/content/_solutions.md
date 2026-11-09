@@ -37,6 +37,41 @@ print("Favorite subject:", "math")
 
 Your answers will be different, and that is the point. Any three lines that start with those labels are right.
 
+## ch01b-numbers-and-comments#3
+
+```python
+print(15 / 4)
+```
+
+Each friend gets 3.75 cookies. Python does not know cookies come whole; it just divides.
+
+## ch01b-numbers-and-comments#4
+
+```python
+print(7 * 24 * 60)
+```
+
+Days times hours in a day gives the hours in a week; times 60 gives the minutes.
+
+## ch01b-numbers-and-comments#6
+
+```python
+print("12 / 5 =", 12 / 5)
+```
+
+The part in quotes is printed as written. The part without quotes is worked out.
+
+## ch01b-numbers-and-comments#8
+
+```python
+# seats on one bus: 12 rows of 4
+print(12 * 4)
+# seats on 3 of those buses
+print(3 * 12 * 4)
+```
+
+The comments are not checked, but they are the part a reader thanks you for.
+
 ## ch01z-welcome-back#2
 
 ```python

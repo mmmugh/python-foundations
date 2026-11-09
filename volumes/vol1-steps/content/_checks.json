@@ -409,5 +409,70 @@
         ]
       }
     ]
+  },
+  "ch01b-numbers-and-comments#1": {
+    "kind": "predict"
+  },
+  "ch01b-numbers-and-comments#2": {
+    "kind": "choice",
+    "options": [
+      "`print(\"It's sunny\")`",
+      "`print('It's sunny')`"
+    ],
+    "answer": 0,
+    "why": "With double quotes outside, the apostrophe is just a character in the string."
+  },
+  "ch01b-numbers-and-comments#3": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "numbers": [
+          3.75
+        ]
+      }
+    ]
+  },
+  "ch01b-numbers-and-comments#4": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "numbers": [
+          10080
+        ]
+      }
+    ]
+  },
+  "ch01b-numbers-and-comments#5": {
+    "kind": "predict"
+  },
+  "ch01b-numbers-and-comments#6": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "numbers": [
+          12,
+          5,
+          2.4
+        ]
+      }
+    ]
+  },
+  "ch01b-numbers-and-comments#7": {
+    "kind": "predict"
+  },
+  "ch01b-numbers-and-comments#8": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [],
+        "numbers": [
+          48,
+          144
+        ]
+      }
+    ]
   }
 }
