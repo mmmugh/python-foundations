@@ -4021,5 +4021,72 @@
         ]
       ]
     ]
+  },
+  "ch07c-changing-a-list#1": {
+    "kind": "predict"
+  },
+  "ch07c-changing-a-list#2": {
+    "kind": "choice",
+    "options": [
+      "2",
+      "3",
+      "4"
+    ],
+    "answer": 0,
+    "why": "It starts at index 1 and stops just before index 3, so it takes index 1 and 2: `Tue` and `Wed`. The stop minus the start, 3 - 1, is 2."
+  },
+  "ch07c-changing-a-list#3": {
+    "kind": "trace",
+    "names": [
+      "temps"
+    ]
+  },
+  "ch07c-changing-a-list#4": {
+    "kind": "predict"
+  },
+  "ch07c-changing-a-list#5": {
+    "kind": "output",
+    "expected": "[3, 6, 9, 12, 15]"
+  },
+  "ch07c-changing-a-list#6": {
+    "kind": "output",
+    "expected": "[88, 92, 79, 95]"
+  },
+  "ch07c-changing-a-list#7": {
+    "kind": "trace",
+    "names": [
+      "mine",
+      "yours"
+    ]
+  },
+  "ch07c-changing-a-list#8": {
+    "kind": "predict"
+  },
+  "ch07c-changing-a-list#9": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "milk",
+          "eggs",
+          "bread",
+          ""
+        ],
+        "contains": "['milk', 'eggs', 'bread']"
+      },
+      {
+        "typed": [
+          ""
+        ],
+        "contains": "[]"
+      },
+      {
+        "typed": [
+          "apples",
+          ""
+        ],
+        "contains": "['apples']"
+      }
+    ]
   }
 }

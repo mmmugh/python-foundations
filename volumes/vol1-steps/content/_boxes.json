@@ -82,5 +82,13 @@
   "ch07a-lists-and-indexing#9": {
     "raises": "IndexError",
     "why": "Fix-the-bug practice: index 4 in a list of four items."
+  },
+  "ch07c-changing-a-list#5": {
+    "raises": "TypeError",
+    "why": "append() given two items. The error message is the lesson."
+  },
+  "ch07c-changing-a-list#8": {
+    "raises": "TypeError",
+    "why": "Fix-the-bug practice: append() given two items at once."
   }
 }

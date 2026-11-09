@@ -1467,3 +1467,44 @@ print(middle_three([]))
 ```
 
 The stop is 4, one past the last index you want, as with `range()`. `scores[1:-1]` works too: from index 1, up to just before the last item. An empty list gives back `[]`, with no error, because a slice is never out of range.
+
+## ch07c-changing-a-list#5
+
+```python
+multiples = []
+for number in range(1, 6):
+    multiples.append(number * 3)
+print(multiples)
+```
+
+The loop runs for 1 to 5, and appends 3 times each one. `range(3, 16, 3)` gives the multiples themselves, so `multiples.append(number)` works with it too.
+
+## ch07c-changing-a-list#6
+
+```python
+scores = [88, 92]
+scores.append(79)
+scores.append(95)
+print(scores)
+```
+
+`append()` takes exactly one item, and the error said so: two were given. One `append()` for each score fixes it, and keeps them in order.
+
+## ch07c-changing-a-list#9
+
+```python
+# Say it: ask for things to buy until an empty answer, then print the list.
+# Split it:
+# 1. start with an empty list
+# 2. ask for the first item
+# 3. while it is not empty: append it, then ask for the next
+# 4. after the loop, print the list
+shopping = []
+item = input("Thing to buy (Enter to finish): ")
+while item != "":
+    shopping.append(item)
+    item = input("Thing to buy (Enter to finish): ")
+print(shopping)
+```
+
+The empty answer is the stop value, so it is checked before it is appended, and never goes into the list. When Enter is pressed straight away, the loop makes no passes, and the list stays `[]`.

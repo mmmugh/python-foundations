@@ -93,6 +93,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch07b-slicing", "Lesson 7.2 — Slicing",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch07c-changing-a-list", "Lesson 7.3 — Changing a list, and two names for one list",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300
