@@ -16,7 +16,7 @@ print(price * 2)
 
 ### The problem
 
-Lesson 0's receipt typed every price twice: once to show it, and once in the total. Change one and forget the other, and the receipt lies.
+Unit 1's receipt typed every price twice: once to show it, and once in the total. Change one and forget the other, and the receipt lies.
 
 Here is the problem: "Write a receipt program for the Corner Store. It asks for the customer's name, stores each price once in a variable with a clear name, and works out the total from those variables."
 

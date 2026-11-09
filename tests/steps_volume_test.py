@@ -36,7 +36,6 @@ LESSONS = [
     ("ch01b-numbers-and-comments", "Lesson 1.2 — Numbers and comments", ()),
     ("ch01c-errors-and-a-receipt", "Lesson 1.3 — When things go wrong, and a receipt",
      ("Say it", "Split it")),
-    ("ch01z-welcome-back", "Lesson 0 — Welcome back", ("Say it", "Split it")),
     ("ch02a-naming-a-value", "Lesson 2.1 — Naming a value", ("Say it", "Split it")),
     ("ch02b-names-and-kinds", "Lesson 2.2 — Names that explain, and kinds of value",
      ("Say it", "Split it", "Name it")),
@@ -103,7 +102,7 @@ def lesson_problems(slug, heading, hint_steps, text, checks, solutions, alternat
     h3 = [p for k, p in blocks if k == "h3"]
     has_warmup = "Warm-up" in h3
     # The course's first lesson has nothing before it to warm up on.
-    no_warmup = slug in (LESSONS[0][0], "ch01z-welcome-back")
+    no_warmup = slug == LESSONS[0][0]
     if no_warmup and has_warmup:
         say(f"{slug}: nothing comes before it to warm up on, so it has no warm-up")
     if not no_warmup and (not h3 or h3[0] != "Warm-up"):

@@ -155,7 +155,7 @@ Output:
 <class 'str'>
 ```
 
-From unit 4 on, every decision a program makes comes down to `True` or `False`.
+You will use `True` and `False` a lot. For now, it is enough to know they are their own kind of value.
 
 ### Practice
 
