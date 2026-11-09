@@ -5123,5 +5123,221 @@
         ]
       }
     ]
+  },
+  "ch08b-capital-letters#1": {
+    "kind": "predict"
+  },
+  "ch08b-capital-letters#2": {
+    "kind": "choice",
+    "options": [
+      "It changes `word` to `\"Pocket\"`.",
+      "It makes a new string, `\"Pocket\"`.",
+      "It stops with a TypeError, because a string can't change."
+    ],
+    "answer": 2,
+    "why": "A string is immutable: no `=` can change one of its characters. To get `\"Pocket\"`, make a new string: `\"P\" + word[1:]`."
+  },
+  "ch08b-capital-letters#3": {
+    "kind": "predict"
+  },
+  "ch08b-capital-letters#4": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "Ada Lovelace"
+        ],
+        "contains": "ADA LOVELACE"
+      },
+      {
+        "typed": [
+          "grace"
+        ],
+        "contains": "GRACE"
+      },
+      {
+        "typed": [
+          "BO"
+        ],
+        "contains": "BO"
+      }
+    ]
+  },
+  "ch08b-capital-letters#5": {
+    "kind": "output",
+    "expected": "SHOUT"
+  },
+  "ch08b-capital-letters#6": {
+    "kind": "predict"
+  },
+  "ch08b-capital-letters#7": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "yes"
+        ],
+        "words": [
+          "Me too!"
+        ],
+        "absent": [
+          "Oh well."
+        ]
+      },
+      {
+        "typed": [
+          "YES"
+        ],
+        "words": [
+          "Me too!"
+        ],
+        "absent": [
+          "Oh well."
+        ]
+      },
+      {
+        "typed": [
+          "Yes"
+        ],
+        "words": [
+          "Me too!"
+        ],
+        "absent": [
+          "Oh well."
+        ]
+      },
+      {
+        "typed": [
+          "no"
+        ],
+        "words": [
+          "Oh well."
+        ],
+        "absent": [
+          "Me too!"
+        ]
+      },
+      {
+        "typed": [
+          "yesterday"
+        ],
+        "words": [
+          "Oh well."
+        ],
+        "absent": [
+          "Me too!"
+        ]
+      }
+    ]
+  },
+  "ch08b-capital-letters#8": {
+    "kind": "function",
+    "name": "same_word",
+    "cases": [
+      [
+        [
+          "Ada",
+          "ada"
+        ],
+        true
+      ],
+      [
+        [
+          "ADA",
+          "Ada"
+        ],
+        true
+      ],
+      [
+        [
+          "Ada",
+          "Bob"
+        ],
+        false
+      ],
+      [
+        [
+          "",
+          ""
+        ],
+        true
+      ],
+      [
+        [
+          "",
+          "a"
+        ],
+        false
+      ],
+      [
+        [
+          "Cat",
+          "cats"
+        ],
+        false
+      ],
+      [
+        [
+          "nOtE",
+          "NoTe"
+        ],
+        true
+      ]
+    ]
+  },
+  "ch08b-capital-letters#9": {
+    "kind": "function",
+    "name": "count_letter",
+    "cases": [
+      [
+        [
+          "Banana",
+          "a"
+        ],
+        3
+      ],
+      [
+        [
+          "Banana",
+          "b"
+        ],
+        1
+      ],
+      [
+        [
+          "BANANA",
+          "a"
+        ],
+        3
+      ],
+      [
+        [
+          "",
+          "a"
+        ],
+        0
+      ],
+      [
+        [
+          "Anna",
+          "A"
+        ],
+        2
+      ],
+      [
+        [
+          "xyz",
+          "a"
+        ],
+        0
+      ],
+      [
+        [
+          "Mississippi",
+          "S"
+        ],
+        4
+      ]
+    ]
   }
 }

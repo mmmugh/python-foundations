@@ -1834,3 +1834,68 @@ print("Length:", len(word))
 ```
 
 `word[::-1]` steps backward through the whole word. `len()` counts every character, so a space counts too: `top spot` has 8. An f-string, like `print(f"Length: {len(word)}")`, works as well.
+
+## ch08b-capital-letters#4
+
+```python
+name = input("Name: ")
+print(name.upper())
+```
+
+`upper()` gives back a new string in capitals, and `print()` shows it. A name already in capitals comes back as it was. Keeping it first, as `loud_name = name.upper()`, then printing that, works too.
+
+## ch08b-capital-letters#5
+
+```python
+message = "shout"
+message = message.upper()
+print(message)
+```
+
+`message.upper()` gave back `"SHOUT"`, but nothing kept it, and `message` itself can't change. `message = message.upper()` keeps the new string. `print(message.upper())` works too.
+
+## ch08b-capital-letters#7
+
+```python
+answer = input("Do you like pizza? ")
+if answer.lower() == "yes":
+    print("Me too!")
+else:
+    print("Oh well.")
+```
+
+`answer.lower()` turns `YES` and `Yes` into `yes` before the comparison, so one test covers them all. Comparing `answer` itself with `"yes"` would say `Oh well.` to `YES`.
+
+## ch08b-capital-letters#8
+
+```python
+def same_word(first, second):
+    return first.lower() == second.lower()
+```
+
+Both sides need `lower()`. With only `first.lower() == second`, `"ADA"` and `"Ada"` would compare `"ada"` with `"Ada"`, which is `False`. An `if` that gives back `True` or `False` works too; the comparison already is `True` or `False`.
+
+## ch08b-capital-letters#9
+
+```python
+# Say it: count how many times the letter is in the text, capital or small.
+# Split it:
+# 1. make the text and the letter both small letters
+# 2. start a count at 0
+# 3. loop over the text, and add 1 for each character that is the letter
+# 4. after the loop, give back the count
+def count_letter(text, letter):
+    text = text.lower()
+    letter = letter.lower()
+    count = 0
+    for character in text:
+        if character == letter:
+            count += 1
+    return count
+
+
+print(count_letter("Banana", "a"))
+print(count_letter("Anna", "A"))
+```
+
+Step 1 is the comparing-safely idea: both sides in small letters, so `A` and `a` match. Without `letter = letter.lower()`, `count_letter("Anna", "A")` would look for a capital in a text of small letters, and give back 0. An empty text makes no passes, so the count stays 0.
