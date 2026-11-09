@@ -1,6 +1,134 @@
 {
  "quizzes": [
   {
+   "slug": "ch01c-errors-and-a-receipt",
+   "questions": [
+    {
+     "section": "Vocabulary",
+     "text": "A ____ is a list of instructions written in an order a computer can follow.",
+     "answers": [
+      "program"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "The ____ function displays something on the screen; it is how a program tells you what it is doing.",
+     "answers": [
+      "print()"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Text inside quotes, like \"hello\", is called a ____.",
+     "answers": [
+      "string"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "A line beginning with # is called a ____, and Python ignores it completely.",
+     "answers": [
+      "comment"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "print(\"Hydrogen\", \"Helium\", \"Lithium\")",
+     "answers": [
+      "Hydrogen Helium Lithium"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "print(7)\nprint(3 + 4)\nprint(\"3 + 4\")",
+     "answers": [
+      "7\n7\n3 + 4"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "# This line does nothing\nprint(\"Done\")",
+     "answers": [
+      "Done"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "print(\"A\")\nprint(\"B\", \"C\")\nprint()\nprint(2 * 3)\nprint(\"2 * 3\")",
+     "answers": [
+      "A\nB C\n\n6\n2 * 3"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "print(\"Section 1\")\nprint()\nprint(\"Section 2\")",
+     "answers": [
+      "Section 1\n\nSection 2"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete this line so it prints the text 3 + 4 exactly, with no arithmetic performed:",
+     "code": "print(____)",
+     "answers": [
+      "\"3 + 4\""
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete this program so a blank line separates the two sections:",
+     "code": "print(\"Section 1\")\n____\nprint(\"Section 2\")",
+     "answers": [
+      "print()"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete this line so it prints three items separated by single spaces:",
+     "code": "print(\"Hydrogen\", ____, \"Lithium\")",
+     "answers": [
+      "\"Helium\""
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Python runs your instructions one line at a time, from ____ to ____, which is why swapping the order of two print() calls changes the order of the output.",
+     "answers": [
+      "top",
+      "bottom"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Without quotes, 3 + 4 is ____ that Python works out and prints as 7; with quotes, \"3 + 4\" is ____ that Python prints exactly as written.",
+     "answers": [
+      "a calculation",
+      "a string"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "When Python cannot run a program, read the error message from ____ to ____: the last line names the problem, and the line above it points to where Python noticed.",
+     "answers": [
+      "bottom",
+      "top"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "When a problem feels too big to start, first write it in your own words as a comment (Say it), then break it into small steps, one comment each. That second step is called ____ it.",
+     "answers": [
+      "Split"
+     ]
+    }
+   ]
+  },
+  {
    "slug": "ch02d-putting-it-together",
    "questions": [
     {
