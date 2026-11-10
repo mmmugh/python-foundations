@@ -230,5 +230,9 @@
   "ch12d-when-it-goes-wrong#7": {
     "raises": "TypeError",
     "why": "Fix-the-bug practice: the recursive case forgets its return, so None reaches the +."
+  },
+  "ch12g-the-capstone#6": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call roster_line(), which the learner writes above them."
   }
 }

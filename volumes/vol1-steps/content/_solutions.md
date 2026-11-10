@@ -3881,3 +3881,121 @@ def is_palindrome(text):
 ```
 
 Like `search()`, it has two base cases: one gives the answer `True` when there is nothing left to check, and one gives `False` as soon as two letters differ. Each call checks a text two letters shorter, so the calls always reach one of them. `text[-1]` for the last letter, and `text[1:-1]` for the middle, work the same.
+
+## ch12g-the-capstone#4
+
+```python
+def numbered(names):
+    lines = []
+    for number, name in enumerate(names, start=1):
+        lines.append(f"{number}. {name}")
+    return lines
+```
+
+`start=1` makes the first number 1, so there is no `+ 1` to remember. An empty list never goes round the loop, and `[]` comes back.
+
+## ch12g-the-capstone#5
+
+```python
+def average(numbers):
+    if numbers == []:
+        return 0
+    return sum(numbers) / len(numbers)
+
+
+def ranked(records):
+    return sorted(records, key=lambda record: average(record["scores"]), reverse=True)
+```
+
+The `lambda` gives back each record's average, so `sorted()` compares averages, and `reverse=True` puts the highest first. `sorted()` keeps records with the same average in the order they were in (lesson 9.5), and gives back a new list, leaving the caller's alone.
+
+## ch12g-the-capstone#6
+
+```python
+def average(numbers):
+    if numbers == []:
+        return 0
+    return sum(numbers) / len(numbers)
+
+
+def letter_grade(score):
+    if score >= 90:
+        return "A"
+    elif score >= 80:
+        return "B"
+    elif score >= 70:
+        return "C"
+    elif score >= 60:
+        return "D"
+    else:
+        return "F"
+
+
+def roster_line(rank, record):
+    mean = average(record["scores"])
+    return f"{rank:<6}{record['id']:<7}{record['name']:<20}{record['grade']:<4}{mean:>7.1f}{letter_grade(mean):>7}"
+
+
+print(roster_line(1, {"id": 1002, "name": "Katherine Johnson", "grade": 11, "scores": [99, 97, 94]}))
+print(roster_line(12, {"id": 1010, "name": "New Student", "grade": 9, "scores": []}))
+```
+
+The average is worked out once, as `mean`, and used twice: printed with 1 decimal place, and handed to `letter_grade()`. Inside the f-string, the field names are in single quotes, because the f-string itself is in double quotes, as in `item_line()` in lesson 10.7.
+
+## ch12g-the-capstone#7
+
+```python
+# Say it: a heading, the students' lines, best average first and numbered from 1, then a closing line.
+# Split it:
+# 1. print the heading line, and 51 dashes
+# 2. loop over the ranked records, numbered from 1, printing each roster_line()
+# 3. print 51 dashes again
+def letter_grade(score):
+    if score >= 90:
+        return "A"
+    elif score >= 80:
+        return "B"
+    elif score >= 70:
+        return "C"
+    elif score >= 60:
+        return "D"
+    else:
+        return "F"
+
+
+students = [
+    {"id": 1004, "name": "Ada Lovelace", "grade": 9, "scores": [88, 92, 85]},
+    {"id": 1001, "name": "Grace Hopper", "grade": 10, "scores": [95, 91, 98]},
+    {"id": 1007, "name": "Alan Turing", "grade": 9, "scores": [45, 62, 58]},
+    {"id": 1002, "name": "Katherine Johnson", "grade": 11, "scores": [99, 97, 94]},
+    {"id": 1009, "name": "Edsger Dijkstra", "grade": 10, "scores": [71, 68, 75]},
+]
+
+
+def average(numbers):
+    if numbers == []:
+        return 0
+    return sum(numbers) / len(numbers)
+
+
+def ranked(records):
+    return sorted(records, key=lambda record: average(record["scores"]), reverse=True)
+
+
+def roster_line(rank, record):
+    mean = average(record["scores"])
+    return f"{rank:<6}{record['id']:<7}{record['name']:<20}{record['grade']:<4}{mean:>7.1f}{letter_grade(mean):>7}"
+
+
+def print_roster(records):
+    print(f"{'Rank':<6}{'ID':<7}{'Name':<20}{'Gr':<4}{'Avg':>7}{'Grade':>7}")
+    print("-" * 51)
+    for rank, record in enumerate(ranked(records), start=1):
+        print(roster_line(rank, record))
+    print("-" * 51)
+
+
+print_roster(students)
+```
+
+`print_roster()` is short, because each step it needs was built and checked on its own first. The heading lines up with the students' lines because it uses the same column widths, with `<` for the words and `>` for the two columns of numbers. `enumerate(..., start=1)` gives each line its rank.

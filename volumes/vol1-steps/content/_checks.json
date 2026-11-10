@@ -12347,5 +12347,259 @@
         false
       ]
     ]
+  },
+  "ch12g-the-capstone#1": {
+    "kind": "predict"
+  },
+  "ch12g-the-capstone#2": {
+    "kind": "choice",
+    "options": [
+      "`1`",
+      "`0`",
+      "`\"Bo\"`"
+    ],
+    "answer": 1,
+    "why": "`enumerate()` counts from 0, as positions do, unless you tell it to start somewhere else. The name, `\"Bo\"`, goes in `name`."
+  },
+  "ch12g-the-capstone#3": {
+    "kind": "predict"
+  },
+  "ch12g-the-capstone#4": {
+    "kind": "function",
+    "name": "numbered",
+    "cases": [
+      [
+        [
+          [
+            "Ada",
+            "Bo"
+          ]
+        ],
+        [
+          "1. Ada",
+          "2. Bo"
+        ]
+      ],
+      [
+        [
+          []
+        ],
+        []
+      ],
+      [
+        [
+          [
+            "Cy"
+          ]
+        ],
+        [
+          "1. Cy"
+        ]
+      ],
+      [
+        [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        [
+          "1. a",
+          "2. b",
+          "3. c"
+        ]
+      ]
+    ]
+  },
+  "ch12g-the-capstone#5": {
+    "kind": "function",
+    "name": "ranked",
+    "cases": [
+      [
+        [
+          [
+            {
+              "name": "Bo",
+              "scores": [
+                50
+              ]
+            },
+            {
+              "name": "Cy",
+              "scores": [
+                90,
+                80
+              ]
+            }
+          ]
+        ],
+        [
+          {
+            "name": "Cy",
+            "scores": [
+              90,
+              80
+            ]
+          },
+          {
+            "name": "Bo",
+            "scores": [
+              50
+            ]
+          }
+        ]
+      ],
+      [
+        [
+          []
+        ],
+        []
+      ],
+      [
+        [
+          [
+            {
+              "name": "Al",
+              "scores": [
+                70
+              ]
+            },
+            {
+              "name": "Di",
+              "scores": [
+                60,
+                80
+              ]
+            }
+          ]
+        ],
+        [
+          {
+            "name": "Al",
+            "scores": [
+              70
+            ]
+          },
+          {
+            "name": "Di",
+            "scores": [
+              60,
+              80
+            ]
+          }
+        ]
+      ],
+      [
+        [
+          [
+            {
+              "name": "Ed",
+              "scores": []
+            },
+            {
+              "name": "Fy",
+              "scores": [
+                10
+              ]
+            }
+          ]
+        ],
+        [
+          {
+            "name": "Fy",
+            "scores": [
+              10
+            ]
+          },
+          {
+            "name": "Ed",
+            "scores": []
+          }
+        ]
+      ],
+      [
+        [
+          [
+            {
+              "name": "Bo",
+              "scores": [
+                50
+              ]
+            }
+          ]
+        ],
+        [
+          {
+            "name": "Bo",
+            "scores": [
+              50
+            ]
+          }
+        ]
+      ],
+      [
+        [
+          [
+            {
+              "name": "Ed",
+              "scores": []
+            },
+            {
+              "name": "Bo",
+              "scores": [
+                50
+              ]
+            },
+            {
+              "name": "Cy",
+              "scores": [
+                90,
+                80
+              ]
+            },
+            {
+              "name": "Fy",
+              "scores": [
+                10
+              ]
+            }
+          ]
+        ],
+        [
+          {
+            "name": "Cy",
+            "scores": [
+              90,
+              80
+            ]
+          },
+          {
+            "name": "Bo",
+            "scores": [
+              50
+            ]
+          },
+          {
+            "name": "Fy",
+            "scores": [
+              10
+            ]
+          },
+          {
+            "name": "Ed",
+            "scores": []
+          }
+        ]
+      ]
+    ]
+  },
+  "ch12g-the-capstone#6": {
+    "kind": "output",
+    "expected": "1     1002   Katherine Johnson   11     96.7      A\n12    1010   New Student         9       0.0      F"
+  },
+  "ch12g-the-capstone#7": {
+    "kind": "output",
+    "expected": "Rank  ID     Name                Gr      Avg  Grade\n---------------------------------------------------\n1     1002   Katherine Johnson   11     96.7      A\n2     1001   Grace Hopper        10     94.7      A\n3     1004   Ada Lovelace        9      88.3      B\n4     1009   Edsger Dijkstra     10     71.3      C\n5     1007   Alan Turing         9      55.0      F\n---------------------------------------------------"
   }
 }

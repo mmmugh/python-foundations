@@ -193,6 +193,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch12f-loop-or-recursion", "Lesson 12.6 — Loop or recursion?",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch12g-the-capstone", "Lesson 12.7 — Numbering from 1, and planning a records system",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300
