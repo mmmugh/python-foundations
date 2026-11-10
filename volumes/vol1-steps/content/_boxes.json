@@ -167,7 +167,7 @@
     "raises": "ValueError",
     "why": "Three values, two names. The error message is the lesson."
   },
-  "ch10a-tuples-and-unpacking#11": {
+  "ch10a-tuples-and-unpacking#12": {
     "raises": "ValueError",
     "why": "The code above a choice: three words, two names."
   },

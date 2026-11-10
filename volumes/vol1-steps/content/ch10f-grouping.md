@@ -9,9 +9,9 @@ Lesson 9.4 counted how many votes each answer got. Sometimes you want more than 
 
 ```python
 books = [{"title": "Holes", "year": 1998}, {"title": "Emma", "year": 1815}]
-for book in sorted(books, key=lambda book: book["year"]):
+for book in sorted(books, key=lambda record: record["year"]):
     print(book["title"])
-print(max(books, key=lambda book: book["year"])["title"])
+print(max(books, key=lambda record: record["year"])["title"])
 ```
 
 2. In this counting loop, why does it ask `if vote in counts:` first?

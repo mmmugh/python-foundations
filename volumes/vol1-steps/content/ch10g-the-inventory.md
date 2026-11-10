@@ -180,7 +180,7 @@ The total has 2 decimal places. In the low-stock lines, the name is at the left 
 
 ### Try It
 
-9. Print the report for this stock, exactly as shown above.
+9. Print the report for this stock, exactly as shown above. Its two heading lines are `Low stock, at or below 10:`, with the 10 printed from `LOW_STOCK` (`f"Low stock, at or below {LOW_STOCK}:"`), and `By category:`.
 
 ```python
 def item_line(item):

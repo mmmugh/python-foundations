@@ -149,6 +149,22 @@ Output:
 40
 ```
 
+Because the right side is worked out first, a line can use the old values of the very names it is changing. Here is a trace table of one that does:
+
+```python
+low = 7
+high = 3
+low, high = high, low + high
+```
+
+| After line | low | high |
+| --- | --- | --- |
+| 1 | 7 |  |
+| 2 | 7 | 3 |
+| 3 | 3 | 10 |
+
+On line 3, both values on the right, 3 and 7 + 3, are worked out from the old values. Only then do `low` and `high` change, together.
+
 ### Practice
 
 6. Predict what this prints, then press Check.
