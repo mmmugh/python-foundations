@@ -131,22 +131,6 @@
     "raises": "ValueError",
     "why": "A loop over a dictionary with two names but no items(). The error is the point of the question."
   },
-  "ch09g-copies#5": {
-    "raises": "NameError",
-    "why": "Starting code: the lines that call add_item(), which the learner writes above them."
-  },
-  "ch09g-copies#6": {
-    "raises": "RuntimeError",
-    "why": "Taking entries out of a dictionary while looping over it. The error message is the lesson."
-  },
-  "ch09g-copies#8": {
-    "raises": "RuntimeError",
-    "why": "Fix-the-bug practice: del inside a loop over the same dictionary."
-  },
-  "ch09g-copies#12": {
-    "raises": "NameError",
-    "why": "Starting code: the lines that call remove_item(), which the learner writes above them."
-  },
   "ch09h-sets#3": {
     "varies": true,
     "why": "Python changes the order of a set's text items from one run to the next."
@@ -154,5 +138,21 @@
   "ch09h-sets#6": {
     "raises": "TypeError",
     "why": "A list as a dictionary key. The error message is the lesson."
+  },
+  "ch09g-copies#5": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call add_item(), which the learner writes above them."
+  },
+  "ch09g-copies#9": {
+    "raises": "RuntimeError",
+    "why": "Taking entries out of a dictionary while looping over it. The error message is the lesson."
+  },
+  "ch09g-copies#11": {
+    "raises": "RuntimeError",
+    "why": "Fix-the-bug practice: del inside a loop over the same dictionary."
+  },
+  "ch09g-copies#15": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call remove_item(), which the learner writes above them."
   }
 }

@@ -102,6 +102,58 @@ print(register)
 > Split it: 1. make a copy of `register`. 2. count one more `item` into the copy, with the counting pattern. 3. give back the copy.
 > Check it: the first line should be `{'umbrella': 3, 'phone': 2}`, and the last line should still be `{'umbrella': 3, 'phone': 1}`. Then the awkward one: add `print(add_item({}, "hat"))`, which prints `{'hat': 1}`.
 
+### A dictionary of dictionaries
+
+`copy()` copies the outer dictionary only. The copy has its own keys, but each of its values is the very same inner dictionary that the original holds. So a change one level down shows through both names:
+
+```python
+books = {"Dune": {"pages": 412}, "Holes": {"pages": 233}}
+mine = books.copy()
+mine["Dune"]["pages"] = 500
+print(books["Dune"])
+```
+
+Output:
+
+```
+{'pages': 500}
+```
+
+To change a value one level down and leave the original as it was, copy that inner dictionary too, and store the copy under its key:
+
+```python
+books = {"Dune": {"pages": 412}, "Holes": {"pages": 233}}
+mine = books.copy()
+mine["Dune"] = books["Dune"].copy()
+mine["Dune"]["pages"] = 500
+print(books["Dune"])
+print(mine["Dune"])
+```
+
+Output:
+
+```
+{'pages': 412}
+{'pages': 500}
+```
+
+Storing a whole new value under a key of the copy, as the third line does, never changes the original.
+
+### Practice
+
+5. Predict what this prints, then press Check.
+
+```python
+teams = {"red": {"wins": 2}, "blue": {"wins": 5}}
+spare = teams.copy()
+spare["red"]["wins"] = 3
+spare["blue"] = teams["blue"].copy()
+spare["blue"]["wins"] = 9
+print(teams["red"])
+print(teams["blue"])
+print(spare["blue"])
+```
+
 ### Changing a dictionary while looping over it
 
 This loop should take out every item the shop has none of:
@@ -132,7 +184,7 @@ Output:
 
 ### Practice
 
-5. This program should take out everyone under 13, and print `{'Kim': 15, 'Ada': 14, 'Bo': 13}`. It stops with an error. Run it and read the last line of the error. Then fix it.
+6. This program should take out everyone under 13, and print `{'Kim': 15, 'Ada': 14, 'Bo': 13}`. It stops with an error. Run it and read the last line of the error. Then fix it.
 
 ```python
 ages = {"Mo": 12, "Kim": 15, "Lee": 11, "Ada": 14, "Bo": 13}
@@ -180,12 +232,12 @@ Output:
 
 ### Practice
 
-6. Write a function `invert(original)` that gives back a new dictionary with the keys and values of `original` swapped: each value becomes a key, with its old key as its value. In this exercise, every value in `original` is different. So `invert({"one": "uno", "two": "dos"})` gives back `{"uno": "one", "dos": "two"}`.
+7. Write a function `invert(original)` that gives back a new dictionary with the keys and values of `original` swapped: each value becomes a key, with its old key as its value. In this exercise, every value in `original` is different. So `invert({"one": "uno", "two": "dos"})` gives back `{"uno": "one", "dos": "two"}`.
 
 > Split it: start an empty dictionary. Loop over the entries of `original` with `items()`, and store each key under its value. Give the new dictionary back.
 > Check it: try the example. Then the awkward one: `{}`, which gives `{}`.
 
-7. Here two keys share a value. Predict what this prints, then press Check.
+8. Here two keys share a value. Predict what this prints, then press Check.
 
 ```python
 grades = {"Ada": "A", "Grace": "A", "Alan": "B"}
@@ -197,7 +249,7 @@ print(flipped)
 
 ### Try It
 
-8. Write a function `remove_item(register, item)` that gives back a new register with one fewer `item`, and leaves `register` as it was. When the last one goes, its entry comes out. If `item` is not held, the new register has the same entries. Write it above the lines below, and keep them.
+9. Write a function `remove_item(register, item)` that gives back a new register with one fewer `item`, and leaves `register` as it was. When the last one goes, its entry comes out. If `item` is not held, the new register has the same entries. Write it above the lines below, and keep them.
 
 ```python
 register = {"umbrella": 3, "phone": 1}
@@ -215,7 +267,7 @@ print(register)
 
 ### What you can do now
 
-- Tell a second name for a dictionary from a copy, made with `copy()`; copy a list with `copy()` too.
+- Copy a dictionary or a list with `copy()`, and copy an inner dictionary too before changing it.
 - Loop over a copy of a dictionary to take entries out of it.
 - Build a new dictionary from an old one, even with keys and values swapped.
 
