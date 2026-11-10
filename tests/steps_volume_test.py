@@ -165,6 +165,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch10g-the-inventory", "Lesson 10.7 — Choosing a value, and an inventory",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch11a-linear-search", "Lesson 11.1 — Looking through a list",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

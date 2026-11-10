@@ -194,5 +194,9 @@
   "ch10b-two-values#11": {
     "raises": "NameError",
     "why": "Starting code: the lines that call distance(), which the learner writes above them."
+  },
+  "ch11a-linear-search#5": {
+    "raises": "ValueError",
+    "why": "index() of an item that is not in the list. The error message is the lesson."
   }
 }

@@ -3300,3 +3300,45 @@ print(round(distance((0, 0), (1, 1)), 3))
 ```
 
 It does not matter which point comes first: going the other way makes across and up negative, and a negative number squared is positive, so the distance is the same. The square root of 2 has no end to its digits, which is why the last line rounds it.
+
+## ch11a-linear-search#5
+
+```python
+def any_over(numbers, limit):
+    for number in numbers:
+        if number > limit:
+            return True
+    return False
+```
+
+`return False` is below the loop, so it runs only once every number has been looked at. Inside the loop, in an `else`, it would give up after the first number.
+
+## ch11a-linear-search#8
+
+```python
+def all_positions(items, target):
+    positions = []
+    for position in range(len(items)):
+        if items[position] == target:
+            positions.append(position)
+    return positions
+```
+
+There is no `break` and no `return` inside the loop: this search keeps going to the end, because every match counts.
+
+## ch11a-linear-search#9
+
+```python
+# Say it: a list and a target go in; the position of the first match comes out, or -1.
+# Split it:
+# 1. loop over the positions
+# 2. if the item at a position is the target, give back that position
+# 3. below the loop, give back -1
+def find_position(items, target):
+    for position in range(len(items)):
+        if items[position] == target:
+            return position
+    return -1
+```
+
+`return position` ends the search at the first match, so a later match is never reached. For an empty list, `range(0)` gives no positions, the loop never runs, and the function gives back -1. A match at position 0 gives back 0, which is a real position: that is why "not found" is -1, and not 0.
