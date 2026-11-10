@@ -3923,6 +3923,142 @@ print(winner_line(leaders))
 
 Tacos and sushi both have 4 votes, and `sorted()` keeps tied keys in the dictionary's order: tacos turned up first. `len(set(votes))` counts the different options, which is the set doing the job it is for. `len(counts)` gives the same number.
 
+## ch09-practice#1
+
+```python
+def kind_of(register, ticket):
+    if ticket in register:
+        return register[ticket]["kind"]
+    return None
+```
+
+## ch09-practice#2
+
+```python
+def with_item(register, ticket, kind, place):
+    new_register = register.copy()
+    new_register[ticket] = {"kind": kind, "place": place}
+    return new_register
+
+
+register = {"A1": {"kind": "umbrella", "place": "platform 2"}}
+bigger = with_item(register, "A2", "phone", "ticket hall")
+print(bigger["A2"]["kind"], "found at", bigger["A2"]["place"])
+print(len(bigger), "items")
+first = with_item({}, "A1", "scarf", "cafe")
+print(first["A1"]["kind"], "found at", first["A1"]["place"])
+print(register)
+```
+
+## ch09-practice#3
+
+```python
+def claimed(register, ticket):
+    new_register = register.copy()
+    if ticket in new_register:
+        del new_register[ticket]
+    return new_register
+
+
+register = {
+    "A1": {"kind": "umbrella", "place": "platform 2"},
+    "A2": {"kind": "phone", "place": "ticket hall"},
+}
+print(sorted(claimed(register, "A1")))
+print(sorted(claimed(register, "A9")))
+print(sorted(claimed({}, "A1")))
+print(sorted(register))
+```
+
+## ch09-practice#4
+
+```python
+def count_kinds(register):
+    counts = {}
+    for details in register.values():
+        kind = details["kind"]
+        counts[kind] = counts.get(kind, 0) + 1
+    return counts
+```
+
+## ch09-practice#5
+
+```python
+def places(register):
+    found_at = []
+    for details in register.values():
+        found_at.append(details["place"])
+    return sorted(set(found_at))
+```
+
+## ch09-practice#6
+
+```python
+# Say it: a new item and a ticket go in; the claim, or a message that
+# there is no such ticket, comes out, then what is still held.
+# Split it:
+# 1. ask the kind and the place, and add the item under A5
+# 2. ask for the ticket
+# 3. if it is there: print the claim line, and take the item out
+# 4. otherwise: print the no-item line
+# 5. count the kinds, and print a line for each
+# 6. print the places, joined
+def kind_of(register, ticket):
+    if ticket in register:
+        return register[ticket]["kind"]
+    return None
+
+
+def with_item(register, ticket, kind, place):
+    new_register = register.copy()
+    new_register[ticket] = {"kind": kind, "place": place}
+    return new_register
+
+
+def claimed(register, ticket):
+    new_register = register.copy()
+    if ticket in new_register:
+        del new_register[ticket]
+    return new_register
+
+
+def count_kinds(register):
+    counts = {}
+    for details in register.values():
+        kind = details["kind"]
+        counts[kind] = counts.get(kind, 0) + 1
+    return counts
+
+
+def places(register):
+    found_at = []
+    for details in register.values():
+        found_at.append(details["place"])
+    return sorted(set(found_at))
+
+
+register = {
+    "A1": {"kind": "umbrella", "place": "platform 2"},
+    "A2": {"kind": "phone", "place": "ticket hall"},
+    "A3": {"kind": "umbrella", "place": "cafe"},
+    "A4": {"kind": "scarf", "place": "platform 2"},
+}
+kind = input("What kind of thing is it? ")
+place = input("Where was it found? ")
+register = with_item(register, "A5", kind, place)
+
+ticket = input("Ticket? ")
+if ticket in register:
+    print(f"Claimed: {kind_of(register, ticket)}, found at {register[ticket]['place']}")
+    register = claimed(register, ticket)
+else:
+    print("No item with ticket", ticket)
+
+for kind, count in count_kinds(register).items():
+    print(f"{kind}: {count}")
+print("Places:", ", ".join(places(register)))
+```
+
 ## ch09g-copies#4
 
 ```python

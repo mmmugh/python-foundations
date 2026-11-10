@@ -175,6 +175,14 @@
     "raises": "NameError",
     "why": "Starting code: the lines that call remove_item(), which the learner writes above them."
   },
+  "ch09-practice#0": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call with_item(), which the learner writes above them."
+  },
+  "ch09-practice#1": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call claimed(), which the learner writes above them."
+  },
   "ch10a-tuples-and-unpacking#2": {
     "raises": "TypeError",
     "why": "A tuple cannot change. The error message is the lesson."

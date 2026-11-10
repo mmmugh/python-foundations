@@ -11411,6 +11411,366 @@
     "kind": "output",
     "expected": "pizza        6   40.0%  ##########\ntacos        4   26.7%  #######\nsushi        4   26.7%  #######\nsalad        1    6.7%  ##\nTotal votes: 15\nOptions: 4\nWinner: pizza"
   },
+  "ch09-practice#1": {
+    "kind": "function",
+    "name": "kind_of",
+    "cases": [
+      [
+        [
+          {
+            "A1": {
+              "kind": "umbrella",
+              "place": "platform 2"
+            },
+            "A2": {
+              "kind": "phone",
+              "place": "ticket hall"
+            },
+            "A3": {
+              "kind": "umbrella",
+              "place": "cafe"
+            }
+          },
+          "A2"
+        ],
+        "phone"
+      ],
+      [
+        [
+          {
+            "A1": {
+              "kind": "umbrella",
+              "place": "platform 2"
+            },
+            "A2": {
+              "kind": "phone",
+              "place": "ticket hall"
+            },
+            "A3": {
+              "kind": "umbrella",
+              "place": "cafe"
+            }
+          },
+          "A1"
+        ],
+        "umbrella"
+      ],
+      [
+        [
+          {
+            "A1": {
+              "kind": "umbrella",
+              "place": "platform 2"
+            },
+            "A2": {
+              "kind": "phone",
+              "place": "ticket hall"
+            },
+            "A3": {
+              "kind": "umbrella",
+              "place": "cafe"
+            }
+          },
+          "A9"
+        ],
+        null
+      ],
+      [
+        [
+          {
+            "A1": {
+              "kind": "umbrella",
+              "place": "platform 2"
+            },
+            "A2": {
+              "kind": "phone",
+              "place": "ticket hall"
+            },
+            "A3": {
+              "kind": "umbrella",
+              "place": "cafe"
+            }
+          },
+          "a1"
+        ],
+        null
+      ],
+      [
+        [
+          {},
+          "A1"
+        ],
+        null
+      ],
+      [
+        [
+          {
+            "B7": {
+              "kind": "scarf",
+              "place": "cafe"
+            }
+          },
+          "B7"
+        ],
+        "scarf"
+      ]
+    ]
+  },
+  "ch09-practice#2": {
+    "kind": "output",
+    "expected": "phone found at ticket hall\n2 items\nscarf found at cafe\n{'A1': {'kind': 'umbrella', 'place': 'platform 2'}}"
+  },
+  "ch09-practice#3": {
+    "kind": "output",
+    "expected": "['A2']\n['A1', 'A2']\n[]\n['A1', 'A2']"
+  },
+  "ch09-practice#4": {
+    "kind": "function",
+    "name": "count_kinds",
+    "cases": [
+      [
+        [
+          {
+            "A1": {
+              "kind": "umbrella",
+              "place": "platform 2"
+            },
+            "A2": {
+              "kind": "phone",
+              "place": "ticket hall"
+            },
+            "A3": {
+              "kind": "umbrella",
+              "place": "cafe"
+            }
+          }
+        ],
+        {
+          "umbrella": 2,
+          "phone": 1
+        }
+      ],
+      [
+        [
+          {
+            "A1": {
+              "kind": "umbrella",
+              "place": "platform 2"
+            },
+            "A2": {
+              "kind": "phone",
+              "place": "ticket hall"
+            },
+            "A3": {
+              "kind": "umbrella",
+              "place": "cafe"
+            },
+            "A4": {
+              "kind": "scarf",
+              "place": "platform 2"
+            }
+          }
+        ],
+        {
+          "umbrella": 2,
+          "phone": 1,
+          "scarf": 1
+        }
+      ],
+      [
+        [
+          {
+            "B7": {
+              "kind": "scarf",
+              "place": "cafe"
+            }
+          }
+        ],
+        {
+          "scarf": 1
+        }
+      ],
+      [
+        [
+          {}
+        ],
+        {}
+      ]
+    ]
+  },
+  "ch09-practice#5": {
+    "kind": "function",
+    "name": "places",
+    "cases": [
+      [
+        [
+          {
+            "A1": {
+              "kind": "umbrella",
+              "place": "platform 2"
+            },
+            "A2": {
+              "kind": "phone",
+              "place": "ticket hall"
+            },
+            "A3": {
+              "kind": "umbrella",
+              "place": "cafe"
+            }
+          }
+        ],
+        [
+          "cafe",
+          "platform 2",
+          "ticket hall"
+        ]
+      ],
+      [
+        [
+          {
+            "A1": {
+              "kind": "umbrella",
+              "place": "platform 2"
+            },
+            "A2": {
+              "kind": "phone",
+              "place": "ticket hall"
+            },
+            "A3": {
+              "kind": "umbrella",
+              "place": "cafe"
+            },
+            "A4": {
+              "kind": "scarf",
+              "place": "platform 2"
+            }
+          }
+        ],
+        [
+          "cafe",
+          "platform 2",
+          "ticket hall"
+        ]
+      ],
+      [
+        [
+          {
+            "B7": {
+              "kind": "scarf",
+              "place": "cafe"
+            }
+          }
+        ],
+        [
+          "cafe"
+        ]
+      ],
+      [
+        [
+          {}
+        ],
+        []
+      ]
+    ]
+  },
+  "ch09-practice#6": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "glove",
+          "cafe",
+          "A2"
+        ],
+        "words": [
+          "Claimed: phone, found at ticket hall",
+          "umbrella: 2",
+          "scarf: 1",
+          "glove: 1",
+          "Places: cafe, platform 2"
+        ],
+        "absent": [
+          "No item with ticket A2",
+          "phone: 1",
+          "Places: cafe, platform 2, ticket hall"
+        ]
+      },
+      {
+        "typed": [
+          "umbrella",
+          "ticket hall",
+          "A9"
+        ],
+        "words": [
+          "No item with ticket A9",
+          "umbrella: 3",
+          "phone: 1",
+          "scarf: 1",
+          "Places: cafe, platform 2, ticket hall"
+        ],
+        "absent": [
+          "umbrella: 2"
+        ]
+      },
+      {
+        "typed": [
+          "phone",
+          "platform 2",
+          "a1"
+        ],
+        "words": [
+          "No item with ticket a1",
+          "umbrella: 2",
+          "phone: 2",
+          "scarf: 1",
+          "Places: cafe, platform 2, ticket hall"
+        ],
+        "absent": [
+          "Claimed: umbrella, found at platform 2",
+          "umbrella: 1",
+          "phone: 1"
+        ]
+      },
+      {
+        "typed": [
+          "book",
+          "library",
+          "A5"
+        ],
+        "words": [
+          "Claimed: book, found at library",
+          "umbrella: 2",
+          "phone: 1",
+          "scarf: 1",
+          "Places: cafe, platform 2, ticket hall"
+        ],
+        "absent": [
+          "No item with ticket A5",
+          "book: 1",
+          "Places: cafe, library, platform 2, ticket hall"
+        ]
+      },
+      {
+        "typed": [
+          "glove",
+          "cafe",
+          "A4"
+        ],
+        "words": [
+          "Claimed: scarf, found at platform 2",
+          "umbrella: 2",
+          "phone: 1",
+          "glove: 1",
+          "Places: cafe, platform 2, ticket hall"
+        ],
+        "absent": [
+          "No item with ticket A4",
+          "scarf: 1",
+          "scarf: 0"
+        ]
+      }
+    ]
+  },
   "ch09g-copies#1": {
     "kind": "predict"
   },
