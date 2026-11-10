@@ -2606,6 +2606,13 @@ print(playlist)
 ```python
 def up_next(playlist):
     return playlist[1:4]
+
+playlist = ["Ghost Town", "Ribbons", "Anvil", "Low Tide", "Harbor"]
+print(up_next(playlist))
+print(up_next(["Ghost Town", "Ribbons"]))
+print(up_next(["Ghost Town"]))
+print(up_next([]))
+print(playlist)
 ```
 
 ## ch07-practice#5
@@ -2615,6 +2622,14 @@ def song_number(playlist, title):
     if playlist.count(title) == 0:
         return 0
     return playlist.index(title) + 1
+
+playlist = ["Ghost Town", "Ribbons", "Anvil", "Ribbons"]
+print(song_number(playlist, "Anvil"))
+print(song_number(playlist, "Ghost Town"))
+print(song_number(playlist, "Ribbons"))
+print(song_number(playlist, "Low Tide"))
+print(song_number([], "Anvil"))
+print(playlist)
 ```
 
 ## ch07-practice#6

@@ -113,9 +113,17 @@
   },
   "ch07-practice#3": {
     "raises": "NameError",
-    "why": "Starting code: the lines that call a_to_z(), which the learner writes above them."
+    "why": "Starting code: the lines that call up_next(), which the learner writes above them."
   },
   "ch07-practice#4": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call song_number(), which the learner writes above them."
+  },
+  "ch07-practice#5": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call a_to_z(), which the learner writes above them."
+  },
+  "ch07-practice#6": {
     "raises": "NameError",
     "why": "Starting code: the lines that call show(), which the learner writes above them."
   },
