@@ -2557,6 +2557,151 @@ print(f"Passing: {count_passing(scores)} of {len(scores)}")
 
 The loop needs each index, because the same index finds a name in `names` and its score in `scores`. Every summary line is one call to a function that was checked on its own. The average here is exactly 78.2, but rounding it to 1 place keeps a class whose average is 78.2222 from printing all those digits.
 
+## ch07-practice#1
+
+```python
+def with_song(playlist, title):
+    new_playlist = playlist[:]
+    new_playlist.append(title)
+    return new_playlist
+
+playlist = ["Ghost Town", "Ribbons", "Anvil"]
+print(with_song(playlist, "Low Tide"))
+print(with_song([], "Low Tide"))
+print(playlist)
+```
+
+## ch07-practice#2
+
+```python
+def play_next(playlist, title):
+    new_playlist = playlist[:]
+    new_playlist.insert(1, title)
+    return new_playlist
+
+playlist = ["Ghost Town", "Ribbons", "Anvil"]
+print(play_next(playlist, "Low Tide"))
+print(play_next([], "Low Tide"))
+print(playlist)
+```
+
+## ch07-practice#3
+
+```python
+def without_song(playlist, title):
+    new_playlist = playlist[:]
+    if new_playlist.count(title) > 0:
+        new_playlist.remove(title)
+    return new_playlist
+
+playlist = ["Ghost Town", "Ribbons", "Anvil", "Ribbons"]
+print(without_song(playlist, "Ribbons"))
+print(without_song(playlist, "Low Tide"))
+print(without_song([], "Low Tide"))
+print(playlist)
+```
+
+## ch07-practice#4
+
+```python
+def up_next(playlist):
+    return playlist[1:4]
+```
+
+## ch07-practice#5
+
+```python
+def song_number(playlist, title):
+    if playlist.count(title) == 0:
+        return 0
+    return playlist.index(title) + 1
+```
+
+## ch07-practice#6
+
+```python
+def a_to_z(playlist):
+    return sorted(playlist)
+
+playlist = ["Ribbons", "Anvil", "Low Tide", "Ghost Town"]
+print(a_to_z(playlist))
+print(a_to_z([]))
+print(playlist)
+```
+
+## ch07-practice#7
+
+```python
+def show(playlist):
+    for position, title in enumerate(playlist):
+        print(f"{position + 1}. {title}")
+
+show(["Ghost Town", "Ribbons", "Anvil"])
+show([])
+```
+
+## ch07-practice#8
+
+```python
+# Say it: four songs go in, to add, to play next, to take out and to find;
+# the changed playlist comes out, numbered, then what is up next, the
+# playlist from A to Z, and where the song to find is.
+# Split it:
+# 1. ask for the song to add, and keep the new playlist
+# 2. the same for the song to play next, and the song to take out
+# 3. ask for the song to find
+# 4. show the playlist; print the up-next line and the A-to-Z line
+# 5. print where the song to find is, or that it is not there
+def with_song(playlist, title):
+    new_playlist = playlist[:]
+    new_playlist.append(title)
+    return new_playlist
+
+def play_next(playlist, title):
+    new_playlist = playlist[:]
+    new_playlist.insert(1, title)
+    return new_playlist
+
+def without_song(playlist, title):
+    new_playlist = playlist[:]
+    if new_playlist.count(title) > 0:
+        new_playlist.remove(title)
+    return new_playlist
+
+def up_next(playlist):
+    return playlist[1:4]
+
+def song_number(playlist, title):
+    if playlist.count(title) == 0:
+        return 0
+    return playlist.index(title) + 1
+
+def a_to_z(playlist):
+    return sorted(playlist)
+
+def show(playlist):
+    for position, title in enumerate(playlist):
+        print(f"{position + 1}. {title}")
+
+playlist = ["Ghost Town", "Ribbons", "Anvil"]
+added = input("Song to add: ")
+playlist = with_song(playlist, added)
+next_song = input("Song to play next: ")
+playlist = play_next(playlist, next_song)
+gone = input("Song to take out: ")
+playlist = without_song(playlist, gone)
+wanted = input("Song to find: ")
+
+show(playlist)
+print("Up next:", up_next(playlist))
+print("A to Z:", a_to_z(playlist))
+number = song_number(playlist, wanted)
+if number == 0:
+    print(f"{wanted} is not in the playlist")
+else:
+    print(f"{wanted} is song {number}")
+```
+
 ## ch08a-text-is-a-sequence#5
 
 ```python

@@ -7198,6 +7198,244 @@
     "kind": "output",
     "expected": "Ada 88 B\nGrace 92 A\nAlan 45 F\nKatherine 95 A\nEdsger 71 C\nAverage: 78.2\nTop: Katherine 95\nPassing: 4 of 5"
   },
+  "ch07-practice#1": {
+    "kind": "output",
+    "expected": "['Ghost Town', 'Ribbons', 'Anvil', 'Low Tide']\n['Low Tide']\n['Ghost Town', 'Ribbons', 'Anvil']"
+  },
+  "ch07-practice#2": {
+    "kind": "output",
+    "expected": "['Ghost Town', 'Low Tide', 'Ribbons', 'Anvil']\n['Low Tide']\n['Ghost Town', 'Ribbons', 'Anvil']"
+  },
+  "ch07-practice#3": {
+    "kind": "output",
+    "expected": "['Ghost Town', 'Anvil', 'Ribbons']\n['Ghost Town', 'Ribbons', 'Anvil', 'Ribbons']\n[]\n['Ghost Town', 'Ribbons', 'Anvil', 'Ribbons']"
+  },
+  "ch07-practice#4": {
+    "kind": "function",
+    "name": "up_next",
+    "cases": [
+      [
+        [
+          [
+            "Ghost Town",
+            "Ribbons",
+            "Anvil",
+            "Low Tide",
+            "Harbor"
+          ]
+        ],
+        [
+          "Ribbons",
+          "Anvil",
+          "Low Tide"
+        ]
+      ],
+      [
+        [
+          [
+            "Ghost Town",
+            "Ribbons",
+            "Anvil",
+            "Low Tide"
+          ]
+        ],
+        [
+          "Ribbons",
+          "Anvil",
+          "Low Tide"
+        ]
+      ],
+      [
+        [
+          [
+            "Ghost Town",
+            "Ribbons"
+          ]
+        ],
+        [
+          "Ribbons"
+        ]
+      ],
+      [
+        [
+          [
+            "Ghost Town"
+          ]
+        ],
+        []
+      ],
+      [
+        [
+          []
+        ],
+        []
+      ]
+    ]
+  },
+  "ch07-practice#5": {
+    "kind": "function",
+    "name": "song_number",
+    "cases": [
+      [
+        [
+          [
+            "Ghost Town",
+            "Ribbons",
+            "Anvil"
+          ],
+          "Anvil"
+        ],
+        3
+      ],
+      [
+        [
+          [
+            "Ghost Town",
+            "Ribbons",
+            "Anvil"
+          ],
+          "Ghost Town"
+        ],
+        1
+      ],
+      [
+        [
+          [
+            "Ghost Town",
+            "Ribbons",
+            "Anvil"
+          ],
+          "Low Tide"
+        ],
+        0
+      ],
+      [
+        [
+          [],
+          "Anvil"
+        ],
+        0
+      ],
+      [
+        [
+          [
+            "Ribbons",
+            "Anvil",
+            "Ribbons"
+          ],
+          "Ribbons"
+        ],
+        1
+      ],
+      [
+        [
+          [
+            "Anvil",
+            "Ribbons",
+            "Anvil"
+          ],
+          "Ribbons"
+        ],
+        2
+      ]
+    ]
+  },
+  "ch07-practice#6": {
+    "kind": "output",
+    "expected": "['Anvil', 'Ghost Town', 'Low Tide', 'Ribbons']\n[]\n['Ribbons', 'Anvil', 'Low Tide', 'Ghost Town']"
+  },
+  "ch07-practice#7": {
+    "kind": "output",
+    "expected": "1. Ghost Town\n2. Ribbons\n3. Anvil"
+  },
+  "ch07-practice#8": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "Low Tide",
+          "Harbor",
+          "Ribbons",
+          "Anvil"
+        ],
+        "words": [
+          "1. Ghost Town",
+          "2. Harbor",
+          "3. Anvil",
+          "4. Low Tide",
+          "Up next: ['Harbor', 'Anvil', 'Low Tide']",
+          "A to Z: ['Anvil', 'Ghost Town', 'Harbor', 'Low Tide']",
+          "Anvil is song 3"
+        ],
+        "absent": [
+          "Anvil is not in the playlist",
+          "Anvil is song 0"
+        ]
+      },
+      {
+        "typed": [
+          "Ribbons",
+          "Harbor",
+          "Ribbons",
+          "Echo"
+        ],
+        "words": [
+          "1. Ghost Town",
+          "2. Harbor",
+          "3. Anvil",
+          "4. Ribbons",
+          "Up next: ['Harbor', 'Anvil', 'Ribbons']",
+          "A to Z: ['Anvil', 'Ghost Town', 'Harbor', 'Ribbons']",
+          "Echo is not in the playlist"
+        ],
+        "absent": [
+          "Echo is song 0"
+        ]
+      },
+      {
+        "typed": [
+          "Low Tide",
+          "Harbor",
+          "Echo",
+          "Ghost Town"
+        ],
+        "words": [
+          "1. Ghost Town",
+          "2. Harbor",
+          "3. Ribbons",
+          "4. Anvil",
+          "5. Low Tide",
+          "Up next: ['Harbor', 'Ribbons', 'Anvil']",
+          "A to Z: ['Anvil', 'Ghost Town', 'Harbor', 'Low Tide', 'Ribbons']",
+          "Ghost Town is song 1"
+        ],
+        "absent": [
+          "Ghost Town is not in the playlist"
+        ]
+      },
+      {
+        "typed": [
+          "Low Tide",
+          "Harbor",
+          "Anvil",
+          "Anvil"
+        ],
+        "words": [
+          "1. Ghost Town",
+          "2. Harbor",
+          "3. Ribbons",
+          "4. Low Tide",
+          "Up next: ['Harbor', 'Ribbons', 'Low Tide']",
+          "A to Z: ['Ghost Town', 'Harbor', 'Low Tide', 'Ribbons']",
+          "Anvil is not in the playlist"
+        ],
+        "absent": [
+          "Anvil is song 0",
+          "Anvil is song 3"
+        ]
+      }
+    ]
+  },
   "ch07e-asking-about-a-list#5": {
     "kind": "stdin",
     "runs": [

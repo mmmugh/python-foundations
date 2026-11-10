@@ -99,6 +99,26 @@
     "raises": "TypeError",
     "why": "Fix-the-bug practice: scores = scores.sort() leaves None in scores."
   },
+  "ch07-practice#0": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call with_song(), which the learner writes above them."
+  },
+  "ch07-practice#1": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call play_next(), which the learner writes above them."
+  },
+  "ch07-practice#2": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call without_song(), which the learner writes above them."
+  },
+  "ch07-practice#3": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call a_to_z(), which the learner writes above them."
+  },
+  "ch07-practice#4": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call show(), which the learner writes above them."
+  },
   "ch08a-text-is-a-sequence#5": {
     "raises": "TypeError",
     "why": "A string can't change: item assignment on a string. The error message is the lesson."
