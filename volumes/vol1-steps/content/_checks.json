@@ -9315,6 +9315,442 @@
     "kind": "output",
     "expected": "====================================\nCharacters:                      125\nCharacters (no spaces):          102\nWords:                            24\nSentences:                         3\nVowels:                           34\nLongest word:            programming\nAverage word length:             4.1\n===================================="
   },
+  "ch08-practice#1": {
+    "kind": "function",
+    "name": "shift_letter",
+    "cases": [
+      [
+        [
+          "a",
+          3
+        ],
+        "d"
+      ],
+      [
+        [
+          "c",
+          1
+        ],
+        "d"
+      ],
+      [
+        [
+          "h",
+          10
+        ],
+        "r"
+      ],
+      [
+        [
+          "b",
+          24
+        ],
+        "z"
+      ],
+      [
+        [
+          "y",
+          1
+        ],
+        "z"
+      ],
+      [
+        [
+          "m",
+          0
+        ],
+        "m"
+      ]
+    ]
+  },
+  "ch08-practice#2": {
+    "kind": "function",
+    "name": "shift_letter",
+    "cases": [
+      [
+        [
+          "x",
+          3
+        ],
+        "a"
+      ],
+      [
+        [
+          "z",
+          1
+        ],
+        "a"
+      ],
+      [
+        [
+          "y",
+          5
+        ],
+        "d"
+      ],
+      [
+        [
+          "a",
+          3
+        ],
+        "d"
+      ],
+      [
+        [
+          "a",
+          26
+        ],
+        "a"
+      ],
+      [
+        [
+          "q",
+          26
+        ],
+        "q"
+      ],
+      [
+        [
+          "m",
+          0
+        ],
+        "m"
+      ]
+    ]
+  },
+  "ch08-practice#3": {
+    "kind": "function",
+    "name": "shift_letter",
+    "cases": [
+      [
+        [
+          "!",
+          3
+        ],
+        "!"
+      ],
+      [
+        [
+          " ",
+          3
+        ],
+        " "
+      ],
+      [
+        [
+          "7",
+          2
+        ],
+        "7"
+      ],
+      [
+        [
+          ",",
+          25
+        ],
+        ","
+      ],
+      [
+        [
+          "x",
+          3
+        ],
+        "a"
+      ],
+      [
+        [
+          "a",
+          0
+        ],
+        "a"
+      ]
+    ]
+  },
+  "ch08-practice#4": {
+    "kind": "function",
+    "name": "shift_letter",
+    "cases": [
+      [
+        [
+          "A",
+          3
+        ],
+        "D"
+      ],
+      [
+        [
+          "Z",
+          1
+        ],
+        "A"
+      ],
+      [
+        [
+          "H",
+          0
+        ],
+        "H"
+      ],
+      [
+        [
+          "a",
+          3
+        ],
+        "d"
+      ],
+      [
+        [
+          "x",
+          3
+        ],
+        "a"
+      ],
+      [
+        [
+          "!",
+          3
+        ],
+        "!"
+      ],
+      [
+        [
+          "Q",
+          26
+        ],
+        "Q"
+      ]
+    ]
+  },
+  "ch08-practice#5": {
+    "kind": "function",
+    "name": "encode",
+    "cases": [
+      [
+        [
+          "Hello, World!",
+          3
+        ],
+        "Khoor, Zruog!"
+      ],
+      [
+        [
+          "xyz",
+          3
+        ],
+        "abc"
+      ],
+      [
+        [
+          "",
+          5
+        ],
+        ""
+      ],
+      [
+        [
+          "Same",
+          0
+        ],
+        "Same"
+      ],
+      [
+        [
+          "Meet at 6",
+          1
+        ],
+        "Nffu bu 6"
+      ],
+      [
+        [
+          "2 + 2 = 4",
+          7
+        ],
+        "2 + 2 = 4"
+      ]
+    ]
+  },
+  "ch08-practice#6": {
+    "kind": "function",
+    "name": "decode",
+    "cases": [
+      [
+        [
+          "Khoor, Zruog!",
+          3
+        ],
+        "Hello, World!"
+      ],
+      [
+        [
+          "abc",
+          3
+        ],
+        "xyz"
+      ],
+      [
+        [
+          "",
+          4
+        ],
+        ""
+      ],
+      [
+        [
+          "Same",
+          0
+        ],
+        "Same"
+      ],
+      [
+        [
+          "Nffu bu 6",
+          1
+        ],
+        "Meet at 6"
+      ],
+      [
+        [
+          "ABC",
+          1
+        ],
+        "ZAB"
+      ],
+      [
+        [
+          "def",
+          -3
+        ],
+        "ghi"
+      ],
+      [
+        [
+          "xyz",
+          -3
+        ],
+        "abc"
+      ]
+    ]
+  },
+  "ch08-practice#7": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "encode",
+          "Hello, World!",
+          "3"
+        ],
+        "contains": "Result: Khoor, Zruog!",
+        "absent": [
+          "Result: Ebiil, Tloia!",
+          "Please type encode or decode."
+        ]
+      },
+      {
+        "typed": [
+          " DECODE ",
+          "Khoor, Zruog!",
+          "3"
+        ],
+        "contains": "Result: Hello, World!",
+        "absent": [
+          "Result: Nkrru, Cuxrj!",
+          "Please type encode or decode."
+        ]
+      },
+      {
+        "typed": [
+          "Decode",
+          "abc",
+          "3"
+        ],
+        "contains": "Result: xyz",
+        "absent": [
+          "Result: def",
+          "Please type encode or decode."
+        ]
+      },
+      {
+        "typed": [
+          "encode",
+          "Zoo",
+          "1"
+        ],
+        "contains": "Result: App",
+        "absent": [
+          "Result: Ynn",
+          "Please type encode or decode."
+        ]
+      },
+      {
+        "typed": [
+          "encode",
+          "Zebra",
+          "0"
+        ],
+        "contains": "Result: Zebra",
+        "absent": [
+          "Please type encode or decode."
+        ]
+      },
+      {
+        "typed": [
+          "encode",
+          "Zz",
+          "-1"
+        ],
+        "contains": "Result: Yy",
+        "absent": [
+          "Result: Aa",
+          "Please type encode or decode."
+        ]
+      },
+      {
+        "typed": [
+          "encode",
+          "2 + 2 = 4",
+          "5"
+        ],
+        "contains": "Result: 2 + 2 = 4",
+        "absent": [
+          "Please type encode or decode."
+        ]
+      },
+      {
+        "typed": [
+          "encode",
+          "",
+          "5"
+        ],
+        "contains": "Result:",
+        "absent": [
+          "Please type encode or decode."
+        ]
+      },
+      {
+        "typed": [
+          "shout"
+        ],
+        "words": [
+          "Please type encode or decode."
+        ],
+        "absent": [
+          "Result:"
+        ]
+      },
+      {
+        "typed": [
+          "  "
+        ],
+        "words": [
+          "Please type encode or decode."
+        ],
+        "absent": [
+          "Result:"
+        ]
+      }
+    ]
+  },
   "ch09a-dictionaries#1": {
     "kind": "predict"
   },

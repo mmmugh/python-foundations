@@ -3321,6 +3321,178 @@ print("=" * 36)
 
 Each line is one step of the plan, and each step is a function you checked on its own. The words are worked out once, in `words`, and used three times. `round(..., 1)` gives 4.1, which `report_line()` puts at the right like any other value; `:>12.1f` in an f-string of your own does the same.
 
+## ch08-practice#1
+
+```python
+alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+
+def shift_letter(letter, shift):
+    position = alphabet.find(letter)
+    return alphabet[position + shift]
+
+
+print(shift_letter("a", 3))
+```
+
+## ch08-practice#2
+
+```python
+alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+
+def shift_letter(letter, shift):
+    position = alphabet.find(letter)
+    new_position = (position + shift) % 26
+    return alphabet[new_position]
+
+
+print(shift_letter("x", 3))
+```
+
+## ch08-practice#3
+
+```python
+alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+
+def shift_letter(letter, shift):
+    position = alphabet.find(letter)
+    if position == -1:
+        return letter
+    new_position = (position + shift) % 26
+    return alphabet[new_position]
+
+
+print(shift_letter("!", 3))
+```
+
+## ch08-practice#4
+
+```python
+alphabet = "abcdefghijklmnopqrstuvwxyz"
+capitals = alphabet.upper()
+
+
+def shift_letter(letter, shift):
+    if alphabet.find(letter) != -1:
+        position = alphabet.find(letter)
+        return alphabet[(position + shift) % 26]
+    if capitals.find(letter) != -1:
+        position = capitals.find(letter)
+        return capitals[(position + shift) % 26]
+    return letter
+
+
+print(shift_letter("A", 3))
+```
+
+## ch08-practice#5
+
+```python
+alphabet = "abcdefghijklmnopqrstuvwxyz"
+capitals = alphabet.upper()
+
+
+def shift_letter(letter, shift):
+    if alphabet.find(letter) != -1:
+        position = alphabet.find(letter)
+        return alphabet[(position + shift) % 26]
+    if capitals.find(letter) != -1:
+        position = capitals.find(letter)
+        return capitals[(position + shift) % 26]
+    return letter
+
+
+def encode(text, shift):
+    result = ""
+    for character in text:
+        result += shift_letter(character, shift)
+    return result
+
+
+print(encode("Hello, World!", 3))
+```
+
+## ch08-practice#6
+
+```python
+alphabet = "abcdefghijklmnopqrstuvwxyz"
+capitals = alphabet.upper()
+
+
+def shift_letter(letter, shift):
+    if alphabet.find(letter) != -1:
+        position = alphabet.find(letter)
+        return alphabet[(position + shift) % 26]
+    if capitals.find(letter) != -1:
+        position = capitals.find(letter)
+        return capitals[(position + shift) % 26]
+    return letter
+
+
+def encode(text, shift):
+    result = ""
+    for character in text:
+        result += shift_letter(character, shift)
+    return result
+
+
+def decode(text, shift):
+    return encode(text, -shift)
+
+
+print(decode("Khoor, Zruog!", 3))
+```
+
+## ch08-practice#7
+
+```python
+# Say it: a choice, a message and a shift go in; the message comes out in
+# code, or out of code, or a reminder of the two choices.
+# Split it:
+# 1. ask encode or decode, and tidy the answer
+# 2. if encode: ask the message and the shift, print the encoded result
+# 3. if decode: the same, with the decoded result
+# 4. otherwise: print the reminder, and ask nothing more
+alphabet = "abcdefghijklmnopqrstuvwxyz"
+capitals = alphabet.upper()
+
+
+def shift_letter(letter, shift):
+    if alphabet.find(letter) != -1:
+        position = alphabet.find(letter)
+        return alphabet[(position + shift) % 26]
+    if capitals.find(letter) != -1:
+        position = capitals.find(letter)
+        return capitals[(position + shift) % 26]
+    return letter
+
+
+def encode(text, shift):
+    result = ""
+    for character in text:
+        result += shift_letter(character, shift)
+    return result
+
+
+def decode(text, shift):
+    return encode(text, -shift)
+
+
+choice = input("Encode or decode? ").strip().lower()
+if choice == "encode":
+    message = input("Message: ")
+    shift = int(input("Shift: "))
+    print("Result:", encode(message, shift))
+elif choice == "decode":
+    message = input("Message: ")
+    shift = int(input("Shift: "))
+    print("Result:", decode(message, shift))
+else:
+    print("Please type encode or decode.")
+```
+
 ## ch09a-dictionaries#5
 
 ```python
