@@ -27,7 +27,7 @@ while low <= high:
 
 ### Counting comparisons
 
-Each time a search checks one item against the target, that is one **comparison**. To count them, add a counter that goes up by one each time round the loop:
+Each time a search checks one item against the target, with `==` or `<`, that is one comparison, the word lesson 3.5 used for such a check. To count them, add a counter that goes up by one each time round the loop:
 
 ```python
 def linear_count(items, target):
@@ -211,4 +211,4 @@ def binary_count(items, target):
 - Tell the best case from the worst case, and say which one you can promise.
 - Read a table of counts: doubling the list doubles a linear search's work, and adds one pass to a binary search.
 
-Key words: **comparison**, **best case**, **worst case**.
+Key words: **best case**, **worst case**.
