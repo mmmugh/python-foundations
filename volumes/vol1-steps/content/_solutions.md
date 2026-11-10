@@ -3343,7 +3343,7 @@ def find_position(items, target):
 
 `return position` ends the search at the first match, so a later match is never reached. For an empty list, `range(0)` gives no positions, the loop never runs, and the function gives back -1. A match at position 0 gives back 0, which is a real position: that is why "not found" is -1, and not 0.
 
-## ch11b-binary-search#6
+## ch11b-binary-search#4
 
 ```python
 numbers = [4, 8, 9, 15, 17, 23, 42]

@@ -199,7 +199,7 @@
     "raises": "ValueError",
     "why": "index() of an item that is not in the list. The error message is the lesson."
   },
-  "ch11b-binary-search#6": {
+  "ch11b-binary-search#3": {
     "raises": "TypeError",
     "why": "Fix-the-bug practice: a position worked out with / is a float."
   },
