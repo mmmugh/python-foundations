@@ -12,12 +12,17 @@ color = (255, 128, 0)
 red, green, blue = color
 print(green)
 print(color[-1])
-a, b = 1, 2
-a, b = b, a
-print(a, b)
 ```
 
 2. `size = (1920, 1080)` is a tuple. Which of these lines stops with an error?
+
+3. Fill in the table, then press Check.
+
+```python
+a = 1
+b = 2
+a, b = b, a
+```
 
 ### Two values from one function
 
@@ -82,7 +87,7 @@ Output:
 
 ### Practice
 
-3. Predict what this prints, then press Check.
+4. Predict what this prints, then press Check.
 
 ```python
 def halves(number):
@@ -96,7 +101,7 @@ print(type((3,)))
 print(type((3)))
 ```
 
-4. Write a function `split_price(total_cents)` that gives back two values: the whole dollars, then the cents left over. So `split_price(1250)` gives back 12 and 50. Write it above these lines, which use it, then run them all.
+5. Write a function `split_price(total_cents)` that gives back two values: the whole dollars, then the cents left over. So `split_price(1250)` gives back 12 and 50. Write it above these lines, which use it, then run them all.
 
 ```python
 dollars, cents = split_price(1250)
@@ -108,7 +113,7 @@ print(split_price(0))
 > Split it: there are 100 cents in a dollar. `//` gives the whole dollars, and `%` the cents left over. Give back both, with a comma between.
 > Check it: the lines print `12 50`, then `(0, 99)`, then the awkward one, `(0, 0)`.
 
-5. Which of these is a tuple with one item in it?
+6. Which of these is a tuple with one item in it?
 
 ### Points
 
@@ -152,7 +157,7 @@ Output:
 
 ### Practice
 
-6. Predict what this prints, then press Check.
+7. Predict what this prints, then press Check.
 
 ```python
 def run_and_rise(start, end):
@@ -167,7 +172,7 @@ print((across ** 2 + up ** 2) ** 0.5)
 print(16 ** 0.5)
 ```
 
-7. Write a function `midpoint(start, end)` that gives back the point halfway between two points, as a tuple. Halfway between (0, 0) and (4, 6) is (2.0, 3.0). Write it above these lines, then run them all.
+8. Write a function `midpoint(start, end)` that gives back the point halfway between two points, as a tuple. Halfway between (0, 0) and (4, 6) is (2.0, 3.0). Write it above these lines, then run them all.
 
 ```python
 print(midpoint((0, 0), (4, 6)))
@@ -181,7 +186,7 @@ print(midpoint((-4, 2), (4, -2)))
 
 ### Try It
 
-8. Write a function `distance(p1, p2)` that gives back the straight-line distance between two points. Write it above these lines, then run them all.
+9. Write a function `distance(p1, p2)` that gives back the straight-line distance between two points. Write it above these lines, then run them all.
 
 ```python
 print(distance((0, 0), (3, 4)))
