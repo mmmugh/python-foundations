@@ -1090,6 +1090,179 @@ except ValueError:
 
 Step 2's program moved one level deeper, into the `else` block, and it did not otherwise change. That is what building one decision at a time looks like. A word or an unrealistic age never reaches the price, and a free ticket stays free on a Tuesday.
 
+## ch04-practice#1
+
+```python
+wind = float(input("Wind speed, in mph? "))
+if wind < 30:
+    print("Wind: OK")
+else:
+    print("Wind: TOO STRONG")
+```
+
+`float()`, because the wind can have a decimal point. `<` rather than `<=`, because 30 exactly is too strong.
+
+## ch04-practice#2
+
+```python
+temperature = float(input("Temperature, in degrees C? "))
+if temperature >= 2 and temperature <= 35:
+    print("Temperature: OK")
+else:
+    print("Temperature: OUT OF RANGE")
+```
+
+Both ends are allowed, so both tests have an `=` in them. `2 <= temperature <= 35` says the same thing, the way you would write it on paper.
+
+## ch04-practice#3
+
+```python
+ceiling = int(input("Cloud ceiling, in feet? "))
+if ceiling >= 5000:
+    print("Ceiling: CLEAR")
+elif ceiling >= 2000:
+    print("Ceiling: MARGINAL")
+else:
+    print("Ceiling: TOO LOW")
+```
+
+5000 or more is the narrowest band, so it goes first. The other way round, `ceiling >= 2000` would catch 6000 too, and a clear sky would come out marginal.
+
+## ch04-practice#4
+
+```python
+try:
+    fuel = int(input("Fuel, in percent? "))
+    if fuel < 0 or fuel > 100:
+        print("Fuel: BAD READING")
+    elif fuel >= 95:
+        print("Fuel: OK")
+    else:
+        print("Fuel: LOW")
+except ValueError:
+    print("Fuel: BAD READING")
+```
+
+A word stops `int()`, and Python jumps to the `except` block. A number outside 0 to 100 gets through `int()`, so the `if` catches it first, before the fuel is judged.
+
+## ch04-practice#5
+
+```python
+wind = float(input("Wind speed, in mph? "))
+temperature = float(input("Temperature, in degrees C? "))
+ceiling = int(input("Cloud ceiling, in feet? "))
+try:
+    fuel = int(input("Fuel, in percent? "))
+    if fuel < 0 or fuel > 100:
+        fuel_status = "BAD READING"
+    elif fuel >= 95:
+        fuel_status = "OK"
+    else:
+        fuel_status = "LOW"
+except ValueError:
+    fuel_status = "BAD READING"
+
+if wind < 30 and 2 <= temperature <= 35 and ceiling >= 2000 and fuel_status == "OK":
+    print("LAUNCH: GO")
+else:
+    print("LAUNCH: NO GO")
+```
+
+`and` is `True` only when every part is. A marginal ceiling is 2000 or more, so `ceiling >= 2000` lets it through. `fuel_status` has a value whichever way the fuel question went, so the verdict can always ask about it.
+
+## ch04-practice#6
+
+```python
+wind = float(input("Wind speed, in mph? "))
+temperature = float(input("Temperature, in degrees C? "))
+ceiling = int(input("Cloud ceiling, in feet? "))
+try:
+    fuel = int(input("Fuel, in percent? "))
+    if fuel < 0 or fuel > 100:
+        fuel_status = "BAD READING"
+    elif fuel >= 95:
+        fuel_status = "OK"
+    else:
+        fuel_status = "LOW"
+except ValueError:
+    fuel_status = "BAD READING"
+
+if wind < 30 and 2 <= temperature <= 35 and ceiling >= 2000 and fuel_status == "OK":
+    print("LAUNCH: GO")
+else:
+    print("LAUNCH: NO GO")
+    if wind >= 30:
+        print("HOLD: wind")
+    elif temperature < 2 or temperature > 35:
+        print("HOLD: temperature")
+    elif ceiling < 2000:
+        print("HOLD: ceiling")
+    else:
+        print("HOLD: fuel")
+```
+
+The `HOLD:` lines sit inside the `else`, so a GO never reaches them. Python stops at the first test that is `True`, so only the first failure is named. If the wind, the temperature and the ceiling are all fine, the fuel must be what failed, so it is the `else`.
+
+## ch04-practice#7
+
+```python
+# Say it: read the wind, temperature, ceiling and fuel; print a line for
+# each, then whether the rocket can launch, and if not, what to fix first.
+# Split it:
+# 1. ask the four questions, keeping the fuel's word in a variable
+# 2. print the wind, temperature and ceiling lines
+# 3. print the fuel line
+# 4. print the verdict
+# 5. after a NO GO, print the first reading that failed
+wind = float(input("Wind speed, in mph? "))
+temperature = float(input("Temperature, in degrees C? "))
+ceiling = int(input("Cloud ceiling, in feet? "))
+try:
+    fuel = int(input("Fuel, in percent? "))
+    if fuel < 0 or fuel > 100:
+        fuel_status = "BAD READING"
+    elif fuel >= 95:
+        fuel_status = "OK"
+    else:
+        fuel_status = "LOW"
+except ValueError:
+    fuel_status = "BAD READING"
+
+if wind < 30:
+    print("Wind: OK")
+else:
+    print("Wind: TOO STRONG")
+
+if 2 <= temperature <= 35:
+    print("Temperature: OK")
+else:
+    print("Temperature: OUT OF RANGE")
+
+if ceiling >= 5000:
+    print("Ceiling: CLEAR")
+elif ceiling >= 2000:
+    print("Ceiling: MARGINAL")
+else:
+    print("Ceiling: TOO LOW")
+
+print(f"Fuel: {fuel_status}")
+
+if wind < 30 and 2 <= temperature <= 35 and ceiling >= 2000 and fuel_status == "OK":
+    print("LAUNCH: GO")
+else:
+    print("LAUNCH: NO GO")
+    if wind >= 30:
+        print("HOLD: wind")
+    elif temperature < 2 or temperature > 35:
+        print("HOLD: temperature")
+    elif ceiling < 2000:
+        print("HOLD: ceiling")
+    else:
+        print("HOLD: fuel")
+```
+
+Each reading is judged once for its own line, and again for the verdict. With 35, 40, 1000 and 50, everything fails, but the `elif` chain names only the wind, because it comes first.
+
 ## ch05a-while#4
 
 ```python

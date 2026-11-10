@@ -2347,6 +2347,1114 @@
       }
     ]
   },
+  "ch04-practice#1": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "12.5"
+        ],
+        "words": [
+          "Wind: OK"
+        ],
+        "absent": [
+          "Wind: TOO STRONG"
+        ]
+      },
+      {
+        "typed": [
+          "30"
+        ],
+        "words": [
+          "Wind: TOO STRONG"
+        ],
+        "absent": [
+          "Wind: OK"
+        ]
+      },
+      {
+        "typed": [
+          "29.9"
+        ],
+        "words": [
+          "Wind: OK"
+        ],
+        "absent": [
+          "Wind: TOO STRONG"
+        ]
+      },
+      {
+        "typed": [
+          "0"
+        ],
+        "words": [
+          "Wind: OK"
+        ],
+        "absent": [
+          "Wind: TOO STRONG"
+        ]
+      },
+      {
+        "typed": [
+          "45"
+        ],
+        "words": [
+          "Wind: TOO STRONG"
+        ],
+        "absent": [
+          "Wind: OK"
+        ]
+      }
+    ]
+  },
+  "ch04-practice#2": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "20"
+        ],
+        "words": [
+          "Temperature: OK"
+        ],
+        "absent": [
+          "Temperature: OUT OF RANGE"
+        ]
+      },
+      {
+        "typed": [
+          "2"
+        ],
+        "words": [
+          "Temperature: OK"
+        ],
+        "absent": [
+          "Temperature: OUT OF RANGE"
+        ]
+      },
+      {
+        "typed": [
+          "35"
+        ],
+        "words": [
+          "Temperature: OK"
+        ],
+        "absent": [
+          "Temperature: OUT OF RANGE"
+        ]
+      },
+      {
+        "typed": [
+          "1.5"
+        ],
+        "words": [
+          "Temperature: OUT OF RANGE"
+        ],
+        "absent": [
+          "Temperature: OK"
+        ]
+      },
+      {
+        "typed": [
+          "35.5"
+        ],
+        "words": [
+          "Temperature: OUT OF RANGE"
+        ],
+        "absent": [
+          "Temperature: OK"
+        ]
+      },
+      {
+        "typed": [
+          "-4"
+        ],
+        "words": [
+          "Temperature: OUT OF RANGE"
+        ],
+        "absent": [
+          "Temperature: OK"
+        ]
+      }
+    ]
+  },
+  "ch04-practice#3": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "6000"
+        ],
+        "words": [
+          "Ceiling: CLEAR"
+        ],
+        "absent": [
+          "Ceiling: MARGINAL",
+          "Ceiling: TOO LOW"
+        ]
+      },
+      {
+        "typed": [
+          "5000"
+        ],
+        "words": [
+          "Ceiling: CLEAR"
+        ],
+        "absent": [
+          "Ceiling: MARGINAL",
+          "Ceiling: TOO LOW"
+        ]
+      },
+      {
+        "typed": [
+          "4999"
+        ],
+        "words": [
+          "Ceiling: MARGINAL"
+        ],
+        "absent": [
+          "Ceiling: CLEAR",
+          "Ceiling: TOO LOW"
+        ]
+      },
+      {
+        "typed": [
+          "2000"
+        ],
+        "words": [
+          "Ceiling: MARGINAL"
+        ],
+        "absent": [
+          "Ceiling: CLEAR",
+          "Ceiling: TOO LOW"
+        ]
+      },
+      {
+        "typed": [
+          "1999"
+        ],
+        "words": [
+          "Ceiling: TOO LOW"
+        ],
+        "absent": [
+          "Ceiling: CLEAR",
+          "Ceiling: MARGINAL"
+        ]
+      },
+      {
+        "typed": [
+          "0"
+        ],
+        "words": [
+          "Ceiling: TOO LOW"
+        ],
+        "absent": [
+          "Ceiling: CLEAR",
+          "Ceiling: MARGINAL"
+        ]
+      }
+    ]
+  },
+  "ch04-practice#4": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "97"
+        ],
+        "words": [
+          "Fuel: OK"
+        ],
+        "absent": [
+          "Fuel: LOW",
+          "Fuel: BAD READING"
+        ]
+      },
+      {
+        "typed": [
+          "95"
+        ],
+        "words": [
+          "Fuel: OK"
+        ],
+        "absent": [
+          "Fuel: LOW",
+          "Fuel: BAD READING"
+        ]
+      },
+      {
+        "typed": [
+          "94"
+        ],
+        "words": [
+          "Fuel: LOW"
+        ],
+        "absent": [
+          "Fuel: OK",
+          "Fuel: BAD READING"
+        ]
+      },
+      {
+        "typed": [
+          "100"
+        ],
+        "words": [
+          "Fuel: OK"
+        ],
+        "absent": [
+          "Fuel: LOW",
+          "Fuel: BAD READING"
+        ]
+      },
+      {
+        "typed": [
+          "0"
+        ],
+        "words": [
+          "Fuel: LOW"
+        ],
+        "absent": [
+          "Fuel: OK",
+          "Fuel: BAD READING"
+        ]
+      },
+      {
+        "typed": [
+          "101"
+        ],
+        "words": [
+          "Fuel: BAD READING"
+        ],
+        "absent": [
+          "Fuel: OK",
+          "Fuel: LOW"
+        ]
+      },
+      {
+        "typed": [
+          "-5"
+        ],
+        "words": [
+          "Fuel: BAD READING"
+        ],
+        "absent": [
+          "Fuel: OK",
+          "Fuel: LOW"
+        ]
+      },
+      {
+        "typed": [
+          "full"
+        ],
+        "words": [
+          "Fuel: BAD READING"
+        ],
+        "absent": [
+          "Fuel: OK",
+          "Fuel: LOW"
+        ]
+      }
+    ]
+  },
+  "ch04-practice#5": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "12.5",
+          "20",
+          "6000",
+          "97"
+        ],
+        "words": [
+          "LAUNCH: GO"
+        ],
+        "absent": [
+          "LAUNCH: NO GO"
+        ]
+      },
+      {
+        "typed": [
+          "29.9",
+          "2",
+          "2000",
+          "95"
+        ],
+        "words": [
+          "LAUNCH: GO"
+        ],
+        "absent": [
+          "LAUNCH: NO GO"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "35",
+          "4999",
+          "100"
+        ],
+        "words": [
+          "LAUNCH: GO"
+        ],
+        "absent": [
+          "LAUNCH: NO GO"
+        ]
+      },
+      {
+        "typed": [
+          "30",
+          "20",
+          "6000",
+          "97"
+        ],
+        "words": [
+          "LAUNCH: NO GO"
+        ],
+        "absent": [
+          "LAUNCH: GO"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "1.5",
+          "6000",
+          "97"
+        ],
+        "words": [
+          "LAUNCH: NO GO"
+        ],
+        "absent": [
+          "LAUNCH: GO"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "35.5",
+          "6000",
+          "97"
+        ],
+        "words": [
+          "LAUNCH: NO GO"
+        ],
+        "absent": [
+          "LAUNCH: GO"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "20",
+          "1999",
+          "97"
+        ],
+        "words": [
+          "LAUNCH: NO GO"
+        ],
+        "absent": [
+          "LAUNCH: GO"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "20",
+          "6000",
+          "94"
+        ],
+        "words": [
+          "LAUNCH: NO GO"
+        ],
+        "absent": [
+          "LAUNCH: GO"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "20",
+          "6000",
+          "full"
+        ],
+        "words": [
+          "LAUNCH: NO GO"
+        ],
+        "absent": [
+          "LAUNCH: GO"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "20",
+          "6000",
+          "101"
+        ],
+        "words": [
+          "LAUNCH: NO GO"
+        ],
+        "absent": [
+          "LAUNCH: GO"
+        ]
+      }
+    ]
+  },
+  "ch04-practice#6": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "12.5",
+          "20",
+          "6000",
+          "97"
+        ],
+        "words": [
+          "LAUNCH: GO"
+        ],
+        "absent": [
+          "LAUNCH: NO GO",
+          "HOLD: wind",
+          "HOLD: temperature",
+          "HOLD: ceiling",
+          "HOLD: fuel"
+        ]
+      },
+      {
+        "typed": [
+          "29.9",
+          "2",
+          "2000",
+          "95"
+        ],
+        "words": [
+          "LAUNCH: GO"
+        ],
+        "absent": [
+          "LAUNCH: NO GO",
+          "HOLD: wind",
+          "HOLD: temperature",
+          "HOLD: ceiling",
+          "HOLD: fuel"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "35",
+          "4999",
+          "100"
+        ],
+        "words": [
+          "LAUNCH: GO"
+        ],
+        "absent": [
+          "LAUNCH: NO GO",
+          "HOLD: wind",
+          "HOLD: temperature",
+          "HOLD: ceiling",
+          "HOLD: fuel"
+        ]
+      },
+      {
+        "typed": [
+          "30",
+          "20",
+          "6000",
+          "97"
+        ],
+        "words": [
+          "LAUNCH: NO GO",
+          "HOLD: wind"
+        ],
+        "absent": [
+          "LAUNCH: GO",
+          "HOLD: temperature",
+          "HOLD: ceiling",
+          "HOLD: fuel"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "1.5",
+          "6000",
+          "97"
+        ],
+        "words": [
+          "LAUNCH: NO GO",
+          "HOLD: temperature"
+        ],
+        "absent": [
+          "LAUNCH: GO",
+          "HOLD: wind",
+          "HOLD: ceiling",
+          "HOLD: fuel"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "35.5",
+          "6000",
+          "97"
+        ],
+        "words": [
+          "LAUNCH: NO GO",
+          "HOLD: temperature"
+        ],
+        "absent": [
+          "LAUNCH: GO",
+          "HOLD: wind",
+          "HOLD: ceiling",
+          "HOLD: fuel"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "20",
+          "1999",
+          "97"
+        ],
+        "words": [
+          "LAUNCH: NO GO",
+          "HOLD: ceiling"
+        ],
+        "absent": [
+          "LAUNCH: GO",
+          "HOLD: wind",
+          "HOLD: temperature",
+          "HOLD: fuel"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "20",
+          "6000",
+          "94"
+        ],
+        "words": [
+          "LAUNCH: NO GO",
+          "HOLD: fuel"
+        ],
+        "absent": [
+          "LAUNCH: GO",
+          "HOLD: wind",
+          "HOLD: temperature",
+          "HOLD: ceiling"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "20",
+          "6000",
+          "full"
+        ],
+        "words": [
+          "LAUNCH: NO GO",
+          "HOLD: fuel"
+        ],
+        "absent": [
+          "LAUNCH: GO",
+          "HOLD: wind",
+          "HOLD: temperature",
+          "HOLD: ceiling"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "20",
+          "6000",
+          "101"
+        ],
+        "words": [
+          "LAUNCH: NO GO",
+          "HOLD: fuel"
+        ],
+        "absent": [
+          "LAUNCH: GO",
+          "HOLD: wind",
+          "HOLD: temperature",
+          "HOLD: ceiling"
+        ]
+      },
+      {
+        "typed": [
+          "35",
+          "40",
+          "1000",
+          "50"
+        ],
+        "words": [
+          "LAUNCH: NO GO",
+          "HOLD: wind"
+        ],
+        "absent": [
+          "LAUNCH: GO",
+          "HOLD: temperature",
+          "HOLD: ceiling",
+          "HOLD: fuel"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "40",
+          "1000",
+          "50"
+        ],
+        "words": [
+          "LAUNCH: NO GO",
+          "HOLD: temperature"
+        ],
+        "absent": [
+          "LAUNCH: GO",
+          "HOLD: wind",
+          "HOLD: ceiling",
+          "HOLD: fuel"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "20",
+          "1000",
+          "full"
+        ],
+        "words": [
+          "LAUNCH: NO GO",
+          "HOLD: ceiling"
+        ],
+        "absent": [
+          "LAUNCH: GO",
+          "HOLD: wind",
+          "HOLD: temperature",
+          "HOLD: fuel"
+        ]
+      },
+      {
+        "typed": [
+          "0",
+          "20",
+          "2500",
+          "0"
+        ],
+        "words": [
+          "LAUNCH: NO GO",
+          "HOLD: fuel"
+        ],
+        "absent": [
+          "LAUNCH: GO",
+          "HOLD: wind",
+          "HOLD: temperature",
+          "HOLD: ceiling"
+        ]
+      }
+    ]
+  },
+  "ch04-practice#7": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "12.5",
+          "20",
+          "6000",
+          "97"
+        ],
+        "words": [
+          "Wind: OK",
+          "Temperature: OK",
+          "Ceiling: CLEAR",
+          "Fuel: OK",
+          "LAUNCH: GO"
+        ],
+        "absent": [
+          "Wind: TOO STRONG",
+          "Temperature: OUT OF RANGE",
+          "Ceiling: MARGINAL",
+          "Ceiling: TOO LOW",
+          "Fuel: LOW",
+          "Fuel: BAD READING",
+          "LAUNCH: NO GO",
+          "HOLD: wind",
+          "HOLD: temperature",
+          "HOLD: ceiling",
+          "HOLD: fuel"
+        ]
+      },
+      {
+        "typed": [
+          "29.9",
+          "2",
+          "2000",
+          "95"
+        ],
+        "words": [
+          "Wind: OK",
+          "Temperature: OK",
+          "Ceiling: MARGINAL",
+          "Fuel: OK",
+          "LAUNCH: GO"
+        ],
+        "absent": [
+          "Wind: TOO STRONG",
+          "Temperature: OUT OF RANGE",
+          "Ceiling: CLEAR",
+          "Ceiling: TOO LOW",
+          "Fuel: LOW",
+          "Fuel: BAD READING",
+          "LAUNCH: NO GO",
+          "HOLD: wind",
+          "HOLD: temperature",
+          "HOLD: ceiling",
+          "HOLD: fuel"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "35",
+          "4999",
+          "100"
+        ],
+        "words": [
+          "Wind: OK",
+          "Temperature: OK",
+          "Ceiling: MARGINAL",
+          "Fuel: OK",
+          "LAUNCH: GO"
+        ],
+        "absent": [
+          "Wind: TOO STRONG",
+          "Temperature: OUT OF RANGE",
+          "Ceiling: CLEAR",
+          "Ceiling: TOO LOW",
+          "Fuel: LOW",
+          "Fuel: BAD READING",
+          "LAUNCH: NO GO",
+          "HOLD: wind",
+          "HOLD: temperature",
+          "HOLD: ceiling",
+          "HOLD: fuel"
+        ]
+      },
+      {
+        "typed": [
+          "30",
+          "20",
+          "6000",
+          "97"
+        ],
+        "words": [
+          "Wind: TOO STRONG",
+          "Temperature: OK",
+          "Ceiling: CLEAR",
+          "Fuel: OK",
+          "LAUNCH: NO GO",
+          "HOLD: wind"
+        ],
+        "absent": [
+          "Wind: OK",
+          "Temperature: OUT OF RANGE",
+          "Ceiling: MARGINAL",
+          "Ceiling: TOO LOW",
+          "Fuel: LOW",
+          "Fuel: BAD READING",
+          "LAUNCH: GO",
+          "HOLD: temperature",
+          "HOLD: ceiling",
+          "HOLD: fuel"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "1.5",
+          "6000",
+          "97"
+        ],
+        "words": [
+          "Wind: OK",
+          "Temperature: OUT OF RANGE",
+          "Ceiling: CLEAR",
+          "Fuel: OK",
+          "LAUNCH: NO GO",
+          "HOLD: temperature"
+        ],
+        "absent": [
+          "Wind: TOO STRONG",
+          "Temperature: OK",
+          "Ceiling: MARGINAL",
+          "Ceiling: TOO LOW",
+          "Fuel: LOW",
+          "Fuel: BAD READING",
+          "LAUNCH: GO",
+          "HOLD: wind",
+          "HOLD: ceiling",
+          "HOLD: fuel"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "35.5",
+          "6000",
+          "97"
+        ],
+        "words": [
+          "Wind: OK",
+          "Temperature: OUT OF RANGE",
+          "Ceiling: CLEAR",
+          "Fuel: OK",
+          "LAUNCH: NO GO",
+          "HOLD: temperature"
+        ],
+        "absent": [
+          "Wind: TOO STRONG",
+          "Temperature: OK",
+          "Ceiling: MARGINAL",
+          "Ceiling: TOO LOW",
+          "Fuel: LOW",
+          "Fuel: BAD READING",
+          "LAUNCH: GO",
+          "HOLD: wind",
+          "HOLD: ceiling",
+          "HOLD: fuel"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "20",
+          "1999",
+          "97"
+        ],
+        "words": [
+          "Wind: OK",
+          "Temperature: OK",
+          "Ceiling: TOO LOW",
+          "Fuel: OK",
+          "LAUNCH: NO GO",
+          "HOLD: ceiling"
+        ],
+        "absent": [
+          "Wind: TOO STRONG",
+          "Temperature: OUT OF RANGE",
+          "Ceiling: CLEAR",
+          "Ceiling: MARGINAL",
+          "Fuel: LOW",
+          "Fuel: BAD READING",
+          "LAUNCH: GO",
+          "HOLD: wind",
+          "HOLD: temperature",
+          "HOLD: fuel"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "20",
+          "6000",
+          "94"
+        ],
+        "words": [
+          "Wind: OK",
+          "Temperature: OK",
+          "Ceiling: CLEAR",
+          "Fuel: LOW",
+          "LAUNCH: NO GO",
+          "HOLD: fuel"
+        ],
+        "absent": [
+          "Wind: TOO STRONG",
+          "Temperature: OUT OF RANGE",
+          "Ceiling: MARGINAL",
+          "Ceiling: TOO LOW",
+          "Fuel: OK",
+          "Fuel: BAD READING",
+          "LAUNCH: GO",
+          "HOLD: wind",
+          "HOLD: temperature",
+          "HOLD: ceiling"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "20",
+          "6000",
+          "full"
+        ],
+        "words": [
+          "Wind: OK",
+          "Temperature: OK",
+          "Ceiling: CLEAR",
+          "Fuel: BAD READING",
+          "LAUNCH: NO GO",
+          "HOLD: fuel"
+        ],
+        "absent": [
+          "Wind: TOO STRONG",
+          "Temperature: OUT OF RANGE",
+          "Ceiling: MARGINAL",
+          "Ceiling: TOO LOW",
+          "Fuel: OK",
+          "Fuel: LOW",
+          "LAUNCH: GO",
+          "HOLD: wind",
+          "HOLD: temperature",
+          "HOLD: ceiling"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "20",
+          "6000",
+          "101"
+        ],
+        "words": [
+          "Wind: OK",
+          "Temperature: OK",
+          "Ceiling: CLEAR",
+          "Fuel: BAD READING",
+          "LAUNCH: NO GO",
+          "HOLD: fuel"
+        ],
+        "absent": [
+          "Wind: TOO STRONG",
+          "Temperature: OUT OF RANGE",
+          "Ceiling: MARGINAL",
+          "Ceiling: TOO LOW",
+          "Fuel: OK",
+          "Fuel: LOW",
+          "LAUNCH: GO",
+          "HOLD: wind",
+          "HOLD: temperature",
+          "HOLD: ceiling"
+        ]
+      },
+      {
+        "typed": [
+          "35",
+          "40",
+          "1000",
+          "50"
+        ],
+        "words": [
+          "Wind: TOO STRONG",
+          "Temperature: OUT OF RANGE",
+          "Ceiling: TOO LOW",
+          "Fuel: LOW",
+          "LAUNCH: NO GO",
+          "HOLD: wind"
+        ],
+        "absent": [
+          "Wind: OK",
+          "Temperature: OK",
+          "Ceiling: CLEAR",
+          "Ceiling: MARGINAL",
+          "Fuel: OK",
+          "Fuel: BAD READING",
+          "LAUNCH: GO",
+          "HOLD: temperature",
+          "HOLD: ceiling",
+          "HOLD: fuel"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "40",
+          "1000",
+          "50"
+        ],
+        "words": [
+          "Wind: OK",
+          "Temperature: OUT OF RANGE",
+          "Ceiling: TOO LOW",
+          "Fuel: LOW",
+          "LAUNCH: NO GO",
+          "HOLD: temperature"
+        ],
+        "absent": [
+          "Wind: TOO STRONG",
+          "Temperature: OK",
+          "Ceiling: CLEAR",
+          "Ceiling: MARGINAL",
+          "Fuel: OK",
+          "Fuel: BAD READING",
+          "LAUNCH: GO",
+          "HOLD: wind",
+          "HOLD: ceiling",
+          "HOLD: fuel"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "20",
+          "1000",
+          "full"
+        ],
+        "words": [
+          "Wind: OK",
+          "Temperature: OK",
+          "Ceiling: TOO LOW",
+          "Fuel: BAD READING",
+          "LAUNCH: NO GO",
+          "HOLD: ceiling"
+        ],
+        "absent": [
+          "Wind: TOO STRONG",
+          "Temperature: OUT OF RANGE",
+          "Ceiling: CLEAR",
+          "Ceiling: MARGINAL",
+          "Fuel: OK",
+          "Fuel: LOW",
+          "LAUNCH: GO",
+          "HOLD: wind",
+          "HOLD: temperature",
+          "HOLD: fuel"
+        ]
+      },
+      {
+        "typed": [
+          "0",
+          "20",
+          "2500",
+          "0"
+        ],
+        "words": [
+          "Wind: OK",
+          "Temperature: OK",
+          "Ceiling: MARGINAL",
+          "Fuel: LOW",
+          "LAUNCH: NO GO",
+          "HOLD: fuel"
+        ],
+        "absent": [
+          "Wind: TOO STRONG",
+          "Temperature: OUT OF RANGE",
+          "Ceiling: CLEAR",
+          "Ceiling: TOO LOW",
+          "Fuel: OK",
+          "Fuel: BAD READING",
+          "LAUNCH: GO",
+          "HOLD: wind",
+          "HOLD: temperature",
+          "HOLD: ceiling"
+        ]
+      }
+    ]
+  },
   "ch05a-while#1": {
     "kind": "predict"
   },
