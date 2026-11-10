@@ -2495,3 +2495,42 @@ else:
 ```
 
 `in` asks about the keys, so the lookup in square brackets runs only for a name the book has. `get()` with a default works too: look the name up once, then test what came back.
+
+## ch09c-looping-over-a-dictionary#4
+
+```python
+def names_over(scores, limit):
+    names = []
+    for name in scores:
+        if scores[name] > limit:
+            names.append(name)
+    return names
+```
+
+The loop gives each name in turn, and `scores[name]` is that name's score. The names go into the new list in the dictionary's order, because that is the order the loop gives them in.
+
+## ch09c-looping-over-a-dictionary#6
+
+```python
+def average_score(scores):
+    if len(scores) == 0:
+        return 0
+    return sum(scores.values()) / len(scores)
+```
+
+The test comes first, because dividing by `len({})`, which is 0, stops with a `ZeroDivisionError`. `if scores == {}:` works as the test too.
+
+## ch09c-looping-over-a-dictionary#7
+
+```python
+# Say it: print each item in the cart with its price, then the total.
+# Split it:
+# 1. loop over the cart: print each item and its price, to 2 places
+# 2. print the total of the prices, to 2 places
+cart = {"bread": 2.5, "milk": 1.25, "eggs": 3.0}
+for item in cart:
+    print(f"{item}: {cart[item]:.2f}")
+print(f"Total: {sum(cart.values()):.2f}")
+```
+
+`:.2f` (lesson 3.3) shows 2.5 as `2.50`. The total can also be added up inside the loop, starting from 0, as in lesson 5.5.

@@ -135,6 +135,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch09b-missing-keys", "Lesson 9.2 — When a key might be missing",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch09c-looping-over-a-dictionary", "Lesson 9.3 — Looping over a dictionary",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

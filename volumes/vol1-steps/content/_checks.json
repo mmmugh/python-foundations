@@ -7106,5 +7106,154 @@
         ]
       }
     ]
+  },
+  "ch09c-looping-over-a-dictionary#1": {
+    "kind": "predict"
+  },
+  "ch09c-looping-over-a-dictionary#2": {
+    "kind": "choice",
+    "options": [
+      "`0`",
+      "It stops with a KeyError.",
+      "`None`"
+    ],
+    "answer": 2,
+    "why": "`\"Lee\"` is not a key. With no default in its brackets, `get()` gives back `None` instead of stopping."
+  },
+  "ch09c-looping-over-a-dictionary#3": {
+    "kind": "predict"
+  },
+  "ch09c-looping-over-a-dictionary#4": {
+    "kind": "function",
+    "name": "names_over",
+    "cases": [
+      [
+        [
+          {
+            "Ada": 88,
+            "Grace": 92,
+            "Alan": 45
+          },
+          60
+        ],
+        [
+          "Ada",
+          "Grace"
+        ]
+      ],
+      [
+        [
+          {
+            "Ada": 88,
+            "Grace": 92,
+            "Alan": 45
+          },
+          90
+        ],
+        [
+          "Grace"
+        ]
+      ],
+      [
+        [
+          {
+            "Ada": 88,
+            "Grace": 92,
+            "Alan": 45
+          },
+          92
+        ],
+        []
+      ],
+      [
+        [
+          {},
+          50
+        ],
+        []
+      ],
+      [
+        [
+          {
+            "Ada": 88,
+            "Grace": 92,
+            "Alan": 45
+          },
+          -1
+        ],
+        [
+          "Ada",
+          "Grace",
+          "Alan"
+        ]
+      ],
+      [
+        [
+          {
+            "Zoe": 70,
+            "Bo": 80
+          },
+          0
+        ],
+        [
+          "Zoe",
+          "Bo"
+        ]
+      ]
+    ]
+  },
+  "ch09c-looping-over-a-dictionary#5": {
+    "kind": "predict"
+  },
+  "ch09c-looping-over-a-dictionary#6": {
+    "kind": "function",
+    "name": "average_score",
+    "cases": [
+      [
+        [
+          {
+            "Ada": 88,
+            "Grace": 92,
+            "Alan": 45
+          }
+        ],
+        75.0
+      ],
+      [
+        [
+          {}
+        ],
+        0
+      ],
+      [
+        [
+          {
+            "Bo": 0
+          }
+        ],
+        0
+      ],
+      [
+        [
+          {
+            "Mo": 10,
+            "Kim": 15
+          }
+        ],
+        12.5
+      ],
+      [
+        [
+          {
+            "Lee": 7
+          }
+        ],
+        7
+      ]
+    ]
+  },
+  "ch09c-looping-over-a-dictionary#7": {
+    "kind": "output",
+    "expected": "bread: 2.50\nmilk: 1.25\neggs: 3.00\nTotal: 6.75"
   }
 }
