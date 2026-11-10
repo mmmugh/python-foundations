@@ -11574,5 +11574,45 @@
   "ch11h-measuring#7": {
     "kind": "output",
     "expected": "      size    linear    binary selection    bubble\n         4         4         3         6         5\n         8         8         4        28        13\n        16        16         5       120        29\n        32        32         6       496        61"
+  },
+  "ch12a-the-two-parts#1": {
+    "kind": "predict"
+  },
+  "ch12a-the-two-parts#2": {
+    "kind": "predict"
+  },
+  "ch12a-the-two-parts#3": {
+    "kind": "predict"
+  },
+  "ch12a-the-two-parts#4": {
+    "kind": "choice",
+    "options": [
+      "The last line, `countdown(3)`, which starts the calls.",
+      "`n == 0` and the `print(\"Liftoff!\")` under it: that question is answered with no more calls.",
+      "The `else:` part, which calls `countdown(n - 1)`."
+    ],
+    "answer": 1,
+    "why": "The base case is the smallest question, answered straight away. The `else:` part is the recursive case: it calls `countdown()` again on something smaller."
+  },
+  "ch12a-the-two-parts#5": {
+    "kind": "choice",
+    "options": [
+      "`n` is 3, because `countdown(3)` was the first call, and it prints 1.",
+      "`n` is 1, it prints 1, and it calls nothing: it is the base case.",
+      "`n` is 1, it prints 1, then it calls `countdown(0)`."
+    ],
+    "answer": 2,
+    "why": "Each call has its own `n`. 1 is not 0, so `countdown(1)` is not the base case: it prints 1 and calls `countdown(0)`, which is."
+  },
+  "ch12a-the-two-parts#6": {
+    "kind": "predict"
+  },
+  "ch12a-the-two-parts#7": {
+    "kind": "output",
+    "expected": "***\n**\n*\nDone.\nDone."
+  },
+  "ch12a-the-two-parts#8": {
+    "kind": "output",
+    "expected": "10\n7\n4\n1\nLiftoff!\n6\n4\n2\nLiftoff!\nLiftoff!"
   }
 }

@@ -181,6 +181,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch11h-measuring", "Lesson 11.8 — Measuring the work",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch12a-the-two-parts", "Lesson 12.1 — A function that calls itself",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

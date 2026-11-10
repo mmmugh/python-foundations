@@ -3675,3 +3675,42 @@ for size in [4, 8, 16, 32]:
 ```
 
 Each function was checked on its own before the loop puts them together. Read the columns: doubling the size doubles the linear search's count and adds one to the binary search's. The selection sort's count goes up about four times, whatever order the list is in, while the bubble sort, on a list that is nearly in order, makes two passes and stops.
+
+## ch12a-the-two-parts#7
+
+```python
+def stars_down(n):
+    if n == 0:
+        print("Done.")
+    else:
+        print("*" * n)
+        stars_down(n - 1)
+
+
+stars_down(3)
+stars_down(0)
+```
+
+The base case is `n == 0`: print `Done.`, with no more calls. The recursive case prints a row of `n` stars, then calls `stars_down()` with one fewer. `stars_down(0)` goes straight to the base case.
+
+## ch12a-the-two-parts#8
+
+```python
+# Say it: print n, then the numbers going down by step, then Liftoff! once the number is 0 or below.
+# Split it:
+# 1. the base case: if n is 0 or below, print Liftoff!
+# 2. the recursive case: otherwise print n, then count down from n - step, by the same step
+def count_down_by(n, step):
+    if n <= 0:
+        print("Liftoff!")
+    else:
+        print(n)
+        count_down_by(n - step, step)
+
+
+count_down_by(10, 3)
+count_down_by(6, 2)
+count_down_by(0, 5)
+```
+
+`step` is handed on unchanged to every call, as `word` is in `cheer()`, and only `n` gets smaller. The base case is `n <= 0` because 10, 7, 4, 1 jumps from 1 to -2: with `n == 0`, that call would not stop, and nor would any after it. Writing the base case as "not above 0", `if n > 0:` with the two parts the other way round, works the same.

@@ -206,5 +206,13 @@
   "ch11d-selection-sort#7": {
     "raises": "NameError",
     "why": "Starting code: the lines that call largest_first(), which the learner writes above them."
+  },
+  "ch12a-the-two-parts#6": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call stars_down(), which the learner writes above them."
+  },
+  "ch12a-the-two-parts#7": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call count_down_by(), which the learner writes above them."
   }
 }
