@@ -436,8 +436,9 @@ def main():
                 problems.append(f"{REFERENCE}: no section for {step}")
 
     if not only:
-        if not meta.get("lessons") or meta.get("status") != "in progress":
-            problems.append('volume.json: needs "lessons": true and "status": "in progress"')
+        if not meta.get("lessons") or meta.get("status"):
+            problems.append('volume.json: needs "lessons": true and no "status" '
+                            '(it has replaced the old course)')
         order = [slug for slug, *_ in LESSONS] + [REFERENCE]
         if list(pages) != order:
             problems.append(f"the pages, in reading order, must be {order}; found {list(pages)}")

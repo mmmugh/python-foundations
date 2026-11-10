@@ -922,8 +922,12 @@ def write_library(built):
     shelf. Not a redirect and not a picker that wastes a click either way.
     """
     template = (ROOT / "web" / "page.html").read_text()
+    # A retired volume keeps building -- its pages, boxes, checks, quizzes and
+    # bundle all still publish -- but it is withdrawn, not deleted, so the
+    # shelf stops pointing at it.
+    shown = [entry for entry in built if not entry[0].get("retired")]
     sections, nav = [], []
-    for vol, pages, _ in built:
+    for vol, pages, _ in shown:
         listed = [p for p in pages if not p.get("practice")]
         first = listed[0]["slug"] if listed else ""
         heading = html.escape(vol["title"])
@@ -943,9 +947,10 @@ def write_library(built):
         nav.append(f'<a href="{vol["slug"]}/{first}.html">{heading}</a>')
     sections.append(f'<p class="notice">{html.escape(DISCLAIMER, quote=False)}</p>')
 
-    # With one volume this page is that volume's contents and should carry its
-    # name; with two it is a shelf and must not claim to be either of them.
-    only = built[0][0] if len(built) == 1 else None
+    # With one volume listed this page is that volume's contents and should
+    # carry its name; with two it is a shelf and must not claim to be either
+    # of them. A retired volume does not count: it is off the shelf.
+    only = shown[0][0] if len(shown) == 1 else None
     name = only["title"] if only else "All volumes"
     # No volume of its own: the page is the shelf, and data-volume must not
     # claim it is volume one, in case it ever grows a code box.
