@@ -176,7 +176,7 @@ print(known)
 > Say it: a number of stairs and a dictionary of answers go in; the number of ways to climb the stairs comes out, each answer worked out once. ([How to start a problem](99-how-to-start-a-problem.html))
 > Split it: 1. the base case: if `n` is 0 or 1, give back 1. 2. if `n` is in `known`, give back its answer. 3. otherwise add the ways for `n - 1` and `n - 2`, handing on `known`. 4. store the answer in `known`, then give it back.
 > Name it: the function and its parameters are named for you. What would you call the answer before you store it?
-> Check it: try 3 stairs, which gives 3 (1+1+1, 1+2 and 2+1), and 4, which gives 5. Then the awkward one: 0 stairs, which gives 1. If Check says `ways()` never finished, the answers are being worked out again and again: look at steps 2 and 4.
+> Check it: try 3 stairs, which gives 3 (1+1+1, 1+2 and 2+1), and 4, which gives 5. Then the awkward one: 0 stairs, which gives 1. If Check says "ways() never finished -- stopped after 5 seconds - this looks like a loop that never ends", your function is slow, not wrong: you wrote no loop, but the same smaller answers are being worked out again and again. Remember them: look at steps 2 and 4.
 > Did it remember? While you try it, add `print("working out", n)` just before step 3: each number shows up only once. Take the print out before you press Check.
 
 ### What you can do now
