@@ -190,5 +190,9 @@
   "ch10d-records#4": {
     "raises": "KeyError",
     "why": "Fix-the-bug practice: a field name with the wrong capital."
+  },
+  "ch10e-sorting-records#1": {
+    "raises": "TypeError",
+    "why": "sorted() cannot compare two dictionaries. The error message is the lesson."
   }
 }

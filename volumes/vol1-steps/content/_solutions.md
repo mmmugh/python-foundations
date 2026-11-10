@@ -3119,3 +3119,27 @@ def older_than(people, age):
 ```
 
 `>` leaves out someone whose age is exactly `age`: "more than" means strictly more. For an empty list, the loop never runs, and the empty list comes back.
+
+## ch10e-sorting-records#7
+
+```python
+def by_year(books):
+    return sorted(books, key=lambda book: book["year"])
+```
+
+`sorted()` gives back a new list and leaves `books` as it was. Books from the same year keep the order they had, as ties did in lesson 9.5.
+
+## ch10e-sorting-records#8
+
+```python
+# Say it: a list of book records goes in; the record of the oldest book comes out, or None.
+# Split it:
+# 1. if the list is empty, give back None
+# 2. otherwise, give back the book with the smallest year
+def oldest(books):
+    if books == []:
+        return None
+    return min(books, key=lambda book: book["year"])
+```
+
+`min()` of an empty list stops with a `ValueError`, so step 1 comes first. On a tie, `min()` gives back the first of the books it tied on. The whole record comes back, so the caller can read its title, its year, or any other field.

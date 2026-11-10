@@ -159,6 +159,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch10d-records", "Lesson 10.4 — Records: a list of dictionaries",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch10e-sorting-records", "Lesson 10.5 — Sorting records by a field",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

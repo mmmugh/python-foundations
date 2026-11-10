@@ -9055,5 +9055,262 @@
         ]
       ]
     ]
+  },
+  "ch10e-sorting-records#1": {
+    "kind": "predict"
+  },
+  "ch10e-sorting-records#2": {
+    "kind": "choice",
+    "options": [
+      "Inside the loop, in an `else` beside the `if`",
+      "Below the loop, after every record has been looked at",
+      "Above the loop, before any record is looked at"
+    ],
+    "answer": 1,
+    "why": "`return` ends the function at once. Below the loop, `return None` runs only when no record matched."
+  },
+  "ch10e-sorting-records#3": {
+    "kind": "predict"
+  },
+  "ch10e-sorting-records#4": {
+    "kind": "choice",
+    "options": [
+      "Python has no rule for which of two dictionaries comes first.",
+      "`sorted()` works only on numbers.",
+      "The list has too many records."
+    ],
+    "answer": 0,
+    "why": "`sorted()` compares items with `<`, and there is no `<` for dictionaries. `key=` tells it what to compare instead."
+  },
+  "ch10e-sorting-records#5": {
+    "kind": "choice",
+    "options": [
+      "`lambda: book[\"title\"]`",
+      "`lambda book: book[\"title\"]`",
+      "`lambda title: book`"
+    ],
+    "answer": 1,
+    "why": "The parameter goes before the colon, and what the function gives back goes after it. `lambda: book[\"title\"]` has no parameter, so it cannot be handed a book."
+  },
+  "ch10e-sorting-records#6": {
+    "kind": "predict"
+  },
+  "ch10e-sorting-records#7": {
+    "kind": "function",
+    "name": "by_year",
+    "cases": [
+      [
+        [
+          [
+            {
+              "title": "Holes",
+              "year": 1998
+            },
+            {
+              "title": "Emma",
+              "year": 1815
+            }
+          ]
+        ],
+        [
+          {
+            "title": "Emma",
+            "year": 1815
+          },
+          {
+            "title": "Holes",
+            "year": 1998
+          }
+        ]
+      ],
+      [
+        [
+          []
+        ],
+        []
+      ],
+      [
+        [
+          [
+            {
+              "title": "Holes",
+              "year": 1998
+            },
+            {
+              "title": "Emma",
+              "year": 1815
+            },
+            {
+              "title": "Dune",
+              "year": 1965
+            }
+          ]
+        ],
+        [
+          {
+            "title": "Emma",
+            "year": 1815
+          },
+          {
+            "title": "Dune",
+            "year": 1965
+          },
+          {
+            "title": "Holes",
+            "year": 1998
+          }
+        ]
+      ],
+      [
+        [
+          [
+            {
+              "title": "Dune",
+              "year": 1965
+            }
+          ]
+        ],
+        [
+          {
+            "title": "Dune",
+            "year": 1965
+          }
+        ]
+      ],
+      [
+        [
+          [
+            {
+              "title": "B",
+              "year": 2001
+            },
+            {
+              "title": "A",
+              "year": 2001
+            },
+            {
+              "title": "C",
+              "year": 1999
+            }
+          ]
+        ],
+        [
+          {
+            "title": "C",
+            "year": 1999
+          },
+          {
+            "title": "B",
+            "year": 2001
+          },
+          {
+            "title": "A",
+            "year": 2001
+          }
+        ]
+      ]
+    ]
+  },
+  "ch10e-sorting-records#8": {
+    "kind": "function",
+    "name": "oldest",
+    "cases": [
+      [
+        [
+          [
+            {
+              "title": "Dune",
+              "year": 1965
+            },
+            {
+              "title": "Emma",
+              "year": 1815
+            }
+          ]
+        ],
+        {
+          "title": "Emma",
+          "year": 1815
+        }
+      ],
+      [
+        [
+          []
+        ],
+        null
+      ],
+      [
+        [
+          [
+            {
+              "title": "Holes",
+              "year": 1998
+            },
+            {
+              "title": "Emma",
+              "year": 1815
+            },
+            {
+              "title": "Dune",
+              "year": 1965
+            }
+          ]
+        ],
+        {
+          "title": "Emma",
+          "year": 1815
+        }
+      ],
+      [
+        [
+          [
+            {
+              "title": "Holes",
+              "year": 1998
+            }
+          ]
+        ],
+        {
+          "title": "Holes",
+          "year": 1998
+        }
+      ],
+      [
+        [
+          [
+            {
+              "title": "B",
+              "year": 2001
+            },
+            {
+              "title": "A",
+              "year": 2001
+            }
+          ]
+        ],
+        {
+          "title": "B",
+          "year": 2001
+        }
+      ],
+      [
+        [
+          [
+            {
+              "title": "Zed",
+              "year": 1990
+            },
+            {
+              "title": "Abe",
+              "year": 2000
+            }
+          ]
+        ],
+        {
+          "title": "Zed",
+          "year": 1990
+        }
+      ]
+    ]
   }
 }
