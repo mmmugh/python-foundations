@@ -6791,5 +6791,58 @@
   "ch08l-the-text-analyzer#7": {
     "kind": "output",
     "expected": "====================================\nCharacters:                      125\nCharacters (no spaces):          102\nWords:                            24\nSentences:                         3\nVowels:                           34\nLongest word:            programming\nAverage word length:             4.1\n===================================="
+  },
+  "ch09a-dictionaries#1": {
+    "kind": "predict"
+  },
+  "ch09a-dictionaries#2": {
+    "kind": "choice",
+    "options": [
+      "`Ada 88`",
+      "`Alan 45`",
+      "`Ada 45`"
+    ],
+    "answer": 2,
+    "why": "`sort()` changed `scores` only, so its smallest score, 45, moved to the front. `names` stayed as it was, and now Ada sits beside Alan's score: the two lists no longer match."
+  },
+  "ch09a-dictionaries#3": {
+    "kind": "predict"
+  },
+  "ch09a-dictionaries#4": {
+    "kind": "choice",
+    "options": [
+      "`scores[1]`",
+      "`scores[\"Grace\"]`",
+      "`scores[92]`"
+    ],
+    "answer": 1,
+    "why": "A lookup goes from a key to its value, and the key is the name. A dictionary has no positions, so `scores[1]` is a `KeyError`; so is `scores[92]`, because 92 is a value, not a key."
+  },
+  "ch09a-dictionaries#5": {
+    "kind": "output",
+    "expected": "0.5"
+  },
+  "ch09a-dictionaries#6": {
+    "kind": "predict"
+  },
+  "ch09a-dictionaries#7": {
+    "kind": "trace",
+    "names": [
+      "fruit"
+    ]
+  },
+  "ch09a-dictionaries#8": {
+    "kind": "choice",
+    "options": [
+      "`phone_numbers`",
+      "`d`",
+      "dict"
+    ],
+    "answer": 0,
+    "why": "It says what the values are: phone numbers. `d` could be anything, and dict is Python's own word for dictionaries, as list is for lists."
+  },
+  "ch09a-dictionaries#9": {
+    "kind": "output",
+    "expected": "Ada: 555-0111\nNumbers: 3"
   }
 }

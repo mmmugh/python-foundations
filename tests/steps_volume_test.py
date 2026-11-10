@@ -131,6 +131,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch08l-the-text-analyzer", "Lesson 8.12 — A text analyzer",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch09a-dictionaries", "Lesson 9.1 — Looking things up by name",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

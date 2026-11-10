@@ -114,5 +114,13 @@
   "ch08h-joining-a-list#6": {
     "raises": "TypeError",
     "why": "Fix-the-bug practice: join() given a list of numbers."
+  },
+  "ch09a-dictionaries#4": {
+    "raises": "KeyError",
+    "why": "A key the dictionary does not have. The error message is the lesson."
+  },
+  "ch09a-dictionaries#7": {
+    "raises": "KeyError",
+    "why": "Fix-the-bug practice: a key with the wrong capital letter."
   }
 }

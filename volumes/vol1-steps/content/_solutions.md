@@ -2415,3 +2415,30 @@ print("=" * 36)
 ```
 
 Each line is one step of the plan, and each step is a function you checked on its own. The words are worked out once, in `words`, and used three times. `round(..., 1)` gives 4.1, which `report_line()` puts at the right like any other value; `:>12.1f` in an f-string of your own does the same.
+
+## ch09a-dictionaries#5
+
+```python
+prices = {"apple": 0.5, "pear": 0.75}
+print(prices["apple"])
+```
+
+The last line of the error is `KeyError: 'Apple'`: the dictionary has no key `"Apple"`, with a capital A. Its key is `"apple"`, so that is what goes in the square brackets.
+
+## ch09a-dictionaries#9
+
+```python
+# Say it: change the phone book in two ways, then print one number and how many there are.
+# Split it:
+# 1. store Lee's number
+# 2. store Ada's new number
+# 3. print Ada's number
+# 4. print how many entries the book has
+phone_book = {"Ada": "555-0100", "Grace": "555-0142"}
+phone_book["Lee"] = "555-0199"
+phone_book["Ada"] = "555-0111"
+print("Ada:", phone_book["Ada"])
+print("Numbers:", len(phone_book))
+```
+
+Storing a value under `"Lee"`, a new key, adds an entry; storing one under `"Ada"`, a key that is there, changes its value. So the book ends with three entries. Under `"ada"`, with a small a, the second line would add a fourth entry instead, and Ada's number would stay `555-0100`.
