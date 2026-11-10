@@ -1259,11 +1259,10 @@
           "2",
           "5"
         ],
-        "words": [
-          "True"
-        ],
+        "contains": "Any left over? True",
         "absent": [
-          "False"
+          "False",
+          "Any left over? False"
         ]
       },
       {
@@ -1271,11 +1270,10 @@
           "2",
           "4"
         ],
-        "words": [
-          "False"
-        ],
+        "contains": "Any left over? False",
         "absent": [
-          "True"
+          "True",
+          "Any left over? True"
         ]
       }
     ]
@@ -1390,7 +1388,7 @@
           3
         ],
         "words": [
-          "True",
+          "Any left over? True",
           "40.50",
           "3.24",
           "--------------------",
@@ -1398,7 +1396,8 @@
           "6.25"
         ],
         "absent": [
-          "False"
+          "False",
+          "Any left over? False"
         ]
       },
       {
@@ -1412,7 +1411,7 @@
           0
         ],
         "words": [
-          "False",
+          "Any left over? False",
           "27.00",
           "0.00",
           "--------------------",
@@ -1420,7 +1419,8 @@
           "6.75"
         ],
         "absent": [
-          "True"
+          "True",
+          "Any left over? True"
         ]
       }
     ]
