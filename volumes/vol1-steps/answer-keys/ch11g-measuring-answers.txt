@@ -1,0 +1,280 @@
+PYTHON FOUNDATIONS
+Unit 11 - Searching and sorting
+
+ANSWER KEY
+
+
+VOCABULARY
+----------
+
+ 1. A ____ is a set of steps that always ends with the answer: a recipe a
+    computer can follow.
+
+      ANSWER: algorithm
+
+ 2. Looking at each item in a list, one after another from the start,
+    until you find the target, is called a ____.
+
+      ANSWER: linear search
+
+ 3. Searching a sorted list by looking at the middle of what is left and
+    throwing away half each pass is called a ____.
+
+      ANSWER: binary search
+
+ 4. The most comparisons an algorithm can need for a list of a given size,
+    the number you can promise, is its ____ case.
+
+      ANSWER: worst
+
+ 5. Sorting by finding the smallest item of what is left and swapping it
+    to the front, pass after pass, is called ____.
+
+      ANSWER: selection sort
+
+ 6. Sorting by comparing neighbors and swapping them when the left one is
+    bigger, so the biggest items rise to the end, is called ____.
+
+      ANSWER: bubble sort
+
+ 7. Building a sorted list by putting each item in at its place, found
+    with place_for(), is called ____.
+
+      ANSWER: insertion sort
+
+
+READING CODE
+------------
+
+ 8. What does this print?
+
+        def find_position(items, target):
+            for position in range(len(items)):
+                if items[position] == target:
+                    return position
+            return -1
+        
+        
+        numbers = [17, 4, 23, 8, 42, 15, 9]
+        
+        print(find_position(numbers, 42))
+        print(find_position(numbers, 99))
+
+      ANSWER: 4
+          -1
+
+ 9. What does this print?
+
+        def binary_search(items, target):
+            low = 0
+            high = len(items) - 1
+        
+            while low <= high:
+                middle = (low + high) // 2
+        
+                if items[middle] == target:
+                    return middle
+                elif items[middle] < target:
+                    low = middle + 1
+                else:
+                    high = middle - 1
+        
+            return -1
+        
+        
+        numbers = [4, 8, 9, 15, 17, 23, 42]
+        
+        print(binary_search(numbers, 42))
+        print(binary_search(numbers, 4))
+        print(binary_search(numbers, 99))
+
+      ANSWER: 6
+          0
+          -1
+
+10. What does this print?
+
+        def selection_sort(items):
+            nums = items.copy()
+        
+            for start in range(len(nums)):
+                smallest = start
+                for position in range(start + 1, len(nums)):
+                    if nums[position] < nums[smallest]:
+                        smallest = position
+                nums[start], nums[smallest] = nums[smallest], nums[start]
+        
+            return nums
+        
+        
+        print(selection_sort([64, 25, 12, 22, 11]))
+
+      ANSWER: [11, 12, 22, 25, 64]
+
+11. What does this print?
+
+        words = ["Banana", "apple", "Cherry"]
+        print(sorted(words))
+        print(sorted(words, key=str.lower))
+
+      ANSWER: ['Banana', 'Cherry', 'apple']
+          ['apple', 'Banana', 'Cherry']
+
+12. What does this print?
+
+        def linear_search_counted(items, target):
+            comparisons = 0
+            for position in range(len(items)):
+                comparisons += 1
+                if items[position] == target:
+                    return position, comparisons
+            return -1, comparisons
+        
+        
+        index, comparisons = linear_search_counted([5, 3, 8, 1, 9], 1)
+        print(index, comparisons)
+
+      ANSWER: 3 4
+
+13. What does this print?
+
+        def bubble_sort(items):
+            nums = items.copy()
+            for done in range(len(nums)):
+                swapped = False
+                for i in range(len(nums) - 1 - done):
+                    if nums[i] > nums[i + 1]:
+                        nums[i], nums[i + 1] = nums[i + 1], nums[i]
+                        swapped = True
+                print(nums)
+                if not swapped:
+                    break
+            return nums
+        
+        
+        bubble_sort([3, 1, 2, 4])
+
+      ANSWER: [1, 2, 3, 4]
+          [1, 2, 3, 4]
+
+14. What does this print?
+
+        results = [("Omar", 61.0), ("Priya", 58.2), ("Nadia", 58.2)]
+        print(sorted(results, key=lambda pair: pair[1]))
+        print(sorted(results, key=lambda pair: (pair[1], pair[0])))
+
+      ANSWER: [('Priya', 58.2), ('Nadia', 58.2), ('Omar', 61.0)]
+          [('Nadia', 58.2), ('Priya', 58.2), ('Omar', 61.0)]
+
+
+WRITING CODE
+------------
+
+15. Complete the loop so every position in items gets checked:
+
+        def find_position(items, target):
+            for position in range(____):
+                if items[position] == target:
+                    return position
+            return -1
+
+      ANSWER: len(items)
+
+16. Compute the middle position using whole-number division:
+
+        low = 0
+        high = len(items) - 1
+        middle = (low + high) ____ 2
+
+      ANSWER: //
+
+17. Complete the swap that puts the smallest item found into position
+    start:
+
+        result = items.copy()
+        result[start], result[smallest] = ____
+
+      ANSWER: result[smallest], result[start]
+
+18. Complete the key so runners are sorted by time, and a tie is broken by
+    name:
+
+        results = [
+            {"name": "Omar", "seconds": 61.0},
+            {"name": "Nadia", "seconds": 58.2},
+        ]
+        ranked = sorted(results, key=lambda record: ____)
+
+      ANSWER: (record["seconds"], record["name"])
+
+
+WHY IT WORKS
+------------
+
+19. A binary search only works correctly when the list is already ____,
+    because each pass assumes everything left of the middle is smaller and
+    everything right of it is bigger.
+
+      ANSWER: sorted
+
+20. Doubling the size of a list ____ the number of comparisons a linear
+    search needs in the worst case, but adds only one to a binary
+    search's.
+
+      ANSWER: doubles
+
+21. Doubling the size of a list makes a selection sort do about ____ times
+    as many comparisons, because there are twice as many passes and each
+    is about twice as long.
+
+      ANSWER: four
+
+22. A dictionary lookup takes about the ____ time however many keys the
+    dictionary holds, because it goes straight to the key instead of
+    looking through them one at a time.
+
+      ANSWER: same
+
+23. A bubble sort that stops early is given a list that is sorted already.
+    It makes ____ pass, because the first pass swaps nothing.
+
+      ANSWER: one
+
+24. With this place_for(), a new time of 20 goes in [10, 20, 20, 30] at
+    position ____, before the 20s already there, because of the >= in its
+    if.
+
+        def place_for(times, new_time):
+            for position in range(len(times)):
+                if times[position] >= new_time:
+                    return position
+            return len(times)
+
+      ANSWER: 1
+
+25. In a trace table of this search, after the first pass `high` holds
+    ____, and the search finds 8 at position ____.
+
+        numbers = [4, 8, 9, 15, 17, 23, 42]
+        target = 8
+        low = 0
+        high = len(numbers) - 1
+        where = -1
+        while low <= high:
+            middle = (low + high) // 2
+            if numbers[middle] == target:
+                where = middle
+                break
+            elif numbers[middle] < target:
+                low = middle + 1
+            else:
+                high = middle - 1
+
+      ANSWER: 2
+      ANSWER: 1
+
+26. Check it tried find_position([], 8), an awkward case. An empty list
+    has no positions, so the loop never runs, and the function gives back
+    ____.
+
+      ANSWER: -1

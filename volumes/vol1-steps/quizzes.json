@@ -1556,6 +1556,207 @@
      ]
     }
    ]
+  },
+  {
+   "slug": "ch11g-measuring",
+   "questions": [
+    {
+     "section": "Vocabulary",
+     "text": "A ____ is a set of steps that always ends with the answer: a recipe a computer can follow.",
+     "answers": [
+      "algorithm"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Looking at each item in a list, one after another from the start, until you find the target, is called a ____.",
+     "answers": [
+      "linear search"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Searching a sorted list by looking at the middle of what is left and throwing away half each pass is called a ____.",
+     "answers": [
+      "binary search"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "The most comparisons an algorithm can need for a list of a given size, the number you can promise, is its ____ case.",
+     "answers": [
+      "worst"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Sorting by finding the smallest item of what is left and swapping it to the front, pass after pass, is called ____.",
+     "answers": [
+      "selection sort"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Sorting by comparing neighbors and swapping them when the left one is bigger, so the biggest items rise to the end, is called ____.",
+     "answers": [
+      "bubble sort"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Building a sorted list by putting each item in at its place, found with place_for(), is called ____.",
+     "answers": [
+      "insertion sort"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def find_position(items, target):\n    for position in range(len(items)):\n        if items[position] == target:\n            return position\n    return -1\n\n\nnumbers = [17, 4, 23, 8, 42, 15, 9]\n\nprint(find_position(numbers, 42))\nprint(find_position(numbers, 99))",
+     "answers": [
+      "4\n-1"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def binary_search(items, target):\n    low = 0\n    high = len(items) - 1\n\n    while low <= high:\n        middle = (low + high) // 2\n\n        if items[middle] == target:\n            return middle\n        elif items[middle] < target:\n            low = middle + 1\n        else:\n            high = middle - 1\n\n    return -1\n\n\nnumbers = [4, 8, 9, 15, 17, 23, 42]\n\nprint(binary_search(numbers, 42))\nprint(binary_search(numbers, 4))\nprint(binary_search(numbers, 99))",
+     "answers": [
+      "6\n0\n-1"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def selection_sort(items):\n    nums = items.copy()\n\n    for start in range(len(nums)):\n        smallest = start\n        for position in range(start + 1, len(nums)):\n            if nums[position] < nums[smallest]:\n                smallest = position\n        nums[start], nums[smallest] = nums[smallest], nums[start]\n\n    return nums\n\n\nprint(selection_sort([64, 25, 12, 22, 11]))",
+     "answers": [
+      "[11, 12, 22, 25, 64]"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "words = [\"Banana\", \"apple\", \"Cherry\"]\nprint(sorted(words))\nprint(sorted(words, key=str.lower))",
+     "answers": [
+      "['Banana', 'Cherry', 'apple']\n['apple', 'Banana', 'Cherry']"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def linear_search_counted(items, target):\n    comparisons = 0\n    for position in range(len(items)):\n        comparisons += 1\n        if items[position] == target:\n            return position, comparisons\n    return -1, comparisons\n\n\nindex, comparisons = linear_search_counted([5, 3, 8, 1, 9], 1)\nprint(index, comparisons)",
+     "answers": [
+      "3 4"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def bubble_sort(items):\n    nums = items.copy()\n    for done in range(len(nums)):\n        swapped = False\n        for i in range(len(nums) - 1 - done):\n            if nums[i] > nums[i + 1]:\n                nums[i], nums[i + 1] = nums[i + 1], nums[i]\n                swapped = True\n        print(nums)\n        if not swapped:\n            break\n    return nums\n\n\nbubble_sort([3, 1, 2, 4])",
+     "answers": [
+      "[1, 2, 3, 4]\n[1, 2, 3, 4]"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "results = [(\"Omar\", 61.0), (\"Priya\", 58.2), (\"Nadia\", 58.2)]\nprint(sorted(results, key=lambda pair: pair[1]))\nprint(sorted(results, key=lambda pair: (pair[1], pair[0])))",
+     "answers": [
+      "[('Priya', 58.2), ('Nadia', 58.2), ('Omar', 61.0)]\n[('Nadia', 58.2), ('Priya', 58.2), ('Omar', 61.0)]"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete the loop so every position in items gets checked:",
+     "code": "def find_position(items, target):\n    for position in range(____):\n        if items[position] == target:\n            return position\n    return -1",
+     "answers": [
+      "len(items)"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Compute the middle position using whole-number division:",
+     "code": "low = 0\nhigh = len(items) - 1\nmiddle = (low + high) ____ 2",
+     "answers": [
+      "//"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete the swap that puts the smallest item found into position start:",
+     "code": "result = items.copy()\nresult[start], result[smallest] = ____",
+     "answers": [
+      "result[smallest], result[start]"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete the key so runners are sorted by time, and a tie is broken by name:",
+     "code": "results = [\n    {\"name\": \"Omar\", \"seconds\": 61.0},\n    {\"name\": \"Nadia\", \"seconds\": 58.2},\n]\nranked = sorted(results, key=lambda record: ____)",
+     "answers": [
+      "(record[\"seconds\"], record[\"name\"])"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "A binary search only works correctly when the list is already ____, because each pass assumes everything left of the middle is smaller and everything right of it is bigger.",
+     "answers": [
+      "sorted"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Doubling the size of a list ____ the number of comparisons a linear search needs in the worst case, but adds only one to a binary search's.",
+     "answers": [
+      "doubles"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Doubling the size of a list makes a selection sort do about ____ times as many comparisons, because there are twice as many passes and each is about twice as long.",
+     "answers": [
+      "four"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "A dictionary lookup takes about the ____ time however many keys the dictionary holds, because it goes straight to the key instead of looking through them one at a time.",
+     "answers": [
+      "same"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "A bubble sort that stops early is given a list that is sorted already. It makes ____ pass, because the first pass swaps nothing.",
+     "answers": [
+      "one"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "With this place_for(), a new time of 20 goes in [10, 20, 20, 30] at position ____, before the 20s already there, because of the >= in its if.",
+     "code": "def place_for(times, new_time):\n    for position in range(len(times)):\n        if times[position] >= new_time:\n            return position\n    return len(times)",
+     "answers": [
+      "1"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "In a trace table of this search, after the first pass `high` holds ____, and the search finds 8 at position ____.",
+     "code": "numbers = [4, 8, 9, 15, 17, 23, 42]\ntarget = 8\nlow = 0\nhigh = len(numbers) - 1\nwhere = -1\nwhile low <= high:\n    middle = (low + high) // 2\n    if numbers[middle] == target:\n        where = middle\n        break\n    elif numbers[middle] < target:\n        low = middle + 1\n    else:\n        high = middle - 1",
+     "answers": [
+      "2",
+      "1"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Check it tried find_position([], 8), an awkward case. An empty list has no positions, so the loop never runs, and the function gives back ____.",
+     "answers": [
+      "-1"
+     ]
+    }
+   ]
   }
  ]
 }
