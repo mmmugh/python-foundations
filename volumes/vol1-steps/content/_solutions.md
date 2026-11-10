@@ -4470,6 +4470,171 @@ for category in sorted(groups):
 
 `total_value()` is used twice: once on the whole stock, and once on each category's list of records. That is why it takes a list, not one item. If `LOW_STOCK` changes, the low-stock lines and their heading both follow, because the heading prints the constant too.
 
+## ch10-practice#1
+
+```python
+def clock_parts(minute):
+    hour = minute // 60
+    past = minute % 60
+    return hour, past
+
+
+hour, past = clock_parts(415)
+print(hour, past)
+print(clock_parts(1000))
+print(clock_parts(0))
+```
+
+`return hour, past` gives back one tuple of two values, and the first line of the calling code unpacks it into two names.
+
+## ch10-practice#2
+
+```python
+def clock_parts(minute):
+    hour = minute // 60
+    past = minute % 60
+    return hour, past
+
+
+def clock(minute):
+    hour, past = clock_parts(minute)
+    tens = "0" if past < 10 else ""
+    return f"{hour}:{tens}{past}"
+```
+
+Only the minutes need two digits: the hour is printed as it is, so midnight is `0:00`.
+
+## ch10-practice#3
+
+```python
+def clock_parts(minute):
+    hour = minute // 60
+    past = minute % 60
+    return hour, past
+
+
+def clock(minute):
+    hour, past = clock_parts(minute)
+    if past < 10:
+        return f"{hour}:0{past}"
+    return f"{hour}:{past}"
+
+
+def describe(service):
+    route, minute, place = service
+    return f"{route} at {clock(minute)} to {place}"
+
+
+print(describe(("47", 415, "Harbor")))
+print(describe(("12", 605, "Museum")))
+print(describe(("N1", 0, "Depot")))
+```
+
+Unpacking names each part of the service, so the f-string reads as the line it makes.
+
+## ch10-practice#4
+
+```python
+def by_time(services):
+    return sorted(services, key=lambda service: service[1])
+
+
+services = [("47", 500, "Harbor"), ("12", 380, "Museum"), ("9", 300, "Airport"), ("47", 415, "Harbor")]
+print(by_time(services))
+print(by_time([]))
+print(services)
+```
+
+`sorted()` gives back a new list, so `services` keeps its order. The key is the minute, `service[1]`: with no key, `sorted()` would put route `"12"` before route `"9"`, since it would compare the routes first, as text.
+
+## ch10-practice#5
+
+```python
+def clock_parts(minute):
+    hour = minute // 60
+    past = minute % 60
+    return hour, past
+
+
+def clock(minute):
+    hour, past = clock_parts(minute)
+    if past < 10:
+        return f"{hour}:0{past}"
+    return f"{hour}:{past}"
+
+
+def by_route(services):
+    groups = {}
+    for route, minute, place in services:
+        groups.setdefault(route, []).append(clock(minute))
+    return groups
+```
+
+`setdefault()` makes each route's empty list the first time the route turns up, as in lesson 10.6.
+
+## ch10-practice#6
+
+```python
+# Say it: the services are there already, and a route goes in; the
+# timetable in time order comes out, then that route's times, or a
+# message that no bus runs on it.
+# Split it:
+# 1. put the services in time order
+# 2. print a line for each one
+# 3. group the services in time order by route
+# 4. ask for the route
+# 5. if it has a group: print its times, joined
+# 6. otherwise: print the no-buses line
+def clock_parts(minute):
+    hour = minute // 60
+    past = minute % 60
+    return hour, past
+
+
+def clock(minute):
+    hour, past = clock_parts(minute)
+    if past < 10:
+        return f"{hour}:0{past}"
+    return f"{hour}:{past}"
+
+
+def describe(service):
+    route, minute, place = service
+    return f"{route} at {clock(minute)} to {place}"
+
+
+def by_time(services):
+    return sorted(services, key=lambda service: service[1])
+
+
+def by_route(services):
+    groups = {}
+    for route, minute, place in services:
+        groups.setdefault(route, []).append(clock(minute))
+    return groups
+
+
+services = [
+    ("47", 500, "Harbor"),
+    ("12", 380, "Museum"),
+    ("9", 1000, "Airport"),
+    ("47", 415, "Harbor"),
+    ("12", 605, "Museum"),
+]
+in_order = by_time(services)
+for service in in_order:
+    print(describe(service))
+
+groups = by_route(in_order)
+route = input("Which route? ")
+if route in groups:
+    print(f"Route {route}: {', '.join(groups[route])}")
+else:
+    print("No buses on route", route)
+```
+
+The services are grouped after they are put in time order, so each route's times come out in the order they leave. Grouping the list as it started would give route 12's times as `10:05, 6:20`.
+
 ## ch10b-two-values#5
 
 ```python

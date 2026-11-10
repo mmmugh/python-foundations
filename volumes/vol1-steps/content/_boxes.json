@@ -231,6 +231,18 @@
     "raises": "NameError",
     "why": "Starting code: the lines that call distance(), which the learner writes above them."
   },
+  "ch10-practice#0": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call clock_parts(), which the learner writes above them."
+  },
+  "ch10-practice#1": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call describe(), which the learner writes above them."
+  },
+  "ch10-practice#2": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call by_time(), which the learner writes above them."
+  },
   "ch11a-linear-search#5": {
     "raises": "ValueError",
     "why": "index() of an item that is not in the list. The error message is the lesson."

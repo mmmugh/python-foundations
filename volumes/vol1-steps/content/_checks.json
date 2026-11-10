@@ -13094,6 +13094,250 @@
     "kind": "output",
     "expected": "Backpack    bags        34.99    5   174.95\nLunch box   bags        12.00    0     0.00\nNotebook    paper        3.50   42   147.00\nPencils     writing      1.20    3     3.60\nPens        writing      2.25   10    22.50\nRuler       writing      0.85   15    12.75\nStickers    paper        1.75  120   210.00\nTotal value: 570.80\nLow stock, at or below 10:\nLunch box   OUT OF STOCK\nPencils     3 left\nBackpack    5 left\nPens        10 left\nBy category:\nbags        2 items   174.95\npaper       2 items   357.00\nwriting     3 items    38.85"
   },
+  "ch10-practice#1": {
+    "kind": "output",
+    "expected": "6 55\n(16, 40)\n(0, 0)"
+  },
+  "ch10-practice#2": {
+    "kind": "function",
+    "name": "clock",
+    "cases": [
+      [
+        [
+          415
+        ],
+        "6:55"
+      ],
+      [
+        [
+          605
+        ],
+        "10:05"
+      ],
+      [
+        [
+          0
+        ],
+        "0:00"
+      ],
+      [
+        [
+          1000
+        ],
+        "16:40"
+      ],
+      [
+        [
+          60
+        ],
+        "1:00"
+      ],
+      [
+        [
+          610
+        ],
+        "10:10"
+      ],
+      [
+        [
+          59
+        ],
+        "0:59"
+      ],
+      [
+        [
+          1439
+        ],
+        "23:59"
+      ],
+      [
+        [
+          369
+        ],
+        "6:09"
+      ]
+    ]
+  },
+  "ch10-practice#3": {
+    "kind": "output",
+    "expected": "47 at 6:55 to Harbor\n12 at 10:05 to Museum\nN1 at 0:00 to Depot"
+  },
+  "ch10-practice#4": {
+    "kind": "output",
+    "expected": "[('9', 300, 'Airport'), ('12', 380, 'Museum'), ('47', 415, 'Harbor'), ('47', 500, 'Harbor')]\n[]\n[('47', 500, 'Harbor'), ('12', 380, 'Museum'), ('9', 300, 'Airport'), ('47', 415, 'Harbor')]"
+  },
+  "ch10-practice#5": {
+    "kind": "function",
+    "name": "by_route",
+    "cases": [
+      [
+        [
+          [
+            [
+              "12",
+              380,
+              "Museum"
+            ],
+            [
+              "47",
+              415,
+              "Harbor"
+            ],
+            [
+              "47",
+              500,
+              "Harbor"
+            ],
+            [
+              "9",
+              1000,
+              "Airport"
+            ]
+          ]
+        ],
+        {
+          "12": [
+            "6:20"
+          ],
+          "47": [
+            "6:55",
+            "8:20"
+          ],
+          "9": [
+            "16:40"
+          ]
+        }
+      ],
+      [
+        [
+          [
+            [
+              "47",
+              500,
+              "Harbor"
+            ],
+            [
+              "12",
+              605,
+              "Museum"
+            ],
+            [
+              "47",
+              415,
+              "Harbor"
+            ],
+            [
+              "12",
+              380,
+              "Museum"
+            ]
+          ]
+        ],
+        {
+          "47": [
+            "8:20",
+            "6:55"
+          ],
+          "12": [
+            "10:05",
+            "6:20"
+          ]
+        }
+      ],
+      [
+        [
+          [
+            [
+              "N1",
+              0,
+              "Depot"
+            ]
+          ]
+        ],
+        {
+          "N1": [
+            "0:00"
+          ]
+        }
+      ],
+      [
+        [
+          []
+        ],
+        {}
+      ]
+    ]
+  },
+  "ch10-practice#6": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "47"
+        ],
+        "words": [
+          "12 at 6:20 to Museum",
+          "47 at 6:55 to Harbor",
+          "47 at 8:20 to Harbor",
+          "12 at 10:05 to Museum",
+          "9 at 16:40 to Airport",
+          "Route 47: 6:55, 8:20"
+        ],
+        "absent": [
+          "No buses on route 47"
+        ]
+      },
+      {
+        "typed": [
+          "12"
+        ],
+        "words": [
+          "12 at 6:20 to Museum",
+          "47 at 6:55 to Harbor",
+          "47 at 8:20 to Harbor",
+          "12 at 10:05 to Museum",
+          "9 at 16:40 to Airport",
+          "Route 12: 6:20, 10:05"
+        ],
+        "absent": [
+          "No buses on route 12",
+          "Route 12: 10:05, 6:20"
+        ]
+      },
+      {
+        "typed": [
+          "9"
+        ],
+        "words": [
+          "12 at 6:20 to Museum",
+          "47 at 6:55 to Harbor",
+          "47 at 8:20 to Harbor",
+          "12 at 10:05 to Museum",
+          "9 at 16:40 to Airport",
+          "Route 9: 16:40"
+        ],
+        "absent": [
+          "No buses on route 9"
+        ]
+      },
+      {
+        "typed": [
+          "5"
+        ],
+        "words": [
+          "12 at 6:20 to Museum",
+          "47 at 6:55 to Harbor",
+          "47 at 8:20 to Harbor",
+          "12 at 10:05 to Museum",
+          "9 at 16:40 to Airport",
+          "No buses on route 5"
+        ],
+        "absent": [
+          "Route 5:"
+        ]
+      }
+    ]
+  },
   "ch10b-two-values#1": {
     "kind": "predict"
   },
