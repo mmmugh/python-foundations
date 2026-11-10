@@ -80,7 +80,7 @@ On the first pass, the middle is position 3, which holds 15. Line 8 asks whether
 
 ### Practice
 
-3. Fill in the table, then press Check. This time the target is to the left of the middle, so the `else` runs.
+3. Fill in the table, then press Check. This time the target is to the left of the middle, so the `else` runs. As in lesson 4.3, an `else:` line gets no row of its own: the next row is the line inside it.
 
 ```python
 numbers = [4, 8, 9, 15, 17, 23, 42]
