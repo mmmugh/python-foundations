@@ -11743,5 +11743,275 @@
         3
       ]
     ]
+  },
+  "ch12c-more-examples#1": {
+    "kind": "predict"
+  },
+  "ch12c-more-examples#2": {
+    "kind": "choice",
+    "options": [
+      "Because 1 is the smallest whole number above 0.",
+      "2 to the power 0 is 1. And the answers are multiplied on the way back, so a 0 at the bottom would make every answer 0.",
+      "Because `n == 0` is `False` for every call but the last."
+    ],
+    "answer": 1,
+    "why": "Multiplying by 1 changes nothing, so the answers above it come out right: 2 * 1 = 2, then 4, then 8. A 0 there would turn every answer into 0."
+  },
+  "ch12c-more-examples#3": {
+    "kind": "predict"
+  },
+  "ch12c-more-examples#4": {
+    "kind": "function",
+    "name": "power",
+    "cases": [
+      [
+        [
+          2,
+          3
+        ],
+        8
+      ],
+      [
+        [
+          10,
+          2
+        ],
+        100
+      ],
+      [
+        [
+          5,
+          0
+        ],
+        1
+      ],
+      [
+        [
+          -2,
+          3
+        ],
+        -8
+      ],
+      [
+        [
+          3,
+          1
+        ],
+        3
+      ],
+      [
+        [
+          0,
+          3
+        ],
+        0
+      ],
+      [
+        [
+          7,
+          2
+        ],
+        49
+      ]
+    ]
+  },
+  "ch12c-more-examples#5": {
+    "kind": "predict"
+  },
+  "ch12c-more-examples#6": {
+    "kind": "function",
+    "name": "double_letters",
+    "cases": [
+      [
+        [
+          "hi"
+        ],
+        "hhii"
+      ],
+      [
+        [
+          "abc"
+        ],
+        "aabbcc"
+      ],
+      [
+        [
+          ""
+        ],
+        ""
+      ],
+      [
+        [
+          "a"
+        ],
+        "aa"
+      ],
+      [
+        [
+          "a b"
+        ],
+        "aa  bb"
+      ],
+      [
+        [
+          "xyx"
+        ],
+        "xxyyxx"
+      ]
+    ]
+  },
+  "ch12c-more-examples#7": {
+    "kind": "predict"
+  },
+  "ch12c-more-examples#8": {
+    "kind": "function",
+    "name": "product",
+    "cases": [
+      [
+        [
+          [
+            2,
+            3,
+            4
+          ]
+        ],
+        24
+      ],
+      [
+        [
+          []
+        ],
+        1
+      ],
+      [
+        [
+          [
+            0,
+            9
+          ]
+        ],
+        0
+      ],
+      [
+        [
+          [
+            5
+          ]
+        ],
+        5
+      ],
+      [
+        [
+          [
+            -1,
+            3
+          ]
+        ],
+        -3
+      ],
+      [
+        [
+          [
+            2,
+            2,
+            2,
+            2
+          ]
+        ],
+        16
+      ]
+    ]
+  },
+  "ch12c-more-examples#9": {
+    "kind": "function",
+    "name": "count_item",
+    "cases": [
+      [
+        [
+          [
+            1,
+            2,
+            1
+          ],
+          1
+        ],
+        2
+      ],
+      [
+        [
+          [
+            "a",
+            "b"
+          ],
+          "c"
+        ],
+        0
+      ],
+      [
+        [
+          [],
+          5
+        ],
+        0
+      ],
+      [
+        [
+          [],
+          0
+        ],
+        0
+      ],
+      [
+        [
+          [
+            "a",
+            "a"
+          ],
+          "a"
+        ],
+        2
+      ],
+      [
+        [
+          [
+            3,
+            3,
+            3
+          ],
+          3
+        ],
+        3
+      ],
+      [
+        [
+          [
+            0,
+            -1,
+            0
+          ],
+          0
+        ],
+        2
+      ],
+      [
+        [
+          [
+            4,
+            5
+          ],
+          5
+        ],
+        1
+      ],
+      [
+        [
+          [
+            4
+          ],
+          4
+        ],
+        1
+      ]
+    ]
   }
 }

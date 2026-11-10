@@ -3742,3 +3742,56 @@ def sum_to(n):
 ```
 
 The call table for `sum_to(3)`: it waits for `sum_to(2)`, which waits for `sum_to(1)`, which waits for `sum_to(0)`. The base case gives back 0, and on the way back up the answers are 1 + 0 = 1, then 2 + 1 = 3, then 3 + 3 = 6. A loop that adds up 1 to `n` gives the same answers; here the sum is built from a smaller sum instead.
+
+## ch12c-more-examples#4
+
+```python
+def power(base, exponent):
+    if exponent == 0:
+        return 1
+    else:
+        return base * power(base, exponent - 1)
+```
+
+Only `exponent` gets smaller; `base` is handed on unchanged. Anything to the power 0 is 1, which is also the answer that changes nothing when the answers are multiplied on the way back.
+
+## ch12c-more-examples#6
+
+```python
+def double_letters(text):
+    if text == "":
+        return ""
+    else:
+        return text[0] + text[0] + double_letters(text[1:])
+```
+
+`text[0] * 2` works too. Here the first character goes in front of the rest, so the order stays the same; in `reverse()` it went at the end.
+
+## ch12c-more-examples#8
+
+```python
+def product(numbers):
+    if numbers == []:
+        return 1
+    else:
+        return numbers[0] * product(numbers[1:])
+```
+
+The base case gives back 1, as `factorial(0)` does: the answers are multiplied on the way back, and 0 at the bottom would make every product 0.
+
+## ch12c-more-examples#9
+
+```python
+# Say it: a list and a target go in; how many times the target is in the list comes out.
+# Split it:
+# 1. the base case: an empty list holds the target 0 times
+# 2. count the first item: 1 if it is the target, 0 if not
+# 3. add that to count_item() of the rest of the list, and give it back
+def count_item(items, target):
+    if items == []:
+        return 0
+    first_counts = 1 if items[0] == target else 0
+    return first_counts + count_item(items[1:], target)
+```
+
+It is `total()`, adding a 1 or a 0 for each item instead of the item itself. The conditional expression is lesson 10.7's; an `if` and an `else`, each with its own `return`, work the same.
