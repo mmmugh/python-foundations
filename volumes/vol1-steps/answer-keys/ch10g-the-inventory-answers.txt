@@ -1,0 +1,214 @@
+PYTHON FOUNDATIONS
+Unit 10 - Tuples and records
+
+ANSWER KEY
+
+
+VOCABULARY
+----------
+
+ 1. A ____ is an ordered collection, like a list, that cannot be changed
+    after it is made.
+
+      ANSWER: tuple
+
+ 2. Assigning a tuple to several names at once, like x, y = point, is
+    called ____.
+
+      ANSWER: unpacking
+
+ 3. Real data is usually a collection of records, and in Python that is
+    represented as a ____.
+
+      ANSWER: list of dictionaries
+
+ 4. The facts in a record are stored under names, the record's keys, which
+    are called its ____.
+
+      ANSWER: fields
+
+ 5. LOW_STOCK = 10 is written in capitals, the Python convention for a
+    ____ - a value fixed for the whole program.
+
+      ANSWER: constant
+
+ 6. The line label = "OUT OF STOCK" if quantity == 0 else f"{quantity}
+    left" is a ____ - an if/else that produces a value rather than
+    choosing which lines run.
+
+      ANSWER: conditional expression
+
+ 7. A short function with no name, written right where it is used, like
+    `lambda book: book["year"]`, is called a ____.
+
+      ANSWER: lambda
+
+
+READING CODE
+------------
+
+ 8. What does this print?
+
+        point = (3, 4)
+        color = (255, 128, 0)
+        
+        print(point[0])
+        print(len(color))
+        
+        for value in color:
+            print(value)
+
+      ANSWER: 3
+          3
+          255
+          128
+          0
+
+ 9. What does this print?
+
+        a = 1
+        b = 2
+        a, b = b, a
+        print(a, b)
+
+      ANSWER: 2 1
+
+10. What does this print?
+
+        board = {}
+        board[(0, 0)] = "X"
+        board[(1, 1)] = "O"
+        board[(2, 2)] = "X"
+        
+        print(board[(1, 1)])
+        print((0, 0) in board)
+        print((0, 1) in board)
+
+      ANSWER: O
+          True
+          False
+
+11. What does this print?
+
+        def lowest_and_highest(numbers):
+            return min(numbers), max(numbers)
+        
+        
+        result = lowest_and_highest([5, 2, 9, 1])
+        print(result)
+        print(type(result))
+
+      ANSWER: (1, 9)
+          <class 'tuple'>
+
+12. What does this print?
+
+        single = (5,)
+        not_a_tuple = (5)
+        print(type(single))
+        print(type(not_a_tuple))
+
+      ANSWER: <class 'tuple'>
+          <class 'int'>
+
+13. What does this print?
+
+        books = [
+            {"title": "Holes", "year": 1998},
+            {"title": "Emma", "year": 1815},
+            {"title": "Dune", "year": 1965},
+        ]
+        for book in sorted(books, key=lambda book: book["year"]):
+            print(book["title"])
+
+      ANSWER: Emma
+          Dune
+          Holes
+
+14. What does this print?
+
+        groups = {}
+        for word in ["ant", "bee", "ape"]:
+            groups.setdefault(word[0], []).append(word)
+        print(groups)
+
+      ANSWER: {'a': ['ant', 'ape'], 'b': ['bee']}
+
+
+WRITING CODE
+------------
+
+15. Unpack the tuple point into its two coordinates:
+
+        point = (3, 4)
+        x, y = ____
+
+      ANSWER: point
+
+16. Write a one-item tuple containing just the number 5 (not the number 5
+    in brackets):
+
+        single = ____
+
+      ANSWER: (5,)
+
+17. Complete the line that stores an empty list for a new category, the
+    first time it turns up, before appending to it:
+
+        groups = {}
+        for item in items:
+            groups.____(item["category"], []).append(item)
+
+      ANSWER: setdefault
+
+18. Sort the student records by their "score" field, lowest first:
+
+        ranked = sorted(students, key=____)
+
+      ANSWER: lambda student: student["score"]
+
+
+WHY IT WORKS
+------------
+
+19. Passing a tuple to a function carries no risk that the function will
+    alter your data, because once a tuple is made it cannot be ____, no
+    matter what the function tries to do.
+
+      ANSWER: changed
+
+20. A dictionary key must never change while it is in use, or the
+    dictionary could no longer find it - that is why a list cannot be a
+    key but a ____ can.
+
+      ANSWER: tuple
+
+21. Sorting a list of student records by score keeps each student's name
+    and score correctly matched, because every field for one student lives
+    together inside a single ____, so sorting only reorders those units in
+    the list, not the values inside them.
+
+      ANSWER: dictionary
+
+22. first, last = "Ada King Lovelace".split() stops with a ValueError,
+    because split() gives back three values and there are only two ____ to
+    unpack them into.
+
+      ANSWER: names
+
+23. In a trace table of this program, after line 3 `a` holds ____ and `b`
+    holds ____, because the whole right side is worked out before either
+    name changes.
+
+        a = 1
+        b = 2
+        a, b = b, a
+
+      ANSWER: 2
+      ANSWER: 1
+
+24. Check it tried `oldest([])`, an awkward case. `min()` of an empty list
+    stops with an error, so the function checks for an empty list first,
+    and gives back ____.
+
+      ANSWER: None

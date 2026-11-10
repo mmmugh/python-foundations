@@ -1370,6 +1370,192 @@
      ]
     }
    ]
+  },
+  {
+   "slug": "ch10g-the-inventory",
+   "questions": [
+    {
+     "section": "Vocabulary",
+     "text": "A ____ is an ordered collection, like a list, that cannot be changed after it is made.",
+     "answers": [
+      "tuple"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Assigning a tuple to several names at once, like x, y = point, is called ____.",
+     "answers": [
+      "unpacking"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "Real data is usually a collection of records, and in Python that is represented as a ____.",
+     "answers": [
+      "list of dictionaries"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "The facts in a record are stored under names, the record's keys, which are called its ____.",
+     "answers": [
+      "fields"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "LOW_STOCK = 10 is written in capitals, the Python convention for a ____ - a value fixed for the whole program.",
+     "answers": [
+      "constant"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "The line label = \"OUT OF STOCK\" if quantity == 0 else f\"{quantity} left\" is a ____ - an if/else that produces a value rather than choosing which lines run.",
+     "answers": [
+      "conditional expression"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "A short function with no name, written right where it is used, like `lambda book: book[\"year\"]`, is called a ____.",
+     "answers": [
+      "lambda"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "point = (3, 4)\ncolor = (255, 128, 0)\n\nprint(point[0])\nprint(len(color))\n\nfor value in color:\n    print(value)",
+     "answers": [
+      "3\n3\n255\n128\n0"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "a = 1\nb = 2\na, b = b, a\nprint(a, b)",
+     "answers": [
+      "2 1"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "board = {}\nboard[(0, 0)] = \"X\"\nboard[(1, 1)] = \"O\"\nboard[(2, 2)] = \"X\"\n\nprint(board[(1, 1)])\nprint((0, 0) in board)\nprint((0, 1) in board)",
+     "answers": [
+      "O\nTrue\nFalse"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "def lowest_and_highest(numbers):\n    return min(numbers), max(numbers)\n\n\nresult = lowest_and_highest([5, 2, 9, 1])\nprint(result)\nprint(type(result))",
+     "answers": [
+      "(1, 9)\n<class 'tuple'>"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "single = (5,)\nnot_a_tuple = (5)\nprint(type(single))\nprint(type(not_a_tuple))",
+     "answers": [
+      "<class 'tuple'>\n<class 'int'>"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "books = [\n    {\"title\": \"Holes\", \"year\": 1998},\n    {\"title\": \"Emma\", \"year\": 1815},\n    {\"title\": \"Dune\", \"year\": 1965},\n]\nfor book in sorted(books, key=lambda book: book[\"year\"]):\n    print(book[\"title\"])",
+     "answers": [
+      "Emma\nDune\nHoles"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "groups = {}\nfor word in [\"ant\", \"bee\", \"ape\"]:\n    groups.setdefault(word[0], []).append(word)\nprint(groups)",
+     "answers": [
+      "{'a': ['ant', 'ape'], 'b': ['bee']}"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Unpack the tuple point into its two coordinates:",
+     "code": "point = (3, 4)\nx, y = ____",
+     "answers": [
+      "point"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Write a one-item tuple containing just the number 5 (not the number 5 in brackets):",
+     "code": "single = ____",
+     "answers": [
+      "(5,)"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Complete the line that stores an empty list for a new category, the first time it turns up, before appending to it:",
+     "code": "groups = {}\nfor item in items:\n    groups.____(item[\"category\"], []).append(item)",
+     "answers": [
+      "setdefault"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Sort the student records by their \"score\" field, lowest first:",
+     "code": "ranked = sorted(students, key=____)",
+     "answers": [
+      "lambda student: student[\"score\"]"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Passing a tuple to a function carries no risk that the function will alter your data, because once a tuple is made it cannot be ____, no matter what the function tries to do.",
+     "answers": [
+      "changed"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "A dictionary key must never change while it is in use, or the dictionary could no longer find it - that is why a list cannot be a key but a ____ can.",
+     "answers": [
+      "tuple"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Sorting a list of student records by score keeps each student's name and score correctly matched, because every field for one student lives together inside a single ____, so sorting only reorders those units in the list, not the values inside them.",
+     "answers": [
+      "dictionary"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "first, last = \"Ada King Lovelace\".split() stops with a ValueError, because split() gives back three values and there are only two ____ to unpack them into.",
+     "answers": [
+      "names"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "In a trace table of this program, after line 3 `a` holds ____ and `b` holds ____, because the whole right side is worked out before either name changes.",
+     "code": "a = 1\nb = 2\na, b = b, a",
+     "answers": [
+      "2",
+      "1"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Check it tried `oldest([])`, an awkward case. `min()` of an empty list stops with an error, so the function checks for an empty list first, and gives back ____.",
+     "answers": [
+      "None"
+     ]
+    }
+   ]
   }
  ]
 }
