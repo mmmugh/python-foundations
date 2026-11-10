@@ -139,6 +139,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch09d-counting", "Lesson 9.4 — Keys and values together, and counting",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch09e-the-most", "Lesson 9.5 — Which key has the most?",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

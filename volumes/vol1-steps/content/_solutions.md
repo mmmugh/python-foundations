@@ -2581,3 +2581,44 @@ def letter_counts(text):
 ```
 
 `lower()` (lesson 8.2) makes `"A"` and `"a"` the same key, and `isalpha()` (lesson 8.6) skips the spaces, digits and punctuation. Making each character small inside the loop works too.
+
+## ch09e-the-most#5
+
+```python
+def top_scorer(scores):
+    if len(scores) == 0:
+        return None
+    return max(scores, key=scores.get)
+```
+
+`max()` of an empty dictionary stops with a `ValueError`, as it does for an empty list (lesson 7.5), so the test comes first. On a tie, `max()` gives back the first of the keys, which is what the exercise asks.
+
+## ch09e-the-most#7
+
+```python
+def top_three(counts):
+    ranked = sorted(counts, key=counts.get, reverse=True)
+    return ranked[:3]
+```
+
+A slice never runs past the end of a list, so `[:3]` of a list with fewer than three keys gives back all of them, and of `[]` gives back `[]`. No test is needed.
+
+## ch09e-the-most#8
+
+```python
+# Say it: give back the character the text has the most of, not counting spaces, or None.
+# Split it:
+# 1. count the characters that are not spaces
+# 2. if nothing was counted, give back None
+# 3. give back the key with the biggest count
+def most_common(text):
+    counts = {}
+    for character in text:
+        if character != " ":
+            counts[character] = counts.get(character, 0) + 1
+    if len(counts) == 0:
+        return None
+    return max(counts, key=counts.get)
+```
+
+The keys go into `counts` in the order the characters first appear, so on a tie `max()` gives back the one that appears first. For `""` and `"   "` nothing is counted, and `max()` of an empty dictionary would stop with a `ValueError`: that is why step 2 comes before step 3.

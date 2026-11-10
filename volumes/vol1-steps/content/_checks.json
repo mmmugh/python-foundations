@@ -7447,5 +7447,238 @@
         {}
       ]
     ]
+  },
+  "ch09e-the-most#1": {
+    "kind": "predict"
+  },
+  "ch09e-the-most#2": {
+    "kind": "choice",
+    "options": [
+      "`None`",
+      "`0`",
+      "`1`"
+    ],
+    "answer": 1,
+    "why": "The first time, the letter is not a key yet, so `get()` gives back its default, 0. One more than that, 1, is stored."
+  },
+  "ch09e-the-most#3": {
+    "kind": "predict"
+  },
+  "ch09e-the-most#4": {
+    "kind": "choice",
+    "options": [
+      "`get` with no brackets gives back `None`.",
+      "It is a slip, but Python lets it through.",
+      "It names the method, and `max()` uses it on each key in turn."
+    ],
+    "answer": 2,
+    "why": "`scores.get` with no brackets is the method itself, not a use of it. `max()` uses it on every key, and compares what comes back: the values."
+  },
+  "ch09e-the-most#5": {
+    "kind": "function",
+    "name": "top_scorer",
+    "cases": [
+      [
+        [
+          {
+            "Ada": 88,
+            "Grace": 92,
+            "Alan": 45
+          }
+        ],
+        "Grace"
+      ],
+      [
+        [
+          {}
+        ],
+        null
+      ],
+      [
+        [
+          {
+            "Mo": 70,
+            "Kim": 70
+          }
+        ],
+        "Mo"
+      ],
+      [
+        [
+          {
+            "Zoe": 10,
+            "Ada": 5
+          }
+        ],
+        "Zoe"
+      ],
+      [
+        [
+          {
+            "Lee": -3
+          }
+        ],
+        "Lee"
+      ],
+      [
+        [
+          {
+            "Ada": 1,
+            "Bo": 9,
+            "Cy": 9
+          }
+        ],
+        "Bo"
+      ]
+    ]
+  },
+  "ch09e-the-most#6": {
+    "kind": "predict"
+  },
+  "ch09e-the-most#7": {
+    "kind": "function",
+    "name": "top_three",
+    "cases": [
+      [
+        [
+          {
+            "a": 1,
+            "b": 5,
+            "c": 3,
+            "d": 4
+          }
+        ],
+        [
+          "b",
+          "d",
+          "c"
+        ]
+      ],
+      [
+        [
+          {}
+        ],
+        []
+      ],
+      [
+        [
+          {
+            "x": 2,
+            "y": 2
+          }
+        ],
+        [
+          "x",
+          "y"
+        ]
+      ],
+      [
+        [
+          {
+            "z": 1,
+            "y": 3,
+            "x": 3,
+            "w": 3
+          }
+        ],
+        [
+          "y",
+          "x",
+          "w"
+        ]
+      ],
+      [
+        [
+          {
+            "one": 0
+          }
+        ],
+        [
+          "one"
+        ]
+      ],
+      [
+        [
+          {
+            "a": 9,
+            "b": 8,
+            "c": 7,
+            "d": 6,
+            "e": 10
+          }
+        ],
+        [
+          "e",
+          "a",
+          "b"
+        ]
+      ]
+    ]
+  },
+  "ch09e-the-most#8": {
+    "kind": "function",
+    "name": "most_common",
+    "cases": [
+      [
+        [
+          "hello world"
+        ],
+        "l"
+      ],
+      [
+        [
+          ""
+        ],
+        null
+      ],
+      [
+        [
+          "   "
+        ],
+        null
+      ],
+      [
+        [
+          "abba"
+        ],
+        "a"
+      ],
+      [
+        [
+          "a b b"
+        ],
+        "b"
+      ],
+      [
+        [
+          "Aaa"
+        ],
+        "a"
+      ],
+      [
+        [
+          "x"
+        ],
+        "x"
+      ],
+      [
+        [
+          "  zz y"
+        ],
+        "z"
+      ],
+      [
+        [
+          "Aab"
+        ],
+        "A"
+      ],
+      [
+        [
+          "bbaa"
+        ],
+        "b"
+      ]
+    ]
   }
 }
