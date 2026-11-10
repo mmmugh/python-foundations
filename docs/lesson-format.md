@@ -156,6 +156,9 @@ out, because checks test behavior, not form.
   {"typed": ["30"], "words": ["fail"], "absent": ["Pass"]}]}}
 ```
 
+`words` and `contains`, unlike `absent`, match part of a line: `Weeks: 1` is found inside `Weeks: 10`. Pick run
+values that no plausible wrong answer collides with, or pin a longer line.
+
 ### `choice`
 
 Radio buttons and Check, decided in the page. Options are inline Markdown, so code goes in backticks. `why` is
