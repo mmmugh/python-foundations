@@ -11007,10 +11007,10 @@
       ]
     ]
   },
-  "ch11f-ties-and-sorted#1": {
+  "ch11f-ties-and-keys#1": {
     "kind": "predict"
   },
-  "ch11f-ties-and-sorted#2": {
+  "ch11f-ties-and-keys#2": {
     "kind": "choice",
     "options": [
       "None",
@@ -11020,10 +11020,10 @@
     "answer": 1,
     "why": "The first pass finds every neighbor pair in order and swaps nothing, so `swapped` stays `False` and the sort stops after that one pass."
   },
-  "ch11f-ties-and-sorted#3": {
+  "ch11f-ties-and-keys#3": {
     "kind": "predict"
   },
-  "ch11f-ties-and-sorted#4": {
+  "ch11f-ties-and-keys#4": {
     "kind": "choice",
     "options": [
       "On a big list it makes far fewer comparisons, and it has been tested on far more lists.",
@@ -11033,10 +11033,20 @@
     "answer": 0,
     "why": "Your sorts work, on numbers and text alike, but for 1,000 items a selection sort makes 499,500 comparisons, and Python's sort fewer than 9,000."
   },
-  "ch11f-ties-and-sorted#5": {
+  "ch11f-ties-and-keys#5": {
     "kind": "predict"
   },
-  "ch11f-ties-and-sorted#6": {
+  "ch11f-ties-and-keys#6": {
+    "kind": "choice",
+    "options": [
+      "`lambda record: (record[\"name\"], record[\"seconds\"])`",
+      "`lambda record: (record[\"seconds\"], record[\"name\"])`",
+      "`lambda record: record[\"seconds\"]`"
+    ],
+    "answer": 1,
+    "why": "The tuple's first item decides, so the seconds go first; the name only gets a say when two times tie. A key of the seconds alone keeps tied runners in the order they were listed."
+  },
+  "ch11f-ties-and-keys#7": {
     "kind": "function",
     "name": "ranked",
     "cases": [
@@ -11208,10 +11218,23 @@
       ]
     ]
   },
-  "ch11f-ties-and-sorted#7": {
+  "ch11g-insertion-sort#1": {
     "kind": "predict"
   },
-  "ch11f-ties-and-sorted#8": {
+  "ch11g-insertion-sort#2": {
+    "kind": "choice",
+    "options": [
+      "The one that was first in the list.",
+      "The one with the smaller name.",
+      "Python picks one at random."
+    ],
+    "answer": 0,
+    "why": "`sorted()` keeps tied items in the order they had. To put a tie in an order of your own, give it a key that breaks the tie, as `ranked()` did."
+  },
+  "ch11g-insertion-sort#3": {
+    "kind": "predict"
+  },
+  "ch11g-insertion-sort#4": {
     "kind": "choice",
     "options": [
       "Position 1, before both 20s.",
@@ -11221,7 +11244,95 @@
     "answer": 2,
     "why": "With `>`, a 20 is not bigger than 20, so the search walks past both of them and stops at 30, position 3. The new 20 goes after the ones already there."
   },
-  "ch11f-ties-and-sorted#9": {
+  "ch11g-insertion-sort#5": {
+    "kind": "function",
+    "name": "place_after",
+    "cases": [
+      [
+        [
+          [
+            10,
+            20,
+            30
+          ],
+          20
+        ],
+        2
+      ],
+      [
+        [
+          [
+            10,
+            20,
+            20,
+            30
+          ],
+          20
+        ],
+        3
+      ],
+      [
+        [
+          [],
+          7
+        ],
+        0
+      ],
+      [
+        [
+          [
+            10,
+            20,
+            30
+          ],
+          35
+        ],
+        3
+      ],
+      [
+        [
+          [
+            10,
+            20,
+            30
+          ],
+          5
+        ],
+        0
+      ],
+      [
+        [
+          [
+            10,
+            20,
+            30
+          ],
+          10
+        ],
+        1
+      ],
+      [
+        [
+          [
+            -5,
+            -1
+          ],
+          -3
+        ],
+        1
+      ],
+      [
+        [
+          [
+            4
+          ],
+          4
+        ],
+        1
+      ]
+    ]
+  },
+  "ch11g-insertion-sort#6": {
     "kind": "function",
     "name": "insertion_sort",
     "cases": [
@@ -11331,10 +11442,10 @@
       ]
     ]
   },
-  "ch11g-measuring#1": {
+  "ch11h-measuring#1": {
     "kind": "predict"
   },
-  "ch11g-measuring#2": {
+  "ch11h-measuring#2": {
     "kind": "choice",
     "options": [
       "The `>=` in its `if`: the search stops at the first item that is not smaller than the new one.",
@@ -11344,7 +11455,7 @@
     "answer": 0,
     "why": "An equal item is not smaller, so `>=` stops the search at it, and the new item goes in at that position, ahead of it. `return len(times)` only runs when every item is smaller."
   },
-  "ch11g-measuring#3": {
+  "ch11h-measuring#3": {
     "kind": "function",
     "name": "bubble_count",
     "cases": [
@@ -11437,10 +11548,10 @@
       ]
     ]
   },
-  "ch11g-measuring#4": {
+  "ch11h-measuring#4": {
     "kind": "predict"
   },
-  "ch11g-measuring#5": {
+  "ch11h-measuring#5": {
     "kind": "choice",
     "options": [
       "A bubble sort compares only the first two numbers.",
@@ -11450,7 +11561,7 @@
     "answer": 2,
     "why": "The first pass swaps the first two numbers and nothing else. The second pass finds every neighbor in order, so the sort stops after two passes. A selection sort still looks through the whole rest of the list on every pass."
   },
-  "ch11g-measuring#6": {
+  "ch11h-measuring#6": {
     "kind": "choice",
     "options": [
       "It doubles, from 120 to 240.",
@@ -11460,7 +11571,7 @@
     "answer": 1,
     "why": "Twice as many passes, each about twice as long: about four times the work, as lesson 11.4 found. It is the bubble column, on a nearly sorted list, that only about doubles."
   },
-  "ch11g-measuring#7": {
+  "ch11h-measuring#7": {
     "kind": "output",
     "expected": "      size    linear    binary selection    bubble\n         4         4         3         6         5\n         8         8         4        28        13\n        16        16         5       120        29\n        32        32         6       496        61"
   }

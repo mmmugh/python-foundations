@@ -226,6 +226,7 @@ print(where)
 > Split it: 1. set `low` to the first position and `high` to the last. 2. while `low <= high`, work out the middle. 3. if the middle item is the target, give back the middle. 4. if it is smaller, move `low` past the middle; otherwise move `high` before it. 5. below the loop, give back -1.
 > Name it: the function and its parameters are named for you, and `low`, `high` and `middle` say what they hold.
 > Check it: try `[4, 8, 9, 15, 17, 23, 42]` with 23, which gives 5, and with 4 and 42, the two ends, which give 0 and 6. Then the awkward ones: 10, which is not there and gives -1; `[7]` with 7, which gives 0; and `[]`, an empty list, which gives -1.
+> Did it halve? While you try it, add `print(low, high, middle)` as the first line inside the loop, as the example did. For the list of 7, you see at most 3 lines, where a linear search could look at all 7 items. Take the print out before you press Check.
 
 ### What you can do now
 

@@ -175,6 +175,7 @@ print(largest_first([5]))
 
 > Split it: selection sort with one change: each pass finds the biggest item from `start` onward, not the smallest. Copy the list first.
 > Check it: the lines print `[95, 95, 82, 70, 60]`, then the scores as they were, `[60, 95, 82, 95, 70]`. Then the awkward ones: `[]` and `[5]`.
+> Did it sort by selection? While you try it, put `print(result)` (or whatever you named the copy) at the end of each pass, as the example does: the biggest of what is left joins the front, one pass at a time. Take the print out before you press Check.
 
 7. A selection sort of 20 items makes 190 comparisons. About how many does it make for 40 items?
 

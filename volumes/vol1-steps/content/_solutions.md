@@ -3524,16 +3524,32 @@ def is_sorted(items):
 
 One pass, with no swaps: the first pair the wrong way round settles it. Equal neighbors are fine, because `>` asks whether the left one is bigger. For `[]` and `[7]`, `range(len(items) - 1)` gives no positions, the loop never runs, and the answer is `True`.
 
-## ch11f-ties-and-sorted#6
+## ch11f-ties-and-keys#7
 
 ```python
+# Say it: a list of race records goes in; a new list comes out, fastest first, with ties in alphabetical order of name.
+# Split it:
+# 1. give back sorted() of the results
+# 2. as the key, a lambda that gives back a tuple: the seconds, then the name
 def ranked(results):
     return sorted(results, key=lambda record: (record["seconds"], record["name"]))
 ```
 
 The tuple's first item, the time, decides. Only when two times are equal does the name get a say. A key of the time alone would keep tied runners in the order they were listed, which is not the rule asked for.
 
-## ch11f-ties-and-sorted#9
+## ch11g-insertion-sort#5
+
+```python
+def place_after(times, new_time):
+    for position in range(len(times)):
+        if times[position] > new_time:
+            return position
+    return len(times)
+```
+
+One character changes: `>` walks past every time equal to the new one, so the new time goes after them all.
+
+## ch11g-insertion-sort#6
 
 ```python
 # Say it: a list goes in; a new sorted list comes out, built by putting each item in at its place.
@@ -3558,7 +3574,7 @@ def insertion_sort(items):
 
 The new list is sorted all the time: it starts empty, which is sorted, and each item goes in at the place that keeps it sorted. The list given to the function is only read, never changed. For `[]`, the loop never runs, and the empty list comes back.
 
-## ch11g-measuring#3
+## ch11h-measuring#3
 
 ```python
 def bubble_count(items):
@@ -3578,7 +3594,7 @@ def bubble_count(items):
 
 The count goes up for every comparison, swap or not, so it sits before the `if`. On `[1, 2, 3, 4]`, the first pass makes 3 comparisons and no swaps, and the sort stops: 3. On `[4, 3, 2, 1]`, every pass swaps, and the count is 3 + 2 + 1, as for a selection sort.
 
-## ch11g-measuring#7
+## ch11h-measuring#7
 
 ```python
 # Say it: print how many comparisons each search and sort makes, for lists of 4, 8, 16 and 32 numbers.

@@ -175,9 +175,11 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch11e-bubble-sort", "Lesson 11.5 — Bubble sort, and stopping early",
      ("Say it", "Split it", "Name it", "Check it")),
-    ("ch11f-ties-and-sorted", "Lesson 11.6 — What Python does, and breaking ties",
+    ("ch11f-ties-and-keys", "Lesson 11.6 — What Python does, and breaking ties",
      ("Say it", "Split it", "Name it", "Check it")),
-    ("ch11g-measuring", "Lesson 11.7 — Measuring the work",
+    ("ch11g-insertion-sort", "Lesson 11.7 — Where a new item goes, and insertion sort",
+     ("Say it", "Split it", "Name it", "Check it")),
+    ("ch11h-measuring", "Lesson 11.8 — Measuring the work",
      ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10

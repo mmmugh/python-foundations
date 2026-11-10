@@ -1,20 +1,27 @@
 <!-- part: Unit 11 — Searching and sorting -->
-## Lesson 11.7 — Measuring the work
+## Lesson 11.8 — Measuring the work
 
-This unit has given you two searches, three sorts, and a way to count the work each one does. In this lesson you put them side by side: a program that measures them on lists of several sizes, and prints the counts in a table, built one function at a time.
+This unit has given you two searches, three sorts by hand, and a way to count the work each one does. In this lesson you put them side by side: a program that measures them on lists of several sizes, and prints the counts in a table, built one function at a time.
 
 ### Warm-up
 
 1. Predict what this prints, then press Check.
 
 ```python
-words = ["Kiwi", "fig", "apple"]
-print(sorted(words, key=str.lower))
-print((2, "fig") < (2, "Kiwi"))
-print(sorted([(2, "fig"), (1, "pear"), (2, "Kiwi")]))
+def place_for(times, new_time):
+    for position in range(len(times)):
+        if times[position] >= new_time:
+            return position
+    return len(times)
+
+
+in_order = []
+for item in [3, 1, 2]:
+    in_order.insert(place_for(in_order, item), item)
+    print(in_order)
 ```
 
-2. In `place_for()` from lesson 11.6, what makes a new item that ties with one already in the list go before it?
+2. In `place_for()` from lesson 11.7, what makes a new item that ties with one already in the list go before it?
 
 ### The plan
 
