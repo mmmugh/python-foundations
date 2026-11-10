@@ -122,5 +122,9 @@
   "ch09a-dictionaries#7": {
     "raises": "KeyError",
     "why": "Fix-the-bug practice: a key with the wrong capital letter."
+  },
+  "ch09b-missing-keys#1": {
+    "raises": "KeyError",
+    "why": "A warm-up on a key with the wrong capital letter. The error is the answer."
   }
 }

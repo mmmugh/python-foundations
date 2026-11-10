@@ -6844,5 +6844,267 @@
   "ch09a-dictionaries#9": {
     "kind": "output",
     "expected": "Ada: 555-0111\nNumbers: 3"
+  },
+  "ch09b-missing-keys#1": {
+    "kind": "predict"
+  },
+  "ch09b-missing-keys#2": {
+    "kind": "choice",
+    "options": [
+      "It prints `88`.",
+      "It prints nothing.",
+      "It stops with a KeyError, because `\"ada\"` is not a key."
+    ],
+    "answer": 2,
+    "why": "Capitals matter in keys, as they do for `==`. The dictionary's key is `\"Ada\"`, so `\"ada\"` is a different key, and it is not there."
+  },
+  "ch09b-missing-keys#3": {
+    "kind": "predict"
+  },
+  "ch09b-missing-keys#4": {
+    "kind": "function",
+    "name": "price_of",
+    "cases": [
+      [
+        [
+          {
+            "apple": 0.5,
+            "pear": 0.75
+          },
+          "pear"
+        ],
+        0.75
+      ],
+      [
+        [
+          {
+            "apple": 0.5,
+            "pear": 0.75
+          },
+          "apple"
+        ],
+        0.5
+      ],
+      [
+        [
+          {
+            "apple": 0.5,
+            "pear": 0.75
+          },
+          "Apple"
+        ],
+        0
+      ],
+      [
+        [
+          {},
+          "apple"
+        ],
+        0
+      ],
+      [
+        [
+          {
+            "tea": 2
+          },
+          "plum"
+        ],
+        0
+      ]
+    ]
+  },
+  "ch09b-missing-keys#5": {
+    "kind": "predict"
+  },
+  "ch09b-missing-keys#6": {
+    "kind": "function",
+    "name": "nickname",
+    "cases": [
+      [
+        [
+          {
+            "Katherine": "Kat",
+            "Alexander": "Alex"
+          },
+          "Katherine"
+        ],
+        "Kat"
+      ],
+      [
+        [
+          {
+            "Katherine": "Kat",
+            "Alexander": "Alex"
+          },
+          "Alexander"
+        ],
+        "Alex"
+      ],
+      [
+        [
+          {
+            "Katherine": "Kat",
+            "Alexander": "Alex"
+          },
+          "Bo"
+        ],
+        "Bo"
+      ],
+      [
+        [
+          {},
+          "Ada"
+        ],
+        "Ada"
+      ],
+      [
+        [
+          {
+            "Katherine": "Kat",
+            "Alexander": "Alex"
+          },
+          ""
+        ],
+        ""
+      ]
+    ]
+  },
+  "ch09b-missing-keys#7": {
+    "kind": "predict"
+  },
+  "ch09b-missing-keys#8": {
+    "kind": "function",
+    "name": "take_one",
+    "cases": [
+      [
+        [
+          {
+            "pens": 2,
+            "pads": 1
+          },
+          "pens"
+        ],
+        {
+          "pens": 1,
+          "pads": 1
+        }
+      ],
+      [
+        [
+          {
+            "pens": 2,
+            "pads": 1
+          },
+          "pads"
+        ],
+        {
+          "pens": 2
+        }
+      ],
+      [
+        [
+          {
+            "pens": 2,
+            "pads": 1
+          },
+          "caps"
+        ],
+        {
+          "pens": 2,
+          "pads": 1
+        }
+      ],
+      [
+        [
+          {},
+          "pens"
+        ],
+        {}
+      ],
+      [
+        [
+          {
+            "pens": 5
+          },
+          "pens"
+        ],
+        {
+          "pens": 4
+        }
+      ],
+      [
+        [
+          {
+            "pens": 1
+          },
+          "pens"
+        ],
+        {}
+      ]
+    ]
+  },
+  "ch09b-missing-keys#9": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "Ada"
+        ],
+        "words": [
+          "Ada: 555-0100"
+        ],
+        "absent": [
+          "No number for Ada."
+        ]
+      },
+      {
+        "typed": [
+          "Lee"
+        ],
+        "words": [
+          "Lee: 555-0199"
+        ],
+        "absent": [
+          "No number for Lee."
+        ]
+      },
+      {
+        "typed": [
+          "Bo"
+        ],
+        "words": [
+          "No number for Bo."
+        ],
+        "absent": [
+          "Bo: None",
+          "Bo:"
+        ]
+      },
+      {
+        "typed": [
+          "ada"
+        ],
+        "words": [
+          "No number for ada."
+        ],
+        "absent": [
+          "ada: None",
+          "ada:",
+          "ada: 555-0100"
+        ]
+      },
+      {
+        "typed": [
+          ""
+        ],
+        "words": [
+          "No number for"
+        ],
+        "absent": [
+          ": None",
+          ":"
+        ]
+      }
+    ]
   }
 }

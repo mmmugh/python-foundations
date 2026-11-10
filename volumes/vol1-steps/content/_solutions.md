@@ -2442,3 +2442,56 @@ print("Numbers:", len(phone_book))
 ```
 
 Storing a value under `"Lee"`, a new key, adds an entry; storing one under `"Ada"`, a key that is there, changes its value. So the book ends with three entries. Under `"ada"`, with a small a, the second line would add a fourth entry instead, and Ada's number would stay `555-0100`.
+
+## ch09b-missing-keys#4
+
+```python
+def price_of(prices, item):
+    if item in prices:
+        return prices[item]
+    return 0
+```
+
+The lookup in square brackets runs only when `item` is a key, so a missing item never meets a `KeyError`. An `else:` before the last line works the same. After the next section, `return prices.get(item, 0)` does it in one line.
+
+## ch09b-missing-keys#6
+
+```python
+def nickname(nicknames, name):
+    return nicknames.get(name, name)
+```
+
+The first `name` is the key to look up; the second is the default, given back when that key is missing. An `if name in nicknames:` with an `else:` works too.
+
+## ch09b-missing-keys#8
+
+```python
+def take_one(stock, item):
+    if item not in stock:
+        return stock
+    if stock[item] == 1:
+        del stock[item]
+    else:
+        stock[item] = stock[item] - 1
+    return stock
+```
+
+The first test comes first, because `stock[item]` would be a `KeyError` for an item that is not there. Storing `stock[item] - 1` when there is 1 left would leave the item in with 0, and the exercise says an item held 0 times is not held.
+
+## ch09b-missing-keys#9
+
+```python
+# Say it: print the number for the name typed in, or a message if the book does not have it.
+# Split it:
+# 1. ask for the name
+# 2. if it is a key of the book, print it and its number
+# 3. otherwise, print the message
+phone_book = {"Ada": "555-0100", "Grace": "555-0142", "Lee": "555-0199"}
+name = input("Name: ")
+if name in phone_book:
+    print(name + ":", phone_book[name])
+else:
+    print("No number for " + name + ".")
+```
+
+`in` asks about the keys, so the lookup in square brackets runs only for a name the book has. `get()` with a default works too: look the name up once, then test what came back.
