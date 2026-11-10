@@ -3863,3 +3863,21 @@ def ways(n, known):
 ```
 
 It is `fast_fib()` with a different base case: 0 and 1 stairs both give 1, where `fib` gave 0 and 1. So the answers run 1, 1, 2, 3, 5, 8: the Fibonacci numbers again, one place along. Without `known`, `ways(40, {})` would make hundreds of millions of calls; with it, each number of stairs is worked out once.
+
+## ch12f-loop-or-recursion#9
+
+```python
+# Say it: a text goes in; True comes out if it reads the same both ways, and False if not.
+# Split it:
+# 1. the first base case: 0 or 1 letters is always a palindrome
+# 2. the second: if the first and last letters differ, it is not
+# 3. the recursive case: it is a palindrome if the middle is
+def is_palindrome(text):
+    if len(text) <= 1:
+        return True
+    if text[0] != text[len(text) - 1]:
+        return False
+    return is_palindrome(text[1:len(text) - 1])
+```
+
+Like `search()`, it has two base cases: one gives the answer `True` when there is nothing left to check, and one gives `False` as soon as two letters differ. Each call checks a text two letters shorter, so the calls always reach one of them. `text[-1]` for the last letter, and `text[1:-1]` for the middle, work the same.

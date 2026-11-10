@@ -12223,5 +12223,129 @@
         165580141
       ]
     ]
+  },
+  "ch12f-loop-or-recursion#1": {
+    "kind": "predict"
+  },
+  "ch12f-loop-or-recursion#2": {
+    "kind": "choice",
+    "options": [
+      "Every call that was made, in order.",
+      "The numbers already worked out, as keys, with their answers as values.",
+      "Only the final answer."
+    ],
+    "answer": 1,
+    "why": "`known[n] = answer` stores each answer under its number. The next time that number is asked for, `n in known` finds it and no more calls are made."
+  },
+  "ch12f-loop-or-recursion#3": {
+    "kind": "predict"
+  },
+  "ch12f-loop-or-recursion#4": {
+    "kind": "predict"
+  },
+  "ch12f-loop-or-recursion#5": {
+    "kind": "predict"
+  },
+  "ch12f-loop-or-recursion#6": {
+    "kind": "choice",
+    "options": [
+      "`if items[middle] == target:`",
+      "`return search(items, target, low, middle - 1)`",
+      "`if low > high:` and the `return -1` under it: nothing is left to search."
+    ],
+    "answer": 2,
+    "why": "Each call searches a smaller range, until `low` passes `high` and the range is empty. That base case gives back -1. The other base case, the middle being the target, is the one that finds it."
+  },
+  "ch12f-loop-or-recursion#7": {
+    "kind": "choice",
+    "options": [
+      "`sum()`, or a loop: going through a list one item after another is what a loop is for.",
+      "`total()` from lesson 12.3: recursion is always better.",
+      "Either: they are the same for any list."
+    ],
+    "answer": 0,
+    "why": "`total()` would have 5,000 calls waiting at once, and Python stops at about 1,000 with a `RecursionError`. A loop, or `sum()`, has no such limit, and says the idea plainly."
+  },
+  "ch12f-loop-or-recursion#8": {
+    "kind": "choice",
+    "options": [
+      "Printing each name in a list of names.",
+      "Adding up the numbers from 1 to 10.",
+      "Counting the files in a folder, where the folder can hold folders, which can hold folders, and so on."
+    ],
+    "answer": 2,
+    "why": "A folder inside a folder is a smaller copy of the same problem: count its files the same way. The other two go through things one after another, which a loop says more plainly."
+  },
+  "ch12f-loop-or-recursion#9": {
+    "kind": "function",
+    "name": "is_palindrome",
+    "cases": [
+      [
+        [
+          "level"
+        ],
+        true
+      ],
+      [
+        [
+          "noon"
+        ],
+        true
+      ],
+      [
+        [
+          "lever"
+        ],
+        false
+      ],
+      [
+        [
+          ""
+        ],
+        true
+      ],
+      [
+        [
+          "a"
+        ],
+        true
+      ],
+      [
+        [
+          "ab"
+        ],
+        false
+      ],
+      [
+        [
+          "aa"
+        ],
+        true
+      ],
+      [
+        [
+          "racecar"
+        ],
+        true
+      ],
+      [
+        [
+          "abca"
+        ],
+        false
+      ],
+      [
+        [
+          "abcba"
+        ],
+        true
+      ],
+      [
+        [
+          "abcda"
+        ],
+        false
+      ]
+    ]
   }
 }
