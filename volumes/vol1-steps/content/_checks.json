@@ -11614,5 +11614,134 @@
   "ch12a-the-two-parts#8": {
     "kind": "output",
     "expected": "10\n7\n4\n1\nLiftoff!\n6\n4\n2\nLiftoff!\nLiftoff!"
+  },
+  "ch12b-the-way-back#1": {
+    "kind": "predict"
+  },
+  "ch12b-the-way-back#2": {
+    "kind": "choice",
+    "options": [
+      "`times`",
+      "`word`",
+      "Both of them"
+    ],
+    "answer": 1,
+    "why": "Each call is given the same `word` it was given itself. Only `times` gets smaller, one each call, until it is 0."
+  },
+  "ch12b-the-way-back#3": {
+    "kind": "predict"
+  },
+  "ch12b-the-way-back#4": {
+    "kind": "choice",
+    "options": [
+      "Each call prints its `n` only after the call below it has finished, so `count_up(1)`, the last call before the base case, finishes and prints first.",
+      "Python runs the calls in reverse order, starting from `count_up(0)`.",
+      "`n - 1` makes the numbers go up instead of down."
+    ],
+    "answer": 0,
+    "why": "The calls go down 3, 2, 1, 0 without printing a number. The `print(n)` lines run on the way back up: the call waiting nearest the base case, `count_up(1)`, finishes first."
+  },
+  "ch12b-the-way-back#5": {
+    "kind": "predict"
+  },
+  "ch12b-the-way-back#6": {
+    "kind": "choice",
+    "options": [
+      "`power_of_two(3)`, because it is called first.",
+      "They all know it at once.",
+      "`power_of_two(0)`, the base case: it gives back 1 without waiting for anything."
+    ],
+    "answer": 2,
+    "why": "Every other call is waiting for the one below it. The base case answers straight away, and the answers are built on the way back up: 2, then 4, then 8."
+  },
+  "ch12b-the-way-back#7": {
+    "kind": "function",
+    "name": "power_of_three",
+    "cases": [
+      [
+        [
+          2
+        ],
+        9
+      ],
+      [
+        [
+          4
+        ],
+        81
+      ],
+      [
+        [
+          0
+        ],
+        1
+      ],
+      [
+        [
+          1
+        ],
+        3
+      ],
+      [
+        [
+          5
+        ],
+        243
+      ],
+      [
+        [
+          3
+        ],
+        27
+      ]
+    ]
+  },
+  "ch12b-the-way-back#8": {
+    "kind": "function",
+    "name": "sum_to",
+    "cases": [
+      [
+        [
+          4
+        ],
+        10
+      ],
+      [
+        [
+          100
+        ],
+        5050
+      ],
+      [
+        [
+          0
+        ],
+        0
+      ],
+      [
+        [
+          1
+        ],
+        1
+      ],
+      [
+        [
+          3
+        ],
+        6
+      ],
+      [
+        [
+          10
+        ],
+        55
+      ],
+      [
+        [
+          2
+        ],
+        3
+      ]
+    ]
   }
 }

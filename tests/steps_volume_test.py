@@ -183,6 +183,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch12a-the-two-parts", "Lesson 12.1 — A function that calls itself",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch12b-the-way-back", "Lesson 12.2 — The way back, and giving back an answer",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

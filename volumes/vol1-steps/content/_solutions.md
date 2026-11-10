@@ -3714,3 +3714,31 @@ count_down_by(0, 5)
 ```
 
 `step` is handed on unchanged to every call, as `word` is in `cheer()`, and only `n` gets smaller. The base case is `n <= 0` because 10, 7, 4, 1 jumps from 1 to -2: with `n == 0`, that call would not stop, and nor would any after it. Writing the base case as "not above 0", `if n > 0:` with the two parts the other way round, works the same.
+
+## ch12b-the-way-back#7
+
+```python
+def power_of_three(n):
+    if n == 0:
+        return 1
+    else:
+        return 3 * power_of_three(n - 1)
+```
+
+3 to the power 0 is 1, the base case. Every other call multiplies the smaller call's answer by 3 on the way back: `power_of_three(2)` is 3 * 3 * 1, which is 9.
+
+## ch12b-the-way-back#8
+
+```python
+# Say it: a whole number goes in; the sum of 1 up to that number comes out, worked out from a smaller sum.
+# Split it:
+# 1. the base case: if n is 0, give back 0
+# 2. the recursive case: give back n plus the sum up to n - 1
+def sum_to(n):
+    if n == 0:
+        return 0
+    else:
+        return n + sum_to(n - 1)
+```
+
+The call table for `sum_to(3)`: it waits for `sum_to(2)`, which waits for `sum_to(1)`, which waits for `sum_to(0)`. The base case gives back 0, and on the way back up the answers are 1 + 0 = 1, then 2 + 1 = 3, then 3 + 3 = 6. A loop that adds up 1 to `n` gives the same answers; here the sum is built from a smaller sum instead.
