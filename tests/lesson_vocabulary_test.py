@@ -75,6 +75,22 @@ def shown_first_by(pages):
     return shown
 
 
+def with_practice(pages, practice):
+    """`pages` in reading order, with each practice page placed right after
+    its unit's last lesson. A unit's extra practice may use everything the
+    unit shows and nothing a later one does; placing it is how the gate,
+    which reads in order, knows that. Returns (pages, stems naming no unit),
+    so a page with nowhere to go is reported rather than quietly skipped."""
+    out, unplaced = list(pages), []
+    for stem, text in practice:
+        at = [i for i, (slug, _) in enumerate(out) if re.match(rf"{stem}[a-z]-", slug)]
+        if not at:
+            unplaced.append(stem)
+            continue
+        out.insert(at[-1] + 1, (f"{stem}-practice", text))
+    return out, unplaced
+
+
 def violations(pages, solutions, checks=None):
     taught = {k: set() for k in KINDS}
     shown = shown_first_by(pages)
@@ -145,7 +161,9 @@ def main():
             continue
         if not meta.get("lessons"):
             continue
-        pages = [(p.stem, p.read_text()) for p in files]
+        pages, unplaced = with_practice([(p.stem, p.read_text()) for p in files],
+                                        [(p.stem, p.read_text()) for p in build.practice_files(vol)])
+        expect(f"{vol['slug']}: every practice page names a unit with lessons", not unplaced, str(unplaced))
         solutions = {k: v for k, v in build.load_solutions(vol).items()}
         problems = violations(pages, solutions, build.load_json(vol, "_checks.json"))
         expect(f"{vol['slug']}: nothing in an exercise comes before its lesson", not problems,

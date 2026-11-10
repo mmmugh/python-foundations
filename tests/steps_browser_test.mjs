@@ -2,8 +2,10 @@
  * script error, fits a 390-pixel phone screen without sideways scrolling,
  * and its links (hints to the reference page, the unit quiz) resolve. A
  * `pre`, `.trace-wrap` or `.options` may scroll inside itself, but never
- * pushes the page wider. One checked exercise goes through Python in the
- * page. Run it with BASE=/name/ too, the way GitHub Pages serves the site. */
+ * pushes the page wider. Practice pages are built pages too, so they are
+ * walked here, and each must be offered from a lesson, labeled optional.
+ * One checked exercise goes through Python in the page. Run it with
+ * BASE=/name/ too, the way GitHub Pages serves the site. */
 import { readdirSync } from "node:fs";
 import { join } from "node:path";
 import { launch, loadChromium, ROOT, startSite } from "./browser_harness.mjs";
@@ -29,6 +31,7 @@ try {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
+  const offered = new Set();
   for (const slug of PAGES) {
     const url = `${baseUrl}vol1-steps/${slug}.html`;
     const response = await page.goto(url, { waitUntil: "load" });
@@ -51,6 +54,13 @@ try {
       const linked = await page.request.get(href);
       if (!linked.ok()) expect(`${slug} links to ${href}`, false);
     }
+    for (const p of await page.$$eval("p.practice", (ps) => ps.map((p) => ({
+      href: p.querySelector("a")?.getAttribute("href") || "", text: p.textContent })))) {
+      if (/optional/i.test(p.text) && /Nothing later needs it/.test(p.text)) offered.add(p.href.replace(/\.html$/, ""));
+    }
+  }
+  for (const slug of PAGES.filter((s) => s.endsWith("-practice"))) {
+    expect(`${slug} is offered from its unit, labeled optional`, offered.has(slug));
   }
   expect("no page raised a script error", errors.length === 0);
 

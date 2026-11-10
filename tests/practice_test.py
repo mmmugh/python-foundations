@@ -101,6 +101,14 @@ def main():
         pages = build.practice_files(vol)
         if not pages:
             continue
+        if vol.get("lessons"):
+            # Its vocabulary is derived from chapter files (ch05-...), which a
+            # lesson volume has none of. The lesson volume's own gates check
+            # these pages instead: lesson_vocabulary_test.py and
+            # steps_volume_test.py.
+            print(f"{vol['slug']}: {len(pages)} practice page(s), checked by "
+                  f"lesson_vocabulary_test.py and steps_volume_test.py")
+            continue
         print(f"{vol['slug']}: {len(pages)} practice page(s)")
         known = vocabulary(vol)
         solutions = build.load_solutions(vol)

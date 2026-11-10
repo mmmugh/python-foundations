@@ -658,10 +658,45 @@ def practice_files(vol):
     Named after the chapter it belongs to, so the pairing is the filename and
     not a table that can fall out of step. Kept out of content/ because these
     are not chapters: they carry no new teaching, they sit outside the reading
-    order, and they must never reach the code bundle.
+    order, and they must never reach the code bundle. In a lesson volume the
+    file is named after the unit (practice/ch05.md), and belongs to the
+    unit's last lesson.
     """
     folder = vol["dir"] / "practice"
     return sorted(folder.glob("*.md"), key=page_order) if folder.is_dir() else []
+
+
+def practice_owner(vol, stem, pages):
+    """The page a practice file belongs to, or None.
+
+    In a chapter volume, the chapter it is named after. In a lesson volume no
+    page is named after a unit, so practice/ch05.md belongs to unit 5's last
+    lesson: the one that carries the unit's quiz, where the reader finishes
+    the unit. A name that is not exactly chNN has no owner, so a typo stops
+    the build instead of publishing a page that nothing links to.
+    """
+    if not vol.get("lessons"):
+        return next((p for p in pages if p["slug"] == stem), None)
+    if not re.fullmatch(r"ch\d\d", stem):
+        return None
+    unit = [p for p in pages if re.match(rf"{stem}[a-z]-", p["slug"])]
+    return unit[-1] if unit else None
+
+
+def practice_link(vol, practice):
+    """The line at the foot of a page that offers its practice page.
+
+    A lesson volume says the page is optional, and that nothing after it
+    needs it: a learner who sees a link at the end of a lesson otherwise
+    reads it as one more thing she has to do before going on.
+    """
+    title = html.escape(practice["title"])
+    if vol.get("lessons"):
+        return (f'<p class="practice"><a href="{practice["slug"]}.html">{title}</a>'
+                f' — optional, for when you want more practice on this unit. '
+                f'Nothing later needs it.</p>')
+    return (f'<p class="practice"><a href="{practice["slug"]}.html">{title}</a>'
+            f' — one project, built step by step, using only what you have met so far</p>')
 
 
 def chapter_files(vol):
@@ -778,15 +813,17 @@ def build_volume(vol):
     for path in practice_files(vol):
         text = path.read_text()
         blocks = split_blocks(text.split("\n"))
-        owner = next((p for p in pages if p["slug"] == path.stem), None)
+        owner = practice_owner(vol, path.stem, pages)
         if owner is None:
-            sys.exit(f"{vol['slug']}/practice/{path.name} has no chapter of that "
-                     f"name in content/")
+            named = ("no unit with lessons in content/ (lesson volumes name a practice "
+                     "file after its unit: practice/ch05.md)" if vol.get("lessons")
+                     else "no chapter of that name in content/")
+            sys.exit(f"{vol['slug']}/practice/{path.name} has {named}")
         pages.append({
             "slug": f"{path.stem}-practice",
             "key": f"{vol['slug']}/{path.stem}-practice",
             "title": title_of(path, blocks),
-            "part": owner["title"],
+            "part": owner["part"] if vol.get("lessons") else owner["title"],
             "blocks": blocks,
             "boxes": sum(1 for k, _ in blocks if k == "code"),
             # Not a chapter: kept out of the reading order, the contents list
@@ -828,11 +865,7 @@ def build_volume(vol):
             practice = next((x for x in pages
                              if x.get("owner") == page["slug"]), None)
             if practice:
-                extras.append(f'<p class="practice">'
-                              f'<a href="{practice["slug"]}.html">'
-                              f'{html.escape(practice["title"])}</a>'
-                              f' — one project, built step by step, using only '
-                              f'what you have met so far</p>')
+                extras.append(practice_link(vol, practice))
             quiz = vol["quizzes"] / f"{page['slug']}-quiz.txt"
             if quiz.exists():
                 unit = re.match(r"(Unit \d+)", page["part"] or "")

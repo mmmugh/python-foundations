@@ -26,6 +26,16 @@ from steps_volume_test import VOLUME, blocks_of, exercises       # noqa: E402
 UNIT = re.compile(r"<!-- part: Unit (\d+) ")
 
 
+def unit_of(slug, text):
+    """The unit a page belongs to: a lesson's part line, or a practice page's
+    name (ch05-practice). None for a page outside any unit."""
+    match = UNIT.match(text)
+    if match:
+        return int(match.group(1))
+    practice = re.fullmatch(r"ch(\d\d)-practice", slug)
+    return int(practice.group(1)) if practice else None
+
+
 def answer_for(slug, number, spec, code, solutions):
     key = f"{slug}#{number}"
     kind = spec["kind"]
@@ -64,6 +74,7 @@ def answers(unit=None):
     checks = build.load_json(vol, "_checks.json")
     solutions = build.load_solutions(vol)
     pages = {p.stem: p.read_text() for p in build.chapter_files(vol)}
+    pages.update({f"{p.stem}-practice": p.read_text() for p in build.practice_files(vol)})
     built = built_slugs(vol)
 
     checked_slugs = {key.split("#")[0] for key in checks}
@@ -77,8 +88,7 @@ def answers(unit=None):
         text = pages.get(slug)
         if text is None:
             continue
-        match = UNIT.match(text)
-        if unit and (not match or match.group(1) != str(int(unit))):
+        if unit and unit_of(slug, text) != int(unit):
             continue
         in_scope.add(slug)
         for number, _, _, code, _ in exercises(blocks_of(text)):

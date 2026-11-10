@@ -281,6 +281,36 @@ def lesson_problems(slug, heading, hint_steps, text, checks, solutions, alternat
     # heading -- is dropped and the learner never sees it. The rule names what
     # is kept, not what was last found dropped, so a new kind of block is
     # refused too. It belongs above the section's heading, or under one of its own.
+    problems += dropped_blocks(slug, blocks)
+
+    found = exercises(blocks)
+    if len(found) > MAX_EXERCISES:
+        say(f"{slug}: {len(found)} exercises; a 20-to-30-minute lesson has at most {MAX_EXERCISES}")
+    words = prose_words(blocks)
+    if words > MAX_WORDS:
+        say(f"{slug}: {words} words of prose; at most {MAX_WORDS}")
+
+    for number, section, item, code, hints in found:
+        key = f"{slug}#{number}"
+        spec, solution = checks.get(key), solutions.get(key)
+        if not spec and not solution:
+            say(f"{key}: has neither a check nor a worked solution")
+        problems += exercise_problems(key, spec, solution, alternates.get(key), code)
+        if section == "Try It":
+            problems += routine_problems(key, hints, hint_steps, solution, spec, key in alternates)
+    return problems
+
+
+def dropped_blocks(slug, blocks):
+    """Messages for a block an exercise section would never show (build.py's
+    render_exercises keeps lists, their code fences and their hints, so
+    anything else between them -- a paragraph, an output fence, a table, a
+    heading -- is dropped and the learner never sees it). The rule names what
+    is kept, not what was last found dropped, so a new kind of block is
+    refused too. It belongs above the section's heading, or under one of its
+    own."""
+    problems = []
+    say = problems.append
     shown_in_section = ("ol", "ul", "code", "quote")
     what = {"p": "a paragraph", "output": "an output fence", "table": "a table", "h1": "a heading", "h2": "a heading"}
     # A fence or a hint belongs to the exercise above it, so one that comes
@@ -296,49 +326,49 @@ def lesson_problems(slug, heading, hint_steps, text, checks, solutions, alternat
         elif section and (kind not in shown_in_section or not has_item):
             say(f"{slug}: {what.get(kind, 'a ' + kind + ' block')} inside the {section} section is never "
                 f"shown; move it above the heading or into an exercise ({str(payload)[:40]!r})")
+    return problems
 
-    found = exercises(blocks)
-    if len(found) > MAX_EXERCISES:
-        say(f"{slug}: {len(found)} exercises; a 20-to-30-minute lesson has at most {MAX_EXERCISES}")
-    words = prose_words(blocks)
-    if words > MAX_WORDS:
-        say(f"{slug}: {words} words of prose; at most {MAX_WORDS}")
 
-    for number, section, item, code, hints in found:
-        key = f"{slug}#{number}"
-        spec, solution = checks.get(key), solutions.get(key)
-        if not spec and not solution:
-            say(f"{key}: has neither a check nor a worked solution")
-        # A check that passes the starting code says "Correct" to a learner
-        # who changed nothing: it cannot see what the exercise asks for.
-        if spec and code and spec["kind"] not in ("predict", "trace", "choice"):
-            untouched = run_check(spec, code)
-            if untouched is not None and untouched[0]:
-                say(f"{key}: its check passes the starting code unchanged")
-        if spec and spec["kind"] == "function":
-            if not any(is_awkward(a) for case in spec["cases"] for a in case[0]):
-                say(f"{key}: a function check needs an awkward case (0, empty or negative)")
-        for label, answer in (("worked solution", solution and solution["code"]),
-                              ("alternate answer", alternates.get(key))):
-            if spec and answer:
-                result = run_check(spec, answer)
-                if result is not None and not result[0]:
-                    say(f"{key}: the {label} fails its own check -- {result[1][0] if result[1] else ''}")
-        if section == "Try It":
-            if [h.split(":")[0] for h in hints[:len(hint_steps)]] != list(hint_steps):
-                say(f"{key}: the hints must walk {', '.join(hint_steps)}, in that order")
-            # Before the routine arrives (no steps), the hints are plain: they
-            # neither link its page nor name its steps in the worked solution.
-            if not hints:
-                say(f"{key}: a try it has hints, revealed one at a time")
-            elif hint_steps and f"({REFERENCE}.html)" not in hints[0]:
-                say(f"{key}: the first hint links to the reference page")
-            if not solution:
-                say(f"{key}: a try it ends in a worked solution")
-            elif hint_steps and ("# Say it" not in solution["code"] or "# Split it" not in solution["code"]):
-                say(f"{key}: the worked solution keeps its Say it and Split it comments")
-            if spec and key not in alternates:
-                say(f"{key}: a checked try it needs an alternate answer in _alternates.json")
+def exercise_problems(key, spec, solution, alternate, code):
+    """Messages for one exercise's check and its worked answers."""
+    problems = []
+    say = problems.append
+    # A check that passes the starting code says "Correct" to a learner
+    # who changed nothing: it cannot see what the exercise asks for.
+    if spec and code and spec["kind"] not in ("predict", "trace", "choice"):
+        untouched = run_check(spec, code)
+        if untouched is not None and untouched[0]:
+            say(f"{key}: its check passes the starting code unchanged")
+    if spec and spec["kind"] == "function":
+        if not any(is_awkward(a) for case in spec["cases"] for a in case[0]):
+            say(f"{key}: a function check needs an awkward case (0, empty or negative)")
+    for label, answer in (("worked solution", solution and solution["code"]),
+                          ("alternate answer", alternate)):
+        if spec and answer:
+            result = run_check(spec, answer)
+            if result is not None and not result[0]:
+                say(f"{key}: the {label} fails its own check -- {result[1][0] if result[1] else ''}")
+    return problems
+
+
+def routine_problems(key, hints, hint_steps, solution, spec, has_alternate):
+    """Messages for a last step that must build the whole thing like a try it."""
+    problems = []
+    say = problems.append
+    if [h.split(":")[0] for h in hints[:len(hint_steps)]] != list(hint_steps):
+        say(f"{key}: the hints must walk {', '.join(hint_steps)}, in that order")
+    # Before the routine arrives (no steps), the hints are plain: they
+    # neither link its page nor name its steps in the worked solution.
+    if not hints:
+        say(f"{key}: a try it has hints, revealed one at a time")
+    elif hint_steps and f"({REFERENCE}.html)" not in hints[0]:
+        say(f"{key}: the first hint links to the reference page")
+    if not solution:
+        say(f"{key}: a try it ends in a worked solution")
+    elif hint_steps and ("# Say it" not in solution["code"] or "# Split it" not in solution["code"]):
+        say(f"{key}: the worked solution keeps its Say it and Split it comments")
+    if spec and not has_alternate:
+        say(f"{key}: a checked try it needs an alternate answer in _alternates.json")
     return problems
 
 
@@ -401,6 +431,56 @@ def unit_problems(pages, checks):
     return problems
 
 
+# A practice step is a program to write, so it is checked by running it.
+PRACTICE_KINDS = ("output", "stdin", "function")
+MIN_STEPS, MAX_STEPS = 3, 10
+
+
+def practice_problems(stem, text, hint_steps, checks, solutions, alternates):
+    """What an extra-practice page promises (spec: "one optional
+    extra-practice page, labeled optional, never needed to continue").
+
+    Optional: its introduction says so. Never needed: it teaches nothing, so
+    no later lesson can come to depend on it -- its only fences are its
+    steps' starting code, and the vocabulary gate places it after its unit.
+    One project in steps: every step is a program, checked by running it and
+    solved, and the last step builds the whole thing the way a try it does.
+    """
+    slug = f"{stem}-practice"
+    problems = []
+    say = problems.append
+    blocks = blocks_of(text)
+    heading = next((p for k, p in blocks if k == "h2"), "")
+    if not heading.startswith("Extra practice: "):
+        say(f"{slug}: the heading must start 'Extra practice: ' (found {heading!r})")
+    h3 = [p for k, p in blocks if k == "h3"]
+    if h3 != ["Steps"]:
+        say(f"{slug}: one section, 'Steps'; found {h3}")
+    top = next((i for i, (k, _) in enumerate(blocks) if k == "h3"), len(blocks))
+    if "optional" not in " ".join(p for k, p in blocks[:top] if k == "p").lower():
+        say(f"{slug}: the introduction must say the page is optional")
+    if any(k == "code" for k, _ in blocks[:top]):
+        say(f"{slug}: a code fence above the steps is an example, and a practice page teaches nothing new")
+    problems += dropped_blocks(slug, blocks)
+
+    found = exercises(blocks)
+    if not MIN_STEPS <= len(found) <= MAX_STEPS:
+        say(f"{slug}: {len(found)} steps; a practice page has {MIN_STEPS} to {MAX_STEPS}")
+    if prose_words(blocks) > MAX_WORDS:
+        say(f"{slug}: {prose_words(blocks)} words of prose; at most {MAX_WORDS}")
+    for number, _, _, code, hints in found:
+        key = f"{slug}#{number}"
+        spec, solution = checks.get(key), solutions.get(key)
+        if not spec or spec["kind"] not in PRACTICE_KINDS:
+            say(f"{key}: every step needs a program check ({', '.join(PRACTICE_KINDS)})")
+        if not solution:
+            say(f"{key}: every step needs a worked solution")
+        problems += exercise_problems(key, spec, solution, alternates.get(key), code)
+        if number == len(found):
+            problems += routine_problems(key, hints, hint_steps, solution, spec, key in alternates)
+    return problems
+
+
 def main():
     only = sys.argv[sys.argv.index("--only") + 1:] if "--only" in sys.argv else None
     vol = next((v for v in build.VOLS if v["slug"] == VOLUME), None)
@@ -426,6 +506,18 @@ def main():
             continue
         problems += lesson_problems(slug, heading, steps, pages[slug], checks, solutions, alternates)
         problems += trace_problems(slug, pages[slug], checks, shown)
+
+    steps_of = {}
+    for slug, _, steps in LESSONS:
+        steps_of[slug[:4]] = steps          # the last lesson of each unit wins
+    for path in build.practice_files(vol):
+        if only and f"{path.stem}-practice" not in only:
+            continue
+        if path.stem not in steps_of:
+            problems.append(f"practice/{path.name}: names no unit (practice files are chNN.md)")
+            continue
+        problems += practice_problems(path.stem, path.read_text(), steps_of[path.stem],
+                                      checks, solutions, alternates)
 
     if not only or REFERENCE in only:
         text = pages.get(REFERENCE, "")

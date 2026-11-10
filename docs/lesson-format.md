@@ -33,8 +33,8 @@ names the unit:
 
 ## Exercise sections
 
-Three `###` headings hold exercises: `Warm-up`, `Practice` and `Try It` (`Steps` is the practice pages' name for
-the same thing). A lesson may have several, with prose and examples between them. Each list item under one is an
+Three `###` headings hold exercises: `Warm-up`, `Practice` and `Try It` (`Steps` is the extra-practice pages'
+section; see below). A lesson may have several, with prose and examples between them. Each list item under one is an
 exercise with its own box; a code fence directly after an item is that exercise's starting code.
 
 An exercise section holds only its exercises, their starting code and their hints. Anything else between them (a
@@ -215,6 +215,30 @@ python3 scripts/make_quizzes.py vol1-steps
 ```
 
 Sections are `Vocabulary`, `Reading code`, `Writing code` and `Why it works`; any other is refused.
+
+## Extra-practice pages
+
+One optional page per unit, in `practice/chNN.md` (the unit's number, no letter). The build publishes it as
+`chNN-practice.html`, offers it at the foot of the unit's last lesson as optional, and links it back there; it is
+not in the reading order or the contents. Its keys are `chNN-practice#<n>`.
+
+```markdown
+## Extra practice: a secret code
+
+Optional: one more project for this unit, if you want it. Nothing later needs it.
+
+### Steps
+
+1. Shift one letter...
+```
+
+`steps_volume_test.py` holds it to:
+- one `### Steps` section, and no fence above it: the page teaches nothing new;
+- an introduction that says it is optional;
+- 3 to 10 steps, each with a check of kind `output`, `stdin` or `function`, and a worked solution;
+- a last step that builds the whole project like a try it: hints that walk the routine, and an alternate.
+
+`lesson_vocabulary_test.py` reads the page as if it came right after its unit's last lesson.
 
 ## The vocabulary rule
 

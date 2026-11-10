@@ -97,6 +97,7 @@ jobs:
           python3 tests/trace_test.py
           python3 tests/lesson_vocabulary_test.py
           python3 tests/steps_volume_test.py
+          python3 tests/lesson_practice_test.py
           python3 tests/stdin_message_test.py
           python3 tests/raises_test.py
       - name: Mark the build with its commit
