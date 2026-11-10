@@ -2953,3 +2953,62 @@ print(first, second)
 ```
 
 On the swap line, Python works out the right side first: a tuple of the two values, the second first. Only then does it unpack that tuple into `first` and `second`, so neither value is lost. Without unpacking, a swap needs a third name to hold one value while the other moves. When the two numbers are the same, no swap happens, and none is needed.
+
+## ch10b-two-values#4
+
+```python
+def split_price(total_cents):
+    dollars = total_cents // 100
+    cents = total_cents % 100
+    return dollars, cents
+
+
+dollars, cents = split_price(1250)
+print(dollars, cents)
+print(split_price(99))
+print(split_price(0))
+```
+
+It is `split_time()` with 100 in place of 60. The second and third lines print the tuple itself, brackets and all, because nothing unpacks it.
+
+## ch10b-two-values#7
+
+```python
+def midpoint(start, end):
+    x1, y1 = start
+    x2, y2 = end
+    return (x1 + x2) / 2, (y1 + y2) / 2
+
+
+print(midpoint((0, 0), (4, 6)))
+print(midpoint((1, 1), (2, 2)))
+print(midpoint((3, 5), (3, 5)))
+print(midpoint((-4, 2), (4, -2)))
+```
+
+`/` always gives back a float, so 2 shows as `2.0`. With `//`, (1, 1) and (2, 2) would give (1, 1), not halfway.
+
+## ch10b-two-values#8
+
+```python
+# Say it: two points go in; the length of the straight line between them comes out.
+# Split it:
+# 1. unpack each point into its x and y
+# 2. work out how far across and how far up
+# 3. give back the square root of across squared plus up squared
+def distance(p1, p2):
+    x1, y1 = p1
+    x2, y2 = p2
+    across = x2 - x1
+    up = y2 - y1
+    return (across ** 2 + up ** 2) ** 0.5
+
+
+print(distance((0, 0), (3, 4)))
+print(distance((1, 2), (7, 10)))
+print(distance((2, 3), (2, 3)))
+print(distance((5, 5), (-7, 0)))
+print(round(distance((0, 0), (1, 1)), 3))
+```
+
+It does not matter which point comes first: going the other way makes across and up negative, and a negative number squared is positive, so the distance is the same. The square root of 2 has no end to its digits, which is why the last line rounds it.

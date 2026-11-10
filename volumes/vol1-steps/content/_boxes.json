@@ -170,5 +170,17 @@
   "ch10a-tuples-and-unpacking#11": {
     "raises": "ValueError",
     "why": "The code above a choice: three words, two names."
+  },
+  "ch10b-two-values#5": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call split_price(), which the learner writes above them."
+  },
+  "ch10b-two-values#9": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call midpoint(), which the learner writes above them."
+  },
+  "ch10b-two-values#10": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call distance(), which the learner writes above them."
   }
 }

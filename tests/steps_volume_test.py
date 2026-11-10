@@ -153,6 +153,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch10a-tuples-and-unpacking", "Lesson 10.1 — Tuples, and unpacking",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch10b-two-values", "Lesson 10.2 — Giving back two values",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

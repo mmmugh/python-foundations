@@ -8655,5 +8655,46 @@
         ]
       }
     ]
+  },
+  "ch10b-two-values#1": {
+    "kind": "predict"
+  },
+  "ch10b-two-values#2": {
+    "kind": "choice",
+    "options": [
+      "`print(size[0])`",
+      "`size = (1280, 720)`",
+      "`size[0] = 1280`"
+    ],
+    "answer": 2,
+    "why": "A tuple cannot change, so storing at a position stops with a `TypeError`. Storing a new tuple under the name `size` is fine: the old tuple is not changed."
+  },
+  "ch10b-two-values#3": {
+    "kind": "predict"
+  },
+  "ch10b-two-values#4": {
+    "kind": "output",
+    "expected": "12 50\n(0, 99)\n(0, 0)"
+  },
+  "ch10b-two-values#5": {
+    "kind": "choice",
+    "options": [
+      "`(7,)`",
+      "`(7)`",
+      "`[7]`"
+    ],
+    "answer": 0,
+    "why": "The comma makes the tuple. `(7)` is the number 7 in brackets, and `[7]` is a list."
+  },
+  "ch10b-two-values#6": {
+    "kind": "predict"
+  },
+  "ch10b-two-values#7": {
+    "kind": "output",
+    "expected": "(2.0, 3.0)\n(1.5, 1.5)\n(3.0, 5.0)\n(0.0, 0.0)"
+  },
+  "ch10b-two-values#8": {
+    "kind": "output",
+    "expected": "5.0\n10.0\n0.0\n13.0\n1.414"
   }
 }
