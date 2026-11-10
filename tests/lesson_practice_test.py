@@ -93,6 +93,8 @@ def main():
             GOOD.replace("Optional: more", "More"), "optional")
     refused("an example fence above the steps is refused (the page would teach)",
             GOOD.replace("### Steps", "```python\nprint(1)\n```\n\n### Steps"), "teaches nothing new")
+    refused("a fence inside the steps before step 1 is refused (the page would drop it)",
+            GOOD.replace("### Steps\n\n", "### Steps\n\n```python\nprint(1)\n```\n\n"), "before the first exercise")
     refused("a second section is refused", GOOD.replace("3. Print every", "### Try It\n\n1. Print every"),
             "one section")
     refused("a heading that does not say extra practice is refused",
