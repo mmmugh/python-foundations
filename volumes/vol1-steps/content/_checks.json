@@ -8320,5 +8320,215 @@
   "ch09i-set-operations#9": {
     "kind": "output",
     "expected": "Both: Alan, Grace\nOnly first: Ada, Edsger, Katherine\nEveryone: Ada, Alan, Barbara, Edsger, Grace, Katherine, Margaret"
+  },
+  "ch09j-the-poll#1": {
+    "kind": "predict"
+  },
+  "ch09j-the-poll#2": {
+    "kind": "choice",
+    "options": [
+      "dictionary",
+      "list",
+      "set"
+    ],
+    "answer": 0,
+    "why": "Each option's count is looked up by the option's name, and counting is what dictionaries do best."
+  },
+  "ch09j-the-poll#3": {
+    "kind": "predict"
+  },
+  "ch09j-the-poll#4": {
+    "kind": "function",
+    "name": "tally",
+    "cases": [
+      [
+        [
+          [
+            "pizza",
+            "tacos",
+            "pizza"
+          ]
+        ],
+        {
+          "pizza": 2,
+          "tacos": 1
+        }
+      ],
+      [
+        [
+          []
+        ],
+        {}
+      ],
+      [
+        [
+          [
+            "soup"
+          ]
+        ],
+        {
+          "soup": 1
+        }
+      ],
+      [
+        [
+          [
+            "a",
+            "b",
+            "a",
+            "b",
+            "a"
+          ]
+        ],
+        {
+          "a": 3,
+          "b": 2
+        }
+      ]
+    ]
+  },
+  "ch09j-the-poll#5": {
+    "kind": "function",
+    "name": "winners",
+    "cases": [
+      [
+        [
+          {
+            "pizza": 6,
+            "tacos": 4
+          }
+        ],
+        [
+          "pizza"
+        ]
+      ],
+      [
+        [
+          {
+            "sushi": 4,
+            "tacos": 4,
+            "salad": 1
+          }
+        ],
+        [
+          "sushi",
+          "tacos"
+        ]
+      ],
+      [
+        [
+          {}
+        ],
+        []
+      ],
+      [
+        [
+          {
+            "tacos": 4,
+            "sushi": 4
+          }
+        ],
+        [
+          "tacos",
+          "sushi"
+        ]
+      ],
+      [
+        [
+          {
+            "a": 0,
+            "b": 0
+          }
+        ],
+        [
+          "a",
+          "b"
+        ]
+      ],
+      [
+        [
+          {
+            "x": 1,
+            "y": 2,
+            "z": 2
+          }
+        ],
+        [
+          "y",
+          "z"
+        ]
+      ],
+      [
+        [
+          {
+            "eve": 3,
+            "dan": 3,
+            "cy": 3,
+            "bo": 3,
+            "al": 3,
+            "fay": 1
+          }
+        ],
+        [
+          "eve",
+          "dan",
+          "cy",
+          "bo",
+          "al"
+        ]
+      ]
+    ]
+  },
+  "ch09j-the-poll#6": {
+    "kind": "function",
+    "name": "winner_line",
+    "cases": [
+      [
+        [
+          [
+            "pizza"
+          ]
+        ],
+        "Winner: pizza"
+      ],
+      [
+        [
+          [
+            "tacos",
+            "sushi"
+          ]
+        ],
+        "Tied: sushi, tacos"
+      ],
+      [
+        [
+          []
+        ],
+        "No votes"
+      ],
+      [
+        [
+          [
+            "c",
+            "a",
+            "b"
+          ]
+        ],
+        "Tied: a, b, c"
+      ],
+      [
+        [
+          [
+            "sushi",
+            "tacos"
+          ]
+        ],
+        "Tied: sushi, tacos"
+      ]
+    ]
+  },
+  "ch09j-the-poll#7": {
+    "kind": "output",
+    "expected": "pizza        6   40.0%  ##########\ntacos        4   26.7%  #######\nsushi        4   26.7%  #######\nsalad        1    6.7%  ##\nTotal votes: 15\nOptions: 4\nWinner: pizza"
   }
 }

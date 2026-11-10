@@ -149,6 +149,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch09i-set-operations", "Lesson 9.9 — Combining sets, and choosing a container",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch09j-the-poll", "Lesson 9.10 — A poll counter",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

@@ -2810,3 +2810,109 @@ print("Everyone:", ", ".join(sorted(first_set | second_set)))
 ```
 
 `sorted()` turns each set into a list in alphabetical order, and `join()` (lesson 8.8) puts `", "` between the names. The sets drop Grace's repeat, so each line names her once.
+
+## ch09j-the-poll#4
+
+```python
+def tally(votes):
+    counts = {}
+    for vote in votes:
+        counts[vote] = counts.get(vote, 0) + 1
+    return counts
+```
+
+The counting pattern from lesson 9.4. For `[]`, the loop never runs, and the empty dictionary comes back.
+
+## ch09j-the-poll#5
+
+```python
+def winners(counts):
+    if len(counts) == 0:
+        return []
+    best = max(counts.values())
+    leaders = []
+    for option, count in counts.items():
+        if count == best:
+            leaders.append(option)
+    return leaders
+```
+
+`max()` of the values finds the most votes; the loop keeps every option with that many, so a tie keeps them all, in the dictionary's order. `max()` of an empty dictionary's values stops with a `ValueError`, so the test comes first.
+
+## ch09j-the-poll#6
+
+```python
+def winner_line(leaders):
+    if len(leaders) == 0:
+        return "No votes"
+    elif len(leaders) == 1:
+        return "Winner: " + leaders[0]
+    else:
+        return "Tied: " + ", ".join(sorted(leaders))
+```
+
+`sorted()` gives a new list in alphabetical order, and `join()` (lesson 8.8) puts `", "` between the names. `leaders[0]` is the only leader when there is one.
+
+## ch09j-the-poll#7
+
+```python
+# Say it: count the votes, and print a report on them.
+# Split it:
+# 1. count the votes: tally(votes)
+# 2. rank the options, most votes first
+# 3. print a line for each option, with report_line()
+# 4. print the total, and how many different options got votes
+# 5. find every option with the most votes: winners(counts)
+# 6. print the winner, or the options that tied: winner_line(leaders)
+def report_line(option, count, total):
+    """Print one option's line: its votes, its share of all the votes, and a bar."""
+    share = count / total * 100
+    bar = "#" * round(share / 4)
+    print(f"{option:<10}{count:>4}{share:>7.1f}%  {bar}")
+
+
+votes = [
+    "tacos", "pizza", "pizza", "sushi", "pizza",
+    "tacos", "salad", "sushi", "pizza", "tacos",
+    "sushi", "pizza", "tacos", "pizza", "sushi",
+]
+
+
+def tally(votes):
+    counts = {}
+    for vote in votes:
+        counts[vote] = counts.get(vote, 0) + 1
+    return counts
+
+
+def winners(counts):
+    if len(counts) == 0:
+        return []
+    best = max(counts.values())
+    leaders = []
+    for option, count in counts.items():
+        if count == best:
+            leaders.append(option)
+    return leaders
+
+
+def winner_line(leaders):
+    if len(leaders) == 0:
+        return "No votes"
+    elif len(leaders) == 1:
+        return "Winner: " + leaders[0]
+    else:
+        return "Tied: " + ", ".join(sorted(leaders))
+
+
+counts = tally(votes)
+ranked = sorted(counts, key=counts.get, reverse=True)
+for option in ranked:
+    report_line(option, counts[option], len(votes))
+print("Total votes:", len(votes))
+print("Options:", len(set(votes)))
+leaders = winners(counts)
+print(winner_line(leaders))
+```
+
+Tacos and sushi both have 4 votes, and `sorted()` keeps tied keys in the dictionary's order: tacos turned up first. `len(set(votes))` counts the different options, which is the set doing the job it is for. `len(counts)` gives the same number.
