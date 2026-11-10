@@ -115,6 +115,83 @@ print("Total", 3.75 + 3.00 + 2.50)
 
 Your words can differ. What matters is a comment for each step, and a total that Python works out.
 
+## ch01-practice#1
+
+```python
+print("======================================")
+print("         RIVERSIDE FILM CLUB")
+print("======================================")
+```
+
+Copying the lines from the flyer is the easy way to get 38 equals signs and nine spaces exactly right.
+
+## ch01-practice#2
+
+```python
+print("Feature:  The Quiet Harbor  (1998)")
+```
+
+One string, spaces and all, exactly as it should look.
+
+## ch01-practice#3
+
+```python
+print("Feature:", "The Quiet Harbor  (1998)")
+```
+
+The comma always puts in exactly one space. When the spacing matters, put the spaces inside the string, as in step 2.
+
+## ch01-practice#4
+
+```python
+print("When:     Friday, 7:30 pm")
+print("Where:    Room 14")
+```
+
+The words line up because the spaces are inside the strings: five after `When:`, four after `Where:`.
+
+## ch01-practice#5
+
+```python
+print("Seats available:", 8 * 12)
+```
+
+`8 * 12` rather than 96: if the room gets another row, you change one number and Python does the rest. The comma puts in the space after the colon.
+
+## ch01-practice#6
+
+```python
+print("Popcorn for 3:", 3 * 3.75)
+```
+
+The calculation is worked out before `print()` shows it.
+
+## ch01-practice#7
+
+```python
+# Say it: print the film club's flyer for Friday, with the seats
+# and the popcorn price worked out by Python.
+# Split it:
+# 1. print the top: the line, the club's name, the line
+# 2. print the feature, when and where
+# 3. print the seats and the popcorn
+# 4. print the line at the bottom
+print("======================================")
+print("         RIVERSIDE FILM CLUB")
+print("======================================")
+print()
+print("Feature:  The Quiet Harbor  (1998)")
+print("When:     Friday, 7:30 pm")
+print("Where:    Room 14")
+print()
+print("Seats available:", 8 * 12)
+print("Popcorn for 3:", 3 * 3.75)
+print()
+print("======================================")
+```
+
+Your comments can say it in your own words. What matters is a comment for each part, the blank lines from an empty `print()`, and the two numbers worked out by Python.
+
 ## ch02a-naming-a-value#3
 
 ```python

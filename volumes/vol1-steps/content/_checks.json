@@ -478,6 +478,34 @@
       }
     ]
   },
+  "ch01-practice#1": {
+    "kind": "output",
+    "expected": "======================================\n         RIVERSIDE FILM CLUB\n======================================"
+  },
+  "ch01-practice#2": {
+    "kind": "output",
+    "expected": "Feature:  The Quiet Harbor  (1998)"
+  },
+  "ch01-practice#3": {
+    "kind": "output",
+    "expected": "Feature: The Quiet Harbor  (1998)"
+  },
+  "ch01-practice#4": {
+    "kind": "output",
+    "expected": "When:     Friday, 7:30 pm\nWhere:    Room 14"
+  },
+  "ch01-practice#5": {
+    "kind": "output",
+    "expected": "Seats available: 96"
+  },
+  "ch01-practice#6": {
+    "kind": "output",
+    "expected": "Popcorn for 3: 11.25"
+  },
+  "ch01-practice#7": {
+    "kind": "output",
+    "expected": "======================================\n         RIVERSIDE FILM CLUB\n======================================\n\nFeature:  The Quiet Harbor  (1998)\nWhen:     Friday, 7:30 pm\nWhere:    Room 14\n\nSeats available: 96\nPopcorn for 3: 11.25\n\n======================================"
+  },
   "ch03a-more-arithmetic#1": {
     "kind": "predict"
   },
