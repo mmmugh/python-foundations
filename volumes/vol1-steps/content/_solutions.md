@@ -3490,3 +3490,36 @@ def selection_count(items):
 ```
 
 The count goes up once each time the inner loop runs, because each pass of it makes one comparison. For 5 items that is 4 + 3 + 2 + 1 + 0. The order of the items never changes the count: a selection sort does the same comparisons on a sorted list as on a jumbled one.
+
+## ch11e-bubble-sort#7
+
+```python
+def bubble_swaps(items):
+    swaps = 0
+    result = items.copy()
+    for done in range(len(result)):
+        for position in range(len(result) - 1 - done):
+            if result[position] > result[position + 1]:
+                result[position], result[position + 1] = result[position + 1], result[position]
+                swaps += 1
+    return swaps
+```
+
+The count goes up inside the `if`, next to the swap, so only real swaps count. Stopping early would give the same count: a pass that swaps nothing adds nothing. Two equal neighbors are never swapped, because `>` asks whether the left one is bigger.
+
+## ch11e-bubble-sort#8
+
+```python
+# Say it: a list goes in; True comes out if it is in order, smallest first, and False if any neighbor pair is the wrong way round.
+# Split it:
+# 1. walk along the neighbor pairs, as one pass of a bubble sort does
+# 2. as soon as a left item is bigger than its right neighbor, give back False
+# 3. below the loop, give back True
+def is_sorted(items):
+    for position in range(len(items) - 1):
+        if items[position] > items[position + 1]:
+            return False
+    return True
+```
+
+One pass, with no swaps: the first pair the wrong way round settles it. Equal neighbors are fine, because `>` asks whether the left one is bigger. For `[]` and `[7]`, `range(len(items) - 1)` gives no positions, the loop never runs, and the answer is `True`.

@@ -10780,5 +10780,231 @@
         45
       ]
     ]
+  },
+  "ch11e-bubble-sort#1": {
+    "kind": "predict"
+  },
+  "ch11e-bubble-sort#2": {
+    "kind": "choice",
+    "options": [
+      "36",
+      "15",
+      "6"
+    ],
+    "answer": 1,
+    "why": "5 + 4 + 3 + 2 + 1 is 15: each pass compares one fewer item than the pass before. 36 would be 6 times 6."
+  },
+  "ch11e-bubble-sort#3": {
+    "kind": "trace",
+    "names": [
+      "position",
+      "numbers"
+    ]
+  },
+  "ch11e-bubble-sort#4": {
+    "kind": "predict"
+  },
+  "ch11e-bubble-sort#5": {
+    "kind": "choice",
+    "options": [
+      "The last `done` items are in their final places already, so comparing them again would change nothing.",
+      "Without `- done`, the sort would give back a wrong answer.",
+      "`- done` makes the list itself shorter."
+    ],
+    "answer": 0,
+    "why": "Each pass carries the biggest item still out of place to the end, so after `done` passes the last `done` items are final. Comparing them again gives the same answer, only slower."
+  },
+  "ch11e-bubble-sort#6": {
+    "kind": "predict"
+  },
+  "ch11e-bubble-sort#7": {
+    "kind": "function",
+    "name": "bubble_swaps",
+    "cases": [
+      [
+        [
+          [
+            5,
+            1,
+            4,
+            2
+          ]
+        ],
+        4
+      ],
+      [
+        [
+          []
+        ],
+        0
+      ],
+      [
+        [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        0
+      ],
+      [
+        [
+          [
+            2,
+            2
+          ]
+        ],
+        0
+      ],
+      [
+        [
+          [
+            4,
+            3,
+            2,
+            1
+          ]
+        ],
+        6
+      ],
+      [
+        [
+          [
+            2,
+            1
+          ]
+        ],
+        1
+      ],
+      [
+        [
+          [
+            7
+          ]
+        ],
+        0
+      ],
+      [
+        [
+          [
+            3,
+            -1,
+            2
+          ]
+        ],
+        2
+      ],
+      [
+        [
+          [
+            1,
+            1,
+            0
+          ]
+        ],
+        2
+      ]
+    ]
+  },
+  "ch11e-bubble-sort#8": {
+    "kind": "function",
+    "name": "is_sorted",
+    "cases": [
+      [
+        [
+          [
+            1,
+            2,
+            2,
+            5
+          ]
+        ],
+        true
+      ],
+      [
+        [
+          [
+            1,
+            3,
+            2
+          ]
+        ],
+        false
+      ],
+      [
+        [
+          []
+        ],
+        true
+      ],
+      [
+        [
+          [
+            7
+          ]
+        ],
+        true
+      ],
+      [
+        [
+          [
+            2,
+            1
+          ]
+        ],
+        false
+      ],
+      [
+        [
+          [
+            -3,
+            -1,
+            0
+          ]
+        ],
+        true
+      ],
+      [
+        [
+          [
+            0,
+            -1
+          ]
+        ],
+        false
+      ],
+      [
+        [
+          [
+            5,
+            5,
+            5
+          ]
+        ],
+        true
+      ],
+      [
+        [
+          [
+            3,
+            1,
+            2,
+            4
+          ]
+        ],
+        false
+      ],
+      [
+        [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        true
+      ]
+    ]
   }
 }

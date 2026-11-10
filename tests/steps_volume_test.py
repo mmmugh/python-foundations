@@ -173,6 +173,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch11d-selection-sort", "Lesson 11.4 — Selection sort",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch11e-bubble-sort", "Lesson 11.5 — Bubble sort, and stopping early",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300
