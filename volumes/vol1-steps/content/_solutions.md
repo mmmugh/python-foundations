@@ -3342,3 +3342,51 @@ def find_position(items, target):
 ```
 
 `return position` ends the search at the first match, so a later match is never reached. For an empty list, `range(0)` gives no positions, the loop never runs, and the function gives back -1. A match at position 0 gives back 0, which is a real position: that is why "not found" is -1, and not 0.
+
+## ch11b-binary-search#6
+
+```python
+numbers = [4, 8, 9, 15, 17, 23, 42]
+target = 17
+low = 0
+high = len(numbers) - 1
+where = -1
+while low <= high:
+    middle = (low + high) // 2
+    if numbers[middle] == target:
+        where = middle
+        break
+    elif numbers[middle] < target:
+        low = middle + 1
+    else:
+        high = middle - 1
+print(where)
+```
+
+`/` always gives back a float: `(0 + 6) / 2` is `3.0`, and a list cannot be indexed with a float, even one with nothing after the point. `//` gives back the whole number 3.
+
+## ch11b-binary-search#9
+
+```python
+# Say it: a sorted list and a target go in; the position of the target comes out, or -1, found by halving.
+# Split it:
+# 1. low is the first position, high the last
+# 2. while low <= high, work out the middle
+# 3. if the middle item is the target, give back the middle
+# 4. if it is smaller, move low past the middle; otherwise move high before it
+# 5. below the loop, give back -1
+def binary_search(items, target):
+    low = 0
+    high = len(items) - 1
+    while low <= high:
+        middle = (low + high) // 2
+        if items[middle] == target:
+            return middle
+        elif items[middle] < target:
+            low = middle + 1
+        else:
+            high = middle - 1
+    return -1
+```
+
+`return middle` does the job of the example's `break`. For an empty list, `high` starts at -1, so `0 <= -1` is `False`: the loop never runs, and the function gives back -1 without looking at anything. For `[7]`, `low` and `high` are both 0, and `<=` lets that one item be looked at.

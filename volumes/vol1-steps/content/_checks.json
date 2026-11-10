@@ -10251,5 +10251,283 @@
         0
       ]
     ]
+  },
+  "ch11b-binary-search#1": {
+    "kind": "predict"
+  },
+  "ch11b-binary-search#2": {
+    "kind": "choice",
+    "options": [
+      "All 1,000",
+      "500",
+      "1"
+    ],
+    "answer": 0,
+    "why": "It cannot stop until it finds a match, and there is none, so it looks at every name before it can give back -1."
+  },
+  "ch11b-binary-search#3": {
+    "kind": "trace",
+    "names": [
+      "low",
+      "high",
+      "middle"
+    ]
+  },
+  "ch11b-binary-search#4": {
+    "kind": "predict"
+  },
+  "ch11b-binary-search#5": {
+    "kind": "choice",
+    "options": [
+      "It has no repeated items.",
+      "It is sorted, smallest first.",
+      "It has an odd number of items."
+    ],
+    "answer": 1,
+    "why": "Each pass throws away a half because everything left of the middle is smaller and everything right of it is bigger. Only a sorted list promises that. An even number of items is fine: `//` still finds a middle."
+  },
+  "ch11b-binary-search#6": {
+    "kind": "output",
+    "expected": "4"
+  },
+  "ch11b-binary-search#7": {
+    "kind": "choice",
+    "options": [
+      "`0`",
+      "`-1`",
+      "The loop never ends."
+    ],
+    "answer": 1,
+    "why": "`low` and `high` are both 0, and `0 < 0` is `False`, so the loop never runs, and the one item is never looked at. With `<=`, one item still in play gets its look."
+  },
+  "ch11b-binary-search#8": {
+    "kind": "choice",
+    "options": [
+      "It gives back -1, as it should.",
+      "It gives back 6.",
+      "The loop never ends: `low` stops moving, and the page stops it after 5 seconds."
+    ],
+    "answer": 2,
+    "why": "When `low` is 5 and `high` is 6, the middle is 5 again, and 23 is smaller than 50, so `low = middle` sets `low` to 5 again. Nothing changes, so `low <= high` stays `True` for ever. `middle + 1` puts the middle item out of play, so every pass makes the range smaller."
+  },
+  "ch11b-binary-search#9": {
+    "kind": "function",
+    "name": "binary_search",
+    "cases": [
+      [
+        [
+          [
+            4,
+            8,
+            9,
+            15,
+            17,
+            23,
+            42
+          ],
+          23
+        ],
+        5
+      ],
+      [
+        [
+          [
+            4,
+            8,
+            9,
+            15,
+            17,
+            23,
+            42
+          ],
+          4
+        ],
+        0
+      ],
+      [
+        [
+          [
+            4,
+            8,
+            9,
+            15,
+            17,
+            23,
+            42
+          ],
+          42
+        ],
+        6
+      ],
+      [
+        [
+          [
+            4,
+            8,
+            9,
+            15,
+            17,
+            23,
+            42
+          ],
+          15
+        ],
+        3
+      ],
+      [
+        [
+          [
+            4,
+            8,
+            9,
+            15,
+            17,
+            23,
+            42
+          ],
+          8
+        ],
+        1
+      ],
+      [
+        [
+          [
+            4,
+            8,
+            9,
+            15,
+            17,
+            23,
+            42
+          ],
+          10
+        ],
+        -1
+      ],
+      [
+        [
+          [
+            4,
+            8,
+            9,
+            15,
+            17,
+            23,
+            42
+          ],
+          1
+        ],
+        -1
+      ],
+      [
+        [
+          [
+            4,
+            8,
+            9,
+            15,
+            17,
+            23,
+            42
+          ],
+          99
+        ],
+        -1
+      ],
+      [
+        [
+          [],
+          5
+        ],
+        -1
+      ],
+      [
+        [
+          [
+            7
+          ],
+          7
+        ],
+        0
+      ],
+      [
+        [
+          [
+            7
+          ],
+          3
+        ],
+        -1
+      ],
+      [
+        [
+          [
+            7
+          ],
+          9
+        ],
+        -1
+      ],
+      [
+        [
+          [
+            2,
+            4,
+            6,
+            8
+          ],
+          8
+        ],
+        3
+      ],
+      [
+        [
+          [
+            2,
+            4,
+            6,
+            8
+          ],
+          2
+        ],
+        0
+      ],
+      [
+        [
+          [
+            2,
+            4,
+            6,
+            8
+          ],
+          5
+        ],
+        -1
+      ],
+      [
+        [
+          [
+            -9,
+            -4,
+            0,
+            6
+          ],
+          -4
+        ],
+        1
+      ],
+      [
+        [
+          [
+            -9,
+            -4,
+            0,
+            6
+          ],
+          0
+        ],
+        2
+      ]
+    ]
   }
 }
