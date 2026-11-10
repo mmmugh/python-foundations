@@ -8533,5 +8533,127 @@
   "ch09g-copies#9": {
     "kind": "output",
     "expected": "{'umbrella': 2, 'phone': 1}\n{'umbrella': 3}\n{'umbrella': 3, 'phone': 1}\n{}\n{'umbrella': 3, 'phone': 1}"
+  },
+  "ch10a-tuples-and-unpacking#1": {
+    "kind": "predict"
+  },
+  "ch10a-tuples-and-unpacking#2": {
+    "kind": "choice",
+    "options": [
+      "It stops with an error.",
+      "It changes the list to `[5, 4]`.",
+      "It makes a second list."
+    ],
+    "answer": 1,
+    "why": "A list can change: `=` with an index stores a new value at that position (lesson 7.3)."
+  },
+  "ch10a-tuples-and-unpacking#3": {
+    "kind": "predict"
+  },
+  "ch10a-tuples-and-unpacking#4": {
+    "kind": "output",
+    "expected": "(8, 4)"
+  },
+  "ch10a-tuples-and-unpacking#5": {
+    "kind": "choice",
+    "options": [
+      "The names of everyone who joins a club, as they join",
+      "A shopping list you add to and cross things off",
+      "A date: its day, month and year"
+    ],
+    "answer": 2,
+    "why": "A date is one thing with three parts that stay together and do not change. The other two are collections you add to or take from: lists."
+  },
+  "ch10a-tuples-and-unpacking#6": {
+    "kind": "predict"
+  },
+  "ch10a-tuples-and-unpacking#7": {
+    "kind": "choice",
+    "options": [
+      "A name cannot be unpacked from a split.",
+      "`split()` gives back three words, and there are only two names.",
+      "`split()` needs a space in its brackets."
+    ],
+    "answer": 1,
+    "why": "Unpacking gives one value to each name, so the counts must match: three words, two names."
+  },
+  "ch10a-tuples-and-unpacking#8": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "Ada Lovelace"
+        ],
+        "contains": "Lovelace, Ada"
+      },
+      {
+        "typed": [
+          "Grace Hopper"
+        ],
+        "contains": "Hopper, Grace"
+      }
+    ]
+  },
+  "ch10a-tuples-and-unpacking#9": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "7",
+          "3"
+        ],
+        "contains": "3 7",
+        "absent": [
+          "7 3"
+        ]
+      },
+      {
+        "typed": [
+          "2",
+          "9"
+        ],
+        "contains": "2 9",
+        "absent": [
+          "9 2"
+        ]
+      },
+      {
+        "typed": [
+          "5",
+          "5"
+        ],
+        "contains": "5 5"
+      },
+      {
+        "typed": [
+          "-4",
+          "1"
+        ],
+        "contains": "-4 1",
+        "absent": [
+          "1 -4"
+        ]
+      },
+      {
+        "typed": [
+          "10",
+          "-2"
+        ],
+        "contains": "-2 10",
+        "absent": [
+          "10 -2"
+        ]
+      },
+      {
+        "typed": [
+          "9",
+          "10"
+        ],
+        "contains": "9 10",
+        "absent": [
+          "10 9"
+        ]
+      }
+    ]
   }
 }

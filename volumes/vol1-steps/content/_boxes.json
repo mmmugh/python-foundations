@@ -154,5 +154,21 @@
   "ch09g-copies#15": {
     "raises": "NameError",
     "why": "Starting code: the lines that call remove_item(), which the learner writes above them."
+  },
+  "ch10a-tuples-and-unpacking#2": {
+    "raises": "TypeError",
+    "why": "A tuple cannot change. The error message is the lesson."
+  },
+  "ch10a-tuples-and-unpacking#5": {
+    "raises": "TypeError",
+    "why": "Fix-the-bug practice: storing into a tuple."
+  },
+  "ch10a-tuples-and-unpacking#8": {
+    "raises": "ValueError",
+    "why": "Three values, two names. The error message is the lesson."
+  },
+  "ch10a-tuples-and-unpacking#11": {
+    "raises": "ValueError",
+    "why": "The code above a choice: three words, two names."
   }
 }

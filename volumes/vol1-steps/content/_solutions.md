@@ -2916,3 +2916,40 @@ print(register)
 ```
 
 Every change goes to the copy, so the last line still shows the register as it started. It is `take_one()` from lesson 9.2, working on a copy instead of on the dictionary it was handed.
+
+## ch10a-tuples-and-unpacking#4
+
+```python
+point = (3, 4)
+point = (point[0] + 5, point[1])
+print(point)
+```
+
+A tuple cannot change, so the fix makes a new one, from the old x plus 5 and the old y, and stores it under the same name.
+
+## ch10a-tuples-and-unpacking#8
+
+```python
+full_name = input("Full name: ")
+first, last = full_name.split()
+print(last + ", " + first)
+```
+
+`split()` gives back a list of two words, and unpacking gives the first to `first` and the second to `last`. An f-string, `f"{last}, {first}"`, prints the same.
+
+## ch10a-tuples-and-unpacking#9
+
+```python
+# Say it: two numbers go in; they come out on one line, the smaller first.
+# Split it:
+# 1. ask for the two numbers
+# 2. if the first is bigger, swap them
+# 3. print them both
+first = int(input("First number: "))
+second = int(input("Second number: "))
+if first > second:
+    first, second = second, first
+print(first, second)
+```
+
+On the swap line, Python works out the right side first: a tuple of the two values, the second first. Only then does it unpack that tuple into `first` and `second`, so neither value is lost. Without unpacking, a swap needs a third name to hold one value while the other moves. When the two numbers are the same, no swap happens, and none is needed.
