@@ -704,6 +704,149 @@ print(f"Total coins: {quarters + dimes + nickels + pennies}")
 
 Each coin is the same two lines: `//` takes as many as fit, and `%` keeps what is left for the next coin. Taking the biggest coin first is what makes the number of coins the fewest. 0 cents gives 0 of everything, which is right.
 
+## ch03-practice#1
+
+```python
+pizzas = int(input("How many pizzas? "))
+people = int(input("How many people? "))
+slices = pizzas * 8
+print("Slices:", slices)
+```
+
+`int()` on both answers. Without it, `pizzas` is text, and `"2" * 8` is `22222222`, which is a lot of pizza.
+
+## ch03-practice#2
+
+```python
+pizzas = int(input("How many pizzas? "))
+people = int(input("How many people? "))
+slices = pizzas * 8
+slices_each = slices // people
+slices_left = slices % people
+print("Slices:", slices)
+print("Slices each:", slices_each)
+print("Slices left over:", slices_left)
+```
+
+`//` says how many whole slices each person gets, and `%` says how many are left. With 1 pizza and 10 people, each gets 0 and all 8 are left.
+
+## ch03-practice#3
+
+```python
+pizzas = int(input("How many pizzas? "))
+people = int(input("How many people? "))
+slices = pizzas * 8
+slices_each = slices // people
+slices_left = slices % people
+print("Slices:", slices)
+print("Slices each:", slices_each)
+print("Slices left over:", slices_left)
+print("Any left over?", slices_left > 0)
+```
+
+A comparison is a value, so `print()` can show it. `slices_left != 0` is just as right.
+
+## ch03-practice#4
+
+```python
+pizzas = int(input("How many pizzas? "))
+people = int(input("How many people? "))
+slices = pizzas * 8
+slices_each = slices // people
+slices_left = slices % people
+print("Slices:", slices)
+print("Slices each:", slices_each)
+print("Slices left over:", slices_left)
+print("Any left over?", slices_left > 0)
+cost = pizzas * 13.50
+print(f"Cost: ${cost:.2f}")
+```
+
+`:.2f` shows 27.0 as 27.00, the way money is written.
+
+## ch03-practice#5
+
+```python
+pizzas = int(input("How many pizzas? "))
+people = int(input("How many people? "))
+tax_rate = float(input("Tax rate, as a percent? "))
+slices = pizzas * 8
+slices_each = slices // people
+slices_left = slices % people
+print("Slices:", slices)
+print("Slices each:", slices_each)
+print("Slices left over:", slices_left)
+print("Any left over?", slices_left > 0)
+cost = pizzas * 13.50
+tax = cost * tax_rate / 100
+total = cost + tax
+print(f"Cost: ${cost:.2f}")
+print(f"Tax: ${tax:.2f}")
+print(f"Total: ${total:.2f}")
+```
+
+The tax rate is asked for with `float()`, since 7.5 percent is a rate too. At 7.5 percent the tax is 3.0375, and `:.2f` shows it as 3.04.
+
+## ch03-practice#6
+
+```python
+pizzas = int(input("How many pizzas? "))
+people = int(input("How many people? "))
+tax_rate = float(input("Tax rate, as a percent? "))
+slices = pizzas * 8
+slices_each = slices // people
+slices_left = slices % people
+print("Slices:", slices)
+print("Slices each:", slices_each)
+print("Slices left over:", slices_left)
+print("Any left over?", slices_left > 0)
+cost = pizzas * 13.50
+tax = cost * tax_rate / 100
+total = cost + tax
+print(f"Cost: ${cost:.2f}")
+print(f"Tax: ${tax:.2f}")
+print(f"Total: ${total:.2f}")
+share = round(total / people, 2)
+print("Each person owes:", share)
+```
+
+Split the total with the tax, not the cost: everybody pays their part of the tax too. `round(..., 2)` keeps 2 decimal places, and `:.2f` would show the same cents.
+
+## ch03-practice#7
+
+```python
+# Say it: ask how many pizzas, how many people and the tax rate, then
+# print a bill that splits the slices and the money evenly.
+# Split it:
+# 1. ask the three questions
+# 2. work out the slices each and the slices left
+# 3. work out the cost, the tax, the total and each share
+# 4. print each line, with a line of - above the total
+pizzas = int(input("How many pizzas? "))
+people = int(input("How many people? "))
+tax_rate = float(input("Tax rate, as a percent? "))
+
+slices = pizzas * 8
+slices_each = slices // people
+slices_left = slices % people
+
+cost = pizzas * 13.50
+tax = cost * tax_rate / 100
+total = cost + tax
+share = total / people
+
+print("Slices each:", slices_each)
+print("Slices left over:", slices_left)
+print("Any left over?", slices_left > 0)
+print(f"Cost: ${cost:.2f}")
+print(f"Tax: ${tax:.2f}")
+print("-" * 20)
+print(f"Total: ${total:.2f}")
+print(f"Each person owes: ${share:.2f}")
+```
+
+Every line comes from the three answers. With 0 people, Python stops with a `ZeroDivisionError` at `slices // people`: there is nobody to share between, so there is no answer.
+
 ## ch04a-if-and-else#8
 
 ```python
