@@ -15023,6 +15023,463 @@
     "kind": "output",
     "expected": "      size    linear    binary selection    bubble\n         4         4         3         6         5\n         8         8         4        28        13\n        16        16         5       120        29\n        32        32         6       496        61"
   },
+  "ch11-practice#1": {
+    "kind": "output",
+    "expected": "Priya 55\nNadia 58\nOmar 61\nRuth 61\n[]\n['Ruth', 'Priya', 'Omar', 'Nadia']"
+  },
+  "ch11-practice#2": {
+    "kind": "function",
+    "name": "place_of",
+    "cases": [
+      [
+        [
+          [
+            {
+              "name": "Priya",
+              "seconds": 55
+            },
+            {
+              "name": "Nadia",
+              "seconds": 58
+            },
+            {
+              "name": "Omar",
+              "seconds": 61
+            },
+            {
+              "name": "Ruth",
+              "seconds": 61
+            }
+          ],
+          "Priya"
+        ],
+        1
+      ],
+      [
+        [
+          [
+            {
+              "name": "Priya",
+              "seconds": 55
+            },
+            {
+              "name": "Nadia",
+              "seconds": 58
+            },
+            {
+              "name": "Omar",
+              "seconds": 61
+            },
+            {
+              "name": "Ruth",
+              "seconds": 61
+            }
+          ],
+          "Nadia"
+        ],
+        2
+      ],
+      [
+        [
+          [
+            {
+              "name": "Priya",
+              "seconds": 55
+            },
+            {
+              "name": "Nadia",
+              "seconds": 58
+            },
+            {
+              "name": "Omar",
+              "seconds": 61
+            },
+            {
+              "name": "Ruth",
+              "seconds": 61
+            }
+          ],
+          "Ruth"
+        ],
+        4
+      ],
+      [
+        [
+          [
+            {
+              "name": "Priya",
+              "seconds": 55
+            },
+            {
+              "name": "Nadia",
+              "seconds": 58
+            },
+            {
+              "name": "Omar",
+              "seconds": 61
+            },
+            {
+              "name": "Ruth",
+              "seconds": 61
+            }
+          ],
+          "Omar"
+        ],
+        3
+      ],
+      [
+        [
+          [
+            {
+              "name": "Priya",
+              "seconds": 55
+            },
+            {
+              "name": "Nadia",
+              "seconds": 58
+            },
+            {
+              "name": "Omar",
+              "seconds": 61
+            },
+            {
+              "name": "Ruth",
+              "seconds": 61
+            }
+          ],
+          "Zed"
+        ],
+        0
+      ],
+      [
+        [
+          [
+            {
+              "name": "Priya",
+              "seconds": 55
+            },
+            {
+              "name": "Nadia",
+              "seconds": 58
+            },
+            {
+              "name": "Omar",
+              "seconds": 61
+            },
+            {
+              "name": "Ruth",
+              "seconds": 61
+            }
+          ],
+          "priya"
+        ],
+        0
+      ],
+      [
+        [
+          [],
+          "Priya"
+        ],
+        0
+      ]
+    ]
+  },
+  "ch11-practice#3": {
+    "kind": "output",
+    "expected": "3\n1\n0\nNone\nNone\n[64, 52, 61, 57]"
+  },
+  "ch11-practice#4": {
+    "kind": "function",
+    "name": "closest_pair",
+    "cases": [
+      [
+        [
+          [
+            {
+              "name": "Priya",
+              "seconds": 55
+            },
+            {
+              "name": "Nadia",
+              "seconds": 58
+            },
+            {
+              "name": "Omar",
+              "seconds": 61
+            },
+            {
+              "name": "Ruth",
+              "seconds": 61
+            }
+          ]
+        ],
+        [
+          {
+            "name": "Omar",
+            "seconds": 61
+          },
+          {
+            "name": "Ruth",
+            "seconds": 61
+          }
+        ]
+      ],
+      [
+        [
+          [
+            {
+              "name": "Priya",
+              "seconds": 52
+            },
+            {
+              "name": "Nadia",
+              "seconds": 57
+            },
+            {
+              "name": "Omar",
+              "seconds": 61
+            },
+            {
+              "name": "Quinn",
+              "seconds": 64
+            }
+          ]
+        ],
+        [
+          {
+            "name": "Omar",
+            "seconds": 61
+          },
+          {
+            "name": "Quinn",
+            "seconds": 64
+          }
+        ]
+      ],
+      [
+        [
+          [
+            {
+              "name": "Bo",
+              "seconds": 40
+            },
+            {
+              "name": "Ed",
+              "seconds": 41
+            },
+            {
+              "name": "Jo",
+              "seconds": 49
+            },
+            {
+              "name": "Lu",
+              "seconds": 60
+            }
+          ]
+        ],
+        [
+          {
+            "name": "Bo",
+            "seconds": 40
+          },
+          {
+            "name": "Ed",
+            "seconds": 41
+          }
+        ]
+      ],
+      [
+        [
+          [
+            {
+              "name": "Cy",
+              "seconds": 50
+            },
+            {
+              "name": "Al",
+              "seconds": 53
+            },
+            {
+              "name": "Di",
+              "seconds": 56
+            }
+          ]
+        ],
+        [
+          {
+            "name": "Cy",
+            "seconds": 50
+          },
+          {
+            "name": "Al",
+            "seconds": 53
+          }
+        ]
+      ],
+      [
+        [
+          [
+            {
+              "name": "Ada",
+              "seconds": 70
+            },
+            {
+              "name": "Bo",
+              "seconds": 72
+            }
+          ]
+        ],
+        [
+          {
+            "name": "Ada",
+            "seconds": 70
+          },
+          {
+            "name": "Bo",
+            "seconds": 72
+          }
+        ]
+      ],
+      [
+        [
+          [
+            {
+              "name": "Ada",
+              "seconds": 70
+            }
+          ]
+        ],
+        []
+      ],
+      [
+        [
+          []
+        ],
+        []
+      ]
+    ]
+  },
+  "ch11-practice#5": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "Ruth",
+          "61",
+          "Priya",
+          "55",
+          "Omar",
+          "61",
+          "Nadia",
+          "58",
+          "",
+          "Nadia"
+        ],
+        "words": [
+          "1. Priya 55",
+          "2. Nadia 58",
+          "3. Omar 61",
+          "4. Ruth 61",
+          "Nadia is in place 2",
+          "Closest finish: Omar 61 and Ruth 61"
+        ],
+        "absent": [
+          "Nadia did not run"
+        ]
+      },
+      {
+        "typed": [
+          "Quinn",
+          "64",
+          "Priya",
+          "52",
+          "Omar",
+          "61",
+          "Nadia",
+          "57",
+          "",
+          "Zed"
+        ],
+        "words": [
+          "1. Priya 52",
+          "2. Nadia 57",
+          "3. Omar 61",
+          "4. Quinn 64",
+          "Zed did not run",
+          "Closest finish: Omar 61 and Quinn 64"
+        ],
+        "absent": [
+          "Zed is in place 0"
+        ]
+      },
+      {
+        "typed": [
+          "Ruth",
+          "61",
+          "Priya",
+          "55",
+          "Omar",
+          "61",
+          "Nadia",
+          "58",
+          "",
+          "priya"
+        ],
+        "words": [
+          "1. Priya 55",
+          "priya did not run",
+          "Closest finish: Omar 61 and Ruth 61"
+        ],
+        "absent": [
+          "priya is in place 1",
+          "priya is in place 0"
+        ]
+      },
+      {
+        "typed": [
+          "Bo",
+          "70",
+          "Ada",
+          "70",
+          "",
+          "Bo"
+        ],
+        "words": [
+          "1. Ada 70",
+          "2. Bo 70",
+          "Bo is in place 2",
+          "Closest finish: Ada 70 and Bo 70"
+        ],
+        "absent": [
+          "Bo did not run",
+          "1. Bo 70"
+        ]
+      },
+      {
+        "typed": [
+          "Di",
+          "56",
+          "Al",
+          "53",
+          "Cy",
+          "50",
+          "",
+          "Di"
+        ],
+        "words": [
+          "1. Cy 50",
+          "2. Al 53",
+          "3. Di 56",
+          "Di is in place 3",
+          "Closest finish: Cy 50 and Al 53"
+        ],
+        "absent": [
+          "Di did not run",
+          "Closest finish: Al 53 and Di 56"
+        ]
+      }
+    ]
+  },
   "ch12a-the-two-parts#1": {
     "kind": "predict"
   },

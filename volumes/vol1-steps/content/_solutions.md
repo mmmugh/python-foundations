@@ -5069,6 +5069,142 @@ for size in [4, 8, 16, 32]:
 
 Each function was checked on its own before the loop puts them together. Read the columns: doubling the size doubles the linear search's count and adds one to the binary search's. The selection sort's count goes up about four times, whatever order the list is in, while the bubble sort, on a list that is nearly in order, makes two passes and stops.
 
+## ch11-practice#1
+
+```python
+def leaderboard(results):
+    return sorted(results, key=lambda runner: (runner["seconds"], runner["name"]))
+
+
+results = [
+    {"name": "Ruth", "seconds": 61},
+    {"name": "Priya", "seconds": 55},
+    {"name": "Omar", "seconds": 61},
+    {"name": "Nadia", "seconds": 58},
+]
+board = leaderboard(results)
+for runner in board:
+    print(runner["name"], runner["seconds"])
+print(leaderboard([]))
+print([runner["name"] for runner in results])
+```
+
+The key gives back a tuple, the seconds and then the name, so a tie on seconds is settled by the name, as in lesson 11.6. `sorted()` gives back a new list, so `results` keeps its order.
+
+## ch11-practice#2
+
+```python
+def place_of(board, name):
+    for position in range(len(board)):
+        if board[position]["name"] == name:
+            return position + 1
+    return 0
+```
+
+The board is a list of records, so the search compares each record's `"name"` field. `position + 1` turns the position counted from 0 into a place counted from 1, and 0 can never be a place, so it is free to mean "not on the board".
+
+## ch11-practice#3
+
+```python
+def smallest_gap(times):
+    if len(times) < 2:
+        return None
+    in_order = sorted(times)
+    smallest = in_order[1] - in_order[0]
+    for position in range(len(in_order) - 1):
+        gap = in_order[position + 1] - in_order[position]
+        if gap < smallest:
+            smallest = gap
+    return smallest
+
+
+times = [64, 52, 61, 57]
+print(smallest_gap(times))
+print(smallest_gap([50, 41, 40]))
+print(smallest_gap([58, 61, 61]))
+print(smallest_gap([70]))
+print(smallest_gap([]))
+print(times)
+```
+
+Once the times are sorted, the two closest are always side by side, so only the neighbors need comparing: one pass, instead of every pair. And in a sorted list the right neighbor is never smaller, so the gap is never negative.
+
+## ch11-practice#4
+
+```python
+def closest_pair(board):
+    if len(board) < 2:
+        return []
+    best = 0
+    for position in range(len(board) - 1):
+        gap = board[position + 1]["seconds"] - board[position]["seconds"]
+        if gap < board[best + 1]["seconds"] - board[best]["seconds"]:
+            best = position
+    return [board[best], board[best + 1]]
+```
+
+`best` keeps the position of the faster runner in the closest pair so far, as lesson 11.4 kept the position of the smallest. Only a gap strictly smaller than the best one moves it, so of two equal gaps, the one nearer the top wins.
+
+## ch11-practice#5
+
+```python
+# Say it: names and times go in, until a blank name, then a name to look
+# up; the leaderboard comes out, then that runner's place, then the
+# closest finish.
+# Split it:
+# 1. ask for names and times until the name is blank, keeping a record of each
+# 2. put the results in leaderboard order
+# 3. print a numbered line for each runner
+# 4. ask for a name, and print its place, or that it did not run
+# 5. print the closest pair
+def leaderboard(results):
+    return sorted(results, key=lambda runner: (runner["seconds"], runner["name"]))
+
+
+def place_of(board, name):
+    for position in range(len(board)):
+        if board[position]["name"] == name:
+            return position + 1
+    return 0
+
+
+def closest_pair(board):
+    if len(board) < 2:
+        return []
+    best = 0
+    for position in range(len(board) - 1):
+        gap = board[position + 1]["seconds"] - board[position]["seconds"]
+        if gap < board[best + 1]["seconds"] - board[best]["seconds"]:
+            best = position
+    return [board[best], board[best + 1]]
+
+
+results = []
+while True:
+    name = input("Name (blank to finish): ")
+    if name == "":
+        break
+    seconds = int(input("Seconds: "))
+    results.append({"name": name, "seconds": seconds})
+
+board = leaderboard(results)
+for position in range(len(board)):
+    runner = board[position]
+    print(f"{position + 1}. {runner['name']} {runner['seconds']}")
+
+wanted = input("Look up: ")
+place = place_of(board, wanted)
+if place == 0:
+    print(wanted, "did not run")
+else:
+    print(f"{wanted} is in place {place}")
+
+first, second = closest_pair(board)
+print(f"Closest finish: {first['name']} {first['seconds']} and {second['name']} {second['seconds']}")
+```
+
+Every function was built and checked on its own first, so this last step only puts them in order. The board is made once, and both the numbered lines and the closest pair use it.
+
 ## ch12a-the-two-parts#7
 
 ```python

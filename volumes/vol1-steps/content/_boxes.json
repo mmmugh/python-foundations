@@ -255,6 +255,14 @@
     "raises": "NameError",
     "why": "Starting code: the lines that call largest_first(), which the learner writes above them."
   },
+  "ch11-practice#0": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call leaderboard(), which the learner writes above them."
+  },
+  "ch11-practice#1": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call smallest_gap(), which the learner writes above them."
+  },
   "ch12a-the-two-parts#6": {
     "raises": "NameError",
     "why": "Starting code: the lines that call stars_down(), which the learner writes above them."
