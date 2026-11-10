@@ -60,7 +60,7 @@ print(sorted(names, key=str.lower, reverse=True))
 
 ### Breaking ties
 
-Two items that compare equal **tie**. `sorted()` keeps tied items in the order they had, as in lesson 9.5, and so does your bubble sort: it swaps only when the left item is bigger, so equal items never pass each other:
+Two items that compare equal tie, as two options did in lesson 9.10's poll. `sorted()` keeps tied items in the order they had, as in lesson 9.5, and so does your bubble sort: it swaps only when the left item is bigger, so equal items never pass each other:
 
 ```python
 results = [
@@ -198,4 +198,4 @@ print(place_for([], 7))
 - Break a tie with a key that gives back a tuple.
 - Find where a new item goes in a sorted list, say where a tie goes, and sort by insertion.
 
-Key words: **tie**, **insertion sort**.
+Key words: **insertion sort**.
