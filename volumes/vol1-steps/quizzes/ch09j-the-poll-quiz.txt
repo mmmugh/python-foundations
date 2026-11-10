@@ -1,0 +1,157 @@
+PYTHON FOUNDATIONS
+Unit 9 - Dictionaries and sets
+
+Name: ________________________________     Date: ______________
+
+Fill in every blank. Where a term is asked for, write the word the course
+uses. Where code is asked for, write exact Python. Where output is asked
+for, write what the program prints, one line per line.
+
+
+VOCABULARY
+----------
+
+ 1. A __________________ stores a connection between a key and a value
+    directly, so a lookup doesn't depend on two lists staying in the same
+    order.
+
+ 2. In a dictionary entry, the part before the colon is the
+    __________________ and the part after the colon is the
+    __________________.
+
+ 3. A __________________ is a collection with no order and no duplicates,
+    best suited to answering one question: is this thing in here?
+
+ 4. In `scores.get("Grace", 0)`, the 0 is the __________________: the
+    value given back when the key is missing.
+
+
+READING CODE
+------------
+
+ 5. What does this print?
+
+        scores = {"Ada": 88, "Grace": 92}
+        scores["Alan"] = 45
+        scores["Ada"] = 91
+        print(scores)
+
+    ____________________________________
+
+ 6. What does this print?
+
+        scores = {"Ada": 88}
+        print(scores.get("Grace"))
+        print(scores.get("Grace", 0))
+
+    ____________________________________
+
+ 7. What does this print?
+
+        text = "a b a c b a"
+        counts = {}
+        for word in text.split():
+            counts[word] = counts.get(word, 0) + 1
+        print(counts)
+
+    ____________________________________
+
+ 8. What does this print?
+
+        scores = {"Ada": 88, "Grace": 92, "Alan": 45}
+        top = max(scores, key=scores.get)
+        print(top)
+
+    ____________________________________
+
+ 9. What does this print?
+
+        scores = {"Mo": 45, "Ada": 88, "Zoe": 92}
+        print(sorted(scores, key=scores.get, reverse=True))
+
+    ____________________________________
+
+10. What does this print?
+
+        band = {"Ada", "Grace", "Alan"}
+        chorus = {"Grace", "Alan", "Katherine"}
+        print(len(band & chorus))
+        print("Ada" in (band - chorus))
+
+    ____________________________________
+
+11. What does this print?
+
+        students = {
+            "Ada": {"score": 88, "grade": "B"},
+            "Grace": {"score": 92, "grade": "A"},
+        }
+        for name, record in students.items():
+            print(f"{name}: {record['score']} ({record['grade']})")
+
+    ____________________________________
+
+12. What does this print?
+
+        stock = {"pens": 10}
+        mine = stock.copy()
+        mine["pens"] = 0
+        print(stock)
+        print(mine)
+
+    ____________________________________
+
+
+WRITING CODE
+------------
+
+13. Fill in the blank:
+
+        scores = {"Ada": 88}
+        # returns 0 instead of raising a KeyError
+        print(scores.__________________("Grace", 0))
+
+14. Fill in the blank:
+
+        scores = {"Ada": 88, "Grace": 92, "Alan": 45}
+        __________________ scores["Alan"]  # removes the "Alan" entry entirely
+        print(scores)
+
+15. Fill in the blank:
+
+        numbers = [1, 2, 2, 3, 3, 3]
+        unique = __________________(numbers)  # removes the duplicates
+        print(sorted(unique))
+
+16. Fill in the blank:
+
+        scores = {"Ada": 88, "Grace": 92}
+        for name, score in scores.__________________():
+            print(name, score)
+
+
+WHY IT WORKS
+------------
+
+17. counts.get(word, 0) returns the current count, or __________________
+    the very first time a word is seen, so counts[word] = counts.get(word,
+    0) + 1 works whether or not the key already __________________.
+
+18. Looping directly over a dictionary, as in for name in scores:, hands
+    you the __________________ only; to get the key and value together in
+    one loop you need .__________________().
+
+19. A loop that takes entries out of the dictionary it is looping over
+    stops with a RuntimeError; looping over a __________________ of the
+    dictionary fixes it.
+
+20. In a trace table of this loop, after the second pass `counts` holds
+    __________________.
+
+        counts = {}
+        for letter in "noon":
+            counts[letter] = counts.get(letter, 0) + 1
+
+21. Check it tried `winners({"sushi": 4, "tacos": 4})`, an awkward case,
+    and the answer was a list of two options, because two options can
+    __________________.

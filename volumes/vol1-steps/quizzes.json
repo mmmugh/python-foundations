@@ -1202,6 +1202,174 @@
      ]
     }
    ]
+  },
+  {
+   "slug": "ch09j-the-poll",
+   "questions": [
+    {
+     "section": "Vocabulary",
+     "text": "A ____ stores a connection between a key and a value directly, so a lookup doesn't depend on two lists staying in the same order.",
+     "answers": [
+      "dictionary"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "In a dictionary entry, the part before the colon is the ____ and the part after the colon is the ____.",
+     "answers": [
+      "key",
+      "value"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "A ____ is a collection with no order and no duplicates, best suited to answering one question: is this thing in here?",
+     "answers": [
+      "set"
+     ]
+    },
+    {
+     "section": "Vocabulary",
+     "text": "In `scores.get(\"Grace\", 0)`, the 0 is the ____: the value given back when the key is missing.",
+     "answers": [
+      "default"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "scores = {\"Ada\": 88, \"Grace\": 92}\nscores[\"Alan\"] = 45\nscores[\"Ada\"] = 91\nprint(scores)",
+     "answers": [
+      "{'Ada': 91, 'Grace': 92, 'Alan': 45}"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "scores = {\"Ada\": 88}\nprint(scores.get(\"Grace\"))\nprint(scores.get(\"Grace\", 0))",
+     "answers": [
+      "None\n0"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "text = \"a b a c b a\"\ncounts = {}\nfor word in text.split():\n    counts[word] = counts.get(word, 0) + 1\nprint(counts)",
+     "answers": [
+      "{'a': 3, 'b': 2, 'c': 1}"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "scores = {\"Ada\": 88, \"Grace\": 92, \"Alan\": 45}\ntop = max(scores, key=scores.get)\nprint(top)",
+     "answers": [
+      "Grace"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "scores = {\"Mo\": 45, \"Ada\": 88, \"Zoe\": 92}\nprint(sorted(scores, key=scores.get, reverse=True))",
+     "answers": [
+      "['Zoe', 'Ada', 'Mo']"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "band = {\"Ada\", \"Grace\", \"Alan\"}\nchorus = {\"Grace\", \"Alan\", \"Katherine\"}\nprint(len(band & chorus))\nprint(\"Ada\" in (band - chorus))",
+     "answers": [
+      "2\nTrue"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "students = {\n    \"Ada\": {\"score\": 88, \"grade\": \"B\"},\n    \"Grace\": {\"score\": 92, \"grade\": \"A\"},\n}\nfor name, record in students.items():\n    print(f\"{name}: {record['score']} ({record['grade']})\")",
+     "answers": [
+      "Ada: 88 (B)\nGrace: 92 (A)"
+     ]
+    },
+    {
+     "section": "Reading code",
+     "text": "What does this print? ____",
+     "code": "stock = {\"pens\": 10}\nmine = stock.copy()\nmine[\"pens\"] = 0\nprint(stock)\nprint(mine)",
+     "answers": [
+      "{'pens': 10}\n{'pens': 0}"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Fill in the blank:",
+     "code": "scores = {\"Ada\": 88}\n# returns 0 instead of raising a KeyError\nprint(scores.____(\"Grace\", 0))",
+     "answers": [
+      "get"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Fill in the blank:",
+     "code": "scores = {\"Ada\": 88, \"Grace\": 92, \"Alan\": 45}\n____ scores[\"Alan\"]  # removes the \"Alan\" entry entirely\nprint(scores)",
+     "answers": [
+      "del"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Fill in the blank:",
+     "code": "numbers = [1, 2, 2, 3, 3, 3]\nunique = ____(numbers)  # removes the duplicates\nprint(sorted(unique))",
+     "answers": [
+      "set"
+     ]
+    },
+    {
+     "section": "Writing code",
+     "text": "Fill in the blank:",
+     "code": "scores = {\"Ada\": 88, \"Grace\": 92}\nfor name, score in scores.____():\n    print(name, score)",
+     "answers": [
+      "items"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "counts.get(word, 0) returns the current count, or ____ the very first time a word is seen, so counts[word] = counts.get(word, 0) + 1 works whether or not the key already ____.",
+     "answers": [
+      "0",
+      "exists"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Looping directly over a dictionary, as in for name in scores:, hands you the ____ only; to get the key and value together in one loop you need .____().",
+     "answers": [
+      "keys",
+      "items"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "A loop that takes entries out of the dictionary it is looping over stops with a RuntimeError; looping over a ____ of the dictionary fixes it.",
+     "answers": [
+      "copy"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "In a trace table of this loop, after the second pass `counts` holds ____.",
+     "code": "counts = {}\nfor letter in \"noon\":\n    counts[letter] = counts.get(letter, 0) + 1",
+     "answers": [
+      "{'n': 1, 'o': 1}"
+     ]
+    },
+    {
+     "section": "Why it works",
+     "text": "Check it tried `winners({\"sushi\": 4, \"tacos\": 4})`, an awkward case, and the answer was a list of two options, because two options can ____.",
+     "answers": [
+      "tie"
+     ]
+    }
+   ]
   }
  ]
 }

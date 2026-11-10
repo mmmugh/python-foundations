@@ -1,0 +1,184 @@
+PYTHON FOUNDATIONS
+Unit 9 - Dictionaries and sets
+
+ANSWER KEY
+
+
+VOCABULARY
+----------
+
+ 1. A ____ stores a connection between a key and a value directly, so a
+    lookup doesn't depend on two lists staying in the same order.
+
+      ANSWER: dictionary
+
+ 2. In a dictionary entry, the part before the colon is the ____ and the
+    part after the colon is the ____.
+
+      ANSWER: key
+      ANSWER: value
+
+ 3. A ____ is a collection with no order and no duplicates, best suited to
+    answering one question: is this thing in here?
+
+      ANSWER: set
+
+ 4. In `scores.get("Grace", 0)`, the 0 is the ____: the value given back
+    when the key is missing.
+
+      ANSWER: default
+
+
+READING CODE
+------------
+
+ 5. What does this print?
+
+        scores = {"Ada": 88, "Grace": 92}
+        scores["Alan"] = 45
+        scores["Ada"] = 91
+        print(scores)
+
+      ANSWER: {'Ada': 91, 'Grace': 92, 'Alan': 45}
+
+ 6. What does this print?
+
+        scores = {"Ada": 88}
+        print(scores.get("Grace"))
+        print(scores.get("Grace", 0))
+
+      ANSWER: None
+          0
+
+ 7. What does this print?
+
+        text = "a b a c b a"
+        counts = {}
+        for word in text.split():
+            counts[word] = counts.get(word, 0) + 1
+        print(counts)
+
+      ANSWER: {'a': 3, 'b': 2, 'c': 1}
+
+ 8. What does this print?
+
+        scores = {"Ada": 88, "Grace": 92, "Alan": 45}
+        top = max(scores, key=scores.get)
+        print(top)
+
+      ANSWER: Grace
+
+ 9. What does this print?
+
+        scores = {"Mo": 45, "Ada": 88, "Zoe": 92}
+        print(sorted(scores, key=scores.get, reverse=True))
+
+      ANSWER: ['Zoe', 'Ada', 'Mo']
+
+10. What does this print?
+
+        band = {"Ada", "Grace", "Alan"}
+        chorus = {"Grace", "Alan", "Katherine"}
+        print(len(band & chorus))
+        print("Ada" in (band - chorus))
+
+      ANSWER: 2
+          True
+
+11. What does this print?
+
+        students = {
+            "Ada": {"score": 88, "grade": "B"},
+            "Grace": {"score": 92, "grade": "A"},
+        }
+        for name, record in students.items():
+            print(f"{name}: {record['score']} ({record['grade']})")
+
+      ANSWER: Ada: 88 (B)
+          Grace: 92 (A)
+
+12. What does this print?
+
+        stock = {"pens": 10}
+        mine = stock.copy()
+        mine["pens"] = 0
+        print(stock)
+        print(mine)
+
+      ANSWER: {'pens': 10}
+          {'pens': 0}
+
+
+WRITING CODE
+------------
+
+13. Fill in the blank:
+
+        scores = {"Ada": 88}
+        # returns 0 instead of raising a KeyError
+        print(scores.____("Grace", 0))
+
+      ANSWER: get
+
+14. Fill in the blank:
+
+        scores = {"Ada": 88, "Grace": 92, "Alan": 45}
+        ____ scores["Alan"]  # removes the "Alan" entry entirely
+        print(scores)
+
+      ANSWER: del
+
+15. Fill in the blank:
+
+        numbers = [1, 2, 2, 3, 3, 3]
+        unique = ____(numbers)  # removes the duplicates
+        print(sorted(unique))
+
+      ANSWER: set
+
+16. Fill in the blank:
+
+        scores = {"Ada": 88, "Grace": 92}
+        for name, score in scores.____():
+            print(name, score)
+
+      ANSWER: items
+
+
+WHY IT WORKS
+------------
+
+17. counts.get(word, 0) returns the current count, or ____ the very first
+    time a word is seen, so counts[word] = counts.get(word, 0) + 1 works
+    whether or not the key already ____.
+
+      ANSWER: 0
+      ANSWER: exists
+
+18. Looping directly over a dictionary, as in for name in scores:, hands
+    you the ____ only; to get the key and value together in one loop you
+    need .____().
+
+      ANSWER: keys
+      ANSWER: items
+
+19. A loop that takes entries out of the dictionary it is looping over
+    stops with a RuntimeError; looping over a ____ of the dictionary fixes
+    it.
+
+      ANSWER: copy
+
+20. In a trace table of this loop, after the second pass `counts` holds
+    ____.
+
+        counts = {}
+        for letter in "noon":
+            counts[letter] = counts.get(letter, 0) + 1
+
+      ANSWER: {'n': 1, 'o': 1}
+
+21. Check it tried `winners({"sushi": 4, "tacos": 4})`, an awkward case,
+    and the answer was a list of two options, because two options can
+    ____.
+
+      ANSWER: tie
