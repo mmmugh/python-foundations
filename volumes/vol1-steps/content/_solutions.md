@@ -2046,6 +2046,137 @@ for candidate in range(50):
 
 `return False` inside the loop stops at the first divisor found: 9 stops at 3. `return True` is after the loop, so it runs only when no divisor was found. For 2, `range(2, 2)` is empty, the loop makes no passes, and 2 is prime, which is right. Without the first `if`, 1, 0 and -7 would also skip the loop, and come back `True`.
 
+## ch06-practice#1
+
+```python
+def c_to_f(celsius):
+    return round(celsius * 9 / 5 + 32, 1)
+
+print(c_to_f(100))
+print(c_to_f(39.2))
+```
+
+Without `round()`, 39.2 gives 102.56, and 36.6 gives `97.88000000000001`, one of those long decimals from lesson 3.2. The function rounds, so every caller gets a tidy answer.
+
+## ch06-practice#2
+
+```python
+def f_to_c(fahrenheit):
+    return round((fahrenheit - 32) * 5 / 9, 1)
+
+print(f_to_c(212))
+print(f_to_c(0))
+```
+
+The brackets make the take-away happen first, before the multiplying. 0 Fahrenheit gives -17.8: a function gives back numbers below 0 as happily as any other.
+
+## ch06-practice#3
+
+```python
+def km_to_miles(km):
+    return round(km * 0.621371, 2)
+
+print(km_to_miles(5))
+```
+
+5 km is 3.106855 miles, which rounds to 3.11.
+
+## ch06-practice#4
+
+```python
+def cups_to_ml(cups):
+    return round(cups * 236.588, 1)
+
+print(cups_to_ml(2))
+```
+
+2 cups is 473.176 ml, which rounds to 473.2. 0 cups gives 0.0, which is right.
+
+## ch06-practice#5
+
+```python
+def c_to_f(celsius):
+    return round(celsius * 9 / 5 + 32, 1)
+
+def oven_setting(celsius):
+    fahrenheit = c_to_f(celsius)
+    return round(fahrenheit / 25) * 25
+
+print(oven_setting(180))
+print(oven_setting(200))
+```
+
+356.0 holds 14.24 lots of 25. `round()` with no places gives the nearest whole number, 14, and 14 lots of 25 is 350. 200 C is 392.0 F, which is 15.68 lots, so the dial goes up to 400. The sum for Fahrenheit is written once, in `c_to_f()`, and `oven_setting()` uses it.
+
+## ch06-practice#6
+
+```python
+def hours_in(minutes):
+    return minutes // 60
+
+print(hours_in(125))
+print(hours_in(45))
+```
+
+`//` gives how many whole 60s fit. 45 minutes is 0 whole hours.
+
+## ch06-practice#7
+
+```python
+def minutes_left(minutes):
+    return minutes % 60
+
+print(minutes_left(125))
+print(minutes_left(60))
+```
+
+`%` gives what is left after the whole hours. 60 minutes is exactly 1 hour, so 0 is left.
+
+## ch06-practice#8
+
+```python
+# Say it: ask for a temperature, a distance, some cups and a cooking time,
+# and print each one converted, using the toolkit's functions.
+# Split it:
+# 1. ask the four questions
+# 2. print the temperature line and the oven dial line
+# 3. print the distance line
+# 4. print the cups line
+# 5. print the time line
+def c_to_f(celsius):
+    return round(celsius * 9 / 5 + 32, 1)
+
+def oven_setting(celsius):
+    return round(c_to_f(celsius) / 25) * 25
+
+def km_to_miles(km):
+    return round(km * 0.621371, 2)
+
+def cups_to_ml(cups):
+    return round(cups * 236.588, 1)
+
+def hours_in(minutes):
+    return minutes // 60
+
+def minutes_left(minutes):
+    return minutes % 60
+
+def main():
+    celsius = float(input("Temperature, in degrees C? "))
+    km = float(input("Distance, in km? "))
+    cups = float(input("How many cups? "))
+    minutes = int(input("Cooking time, in minutes? "))
+    print(f"{celsius} C is {c_to_f(celsius)} F")
+    print(f"Oven dial: {oven_setting(celsius)}")
+    print(f"{km} km is {km_to_miles(km)} miles")
+    print(f"{cups} cups is {cups_to_ml(cups)} ml")
+    print(f"{minutes} minutes is {hours_in(minutes)} h {minutes_left(minutes)} min")
+
+main()
+```
+
+`main()` is the plan from Split it, as code, and each line of it uses a function you checked on its own. `float()` turns 180 into `180.0`, so the first line says `180.0 C`; that is the same temperature. (`f_to_c()` is not needed here, and that is fine: a toolkit can hold more than one program uses.)
+
 ## ch07a-lists-and-indexing#7
 
 ```python
