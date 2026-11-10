@@ -3189,3 +3189,114 @@ def titles_by_author(books):
 ```
 
 `setdefault()` gives back the author's list, making an empty one the first time the author turns up, and `append()` adds the title to it. The titles go in the order the books are in, because the loop goes through them in that order.
+
+## ch10g-the-inventory#4
+
+```python
+def stock_label(quantity):
+    return "OUT OF STOCK" if quantity == 0 else f"{quantity} left"
+```
+
+The four-line `if` and `else`, each with its own `return`, gives back the same values.
+
+## ch10g-the-inventory#6
+
+```python
+def total_value(items):
+    total = 0
+    for item in items:
+        total += item["price"] * item["quantity"]
+    return total
+```
+
+For an empty list, the loop never runs, and the total stays 0.
+
+## ch10g-the-inventory#7
+
+```python
+def low_stock(items, limit):
+    low = [item for item in items if item["quantity"] <= limit]
+    return sorted(low, key=lambda item: item["quantity"])
+```
+
+`<=` keeps an item with exactly `limit` left, as "at or below" says. `sorted()` keeps the order of records whose quantities tie.
+
+## ch10g-the-inventory#8
+
+```python
+def by_category(items):
+    groups = {}
+    for item in items:
+        groups.setdefault(item["category"], []).append(item)
+    return groups
+```
+
+Each list holds whole records, not names, so the report can work out how many items a category has, and what they are worth, with `len()` and `total_value()`.
+
+## ch10g-the-inventory#9
+
+```python
+# Say it: print a report on the shop's stock.
+# Split it:
+# 1. a line for each item, in order of name
+# 2. the total value of all the stock
+# 3. a line for each item at or below LOW_STOCK, fewest first, with its label
+# 4. a line for each category, in order, with its number of items and their value
+def item_line(item):
+    """Print one item's line: name, category, price, quantity and value."""
+    value = item["price"] * item["quantity"]
+    words = f"{item['name']:<12}{item['category']:<10}"
+    numbers = f"{item['price']:>7.2f}{item['quantity']:>5}{value:>9.2f}"
+    print(words + numbers)
+
+
+LOW_STOCK = 10
+
+inventory = [
+    {"name": "Notebook", "category": "paper", "price": 3.50, "quantity": 42},
+    {"name": "Pens", "category": "writing", "price": 2.25, "quantity": 10},
+    {"name": "Stickers", "category": "paper", "price": 1.75, "quantity": 120},
+    {"name": "Backpack", "category": "bags", "price": 34.99, "quantity": 5},
+    {"name": "Pencils", "category": "writing", "price": 1.20, "quantity": 3},
+    {"name": "Lunch box", "category": "bags", "price": 12.00, "quantity": 0},
+    {"name": "Ruler", "category": "writing", "price": 0.85, "quantity": 15},
+]
+
+
+def stock_label(quantity):
+    return "OUT OF STOCK" if quantity == 0 else f"{quantity} left"
+
+
+def total_value(items):
+    total = 0
+    for item in items:
+        total += item["price"] * item["quantity"]
+    return total
+
+
+def low_stock(items, limit):
+    low = [item for item in items if item["quantity"] <= limit]
+    return sorted(low, key=lambda item: item["quantity"])
+
+
+def by_category(items):
+    groups = {}
+    for item in items:
+        groups.setdefault(item["category"], []).append(item)
+    return groups
+
+
+for item in sorted(inventory, key=lambda item: item["name"]):
+    item_line(item)
+print(f"Total value: {total_value(inventory):.2f}")
+print(f"Low stock, at or below {LOW_STOCK}:")
+for item in low_stock(inventory, LOW_STOCK):
+    print(f"{item['name']:<12}{stock_label(item['quantity'])}")
+print("By category:")
+groups = by_category(inventory)
+for category in sorted(groups):
+    members = groups[category]
+    print(f"{category:<12}{len(members)} items{total_value(members):>9.2f}")
+```
+
+`total_value()` is used twice: once on the whole stock, and once on each category's list of records. That is why it takes a list, not one item. If `LOW_STOCK` changes, the low-stock lines and their heading both follow, because the heading prints the constant too.

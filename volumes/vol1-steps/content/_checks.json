@@ -9535,5 +9535,400 @@
         }
       ]
     ]
+  },
+  "ch10g-the-inventory#1": {
+    "kind": "predict"
+  },
+  "ch10g-the-inventory#2": {
+    "kind": "choice",
+    "options": [
+      "`sorted(items)`",
+      "`sorted(items, key=items[\"price\"])`",
+      "`sorted(items, key=lambda item: item[\"price\"])`"
+    ],
+    "answer": 2,
+    "why": "`key=` needs a function that takes one record and gives back its price. `sorted(items)` stops, because two dictionaries cannot be compared, and `items[\"price\"]` asks the list for a key it does not have."
+  },
+  "ch10g-the-inventory#3": {
+    "kind": "predict"
+  },
+  "ch10g-the-inventory#4": {
+    "kind": "function",
+    "name": "stock_label",
+    "cases": [
+      [
+        [
+          8
+        ],
+        "8 left"
+      ],
+      [
+        [
+          1
+        ],
+        "1 left"
+      ],
+      [
+        [
+          0
+        ],
+        "OUT OF STOCK"
+      ],
+      [
+        [
+          120
+        ],
+        "120 left"
+      ]
+    ]
+  },
+  "ch10g-the-inventory#5": {
+    "kind": "choice",
+    "options": [
+      "Python only lets names in capitals be used inside a function.",
+      "It is a constant: the capitals tell a reader it stays the same for the whole program.",
+      "Capitals make the program run faster."
+    ],
+    "answer": 1,
+    "why": "Python does not enforce it. The capitals are a message to whoever reads the code: this value is fixed, so change it only here."
+  },
+  "ch10g-the-inventory#6": {
+    "kind": "function",
+    "name": "total_value",
+    "cases": [
+      [
+        [
+          [
+            {
+              "name": "Pens",
+              "category": "writing",
+              "price": 2.25,
+              "quantity": 8
+            }
+          ]
+        ],
+        18.0
+      ],
+      [
+        [
+          []
+        ],
+        0
+      ],
+      [
+        [
+          [
+            {
+              "name": "Pens",
+              "category": "writing",
+              "price": 2.25,
+              "quantity": 8
+            },
+            {
+              "name": "Pads",
+              "category": "paper",
+              "price": 0.5,
+              "quantity": 4
+            },
+            {
+              "name": "Caps",
+              "category": "bags",
+              "price": 1.75,
+              "quantity": 0
+            }
+          ]
+        ],
+        20.0
+      ],
+      [
+        [
+          [
+            {
+              "name": "Caps",
+              "category": "bags",
+              "price": 1.75,
+              "quantity": 0
+            }
+          ]
+        ],
+        0
+      ],
+      [
+        [
+          [
+            {
+              "name": "Pads",
+              "category": "paper",
+              "price": 0.5,
+              "quantity": 4
+            },
+            {
+              "name": "Pads",
+              "category": "paper",
+              "price": 0.5,
+              "quantity": 4
+            }
+          ]
+        ],
+        4.0
+      ]
+    ]
+  },
+  "ch10g-the-inventory#7": {
+    "kind": "function",
+    "name": "low_stock",
+    "cases": [
+      [
+        [
+          [
+            {
+              "name": "Ten",
+              "category": "x",
+              "price": 1.0,
+              "quantity": 10
+            },
+            {
+              "name": "Eleven",
+              "category": "x",
+              "price": 1.0,
+              "quantity": 11
+            },
+            {
+              "name": "Two",
+              "category": "x",
+              "price": 1.0,
+              "quantity": 2
+            }
+          ],
+          10
+        ],
+        [
+          {
+            "name": "Two",
+            "category": "x",
+            "price": 1.0,
+            "quantity": 2
+          },
+          {
+            "name": "Ten",
+            "category": "x",
+            "price": 1.0,
+            "quantity": 10
+          }
+        ]
+      ],
+      [
+        [
+          [],
+          10
+        ],
+        []
+      ],
+      [
+        [
+          [
+            {
+              "name": "Eleven",
+              "category": "x",
+              "price": 1.0,
+              "quantity": 11
+            }
+          ],
+          10
+        ],
+        []
+      ],
+      [
+        [
+          [
+            {
+              "name": "Ann",
+              "category": "x",
+              "price": 1.0,
+              "quantity": 2
+            },
+            {
+              "name": "None left",
+              "category": "x",
+              "price": 1.0,
+              "quantity": 0
+            },
+            {
+              "name": "Bo",
+              "category": "x",
+              "price": 1.0,
+              "quantity": 2
+            }
+          ],
+          5
+        ],
+        [
+          {
+            "name": "None left",
+            "category": "x",
+            "price": 1.0,
+            "quantity": 0
+          },
+          {
+            "name": "Ann",
+            "category": "x",
+            "price": 1.0,
+            "quantity": 2
+          },
+          {
+            "name": "Bo",
+            "category": "x",
+            "price": 1.0,
+            "quantity": 2
+          }
+        ]
+      ],
+      [
+        [
+          [
+            {
+              "name": "None left",
+              "category": "x",
+              "price": 1.0,
+              "quantity": 0
+            },
+            {
+              "name": "Ten",
+              "category": "x",
+              "price": 1.0,
+              "quantity": 10
+            }
+          ],
+          0
+        ],
+        [
+          {
+            "name": "None left",
+            "category": "x",
+            "price": 1.0,
+            "quantity": 0
+          }
+        ]
+      ],
+      [
+        [
+          [
+            {
+              "name": "Eleven",
+              "category": "x",
+              "price": 1.0,
+              "quantity": 11
+            },
+            {
+              "name": "Twelve",
+              "category": "x",
+              "price": 1.0,
+              "quantity": 12
+            },
+            {
+              "name": "Two",
+              "category": "x",
+              "price": 1.0,
+              "quantity": 2
+            }
+          ],
+          10
+        ],
+        [
+          {
+            "name": "Two",
+            "category": "x",
+            "price": 1.0,
+            "quantity": 2
+          }
+        ]
+      ]
+    ]
+  },
+  "ch10g-the-inventory#8": {
+    "kind": "function",
+    "name": "by_category",
+    "cases": [
+      [
+        [
+          [
+            {
+              "name": "Pens",
+              "category": "writing",
+              "price": 1.0,
+              "quantity": 8
+            },
+            {
+              "name": "Pads",
+              "category": "paper",
+              "price": 1.0,
+              "quantity": 4
+            },
+            {
+              "name": "Inks",
+              "category": "writing",
+              "price": 1.0,
+              "quantity": 1
+            }
+          ]
+        ],
+        {
+          "writing": [
+            {
+              "name": "Pens",
+              "category": "writing",
+              "price": 1.0,
+              "quantity": 8
+            },
+            {
+              "name": "Inks",
+              "category": "writing",
+              "price": 1.0,
+              "quantity": 1
+            }
+          ],
+          "paper": [
+            {
+              "name": "Pads",
+              "category": "paper",
+              "price": 1.0,
+              "quantity": 4
+            }
+          ]
+        }
+      ],
+      [
+        [
+          []
+        ],
+        {}
+      ],
+      [
+        [
+          [
+            {
+              "name": "Pads",
+              "category": "paper",
+              "price": 1.0,
+              "quantity": 4
+            }
+          ]
+        ],
+        {
+          "paper": [
+            {
+              "name": "Pads",
+              "category": "paper",
+              "price": 1.0,
+              "quantity": 4
+            }
+          ]
+        }
+      ]
+    ]
+  },
+  "ch10g-the-inventory#9": {
+    "kind": "output",
+    "expected": "Backpack    bags        34.99    5   174.95\nLunch box   bags        12.00    0     0.00\nNotebook    paper        3.50   42   147.00\nPencils     writing      1.20    3     3.60\nPens        writing      2.25   10    22.50\nRuler       writing      0.85   15    12.75\nStickers    paper        1.75  120   210.00\nTotal value: 570.80\nLow stock, at or below 10:\nLunch box   OUT OF STOCK\nPencils     3 left\nBackpack    5 left\nPens        10 left\nBy category:\nbags        2 items   174.95\npaper       2 items   357.00\nwriting     3 items    38.85"
   }
 }

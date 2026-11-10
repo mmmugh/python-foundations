@@ -163,6 +163,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch10f-grouping", "Lesson 10.6 — Grouping, and setdefault()",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch10g-the-inventory", "Lesson 10.7 — Choosing a value, and an inventory",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300
