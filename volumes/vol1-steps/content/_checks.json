@@ -7680,5 +7680,158 @@
         "b"
       ]
     ]
+  },
+  "ch09f-nested#1": {
+    "kind": "predict"
+  },
+  "ch09f-nested#2": {
+    "kind": "choice",
+    "options": [
+      "`\"Zoe\"`",
+      "`\"Ada\"`",
+      "`88`"
+    ],
+    "answer": 0,
+    "why": "`max()` of a dictionary compares its keys, in alphabetical order, and Zoe comes after Ada. To compare by value, it needs `key=` and the dictionary's `get`."
+  },
+  "ch09f-nested#3": {
+    "kind": "predict"
+  },
+  "ch09f-nested#4": {
+    "kind": "choice",
+    "options": [
+      "`students[\"grade\"][\"Grace\"]`",
+      "`students[\"Grace\"][\"grade\"]`",
+      "`students[\"A\"]`"
+    ],
+    "answer": 1,
+    "why": "One level at a time: `students[\"Grace\"]` is Grace's dictionary, and `[\"grade\"]` picks her grade out of it. `\"grade\"` is not a key of `students`, and neither is `\"A\"`, which is a value two levels down."
+  },
+  "ch09f-nested#5": {
+    "kind": "predict"
+  },
+  "ch09f-nested#6": {
+    "kind": "output",
+    "expected": "Ada: grade 7, likes math\nGrace: grade 8, likes science\nAlan: grade 7, likes art"
+  },
+  "ch09f-nested#7": {
+    "kind": "function",
+    "name": "class_average",
+    "cases": [
+      [
+        [
+          {
+            "Ada": {
+              "score": 88,
+              "grade": "B"
+            },
+            "Grace": {
+              "score": 92,
+              "grade": "A"
+            }
+          }
+        ],
+        90.0
+      ],
+      [
+        [
+          {}
+        ],
+        0
+      ],
+      [
+        [
+          {
+            "Bo": {
+              "score": 0,
+              "grade": "F"
+            }
+          }
+        ],
+        0
+      ],
+      [
+        [
+          {
+            "Mo": {
+              "score": 70,
+              "grade": "C"
+            },
+            "Kim": {
+              "score": 75,
+              "grade": "C"
+            },
+            "Lee": {
+              "score": 80,
+              "grade": "B"
+            }
+          }
+        ],
+        75.0
+      ],
+      [
+        [
+          {
+            "Zoe": {
+              "grade": "B",
+              "score": 85
+            }
+          }
+        ],
+        85
+      ]
+    ]
+  },
+  "ch09f-nested#8": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "chess"
+        ],
+        "words": [
+          "chess meets in B12 on Monday."
+        ],
+        "absent": [
+          "No club called chess."
+        ]
+      },
+      {
+        "typed": [
+          "robots"
+        ],
+        "words": [
+          "robots meets in Lab 2 on Friday."
+        ],
+        "absent": [
+          "No club called robots."
+        ]
+      },
+      {
+        "typed": [
+          "knitting"
+        ],
+        "words": [
+          "No club called knitting."
+        ]
+      },
+      {
+        "typed": [
+          "Chess"
+        ],
+        "contains": "No club called Chess.",
+        "absent": [
+          "Chess meets in B12 on Monday."
+        ]
+      },
+      {
+        "typed": [
+          ""
+        ],
+        "words": [
+          "No club called"
+        ]
+      }
+    ]
   }
 }

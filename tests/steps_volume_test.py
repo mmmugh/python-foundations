@@ -141,6 +141,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch09e-the-most", "Lesson 9.5 — Which key has the most?",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch09f-nested", "Lesson 9.6 — Dictionaries inside dictionaries",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

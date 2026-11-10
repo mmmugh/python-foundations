@@ -2622,3 +2622,55 @@ def most_common(text):
 ```
 
 The keys go into `counts` in the order the characters first appear, so on a tie `max()` gives back the one that appears first. For `""` and `"   "` nothing is counted, and `max()` of an empty dictionary would stop with a `ValueError`: that is why step 2 comes before step 3.
+
+## ch09f-nested#6
+
+```python
+students = {
+    "Ada": {"grade": 7, "subject": "math"},
+    "Grace": {"grade": 8, "subject": "science"},
+    "Alan": {"grade": 7, "subject": "art"},
+}
+for name, details in students.items():
+    print(f"{name}: grade {details['grade']}, likes {details['subject']}")
+```
+
+`details` is one student's own dictionary, so `details['grade']` is one level down from `students`. `students[name]['grade']` in a loop over the names works too.
+
+## ch09f-nested#7
+
+```python
+def class_average(students):
+    if len(students) == 0:
+        return 0
+    total = 0
+    for name, details in students.items():
+        total += details["score"]
+    return total / len(students)
+```
+
+Each student's score is one level down, in their own dictionary, so the loop adds up `details["score"]`. `len(students)` counts the students. The test comes first, because dividing by 0 stops with a `ZeroDivisionError`.
+
+## ch09f-nested#8
+
+```python
+# Say it: print where and when the club typed in meets, or a message if there is no such club.
+# Split it:
+# 1. ask for the club's name
+# 2. if it is a key of clubs, print the sentence from that club's dictionary
+# 3. otherwise, print the message
+clubs = {
+    "chess": {"room": "B12", "day": "Monday"},
+    "drama": {"room": "Hall", "day": "Wednesday"},
+    "robots": {"room": "Lab 2", "day": "Friday"},
+}
+name = input("Club: ")
+if name in clubs:
+    room = clubs[name]["room"]
+    day = clubs[name]["day"]
+    print(name, "meets in", room, "on " + day + ".")
+else:
+    print("No club called " + name + ".")
+```
+
+`clubs[name]` is the club's own dictionary, and `["room"]` picks the room out of it: two levels down, one at a time. The `in` test comes first, so a name that is not a key never reaches the lookup.
