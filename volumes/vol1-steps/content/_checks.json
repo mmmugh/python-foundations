@@ -7833,5 +7833,84 @@
         ]
       }
     ]
+  },
+  "ch09g-copies#1": {
+    "kind": "predict"
+  },
+  "ch09g-copies#2": {
+    "kind": "choice",
+    "options": [
+      "The string itself is in double quotes, so the key inside its braces uses the other kind.",
+      "Single quotes make `score` a number.",
+      "A key must always be in single quotes."
+    ],
+    "answer": 0,
+    "why": "Use the other kind of quote inside an f-string's braces. Some versions of Python read a second double quote there as the end of the string."
+  },
+  "ch09g-copies#3": {
+    "kind": "predict"
+  },
+  "ch09g-copies#4": {
+    "kind": "output",
+    "expected": "{'umbrella': 3, 'phone': 2}\n{'umbrella': 3, 'phone': 1, 'hat': 1}\n{'umbrella': 3, 'phone': 1}"
+  },
+  "ch09g-copies#5": {
+    "kind": "output",
+    "expected": "{'Kim': 15, 'Ada': 14, 'Bo': 13}"
+  },
+  "ch09g-copies#6": {
+    "kind": "function",
+    "name": "invert",
+    "cases": [
+      [
+        [
+          {
+            "one": "uno",
+            "two": "dos"
+          }
+        ],
+        {
+          "uno": "one",
+          "dos": "two"
+        }
+      ],
+      [
+        [
+          {}
+        ],
+        {}
+      ],
+      [
+        [
+          {
+            "a": "z"
+          }
+        ],
+        {
+          "z": "a"
+        }
+      ],
+      [
+        [
+          {
+            "red": "rojo",
+            "blue": "azul",
+            "green": "verde"
+          }
+        ],
+        {
+          "rojo": "red",
+          "azul": "blue",
+          "verde": "green"
+        }
+      ]
+    ]
+  },
+  "ch09g-copies#7": {
+    "kind": "predict"
+  },
+  "ch09g-copies#8": {
+    "kind": "output",
+    "expected": "{'umbrella': 2, 'phone': 1}\n{'umbrella': 3}\n{'umbrella': 3, 'phone': 1}\n{}\n{'umbrella': 3, 'phone': 1}"
   }
 }

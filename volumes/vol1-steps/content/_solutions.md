@@ -2674,3 +2674,74 @@ else:
 ```
 
 `clubs[name]` is the club's own dictionary, and `["room"]` picks the room out of it: two levels down, one at a time. The `in` test comes first, so a name that is not a key never reaches the lookup.
+
+## ch09g-copies#4
+
+```python
+def add_item(register, item):
+    new_register = register.copy()
+    new_register[item] = new_register.get(item, 0) + 1
+    return new_register
+
+
+register = {"umbrella": 3, "phone": 1}
+print(add_item(register, "phone"))
+print(add_item(register, "hat"))
+print(register)
+```
+
+Without the copy, the first call would change `register` itself, and the second and last lines would show 2 phones. `new_register` is a new dictionary, so the change goes there only.
+
+## ch09g-copies#5
+
+```python
+ages = {"Mo": 12, "Kim": 15, "Lee": 11, "Ada": 14, "Bo": 13}
+for name in ages.copy():
+    if ages[name] < 13:
+        del ages[name]
+print(ages)
+```
+
+The loop goes over a copy, which never changes, and the entries come out of `ages`. Building a new dictionary of the people who are 13 or over works too.
+
+## ch09g-copies#6
+
+```python
+def invert(original):
+    swapped = {}
+    for key, value in original.items():
+        swapped[value] = key
+    return swapped
+```
+
+It has the shape of the `by_capital` example: start empty, and store something worked out from each entry. Here the new key is the old value, and the new value is the old key.
+
+## ch09g-copies#8
+
+```python
+# Say it: give back a new register with one fewer of the item, leaving the old one as it was.
+# Split it:
+# 1. make a copy of the register
+# 2. if the item is not in the copy, give the copy back
+# 3. if the copy holds exactly 1, take the entry out; otherwise, store one less
+# 4. give back the copy
+def remove_item(register, item):
+    new_register = register.copy()
+    if item not in new_register:
+        return new_register
+    if new_register[item] == 1:
+        del new_register[item]
+    else:
+        new_register[item] = new_register[item] - 1
+    return new_register
+
+
+register = {"umbrella": 3, "phone": 1}
+print(remove_item(register, "umbrella"))
+print(remove_item(register, "phone"))
+print(remove_item(register, "hat"))
+print(remove_item({}, "hat"))
+print(register)
+```
+
+Every change goes to the copy, so the last line still shows the register as it started. It is `take_one()` from lesson 9.2, working on a copy instead of on the dictionary it was handed.
