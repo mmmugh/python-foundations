@@ -169,6 +169,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch11b-binary-search", "Lesson 11.2 — Halving the search",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch11c-counting-the-work", "Lesson 11.3 — Counting the work",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

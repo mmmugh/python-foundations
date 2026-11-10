@@ -3390,3 +3390,56 @@ def binary_search(items, target):
 ```
 
 `return middle` does the job of the example's `break`. For an empty list, `high` starts at -1, so `0 <= -1` is `False`: the loop never runs, and the function gives back -1 without looking at anything. For `[7]`, `low` and `high` are both 0, and `<=` lets that one item be looked at.
+
+## ch11c-counting-the-work#5
+
+```python
+def linear_count(items, target):
+    comparisons = 0
+    for item in items:
+        comparisons += 1
+        if item == target:
+            break
+    return comparisons
+
+
+def binary_count(items, target):
+    comparisons = 0
+    low = 0
+    high = len(items) - 1
+    while low <= high:
+        middle = (low + high) // 2
+        comparisons += 1
+        if items[middle] == target:
+            break
+        elif items[middle] < target:
+            low = middle + 1
+        else:
+            high = middle - 1
+    return comparisons
+
+
+for size in [10, 100, 1000]:
+    numbers = [number for number in range(size)]
+    print(size, linear_count(numbers, size), binary_count(numbers, size))
+```
+
+Ten times the items is ten times the work for a linear search. For a binary search it is about three more passes, because ten is between 8 and 16: three or four doublings.
+
+## ch11c-counting-the-work#8
+
+```python
+# Say it: a list's size goes in; the most passes a binary search can make on a list that long comes out.
+# Split it:
+# 1. start a count at 0
+# 2. while the size is more than 0, halve it with // 2 and add one to the count
+# 3. give back the count
+def halvings(size):
+    count = 0
+    while size > 0:
+        size = size // 2
+        count += 1
+    return count
+```
+
+Each pass of a binary search leaves at most half of what was in play, so the number of halvings is the most passes it can make. `halvings(1000)` gives 10, as in the table, and `halvings(1048576)` gives 21. For 0, the loop never runs: an empty list needs no comparisons.

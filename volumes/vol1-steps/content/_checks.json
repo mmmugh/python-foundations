@@ -10529,5 +10529,127 @@
         2
       ]
     ]
+  },
+  "ch11c-counting-the-work#1": {
+    "kind": "predict"
+  },
+  "ch11c-counting-the-work#2": {
+    "kind": "choice",
+    "options": [
+      "It sorts the list first, then searches.",
+      "It stops with an error.",
+      "It can give back a wrong answer, with no error."
+    ],
+    "answer": 2,
+    "why": "Nothing in a binary search checks that the list is sorted. It throws away a half on trust, and on an unsorted list the target can be in the half it threw away."
+  },
+  "ch11c-counting-the-work#3": {
+    "kind": "predict"
+  },
+  "ch11c-counting-the-work#4": {
+    "kind": "choice",
+    "options": [
+      "When the target is not in the list.",
+      "When the target is the first item.",
+      "When the target is the last item."
+    ],
+    "answer": 1,
+    "why": "The first comparison finds it, and the loop stops: one comparison, the best case. A target that is last, or not there, costs one comparison per item: the worst case."
+  },
+  "ch11c-counting-the-work#5": {
+    "kind": "output",
+    "expected": "10 10 4\n100 100 7\n1000 1000 10"
+  },
+  "ch11c-counting-the-work#6": {
+    "kind": "choice",
+    "options": [
+      "8",
+      "14",
+      "128"
+    ],
+    "answer": 0,
+    "why": "Doubling the list adds one pass: the first pass cuts 128 items down to at most 64, and 64 take at most 7 more."
+  },
+  "ch11c-counting-the-work#7": {
+    "kind": "choice",
+    "options": [
+      "It looks at the keys one at a time, but very quickly.",
+      "It goes straight to the key, without looking through the others.",
+      "It does a binary search of the keys."
+    ],
+    "answer": 1,
+    "why": "A dictionary never searches its keys one by one, so the number of keys hardly matters. A search of a list grows with the list."
+  },
+  "ch11c-counting-the-work#8": {
+    "kind": "function",
+    "name": "halvings",
+    "cases": [
+      [
+        [
+          7
+        ],
+        3
+      ],
+      [
+        [
+          8
+        ],
+        4
+      ],
+      [
+        [
+          0
+        ],
+        0
+      ],
+      [
+        [
+          1
+        ],
+        1
+      ],
+      [
+        [
+          2
+        ],
+        2
+      ],
+      [
+        [
+          10
+        ],
+        4
+      ],
+      [
+        [
+          63
+        ],
+        6
+      ],
+      [
+        [
+          64
+        ],
+        7
+      ],
+      [
+        [
+          100
+        ],
+        7
+      ],
+      [
+        [
+          1000
+        ],
+        10
+      ],
+      [
+        [
+          1048576
+        ],
+        21
+      ]
+    ]
   }
 }
