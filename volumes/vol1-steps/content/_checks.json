@@ -8696,5 +8696,46 @@
   "ch10b-two-values#8": {
     "kind": "output",
     "expected": "5.0\n10.0\n0.0\n13.0\n1.414"
+  },
+  "ch10c-tuples-in-lists-and-keys#1": {
+    "kind": "predict"
+  },
+  "ch10c-tuples-in-lists-and-keys#2": {
+    "kind": "choice",
+    "options": [
+      "Two separate values, which must be printed one at a time",
+      "Only `low`: a function gives back one value",
+      "One tuple, holding both values"
+    ],
+    "answer": 2,
+    "why": "The comma makes a tuple, so the function gives back one value with two parts, which you can unpack where you call it."
+  },
+  "ch10c-tuples-in-lists-and-keys#3": {
+    "kind": "predict"
+  },
+  "ch10c-tuples-in-lists-and-keys#4": {
+    "kind": "output",
+    "expected": "Paris is at 48.9, 2.4\nTokyo is at 35.7, 139.7\nLima is at -12.0, -77.0\nCairo is at 30.0, 31.2\nOslo is at 59.9, 10.8"
+  },
+  "ch10c-tuples-in-lists-and-keys#5": {
+    "kind": "output",
+    "expected": "['Harbour', 'Museum', 'Airport']\n[]"
+  },
+  "ch10c-tuples-in-lists-and-keys#6": {
+    "kind": "predict"
+  },
+  "ch10c-tuples-in-lists-and-keys#7": {
+    "kind": "choice",
+    "options": [
+      "A tuple cannot change, so the dictionary can always find it again.",
+      "A tuple is shorter than a list.",
+      "Round brackets are quicker to look up than square ones."
+    ],
+    "answer": 0,
+    "why": "A key must stay the same while it is in the dictionary. A list can change, and a tuple cannot."
+  },
+  "ch10c-tuples-in-lists-and-keys#8": {
+    "kind": "output",
+    "expected": "X.O\n.O.\n..X"
   }
 }

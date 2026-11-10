@@ -182,5 +182,9 @@
   "ch10b-two-values#10": {
     "raises": "NameError",
     "why": "Starting code: the lines that call distance(), which the learner writes above them."
+  },
+  "ch10c-tuples-in-lists-and-keys#5": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call destinations(), which the learner writes above them."
   }
 }

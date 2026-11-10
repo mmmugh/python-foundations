@@ -3012,3 +3012,54 @@ print(round(distance((0, 0), (1, 1)), 3))
 ```
 
 It does not matter which point comes first: going the other way makes across and up negative, and a negative number squared is positive, so the distance is the same. The square root of 2 has no end to its digits, which is why the last line rounds it.
+
+## ch10c-tuples-in-lists-and-keys#4
+
+```python
+cities = [
+    ("Paris", 48.9, 2.4),
+    ("Tokyo", 35.7, 139.7),
+    ("Lima", -12.0, -77.0),
+    ("Cairo", 30.0, 31.2),
+    ("Oslo", 59.9, 10.8),
+]
+for name, latitude, longitude in cities:
+    print(f"{name} is at {latitude}, {longitude}")
+```
+
+The `for` line unpacks each city's tuple into three names, in the order the tuple holds them.
+
+## ch10c-tuples-in-lists-and-keys#5
+
+```python
+def destinations(services):
+    places = []
+    for route, minute, place in services:
+        places.append(place)
+    return places
+
+
+services = [("47", 415, "Harbour"), ("12", 380, "Museum"), ("9", 1000, "Airport")]
+print(destinations(services))
+print(destinations([]))
+```
+
+The loop needs a name for every part of the tuple, even the parts it does not use. A list comprehension (lesson 7.9) does the same in one line: `[place for route, minute, place in services]`.
+
+## ch10c-tuples-in-lists-and-keys#8
+
+```python
+# Say it: the board goes in; three lines of three squares come out, a mark or a . for each.
+# Split it:
+# 1. loop over the rows
+# 2. build the row's line, one column at a time
+# 3. print the line
+board = {(0, 0): "X", (1, 1): "O", (2, 2): "X", (0, 2): "O"}
+for row in range(3):
+    line = ""
+    for column in range(3):
+        line += board.get((row, column), ".")
+    print(line)
+```
+
+The example's loop over the columns goes inside a loop over the rows, so `row` takes 0, 1 and 2 in turn. `line` starts empty for each row; if it started once, above both loops, the rows would run together into one long line.

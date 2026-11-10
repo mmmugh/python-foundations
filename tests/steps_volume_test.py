@@ -155,6 +155,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch10b-two-values", "Lesson 10.2 — Giving back two values",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch10c-tuples-in-lists-and-keys", "Lesson 10.3 — Lists of tuples, and tuples as keys",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300
