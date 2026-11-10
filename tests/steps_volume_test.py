@@ -237,11 +237,17 @@ def lesson_problems(slug, heading, hint_steps, text, checks, solutions, alternat
     # refused too. It belongs above the section's heading, or under one of its own.
     shown_in_section = ("ol", "ul", "code", "quote")
     what = {"p": "a paragraph", "output": "an output fence", "table": "a table", "h1": "a heading", "h2": "a heading"}
-    section = None
+    # A fence or a hint belongs to the exercise above it, so one that comes
+    # before a section's first exercise has none, and is dropped too.
+    what["code"], what["quote"] = "a code fence before the first exercise", "a hint before the first exercise"
+    section, has_item = None, False
     for kind, payload in blocks:
         if kind == "h3":
             section = payload if payload in build.EXERCISE_SECTIONS else None
-        elif section and kind not in shown_in_section:
+            has_item = False
+        elif section and kind in ("ol", "ul"):
+            has_item = True
+        elif section and (kind not in shown_in_section or not has_item):
             say(f"{slug}: {what.get(kind, 'a ' + kind + ' block')} inside the {section} section is never "
                 f"shown; move it above the heading or into an exercise ({str(payload)[:40]!r})")
 
