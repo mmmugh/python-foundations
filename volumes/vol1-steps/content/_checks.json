@@ -8737,5 +8737,323 @@
   "ch10c-tuples-in-lists-and-keys#8": {
     "kind": "output",
     "expected": "X.O\n.O.\n..X"
+  },
+  "ch10d-records#1": {
+    "kind": "predict"
+  },
+  "ch10d-records#2": {
+    "kind": "choice",
+    "options": [
+      "`student[1]`",
+      "`student(\"score\")`",
+      "`student[\"score\"]`"
+    ],
+    "answer": 2,
+    "why": "A dictionary is read by key, in square brackets. It has no positions, so `student[1]` asks for a key called 1."
+  },
+  "ch10d-records#3": {
+    "kind": "predict"
+  },
+  "ch10d-records#4": {
+    "kind": "output",
+    "expected": "Dune\nHoles"
+  },
+  "ch10d-records#5": {
+    "kind": "predict"
+  },
+  "ch10d-records#6": {
+    "kind": "function",
+    "name": "average_score",
+    "cases": [
+      [
+        [
+          [
+            {
+              "name": "Ada",
+              "grade": 9,
+              "score": 88
+            },
+            {
+              "name": "Grace",
+              "grade": 10,
+              "score": 92
+            },
+            {
+              "name": "Alan",
+              "grade": 9,
+              "score": 45
+            }
+          ]
+        ],
+        75.0
+      ],
+      [
+        [
+          []
+        ],
+        0
+      ],
+      [
+        [
+          [
+            {
+              "name": "Bo",
+              "score": 60
+            }
+          ]
+        ],
+        60
+      ],
+      [
+        [
+          [
+            {
+              "name": "Bo",
+              "score": 0
+            },
+            {
+              "name": "Cy",
+              "score": 5
+            }
+          ]
+        ],
+        2.5
+      ]
+    ]
+  },
+  "ch10d-records#7": {
+    "kind": "function",
+    "name": "find_book",
+    "cases": [
+      [
+        [
+          [
+            {
+              "title": "Dune",
+              "year": 1965
+            },
+            {
+              "title": "Holes",
+              "year": 1998
+            }
+          ],
+          "Holes"
+        ],
+        {
+          "title": "Holes",
+          "year": 1998
+        }
+      ],
+      [
+        [
+          [
+            {
+              "title": "Dune",
+              "year": 1965
+            },
+            {
+              "title": "Holes",
+              "year": 1998
+            }
+          ],
+          "Emma"
+        ],
+        null
+      ],
+      [
+        [
+          [],
+          "Dune"
+        ],
+        null
+      ],
+      [
+        [
+          [
+            {
+              "title": "Dune",
+              "year": 1965
+            },
+            {
+              "title": "Holes",
+              "year": 1998
+            }
+          ],
+          "Dune"
+        ],
+        {
+          "title": "Dune",
+          "year": 1965
+        }
+      ],
+      [
+        [
+          [
+            {
+              "title": "Emma",
+              "year": 1815
+            },
+            {
+              "title": "Dune",
+              "year": 1965
+            },
+            {
+              "title": "Dune",
+              "year": 2021
+            }
+          ],
+          "Dune"
+        ],
+        {
+          "title": "Dune",
+          "year": 1965
+        }
+      ]
+    ]
+  },
+  "ch10d-records#8": {
+    "kind": "choice",
+    "options": [
+      "The `else` gives back `None` as soon as the first book is not Holes, before the loop reaches Holes.",
+      "`return` cannot be used inside a loop.",
+      "Titles must be compared with `in`, not `==`."
+    ],
+    "answer": 0,
+    "why": "`return` ends the function at once. Dune is looked at first, it is not Holes, so the `else` gives back `None` and the loop never reaches Holes. `return None` belongs below the loop."
+  },
+  "ch10d-records#9": {
+    "kind": "function",
+    "name": "older_than",
+    "cases": [
+      [
+        [
+          [
+            {
+              "name": "Ada",
+              "age": 36
+            },
+            {
+              "name": "Bo",
+              "age": 9
+            },
+            {
+              "name": "Cy",
+              "age": 14
+            }
+          ],
+          12
+        ],
+        [
+          "Ada",
+          "Cy"
+        ]
+      ],
+      [
+        [
+          [
+            {
+              "name": "Ada",
+              "age": 36
+            },
+            {
+              "name": "Bo",
+              "age": 9
+            },
+            {
+              "name": "Cy",
+              "age": 14
+            }
+          ],
+          14
+        ],
+        [
+          "Ada"
+        ]
+      ],
+      [
+        [
+          [],
+          10
+        ],
+        []
+      ],
+      [
+        [
+          [
+            {
+              "name": "Ada",
+              "age": 36
+            },
+            {
+              "name": "Bo",
+              "age": 9
+            },
+            {
+              "name": "Cy",
+              "age": 14
+            }
+          ],
+          40
+        ],
+        []
+      ],
+      [
+        [
+          [
+            {
+              "name": "Ada",
+              "age": 36
+            },
+            {
+              "name": "Bo",
+              "age": 9
+            },
+            {
+              "name": "Cy",
+              "age": 14
+            }
+          ],
+          0
+        ],
+        [
+          "Ada",
+          "Bo",
+          "Cy"
+        ]
+      ],
+      [
+        [
+          [
+            {
+              "name": "Di",
+              "age": 0
+            }
+          ],
+          -1
+        ],
+        [
+          "Di"
+        ]
+      ],
+      [
+        [
+          [
+            {
+              "name": "Zoe",
+              "age": 20
+            },
+            {
+              "name": "Flo",
+              "age": 50
+            }
+          ],
+          19
+        ],
+        [
+          "Zoe",
+          "Flo"
+        ]
+      ]
+    ]
   }
 }

@@ -186,5 +186,9 @@
   "ch10c-tuples-in-lists-and-keys#5": {
     "raises": "NameError",
     "why": "Starting code: the lines that call destinations(), which the learner writes above them."
+  },
+  "ch10d-records#4": {
+    "raises": "KeyError",
+    "why": "Fix-the-bug practice: a field name with the wrong capital."
   }
 }

@@ -3063,3 +3063,59 @@ for row in range(3):
 ```
 
 The example's loop over the columns goes inside a loop over the rows, so `row` takes 0, 1 and 2 in turn. `line` starts empty for each row; if it started once, above both loops, the rows would run together into one long line.
+
+## ch10d-records#4
+
+```python
+books = [
+    {"title": "Dune", "year": 1965},
+    {"title": "Holes", "year": 1998},
+]
+for book in books:
+    print(book["title"])
+```
+
+The last line of the error says `KeyError: 'Title'`. The field is `"title"`, with a small t, and capitals matter in a key.
+
+## ch10d-records#6
+
+```python
+def average_score(students):
+    if students == []:
+        return 0
+    scores = [student["score"] for student in students]
+    return sum(scores) / len(scores)
+```
+
+Dividing by `len([])`, which is 0, would stop with a `ZeroDivisionError`, so the empty list is answered first.
+
+## ch10d-records#7
+
+```python
+def find_book(books, title):
+    for book in books:
+        if book["title"] == title:
+            return book
+    return None
+```
+
+If two books have the same title, the first one found comes back, because `return` stops the loop there.
+
+## ch10d-records#9
+
+```python
+# Say it: a list of people and an age go in; the names of everyone older than that age come out.
+# Split it:
+# 1. start an empty list
+# 2. loop over the people
+# 3. if a person's age is more than age, add their name
+# 4. give the list back
+def older_than(people, age):
+    names = []
+    for person in people:
+        if person["age"] > age:
+            names.append(person["name"])
+    return names
+```
+
+`>` leaves out someone whose age is exactly `age`: "more than" means strictly more. For an empty list, the loop never runs, and the empty list comes back.

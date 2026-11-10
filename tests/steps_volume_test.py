@@ -157,6 +157,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch10c-tuples-in-lists-and-keys", "Lesson 10.3 — Lists of tuples, and tuples as keys",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch10d-records", "Lesson 10.4 — Records: a list of dictionaries",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300
