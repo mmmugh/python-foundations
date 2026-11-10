@@ -3557,3 +3557,105 @@ def insertion_sort(items):
 ```
 
 The new list is sorted all the time: it starts empty, which is sorted, and each item goes in at the place that keeps it sorted. The list given to the function is only read, never changed. For `[]`, the loop never runs, and the empty list comes back.
+
+## ch11g-measuring#3
+
+```python
+def bubble_count(items):
+    comparisons = 0
+    result = items.copy()
+    for done in range(len(result)):
+        swapped = False
+        for position in range(len(result) - 1 - done):
+            comparisons += 1
+            if result[position] > result[position + 1]:
+                result[position], result[position + 1] = result[position + 1], result[position]
+                swapped = True
+        if not swapped:
+            break
+    return comparisons
+```
+
+The count goes up for every comparison, swap or not, so it sits before the `if`. On `[1, 2, 3, 4]`, the first pass makes 3 comparisons and no swaps, and the sort stops: 3. On `[4, 3, 2, 1]`, every pass swaps, and the count is 3 + 2 + 1, as for a selection sort.
+
+## ch11g-measuring#7
+
+```python
+# Say it: print how many comparisons each search and sort makes, for lists of 4, 8, 16 and 32 numbers.
+# Split it:
+# 1. the heading line: row() with the five column names
+# 2. for each size, a sorted list of that many numbers, and a copy with its first two numbers swapped
+# 3. the searches' counts on the sorted list, for the target size: linear_count(), binary_count()
+# 4. the sorts' counts on the nearly sorted list: selection_count(), bubble_count()
+# 5. the line for that size: row()
+def row(size, linear, binary, selection, bubble):
+    """Print one line of the table, each value at the right of a column 10 wide."""
+    print(f"{size:>10}{linear:>10}{binary:>10}{selection:>10}{bubble:>10}")
+
+
+def linear_count(items, target):
+    comparisons = 0
+    for item in items:
+        comparisons += 1
+        if item == target:
+            break
+    return comparisons
+
+
+def binary_count(items, target):
+    comparisons = 0
+    low = 0
+    high = len(items) - 1
+    while low <= high:
+        middle = (low + high) // 2
+        comparisons += 1
+        if items[middle] == target:
+            break
+        elif items[middle] < target:
+            low = middle + 1
+        else:
+            high = middle - 1
+    return comparisons
+
+
+def selection_count(items):
+    comparisons = 0
+    result = items.copy()
+    for start in range(len(result)):
+        smallest = start
+        for position in range(start + 1, len(result)):
+            comparisons += 1
+            if result[position] < result[smallest]:
+                smallest = position
+        result[start], result[smallest] = result[smallest], result[start]
+    return comparisons
+
+
+def bubble_count(items):
+    comparisons = 0
+    result = items.copy()
+    for done in range(len(result)):
+        swapped = False
+        for position in range(len(result) - 1 - done):
+            comparisons += 1
+            if result[position] > result[position + 1]:
+                result[position], result[position + 1] = result[position + 1], result[position]
+                swapped = True
+        if not swapped:
+            break
+    return comparisons
+
+
+row("size", "linear", "binary", "selection", "bubble")
+for size in [4, 8, 16, 32]:
+    numbers = [number for number in range(size)]
+    nearly = numbers.copy()
+    nearly[0], nearly[1] = nearly[1], nearly[0]
+    linear = linear_count(numbers, size)
+    binary = binary_count(numbers, size)
+    selection = selection_count(nearly)
+    bubble = bubble_count(nearly)
+    row(size, linear, binary, selection, bubble)
+```
+
+Each function was checked on its own before the loop puts them together. Read the columns: doubling the size doubles the linear search's count and adds one to the binary search's. The selection sort's count goes up about four times, whatever order the list is in, while the bubble sort, on a list that is nearly in order, makes two passes and stops.
