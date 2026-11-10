@@ -3964,8 +3964,8 @@ def letter_grade(score):
 
 
 students = [
-    {"id": 1004, "name": "Ada Lovelace", "grade": 9, "scores": [88, 92, 85]},
     {"id": 1001, "name": "Grace Hopper", "grade": 10, "scores": [95, 91, 98]},
+    {"id": 1004, "name": "Ada Lovelace", "grade": 9, "scores": [88, 92, 85]},
     {"id": 1007, "name": "Alan Turing", "grade": 9, "scores": [45, 62, 58]},
     {"id": 1002, "name": "Katherine Johnson", "grade": 11, "scores": [99, 97, 94]},
     {"id": 1009, "name": "Edsger Dijkstra", "grade": 10, "scores": [71, 68, 75]},
@@ -3999,3 +3999,202 @@ print_roster(students)
 ```
 
 `print_roster()` is short, because each step it needs was built and checked on its own first. The heading lines up with the students' lines because it uses the same column widths, with `<` for the words and `>` for the two columns of numbers. `enumerate(..., start=1)` gives each line its rank.
+
+## ch12h-the-records-system#3
+
+```python
+def group_by_grade(records):
+    groups = {}
+    for record in records:
+        groups.setdefault(record["grade"], []).append(record)
+    return groups
+
+
+students = [
+    {"id": 1001, "name": "Grace Hopper", "grade": 10, "scores": [95, 91, 98]},
+    {"id": 1004, "name": "Ada Lovelace", "grade": 9, "scores": [88, 92, 85]},
+    {"id": 1007, "name": "Alan Turing", "grade": 9, "scores": [45, 62, 58]},
+    {"id": 1002, "name": "Katherine Johnson", "grade": 11, "scores": [99, 97, 94]},
+    {"id": 1009, "name": "Edsger Dijkstra", "grade": 10, "scores": [71, 68, 75]},
+]
+
+groups = group_by_grade(students)
+for grade in sorted(groups):
+    print(grade, [record["name"] for record in groups[grade]])
+print(group_by_grade([]))
+```
+
+`setdefault()` gives the grade level an empty list the first time it is seen, and the record is added to that list. The records are added in the order they come, so Ada Lovelace is before Alan Turing.
+
+## ch12h-the-records-system#4
+
+```python
+def students_word(count):
+    return f"{count} student" if count == 1 else f"{count} students"
+```
+
+Only 1 takes the word without an s: 0 students, 2 students, 11 students.
+
+## ch12h-the-records-system#5
+
+```python
+def average(numbers):
+    if numbers == []:
+        return 0
+    return sum(numbers) / len(numbers)
+
+
+def passing_count(records):
+    passing = [record for record in records if average(record["scores"]) >= 60]
+    return len(passing)
+```
+
+`>= 60` makes 60 itself a pass. A record with no scores has an average of 0, so it does not pass, and an empty list gives 0.
+
+## ch12h-the-records-system#7
+
+```python
+def search_by_name(records, text):
+    return [record for record in records if text.lower() in record["name"].lower()]
+```
+
+Both sides are lowered, so `"ER"` finds `"Grace Hopper"`. `""` is in every text, so searching for it keeps every record.
+
+## ch12h-the-records-system#8
+
+```python
+def find_by_id(records, student_id):
+    """Give back the record with this id, or None. records must be sorted by id."""
+    low = 0
+    high = len(records) - 1
+    while low <= high:
+        middle = (low + high) // 2
+        if records[middle]["id"] == student_id:
+            return records[middle]
+        elif records[middle]["id"] < student_id:
+            low = middle + 1
+        else:
+            high = middle - 1
+    return None
+```
+
+It is lesson 11.2's binary search, comparing ids, and giving back the whole record instead of its position. For an empty list, `high` starts at -1, the loop never runs, and the answer is `None`.
+
+## ch12h-the-records-system#10
+
+```python
+# Say it: the roster, the grade levels, the top student and the passing count, a search by name, and two look-ups by id.
+# Split it:
+# 1. print_roster()
+# 2. By grade level:, then a line for each grade level in order
+# 3. the top student, with max()
+# 4. the passing count
+# 5. the names with er
+# 6. a copy sorted by id, and a look-up of 1002 and of 9999 in it
+def letter_grade(score):
+    if score >= 90:
+        return "A"
+    elif score >= 80:
+        return "B"
+    elif score >= 70:
+        return "C"
+    elif score >= 60:
+        return "D"
+    else:
+        return "F"
+
+
+students = [
+    {"id": 1001, "name": "Grace Hopper", "grade": 10, "scores": [95, 91, 98]},
+    {"id": 1004, "name": "Ada Lovelace", "grade": 9, "scores": [88, 92, 85]},
+    {"id": 1007, "name": "Alan Turing", "grade": 9, "scores": [45, 62, 58]},
+    {"id": 1002, "name": "Katherine Johnson", "grade": 11, "scores": [99, 97, 94]},
+    {"id": 1009, "name": "Edsger Dijkstra", "grade": 10, "scores": [71, 68, 75]},
+]
+
+
+def average(numbers):
+    if numbers == []:
+        return 0
+    return sum(numbers) / len(numbers)
+
+
+def ranked(records):
+    return sorted(records, key=lambda record: average(record["scores"]), reverse=True)
+
+
+def roster_line(rank, record):
+    mean = average(record["scores"])
+    return f"{rank:<6}{record['id']:<7}{record['name']:<20}{record['grade']:<4}{mean:>7.1f}{letter_grade(mean):>7}"
+
+
+def print_roster(records):
+    print(f"{'Rank':<6}{'ID':<7}{'Name':<20}{'Gr':<4}{'Avg':>7}{'Grade':>7}")
+    print("-" * 51)
+    for rank, record in enumerate(ranked(records), start=1):
+        print(roster_line(rank, record))
+    print("-" * 51)
+
+
+def group_by_grade(records):
+    groups = {}
+    for record in records:
+        groups.setdefault(record["grade"], []).append(record)
+    return groups
+
+
+def students_word(count):
+    return f"{count} student" if count == 1 else f"{count} students"
+
+
+def passing_count(records):
+    passing = [record for record in records if average(record["scores"]) >= 60]
+    return len(passing)
+
+
+def search_by_name(records, text):
+    return [record for record in records if text.lower() in record["name"].lower()]
+
+
+def find_by_id(records, student_id):
+    """Give back the record with this id, or None. records must be sorted by id."""
+    low = 0
+    high = len(records) - 1
+    while low <= high:
+        middle = (low + high) // 2
+        if records[middle]["id"] == student_id:
+            return records[middle]
+        elif records[middle]["id"] < student_id:
+            low = middle + 1
+        else:
+            high = middle - 1
+    return None
+
+
+print_roster(students)
+
+print("By grade level:")
+groups = group_by_grade(students)
+for grade in sorted(groups):
+    members = groups[grade]
+    averages = [average(record["scores"]) for record in members]
+    print(f"Grade {grade}: {students_word(len(members))}, average {average(averages):.1f}")
+
+best = max(students, key=lambda record: average(record["scores"]))
+print(f"Top student: {best['name']} ({average(best['scores']):.1f})")
+print(f"Passing: {passing_count(students)} of {len(students)}")
+
+found = search_by_name(students, "er")
+names = [record["name"] for record in found]
+print("Names with er: " + ", ".join(names))
+
+by_id = sorted(students, key=lambda record: record["id"])
+for student_id in [1002, 9999]:
+    record = find_by_id(by_id, student_id)
+    if record == None:
+        print(f"Lookup {student_id}: not found")
+    else:
+        print(f"Lookup {student_id}: {record['name']}")
+```
+
+Every function was built and checked on its own first, so this last step only puts them in order. Each grade level's line needs the average of its students' averages, so `average()` is used twice: once for each student, then once on the list of their averages. `students` is never changed: `ranked()` and the copy sorted by id are new lists, which is why the look-ups can sort one without spoiling the roster.

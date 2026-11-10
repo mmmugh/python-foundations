@@ -171,8 +171,8 @@ def letter_grade(score):
 
 
 students = [
-    {"id": 1004, "name": "Ada Lovelace", "grade": 9, "scores": [88, 92, 85]},
     {"id": 1001, "name": "Grace Hopper", "grade": 10, "scores": [95, 91, 98]},
+    {"id": 1004, "name": "Ada Lovelace", "grade": 9, "scores": [88, 92, 85]},
     {"id": 1007, "name": "Alan Turing", "grade": 9, "scores": [45, 62, 58]},
     {"id": 1002, "name": "Katherine Johnson", "grade": 11, "scores": [99, 97, 94]},
     {"id": 1009, "name": "Edsger Dijkstra", "grade": 10, "scores": [71, 68, 75]},

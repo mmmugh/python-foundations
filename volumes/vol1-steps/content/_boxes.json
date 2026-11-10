@@ -234,5 +234,13 @@
   "ch12g-the-capstone#6": {
     "raises": "NameError",
     "why": "Starting code: the lines that call roster_line(), which the learner writes above them."
+  },
+  "ch12h-the-records-system#1": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call group_by_grade(), which the learner writes above them."
+  },
+  "ch12h-the-records-system#4": {
+    "reference": true,
+    "why": "A docstring that states a precondition: the first lines of a function, not a program to run."
   }
 }

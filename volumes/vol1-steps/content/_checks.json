@@ -12601,5 +12601,1209 @@
   "ch12g-the-capstone#7": {
     "kind": "output",
     "expected": "Rank  ID     Name                Gr      Avg  Grade\n---------------------------------------------------\n1     1002   Katherine Johnson   11     96.7      A\n2     1001   Grace Hopper        10     94.7      A\n3     1004   Ada Lovelace        9      88.3      B\n4     1009   Edsger Dijkstra     10     71.3      C\n5     1007   Alan Turing         9      55.0      F\n---------------------------------------------------"
+  },
+  "ch12h-the-records-system#1": {
+    "kind": "predict"
+  },
+  "ch12h-the-records-system#2": {
+    "kind": "choice",
+    "options": [
+      "It must be sorted by id, smallest first: each step throws away the half the id cannot be in.",
+      "It must be sorted by name.",
+      "Nothing: a binary search works on any list."
+    ],
+    "answer": 0,
+    "why": "A binary search decides which half to throw away by comparing with the middle, which only works if the list is in order of what it compares: here, the id."
+  },
+  "ch12h-the-records-system#3": {
+    "kind": "output",
+    "expected": "9 ['Ada Lovelace', 'Alan Turing']\n10 ['Grace Hopper', 'Edsger Dijkstra']\n11 ['Katherine Johnson']\n{}"
+  },
+  "ch12h-the-records-system#4": {
+    "kind": "function",
+    "name": "students_word",
+    "cases": [
+      [
+        [
+          1
+        ],
+        "1 student"
+      ],
+      [
+        [
+          2
+        ],
+        "2 students"
+      ],
+      [
+        [
+          0
+        ],
+        "0 students"
+      ],
+      [
+        [
+          11
+        ],
+        "11 students"
+      ],
+      [
+        [
+          21
+        ],
+        "21 students"
+      ]
+    ]
+  },
+  "ch12h-the-records-system#5": {
+    "kind": "function",
+    "name": "passing_count",
+    "cases": [
+      [
+        [
+          [
+            {
+              "scores": [
+                60,
+                60
+              ]
+            },
+            {
+              "scores": [
+                59,
+                60
+              ]
+            }
+          ]
+        ],
+        1
+      ],
+      [
+        [
+          []
+        ],
+        0
+      ],
+      [
+        [
+          [
+            {
+              "scores": []
+            }
+          ]
+        ],
+        0
+      ],
+      [
+        [
+          [
+            {
+              "id": 1004,
+              "name": "Ada Lovelace",
+              "grade": 9,
+              "scores": [
+                88,
+                92,
+                85
+              ]
+            },
+            {
+              "id": 1001,
+              "name": "Grace Hopper",
+              "grade": 10,
+              "scores": [
+                95,
+                91,
+                98
+              ]
+            },
+            {
+              "id": 1007,
+              "name": "Alan Turing",
+              "grade": 9,
+              "scores": [
+                45,
+                62,
+                58
+              ]
+            },
+            {
+              "id": 1002,
+              "name": "Katherine Johnson",
+              "grade": 11,
+              "scores": [
+                99,
+                97,
+                94
+              ]
+            },
+            {
+              "id": 1009,
+              "name": "Edsger Dijkstra",
+              "grade": 10,
+              "scores": [
+                71,
+                68,
+                75
+              ]
+            }
+          ]
+        ],
+        4
+      ],
+      [
+        [
+          [
+            {
+              "scores": [
+                100
+              ]
+            },
+            {
+              "scores": [
+                61,
+                59
+              ]
+            }
+          ]
+        ],
+        2
+      ]
+    ]
+  },
+  "ch12h-the-records-system#6": {
+    "kind": "predict"
+  },
+  "ch12h-the-records-system#7": {
+    "kind": "function",
+    "name": "search_by_name",
+    "cases": [
+      [
+        [
+          [
+            {
+              "id": 1004,
+              "name": "Ada Lovelace",
+              "grade": 9,
+              "scores": [
+                88,
+                92,
+                85
+              ]
+            },
+            {
+              "id": 1001,
+              "name": "Grace Hopper",
+              "grade": 10,
+              "scores": [
+                95,
+                91,
+                98
+              ]
+            },
+            {
+              "id": 1007,
+              "name": "Alan Turing",
+              "grade": 9,
+              "scores": [
+                45,
+                62,
+                58
+              ]
+            },
+            {
+              "id": 1002,
+              "name": "Katherine Johnson",
+              "grade": 11,
+              "scores": [
+                99,
+                97,
+                94
+              ]
+            },
+            {
+              "id": 1009,
+              "name": "Edsger Dijkstra",
+              "grade": 10,
+              "scores": [
+                71,
+                68,
+                75
+              ]
+            }
+          ],
+          "er"
+        ],
+        [
+          {
+            "id": 1001,
+            "name": "Grace Hopper",
+            "grade": 10,
+            "scores": [
+              95,
+              91,
+              98
+            ]
+          },
+          {
+            "id": 1002,
+            "name": "Katherine Johnson",
+            "grade": 11,
+            "scores": [
+              99,
+              97,
+              94
+            ]
+          },
+          {
+            "id": 1009,
+            "name": "Edsger Dijkstra",
+            "grade": 10,
+            "scores": [
+              71,
+              68,
+              75
+            ]
+          }
+        ]
+      ],
+      [
+        [
+          [
+            {
+              "id": 1004,
+              "name": "Ada Lovelace",
+              "grade": 9,
+              "scores": [
+                88,
+                92,
+                85
+              ]
+            },
+            {
+              "id": 1001,
+              "name": "Grace Hopper",
+              "grade": 10,
+              "scores": [
+                95,
+                91,
+                98
+              ]
+            },
+            {
+              "id": 1007,
+              "name": "Alan Turing",
+              "grade": 9,
+              "scores": [
+                45,
+                62,
+                58
+              ]
+            },
+            {
+              "id": 1002,
+              "name": "Katherine Johnson",
+              "grade": 11,
+              "scores": [
+                99,
+                97,
+                94
+              ]
+            },
+            {
+              "id": 1009,
+              "name": "Edsger Dijkstra",
+              "grade": 10,
+              "scores": [
+                71,
+                68,
+                75
+              ]
+            }
+          ],
+          "ER"
+        ],
+        [
+          {
+            "id": 1001,
+            "name": "Grace Hopper",
+            "grade": 10,
+            "scores": [
+              95,
+              91,
+              98
+            ]
+          },
+          {
+            "id": 1002,
+            "name": "Katherine Johnson",
+            "grade": 11,
+            "scores": [
+              99,
+              97,
+              94
+            ]
+          },
+          {
+            "id": 1009,
+            "name": "Edsger Dijkstra",
+            "grade": 10,
+            "scores": [
+              71,
+              68,
+              75
+            ]
+          }
+        ]
+      ],
+      [
+        [
+          [],
+          "a"
+        ],
+        []
+      ],
+      [
+        [
+          [
+            {
+              "id": 1004,
+              "name": "Ada Lovelace",
+              "grade": 9,
+              "scores": [
+                88,
+                92,
+                85
+              ]
+            },
+            {
+              "id": 1001,
+              "name": "Grace Hopper",
+              "grade": 10,
+              "scores": [
+                95,
+                91,
+                98
+              ]
+            },
+            {
+              "id": 1007,
+              "name": "Alan Turing",
+              "grade": 9,
+              "scores": [
+                45,
+                62,
+                58
+              ]
+            },
+            {
+              "id": 1002,
+              "name": "Katherine Johnson",
+              "grade": 11,
+              "scores": [
+                99,
+                97,
+                94
+              ]
+            },
+            {
+              "id": 1009,
+              "name": "Edsger Dijkstra",
+              "grade": 10,
+              "scores": [
+                71,
+                68,
+                75
+              ]
+            }
+          ],
+          ""
+        ],
+        [
+          {
+            "id": 1004,
+            "name": "Ada Lovelace",
+            "grade": 9,
+            "scores": [
+              88,
+              92,
+              85
+            ]
+          },
+          {
+            "id": 1001,
+            "name": "Grace Hopper",
+            "grade": 10,
+            "scores": [
+              95,
+              91,
+              98
+            ]
+          },
+          {
+            "id": 1007,
+            "name": "Alan Turing",
+            "grade": 9,
+            "scores": [
+              45,
+              62,
+              58
+            ]
+          },
+          {
+            "id": 1002,
+            "name": "Katherine Johnson",
+            "grade": 11,
+            "scores": [
+              99,
+              97,
+              94
+            ]
+          },
+          {
+            "id": 1009,
+            "name": "Edsger Dijkstra",
+            "grade": 10,
+            "scores": [
+              71,
+              68,
+              75
+            ]
+          }
+        ]
+      ],
+      [
+        [
+          [
+            {
+              "id": 1004,
+              "name": "Ada Lovelace",
+              "grade": 9,
+              "scores": [
+                88,
+                92,
+                85
+              ]
+            },
+            {
+              "id": 1001,
+              "name": "Grace Hopper",
+              "grade": 10,
+              "scores": [
+                95,
+                91,
+                98
+              ]
+            },
+            {
+              "id": 1007,
+              "name": "Alan Turing",
+              "grade": 9,
+              "scores": [
+                45,
+                62,
+                58
+              ]
+            },
+            {
+              "id": 1002,
+              "name": "Katherine Johnson",
+              "grade": 11,
+              "scores": [
+                99,
+                97,
+                94
+              ]
+            },
+            {
+              "id": 1009,
+              "name": "Edsger Dijkstra",
+              "grade": 10,
+              "scores": [
+                71,
+                68,
+                75
+              ]
+            }
+          ],
+          "zz"
+        ],
+        []
+      ],
+      [
+        [
+          [
+            {
+              "id": 1004,
+              "name": "Ada Lovelace",
+              "grade": 9,
+              "scores": [
+                88,
+                92,
+                85
+              ]
+            },
+            {
+              "id": 1001,
+              "name": "Grace Hopper",
+              "grade": 10,
+              "scores": [
+                95,
+                91,
+                98
+              ]
+            },
+            {
+              "id": 1007,
+              "name": "Alan Turing",
+              "grade": 9,
+              "scores": [
+                45,
+                62,
+                58
+              ]
+            },
+            {
+              "id": 1002,
+              "name": "Katherine Johnson",
+              "grade": 11,
+              "scores": [
+                99,
+                97,
+                94
+              ]
+            },
+            {
+              "id": 1009,
+              "name": "Edsger Dijkstra",
+              "grade": 10,
+              "scores": [
+                71,
+                68,
+                75
+              ]
+            }
+          ],
+          "alan"
+        ],
+        [
+          {
+            "id": 1007,
+            "name": "Alan Turing",
+            "grade": 9,
+            "scores": [
+              45,
+              62,
+              58
+            ]
+          }
+        ]
+      ],
+      [
+        [
+          [
+            {
+              "id": 1004,
+              "name": "Ada Lovelace",
+              "grade": 9,
+              "scores": [
+                88,
+                92,
+                85
+              ]
+            },
+            {
+              "id": 1001,
+              "name": "Grace Hopper",
+              "grade": 10,
+              "scores": [
+                95,
+                91,
+                98
+              ]
+            },
+            {
+              "id": 1007,
+              "name": "Alan Turing",
+              "grade": 9,
+              "scores": [
+                45,
+                62,
+                58
+              ]
+            },
+            {
+              "id": 1002,
+              "name": "Katherine Johnson",
+              "grade": 11,
+              "scores": [
+                99,
+                97,
+                94
+              ]
+            },
+            {
+              "id": 1009,
+              "name": "Edsger Dijkstra",
+              "grade": 10,
+              "scores": [
+                71,
+                68,
+                75
+              ]
+            }
+          ],
+          "Ada"
+        ],
+        [
+          {
+            "id": 1004,
+            "name": "Ada Lovelace",
+            "grade": 9,
+            "scores": [
+              88,
+              92,
+              85
+            ]
+          }
+        ]
+      ]
+    ]
+  },
+  "ch12h-the-records-system#8": {
+    "kind": "function",
+    "name": "find_by_id",
+    "cases": [
+      [
+        [
+          [
+            {
+              "id": 1001,
+              "name": "Grace Hopper",
+              "grade": 10,
+              "scores": [
+                95,
+                91,
+                98
+              ]
+            },
+            {
+              "id": 1002,
+              "name": "Katherine Johnson",
+              "grade": 11,
+              "scores": [
+                99,
+                97,
+                94
+              ]
+            },
+            {
+              "id": 1004,
+              "name": "Ada Lovelace",
+              "grade": 9,
+              "scores": [
+                88,
+                92,
+                85
+              ]
+            },
+            {
+              "id": 1007,
+              "name": "Alan Turing",
+              "grade": 9,
+              "scores": [
+                45,
+                62,
+                58
+              ]
+            },
+            {
+              "id": 1009,
+              "name": "Edsger Dijkstra",
+              "grade": 10,
+              "scores": [
+                71,
+                68,
+                75
+              ]
+            }
+          ],
+          1001
+        ],
+        {
+          "id": 1001,
+          "name": "Grace Hopper",
+          "grade": 10,
+          "scores": [
+            95,
+            91,
+            98
+          ]
+        }
+      ],
+      [
+        [
+          [
+            {
+              "id": 1001,
+              "name": "Grace Hopper",
+              "grade": 10,
+              "scores": [
+                95,
+                91,
+                98
+              ]
+            },
+            {
+              "id": 1002,
+              "name": "Katherine Johnson",
+              "grade": 11,
+              "scores": [
+                99,
+                97,
+                94
+              ]
+            },
+            {
+              "id": 1004,
+              "name": "Ada Lovelace",
+              "grade": 9,
+              "scores": [
+                88,
+                92,
+                85
+              ]
+            },
+            {
+              "id": 1007,
+              "name": "Alan Turing",
+              "grade": 9,
+              "scores": [
+                45,
+                62,
+                58
+              ]
+            },
+            {
+              "id": 1009,
+              "name": "Edsger Dijkstra",
+              "grade": 10,
+              "scores": [
+                71,
+                68,
+                75
+              ]
+            }
+          ],
+          1009
+        ],
+        {
+          "id": 1009,
+          "name": "Edsger Dijkstra",
+          "grade": 10,
+          "scores": [
+            71,
+            68,
+            75
+          ]
+        }
+      ],
+      [
+        [
+          [
+            {
+              "id": 1001,
+              "name": "Grace Hopper",
+              "grade": 10,
+              "scores": [
+                95,
+                91,
+                98
+              ]
+            },
+            {
+              "id": 1002,
+              "name": "Katherine Johnson",
+              "grade": 11,
+              "scores": [
+                99,
+                97,
+                94
+              ]
+            },
+            {
+              "id": 1004,
+              "name": "Ada Lovelace",
+              "grade": 9,
+              "scores": [
+                88,
+                92,
+                85
+              ]
+            },
+            {
+              "id": 1007,
+              "name": "Alan Turing",
+              "grade": 9,
+              "scores": [
+                45,
+                62,
+                58
+              ]
+            },
+            {
+              "id": 1009,
+              "name": "Edsger Dijkstra",
+              "grade": 10,
+              "scores": [
+                71,
+                68,
+                75
+              ]
+            }
+          ],
+          1004
+        ],
+        {
+          "id": 1004,
+          "name": "Ada Lovelace",
+          "grade": 9,
+          "scores": [
+            88,
+            92,
+            85
+          ]
+        }
+      ],
+      [
+        [
+          [
+            {
+              "id": 1001,
+              "name": "Grace Hopper",
+              "grade": 10,
+              "scores": [
+                95,
+                91,
+                98
+              ]
+            },
+            {
+              "id": 1002,
+              "name": "Katherine Johnson",
+              "grade": 11,
+              "scores": [
+                99,
+                97,
+                94
+              ]
+            },
+            {
+              "id": 1004,
+              "name": "Ada Lovelace",
+              "grade": 9,
+              "scores": [
+                88,
+                92,
+                85
+              ]
+            },
+            {
+              "id": 1007,
+              "name": "Alan Turing",
+              "grade": 9,
+              "scores": [
+                45,
+                62,
+                58
+              ]
+            },
+            {
+              "id": 1009,
+              "name": "Edsger Dijkstra",
+              "grade": 10,
+              "scores": [
+                71,
+                68,
+                75
+              ]
+            }
+          ],
+          1007
+        ],
+        {
+          "id": 1007,
+          "name": "Alan Turing",
+          "grade": 9,
+          "scores": [
+            45,
+            62,
+            58
+          ]
+        }
+      ],
+      [
+        [
+          [
+            {
+              "id": 1001,
+              "name": "Grace Hopper",
+              "grade": 10,
+              "scores": [
+                95,
+                91,
+                98
+              ]
+            },
+            {
+              "id": 1002,
+              "name": "Katherine Johnson",
+              "grade": 11,
+              "scores": [
+                99,
+                97,
+                94
+              ]
+            },
+            {
+              "id": 1004,
+              "name": "Ada Lovelace",
+              "grade": 9,
+              "scores": [
+                88,
+                92,
+                85
+              ]
+            },
+            {
+              "id": 1007,
+              "name": "Alan Turing",
+              "grade": 9,
+              "scores": [
+                45,
+                62,
+                58
+              ]
+            },
+            {
+              "id": 1009,
+              "name": "Edsger Dijkstra",
+              "grade": 10,
+              "scores": [
+                71,
+                68,
+                75
+              ]
+            }
+          ],
+          1002
+        ],
+        {
+          "id": 1002,
+          "name": "Katherine Johnson",
+          "grade": 11,
+          "scores": [
+            99,
+            97,
+            94
+          ]
+        }
+      ],
+      [
+        [
+          [
+            {
+              "id": 1001,
+              "name": "Grace Hopper",
+              "grade": 10,
+              "scores": [
+                95,
+                91,
+                98
+              ]
+            },
+            {
+              "id": 1002,
+              "name": "Katherine Johnson",
+              "grade": 11,
+              "scores": [
+                99,
+                97,
+                94
+              ]
+            },
+            {
+              "id": 1004,
+              "name": "Ada Lovelace",
+              "grade": 9,
+              "scores": [
+                88,
+                92,
+                85
+              ]
+            },
+            {
+              "id": 1007,
+              "name": "Alan Turing",
+              "grade": 9,
+              "scores": [
+                45,
+                62,
+                58
+              ]
+            },
+            {
+              "id": 1009,
+              "name": "Edsger Dijkstra",
+              "grade": 10,
+              "scores": [
+                71,
+                68,
+                75
+              ]
+            }
+          ],
+          9999
+        ],
+        null
+      ],
+      [
+        [
+          [],
+          1001
+        ],
+        null
+      ],
+      [
+        [
+          [
+            {
+              "id": 1001,
+              "name": "Grace Hopper",
+              "grade": 10,
+              "scores": [
+                95,
+                91,
+                98
+              ]
+            },
+            {
+              "id": 1002,
+              "name": "Katherine Johnson",
+              "grade": 11,
+              "scores": [
+                99,
+                97,
+                94
+              ]
+            },
+            {
+              "id": 1004,
+              "name": "Ada Lovelace",
+              "grade": 9,
+              "scores": [
+                88,
+                92,
+                85
+              ]
+            },
+            {
+              "id": 1007,
+              "name": "Alan Turing",
+              "grade": 9,
+              "scores": [
+                45,
+                62,
+                58
+              ]
+            },
+            {
+              "id": 1009,
+              "name": "Edsger Dijkstra",
+              "grade": 10,
+              "scores": [
+                71,
+                68,
+                75
+              ]
+            }
+          ],
+          1000
+        ],
+        null
+      ],
+      [
+        [
+          [
+            {
+              "id": 1001,
+              "name": "Grace Hopper",
+              "grade": 10,
+              "scores": [
+                95,
+                91,
+                98
+              ]
+            },
+            {
+              "id": 1002,
+              "name": "Katherine Johnson",
+              "grade": 11,
+              "scores": [
+                99,
+                97,
+                94
+              ]
+            },
+            {
+              "id": 1004,
+              "name": "Ada Lovelace",
+              "grade": 9,
+              "scores": [
+                88,
+                92,
+                85
+              ]
+            },
+            {
+              "id": 1007,
+              "name": "Alan Turing",
+              "grade": 9,
+              "scores": [
+                45,
+                62,
+                58
+              ]
+            },
+            {
+              "id": 1009,
+              "name": "Edsger Dijkstra",
+              "grade": 10,
+              "scores": [
+                71,
+                68,
+                75
+              ]
+            }
+          ],
+          1003
+        ],
+        null
+      ]
+    ]
+  },
+  "ch12h-the-records-system#9": {
+    "kind": "choice",
+    "options": [
+      "So that the look-ups print the names in order.",
+      "`find_by_id()` is a binary search, and its precondition is a list sorted by id. On the list as it is, it could miss a student who is there, with no error.",
+      "Because `find_by_id()` cannot look at a list that has not been copied."
+    ],
+    "answer": 1,
+    "why": "A binary search of a list in the wrong order throws away the wrong half and says `None`, as if the student were not there. Sorting a copy keeps `students` as it was for the rest of the report."
+  },
+  "ch12h-the-records-system#10": {
+    "kind": "output",
+    "expected": "Rank  ID     Name                Gr      Avg  Grade\n---------------------------------------------------\n1     1002   Katherine Johnson   11     96.7      A\n2     1001   Grace Hopper        10     94.7      A\n3     1004   Ada Lovelace        9      88.3      B\n4     1009   Edsger Dijkstra     10     71.3      C\n5     1007   Alan Turing         9      55.0      F\n---------------------------------------------------\nBy grade level:\nGrade 9: 2 students, average 71.7\nGrade 10: 2 students, average 83.0\nGrade 11: 1 student, average 96.7\nTop student: Katherine Johnson (96.7)\nPassing: 4 of 5\nNames with er: Grace Hopper, Katherine Johnson, Edsger Dijkstra\nLookup 1002: Katherine Johnson\nLookup 9999: not found"
   }
 }
