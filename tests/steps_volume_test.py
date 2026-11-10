@@ -171,6 +171,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch11c-counting-the-work", "Lesson 11.3 — Counting the work",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch11d-selection-sort", "Lesson 11.4 — Selection sort",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

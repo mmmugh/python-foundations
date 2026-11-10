@@ -3443,3 +3443,50 @@ def halvings(size):
 ```
 
 Each pass of a binary search leaves at most half of what was in play, so the number of halvings is the most passes it can make. `halvings(1000)` gives 10, as in the table, and `halvings(1048576)` gives 21. For 0, the loop never runs: an empty list needs no comparisons.
+
+## ch11d-selection-sort#6
+
+```python
+def largest_first(items):
+    result = items.copy()
+    for start in range(len(result)):
+        biggest = start
+        for position in range(start + 1, len(result)):
+            if result[position] > result[biggest]:
+                biggest = position
+        result[start], result[biggest] = result[biggest], result[start]
+    return result
+
+
+scores = [60, 95, 82, 95, 70]
+print(largest_first(scores))
+print(scores)
+print(largest_first([]))
+print(largest_first([5]))
+```
+
+Two changes from the example: `>` instead of `<`, and a name that says what it holds now, `biggest`. Without `copy()`, the function would sort the caller's list itself, and the second line would print it sorted.
+
+## ch11d-selection-sort#8
+
+```python
+# Say it: a list goes in; the number of times a selection sort compares two items, sorting it, comes out.
+# Split it:
+# 1. start a count at 0
+# 2. do the selection sort, on a copy
+# 3. add one to the count each time two items are compared, just before the if
+# 4. give back the count, not the list
+def selection_count(items):
+    comparisons = 0
+    result = items.copy()
+    for start in range(len(result)):
+        smallest = start
+        for position in range(start + 1, len(result)):
+            comparisons += 1
+            if result[position] < result[smallest]:
+                smallest = position
+        result[start], result[smallest] = result[smallest], result[start]
+    return comparisons
+```
+
+The count goes up once each time the inner loop runs, because each pass of it makes one comparison. For 5 items that is 4 + 3 + 2 + 1 + 0. The order of the items never changes the count: a selection sort does the same comparisons on a sorted list as on a jumbled one.

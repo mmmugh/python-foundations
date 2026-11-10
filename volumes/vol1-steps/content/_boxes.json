@@ -202,5 +202,9 @@
   "ch11b-binary-search#6": {
     "raises": "TypeError",
     "why": "Fix-the-bug practice: a position worked out with / is a float."
+  },
+  "ch11d-selection-sort#7": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call largest_first(), which the learner writes above them."
   }
 }

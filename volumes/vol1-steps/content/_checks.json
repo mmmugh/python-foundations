@@ -10651,5 +10651,134 @@
         21
       ]
     ]
+  },
+  "ch11d-selection-sort#1": {
+    "kind": "predict"
+  },
+  "ch11d-selection-sort#2": {
+    "kind": "choice",
+    "options": [
+      "It goes up by one.",
+      "It doubles.",
+      "It stays the same."
+    ],
+    "answer": 1,
+    "why": "The worst case is one comparison per item, so twice the items is twice the comparisons: 1,000. Going up by one is what a binary search does."
+  },
+  "ch11d-selection-sort#3": {
+    "kind": "trace",
+    "names": [
+      "position",
+      "smallest"
+    ]
+  },
+  "ch11d-selection-sort#4": {
+    "kind": "predict"
+  },
+  "ch11d-selection-sort#5": {
+    "kind": "predict"
+  },
+  "ch11d-selection-sort#6": {
+    "kind": "output",
+    "expected": "[95, 95, 82, 70, 60]\n[60, 95, 82, 95, 70]\n[]\n[5]"
+  },
+  "ch11d-selection-sort#7": {
+    "kind": "choice",
+    "options": [
+      "1,600",
+      "380",
+      "780"
+    ],
+    "answer": 2,
+    "why": "39 + 38 + ... + 1 is 780, about four times 190. Twice as many passes, each about twice as long. 380 would be only twice the work."
+  },
+  "ch11d-selection-sort#8": {
+    "kind": "function",
+    "name": "selection_count",
+    "cases": [
+      [
+        [
+          [
+            64,
+            25,
+            12,
+            22,
+            11
+          ]
+        ],
+        10
+      ],
+      [
+        [
+          [
+            2,
+            1
+          ]
+        ],
+        1
+      ],
+      [
+        [
+          []
+        ],
+        0
+      ],
+      [
+        [
+          [
+            7
+          ]
+        ],
+        0
+      ],
+      [
+        [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        3
+      ],
+      [
+        [
+          [
+            5,
+            5,
+            5,
+            5
+          ]
+        ],
+        6
+      ],
+      [
+        [
+          [
+            -3,
+            -1,
+            -2
+          ]
+        ],
+        3
+      ],
+      [
+        [
+          [
+            10,
+            9,
+            8,
+            7,
+            6,
+            5,
+            4,
+            3,
+            2,
+            1
+          ]
+        ],
+        45
+      ]
+    ]
   }
 }
