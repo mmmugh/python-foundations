@@ -145,6 +145,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch09g-copies", "Lesson 9.7 — A copy of your own, and a new dictionary",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch09h-sets", "Lesson 9.8 — Sets",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

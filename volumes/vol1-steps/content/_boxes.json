@@ -146,5 +146,13 @@
   "ch09g-copies#12": {
     "raises": "NameError",
     "why": "Starting code: the lines that call remove_item(), which the learner writes above them."
+  },
+  "ch09h-sets#3": {
+    "varies": true,
+    "why": "Python changes the order of a set's text items from one run to the next."
+  },
+  "ch09h-sets#6": {
+    "raises": "TypeError",
+    "why": "A list as a dictionary key. The error message is the lesson."
   }
 }

@@ -2745,3 +2745,29 @@ print(register)
 ```
 
 Every change goes to the copy, so the last line still shows the register as it started. It is `take_one()` from lesson 9.2, working on a copy instead of on the dictionary it was handed.
+
+## ch09h-sets#4
+
+```python
+def distinct_count(items):
+    return len(set(items))
+```
+
+`set()` drops the repeats, so its length is the number of different items. `set([])` is an empty set, of length 0.
+
+## ch09h-sets#8
+
+```python
+# Say it: print how many different words the sentence has, with capitals ignored.
+# Split it:
+# 1. ask for the sentence
+# 2. make it small, and split it into words
+# 3. make a set of the words
+# 4. print how many items the set holds
+sentence = input("Sentence: ")
+words = sentence.lower().split()
+different = set(words)
+print("Different words:", len(different))
+```
+
+`lower()` comes before the set is made, so `Go` and `go` are the same item. `split()` with nothing in its brackets gives `[]` for an empty sentence, and the set of that holds 0 items.

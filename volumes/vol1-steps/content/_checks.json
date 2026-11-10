@@ -7912,5 +7912,158 @@
   "ch09g-copies#8": {
     "kind": "output",
     "expected": "{'umbrella': 2, 'phone': 1}\n{'umbrella': 3}\n{'umbrella': 3, 'phone': 1}\n{}\n{'umbrella': 3, 'phone': 1}"
+  },
+  "ch09h-sets#1": {
+    "kind": "predict"
+  },
+  "ch09h-sets#2": {
+    "kind": "choice",
+    "options": [
+      "Use `get()` instead of square brackets.",
+      "Take the entries out before the loop starts.",
+      "Loop over a copy of the dictionary, and take the entries out of the original."
+    ],
+    "answer": 2,
+    "why": "The copy never changes while the loop goes over it, so the loop can take entries out of the original safely."
+  },
+  "ch09h-sets#3": {
+    "kind": "predict"
+  },
+  "ch09h-sets#4": {
+    "kind": "function",
+    "name": "distinct_count",
+    "cases": [
+      [
+        [
+          [
+            "a",
+            "b",
+            "a"
+          ]
+        ],
+        2
+      ],
+      [
+        [
+          []
+        ],
+        0
+      ],
+      [
+        [
+          [
+            "x"
+          ]
+        ],
+        1
+      ],
+      [
+        [
+          [
+            3,
+            3,
+            3,
+            3
+          ]
+        ],
+        1
+      ],
+      [
+        [
+          [
+            "A",
+            "a"
+          ]
+        ],
+        2
+      ],
+      [
+        [
+          [
+            1,
+            2,
+            3,
+            2,
+            1
+          ]
+        ],
+        3
+      ]
+    ]
+  },
+  "ch09h-sets#5": {
+    "kind": "choice",
+    "options": [
+      "A set has no order, and prints in an order that can change; `sorted()` gives a list in a fixed order.",
+      "`print()` cannot print a set.",
+      "`sorted()` takes out the repeats."
+    ],
+    "answer": 0,
+    "why": "The predict needs the same lines every run. A set prints in an order of its own; `sorted()` turns it into a list in alphabetical order, which never changes. The repeats were already gone: `set()` took them out."
+  },
+  "ch09h-sets#6": {
+    "kind": "choice",
+    "options": [
+      "An empty set",
+      "An empty dictionary",
+      "Nothing: it is an error."
+    ],
+    "answer": 1,
+    "why": "Dictionaries had the braces first, so `{}` is an empty dictionary. An empty set is `set()`."
+  },
+  "ch09h-sets#7": {
+    "kind": "choice",
+    "options": [
+      "`[\"Ada\", \"Grace\"]`, a list",
+      "Both of them",
+      "`\"Ada and Grace\"`, a string"
+    ],
+    "answer": 2,
+    "why": "A key must stay the same, and a list can change, so a list cannot be a key: it is a `TypeError`. Text cannot change, so a string can be a key."
+  },
+  "ch09h-sets#8": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "The cat and the hat"
+        ],
+        "numbers": [
+          4
+        ]
+      },
+      {
+        "typed": [
+          "go Go GO"
+        ],
+        "numbers": [
+          1
+        ]
+      },
+      {
+        "typed": [
+          ""
+        ],
+        "numbers": [
+          0
+        ]
+      },
+      {
+        "typed": [
+          "one two three"
+        ],
+        "numbers": [
+          3
+        ]
+      },
+      {
+        "typed": [
+          "  a  A b  "
+        ],
+        "numbers": [
+          2
+        ]
+      }
+    ]
   }
 }
