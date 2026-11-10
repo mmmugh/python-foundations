@@ -3795,3 +3795,50 @@ def count_item(items, target):
 ```
 
 It is `total()`, adding a 1 or a 0 for each item instead of the item itself. The conditional expression is lesson 10.7's; an `if` and an `else`, each with its own `return`, work the same.
+
+## ch12d-when-it-goes-wrong#3
+
+```python
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+
+print(factorial(4))
+print(factorial(0))
+```
+
+`factorial(n)` called itself with the same `n`, so the calls never got any smaller and never reached `n == 0`. Handing on `n - 1` moves every call one closer to the base case.
+
+## ch12d-when-it-goes-wrong#7
+
+```python
+def sum_to(n):
+    if n <= 0:
+        return 0
+    else:
+        return n + sum_to(n - 1)
+
+
+print(sum_to(3))
+```
+
+`sum_to(1)` worked out 1 + 0 and dropped it, so it gave back `None`. Then `sum_to(2)` tried `2 + None`, which is the `TypeError`. With `return` in front, every call gives its answer back to the one waiting above it.
+
+## ch12d-when-it-goes-wrong#8
+
+```python
+# Say it: two whole numbers go in; the biggest number that divides both comes out, by Euclid's rule.
+# Split it:
+# 1. the base case: if b is 0, give back a
+# 2. the recursive case: give back the GCD of b and a % b
+def gcd(a, b):
+    if b == 0:
+        return a
+    else:
+        return gcd(b, a % b)
+```
+
+The rule turns straight into the two parts. For 12 and 18 the calls are `gcd(12, 18)`, `gcd(18, 12)`, `gcd(12, 6)` and `gcd(6, 0)`, which gives back 6, and every call above it gives that same 6 back up. The second number always shrinks, because a remainder is smaller than what you divide by, so the base case is always reached.

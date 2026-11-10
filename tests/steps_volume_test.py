@@ -187,6 +187,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch12c-more-examples", "Lesson 12.3 — Three shapes of recursion",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch12d-when-it-goes-wrong", "Lesson 12.4 — When recursion goes wrong",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300

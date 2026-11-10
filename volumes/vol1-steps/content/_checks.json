@@ -12013,5 +12013,118 @@
         1
       ]
     ]
+  },
+  "ch12d-when-it-goes-wrong#1": {
+    "kind": "predict"
+  },
+  "ch12d-when-it-goes-wrong#2": {
+    "kind": "choice",
+    "options": [
+      "`\"\"`, the empty text: there is nothing after the first letter.",
+      "`\"c\"`",
+      "An error: a text of one letter has no `[1:]`."
+    ],
+    "answer": 0,
+    "why": "`[1:]` is everything after the first letter, and after the only letter there is nothing. So a text of one letter reaches the `\"\"` base case in one more call."
+  },
+  "ch12d-when-it-goes-wrong#3": {
+    "kind": "output",
+    "expected": "24\n1"
+  },
+  "ch12d-when-it-goes-wrong#4": {
+    "kind": "choice",
+    "options": [
+      "The numbers got too big for Python.",
+      "The calls never reach a base case: there isn't one, or the calls go past it.",
+      "The recursive case forgot its `return`."
+    ],
+    "answer": 1,
+    "why": "About 1,000 calls were waiting at once, and none had reached a base case. A forgotten `return` gives back `None` instead, which shows up as `None` or a `TypeError`."
+  },
+  "ch12d-when-it-goes-wrong#5": {
+    "kind": "choice",
+    "options": [
+      "`halves(8)`",
+      "`halves(1)`",
+      "`halves(0)`"
+    ],
+    "answer": 2,
+    "why": "`0 // 2` is 0, so `halves(0)` calls `halves(0)` again, and again, and never lands on 1. `halves(8)` goes 8, 4, 2, 1 and gives back 3. `if n <= 1:` would catch 0 too."
+  },
+  "ch12d-when-it-goes-wrong#6": {
+    "kind": "predict"
+  },
+  "ch12d-when-it-goes-wrong#7": {
+    "kind": "output",
+    "expected": "6"
+  },
+  "ch12d-when-it-goes-wrong#8": {
+    "kind": "function",
+    "name": "gcd",
+    "cases": [
+      [
+        [
+          12,
+          18
+        ],
+        6
+      ],
+      [
+        [
+          17,
+          5
+        ],
+        1
+      ],
+      [
+        [
+          7,
+          0
+        ],
+        7
+      ],
+      [
+        [
+          0,
+          5
+        ],
+        5
+      ],
+      [
+        [
+          18,
+          12
+        ],
+        6
+      ],
+      [
+        [
+          100,
+          75
+        ],
+        25
+      ],
+      [
+        [
+          9,
+          9
+        ],
+        9
+      ],
+      [
+        [
+          1,
+          1
+        ],
+        1
+      ],
+      [
+        [
+          48,
+          36
+        ],
+        12
+      ]
+    ]
   }
 }

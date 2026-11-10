@@ -214,5 +214,21 @@
   "ch12a-the-two-parts#7": {
     "raises": "NameError",
     "why": "Starting code: the lines that call count_down_by(), which the learner writes above them."
+  },
+  "ch12d-when-it-goes-wrong#1": {
+    "raises": "RecursionError",
+    "why": "No base case, so the calls never stop. The error message is the lesson."
+  },
+  "ch12d-when-it-goes-wrong#2": {
+    "raises": "RecursionError",
+    "why": "The base case is there, but the calls from -1 go past it. The error message is the lesson."
+  },
+  "ch12d-when-it-goes-wrong#3": {
+    "raises": "RecursionError",
+    "why": "Fix-the-bug practice: each call hands on the same n, so none reaches the base case."
+  },
+  "ch12d-when-it-goes-wrong#7": {
+    "raises": "TypeError",
+    "why": "Fix-the-bug practice: the recursive case forgets its return, so None reaches the +."
   }
 }
