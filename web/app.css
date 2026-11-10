@@ -607,7 +607,7 @@ pre.reference {
 .options { border: 0; padding: 0; margin: .5rem 0; display: grid; gap: .4rem; }
 .options label { display: flex; gap: .5rem; align-items: baseline; cursor: pointer; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-pre.given { margin: .5rem 0; }
+pre.given { margin: .5rem 0; overflow-x: auto; }
 
 /* Trace tables: each variable's value after each line. */
 .trace-wrap { overflow-x: auto; }
