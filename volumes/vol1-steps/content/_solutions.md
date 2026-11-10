@@ -2534,3 +2534,50 @@ print(f"Total: {sum(cart.values()):.2f}")
 ```
 
 `:.2f` (lesson 3.3) shows 2.5 as `2.50`. The total can also be added up inside the loop, starting from 0, as in lesson 5.5.
+
+## ch09d-counting#7
+
+```python
+def count_words(text):
+    counts = {}
+    for word in text.split():
+        counts[word] = counts.get(word, 0) + 1
+    return counts
+```
+
+`"".split()` gives back `[]`, so for an empty text the loop never runs, and the empty dictionary comes back. The `if word in counts:` version of the counting pattern works the same.
+
+## ch09d-counting#8
+
+```python
+def repeated(words):
+    counts = {}
+    for word in words:
+        counts[word] = counts.get(word, 0) + 1
+    result = []
+    for word, count in counts.items():
+        if count > 1:
+            result.append(word)
+    return result
+```
+
+Counting first means each word is a key once, so it goes into the list once, however many times it repeats. The keys are in the order the words first turned up, so the list is too.
+
+## ch09d-counting#9
+
+```python
+# Say it: count each letter in the text, with capitals made small and anything else left out.
+# Split it:
+# 1. start an empty dictionary
+# 2. loop over the text, made small, one character at a time
+# 3. if the character is a letter, count it
+# 4. give the dictionary back
+def letter_counts(text):
+    counts = {}
+    for character in text.lower():
+        if character.isalpha():
+            counts[character] = counts.get(character, 0) + 1
+    return counts
+```
+
+`lower()` (lesson 8.2) makes `"A"` and `"a"` the same key, and `isalpha()` (lesson 8.6) skips the spaces, digits and punctuation. Making each character small inside the loop works too.

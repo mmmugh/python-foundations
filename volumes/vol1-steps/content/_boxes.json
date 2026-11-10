@@ -126,5 +126,9 @@
   "ch09b-missing-keys#1": {
     "raises": "KeyError",
     "why": "A warm-up on a key with the wrong capital letter. The error is the answer."
+  },
+  "ch09d-counting#3": {
+    "raises": "ValueError",
+    "why": "A loop over a dictionary with two names but no items(). The error is the point of the question."
   }
 }

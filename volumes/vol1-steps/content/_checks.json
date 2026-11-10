@@ -7255,5 +7255,197 @@
   "ch09c-looping-over-a-dictionary#7": {
     "kind": "output",
     "expected": "bread: 2.50\nmilk: 1.25\neggs: 3.00\nTotal: 6.75"
+  },
+  "ch09d-counting#1": {
+    "kind": "predict"
+  },
+  "ch09d-counting#2": {
+    "kind": "choice",
+    "options": [
+      "A key",
+      "A value",
+      "A key and its value"
+    ],
+    "answer": 0,
+    "why": "A loop over a dictionary gets its keys, in the order they went in. Its value is looked up with square brackets."
+  },
+  "ch09d-counting#3": {
+    "kind": "predict"
+  },
+  "ch09d-counting#4": {
+    "kind": "choice",
+    "options": [
+      "Nothing: it works as it is.",
+      "`.items()` after `scores`, in the `for` line",
+      "`.values()` after `scores`, in the `for` line"
+    ],
+    "answer": 1,
+    "why": "Without `.items()`, the loop gets the keys only, and one key cannot be split between `name` and `score`. `items()` gives each key with its value, one for each name."
+  },
+  "ch09d-counting#5": {
+    "kind": "trace",
+    "names": [
+      "letter",
+      "counts"
+    ]
+  },
+  "ch09d-counting#6": {
+    "kind": "predict"
+  },
+  "ch09d-counting#7": {
+    "kind": "function",
+    "name": "count_words",
+    "cases": [
+      [
+        [
+          "the cat and the hat"
+        ],
+        {
+          "the": 2,
+          "cat": 1,
+          "and": 1,
+          "hat": 1
+        }
+      ],
+      [
+        [
+          ""
+        ],
+        {}
+      ],
+      [
+        [
+          "go go go"
+        ],
+        {
+          "go": 3
+        }
+      ],
+      [
+        [
+          "  one   two "
+        ],
+        {
+          "one": 1,
+          "two": 1
+        }
+      ]
+    ]
+  },
+  "ch09d-counting#8": {
+    "kind": "function",
+    "name": "repeated",
+    "cases": [
+      [
+        [
+          [
+            "a",
+            "b",
+            "a",
+            "c",
+            "b",
+            "a"
+          ]
+        ],
+        [
+          "a",
+          "b"
+        ]
+      ],
+      [
+        [
+          []
+        ],
+        []
+      ],
+      [
+        [
+          [
+            "x",
+            "y"
+          ]
+        ],
+        []
+      ],
+      [
+        [
+          [
+            "b",
+            "a",
+            "a",
+            "b"
+          ]
+        ],
+        [
+          "b",
+          "a"
+        ]
+      ],
+      [
+        [
+          [
+            "z",
+            "z",
+            "z"
+          ]
+        ],
+        [
+          "z"
+        ]
+      ]
+    ]
+  },
+  "ch09d-counting#9": {
+    "kind": "function",
+    "name": "letter_counts",
+    "cases": [
+      [
+        [
+          "Banana!"
+        ],
+        {
+          "b": 1,
+          "a": 3,
+          "n": 2
+        }
+      ],
+      [
+        [
+          ""
+        ],
+        {}
+      ],
+      [
+        [
+          "123"
+        ],
+        {}
+      ],
+      [
+        [
+          "A man"
+        ],
+        {
+          "a": 2,
+          "m": 1,
+          "n": 1
+        }
+      ],
+      [
+        [
+          "Hi, hi."
+        ],
+        {
+          "h": 2,
+          "i": 2
+        }
+      ],
+      [
+        [
+          "   "
+        ],
+        {}
+      ]
+    ]
   }
 }

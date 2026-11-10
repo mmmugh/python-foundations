@@ -137,6 +137,8 @@ LESSONS = [
      ("Say it", "Split it", "Name it", "Check it")),
     ("ch09c-looping-over-a-dictionary", "Lesson 9.3 — Looping over a dictionary",
      ("Say it", "Split it", "Name it", "Check it")),
+    ("ch09d-counting", "Lesson 9.4 — Keys and values together, and counting",
+     ("Say it", "Split it", "Name it", "Check it")),
 ]
 MAX_EXERCISES = 10
 MAX_WORDS = 1300
