@@ -12126,5 +12126,102 @@
         12
       ]
     ]
+  },
+  "ch12e-repeated-work#1": {
+    "kind": "predict"
+  },
+  "ch12e-repeated-work#2": {
+    "kind": "choice",
+    "options": [
+      "The answer it worked out.",
+      "0, as a base case would.",
+      "`None`: it works out the answer, then reaches the end of the function and drops it."
+    ],
+    "answer": 2,
+    "why": "A function that ends without `return` gives back `None`. The call above it then gets `None` instead of a number."
+  },
+  "ch12e-repeated-work#3": {
+    "kind": "predict"
+  },
+  "ch12e-repeated-work#4": {
+    "kind": "predict"
+  },
+  "ch12e-repeated-work#5": {
+    "kind": "choice",
+    "options": [
+      "The same smaller numbers are worked out again and again, each time from the start, because each call asks for two more and nothing is remembered.",
+      "Python checks every number from 0 to 30 a million times to be sure.",
+      "The numbers get very big, and big numbers take millions of calls to add."
+    ],
+    "answer": 0,
+    "why": "`fib(30)` and `fib(29)` both ask for `fib(28)`, and each works it out separately, all the way down. The repeats multiply at every level."
+  },
+  "ch12e-repeated-work#6": {
+    "kind": "predict"
+  },
+  "ch12e-repeated-work#7": {
+    "kind": "choice",
+    "options": [
+      "It saves the answer in `known`.",
+      "All the calls that working out `n` again would make: the stored answer is given back straight away.",
+      "Nothing: it is there in case `n` is negative."
+    ],
+    "answer": 1,
+    "why": "The answer is stored lower down, at `known[n] = answer`. `if n in known:` is the look-up: a number already worked out is given back with no more calls."
+  },
+  "ch12e-repeated-work#8": {
+    "kind": "function",
+    "name": "ways",
+    "cases": [
+      [
+        [
+          3,
+          {}
+        ],
+        3
+      ],
+      [
+        [
+          4,
+          {}
+        ],
+        5
+      ],
+      [
+        [
+          0,
+          {}
+        ],
+        1
+      ],
+      [
+        [
+          1,
+          {}
+        ],
+        1
+      ],
+      [
+        [
+          2,
+          {}
+        ],
+        2
+      ],
+      [
+        [
+          10,
+          {}
+        ],
+        89
+      ],
+      [
+        [
+          40,
+          {}
+        ],
+        165580141
+      ]
+    ]
   }
 }

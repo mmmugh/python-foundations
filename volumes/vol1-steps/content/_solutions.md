@@ -3842,3 +3842,24 @@ def gcd(a, b):
 ```
 
 The rule turns straight into the two parts. For 12 and 18 the calls are `gcd(12, 18)`, `gcd(18, 12)`, `gcd(12, 6)` and `gcd(6, 0)`, which gives back 6, and every call above it gives that same 6 back up. The second number always shrinks, because a remainder is smaller than what you divide by, so the base case is always reached.
+
+## ch12e-repeated-work#8
+
+```python
+# Say it: a number of stairs and a dictionary of answers go in; the number of ways to climb them comes out.
+# Split it:
+# 1. the base case: 0 or 1 stairs have 1 way
+# 2. if n is in known, give back its answer
+# 3. otherwise add the ways for n - 1 and n - 2, handing on known
+# 4. store the answer in known, then give it back
+def ways(n, known):
+    if n <= 1:
+        return 1
+    if n in known:
+        return known[n]
+    answer = ways(n - 1, known) + ways(n - 2, known)
+    known[n] = answer
+    return answer
+```
+
+It is `fast_fib()` with a different base case: 0 and 1 stairs both give 1, where `fib` gave 0 and 1. So the answers run 1, 1, 2, 3, 5, 8: the Fibonacci numbers again, one place along. Without `known`, `ways(40, {})` would make hundreds of millions of calls; with it, each number of stairs is worked out once.
