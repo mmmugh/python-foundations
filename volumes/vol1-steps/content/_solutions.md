@@ -2771,3 +2771,42 @@ print("Different words:", len(different))
 ```
 
 `lower()` comes before the set is made, so `Go` and `go` are the same item. `split()` with nothing in its brackets gives `[]` for an empty sentence, and the set of that holds 0 items.
+
+## ch09i-set-operations#4
+
+```python
+def in_both(left, right):
+    both = set(left) & set(right)
+    return sorted(both)
+```
+
+`&` keeps only the names in both sets, and a set holds each name once, so the repeats drop out. `sorted()` gives the names back as a list, in order.
+
+## ch09i-set-operations#5
+
+```python
+def only_first(left, right):
+    return sorted(set(left) - set(right))
+```
+
+`-` keeps the names in the first set that are not in the second, so `left` goes first. `set(right) - set(left)` would give the names only in `right`.
+
+## ch09i-set-operations#9
+
+```python
+# Say it: three sorted lists of names, each printed on one line with a label.
+# Split it:
+# 1. make a set of each list
+# 2. the names in both, sorted and joined
+# 3. the names only in the first, the same way
+# 4. everyone, the same way
+first = ["Ada", "Grace", "Alan", "Katherine", "Grace", "Edsger"]
+second = ["Grace", "Alan", "Margaret", "Barbara"]
+first_set = set(first)
+second_set = set(second)
+print("Both:", ", ".join(sorted(first_set & second_set)))
+print("Only first:", ", ".join(sorted(first_set - second_set)))
+print("Everyone:", ", ".join(sorted(first_set | second_set)))
+```
+
+`sorted()` turns each set into a list in alphabetical order, and `join()` (lesson 8.8) puts `", "` between the names. The sets drop Grace's repeat, so each line names her once.

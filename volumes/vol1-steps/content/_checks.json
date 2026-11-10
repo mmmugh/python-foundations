@@ -8065,5 +8065,260 @@
         ]
       }
     ]
+  },
+  "ch09i-set-operations#1": {
+    "kind": "predict"
+  },
+  "ch09i-set-operations#2": {
+    "kind": "choice",
+    "options": [
+      "`{}`",
+      "`set()`",
+      "`[]`"
+    ],
+    "answer": 1,
+    "why": "`{}` is an empty dictionary, because dictionaries had the braces first, and `[]` is an empty list."
+  },
+  "ch09i-set-operations#3": {
+    "kind": "predict"
+  },
+  "ch09i-set-operations#4": {
+    "kind": "function",
+    "name": "in_both",
+    "cases": [
+      [
+        [
+          [
+            "Ada",
+            "Bo"
+          ],
+          [
+            "Bo",
+            "Cy"
+          ]
+        ],
+        [
+          "Bo"
+        ]
+      ],
+      [
+        [
+          [],
+          [
+            "Bo"
+          ]
+        ],
+        []
+      ],
+      [
+        [
+          [
+            "a",
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "a"
+          ]
+        ],
+        [
+          "a",
+          "b"
+        ]
+      ],
+      [
+        [
+          [
+            "Zed",
+            "Ann",
+            "Kim"
+          ],
+          [
+            "Kim",
+            "Zed"
+          ]
+        ],
+        [
+          "Kim",
+          "Zed"
+        ]
+      ],
+      [
+        [
+          [
+            "x"
+          ],
+          [
+            "y"
+          ]
+        ],
+        []
+      ],
+      [
+        [
+          [
+            "Bo"
+          ],
+          []
+        ],
+        []
+      ],
+      [
+        [
+          [
+            "eve",
+            "dan",
+            "cy",
+            "bo",
+            "al",
+            "fay"
+          ],
+          [
+            "al",
+            "bo",
+            "cy",
+            "dan",
+            "eve",
+            "gus"
+          ]
+        ],
+        [
+          "al",
+          "bo",
+          "cy",
+          "dan",
+          "eve"
+        ]
+      ]
+    ]
+  },
+  "ch09i-set-operations#5": {
+    "kind": "function",
+    "name": "only_first",
+    "cases": [
+      [
+        [
+          [
+            "Ada",
+            "Bo",
+            "Cy"
+          ],
+          [
+            "Bo"
+          ]
+        ],
+        [
+          "Ada",
+          "Cy"
+        ]
+      ],
+      [
+        [
+          [],
+          [
+            "Bo"
+          ]
+        ],
+        []
+      ],
+      [
+        [
+          [
+            "Bo"
+          ],
+          []
+        ],
+        [
+          "Bo"
+        ]
+      ],
+      [
+        [
+          [
+            "Zed",
+            "Ann",
+            "Zed"
+          ],
+          [
+            "Kim"
+          ]
+        ],
+        [
+          "Ann",
+          "Zed"
+        ]
+      ],
+      [
+        [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        []
+      ],
+      [
+        [
+          [
+            "eve",
+            "dan",
+            "cy",
+            "bo",
+            "al",
+            "fay"
+          ],
+          [
+            "fay"
+          ]
+        ],
+        [
+          "al",
+          "bo",
+          "cy",
+          "dan",
+          "eve"
+        ]
+      ]
+    ]
+  },
+  "ch09i-set-operations#6": {
+    "kind": "choice",
+    "options": [
+      "list",
+      "dictionary",
+      "set"
+    ],
+    "answer": 1,
+    "why": "Each capital is looked up by a name, the country's: that is what a dictionary does."
+  },
+  "ch09i-set-operations#7": {
+    "kind": "choice",
+    "options": [
+      "list",
+      "dictionary",
+      "set"
+    ],
+    "answer": 0,
+    "why": "The order they arrived in matters, and a list keeps its items in order. A set has no order."
+  },
+  "ch09i-set-operations#8": {
+    "kind": "choice",
+    "options": [
+      "list",
+      "dictionary",
+      "set"
+    ],
+    "answer": 2,
+    "why": "All the game asks is \"is this word in here?\", and each word only needs to be kept once."
+  },
+  "ch09i-set-operations#9": {
+    "kind": "output",
+    "expected": "Both: Alan, Grace\nOnly first: Ada, Edsger, Katherine\nEveryone: Ada, Alan, Barbara, Edsger, Grace, Katherine, Margaret"
   }
 }
