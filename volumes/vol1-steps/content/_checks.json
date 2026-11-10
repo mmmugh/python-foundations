@@ -9312,5 +9312,228 @@
         }
       ]
     ]
+  },
+  "ch10f-grouping#1": {
+    "kind": "predict"
+  },
+  "ch10f-grouping#2": {
+    "kind": "choice",
+    "options": [
+      "To count the votes faster",
+      "A dictionary cannot hold text keys without it",
+      "`counts[vote] += 1` needs the key to be there already"
+    ],
+    "answer": 2,
+    "why": "`+= 1` adds to the value already stored under the key. The first time a vote turns up there is none, so the `else` stores 1 instead."
+  },
+  "ch10f-grouping#3": {
+    "kind": "predict"
+  },
+  "ch10f-grouping#4": {
+    "kind": "function",
+    "name": "by_first_letter",
+    "cases": [
+      [
+        [
+          [
+            "ant",
+            "bee",
+            "ape"
+          ]
+        ],
+        {
+          "a": [
+            "ant",
+            "ape"
+          ],
+          "b": [
+            "bee"
+          ]
+        }
+      ],
+      [
+        [
+          []
+        ],
+        {}
+      ],
+      [
+        [
+          [
+            "cat"
+          ]
+        ],
+        {
+          "c": [
+            "cat"
+          ]
+        }
+      ],
+      [
+        [
+          [
+            "yak",
+            "emu",
+            "yeti",
+            "eel",
+            "yak"
+          ]
+        ],
+        {
+          "y": [
+            "yak",
+            "yeti",
+            "yak"
+          ],
+          "e": [
+            "emu",
+            "eel"
+          ]
+        }
+      ]
+    ]
+  },
+  "ch10f-grouping#5": {
+    "kind": "predict"
+  },
+  "ch10f-grouping#6": {
+    "kind": "choice",
+    "options": [
+      "`get()` gives back the empty list but stores nothing; `setdefault()` stores it under the key too.",
+      "They do the same thing.",
+      "`setdefault()` stops with an error for a missing key; `get()` does not."
+    ],
+    "answer": 0,
+    "why": "Both give back the default for a missing key. Only `setdefault()` also stores it, so the key is there afterwards."
+  },
+  "ch10f-grouping#7": {
+    "kind": "function",
+    "name": "count_routes",
+    "cases": [
+      [
+        [
+          [
+            "47",
+            "12",
+            "47"
+          ]
+        ],
+        {
+          "47": 2,
+          "12": 1
+        }
+      ],
+      [
+        [
+          []
+        ],
+        {}
+      ],
+      [
+        [
+          [
+            "9"
+          ]
+        ],
+        {
+          "9": 1
+        }
+      ],
+      [
+        [
+          [
+            "9",
+            "9",
+            "9",
+            "12"
+          ]
+        ],
+        {
+          "9": 3,
+          "12": 1
+        }
+      ]
+    ]
+  },
+  "ch10f-grouping#8": {
+    "kind": "function",
+    "name": "titles_by_author",
+    "cases": [
+      [
+        [
+          [
+            {
+              "title": "Emma",
+              "author": "Austen"
+            },
+            {
+              "title": "Dune",
+              "author": "Herbert"
+            },
+            {
+              "title": "Persuasion",
+              "author": "Austen"
+            }
+          ]
+        ],
+        {
+          "Austen": [
+            "Emma",
+            "Persuasion"
+          ],
+          "Herbert": [
+            "Dune"
+          ]
+        }
+      ],
+      [
+        [
+          []
+        ],
+        {}
+      ],
+      [
+        [
+          [
+            {
+              "title": "Holes",
+              "author": "Sachar"
+            }
+          ]
+        ],
+        {
+          "Sachar": [
+            "Holes"
+          ]
+        }
+      ],
+      [
+        [
+          [
+            {
+              "title": "Z",
+              "author": "Ann"
+            },
+            {
+              "title": "A",
+              "author": "Ann"
+            },
+            {
+              "title": "M",
+              "author": "Bo"
+            }
+          ]
+        ],
+        {
+          "Ann": [
+            "Z",
+            "A"
+          ],
+          "Bo": [
+            "M"
+          ]
+        }
+      ]
+    ]
   }
 }

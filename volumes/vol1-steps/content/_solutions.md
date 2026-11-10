@@ -3143,3 +3143,49 @@ def oldest(books):
 ```
 
 `min()` of an empty list stops with a `ValueError`, so step 1 comes first. On a tie, `min()` gives back the first of the books it tied on. The whole record comes back, so the caller can read its title, its year, or any other field.
+
+## ch10f-grouping#4
+
+```python
+def by_first_letter(words):
+    groups = {}
+    for word in words:
+        letter = word[0]
+        if letter not in groups:
+            groups[letter] = []
+        groups[letter].append(word)
+    return groups
+```
+
+It is the `by_grade` loop, with the first letter in place of the grade and the word in place of the name. A word that turns up twice goes into its list twice.
+
+## ch10f-grouping#7
+
+```python
+def count_routes(routes):
+    counts = {}
+    for route in routes:
+        counts.setdefault(route, 0)
+        counts[route] += 1
+    return counts
+```
+
+`setdefault(route, 0)` stores 0 the first time a route turns up, and does nothing after that, so `+= 1` always has a count to add to. `get(route, 0) + 1`, from lesson 9.4, gives the same dictionary.
+
+## ch10f-grouping#8
+
+```python
+# Say it: a list of book records goes in; a dictionary from each author to their titles comes out.
+# Split it:
+# 1. start an empty dictionary
+# 2. loop over the books
+# 3. add each book's title to its author's list
+# 4. give the dictionary back
+def titles_by_author(books):
+    groups = {}
+    for book in books:
+        groups.setdefault(book["author"], []).append(book["title"])
+    return groups
+```
+
+`setdefault()` gives back the author's list, making an empty one the first time the author turns up, and `append()` adds the title to it. The titles go in the order the books are in, because the loop goes through them in that order.
