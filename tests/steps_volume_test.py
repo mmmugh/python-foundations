@@ -535,6 +535,10 @@ def main():
         if list(pages) != order:
             problems.append(f"the pages, in reading order, must be {order}; found {list(pages)}")
         problems += unit_problems(pages, checks)
+        units = sorted({slug[:4] for slug, *_ in LESSONS})
+        stems = [p.stem for p in build.practice_files(vol)]
+        if stems != units:
+            problems.append(f"practice/: one page per unit, {units}; found {stems}")
         # Options are never shuffled, so a pattern in where the right one sits
         # would pass a learner who learned the pattern, not the idea.
         answers = [spec["answer"] for spec in checks.values() if spec.get("kind") == "choice"]
