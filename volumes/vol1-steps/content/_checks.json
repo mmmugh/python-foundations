@@ -4446,6 +4446,406 @@
       }
     ]
   },
+  "ch05-practice#1": {
+    "kind": "output",
+    "expected": "Week 1\nWeek 2\nWeek 3\nWeek 4\nWeek 5\nWeek 6\nWeek 7\nWeek 8"
+  },
+  "ch05-practice#2": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "15"
+        ],
+        "words": [
+          "Week 1: 15",
+          "Week 2: 30",
+          "Week 3: 45",
+          "Week 4: 60",
+          "Week 5: 75",
+          "Week 6: 90",
+          "Week 7: 105",
+          "Week 8: 120"
+        ]
+      },
+      {
+        "typed": [
+          "7"
+        ],
+        "words": [
+          "Week 1: 7",
+          "Week 2: 14",
+          "Week 3: 21",
+          "Week 4: 28",
+          "Week 5: 35",
+          "Week 6: 42",
+          "Week 7: 49",
+          "Week 8: 56"
+        ]
+      },
+      {
+        "typed": [
+          "0"
+        ],
+        "words": [
+          "Week 1: 0",
+          "Week 2: 0",
+          "Week 3: 0",
+          "Week 4: 0",
+          "Week 5: 0",
+          "Week 6: 0",
+          "Week 7: 0",
+          "Week 8: 0"
+        ]
+      }
+    ]
+  },
+  "ch05-practice#3": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "15"
+        ],
+        "words": [
+          "Week 1: 15",
+          "Week 2: 30",
+          "Week 3: 45",
+          "Week 4: 70",
+          "Week 5: 85",
+          "Week 6: 100",
+          "Week 7: 115",
+          "Week 8: 140"
+        ]
+      },
+      {
+        "typed": [
+          "7"
+        ],
+        "words": [
+          "Week 1: 7",
+          "Week 2: 14",
+          "Week 3: 21",
+          "Week 4: 38",
+          "Week 5: 45",
+          "Week 6: 52",
+          "Week 7: 59",
+          "Week 8: 76"
+        ]
+      },
+      {
+        "typed": [
+          "0"
+        ],
+        "words": [
+          "Week 1: 0",
+          "Week 2: 0",
+          "Week 3: 0",
+          "Week 4: 10",
+          "Week 5: 10",
+          "Week 6: 10",
+          "Week 7: 10",
+          "Week 8: 20"
+        ]
+      }
+    ]
+  },
+  "ch05-practice#4": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "0",
+          "15"
+        ],
+        "words": [
+          "Weeks: 16"
+        ]
+      },
+      {
+        "typed": [
+          "0",
+          "17"
+        ],
+        "words": [
+          "Weeks: 15"
+        ]
+      },
+      {
+        "typed": [
+          "100",
+          "20"
+        ],
+        "words": [
+          "Weeks: 7"
+        ]
+      },
+      {
+        "typed": [
+          "239",
+          "1"
+        ],
+        "words": [
+          "Weeks: 1"
+        ]
+      },
+      {
+        "typed": [
+          "0",
+          "240"
+        ],
+        "words": [
+          "Weeks: 1"
+        ]
+      },
+      {
+        "typed": [
+          "240",
+          "15"
+        ],
+        "words": [
+          "Weeks: 0"
+        ]
+      },
+      {
+        "typed": [
+          "300",
+          "15"
+        ],
+        "words": [
+          "Weeks: 0"
+        ]
+      }
+    ]
+  },
+  "ch05-practice#5": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "20",
+          "35",
+          "15",
+          "0"
+        ],
+        "words": [
+          "Saved: 20",
+          "Saved: 55",
+          "Saved: 70",
+          "Weeks: 3"
+        ],
+        "absent": [
+          "Weeks: 4"
+        ]
+      },
+      {
+        "typed": [
+          "100",
+          "0"
+        ],
+        "words": [
+          "Saved: 100",
+          "Weeks: 1"
+        ],
+        "absent": [
+          "Weeks: 2"
+        ]
+      },
+      {
+        "typed": [
+          "0"
+        ],
+        "words": [
+          "Weeks: 0"
+        ],
+        "absent": [
+          "Saved: 0",
+          "Weeks: 1"
+        ]
+      }
+    ]
+  },
+  "ch05-practice#6": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "100",
+          "100",
+          "50"
+        ],
+        "words": [
+          "Saved: 100",
+          "Saved: 200",
+          "Saved: 250",
+          "Goal reached in week 3!"
+        ],
+        "absent": [
+          "Still to save: -10"
+        ]
+      },
+      {
+        "typed": [
+          "120",
+          "120"
+        ],
+        "words": [
+          "Saved: 120",
+          "Saved: 240",
+          "Goal reached in week 2!"
+        ],
+        "absent": [
+          "Still to save: 0"
+        ]
+      },
+      {
+        "typed": [
+          "300"
+        ],
+        "words": [
+          "Saved: 300",
+          "Goal reached in week 1!"
+        ],
+        "absent": [
+          "Still to save: -60"
+        ]
+      },
+      {
+        "typed": [
+          "50",
+          "40",
+          "0"
+        ],
+        "words": [
+          "Saved: 50",
+          "Saved: 90",
+          "Still to save: 150"
+        ],
+        "absent": [
+          "Goal reached in week 2!",
+          "Goal reached in week 3!"
+        ]
+      },
+      {
+        "typed": [
+          "0"
+        ],
+        "words": [
+          "Still to save: 240"
+        ],
+        "absent": [
+          "Goal reached in week 0!",
+          "Goal reached in week 1!",
+          "Saved: 0"
+        ]
+      }
+    ]
+  },
+  "ch05-practice#7": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "100",
+          "50",
+          "50",
+          "50"
+        ],
+        "words": [
+          "Saved: 150",
+          "Saved: 200",
+          "Saved: 250",
+          "Goal reached in week 3!"
+        ],
+        "absent": [
+          "Still to save: -10",
+          "Goal reached already!"
+        ]
+      },
+      {
+        "typed": [
+          "240"
+        ],
+        "words": [
+          "Goal reached already!"
+        ],
+        "absent": [
+          "Goal reached in week 0!",
+          "Still to save: 0"
+        ]
+      },
+      {
+        "typed": [
+          "300"
+        ],
+        "words": [
+          "Goal reached already!"
+        ],
+        "absent": [
+          "Goal reached in week 0!",
+          "Still to save: -60"
+        ]
+      },
+      {
+        "typed": [
+          "0",
+          "0"
+        ],
+        "words": [
+          "Still to save: 240"
+        ],
+        "absent": [
+          "Goal reached in week 0!",
+          "Goal reached in week 1!",
+          "Goal reached already!"
+        ]
+      },
+      {
+        "typed": [
+          "200",
+          "40"
+        ],
+        "words": [
+          "Saved: 240",
+          "Goal reached in week 1!"
+        ],
+        "absent": [
+          "Still to save: 0",
+          "Goal reached already!"
+        ]
+      },
+      {
+        "typed": [
+          "50",
+          "30",
+          "0"
+        ],
+        "words": [
+          "Saved: 80",
+          "Still to save: 160"
+        ],
+        "absent": [
+          "Goal reached in week 1!",
+          "Goal reached in week 2!",
+          "Goal reached already!"
+        ]
+      },
+      {
+        "typed": [
+          "239",
+          "1"
+        ],
+        "words": [
+          "Saved: 240",
+          "Goal reached in week 1!"
+        ],
+        "absent": [
+          "Still to save: 0",
+          "Goal reached already!"
+        ]
+      }
+    ]
+  },
   "ch06a-defining#1": {
     "kind": "predict"
   },

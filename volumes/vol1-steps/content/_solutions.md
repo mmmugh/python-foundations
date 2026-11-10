@@ -1554,6 +1554,126 @@ else:
 
 The loop can end two ways: `break` on a right guess, or the count reaching 5. `won` remembers which. `guesses < 5` lets exactly 5 guesses through: with `<=`, the player would get 6. Using `{secret}` in the last line means it stays right when the secret is random.
 
+## ch05-practice#1
+
+```python
+for week in range(1, 9):
+    print(f"Week {week}")
+```
+
+`range(1, 9)` starts at 1 and stops just before 9, so it gives the 8 week numbers.
+
+## ch05-practice#2
+
+```python
+amount = int(input("How much do you save each week? "))
+total = 0
+for week in range(1, 9):
+    total += amount
+    print(f"Week {week}: {total}")
+```
+
+`total` is an accumulator: set up before the loop, added to on each pass, and printed as it grows. An amount of 0 gives eight lines of 0, which is right.
+
+## ch05-practice#3
+
+```python
+amount = int(input("How much do you save each week? "))
+total = 0
+for week in range(1, 9):
+    total += amount
+    if week % 4 == 0:
+        total += 10
+    print(f"Week {week}: {total}")
+```
+
+`week % 4 == 0` is `True` only in weeks 4 and 8. `week % 4 == 1` would pay the bonus in weeks 1 and 5 instead, and week 1's total would already be wrong.
+
+## ch05-practice#4
+
+```python
+saved = int(input("How much have you saved already? "))
+amount = int(input("How much do you save each week? "))
+weeks = 0
+while saved < 240:
+    saved += amount
+    weeks += 1
+print(f"Weeks: {weeks}")
+```
+
+The condition asks before every pass, so with 240 already, the block never runs and the count stays at 0. `saved < 240` keeps going while the goal is not yet reached, so landing on exactly 240 stops it.
+
+## ch05-practice#5
+
+```python
+saved = 0
+weeks = 0
+amount = int(input("Saved this week (0 to stop)? "))
+while amount != 0:
+    saved += amount
+    weeks += 1
+    print(f"Saved: {saved}")
+    amount = int(input("Saved this week (0 to stop)? "))
+print(f"Weeks: {weeks}")
+```
+
+Read, loop, read again. The 0 is the stop value, not a week: the condition sees it first, so it is never added or counted. A 0 straight away gives `Weeks: 0`.
+
+## ch05-practice#6
+
+```python
+saved = 0
+week = 0
+while True:
+    amount = int(input("Saved this week (0 to stop)? "))
+    if amount == 0:
+        break
+    saved += amount
+    week += 1
+    print(f"Saved: {saved}")
+    if saved >= 240:
+        break
+if saved >= 240:
+    print(f"Goal reached in week {week}!")
+else:
+    print(f"Still to save: {240 - saved}")
+```
+
+There are two ways out of the loop, a 0 or the goal, and each has a `break`. After the loop, `saved >= 240` says which one it was.
+
+## ch05-practice#7
+
+```python
+# Say it: start from what is saved already, add a week's savings at a time,
+# and say when the total reaches 240, or how much is still needed.
+# Split it:
+# 1. ask what is saved already
+# 2. if it is 240 or more, say so, and stop there
+# 3. otherwise, loop: read a week's savings; stop at a 0;
+#    add it, count the week, print the total; stop at the goal
+# 4. after the loop, the goal line or the still-to-save line
+saved = int(input("How much have you saved already? "))
+if saved >= 240:
+    print("Goal reached already!")
+else:
+    week = 0
+    while True:
+        amount = int(input("Saved this week (0 to stop)? "))
+        if amount == 0:
+            break
+        saved += amount
+        week += 1
+        print(f"Saved: {saved}")
+        if saved >= 240:
+            break
+    if saved >= 240:
+        print(f"Goal reached in week {week}!")
+    else:
+        print(f"Still to save: {240 - saved}")
+```
+
+Step 6's program moved into the `else` block, one level deeper, and `saved` now starts from what was typed instead of 0. With 240 already, the loop never starts, so nothing more is asked.
+
 ## ch06a-defining#5
 
 ```python
