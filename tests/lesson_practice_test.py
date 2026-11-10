@@ -108,6 +108,8 @@ def main():
     refused("a last step without an alternate is refused", GOOD, "alternate", alternates={})
     refused("a check that passes the starting code is refused", GOOD, "starting code",
             checks={**CHECKS, "ch05-practice#2": {"kind": "output", "expected": "3"}})
+    refused("a check that passes the empty box of a step with no starting code is refused", GOOD, "empty box",
+            checks={**CHECKS, "ch05-practice#1": {"kind": "output", "expected": ""}})
 
     lessons = [("ch02a-one", "## L\n\n```python\nprint(1)\n```\n"),
                ("ch03a-two", "## L\n\n```python\nname = 'ada'\nprint(name.upper())\n```\n")]

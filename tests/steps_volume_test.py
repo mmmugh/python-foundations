@@ -476,6 +476,12 @@ def practice_problems(stem, text, hint_steps, checks, solutions, alternates):
         if not solution:
             say(f"{key}: every step needs a worked solution")
         problems += exercise_problems(key, spec, solution, alternates.get(key), code)
+        # A step with no starting code starts from an empty box, which the
+        # starting-code check above never runs.
+        if spec and not code and spec["kind"] in PRACTICE_KINDS:
+            untouched = run_check(spec, "")
+            if untouched is not None and untouched[0]:
+                say(f"{key}: its check passes an empty box")
         if number == len(found):
             problems += routine_problems(key, hints, hint_steps, solution, spec, key in alternates)
     return problems
