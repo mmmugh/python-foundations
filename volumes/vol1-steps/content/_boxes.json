@@ -298,5 +298,17 @@
   "ch12h-the-records-system#4": {
     "reference": true,
     "why": "A docstring that states a precondition: the first lines of a function, not a program to run."
+  },
+  "ch12-practice#0": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call move_two(), which the learner writes above them."
+  },
+  "ch12-practice#1": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call move_three(), which the learner writes above them."
+  },
+  "ch12-practice#2": {
+    "raises": "NameError",
+    "why": "Starting code: the lines that call hanoi(), which the learner writes above them."
   }
 }

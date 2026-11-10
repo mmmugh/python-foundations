@@ -17710,5 +17710,169 @@
   "ch12h-the-records-system#10": {
     "kind": "output",
     "expected": "Rank  ID     Name                Gr      Avg  Grade\n---------------------------------------------------\n1     1002   Katherine Johnson   11     96.7      A\n2     1001   Grace Hopper        10     94.7      A\n3     1004   Ada Lovelace        9      88.3      B\n4     1009   Edsger Dijkstra     10     71.3      C\n5     1007   Alan Turing         9      55.0      F\n---------------------------------------------------\nBy grade level:\nGrade 9: 2 students, average 71.7\nGrade 10: 2 students, average 83.0\nGrade 11: 1 student, average 96.7\nTop student: Katherine Johnson (96.7)\nPassing: 4 of 5\nNames with er: Grace Hopper, Katherine Johnson, Edsger Dijkstra\nLookup 1002: Katherine Johnson\nLookup 9999: not found"
+  },
+  "ch12-practice#1": {
+    "kind": "function",
+    "name": "digit_sum",
+    "cases": [
+      [
+        [
+          1234
+        ],
+        10
+      ],
+      [
+        [
+          7
+        ],
+        7
+      ],
+      [
+        [
+          0
+        ],
+        0
+      ],
+      [
+        [
+          905
+        ],
+        14
+      ],
+      [
+        [
+          10
+        ],
+        1
+      ],
+      [
+        [
+          99999
+        ],
+        45
+      ],
+      [
+        [
+          1000001
+        ],
+        2
+      ]
+    ]
+  },
+  "ch12-practice#2": {
+    "kind": "output",
+    "expected": "Move disc 1 from A to B\nMove disc 2 from A to C\nMove disc 1 from B to C\n--\nMove disc 1 from A to C\nMove disc 2 from A to B\nMove disc 1 from C to B"
+  },
+  "ch12-practice#3": {
+    "kind": "output",
+    "expected": "Move disc 1 from A to C\nMove disc 2 from A to B\nMove disc 1 from C to B\nMove disc 3 from A to C\nMove disc 1 from B to A\nMove disc 2 from B to C\nMove disc 1 from A to C"
+  },
+  "ch12-practice#4": {
+    "kind": "output",
+    "expected": "Move disc 1 from A to C\n--\nMove disc 1 from A to B\nMove disc 2 from A to C\nMove disc 1 from B to C\n--\nMove disc 1 from A to C\nMove disc 2 from A to B\nMove disc 1 from C to B\nMove disc 3 from A to C\nMove disc 1 from B to A\nMove disc 2 from B to C\nMove disc 1 from A to C\n--\n--"
+  },
+  "ch12-practice#5": {
+    "kind": "function",
+    "name": "moves",
+    "cases": [
+      [
+        [
+          0
+        ],
+        0
+      ],
+      [
+        [
+          1
+        ],
+        1
+      ],
+      [
+        [
+          2
+        ],
+        3
+      ],
+      [
+        [
+          3
+        ],
+        7
+      ],
+      [
+        [
+          4
+        ],
+        15
+      ],
+      [
+        [
+          10
+        ],
+        1023
+      ]
+    ]
+  },
+  "ch12-practice#6": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "3"
+        ],
+        "words": [
+          "Move disc 1 from A to C",
+          "Move disc 2 from A to B",
+          "Move disc 1 from C to B",
+          "Move disc 3 from A to C",
+          "Move disc 1 from B to A",
+          "Move disc 2 from B to C",
+          "Move disc 1 from A to C",
+          "Moves needed: 7"
+        ]
+      },
+      {
+        "typed": [
+          "2"
+        ],
+        "words": [
+          "Move disc 1 from A to B",
+          "Move disc 2 from A to C",
+          "Move disc 1 from B to C",
+          "Moves needed: 3"
+        ],
+        "absent": [
+          "Move disc 3 from A to C",
+          "Moves needed: 7"
+        ]
+      },
+      {
+        "typed": [
+          "1"
+        ],
+        "words": [
+          "Move disc 1 from A to C",
+          "Moves needed: 1"
+        ],
+        "absent": [
+          "Move disc 1 from A to B",
+          "Move disc 2 from A to C",
+          "Moves needed: 3"
+        ]
+      },
+      {
+        "typed": [
+          "0"
+        ],
+        "words": [
+          "Moves needed: 0"
+        ],
+        "absent": [
+          "Move disc 1 from A to C",
+          "Move disc 1 from A to B",
+          "Moves needed: 1"
+        ]
+      }
+    ]
   }
 }

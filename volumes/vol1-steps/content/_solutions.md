@@ -5727,3 +5727,115 @@ for student_id in [1002, 9999]:
 ```
 
 Every function was built and checked on its own first, so this last step only puts them in order. Each grade level's line needs the average of its students' averages, so `average()` is used twice: once for each student, then once on the list of their averages. `students` is never changed: `ranked()` and the copy sorted by id are new lists, which is why the look-ups can sort one without spoiling the roster.
+
+## ch12-practice#1
+
+```python
+def digit_sum(n):
+    if n == 0:
+        return 0
+    else:
+        return n % 10 + digit_sum(n // 10)
+```
+
+`n % 10` is the last digit, and `n // 10` is the number without it: a smaller question of the same kind. The calls end at 0, which has no digits left, so it adds 0, as `sum_to(0)` did in lesson 12.2. A base case of `n < 10`, giving back `n`, is right too.
+
+## ch12-practice#2
+
+```python
+def move_two(start, end, spare):
+    print(f"Move disc 1 from {start} to {spare}")
+    print(f"Move disc 2 from {start} to {end}")
+    print(f"Move disc 1 from {spare} to {end}")
+
+
+move_two("A", "C", "B")
+print("--")
+move_two("A", "B", "C")
+```
+
+The moves name the parameters, never the letters, so the same three lines move a pile between any two pegs.
+
+## ch12-practice#3
+
+```python
+def move_two(start, end, spare):
+    print(f"Move disc 1 from {start} to {spare}")
+    print(f"Move disc 2 from {start} to {end}")
+    print(f"Move disc 1 from {spare} to {end}")
+
+
+def move_three(start, end, spare):
+    move_two(start, spare, end)
+    print(f"Move disc 3 from {start} to {end}")
+    move_two(spare, end, start)
+
+
+move_three("A", "C", "B")
+```
+
+The two discs go out of the way to the spare peg, so for that call the spare is their end, and the end peg is their spare. On the way back they start from the spare peg, and peg `start` is free.
+
+## ch12-practice#4
+
+```python
+def hanoi(n, start, end, spare):
+    if n > 0:
+        hanoi(n - 1, start, spare, end)
+        print(f"Move disc {n} from {start} to {end}")
+        hanoi(n - 1, spare, end, start)
+
+
+hanoi(1, "A", "C", "B")
+print("--")
+hanoi(2, "A", "C", "B")
+print("--")
+hanoi(3, "A", "C", "B")
+print("--")
+hanoi(0, "A", "C", "B")
+print("--")
+```
+
+The base case is the pile of 0 discs, with nothing to move: the `if` with no `else` does nothing at all for it. Each call makes two smaller calls, with the pegs' places swapped as in step 3, so the calls always reach 0. A base case of 1 disc is right too, as long as 0 discs still prints nothing.
+
+## ch12-practice#5
+
+```python
+def moves(n):
+    if n == 0:
+        return 0
+    else:
+        return moves(n - 1) + 1 + moves(n - 1)
+```
+
+Each pile takes the moves of the smaller pile twice, plus one. `2 * moves(n - 1) + 1` says the same, and makes one call instead of two.
+
+## ch12-practice#6
+
+```python
+# Say it: a number of discs goes in; every move that takes them from
+# peg A to peg C comes out, then how many moves that took.
+# Split it:
+# 1. ask for the number of discs
+# 2. print the moves: from A, to C, with B as the spare
+# 3. print the number of moves
+def hanoi(n, start, end, spare):
+    if n > 0:
+        hanoi(n - 1, start, spare, end)
+        print(f"Move disc {n} from {start} to {end}")
+        hanoi(n - 1, spare, end, start)
+
+
+def moves(n):
+    if n == 0:
+        return 0
+    else:
+        return moves(n - 1) + 1 + moves(n - 1)
+
+
+discs = int(input("How many discs? "))
+hanoi(discs, "A", "C", "B")
+print("Moves needed:", moves(discs))
+```
+
+Every function was built and checked on its own first, so this last step only puts them in order. `hanoi()` prints, and `moves()` gives back a number, so one is called on its own line and the other inside the `print()`.
