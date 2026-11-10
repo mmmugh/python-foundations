@@ -3523,3 +3523,37 @@ def is_sorted(items):
 ```
 
 One pass, with no swaps: the first pair the wrong way round settles it. Equal neighbors are fine, because `>` asks whether the left one is bigger. For `[]` and `[7]`, `range(len(items) - 1)` gives no positions, the loop never runs, and the answer is `True`.
+
+## ch11f-ties-and-sorted#6
+
+```python
+def ranked(results):
+    return sorted(results, key=lambda record: (record["seconds"], record["name"]))
+```
+
+The tuple's first item, the time, decides. Only when two times are equal does the name get a say. A key of the time alone would keep tied runners in the order they were listed, which is not the rule asked for.
+
+## ch11f-ties-and-sorted#9
+
+```python
+# Say it: a list goes in; a new sorted list comes out, built by putting each item in at its place.
+# Split it:
+# 1. copy place_for() in above it
+# 2. start an empty list
+# 3. for each item, find its place in the new list with place_for(), and insert() it there
+# 4. give back the new list
+def place_for(times, new_time):
+    for position in range(len(times)):
+        if times[position] >= new_time:
+            return position
+    return len(times)
+
+
+def insertion_sort(items):
+    in_order = []
+    for item in items:
+        in_order.insert(place_for(in_order, item), item)
+    return in_order
+```
+
+The new list is sorted all the time: it starts empty, which is sorted, and each item goes in at the place that keeps it sorted. The list given to the function is only read, never changed. For `[]`, the loop never runs, and the empty list comes back.

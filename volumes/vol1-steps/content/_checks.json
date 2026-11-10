@@ -11006,5 +11006,329 @@
         true
       ]
     ]
+  },
+  "ch11f-ties-and-sorted#1": {
+    "kind": "predict"
+  },
+  "ch11f-ties-and-sorted#2": {
+    "kind": "choice",
+    "options": [
+      "None",
+      "One",
+      "One for each item"
+    ],
+    "answer": 1,
+    "why": "The first pass finds every neighbor pair in order and swaps nothing, so `swapped` stays `False` and the sort stops after that one pass."
+  },
+  "ch11f-ties-and-sorted#3": {
+    "kind": "predict"
+  },
+  "ch11f-ties-and-sorted#4": {
+    "kind": "choice",
+    "options": [
+      "On a big list it makes far fewer comparisons, and it has been tested on far more lists.",
+      "A sort you write yourself cannot sort text.",
+      "Only `sorted()` can sort a list of numbers."
+    ],
+    "answer": 0,
+    "why": "Your sorts work, on numbers and text alike, but for 1,000 items a selection sort makes 499,500 comparisons, and Python's sort fewer than 9,000."
+  },
+  "ch11f-ties-and-sorted#5": {
+    "kind": "predict"
+  },
+  "ch11f-ties-and-sorted#6": {
+    "kind": "function",
+    "name": "ranked",
+    "cases": [
+      [
+        [
+          [
+            {
+              "name": "Omar",
+              "seconds": 61.0
+            },
+            {
+              "name": "Priya",
+              "seconds": 58.2
+            },
+            {
+              "name": "Nadia",
+              "seconds": 58.2
+            }
+          ]
+        ],
+        [
+          {
+            "name": "Nadia",
+            "seconds": 58.2
+          },
+          {
+            "name": "Priya",
+            "seconds": 58.2
+          },
+          {
+            "name": "Omar",
+            "seconds": 61.0
+          }
+        ]
+      ],
+      [
+        [
+          []
+        ],
+        []
+      ],
+      [
+        [
+          [
+            {
+              "name": "Zed",
+              "seconds": 50.0
+            },
+            {
+              "name": "Ada",
+              "seconds": 50.0
+            }
+          ]
+        ],
+        [
+          {
+            "name": "Ada",
+            "seconds": 50.0
+          },
+          {
+            "name": "Zed",
+            "seconds": 50.0
+          }
+        ]
+      ],
+      [
+        [
+          [
+            {
+              "name": "Bo",
+              "seconds": 59.9
+            }
+          ]
+        ],
+        [
+          {
+            "name": "Bo",
+            "seconds": 59.9
+          }
+        ]
+      ],
+      [
+        [
+          [
+            {
+              "name": "Cy",
+              "seconds": 70.5
+            },
+            {
+              "name": "Bo",
+              "seconds": 64.0
+            },
+            {
+              "name": "Al",
+              "seconds": 64.0
+            }
+          ]
+        ],
+        [
+          {
+            "name": "Al",
+            "seconds": 64.0
+          },
+          {
+            "name": "Bo",
+            "seconds": 64.0
+          },
+          {
+            "name": "Cy",
+            "seconds": 70.5
+          }
+        ]
+      ],
+      [
+        [
+          [
+            {
+              "name": "Ada",
+              "seconds": 50.0
+            },
+            {
+              "name": "Zed",
+              "seconds": 50.0
+            },
+            {
+              "name": "Max",
+              "seconds": 49.0
+            }
+          ]
+        ],
+        [
+          {
+            "name": "Max",
+            "seconds": 49.0
+          },
+          {
+            "name": "Ada",
+            "seconds": 50.0
+          },
+          {
+            "name": "Zed",
+            "seconds": 50.0
+          }
+        ]
+      ],
+      [
+        [
+          [
+            {
+              "name": "Zoe",
+              "seconds": 49.0
+            },
+            {
+              "name": "Abe",
+              "seconds": 51.0
+            }
+          ]
+        ],
+        [
+          {
+            "name": "Zoe",
+            "seconds": 49.0
+          },
+          {
+            "name": "Abe",
+            "seconds": 51.0
+          }
+        ]
+      ]
+    ]
+  },
+  "ch11f-ties-and-sorted#7": {
+    "kind": "predict"
+  },
+  "ch11f-ties-and-sorted#8": {
+    "kind": "choice",
+    "options": [
+      "Position 1, before both 20s.",
+      "Position 2, between the 20s.",
+      "Position 3, after both 20s."
+    ],
+    "answer": 2,
+    "why": "With `>`, a 20 is not bigger than 20, so the search walks past both of them and stops at 30, position 3. The new 20 goes after the ones already there."
+  },
+  "ch11f-ties-and-sorted#9": {
+    "kind": "function",
+    "name": "insertion_sort",
+    "cases": [
+      [
+        [
+          [
+            5,
+            2,
+            9,
+            1
+          ]
+        ],
+        [
+          1,
+          2,
+          5,
+          9
+        ]
+      ],
+      [
+        [
+          [
+            2,
+            1,
+            2
+          ]
+        ],
+        [
+          1,
+          2,
+          2
+        ]
+      ],
+      [
+        [
+          []
+        ],
+        []
+      ],
+      [
+        [
+          [
+            3
+          ]
+        ],
+        [
+          3
+        ]
+      ],
+      [
+        [
+          [
+            -1,
+            -5,
+            0
+          ]
+        ],
+        [
+          -5,
+          -1,
+          0
+        ]
+      ],
+      [
+        [
+          [
+            4,
+            3,
+            2,
+            1
+          ]
+        ],
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      [
+        [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      [
+        [
+          [
+            "pear",
+            "fig",
+            "kiwi"
+          ]
+        ],
+        [
+          "fig",
+          "kiwi",
+          "pear"
+        ]
+      ]
+    ]
   }
 }
