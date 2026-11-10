@@ -87,6 +87,11 @@ def answers(unit=None):
     for slug in sorted(built):
         text = pages.get(slug)
         if text is None:
+            # A built page with checks must be walked: skipping it here would
+            # drop its exercises from the walk with every gate still green.
+            if slug in checked_slugs:
+                sys.exit(f"{VOLUME}: checks exist for {slug}, but no source page was read for it "
+                         f"-- the walk would skip it")
             continue
         if unit and unit_of(slug, text) != int(unit):
             continue
