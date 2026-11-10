@@ -307,6 +307,160 @@
       }
     ]
   },
+  "ch02-practice#1": {
+    "kind": "output",
+    "expected": "Kettle Ridge is 12.4 km"
+  },
+  "ch02-practice#2": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "11"
+        ],
+        "numbers": [
+          136.4
+        ]
+      },
+      {
+        "typed": [
+          "10.5"
+        ],
+        "numbers": [
+          130.2
+        ]
+      }
+    ]
+  },
+  "ch02-practice#3": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "11"
+        ],
+        "numbers": [
+          136.4,
+          2.2733333
+        ]
+      },
+      {
+        "typed": [
+          "10.5"
+        ],
+        "numbers": [
+          130.2,
+          2.17
+        ]
+      }
+    ]
+  },
+  "ch02-practice#4": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "11"
+        ],
+        "numbers": [
+          1.705
+        ]
+      },
+      {
+        "typed": [
+          "10.5"
+        ],
+        "numbers": [
+          1.6275
+        ]
+      }
+    ]
+  },
+  "ch02-practice#5": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "11",
+          "4"
+        ],
+        "numbers": [
+          1.705,
+          6.82
+        ]
+      },
+      {
+        "typed": [
+          "10.5",
+          "0"
+        ],
+        "numbers": [
+          1.6275,
+          0
+        ]
+      }
+    ]
+  },
+  "ch02-practice#6": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "11",
+          "4"
+        ],
+        "numbers": [
+          6.82,
+          18
+        ]
+      },
+      {
+        "typed": [
+          "10.5",
+          "3"
+        ],
+        "numbers": [
+          4.8825,
+          13.5
+        ]
+      }
+    ]
+  },
+  "ch02-practice#7": {
+    "kind": "stdin",
+    "runs": [
+      {
+        "typed": [
+          "12.4",
+          "11",
+          "4"
+        ],
+        "numbers": [
+          12.4,
+          136.4,
+          2.2733333,
+          1.705,
+          6.82,
+          18
+        ]
+      },
+      {
+        "typed": [
+          "5",
+          "10.5",
+          "0"
+        ],
+        "numbers": [
+          5,
+          52.5,
+          0.875,
+          0.65625,
+          0,
+          0
+        ]
+      }
+    ]
+  },
   "ch01a-printing#1": {
     "kind": "choice",
     "options": [

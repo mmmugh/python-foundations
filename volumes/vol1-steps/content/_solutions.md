@@ -377,6 +377,122 @@ print("Total", total)
 The ruler needed three changes, one for each step it touches: its price, its line, and its place in the total.
 
 
+## ch02-practice#1
+
+```python
+trail = "Kettle Ridge"
+distance_km = 12.4
+print(trail, "is", distance_km, "km")
+```
+
+Each comma puts in one space, so there are no spaces inside the strings.
+
+## ch02-practice#2
+
+```python
+trail = "Kettle Ridge"
+distance_km = 12.4
+pace = float(input("Pace, in minutes per km? "))
+minutes = distance_km * pace
+print("That takes", minutes, "minutes")
+```
+
+`float()`, not `int()`, because a pace can be 10.5, and `int()` cannot turn the text `10.5` into a whole number. Without either one, Python is asked to multiply a number by a piece of text, and stops.
+
+## ch02-practice#3
+
+```python
+trail = "Kettle Ridge"
+distance_km = 12.4
+pace = float(input("Pace, in minutes per km? "))
+minutes = distance_km * pace
+hours = minutes / 60
+print("That takes", minutes, "minutes")
+print("That is", hours, "hours")
+```
+
+Sixty minutes make an hour, so the hours are the minutes divided by 60. The answer has a lot of decimal places, and that is fine for now.
+
+## ch02-practice#4
+
+```python
+trail = "Kettle Ridge"
+distance_km = 12.4
+pace = float(input("Pace, in minutes per km? "))
+minutes = distance_km * pace
+hours = minutes / 60
+water = hours * 0.75
+print("That takes", minutes, "minutes")
+print("That is", hours, "hours")
+print("Water for one person:", water, "liters")
+```
+
+It is 0.75 for each hour, so it multiplies the hours. Multiplying the minutes asks for over 100 liters, which is a clue that the wrong variable went in.
+
+## ch02-practice#5
+
+```python
+trail = "Kettle Ridge"
+distance_km = 12.4
+pace = float(input("Pace, in minutes per km? "))
+minutes = distance_km * pace
+people = int(input("How many people? "))
+hours = minutes / 60
+water = hours * 0.75
+print("That takes", minutes, "minutes")
+print("That is", hours, "hours")
+print("Water for one person:", water, "liters")
+print("Water for the group:", water * people, "liters")
+```
+
+`int()` for a number of people, since nobody brings half a walker.
+
+## ch02-practice#6
+
+```python
+trail = "Kettle Ridge"
+distance_km = 12.4
+pace = float(input("Pace, in minutes per km? "))
+minutes = distance_km * pace
+people = int(input("How many people? "))
+hours = minutes / 60
+water = hours * 0.75
+print("That takes", minutes, "minutes")
+print("That is", hours, "hours")
+print("Water for one person:", water, "liters")
+print("Water for the group:", water * people, "liters")
+print("Permits:", 4.50 * people)
+```
+
+The permits read the same `people` variable as the water, so the number is typed in once and used twice.
+
+## ch02-practice#7
+
+```python
+# Say it: ask for the trail length, the pace and the group size, then
+# print the time, the water and the permits for the day.
+# Split it:
+# 1. ask for the length, the pace and how many people
+# 2. work out the minutes, the hours and the water for one person
+# 3. print each line of the plan
+distance_km = float(input("Trail length, in km? "))
+pace = float(input("Pace, in minutes per km? "))
+people = int(input("How many people? "))
+
+minutes = distance_km * pace
+hours = minutes / 60
+water = hours * 0.75
+
+print("Length:", distance_km, "km")
+print("Time:", minutes, "minutes")
+print("Time:", hours, "hours")
+print("Water for one person:", water, "liters")
+print("Water for the group:", water * people, "liters")
+print("Permits:", 4.50 * people)
+```
+
+Every number on the plan comes from the three that were typed in, so the planner works for any trail. With 0 people, the group needs no water and no permits, which makes sense.
+
 ## ch03a-more-arithmetic#4
 
 ```python
