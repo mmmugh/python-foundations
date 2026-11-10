@@ -112,24 +112,24 @@ def cheer(word, times):
         cheer(word, times - 1)
 
 
-cheer("Hip", 2)
+cheer("Hi", 2)
 ```
 
 Output:
 
 ```
-Hip
-Hip
+Hi
+Hi
 Hooray!
 ```
 
-Its call table:
+Its call table, with no column for `word`, which is "Hi" in every call:
 
-| Call | word | times | Prints | Then calls |
-| --- | --- | --- | --- | --- |
-| `cheer("Hip", 2)` | "Hip" | 2 | Hip | `cheer("Hip", 1)` |
-| `cheer("Hip", 1)` | "Hip" | 1 | Hip | `cheer("Hip", 0)` |
-| `cheer("Hip", 0)` | "Hip" | 0 | Hooray! | nothing: the base case |
+| Call | times | Prints | Then calls |
+| --- | --- | --- | --- |
+| `cheer("Hi", 2)` | 2 | Hi | `cheer("Hi", 1)` |
+| `cheer("Hi", 1)` | 1 | Hi | `cheer("Hi", 0)` |
+| `cheer("Hi", 0)` | 0 | Hooray! | nothing: the base case |
 
 ### Practice
 
